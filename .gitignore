@@ -1,0 +1,5 @@
+# build artifacts from topic demos
+**/target/
+**/node_modules/
+**/*.test
+**/bin/
