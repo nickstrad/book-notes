@@ -1,6 +1,8 @@
-# Release It! (2nd ed.) — topics and skills
+# Release It! (2nd ed.) — one flawed SQLite platform, improved lesson by lesson
 
-> **STUB landing page** — the phase-2 builder expands this once topics run. Plan: [`PLAN.md`](PLAN.md).
+> **Plan phase (v3).** The project and lessons below are designed, not built. Plan:
+> [`PLAN.md`](PLAN.md). The tags and verify commands become real in the build phase; this page is
+> rewritten then with the final index.
 
 *Release It! Design and Deploy Production-Ready Software*, 2nd edition, Michael T. Nygard (2018).
 
@@ -11,28 +13,60 @@ start (stability antipatterns), build the structures that stop them spreading (s
 design processes so they can be seen and run (transparency, demand control), deploy without
 downtime (phased changes, tolerant versions), and keep proving it with deliberate chaos.
 
-## Topics
+## The project: `litefleet`
 
-Run any topic with `./run.sh` from its folder; `run-all.sh` here runs them all.
+A baby multitenant SQLite database platform. Tenants authenticate with an API key, create databases
+and run SQL against them. Each database is one SQLite file in WAL mode on one of two **node agents**.
+Three stateless **gateways** behind HAProxy authenticate, ask the **control plane** (a Postgres
+registry) which node owns the database, forward the statement and stream the rows back. Nodes back
+up to a **blob store** and emit usage events to a **metering** partner; an ops dashboard polls a
+fleet-wide usage report. Everything runs in Docker Compose with Toxiproxy between the tiers,
+Prometheus scraping every service, an open-loop load generator, and DuckDB for the run reports and
+for auditing tenant files. It is the control-plane / data-plane shape of the ts-db planes design at
+baby size; what the baby leaves out (moves, fencing, replication) is named in each lesson's note.
 
-| # | Folder | Idea | Language | Before/after |
+`v0` runs and passes its tests, and it ships with eighteen deliberate flaws of the kind real
+codebases have: no timeouts, a transaction not rolled back on an error path, retries on writes, no
+breaker around the control plane, no per-tenant limits, a backup that holds the writer lock during
+upload, no row cap, an unbounded usage queue, WALs that never checkpoint, strict JSON readers,
+migrations at startup. Each lesson is one patch commit that fixes one flaw or one tight cluster, with
+a note and a verify script that reproduces the flaw on the previous tag.
+
+## Lessons (planned)
+
+Reader's path, once built: `git checkout release-it/lesson-NN && make -C project verify LESSON=NN`
+shows the improvement; add `REF=release-it/lesson-(NN-1)` to reproduce the flaw.
+
+| # | Tag | Lesson | Flaws | Book |
 |---|---|---|---|---|
-| 01 | [`01-integration-points-timeouts`](topics/01-integration-points-timeouts/) | Remote calls hang, not fail; bound every call in time | Go | yes |
-| 02 | [`02-blocked-threads-resource-pool`](topics/02-blocked-threads-resource-pool/) | A leaked or stuck resource freezes every thread; return on every path, check out with a timeout | Rust | yes |
-| 03 | [`03-circuit-breaker`](topics/03-circuit-breaker/) | Stop calling a failing dependency; fail fast, probe for recovery | Rust | yes |
-| 04 | [`04-bulkheads`](topics/04-bulkheads/) | Partition capacity so a slow path cannot starve a critical one | Go | yes |
-| 05 | [`05-chain-reactions-shed-load`](topics/05-chain-reactions-shed-load/) | One instance dies, the rest follow; shed excess load to survive | Go | yes |
-| 06 | [`06-retry-storms-dogpile`](topics/06-retry-storms-dogpile/) | Synchronized retries knock a recovering dependency over; backoff with jitter | Node | yes |
-| 07 | [`07-unbounded-result-sets`](topics/07-unbounded-result-sets/) | Queries that return everything eventually return too much; bound and stream | Node | yes |
-| 08 | [`08-back-pressure`](topics/08-back-pressure/) | Unbounded queues grow until death; slow the producer or shed at the boundary | Rust | yes |
-| 09 | [`09-steady-state`](topics/09-steady-state/) | Everything that accumulates must be recycled: logs, sessions, caches | Bash | yes |
-| 10 | [`10-test-harness`](topics/10-test-harness/) | A deliberately misbehaving fake dependency to test integration points | Go | yes (naive vs hardened client) |
-| 11 | [`11-transparency-health-metrics`](topics/11-transparency-health-metrics/) | Health checks, metrics and structured logs make trouble visible before it is an outage | Go | yes |
-| 12 | [`12-handling-versions`](topics/12-handling-versions/) | Old and new versions always coexist; tolerant readers and expand/contract rollouts | Node | yes |
+| 00 | `release-it/v0-flawed` | The flawed start: tour of v0 and the register | — | Ch. 1–3 |
+| 01 | `release-it/lesson-01` | Transparency: health, metrics, structured logs | F01 | Ch. 8, 10, 6 |
+| 02 | `release-it/lesson-02` | Timeouts on every integration point and every statement | F02–F04 | Ch. 4, 5 |
+| 03 | `release-it/lesson-03` | Blocked threads: roll back on every path, bound the handle pools, fail fast | F05–F07 | Ch. 2, 4, 5 |
+| 04 | `release-it/lesson-04` | Retries: reads only, jittered backoff, a budget, `busy_timeout` | F08 | Ch. 4, 5 |
+| 05 | `release-it/lesson-05` | Circuit breaker around control, TTL route cache as the degraded mode | F09 | Ch. 5, 4 |
+| 06 | `release-it/lesson-06` | Bulkheads: per-tenant admission, separate pools, backups off the writer lock | F10–F11 | Ch. 5, 4 |
+| 07 | `release-it/lesson-07` | Shed load at the gateway, the node and the balancer | F12 | Ch. 4, 5, 9 |
+| 08 | `release-it/lesson-08` | Unbounded result sets: cap and stream rows, aggregate usage in SQL | F13 | Ch. 4, 5 |
+| 09 | `release-it/lesson-09` | Back pressure: bounded usage queue with a SQLite outbox | F14 | Ch. 5, 4 |
+| 10 | `release-it/lesson-10` | Steady state: checkpoint WALs, purge the ledger, evict idle handles | F15 | Ch. 5 |
+| 11 | `release-it/lesson-11` | Test harness: chaos tests against Toxiproxy and a misbehaving blob store | F16 | Ch. 5, 15, 17 |
+| 12 | `release-it/lesson-12` | Handling versions: expand/contract, node drain, tolerant readers | F17–F18 | Ch. 12, 13, 14 |
+| — | `release-it/v1-hardened` | Final state: lessons index and this page | | |
+
+The register (what each flaw is, where it lives, how it shows) is `PLAN.md` section 3; the lesson
+details with verify timelines and thresholds are section 4.3.
 
 ## Skills
 
 See [`skills/README.md`](skills/README.md). Planned: `test-integration-points`,
 `hunt-stability-antipatterns`, `suggest-stability-patterns`, `budget-timeouts-and-retries`,
 `review-capacity-headroom`, `review-operational-transparency`, `plan-safe-release`,
-`design-chaos-experiment`.
+`design-chaos-experiment`. Each cites the project as its worked example; the register is the answer
+key for the hunt.
+
+## Earlier plans
+
+`PLAN-v2-checkout.md` (same structure, a web-shop checkout service as the vehicle) and
+`PLAN-v1-per-topic-projects.md` (twelve standalone mini-programs; its `topics/` stubs are superseded
+and are removed in the build phase).

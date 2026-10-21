@@ -157,7 +157,7 @@ Verdicts are PASS / NITS / FAIL per the repo-wide protocol; one repair round, th
 ## Conventions
 
 - Commit subjects `<area>: <imperative summary>`; `<area>` is `docs`, the book slug (`release-it`)
-  for plan-level and landing-page commits, the project name (`checkout`) for lesson commits, `skills`,
+  for plan-level and landing-page commits, the project name (`litefleet` for Release It!) for lesson commits, `skills`,
   or `repo`. Lesson commits end their subject with `(lesson NN)`.
 - `STATE.md` at the repo root records which book is in which phase and what is next; update it in
   the same commit as the phase's deliverable.

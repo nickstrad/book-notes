@@ -39,11 +39,12 @@ make -C books/<slug>/project verify LESSON=05                        # IMPROVED
 
 | Book | Status | Plan |
 |---|---|---|
-| Release It! Design and Deploy Production-Ready Software, 2nd ed. (Michael T. Nygard, 2018) | plan v2 written (one flawed `checkout` service, 17 flaws, 12 lessons); awaiting Nick's confirmation before the build | [`books/release-it/PLAN.md`](books/release-it/PLAN.md) |
+| Release It! Design and Deploy Production-Ready Software, 2nd ed. (Michael T. Nygard, 2018) | plan v3 written (one flawed `litefleet` multitenant SQLite platform, 18 flaws, 12 lessons); awaiting Nick's confirmation before the build | [`books/release-it/PLAN.md`](books/release-it/PLAN.md) |
 
-The v1 approach (twelve standalone mini-projects) is archived at
-`books/release-it/PLAN-v1-per-topic-projects.md`; its stub folders under `books/release-it/topics/`
-are superseded and are removed in the build phase.
+Earlier plans are archived next to the current one: v2 (same structure, a web-shop `checkout`
+service as the vehicle) at `books/release-it/PLAN-v2-checkout.md`, and v1 (twelve standalone
+mini-projects) at `books/release-it/PLAN-v1-per-topic-projects.md`; v1's stub folders under
+`books/release-it/topics/` are superseded and are removed in the build phase.
 
 ## Toolchains
 
