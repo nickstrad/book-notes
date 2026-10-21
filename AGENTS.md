@@ -1,7 +1,7 @@
 # AGENTS.md — how a book becomes software and skills in this repo
 
 This file is the book-agnostic playbook. It applies to every book under `books/`. Nothing here is
-specific to one book; the first worked example is `books/release-it/` (start with its `PLAN.md`).
+specific to one book; the worked example is `books/release-it/` (start with its `PLAN.md`).
 Repo-wide agent rules from `~/.claude/CLAUDE.md` (seats, fresh-agent lifecycle, cross-family
 review, commit style) still apply; this file only adds what is particular to breaking down a book.
 
@@ -9,110 +9,102 @@ review, commit style) still apply; this file only adds what is particular to bre
 
 Nick reads a technical book. The repo turns it into two artifacts:
 
-1. **Topic projects** that TEACH the book's core ideas by making them visible: small, runnable
-   programs where the reader watches the failure the book warns about, then watches the remedy.
-2. **Skills** that CODIFY the book's main parts as reusable procedures an agent (or a person)
-   can run on real code and real designs: "test the integration points", "hunt for X", "plan Y".
+1. **One flawed archetype project per book, improved lesson by lesson.** A single realistic
+   service or program, built with real technology and seeded with deliberate, realistic flaws that
+   the book warns about. Each lesson of the book is a **patch commit** that fixes one flaw (or one
+   tight cluster) in that same codebase. The commit history is the teaching artifact: the first tag
+   is the "before", every lesson tag is a checkpoint a reader can run, and the final tag implements
+   the book's lessons. `git log` reads as the codebase getting better.
+2. **Skills** that CODIFY the book's main parts as reusable procedures an agent (or a person) can
+   run on real code and real designs, each pointing at the project as its worked example.
 
-The book itself is the source of truth. Every topic and skill must trace back to specific chapters.
+The book itself is the source of truth. Every flaw, lesson and skill must trace back to specific
+chapters.
 
-## Phase flow
-
-Each book goes through four phases. Each phase is one unit of work for a fresh agent (per the
-repo-wide fresh-agent lifecycle). Hand-off is through files in the repo, never through chat.
+## Phase flow and the confirmation gate
 
 | Phase | Seat | Produces | Done when |
 |---|---|---|---|
-| 1. Research & plan | planner (top tier) | `books/<slug>/PLAN.md`, scaffold of topic folders with stub READMEs, `books/<slug>/skills/README.md` index, root `README.md` index entry, `STATE.md` update | Plan names every topic and skill with sources, teaching design, language and run command; stubs exist; committed |
-| 2. Implement topics | builder (top tier for subtle concurrency/failure demos, middle tier for the rest) | Code, `run.sh`, finished README per topic, `books/<slug>/run-all.sh` | Every topic's `./run.sh` passes from a fresh checkout within the time budget |
-| 3. Write skills | builder (may follow phase 2 directly) | `books/<slug>/skills/<skill>/SKILL.md` for each planned skill | Each skill meets the skills contract below and cites its chapters |
-| 4. Review | reviewer from a DIFFERENT model family than the builder | Review notes in the PR / `STATE.md`; fixes land in a repair round | Review bar below is met; verdict recorded |
+| 1. Research & plan | planner (top tier) | `books/<slug>/PLAN.md` (project design, deliberate-issues register, lesson sequence, skills, build order), `STATE.md` update | **Nick has confirmed the plan.** Nothing is delegated to a builder before that. |
+| 2. Build v0 + lessons | builder (top tier; the work is subtle concurrency and failure behaviour) | `books/<slug>/project/` at the flawed tag, then one commit per lesson with its note and verify script, tags per plan | Every lesson's verify passes at its tag and reproduces the flaw at the previous tag; checkpoints reviewed |
+| 3. Write skills | builder (may follow phase 2 directly) | `books/<slug>/skills/<skill>/SKILL.md` for each planned skill | Each skill meets the skills contract and cites its chapters and the project |
+| 4. Review | reviewer from a DIFFERENT model family than the builder | Review notes in `STATE.md`; fixes folded into the lessons they belong to | Review bar below is met; verdict recorded |
 
-Phases 2 and 3 may be split across several agents by topic; the plan fixes the structure so
-builders do not re-decide it. If a builder finds the plan wrong for a topic, they record the
-deviation and its reason in that topic's README under "Deviations from plan" and in `STATE.md`.
+**The gate.** The planner's plan is a proposal until Nick confirms it. Plan revisions (v1 → v2 → …)
+are committed as documents; the previous plan is archived next to the new one when the approach
+changes. Phase 2 may also be split into checkpoints (the plan says which), each confirmed by a
+cross-family review before the next begins. Builders do not re-decide structure: the register and the
+lesson order are fixed by the plan; thresholds and sizes may be tuned, with the deviation recorded in
+the lesson note and in `STATE.md`.
 
-## Topic selection bar
+Hand-off between phases is through files in the repo, never through chat.
 
-A topic earns a folder only if ALL of these hold:
+## Choosing the archetype project
 
-- It carries a **core, transferable idea** of the book: something the author returns to, builds
-  on, or names as a cause of real failures. Not a passing mention, not a tooling survey.
-- It can be **shown**, not just told: a reader can run something and see the behavior change.
-- It is **self-contained**: runnable with no external services, network access, or accounts.
-- It is **not a duplicate**: if two chapters teach one mechanism, make one topic and cite both.
+The plan picks one project per book. It earns the role if ALL of these hold:
 
-Aim for 8 to 12 topics per book. If the count climbs, merge; if a chapter does not pass the bar,
-list it in the plan under "Deliberately omitted" with the reason, so the omission is a decision.
+- Every core, transferable idea of the book has a **natural home** in it: a place where the flaw the
+  book describes would plausibly be written by a competent team, and where its fix is the book's
+  remedy. If a core idea has no home, the archetype is wrong, not the idea.
+- It is **modest**: a few thousand lines at the flawed tag, buildable by one builder pass.
+- It is built on **real technology** for its domain (Docker Compose if it is a service; a real
+  database; real instrumentation such as Prometheus; a real load balancer or fault injector where the
+  book's lessons involve them), chosen and justified per component in the plan. One primary language,
+  chosen by what makes the book's failures and remedies most visible.
+- It **runs badly, not brokenly**: at the flawed tag it passes its own tests and serves gentle load.
+  Flaws are behavioural (hangs, storms, unbounded growth, cascades, lost work), never compile errors
+  or cartoon sabotage, and never marked in the code. The plan's register is the only list of them.
+
+## The deliberate-issues register
+
+The heart of the plan. One row per flaw: id, where it lives (file / area), how it shows under the
+right load, the chapter and anti-pattern that names it, and the lesson that fixes it. Flaws must be
+realistic (the kind real codebases have), individually demonstrable on the tree one lesson before
+their fix, and fixable in one focused patch each. The register doubles as the answer key for the
+book's "hunt for X" skill.
+
+## Lesson contract
+
+A lesson is one commit on the main line (two if the plan says the patch would exceed ~400 lines; the
+lesson tag points at the last). It contains:
+
+1. **The patch**: the fix for the register rows it names and nothing else. A reader must be able to
+   `git diff <prev-tag> <tag> -- project/` and understand it in minutes.
+2. **The note** `books/<slug>/lessons/NN-<slug>.md`: the idea in plain words with chapter citations;
+   the flaw with `file:line` pointers into the previous tag; the patch walkthrough naming the lines
+   that matter; the verification with the exact command and expected before/after output; "try
+   changing"; where to read more. Written for someone who has not read the book yet.
+3. **The verify script** `project/lab/verify/NN-<slug>.sh`, run as `make verify LESSON=NN`: resets
+   state, applies the load and chaos timeline, prints a comparable report table and the named
+   metrics, and ends with a verdict line starting `IMPROVED:` or `FLAW REPRODUCED:` against explicit
+   thresholds. `make verify LESSON=NN REF=<previous tag>` runs the same script with the project built
+   from the previous tag and must reproduce the flaw. Runs in a couple of minutes with warm images.
+4. **The commit body**: flaw, fix, both verdict lines pasted in. It must stand alone in `git log`.
+5. **A tag** per the plan's naming (`<slug>/v0-flawed`, `<slug>/lesson-NN`, `<slug>/v1-hardened`).
+
+Chaos is injected only from outside the codebase (fault injector API, container kill/pause/restart,
+partner-fake admin endpoints, SQL run by the script), never through hidden paths in the service.
+History may be rewritten (fixups folded into their lesson, tags re-pointed) until Nick accepts the
+final tag; after that it is frozen.
 
 ## Layout of a book
 
 ```
 books/<slug>/
-  PLAN.md               # phase-1 research product: argument, parts, topics, skills, omissions
-  README.md             # landing page: what the book argues, topic index, skills index
-  run-all.sh            # runs every topic's run.sh; the reviewer's first command
-  topics/
-    NN-<topic>/         # NN = reading order; <topic> = kebab-case idea name
-      README.md         # the teaching document (see contract)
-      run.sh            # the single documented run command
-      before/ after/    # or before.* / after.* — language-appropriate (see contract)
+  PLAN.md                     # the confirmed plan; earlier versions archived alongside
+  README.md                   # landing page: argument, lesson index with tags, skills index
+  lessons/
+    README.md                 # index: lesson, tag, flaw ids, verify command
+    00-<the-flawed-start>.md  # tour of the flawed tag and the register
+    NN-<lesson>.md            # one note per lesson
+  project/                    # the one codebase; `make up`, `make verify LESSON=NN`, `make down`
+    lab/                      # load generator, verify runner and scripts, report queries
   skills/
-    README.md           # index of the book's skills with triggers
-    <skill-name>/
-      SKILL.md          # the procedure (see contract)
+    README.md                 # index of the book's skills with triggers
+    <skill-name>/SKILL.md
 ```
 
-Names are stable once committed: skills and READMEs link to them.
-
-## Per-topic folder contract
-
-Every topic folder provides:
-
-1. **A teaching README** with, in this order: the idea in plain words (2 to 4 paragraphs, with
-   chapter citations), what the reader will see (before and after), how the demo works (code
-   walkthrough naming the few lines that matter), how to run it, "try changing" suggestions, and
-   where to read more in the book. Written for someone who has not read the book yet.
-2. **A runnable demo** in exactly one of Rust, Go, Node, or Bash, using only that toolchain's
-   standard library (no crates.io, no npm packages, no Go modules outside std). Deterministic
-   enough to read: fixed seeds, scripted timelines, printed tables or ASCII timelines rather than
-   raw log spew.
-3. **Before/after** whenever the idea is a failure mode and its remedy. `before` shows the failure
-   happening and names it in its final line; `after` applies the remedy and shows the difference
-   in the same output format so the two runs can be compared line for line. A `before` that
-   would hang or run forever must be bounded by a watchdog that prints the state and exits
-   non-zero with a message saying production would not have stopped. When the idea is a tool or
-   a practice rather than a remedy, the README says "before/after: not applicable" and explains
-   what the single demo shows instead.
-4. **A single documented run command**: `./run.sh` at the topic root runs `before` then `after`
-   (or the single demo) and exits 0 on a clean run. `./run.sh before` and `./run.sh after` run one
-   side. `run.sh` performs any build step itself. The whole run finishes in under about 30 seconds
-   on this VM; a topic that needs longer is split or simplified.
-5. **No shared code between topics.** Each topic is a complete, copyable example. Duplication
-   across topics is accepted; coupling is not.
-
-## Language rubric
-
-Choose per topic by what teaches the idea best. The question to answer in the plan is "which
-toolchain makes the failure and the remedy most visible in the fewest lines?" Defaults:
-
-- **Rust** when the lesson is about who owns a resource, a state machine that must be exhaustive,
-  or a bounded-vs-unbounded primitive, and the type system or RAII IS the remedy (`Drop` guards,
-  `sync_channel` vs `channel`, `wait_timeout`). Std-only; `cargo run` from a package with
-  `src/bin/before.rs` and `src/bin/after.rs`.
-- **Go** when the lesson is about concurrent servers, worker pools, sockets, HTTP client/server
-  knobs, or many goroutines doing simple things; the std `net`, `net/http`, `context`, `expvar`
-  and `log/slog` packages cover production-shaped demos with no dependencies. One `go.mod` per
-  topic with `before/main.go` and `after/main.go`.
-- **Node** when the lesson is about event-loop scheduling and timers, JSON/API contracts, retry
-  logic as commonly written in web clients, or memory growth visible via `process.memoryUsage()`.
-  ESM `.mjs`, no `package.json` dependencies.
-- **Bash** when the lesson is about files, disks, processes, cron-like housekeeping, or
-  orchestrating other programs; bash 5 plus coreutils only.
-
-Rules: one language per topic. Never choose by habit or by "the rest are in Go". If more than
-half of a book's topics land in one language, re-check each rationale. Record the rationale in
-the plan and in the topic README in one sentence.
+Names are stable once committed: notes, skills and commit bodies link to them.
 
 ## Skills contract
 
@@ -133,47 +125,53 @@ followed by these sections:
 - **Procedure** — numbered steps an agent can execute, each with what to look for or do, and
   concrete signals (grep patterns, questions, thresholds) where the book gives them.
 - **Output** — the shape of the result (a table, a checklist, a plan) so results are comparable.
-- **Source** — the chapters the steps come from, and the topics in this repo that demonstrate them.
+- **Source** — the chapters the steps come from, and the lessons in this repo that demonstrate them.
+- **Worked example** — what the skill produces when run against the book's project (for a "hunt"
+  skill, the register is the answer key and the skill is expected to find most of it).
 
 A skill may reference the book's vocabulary but must be usable by someone who has not read it.
 Skill names are imperative verb phrases (`test-integration-points`, `plan-safe-release`).
-Aim for 5 to 8 skills per book; each must earn its place by covering a part of the book the
-others do not.
+Aim for 5 to 8 skills per book; each must earn its place by covering a part of the book the others
+do not.
 
 ## Review bar
 
 The phase-4 reviewer checks, from a FRESH clone on this VM:
 
-1. `books/<slug>/run-all.sh` exits 0 and every topic finished within its budget. Any `before`
-   that is bounded by a watchdog exits as its README says it will.
-2. For every before/after topic, the two outputs differ in the way the README promises and the
-   `before` names its failure in its last line.
-3. Every claim about the book in a README, PLAN or skill traces to a chapter or named section
-   that actually says it. Chapter numbers match the edition named in the plan. Spot-check at
-   least one citation per topic and per skill.
-4. Each topic's language choice matches the plan or records a justified deviation.
-5. Each skill is executable as a procedure (a reader could follow the steps on a real repo) and
-   is not a chapter summary.
-6. No external services, network calls, or non-std dependencies anywhere in `books/`.
+1. At the flawed tag, the project builds, its tests pass and its baseline verify passes: the flaws
+   are latent, not obvious.
+2. For every lesson, `make verify LESSON=NN` passes at its tag and
+   `make verify LESSON=NN REF=<previous tag>` reproduces the flaw, each within its time budget. The
+   verdict lines match the commit body.
+3. Each lesson's diff is confined to what its note claims; no flaw is fixed early by accident and no
+   new one is introduced (spot-check two later lessons' verify at an earlier tag).
+4. Every claim about the book in a note, the plan or a skill traces to a chapter or named section
+   that actually says it. Chapter numbers match the edition named in the plan. Spot-check at least
+   one citation per lesson and per skill.
+5. Each skill is executable as a procedure and is not a chapter summary; its worked example matches
+   the project.
+6. History is linear, tags are where the plan says, and `git log` reads as the intended story.
 
 Verdicts are PASS / NITS / FAIL per the repo-wide protocol; one repair round, then arbitration.
 
 ## Conventions
 
-- Commit subjects `<area>: <imperative summary>`; `<area>` is `docs`, `release-it` (or the book
-  slug), `skills`, or `repo`.
+- Commit subjects `<area>: <imperative summary>`; `<area>` is `docs`, the book slug (`release-it`)
+  for plan-level and landing-page commits, the project name (`checkout`) for lesson commits, `skills`,
+  or `repo`. Lesson commits end their subject with `(lesson NN)`.
 - `STATE.md` at the repo root records which book is in which phase and what is next; update it in
   the same commit as the phase's deliverable.
-- Durable knowledge about this repo's process goes in `docs/knowledge/` (not the `kb` CLI, which
-  is for VM/environment facts).
-- Scratch files go in `/tmp/<task>/`, never in the repo.
+- Durable knowledge about this repo's process goes in `docs/knowledge/` (not the `kb` CLI, which is
+  for VM/environment facts).
+- Scratch files go in `/tmp/<task>/`, never in the repo. Load-test results under `project/results/`
+  are gitignored.
 
 ## Starting a new book
 
-1. Create `books/<slug>/` and write `PLAN.md` following the phase-1 row above and the
-   `books/release-it/PLAN.md` structure: core argument → parts with chapter refs → topics → skills
-   → deliberately omitted → build order and budgets.
-2. Scaffold `topics/NN-<topic>/README.md` stubs carrying the teaching outline from the plan, and
-   `skills/README.md` listing planned skills.
-3. Add the book to the root `README.md` index and to `STATE.md`. Commit.
-4. Dispatch phase 2 to a builder seat with the plan as the brief.
+1. Create `books/<slug>/` and write `PLAN.md` following `books/release-it/PLAN.md`: core argument →
+   archetype project (what it does, components, partners, stack with rationale) → deliberate-issues
+   register → lesson sequence (source, flaw, patch, commit subject, verify) → coverage honesty →
+   skills → build order and budget → layout → decisions to confirm.
+2. Add the book to the root `README.md` index and to `STATE.md`. Commit.
+3. Wait for Nick's confirmation. Then dispatch phase 2 to a builder seat with the plan as the brief,
+   one checkpoint at a time.

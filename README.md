@@ -1,45 +1,52 @@
 # book-notes
 
-Technical books, turned into small programs that teach their core ideas and into skills that
-codify their main parts as reusable procedures.
+Technical books, turned into one deliberately flawed project per book that the book's lessons
+improve commit by commit, and into skills that codify the book's main parts as reusable procedures.
 
-Each book gets a folder under `books/`. Inside, every core idea of the book becomes a **topic**:
-a runnable demo (Rust, Go, Node, or Bash, chosen per topic by what teaches best) with a teaching
-README, and, when the idea is a failure mode and its remedy, a `before` run that shows the failure
-and an `after` run that shows the fix. At the end of each book sits a `skills/` folder whose
-`SKILL.md` files turn the book's main parts into procedures an agent can run on real code.
+Each book gets a folder under `books/`. Inside, a single realistic project built on real technology
+(Docker Compose, a real database, real instrumentation) starts at a tagged **flawed** state seeded
+with the mistakes the book warns about. Every core lesson of the book is then a **patch commit**
+with its own tag, a teaching note, and a verify script that reproduces the flaw on the previous tag
+and shows the improvement on this one. Reading `git log` between the first and last tag is reading
+the book applied. A `skills/` folder turns the book's main parts into procedures an agent can run on
+real code, each pointing at the project as its worked example.
 
 The process for breaking down any book is in [`AGENTS.md`](AGENTS.md). It is book-agnostic; the
-first worked example is Release It!.
+worked example is Release It!.
 
 ## How a book is laid out
 
 ```
 books/<slug>/
-  PLAN.md             research product: the book's argument, chosen topics, chosen skills, omissions
+  PLAN.md             the confirmed plan: project design, flaw register, lesson sequence, skills
   README.md           landing page and index for the book
-  run-all.sh          runs every topic demo (the reviewer's first command)
-  topics/NN-<topic>/  README.md + run.sh + before/after demo, one language per topic
-  skills/<skill>/     SKILL.md: when to use, inputs, procedure, output, source chapters
+  lessons/NN-*.md     one teaching note per lesson (00 is the tour of the flawed start)
+  project/            the one codebase: make up / make verify LESSON=NN / make down
+  skills/<skill>/     SKILL.md: when to use, inputs, procedure, output, source, worked example
 ```
 
-Every topic runs with one command from its folder:
+Reader's path, for any book:
 
 ```
-./run.sh          # before, then after
-./run.sh before   # just the failure
-./run.sh after    # just the remedy
+git checkout <slug>/v0-flawed            # the before
+make -C books/<slug>/project up verify LESSON=00
+git checkout <slug>/lesson-05
+make -C books/<slug>/project verify LESSON=05 REF=<slug>/lesson-04   # FLAW REPRODUCED
+make -C books/<slug>/project verify LESSON=05                        # IMPROVED
 ```
-
-Demos use only the standard library of their language and need no network or services.
 
 ## Books
 
 | Book | Status | Plan |
 |---|---|---|
-| Release It! Design and Deploy Production-Ready Software, 2nd ed. (Michael T. Nygard, 2018) | phase 1 done: planned and scaffolded; topics and skills not yet built | [`books/release-it/PLAN.md`](books/release-it/PLAN.md) |
+| Release It! Design and Deploy Production-Ready Software, 2nd ed. (Michael T. Nygard, 2018) | plan v2 written (one flawed `checkout` service, 17 flaws, 12 lessons); awaiting Nick's confirmation before the build | [`books/release-it/PLAN.md`](books/release-it/PLAN.md) |
+
+The v1 approach (twelve standalone mini-projects) is archived at
+`books/release-it/PLAN-v1-per-topic-projects.md`; its stub folders under `books/release-it/topics/`
+are superseded and are removed in the build phase.
 
 ## Toolchains
 
-Go 1.26, Node 22 (`export PATH="$HOME/.nvm/versions/node/v22.23.2/bin:$PATH"`), Rust stable via
-rustup (`~/.cargo/bin`), bash 5. Each `run.sh` checks for the toolchain it needs.
+Docker 29 with Compose v5, Go 1.26, Node 22 (`export PATH="$HOME/.nvm/versions/node/v22.23.2/bin:$PATH"`),
+Rust stable via rustup (`~/.cargo/bin`), bash 5. Host ports 5432 and 8080 are taken on this VM by
+another project; book projects bind host ports in the 1xxxx range.

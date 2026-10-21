@@ -6,16 +6,20 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
 
 ### release-it — Release It! 2nd ed. (Nygard)
 
-- **Phase 1 (research & plan):** done 2026-10-21 by the planner seat (Claude Fable 5.1).
-  Deliverables: `books/release-it/PLAN.md`, 12 topic stubs under `books/release-it/topics/`,
-  `books/release-it/skills/README.md` index, root `AGENTS.md` and `README.md`.
-- **Phase 2 (implement topics):** not started. Builder seat: Claude Opus 5.5. Brief = `PLAN.md`
-  section "Build order and budgets" plus each topic's stub README.
-- **Phase 3 (skills):** not started. Eight skills planned in `PLAN.md`.
-- **Phase 4 (review):** not started. Reviewer must be from a different model family than the
-  builder (repo-wide protocol); final big review by the planner seat is also requested by Nick.
+- **Phase 1 (research & plan):** v1 done 2026-10-21 (twelve standalone topic projects); Nick
+  reviewed and redirected to one flawed project improved lesson by lesson. **v2 written 2026-10-21**
+  by the planner seat (Claude Fable 5.1): `books/release-it/PLAN.md`. v1 archived as
+  `books/release-it/PLAN-v1-per-topic-projects.md`. `AGENTS.md` and root `README.md` now describe
+  the v2 pattern. **Awaiting Nick's confirmation** (decisions listed in PLAN.md section 9).
+- **Phase 2 (build v0 + lessons):** not started; gated on confirmation. Builder seat: Claude
+  Opus 5.5. Three checkpoints (A: v0 + lab + L01; B: L02–L07; C: L08–L12 + landing page + skills),
+  each reviewed by a Codex seat before the next. Checkpoint A also removes the superseded
+  `books/release-it/topics/` stubs.
+- **Phase 3 (skills):** not started; part of checkpoint C. Eight skills as in PLAN.md section 5.
+- **Phase 4 (review):** not started. Reviewer from a different model family than the builder;
+  final big review by the planner seat is also requested by Nick.
 
 ## Next action
 
-Dispatch phase 2 to the builder with `books/release-it/PLAN.md` as the brief. The builder reads
-`AGENTS.md` first, then the plan, then fills each topic in the order the plan gives.
+Nick confirms or amends `books/release-it/PLAN.md` v2. On confirmation, dispatch checkpoint A to the
+builder with the plan as the brief (the builder reads `AGENTS.md` first, then the plan).
