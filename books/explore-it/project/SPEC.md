@@ -52,6 +52,8 @@ become orphaned. Callers must handle a conflict for a nonempty queue.
 `POST /v1/queues/{name}/resume` allows work again. Missed periodic ticks should
 not create an unbounded burst of catch-up jobs.
 `POST /v1/queues/{name}/purge` removes all pending jobs: scheduled, queued and retry_wait.
+A job leased when its queue is purged keeps its lease: an ack completes it, and a
+nack, lease expiry or worker deletion makes it `dead`, never pending again.
 
 ## Jobs
 
@@ -79,12 +81,16 @@ Valid state filters are `scheduled`, `queued`, `leased`, `retry_wait`,
 Attempt `n` numbers every execution of the job and is never reused, across
 operator retries too; the lease's `attempt` counts toward `max_attempts`.
 `DELETE /v1/jobs/{id}` removes a terminal job.
+Only a `leased` job has a lease token, holder and expiry; every exit from
+`leased` clears all three; attempt rows keep the worker that ran them.
 
 ## Worker protocol
 
 `POST /v1/workers` takes a name and an array of supported kinds.
 It returns a worker id and token.
 `DELETE /v1/workers/{id}` deregisters the worker and releases its active leases.
+Each release records an unsuccessful attempt, as an expired lease does; a job
+whose maximum attempts are exhausted becomes `dead` instead of `queued`.
 `POST /v1/queues/{name}/lease` takes `worker_id` and `max_jobs` (1–100).
 Only jobs with a kind supported by that worker are eligible.
 Leasing is atomic; concurrent workers cannot acquire the same lease.

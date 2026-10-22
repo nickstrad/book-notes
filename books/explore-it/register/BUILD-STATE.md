@@ -5,6 +5,29 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
+E05 complete, tag explore-it/lesson-05 (the fix commit containing this state). Builder: Claude
+Opus 5.5 (explorer also Opus; the cross-family check rests on the Astra end review).
+
+- Exploration record `01137b6` (blind Opus explorer, 24 min, 40/40 manifest hashes rechecked).
+  Blindness audit: zero flagged tool inputs; the explorer did not open the exported lesson 01
+  note that names A2. It ran A2's sequence as chartered (P3) and judged it SPEC-consistent.
+- Reconciliation `reconciliations/05.md`: three reports -> U24-U26, all fixed; A2 resolved by
+  decision (purge marks leased jobs; a later failure dead-letters). D12-D14 held as regressions.
+  E05-F02's cancelled-in-flight attempt row is left with A3.
+- Acceptance (`runs/05-acceptance.json`): verify current `FIXED AND CHECKED: 4 absent`; REF
+  lesson-04 `DEFECTS REPRODUCED: 4 present` (first attempt); 66/66 integration checks incl.
+  TestL05Walk; unit tests pass; seeder A2 control ABSENT, A3-A4 still PRESENT.
+- walk05.py at lesson-04 (scratch stack `queuelet-w05`, torn down): breaks on W2/W3/W4, but W1
+  (U24) never fired in any measured seed; U24 rests on its own repro.
+- Process notes: a HAVING clause with `count(*)` inside an `array(SELECT generate_series(...))`
+  subquery is not the outer group's count (walk W6's first version false-alarmed); a uniform
+  random walk spends its steps on no-op verbs, so bias toward holder verbs while a lease is held.
+
+Resume: fresh agent for E06 from lesson-05; coordinator prepares the export with
+`register/tools/prepare-export.py 6 explore-it/lesson-05`.
+
+## E04 unit (historical)
+
 E04 complete, tag explore-it/lesson-04 (the fix commit containing this state). Builder: Claude
 Opus 5.5 (explorer also Opus; the cross-family check rests on the Astra end review).
 

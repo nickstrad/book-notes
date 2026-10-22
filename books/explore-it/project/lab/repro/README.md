@@ -69,3 +69,14 @@ once (the first REF attempt failed on exactly that). `invariants04.py I04 [seed]
 is the E04 rules list as a seeded random walk over 200 jobs (I1–I7, see its
 docstring); `TestL04Invariants` runs it. It is a check, not a reproduction, so it
 is not in `lesson-04.ids`.
+
+E05 adds `probe05.py`, wrappers U24–U26 and A2, `lesson-05.ids`, and `walk05.py`.
+U24 leases one job on `max_attempts: 2` and deletes the worker, up to four times;
+an empty lease is the answer there, so it leases once per round instead of
+waiting. U26 freezes the lab clock, lets two leases expire once, then acks one
+job and cancels the other and reads each job's last event; it always resets the
+clock. A2 leases, purges, then nacks. `walk05.py W05 [seed]` is the E05 sequence
+charter as a seeded random walk of 100 verbs (W1–W7, see its docstring) on a
+frozen clock; `TestL05Walk` runs it. Holder verbs are favoured while a lease is
+held, because a uniform walk rarely acks. It is a check, not a reproduction, so
+it is not in `lesson-05.ids`.

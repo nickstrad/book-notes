@@ -7,7 +7,7 @@ structured exploration experiments run against it, plus 8 codebase-exploration s
 Spec: `books/explore-it/PLAN.md` (sharpened pass) + repo `AGENTS.md`.
 Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at the end.
 
-**Status (2026-10-22): experiment 05 exploration recorded; fix step in progress.**
+**Status (2026-10-22): experiment 05 complete, tag `explore-it/lesson-05`. Next: experiment 06.**
 
 ## Done
 - Plan: `78e56de` + scoped revision `7dcfb05`.
@@ -22,11 +22,17 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
   resolved by decision (default backoff cap 3600 s). Verify current `FIXED AND CHECKED: 6
   absent`; REF lesson-03 `DEFECTS REPRODUCED: 6 present`; 61/61 integration checks incl.
   the rules-as-invariants walk (200 jobs). Prediction contradicted: only the charter's
-  ("the code honours every rule"). A2–A4 still PRESENT.
+  ("the code honours every rule").
+- Experiment 05 (Sequence it): exploration `01137b6`; fix = the commit containing this state
+  (tag `explore-it/lesson-05`). 3 findings, all 3 fixed (U24–U26), none deferred; A2 resolved
+  by decision (purge marks leased jobs; a later nack/expiry/release dead-letters). Verify
+  current `FIXED AND CHECKED: 4 absent`; REF lesson-04 `DEFECTS REPRODUCED: 4 present`;
+  66/66 integration checks incl. the 100-step random walk. Predictions contradicted: the
+  charter's ("every verb does what it says or is refused") and the walk's (which invariants
+  break). A3–A4 still PRESENT. The walk check does not catch U24 at lesson-04 (W1 never fired).
 
 ## In progress
-- Experiment 05 (Sequence it): blind exploration committed (this commit); reconciliation and fix next,
-  same Opus run. Explorer stack `queuelet-e05` stopped by the explorer.
+- Nothing running. The `queuelet` lab stack may still be up (current tree); that is not an agent.
 
 ## Incidents (history)
 - Sol run 1 stopped 2026-10-21 ~21:13 CDT by the Codex content filter after E01.
@@ -35,21 +41,25 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
   E03's cross-family check rests on the Astra end review.
 
 ## Next
-1. Experiment 05 (Sequence it): fresh run; export from `explore-it/lesson-04`
-   (`register/tools/prepare-export.py 5 explore-it/lesson-04`). Carries A2; its planned
-   defects D12–D14 were already fixed in E01.
-2. Experiment 06, then checkpoint B review.
+1. Experiment 06 (Relate it): fresh run; export from `explore-it/lesson-05`
+   (`register/tools/prepare-export.py 6 explore-it/lesson-05`). Carries A4; its planned
+   defects D15–D17 were already fixed in E01.
+2. Checkpoint B review (E02–E06).
 3. Checkpoint C: 07–09, final skills, landing commit; Astra end review.
 4. Merge into `main` adds-only after Release It! lands.
 
-Handed forward from E04 (open in `exploration/hypotheses.md`): Q-E04-4 (does "completed"
+Handed forward (open in `exploration/hypotheses.md`): from E04, Q-E04-4 (does "completed"
 include dead/cancelled), H-E04-08 (FIFO under a backward clock step), H-E04-09 (stats read
 without a snapshot), H-E04-10 (ack not atomic: needs DB fault injection), R42 linear backoff
-not re-probed, TR-E04-1/2 testability requests (sweep-lag signal, stats snapshot hook).
+not re-probed, TR-E04-1/2 (sweep-lag signal, stats snapshot hook). From E05: H-E05-21
+(worker deregistering on SIGTERM; now bounded by U24's fix), T-E05-1 (an "offset and keep
+ticking" clock mode), the untested sequences in `models/nouns-verbs.md` (schedules, queue
+DELETE, retention and webhooks were outside the walk), and E05-F02's missing attempt row for
+a delivery cancelled in flight (left with A3).
 
 ## Open decisions
-- A2–A4 spec silences: E05–E07 (coordinator decides one line each in the fix commit).
-- Explorer seat for E05+ (E04 ran on Opus again; Muse CLI not on PATH this session): the plan wants explorer and fixer from different families; with
+- A3–A4 spec silences: E06–E07 (coordinator decides one line each in the fix commit).
+- Explorer seat for E06+ (E04 and E05 ran on Opus again; Muse CLI not on PATH this session): the plan wants explorer and fixer from different families; with
   Opus building, a Muse or Codex explorer would restore that. Owner: Nick / Twin.
 
 ## Resume

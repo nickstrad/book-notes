@@ -18,7 +18,7 @@ CREATE OR REPLACE FUNCTION observe_job() RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE label text;
 BEGIN
  IF TG_OP='INSERT' THEN label:='created';
- ELSIF NEW.state IS DISTINCT FROM OLD.state THEN label:=CASE WHEN OLD.state='leased' AND NEW.last_error='lease expired' THEN 'lease_expired' ELSE NEW.state END;
+ ELSIF NEW.state IS DISTINCT FROM OLD.state THEN label:=CASE WHEN OLD.state='leased' AND current_setting('queuelet.release',true)='lease_expired' THEN 'lease_expired' ELSE NEW.state END;
  ELSIF NEW.lease_expires_at IS DISTINCT FROM OLD.lease_expires_at THEN label:='heartbeat';
  ELSE RETURN NEW; END IF;
  INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt,error)

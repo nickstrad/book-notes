@@ -1,6 +1,9 @@
 package jobs
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
 
 func (j *Service) Expire(now time.Time) error {
 
@@ -9,43 +12,13 @@ func (j *Service) Expire(now time.Time) error {
 		return e
 	}
 	defer tx.Rollback()
-	rows, e := tx.Query(`SELECT id,attempts+1,max_attempts,leased_by FROM jobs WHERE state='leased' AND lease_expires_at <= $1 FOR UPDATE SKIP LOCKED`, now)
-	if e != nil {
+	// The event trigger labels this transaction's releases as expiries.
+	if _, e = tx.Exec(`SET LOCAL queuelet.release='lease_expired'`); e != nil {
 		return e
 	}
-	type expired struct {
-		id, worker int64
-		n, max     int
-	}
-	batch := []expired{}
-	for rows.Next() {
-		var r expired
-		if e = rows.Scan(&r.id, &r.n, &r.max, &r.worker); e != nil {
-			rows.Close()
-			return e
-		}
-		batch = append(batch, r)
-	}
-	e = rows.Err()
-	rows.Close()
+	dead, e := release(tx, now, "expired", "lease expired", `state='leased' AND lease_expires_at <= $1 FOR UPDATE SKIP LOCKED`, now)
 	if e != nil {
 		return e
-	}
-	dead := []int64{}
-	for _, r := range batch {
-		state := "queued"
-		if r.n >= r.max {
-			state = "dead"
-			dead = append(dead, r.id)
-		}
-		_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$4,attempts=$3,last_error='lease expired',run_at=$4,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now)
-		if e != nil {
-			return e
-		}
-		_, e = tx.Exec(`INSERT INTO attempts SELECT $1,(SELECT count(*)+1 FROM attempts WHERE job_id=$1),$2,leased_at,$3,'expired','lease expired' FROM jobs WHERE id=$1`, r.id, r.worker, now)
-		if e != nil {
-			return e
-		}
 	}
 	if e = tx.Commit(); e != nil {
 		return e
@@ -56,6 +29,58 @@ func (j *Service) Expire(now time.Time) error {
 		}
 	}
 	return nil
+}
+
+// ReleaseWorker ends a deregistered worker's leases inside the caller's
+// transaction. The caller notifies the returned dead jobs after commit.
+func (j *Service) ReleaseWorker(tx *sql.Tx, worker int64, now time.Time) ([]int64, error) {
+	return release(tx, now, "released", "worker deleted", `state='leased' AND leased_by=$1 FOR UPDATE`, worker)
+}
+
+// release ends the selected leases. Each records an unsuccessful attempt; the
+// job is queued again, or dead when its attempts are spent or its queue was
+// purged while it ran.
+func release(tx *sql.Tx, now time.Time, outcome, reason, where string, arg any) ([]int64, error) {
+	rows, e := tx.Query(`SELECT id,attempts+1,max_attempts,leased_by,purge_requested FROM jobs WHERE `+where, arg)
+	if e != nil {
+		return nil, e
+	}
+	type expired struct {
+		id, worker int64
+		n, max     int
+		purged     bool
+	}
+	batch := []expired{}
+	for rows.Next() {
+		var r expired
+		if e = rows.Scan(&r.id, &r.n, &r.max, &r.worker, &r.purged); e != nil {
+			rows.Close()
+			return nil, e
+		}
+		batch = append(batch, r)
+	}
+	e = rows.Err()
+	rows.Close()
+	if e != nil {
+		return nil, e
+	}
+	dead := []int64{}
+	for _, r := range batch {
+		state := "queued"
+		if r.n >= r.max || r.purged {
+			state = "dead"
+			dead = append(dead, r.id)
+		}
+		_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$4,attempts=$3,last_error=$5,run_at=$4,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now, reason)
+		if e != nil {
+			return nil, e
+		}
+		_, e = tx.Exec(`INSERT INTO attempts SELECT $1,(SELECT count(*)+1 FROM attempts WHERE job_id=$1),$2,leased_at,$3,$4,$5 FROM jobs WHERE id=$1`, r.id, r.worker, now, outcome, reason)
+		if e != nil {
+			return nil, e
+		}
+	}
+	return dead, nil
 }
 
 func (j *Service) Promote(now time.Time) error {

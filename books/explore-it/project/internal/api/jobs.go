@@ -123,9 +123,15 @@ func (s *Server) deleteWorker(w http.ResponseWriter, r *http.Request) {
 		fail(w, 404, "worker_not_found", e)
 		return
 	}
-	_, e = tx.Exec(`UPDATE jobs SET state='queued',event_at=$2,run_at=$2,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"), s.Clock.Now())
+	now := s.Clock.Now()
+	dead, e := s.Jobs.ReleaseWorker(tx, num(r, "id"), now)
 	if e == nil {
 		e = tx.Commit()
+	}
+	for _, id := range dead {
+		if e == nil {
+			e = s.Jobs.Notify(id, now)
+		}
 	}
 	output(w, map[string]any{"ok": true}, e)
 }

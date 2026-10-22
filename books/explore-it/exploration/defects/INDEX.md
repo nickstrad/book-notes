@@ -81,3 +81,18 @@ All five E04 reports are new unplanned faults, fixed in lesson 04. The planned E
 | U23 | [E04-F05](E04-F05-queued-age-counts-leased-time.md) | [fixed in lesson 04](U23-queued-age-counts-leased-time.md) |
 
 Original E04-F reports and raw scores are immutable.
+
+## Experiment 05 additions
+
+All three E05 reports are new unplanned faults, fixed in lesson 05. The planned E05 defects
+(D12–D14) were already fixed in lesson 01; D12 and D14 held as regressions here and D13 was
+re-probed as a pause, one-hour clock jump and resume. The spec silence A2 (a job leased when its
+queue is purged) is resolved in lesson 05 by decision.
+
+| ID | Original | Current record |
+|---|---|---|
+| U24 | [E05-F01](E05-F01-worker-delete-release-uncounted-attempt.md) | [fixed in lesson 05](U24-worker-delete-release-uncounted-attempt.md) |
+| U25 | [E05-F02](E05-F02-terminal-rows-keep-lease-fields.md) | [fixed in lesson 05](U25-terminal-rows-keep-lease-fields.md) |
+| U26 | [E05-F03](E05-F03-worker-release-logged-as-lease-expired.md) | [fixed in lesson 05](U26-release-logged-as-lease-expired.md) |
+
+Original E05-F reports and raw scores are immutable.

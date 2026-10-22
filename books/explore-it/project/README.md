@@ -80,6 +80,8 @@ have unknown (`null`) starts; no timing history is invented. `event_at` uses
 application time. API lifecycle JSON logs mirror committed events asynchronously;
 a crash between logging and marking can repeat a log event (deduplicate event_id).
 Worker JSON logs correlate processing/completion with the same job id.
+An event is labelled with the job's new state, except that a release by lease
+expiry is `lease_expired`; earlier error text never changes the label.
 
 The Compose **lab** enables `QUEUELET_TEST_CLOCK=1`. Production defaults to no
 clock endpoint. With `QUEUELET_KEY=admin-key`, use `qctl clock set
