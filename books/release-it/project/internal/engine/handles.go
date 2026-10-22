@@ -89,9 +89,11 @@ func (e *Engine) path(id string) string { return filepath.Join(e.dir, id+".db") 
 
 // dsn opens tenant files in WAL mode. Automatic checkpoints are off because
 // they landed on tenants' writes as latency spikes; checkpoints belong in the
-// node's maintenance loop instead (TODO: schedule them).
+// node's maintenance loop instead (TODO: schedule them). A writer that finds
+// the file locked waits up to 2 s with SQLite's own backing-off busy handler
+// (it must be the first pragma), bounded further by the statement deadline.
 func dsn(path string) string {
-	return "file:" + path + "?_pragma=journal_mode(wal)&_pragma=synchronous(normal)&_pragma=wal_autocheckpoint(0)&_pragma=foreign_keys(on)"
+	return "file:" + path + "?_pragma=busy_timeout(2000)&_pragma=journal_mode(wal)&_pragma=synchronous(normal)&_pragma=wal_autocheckpoint(0)&_pragma=foreign_keys(on)"
 }
 
 // Handle returns the open database for id, opening it on first use.

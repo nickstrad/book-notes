@@ -37,6 +37,9 @@ services:
       POSTGRES_PASSWORD: litefleet
       POSTGRES_DB: litefleet
     command: ["postgres", "-c", "max_connections=100", "-c", "shared_buffers=256MB", "-c", "synchronous_commit=off"]
+    # The registry and control stand in for services on their own machines:
+    # on this shared VM they get a higher CPU weight than the tiers under test.
+    cpu_shares: 4096
     ports: ["15432:5432"]
     volumes: [pgdata:/var/lib/postgresql/data]
     healthcheck:
@@ -57,6 +60,7 @@ services:
       <<: *go-build
       args: { CMD: control }
     restart: unless-stopped
+    cpu_shares: 4096
     environment:
       DATABASE_URL: postgres://litefleet:litefleet@postgres:5432/litefleet
       NODES: node-a=http://node-a:8070,node-b=http://node-b:8070
@@ -109,7 +113,8 @@ services:
 
   toxiproxy:
     image: ghcr.io/shopify/toxiproxy:2.12.0
-    command: ["-host=0.0.0.0", "-config=/config/toxiproxy.json", "-proxy-metrics", "-runtime-metrics"]
+    command: ["-host=0.0.0.0", "-config=/config/toxiproxy.json"]
+    cpu_shares: 4096   # it stands in for the network
     volumes: ["./toxiproxy.json:/config/toxiproxy.json:ro"]
     ports: ["18474:8474"]
 

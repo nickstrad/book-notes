@@ -13,7 +13,11 @@ for n in /nodes/node-*; do
   cp "$n"/_node.db* "/tmp/audit/$(basename "$n")/" 2>/dev/null || true
   rm -f "/tmp/audit/$(basename "$n")"/_node.db-shm
 done
-files=(/tmp/audit/node-*/tenants/*.db)
+# Every tenant file; the node's health canary (all-zero id) is not a tenant.
+files=()
+for f in /tmp/audit/node-*/tenants/*.db; do
+  [[ $(basename "$f") == 00000000-0000-4000-8000-000000000000.db ]] || files+=("$f")
+done
 
 dups_sql() {
   local parts=() f

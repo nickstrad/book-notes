@@ -30,5 +30,7 @@ scrape_configs:
     static_configs: [{targets: ["toxiproxy:8474"]}]
     relabel_configs: *instance
   - job_name: postgres
+    scrape_interval: 5s   # the exporter's queries are not free for Postgres
+    scrape_timeout: 4s
     static_configs: [{targets: ["postgres-exporter:9187"]}]
     relabel_configs: *instance

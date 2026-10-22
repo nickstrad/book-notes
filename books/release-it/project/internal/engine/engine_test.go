@@ -125,3 +125,26 @@ func TestFailedWriteReleasesTheWriteLock(t *testing.T) {
 		t.Fatalf("%d connections open after failed writes; want <= %d", open, maxConnsPerDB)
 	}
 }
+
+func TestWriterWaitsForTheLock(t *testing.T) {
+	e := newEngine(t)
+	exec(t, e, `CREATE TABLE notes (id integer PRIMARY KEY, body text)`)
+	h, _ := e.Handle("db1")
+	lock, err := h.DB().Conn(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := lock.ExecContext(context.Background(), "BEGIN IMMEDIATE"); err != nil {
+		t.Fatal(err)
+	}
+	go func() {
+		time.Sleep(300 * time.Millisecond)
+		lock.ExecContext(context.Background(), "COMMIT")
+		lock.Close()
+	}()
+	start := time.Now()
+	exec(t, e, `INSERT INTO notes (body) VALUES ('waited')`)
+	if d := time.Since(start); d < 250*time.Millisecond {
+		t.Fatalf("write finished in %s while the lock was held for 300 ms", d)
+	}
+}

@@ -13,24 +13,43 @@ import (
 	"time"
 
 	"litefleet/internal/httpx"
+	"litefleet/internal/retry"
 	"litefleet/internal/wire"
 )
 
 // Client forwards statements to nodes.
 type Client struct {
-	http *http.Client
+	http  *http.Client
+	reads retry.Policy
 }
 
 // New returns a node client. A node runs a statement for at most 2 s (its
 // statement deadline), so an attempt gets 2.5 s for headers and body.
+//
+// Reads are idempotent and may be retried: at most twice, after a backoff
+// drawn from [0, 50 ms·2^n] (capped at 400 ms), only with time left in the
+// request's deadline, and only while this gateway's retries stay under 10 %
+// of its node calls. Writes are never retried: after a timeout the gateway
+// cannot know whether the transaction committed, and SQL in general cannot
+// be de-duplicated, so a repeat could apply it twice.
 func New() *Client {
-	return &Client{http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2500 * time.Millisecond, Total: 2500 * time.Millisecond})}
+	return &Client{
+		http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2500 * time.Millisecond, Total: 2500 * time.Millisecond}),
+		reads: retry.Policy{Base: 50 * time.Millisecond, Cap: 400 * time.Millisecond, MaxRetries: 2,
+			MinAttempt: 100 * time.Millisecond, Budget: retry.NewBudget(0.1, 10)},
+	}
 }
 
 // Query runs a read statement on the route's node.
 func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest) (*wire.QueryResult, error) {
+	body, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
 	var out wire.QueryResult
-	if err := c.call(ctx, rt, "query", req, &out); err != nil {
+	p := c.reads
+	p.Dep = rt.Node
+	if err := p.Do(ctx, transient, func(ctx context.Context) error { return c.do(ctx, rt, "query", body, &out) }); err != nil {
 		return nil, err
 	}
 	return &out, nil
@@ -38,42 +57,23 @@ func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest
 
 // Execute runs a write transaction on the route's node.
 func (c *Client) Execute(ctx context.Context, rt wire.Route, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
+	body, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
 	var out wire.ExecuteResult
-	if err := c.call(ctx, rt, "execute", req, &out); err != nil {
+	if err := c.do(ctx, rt, "execute", body, &out); err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
 
-// Nodes are reached over the network and blip; retry transient failures.
-const (
-	retries    = 5
-	retryDelay = 100 * time.Millisecond
-)
-
-func (c *Client) call(ctx context.Context, rt wire.Route, op string, in, out any) error {
-	body, err := json.Marshal(in)
-	if err != nil {
-		return err
-	}
-	for attempt := 0; ; attempt++ {
-		err = c.do(ctx, rt, op, body, out)
-		if err == nil || !transient(err) || attempt == retries {
-			return err
-		}
-		select {
-		case <-time.After(retryDelay):
-		case <-ctx.Done():
-			return err
-		}
-	}
-}
-
-// transient reports whether a failed call is worth repeating: network
-// errors and node-side 5xx are; a 4xx is the request's own fault.
+// transient reports whether a failed read is worth repeating: network errors
+// and node-side 5xx are, except a statement that ran out its deadline (it
+// would again); a 4xx is the request's own fault.
 func transient(err error) bool {
 	if re, ok := err.(*httpx.RemoteError); ok {
-		return re.Status >= 500
+		return re.Status >= 500 && re.Code != "statement_deadline"
 	}
 	return true
 }

@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -14,6 +15,7 @@ import (
 	"time"
 
 	"litefleet/internal/httpx"
+	"litefleet/internal/retry"
 	"litefleet/internal/wire"
 )
 
@@ -21,9 +23,10 @@ import (
 // milliseconds, so 500 ms is generous; the usage report is a heavy read and
 // gets its own client.
 type Client struct {
-	base   string
-	http   *http.Client
-	report *http.Client
+	base    string
+	http    *http.Client
+	report  *http.Client
+	resolve retry.Policy
 }
 
 // New returns a client for the control plane at base.
@@ -32,6 +35,10 @@ func New(base string) *Client {
 		base:   base,
 		http:   httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 500 * time.Millisecond, Total: 500 * time.Millisecond}),
 		report: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 10 * time.Second, Total: 10 * time.Second}),
+		// A resolve is a read and may be retried, within the same limits
+		// as node reads.
+		resolve: retry.Policy{Dep: "control", Base: 50 * time.Millisecond, Cap: 400 * time.Millisecond, MaxRetries: 2,
+			MinAttempt: 100 * time.Millisecond, Budget: retry.NewBudget(0.1, 10)},
 	}
 }
 
@@ -39,7 +46,9 @@ func New(base string) *Client {
 func (c *Client) Resolve(ctx context.Context, apiKey, dbName string) (wire.Route, error) {
 	var rt wire.Route
 	body, _ := json.Marshal(wire.ResolveRequest{APIKey: apiKey, DBName: dbName})
-	err := c.do(ctx, http.MethodPost, "/internal/resolve", "", body, &rt)
+	err := c.resolve.Do(ctx, retryable, func(ctx context.Context) error {
+		return c.do(ctx, http.MethodPost, "/internal/resolve", "", body, &rt)
+	})
 	return rt, err
 }
 
@@ -75,6 +84,15 @@ func (c *Client) Usage(ctx context.Context, apiKey, window string) (json.RawMess
 	var out json.RawMessage
 	err := c.doWith(ctx, c.report, http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
 	return out, err
+}
+
+// retryable: transport errors and control-side 5xx; a 4xx is an answer.
+func retryable(err error) bool {
+	var re *httpx.RemoteError
+	if errors.As(err, &re) {
+		return re.Status >= 500
+	}
+	return true
 }
 
 func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) error {

@@ -107,6 +107,19 @@ toxic() {
 }
 untoxic() { curl -fs -XDELETE "$TOXI/proxies/$1/toxics/$2" >/dev/null; log "removed toxic $2 from $1"; }
 
+# untoxic_busy PROXY NAME — remove a toxic from a proxy with many open links.
+# Toxiproxy 2.12 can wedge a proxy for many seconds when a latency or timeout
+# toxic is removed while thousands of links are open (the toxic flushes held
+# data to connections that are already gone). Disabling the proxy closes
+# every link first; the toxic is then removed from an idle proxy and traffic
+# resumes on fresh connections, at the cost of one reset per open link.
+untoxic_busy() {
+  curl -fs -XPOST "$TOXI/proxies/$1" -d '{"enabled":false}' >/dev/null
+  curl -fs -XDELETE "$TOXI/proxies/$1/toxics/$2" >/dev/null
+  curl -fs -XPOST "$TOXI/proxies/$1" -d '{"enabled":true}' >/dev/null
+  log "removed toxic $2 from $1 (proxy cycled)"
+}
+
 # prom EXPR — first value of an instant query, or "NaN".
 prom() {
   curl -fsG "$PROM/api/v1/query" --data-urlencode "query=$1" |

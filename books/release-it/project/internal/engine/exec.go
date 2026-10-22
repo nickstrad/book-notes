@@ -60,6 +60,10 @@ func (h *Handle) conn(ctx context.Context) (*sql.Conn, error) {
 	return c, nil
 }
 
+var sqliteBusy = promauto.NewCounter(prometheus.CounterOpts{
+	Name: "sqlite_busy_total", Help: "Statements that gave up waiting for a database's write lock.",
+})
+
 var statementsCancelled = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "statements_cancelled_total", Help: "Statements interrupted because their deadline passed or their caller went away.",
 }, []string{"reason"})
@@ -81,6 +85,9 @@ func classify(ctx context.Context, err error) error {
 		return err
 	}
 	switch se.Code() {
+	case sqlite3.BUSY:
+		sqliteBusy.Inc()
+		return &StatementError{http.StatusServiceUnavailable, "busy", "database busy: the write lock stayed taken past busy_timeout"}
 	case sqlite3.CONSTRAINT:
 		return &StatementError{http.StatusConflict, "constraint", se.Error()}
 	case sqlite3.ERROR, sqlite3.READONLY, sqlite3.RANGE, sqlite3.MISMATCH, sqlite3.TOOBIG:
@@ -131,7 +138,7 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 		return nil, nil, classify(ctx, err)
 	}
 	defer tx.Rollback()
-	rows, err := queryBusy(ctx, tx, req.SQL, req.Args)
+	rows, err := tx.QueryContext(ctx, req.SQL, req.Args...)
 	if err != nil {
 		return nil, nil, classify(ctx, err)
 	}
@@ -196,7 +203,7 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 	var inBytes int64
 	affected := make([]int64, 0, len(req.Statements))
 	for _, st := range req.Statements {
-		r, err := execBusy(ctx, tx, st.SQL, st.Args)
+		r, err := tx.ExecContext(ctx, st.SQL, st.Args...)
 		if err != nil {
 			return nil, classify(ctx, err)
 		}
@@ -216,34 +223,6 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 		e.emit(h, "write", n, int64(len(req.Statements[i].SQL)))
 	}
 	return &res, nil
-}
-
-// SQLite answers BUSY when another connection holds the write lock; retry a
-// few times before giving up.
-const busyRetries = 50
-
-func execBusy(ctx context.Context, tx *sql.Tx, q string, args []any) (sql.Result, error) {
-	var err error
-	for i := 0; i < busyRetries; i++ {
-		var r sql.Result
-		r, err = tx.ExecContext(ctx, q, args...)
-		if !errors.Is(err, sqlite3.BUSY) {
-			return r, err
-		}
-	}
-	return nil, err
-}
-
-func queryBusy(ctx context.Context, tx *sql.Tx, q string, args []any) (*sql.Rows, error) {
-	var err error
-	for i := 0; i < busyRetries; i++ {
-		var rows *sql.Rows
-		rows, err = tx.QueryContext(ctx, q, args...)
-		if !errors.Is(err, sqlite3.BUSY) {
-			return rows, err
-		}
-	}
-	return nil, err
 }
 
 func (h *Handle) recordRead(rows, bytes int64) {
