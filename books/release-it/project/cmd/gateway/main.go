@@ -22,7 +22,7 @@ func main() {
 		Routes: routes.New(controlURL),
 		Nodes:  nodeclient.New(),
 	}
-	health := newProber(controlURL, env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"))
+	health := newProber(controlURL, env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"), g.Routes)
 	go health.run()
 
 	mux := http.NewServeMux()

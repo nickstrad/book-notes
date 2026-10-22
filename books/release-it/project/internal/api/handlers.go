@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 
+	"litefleet/internal/breaker"
 	"litefleet/internal/httpx"
 	"litefleet/internal/nodeclient"
 	"litefleet/internal/routes"
@@ -207,6 +208,11 @@ func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err 
 	var re *httpx.RemoteError
 	if errors.As(err, &re) {
 		httpx.WriteError(w, r, re.Status, re.Code, re.Message)
+		return
+	}
+	if errors.Is(err, breaker.ErrOpen) {
+		w.Header().Set("Retry-After", "5")
+		httpx.WriteError(w, r, http.StatusServiceUnavailable, "control_unavailable", "control plane unavailable")
 		return
 	}
 	if httpx.Outcome(0, err) == "timeout" {

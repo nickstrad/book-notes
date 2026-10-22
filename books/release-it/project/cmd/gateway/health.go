@@ -7,7 +7,9 @@ import (
 	"sync"
 	"time"
 
+	"litefleet/internal/breaker"
 	"litefleet/internal/httpx"
+	"litefleet/internal/routes"
 )
 
 // prober checks control and every node once a second, so /health answers
@@ -16,13 +18,14 @@ type prober struct {
 	client  *http.Client
 	control string
 	nodes   map[string]string
+	routes  *routes.Client
 
 	mu   sync.Mutex
 	down map[string]bool
 }
 
-func newProber(control, nodeSpec string) *prober {
-	p := &prober{client: &http.Client{Timeout: time.Second}, control: control, nodes: map[string]string{}, down: map[string]bool{}}
+func newProber(control, nodeSpec string, rc *routes.Client) *prober {
+	p := &prober{client: &http.Client{Timeout: time.Second}, control: control, nodes: map[string]string{}, routes: rc, down: map[string]bool{}}
 	for _, kv := range strings.Split(nodeSpec, ",") {
 		if name, url, ok := strings.Cut(strings.TrimSpace(kv), "="); ok {
 			p.nodes[name] = url
@@ -59,10 +62,13 @@ func (p *prober) isDown(name string) bool {
 }
 
 // The gateway cannot serve anything without control: every request resolves
-// through it.
+// through it. An open breaker is reported as it happens.
 func (p *prober) controlCheck() (string, string) {
-	if p.isDown("control") {
+	switch {
+	case p.isDown("control"):
 		return httpx.Failed, "control unreachable"
+	case p.routes.BreakerState() != breaker.Closed:
+		return httpx.Degraded, "control breaker " + p.routes.BreakerState().String()
 	}
 	return httpx.OK, ""
 }

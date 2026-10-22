@@ -14,6 +14,7 @@ import (
 	"net/url"
 	"time"
 
+	"litefleet/internal/breaker"
 	"litefleet/internal/httpx"
 	"litefleet/internal/retry"
 	"litefleet/internal/wire"
@@ -22,11 +23,16 @@ import (
 // Client talks to control. Control answers from an indexed registry in
 // milliseconds, so 500 ms is generous; the usage report is a heavy read and
 // gets its own client.
+//
+// Every call except the usage report goes through a circuit breaker: when
+// control keeps failing, callers get breaker.ErrOpen at once instead of
+// spending their deadline on it.
 type Client struct {
 	base    string
 	http    *http.Client
 	report  *http.Client
 	resolve retry.Policy
+	breaker *breaker.Breaker
 }
 
 // New returns a client for the control plane at base.
@@ -39,8 +45,12 @@ func New(base string) *Client {
 		// as node reads.
 		resolve: retry.Policy{Dep: "control", Base: 50 * time.Millisecond, Cap: 400 * time.Millisecond, MaxRetries: 2,
 			MinAttempt: 100 * time.Millisecond, Budget: retry.NewBudget(0.1, 10)},
+		breaker: breaker.New("control"),
 	}
 }
+
+// BreakerState is the state of the breaker around control.
+func (c *Client) BreakerState() breaker.State { return c.breaker.State() }
 
 // Resolve authenticates apiKey and locates its database dbName.
 func (c *Client) Resolve(ctx context.Context, apiKey, dbName string) (wire.Route, error) {
@@ -82,12 +92,18 @@ func (c *Client) Drop(ctx context.Context, apiKey, name string) error {
 // Usage fetches the fleet usage report (admin key).
 func (c *Client) Usage(ctx context.Context, apiKey, window string) (json.RawMessage, error) {
 	var out json.RawMessage
+	// Not on the critical path, and slow by nature: it bypasses the breaker
+	// so a heavy report cannot trip it for the data plane.
 	err := c.doWith(ctx, c.report, http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
 	return out, err
 }
 
-// retryable: transport errors and control-side 5xx; a 4xx is an answer.
+// retryable: transport errors and control-side 5xx; a 4xx is an answer, and
+// an open breaker means control is known to be down.
 func retryable(err error) bool {
+	if errors.Is(err, breaker.ErrOpen) {
+		return false
+	}
 	var re *httpx.RemoteError
 	if errors.As(err, &re) {
 		return re.Status >= 500
@@ -96,7 +112,9 @@ func retryable(err error) bool {
 }
 
 func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) error {
-	return c.doWith(ctx, c.http, method, path, apiKey, body, out)
+	return c.breaker.Call(func() error {
+		return c.doWith(ctx, c.http, method, path, apiKey, body, out)
+	}, retryable)
 }
 
 func (c *Client) doWith(ctx context.Context, client *http.Client, method, path, apiKey string, body []byte, out any) (err error) {
