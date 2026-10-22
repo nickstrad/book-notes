@@ -85,7 +85,7 @@ reaction`. Then the gaps, ordered by "would have changed the last incident".
 
 *Release It!* 2nd ed.: Ch. 8 "Transparency" (designing for transparency, logging, instance metrics,
 health checks); Ch. 10 "System-Wide Transparency";
-Ch. 6 case study (a busy season diagnosed with few vital signs); Ch. 5 "Steady State" (log files);
+Ch. 6 case study (diagnosing a live system from its vital signs); Ch. 5 "Steady State" (log files);
 Ch. 5 "Handshaking" (health as the instance's way of saying "not now"). Demonstrated in lesson 01
 (`../../lessons/01-transparency.md`), refined in lessons 05, 06, 07 and 12.
 

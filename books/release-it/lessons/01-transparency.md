@@ -6,11 +6,10 @@ Ch. 10 "System-Wide Transparency"; Ch. 6 case study
 
 ## The idea
 
-You cannot fix what you cannot see. Chapter 6 of *Release It!* is a case study of a retailer whose
-site struggled through its busiest season while the team had few vital signs to go on. They
-diagnosed it from scraps and guesses, because the system said almost nothing about itself. Chapter 8
-names the remedy **transparency**: a running instance should show its state from the outside, in
-three ways.
+You cannot fix what you cannot see. Chapter 6 of *Release It!* is a case study of diagnosing a live
+retail site under its heaviest load from its vital signs: the team could act only on what the
+running system showed them. Chapter 8 names the property that makes that possible
+**transparency**: a running instance should show its state from the outside, in three ways.
 
 - **Instance metrics.** Numbers that change when the instance's situation changes: requests,
   latencies, pool usage, queue depths, and above all the time spent waiting on each integration
