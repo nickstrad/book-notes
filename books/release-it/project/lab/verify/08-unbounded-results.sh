@@ -48,5 +48,7 @@ check whale_answered_pct "$whale_pct" ">=" 99
 # most of a scan's latency is waiting for a lane.
 check whale_p99_ms "${whale_p99/NULL/NaN}" "<=" 1000
 check other_tenant_5xx "$other_5xx" "==" 0
-check report_max_s "$worst" "<=" 0.5
+# 0.8 s, not 0.5: the after report took 0.29-0.46 s across runs on a shared
+# VM, the before 1.15 s or more.
+check report_max_s "$worst" "<=" 0.8
 verdict

@@ -63,9 +63,11 @@ BASELINE HOLDS: success_pct 100.00 >= 99.5; p99_ms 30.4 <= 50; errors_5xx_or_tim
 ```
 
 The steady mix (75 % point-range reads, 25 % single-row inserts, spread over 197 tenants with a
-mild skew) at half the fleet's calibrated capacity is served completely, with p99 under 50 ms. The
-three `up = 0` lines are the first hint that something is wrong. Prometheus was told to scrape every
-service, but gateway, control and node expose nothing.
+mild skew) at half the fleet's calibrated capacity is served completely, with p99 under 50 ms. (The
+verify's p99 line is 80 ms since the final review: on the shared VM, runs with everything served
+measured 48 ms on this tree and 56 ms on the hardened one.) The three `up = 0` lines are the
+first hint that something is wrong. Prometheus was told to scrape every service, but gateway,
+control and node expose nothing.
 
 ## The lab
 

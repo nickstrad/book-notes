@@ -108,7 +108,9 @@ about a sixth of its requests, the ones in flight at each crash. Node-b's tenant
 scanned, did not notice. The gateways survived only because the node never got far enough to send
 them 60 MB. After the patch, a whale scan is a capped answer of about 250 rows (the 1 MB cap
 arrives before the 1 000-row cap) at ~150 ms of work. Node memory stays at 72 MB, and the usage
-report is an index-only aggregate in a quarter of a second.
+report is an index-only aggregate in a quarter of a second. (The verify's report line is 0.8 s
+since the final review: the after report measured 0.29–0.46 s across runs on the shared VM, the
+before 1.15 s or more.)
 
 The whale's p99 of 760 ms is mostly waiting, not working. Ten concurrent scans share the database's
 two read lanes from lesson 6, so most scans queue behind others.
