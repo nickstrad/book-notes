@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -44,16 +45,22 @@ func main() {
 		data: env("DATA_DIR", "/data"),
 	}
 	httpx.SetupLogging(n.name)
-	self, err := sql.Open("sqlite3", "file:"+filepath.Join(n.data, "_node.db")+"?_pragma=journal_mode(wal)")
+	self, err := sql.Open("sqlite3", "file:"+filepath.Join(n.data, "_node.db")+"?_pragma=busy_timeout(5000)&_pragma=journal_mode(wal)")
 	if err != nil {
 		log.Fatal(err)
 	}
+	self.SetMaxOpenConns(1) // the outbox's writers take turns
+
 	if _, err := self.Exec(`CREATE TABLE IF NOT EXISTS node_info (key text PRIMARY KEY, value text)`); err != nil {
 		log.Fatal(err)
 	}
 	n.self = self
 
-	n.usage = metering.NewQueue(metering.NewClient(env("METERING_URL", "http://metering:8082")))
+	outbox, err := metering.NewOutbox(self)
+	if err != nil {
+		log.Fatal(err)
+	}
+	n.usage = metering.NewQueue(metering.NewClient(env("METERING_URL", "http://metering:8082")), outbox)
 	n.eng, err = engine.New(filepath.Join(n.data, "tenants"), n.usage)
 	if err != nil {
 		log.Fatal(err)
@@ -65,7 +72,16 @@ func main() {
 	n.backup = backup.New(n.eng, blob.New(env("BLOBSTORE_URL", "http://blobstore:8081")), interval, tmp)
 
 	n.exportMetrics()
-	go n.usage.Run()
+	n.usage.Run()
+	// On SIGTERM, keep the usage events: everything queued in memory goes to
+	// the outbox before the process exits.
+	go func() {
+		sig := make(chan os.Signal, 1)
+		signal.Notify(sig, syscall.SIGTERM, syscall.SIGINT)
+		<-sig
+		n.usage.Spill(3 * time.Second)
+		os.Exit(0)
+	}()
 	go n.backup.Run()
 	go n.heartbeats(env("CONTROL_URL", "http://control:8090"))
 

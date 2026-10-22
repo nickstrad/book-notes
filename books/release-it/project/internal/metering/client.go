@@ -22,7 +22,11 @@ type Client struct {
 
 // NewClient returns a client for the metering partner at base.
 func NewClient(base string) *Client {
-	return &Client{base: base, http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: time.Second, Total: 2 * time.Second})}
+	// Metering answers a batch in ~10 ms; a slow partner gets 2 s for the
+	// whole exchange (headers included) before a batch counts as failed and
+	// goes to the outbox. A shorter header timeout than the partner's latency
+	// turns every delivered batch into a "failure" and a duplicate.
+	return &Client{base: base, http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2 * time.Second, Total: 2 * time.Second})}
 }
 
 // Send posts one batch.

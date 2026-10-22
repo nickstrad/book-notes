@@ -63,4 +63,6 @@ func (n *node) exportMetrics() {
 		func() float64 { return float64(n.usage.Len()) })
 	promauto.NewGaugeFunc(prometheus.GaugeOpts{Name: "usage_queue_oldest_age_seconds", Help: "Age of the oldest waiting usage event."},
 		func() float64 { return n.usage.OldestAge().Seconds() })
+	promauto.NewGaugeFunc(prometheus.GaugeOpts{Name: "usage_outbox_rows", Help: "Usage events waiting in the outbox."},
+		func() float64 { return float64(n.usage.OutboxLen()) })
 }
