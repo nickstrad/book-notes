@@ -47,6 +47,9 @@ Original F reports preserve what the blind explorer wrote. Canonical D/U records
 - E02-F03: delivery-timeout semantics clarified in SPEC.md; retained snapshots and at-least-once duplicates; no extra bug counted.
 
 Original E02-F reports and raw scores are immutable. Canonical statuses are maintained separately.
+The earlier [U09 observation copy](U09-sample-worker-ignores-failN-kinds.md), committed with
+E02 exploration, also preserves its original “open” wording. It is a historical copy,
+not a second unresolved defect; the current U09 status is the fixed record linked above.
 
 ## Experiment 03 additions
 

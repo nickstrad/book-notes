@@ -4,7 +4,7 @@
 one inherited queuelet service, nine structured experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E06 complete; lesson-06 at `755d21c`, independent repair revalidation PASS. Checkpoint B review next.**
+**Status (2026-10-22): checkpoint B review in progress; E03–E06 tag/HEAD and historical checks running in a fresh temporary clone. E07 not started.**
 
 ## Done
 
@@ -43,7 +43,15 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
 ## In progress
 
-None. Explorer, fixer, repair and reviewer runs are closed; the owned lab is stopped.
+Checkpoint B reviewer: fresh Codex Sol run authorized by `/root/booknotes-sol-ckptB.md`.
+Runtime clone `/tmp/explore-it-checkpoint-b/repo`; runner `run.py`, progress and acceptance
+JSON in its parent; isolated Compose project `queuelet-review-b` (18260/18261/15493).
+The shell runner is active while `pgrep -af /tmp/explore-it-checkpoint-b/run.py` finds it.
+Do not launch a second runner over this stack. Review evidence will be copied under
+`register/reviews/B/`. The stale historical U09 copy is now explicitly disambiguated in
+the canonical index without editing the original observation. No runtime fix so far.
+
+Earlier E06 explorer, fixer, repair and reviewer runs are closed; their owned lab is stopped.
 The initial Muse NITS report is preserved. Its runtime was stopped after report/result
 completion when closing/reminder provider retries continued. A fresh Muse revalidation
 then stalled on provider-stream failures before running tests (no verdict); fresh Claude
