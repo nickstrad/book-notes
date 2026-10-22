@@ -1,0 +1,12 @@
+{
+  "source_tag": "explore-it/v0-inherited",
+  "tracked_source_files": 39,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "start": "2026-10-22T01:38:24Z",
+  "end": "2026-10-22T02:00:45Z",
+  "exit_status": 0,
+  "source_family": "Anthropic Opus 5.5",
+  "tools": "Bash, Read, Write, Edit, Glob, Grep",
+  "setup_failure": "Initial CLI launch rejected dangerously-skip-permissions under root before any model turn. Relaunched with explicit allowed tools; no environment bypass."
+}

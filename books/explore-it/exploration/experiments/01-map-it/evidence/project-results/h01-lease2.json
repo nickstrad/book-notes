@@ -1,0 +1,14 @@
+{
+  "jobs": [
+    {
+      "attempt": 1,
+      "id": 87,
+      "kind": "echo",
+      "lease_expires_at": "2026-10-22T01:42:08.40114196Z",
+      "lease_token": "8037d23c3ea5cd0a2a1b7745d774f441",
+      "payload": {
+        "fixture": 86
+      }
+    }
+  ]
+}

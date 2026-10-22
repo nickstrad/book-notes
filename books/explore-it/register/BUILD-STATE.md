@@ -5,7 +5,7 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-Checkpoint A v0 complete: live baseline passes, all 27 planted defects reproduced, all four spec silences characterized, eight skill drafts validated. Evidence: `runs/00-baseline.log`, `00-proofs.log`, `00-silences.log`, `00-reset.log`. Standard seed restored. No experiments have run yet. Next: fresh blind Opus 5.5 E01 export, followed by a fresh Astra fixer.
+Checkpoint A v0 complete: live baseline passes, all 27 planted defects reproduced, all four spec silences characterized, eight skill drafts validated. Evidence: `runs/00-baseline.log`, `00-proofs.log`, `00-silences.log`, `00-reset.log`. Standard seed restored. E01 closed: Opus 5.5 produced 27 reports in 21.8 minutes; raw score 48/44/2 stated/confirmed/refuted, one code-reading contradiction. Register reconciliation: 25 live-probed defects, D23 harness finding, partial D07; eight additional unplanned faults. See reconciliations/01.md and 01.json. Next: fresh Astra fixer for assigned recon findings, then checkpoint A review.
 
 ## Execution discipline
 
@@ -22,7 +22,7 @@ Checkpoint A v0 complete: live baseline passes, all 27 planted defects reproduce
 ## Pending
 
 1. DONE: baseline, 27 proofs and four silence probes; commit and tag v0.
-2. E01 blind exploration → reconcile → fresh fixer → both verify directions → lesson tag.
+2. E01 blind exploration and reconciliation DONE; fresh fixer, both verify directions and lesson tag pending.
 3. Checkpoint A review; E02–E06; checkpoint B review; E07–E09 and final skills/index; checkpoint C review.
 4. Final clean tree and ordered commit, score, skills, deviation report.
 
@@ -32,3 +32,6 @@ Checkpoint A v0 complete: live baseline passes, all 27 planted defects reproduce
 - A1 at base=5 and completed attempt 20 waits 30.34 days (2^19), rather than the plan’s illustrative 60 days. The defect remains uncapped growth.
 - Baseline has four meaningful integration checks, adding concurrent disjoint leases and priority behavior; no speculative expected test count is claimed.
 - Specific brief isolation and branch rules take precedence over the global per-agent worktree default. Fresh agents work sequentially in the authorized branch; blind explorers receive plain temporary exports.
+
+- E01 found essentially the full register early. Per plan, findings are fixed where found; no artificial dwell will be manufactured. Causes and other models also appeared early and are retained as produced. Later experiments will refine/test those models, remaining spec silences and new leads.
+- First explorer launch failed before any model turn because Claude disallows the bypass flag as root. The actual run used an explicit Bash/Read/Write/Edit/Glob/Grep allowlist and no environment bypass.

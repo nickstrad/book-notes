@@ -1,0 +1,247 @@
+[
+  {
+    "id": "D01",
+    "report": "F22-qctl-exit-status-zero-on-error.md",
+    "canonical": "D01-qctl-exit-status-zero-on-error.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D02",
+    "report": "F15-queue-delete-orphans.md",
+    "canonical": "D02-queue-delete-orphans.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D03",
+    "report": "F05-expired-lease-not-counted.md",
+    "canonical": "D03-expired-lease-not-counted.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D04",
+    "report": "F11-webhook-non-2xx-marked-delivered.md",
+    "canonical": "D04-webhook-non-2xx-marked-delivered.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D05",
+    "report": "F19-range-and-charset-validation.md",
+    "canonical": "D05-range-and-charset-validation.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D06",
+    "report": "F16-batch-bounds-and-atomicity.md",
+    "canonical": "D06-batch-bounds-and-atomicity.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D07",
+    "report": "F19-range-and-charset-validation.md",
+    "canonical": "D07-range-and-charset-validation.md",
+    "route": "partial: invalid name charset observed; exact unreachable-name variant not probed",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D08",
+    "report": "F17-payload-numeric-precision.md",
+    "canonical": "D08-payload-numeric-precision.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D09",
+    "report": "F04-max-attempts-off-by-one.md",
+    "canonical": "D09-max-attempts-off-by-one.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D10",
+    "report": "F18-stats-queued-includes-other-states.md",
+    "canonical": "D10-stats-queued-includes-other-states.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D11",
+    "report": "F23-fifo-ties-within-a-second.md",
+    "canonical": "D11-fifo-ties-within-a-second.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D12",
+    "report": "F25-purge-leaves-scheduled-and-retry.md",
+    "canonical": "D12-purge-leaves-scheduled-and-retry.md",
+    "route": "observed behavior, spec clarification by coordinator after run",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D13",
+    "report": "F24-resume-catch-up-burst.md",
+    "canonical": "D13-resume-catch-up-burst.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D14",
+    "report": "F06-retry-accepts-non-dead-jobs.md",
+    "canonical": "D14-retry-accepts-non-dead-jobs.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D15",
+    "report": "F15-queue-delete-orphans.md",
+    "canonical": "D15-queue-delete-orphans.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D16",
+    "report": "F07-schedule-patch-not-reflected.md",
+    "canonical": "D16-schedule-patch-not-reflected.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D17",
+    "report": "F12-webhook-result-stringified-truncated.md",
+    "canonical": "D17-webhook-result-stringified-truncated.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D18",
+    "report": "F01-ack-ignores-lease-token.md",
+    "canonical": "D18-ack-ignores-lease-token.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D19",
+    "report": "F02-nack-ignores-token-and-state.md",
+    "canonical": "D19-nack-ignores-token-and-state.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D20",
+    "report": "F05-expired-lease-not-counted.md",
+    "canonical": "D20-expired-lease-not-counted.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D21",
+    "report": "F03-job-endpoints-cross-namespace.md",
+    "canonical": "D21-job-endpoints-cross-namespace.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D22",
+    "report": "F08-background-loop-stops-on-error.md",
+    "canonical": "D22-background-loop-stops-on-error.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D23",
+    "report": "F27-schedule-zone-offset-frozen.md",
+    "canonical": "D23-schedule-zone-offset-frozen.md",
+    "route": "source harness plus running-service stored offset; end-to-end firing unconfirmed",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D24",
+    "report": "F10-webhook-signature-wrong-bytes.md",
+    "canonical": "D24-webhook-signature-wrong-bytes.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D25",
+    "report": "F21-lease-unknown-worker-200.md",
+    "canonical": "D25-lease-unknown-worker-200.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D26",
+    "report": "F20-unknown-fields-and-enums-accepted.md",
+    "canonical": "D26-unknown-fields-and-enums-accepted.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "D27",
+    "report": "F07-schedule-patch-not-reflected.md",
+    "canonical": "D27-schedule-patch-not-reflected.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U01",
+    "report": "F09-schedule-patch-accepts-invalid-cron.md",
+    "canonical": "U01-schedule-patch-validation.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U02",
+    "report": "F12-webhook-result-stringified-truncated.md",
+    "canonical": "U02-webhook-result-type.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U03",
+    "report": "F13-slow-webhook-stalls-background-loop.md",
+    "canonical": "U03-webhook-blocks-core-progress.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U04",
+    "report": "F14-db-outage-reported-as-invalid-key.md",
+    "canonical": "U04-database-fault-auth-health.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U05",
+    "report": "F16-batch-bounds-and-atomicity.md",
+    "canonical": "U05-batch-partial-insertion.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U06",
+    "report": "F19-range-and-charset-validation.md",
+    "canonical": "U06-queue-patch-limits.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U07",
+    "report": "F20-unknown-fields-and-enums-accepted.md",
+    "canonical": "U07-backoff-kind-validation.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  },
+  {
+    "id": "U08",
+    "report": "F26-stats-age-from-run-at.md",
+    "canonical": "U08-queued-age-reference.md",
+    "route": "live black-box observation",
+    "status": "assigned lesson 01"
+  }
+]
