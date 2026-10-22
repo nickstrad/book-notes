@@ -7,7 +7,7 @@ lesson-by-lesson as patch commits, plus skills that codify the book. Spec:
 
 **Status (2026-10-22):** build, skills and Fable's final review COMPLETE on `main`; the review's
 findings were worked by an Opus fix run: 14 fixed, M3 and L7 partly (thresholds left), M5 open.
-Nothing is running. Next: Nick rules on the open decisions below.
+A post-review defect (cut-off queries not logged) is fixed in `9367863`. Nothing is running. Next: Nick rules on the open decisions below.
 
 ## Done
 - Plans: v1 `9b221c1` (superseded), v2 `a5b49d4` (superseded), v3 `d4382c0` (approved).
@@ -18,9 +18,10 @@ Nothing is running. Next: Nick rules on the open decisions below.
   12 `f8bb556`+`996c596`.
 - Landing: lessons index + landing page `a338b8d`.
 - Skills: the eight `skills/<name>/SKILL.md` of PLAN.md section 5, commit `f27e8aa`.
-- Tag `release-it/v1-hardened` now points at `afb7274`, the last review fix, so the "final state"
-  includes the skills and the fixes. It was `a338b8d` (before the skills; REVIEW.md M6), moved
-  2026-10-22 by the fix run. No other tag moved.
+- Tag `release-it/v1-hardened` now points at `9367863`, the post-review defect fix, so the "final
+  state" a reader checks out includes it. History: `a338b8d` (before the skills; REVIEW.md M6) →
+  `afb7274` (the last review fix, moved by the fix run) → `9367863` (moved 2026-10-22 by the
+  defect-fix run). No other tag moved.
 - Deviations from the plan are recorded per lesson in each note and summarised in the root
   `STATE.md`.
 - Final review: `REVIEW.md` (Fable, 2026-10-22). Full verify matrix at `main` and at every parent
@@ -45,6 +46,19 @@ Nothing is running. Next: Nick rules on the open decisions below.
     `outage_p99_s < 3.0` left (its before run is 3.02 s).
   - L8 `ba2f0fc`, L9 `a30c810`: `docs/knowledge/` started (Toxiproxy, shared-VM lab, resets and
     seeds, plan size estimates).
+- Post-review defect fix `9367863` (Opus 5.5, 2026-10-22; found by the fix pass, not by the
+  review). From lesson 08 the node cuts a failed streamed query with `panic(http.ErrAbortHandler)`;
+  `httpx.Logged` logged and counted after the handler, so those requests had no log line or
+  `http_requests_total` count (lesson 01's promise broken). The fix pass had made lesson 02's verify
+  fall back to the statement histogram (`6edbd15`), hiding it. Now `Logged` logs in a `defer`
+  (recover, log with `aborted: true`, re-panic), the node annotates `error_code`, and the fallback
+  is gone. Evidence (lesson 02's runaway query): before, 0 node-a lines and the counter 0 → 0 for
+  two attempts; after, 2 lines (`statement_deadline`, `canceled`) and 0 → 2. Verifies at
+  `9367863`: 01 IMPROVED; 02 IMPROVED (`cancel_late_ms` 1.0 from the log); 08 correctness held
+  in three runs but latency lines missed at load average 8–18 (report 0.93/1.60/1.43 s, whale p99
+  1.33 s once). The pre-fix `REF=` run missed as well (whale p99 1.14 s), and idle usage reports
+  match before and after (0.20–0.35 s), so it is the host-load item below. Teaching note: lesson 01,
+  "After the review"; `docs/knowledge/verify-workarounds-hide-defects.md`.
 
 ## In progress
 - Nothing.
@@ -69,7 +83,8 @@ Nothing is running. Next: Nick rules on the open decisions below.
   the before numbers need a loaded host; the thresholds are unchanged.
 - **Latency lines under heavy host load.** At load average 9–16 on 4 cores the fix run saw
   lesson 00's v0 baseline break on p99 (823 ms, 120 ms; 100 % served) and lesson 08 at `main`
-  miss whale p99 and the widened report line (latency only; correctness held). On a quieter
+  miss whale p99 and the widened report line (latency only; correctness held). The defect-fix run
+  saw the same for lesson 08 at load 8–18, at the fix and at the pre-fix images alike. On a quieter
   host (the review's runs) both held. Run the lab on a quiet VM, or widen further.
 - **Unconfirmed book summaries (Nick).** M1's and L3's case-study sentences were rewritten to
   the conservative wording the review proposed; Nick should check them against his copy.

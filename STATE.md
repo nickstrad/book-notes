@@ -71,6 +71,11 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   Nick; M5 not backfilled. Tag `release-it/v1-hardened` moved from `a338b8d` to `afb7274` so the
   final state includes the skills and the fixes (M6); no other tag moved. `docs/knowledge/`
   started (L8).
+- **Post-review defect fix:** done 2026-10-22 by Claude Opus 5.5, commit `9367863`. From lesson 08
+  a query the node cut off (abort panic) left no request log line or count, because `httpx.Logged`
+  logged after the handler; the fix pass had routed around it in lesson 02's verify. `Logged` now
+  logs in a `defer` (`aborted: true`), the workaround is removed, and lesson 01's note and
+  `docs/knowledge/` teach it. Tag `release-it/v1-hardened` moved from `afb7274` to `9367863`.
 
 ## Next action
 
