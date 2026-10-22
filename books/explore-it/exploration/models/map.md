@@ -39,3 +39,16 @@ Source pointers are per-file line numbers (see erratum in [E01 notes](../experim
 ## Persistence (migrations/001.sql)
 Tables namespaces, api_keys, queues, jobs, attempts, workers, schedules, webhook_outbox; no foreign keys (O: orphans F15);
 `jobs.created_at timestamp(0)` (O: second buckets H22); unique (queue_id, idempotency_key) (O: H29).
+
+## E02 revision — `explore-it/lesson-01` background work and consoles ([E02 notes](../experiments/02-make-it-visible/notes.md))
+
+| Step | Code (lesson-01, per-file lines) | Observed in E02 |
+|---|---|---|
+| ★ Core loop: Promote, Expire, Fire, Retain each tick; error logged as `background task: %v`, loop continues | internal/api/api.go:129-145 | O during DB restart: 24 error lines, then recovery (H15) |
+| ★ Separate shipper goroutine, 1 s tick, `webhook task: %v` on error | api.go:113-128; internal/webhook/ship.go:17-49 | O: success log only, no failure log (H05); parse error each second (H11) |
+| ★ Expire writes `expired` attempt rows and dead-letters at max | internal/jobs/expire.go:12-56 | O H01, H13 |
+| ★ /health = DB ping ∧ last core tick ok ∧ last ship tick ok | api.go:62-70 | O 503 on bad URL (H11) and DB restart (H15); 200 during partner 500/slow (H08, H12) |
+| /metrics constant `queuelet_up 1` | api.go:71 | O (H08) |
+
+Console producers: API process log has no request or lifecycle logging and no ids; worker stdout has no job ids
+(internal/worker/worker.go:48,71); hooksink keeps per-POST records in memory (cmd/hooksink/main.go:67). ★ console inventory O.

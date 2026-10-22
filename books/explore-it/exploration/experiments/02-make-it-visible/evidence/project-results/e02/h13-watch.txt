@@ -1,0 +1,500 @@
+=== 2026-10-22T03:32:08.809Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:10.296Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:11.750Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:13.075Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:14.376Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:15.753Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:17.031Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:18.298Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:19.613Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:20.915Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:22.236Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:23.568Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:24.965Z
+API: {"state":"leased","attempts":0,"leased_by":3,"lease_expires_at":"2026-10-22T03:32:25.097413Z","last_error":""}
+DB:  leased | 0 | 3 | 2026-10-22 03:32:25.097413+00
+ATT: 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:26.399Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:27.964Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:29.553Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:31.116Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:32.997Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:35.025Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:36.803Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:38.350Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:39.969Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:42.050Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:43.440Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:44.940Z
+API: {"state":"leased","attempts":1,"leased_by":5,"lease_expires_at":"2026-10-22T03:32:45.4093Z","last_error":"lease expired"}
+DB:  leased | 1 | 5 | 2026-10-22 03:32:45.4093+00
+ATT: 1:3:expired (1 row) 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:46.456Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:48.001Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:49.490Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:50.847Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:52.252Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:53.652Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:55.007Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:56.482Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:58.071Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:32:59.474Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:00.812Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:02.386Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:03.901Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:05.287Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:06.856Z
+API: {"state":"leased","attempts":2,"leased_by":6,"lease_expires_at":"2026-10-22T03:33:06.465124Z","last_error":"lease expired"}
+DB:  leased | 2 | 6 | 2026-10-22 03:33:06.465124+00
+ATT: 1:3:expired 2:5:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:08.242Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:09.587Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:10.973Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:12.227Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:13.511Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:14.766Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:16.033Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:17.436Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:18.893Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:20.246Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:21.571Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:22.823Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:24.150Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:25.475Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:26.881Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  leased | 3 | 7 | 2026-10-22 03:33:27.312635+00
+ATT: 1:3:expired 2:5:expired 3:6:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:28.178Z
+API: {"state":"leased","attempts":3,"leased_by":7,"lease_expires_at":"2026-10-22T03:33:27.312635Z","last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:29.591Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:30.868Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:32.130Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:33.464Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:34.764Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:36.071Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:37.322Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:38.675Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:40.024Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:41.310Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:42.589Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:43.890Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:45.210Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:46.491Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:47.756Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:49.026Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:50.339Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:51.633Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:52.876Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:54.153Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:55.455Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:56.806Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:58.129Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:33:59.426Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:00.699Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:01.982Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:03.431Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:04.769Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:06.104Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:07.432Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:08.721Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:10.013Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:11.331Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:12.664Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:13.965Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:15.522Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:16.935Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:18.355Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:19.671Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:21.086Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:22.369Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:23.759Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:25.078Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running
+=== 2026-10-22T03:34:26.460Z
+API: {"state":"dead","attempts":4,"leased_by":null,"lease_expires_at":null,"last_error":"lease expired"}
+DB:  dead | 4 |  | 
+ATT: 1:3:expired 2:5:expired 3:6:expired 4:7:expired 
+WRK: 2 restarts=0 running

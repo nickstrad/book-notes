@@ -15,3 +15,13 @@ Legend: **O** walked in E01 with evidence, **I** read only, **—** not tried.
 | webhook outbox entry | (implicit on terminal) | O H11-H13, H34 | ack/cancel/dead → POST; 500; timeout | change secret with entries pending |
 | hooksink record | /admin/records, /admin/mode | O | ok/500/timeout | slow (3 s) |
 | stats | queue / namespace | O H01, H17, H30 | | throughput window edge |
+
+## E02 revision — `explore-it/lesson-01`; ★ = sequence newly walked ([E02 notes](../experiments/02-make-it-visible/notes.md))
+
+| Noun | Sequence walked | Result |
+|---|---|---|
+| ★ job | enqueue crash → lease → exit → expire → lease … → dead (emails, reports) | dead at max; notification for reports |
+| ★ job | enqueue sleep → lease → freeze worker → expire → stale ack → re-lease → ack | 409 then succeeded attempts 2 |
+| ★ webhook outbox entry | ack → POST 500 ×11 → mode ok → delivered | delivered once on 2xx |
+| ★ webhook outbox entry | bad-URL queue → ack → PATCH URL → DELETE job | stays, blocks all (E02-F02) |
+| ★ worker | crash → container restart → re-register | row per incarnation, stale rows remain |

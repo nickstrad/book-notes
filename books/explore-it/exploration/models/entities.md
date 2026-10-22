@@ -10,3 +10,12 @@
 | worker | name, kinds[], token, last_seen_at | → namespace; leases | C, D O | token returned but never used by API (I); last_seen_at never updated (I) |
 | schedule | name, queue_id, kind, payload, cron, timezone, zone_offset, enabled, next/last_run_at | → queue | CRUD + run O | zone_offset frozen (F27); PATCH no recompute (F07) |
 | webhook_outbox | job_id, url, secret, body, attempts, next_at, delivered_at | → job | C (Notify), U (Ship) | delivered on 500 (F11) |
+
+## E02 revision — `explore-it/lesson-01` ([E02 notes](../experiments/02-make-it-visible/notes.md)); ★ = new observation
+
+| Entity | Observation | Evidence |
+|---|---|---|
+| ★ worker | One row per process incarnation; old rows never removed; `last_seen_at` = registration time (heartbeats do not update it) | H03, H13, final snapshot (8 rows, 5 worker-b) |
+| ★ attempt | `expired` rows carry the incarnation's worker id; `started_at` = `finished_at` for every outcome (expired, failed, succeeded) | H04, H09, H14 |
+| ★ webhook_outbox | Stores only attempts count, next_at, delivered_at — no per-POST status; URL copied at Notify, so queue PATCH does not affect pending rows; survives job deletion (orphan) | H05, H11a, H11b |
+| ★ job | `last_error` survives a later success; dead job's `run_at` = last nack + backoff | S9 (H14), S4 (H09) |

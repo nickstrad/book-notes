@@ -15,3 +15,12 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 | C8 Ordering/reporting semantics | created_at timestamp(0) + no id tiebreak (jobs.go:24); stats fold & run_at age (stats.go:17-19) | F18, F23, F26 | catch-up jobs share created_at: observed in F24 data (01:48:05 ×4) |
 | C9 Spec silence | "pending" undefined | F25 | — |
 | C10 No referential integrity | no FKs in migrations/001.sql; unconditional DELETE (queues.go:86) | F15 | orphan outbox rows after job delete: predicted |
+
+## E02 additions — `explore-it/lesson-01` (sibling predictions timestamped in [E02 notes](../experiments/02-make-it-visible/notes.md))
+
+| Cause | Mechanism (source) | Findings | Sibling predictions (time, status) |
+|---|---|---|---|
+| C11 Shared shipper aborts its batch on a per-row configuration error | `return e` on `http.NewRequest` failure before updating the row, `ORDER BY id LIMIT 20` (ship.go:17-28); no URL validation (queues.go:21-41, :79-84) | E02-F02 | PATCH path accepts bad URL 03:30Z → confirmed (H11d); ftp URL does not block 03:30Z → confirmed (H11c); UPDATE-error aborts (ship.go:37-40, :46-49): predicted, not probed |
+| C12 Delivery policy fixed in code, not in spec | 2 s client timeout (ship.go:31); fixed +5 s, no cap (ship.go:37) | E02-F03 (spec) | 500 and ftp rows retried forever: observed (H07, H11c) |
+| C13 Consoles lack correlation ids | log lines without job/outbox/worker ids (ship.go:45; worker.go:48,71); no request log | testability TR-E02-1…5 (not defects) | — |
+| C14 Sample worker advertises kinds by family name | default kinds list (cmd/worker/main.go:24) vs prefix handling (worker.go:86) vs exact match (jobs.go:44) | E02-F01 | none found |

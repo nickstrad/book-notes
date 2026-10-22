@@ -39,3 +39,11 @@ Original F reports preserve what the blind explorer wrote. Canonical D/U records
 | U06 | [F19](F19-range-and-charset-validation.md) | [fixed in lesson 01](U06-queue-patch-limits.md) |
 | U07 | [F20](F20-unknown-fields-and-enums-accepted.md) | [fixed in lesson 01](U07-backoff-kind-validation.md) |
 | U08 | [F26](F26-stats-age-from-run-at.md) | [fixed in lesson 01](U08-queued-age-reference.md) |
+
+## Experiment 02 additions
+
+- U09: documented fail3/default-worker kind mismatch; open, assigned lesson 02.
+- U10: malformed destination blocks later notifications; open, assigned lesson 02.
+- E02-F03: delivery-timeout semantics, spec clarification; no extra bug counted.
+
+Original E02-F reports and raw scores are immutable. Canonical statuses are maintained separately.

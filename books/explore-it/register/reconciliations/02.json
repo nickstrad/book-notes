@@ -1,0 +1,41 @@
+{
+  "experiment": 2,
+  "raw_reports": 3,
+  "new_catalogue_defects": 0,
+  "catalogue_expected": [
+    "D03",
+    "D04"
+  ],
+  "catalogue_expected_found_early_in": 1,
+  "new_unplanned_bugs": 2,
+  "raw_hypotheses": {
+    "stated": 19,
+    "confirmed": 19,
+    "refuted": 0,
+    "reading_contradictions": 0,
+    "model_cells": 46
+  },
+  "charter_disagreement_condition_observed": true,
+  "crosswalk": [
+    {
+      "original": "E02-F01",
+      "canonical": "U09",
+      "classification": "bug"
+    },
+    {
+      "original": "E02-F02",
+      "canonical": "U10",
+      "classification": "bug"
+    },
+    {
+      "original": "E02-F03",
+      "canonical": null,
+      "classification": "spec clarification, no additional fault count"
+    }
+  ],
+  "planned_gaps": [
+    "T1",
+    "T2",
+    "T3"
+  ]
+}

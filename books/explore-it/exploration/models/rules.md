@@ -28,3 +28,15 @@ Authority: SPEC.md unless stated. Scope: v0-inherited. Observation column cites 
 | R22 Existing jobs retain max_attempts on queue PATCH | SPEC Queues | PATCH | Holds (H39) |
 | R23 CLI exits non-zero on failure | convention (not in SPEC) | qctl | Violated (F22) |
 | R24 Partner latency should not gate core progress | approximation (no SPEC bound) | Loop | Violated (F13) |
+
+## E02 revision — `explore-it/lesson-01` ([E02 notes](../experiments/02-make-it-visible/notes.md)); ★ = new observation
+
+| Rule | Authority | Scope | E02 observation |
+|---|---|---|---|
+| ★ R3 No job executes more than max_attempts | SPEC Worker | expiry via crash | Holds for crash (3/3, 4/4) and fail (3/3). Freeze case: 2 executions within max 3 (H14) |
+| ★ R4 Expired lease records an unsuccessful attempt | SPEC Worker | Expire | Holds (H01, H13); started_at = finished_at = expiry tick (Q1 persists) |
+| ★ R17 Webhook success only on 2xx; retried; at least once | SPEC Notifications | Ship | 2xx rule holds (H05/H06); retry unbounded (H07); partner 2xx after 2 s counted as failure (E02-F03, spec) |
+| ★ R19 Loop recovers after DB restart; health reports degradation | SPEC ops | Loop, /health | Holds (H15); health lags one tick |
+| ★ R25 One tenant's configuration must not stop another tenant's processing | approximation of SPEC:10 tenant isolation | shared shipper | Violated (E02-F02) |
+| ★ R26 Invalid command values rejected | SPEC:17 | queue webhook URL | Violated for unparsable URL on create and PATCH (E02-F02, H11d) |
+| ★ R27 README sample worker runs documented kinds | README "Worker mode" | sample worker | Violated for `fail3` (E02-F01) |

@@ -10,3 +10,18 @@
 | Clock | host UTC; Go time.Now in API | Loop ticks, cron | no control; DST via harness | F27; TR2 |
 
 Testability requests: TR1 (hooksink records received signature), TR2 (lab clock control), TR3 (loop liveness metric) — see E01 notes.
+
+## E02 revision — `explore-it/lesson-01` ([E02 notes](../experiments/02-make-it-visible/notes.md)); ★ = new observed cell
+
+| Neighbour | Trust boundary | Data path | What-if tried (E02) | Result |
+|---|---|---|---|---|
+| ★ Docker restart policy (`restart: on-failure`) | process supervisor | worker exit → new container incarnation → new `POST /v1/workers` | crash kind on emails and reports | RestartCount +3 / +4; each incarnation a new worker row; exit code of the crashing run not retained (H03, H13) |
+| ★ Frozen worker (`docker pause`) | process scheduling | lease held without heartbeat | pause 14 s on 10 s lease | expiry, stale ack 409 visible only in worker stdout, work executed twice (H14) |
+| ★ Webhook partner, 500 | outbound HTTP | outbox → POST | mode 500 for 58 s | retried every 5–6 s, delivered on first 200; API log silent for failures (H05–H07) |
+| ★ Webhook partner, slow 3 s | outbound HTTP, 2 s client timeout | outbox → POST | mode slow 24 s | partner records 5 × 200, queuelet 5 failures (E02-F03) |
+| ★ Webhook URL from tenant configuration | tenant input → shared shipper | queue.webhook_url copied into outbox | `http://bad host/x` (globex) | all tenants' notifications stop; health degraded (E02-F02) |
+| ★ Webhook URL, unsupported scheme | same | same | `ftp://x/y` | isolated per-row failure, retried forever (H11c) |
+| ★ PostgreSQL restart | API ↔ DB | all state | `dc restart postgres` | 503 auth_unavailable and health degraded ≈4–6 s, loop recovers, delayed job promoted (H15; F08/F14 regressions hold) |
+
+Testability requests from this run: TR-E02-1…6 in the [E02 notes](../experiments/02-make-it-visible/notes.md) (correlated
+lifecycle events; per-POST outbox history; backlog/liveness metrics; eligibility reason; lease start; controllable clock).

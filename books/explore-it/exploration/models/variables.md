@@ -18,3 +18,13 @@
 | partner | hooksink mode | ok, 500, timeout | 500 delivered (F11); timeout stalls loop (F13) |
 | infra | postgres availability | restart, stop | loop dead (F08); 401 (F14) |
 | schedule | cron / timezone / enabled via PATCH | each | no recompute (F07); invalid accepted (F09) |
+
+## E02 revision — `explore-it/lesson-01` ([E02 notes](../experiments/02-make-it-visible/notes.md)); ★ = new variation observed
+
+| Family | Variable | Variations tried (E02) | Effect observed |
+|---|---|---|---|
+| ★ process fate | worker during lease | normal, crash (exit 3), frozen 14 s | crash → expiry chain to dead; frozen → 409 ack, re-run |
+| ★ partner | hooksink latency vs 2 s timeout | 0 s, 3 s (slow) | 3 s → success counted as failure, duplicates (E02-F03) |
+| ★ partner | URL class | valid, unsupported scheme `ftp://`, unparsable `http://bad host/x` | per-row retry vs global block (E02-F02) |
+| ★ kind | job kind string vs worker kinds | `fail` + payload n, `fail3` | `fail3` never leased (E02-F01) |
+| ★ queue config | lease_seconds/max_attempts at crash | 10 s/3 (emails), 20 s/4 (reports) | dead after 3 / 4 expiries, 32.5 s / 84 s |

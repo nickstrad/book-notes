@@ -8,16 +8,12 @@ The approved scope omits the people/process material. Specification and order:
 
 ## Status
 
-2026-10-22 UTC: checkpoint A complete. Independent Muse Wonder Full review of
-`b839fdf` returned **NITS**; current/historical verification, baseline, unit suites
-and A1–A4 controls passed. Its first REF startup attempt failed and is retained,
-with cause unproven. Review nits 1/2 are repaired in the commit containing this
-state; `explore-it/lesson-01` moves to that repair commit. SUT and oracles remain
-identical to reviewed `b839fdf`. Branch `plan/explore-it`, worktree
-`/root/Software/booknotes-work/explore-it`. E02 has not started; its prepared export
-must be regenerated for the repaired tag. Evidence and exact limits:
-[BUILD-STATE.md](register/BUILD-STATE.md), [review](register/reviews/A/review-a.md),
-[repair validation](register/reviews/A/a-nits-validation.md).
+2026-10-22 UTC: checkpoint A reviewed NITS and repaired (`99d42fc`, lesson-01).
+E02 blind exploration closed done (Opus 5.5, exit 0):19/19 confirmed predictions,
+0 refuted, 2 new bugs + 1 spec clarification, 46 model cells. Raw records preserved;
+source/blindness audit clean. Coordinator reconciliation is register/reconciliations/02.md.
+Next fresh fixer closes T1–T3 and repairs U09/U10; A1–A4 remain later.
+Branch/worktree: plan/explore-it, /root/Software/booknotes-work/explore-it.
 
 ## Done
 
@@ -72,3 +68,12 @@ and `/tmp/bn-sol-exploreit2.exit`; an absent exit file alone does not prove it i
 still running. Check process state and recent log progress. Docker queuelet
 services can remain running after a completed unit; they are not an active agent.
 Use project Compose actions only; do not change the concurrent Release It! tree.
+
+Active E02 liveness: `/tmp/explore-it-experiment-02/run.jsonl`, `run.stderr`,
+`run-start.txt`, `run-end.txt`, `exit-status.txt`; launch wrapper
+`register/tools/run-explorer.sh`. Check matching `claude --model claude-opus-5-5`
+process and recent log progress before relaunching. Preserve an interrupted run;
+never create a duplicate or reuse a stalled agent. Metadata is
+`/tmp/explore-it-coordinator/current.json`; collector is `collect-record.py`.
+
+E02 explorer ended; do not relaunch. Fresh fixer brief: register/reconciliations/02-fixer-brief.md (to be dispatched after this experiment commit). Tools and current run metadata remain under /tmp/explore-it-coordinator.

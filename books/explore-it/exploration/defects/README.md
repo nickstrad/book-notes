@@ -35,3 +35,13 @@ Explorer reports from experiment 01 (blind run, local ids F01–F27; the coordin
 Each report contains title, seen-at tag/build, original-observation link, minimal setup/steps, expected behavior with named oracle, observed behavior/evidence, variables isolated (including irrelevant ones), sibling check with file:line or “none found,” severity/impact and status.
 
 Use a provisional local id during the blind run if needed. The coordinator later reconciles matching planted findings to `D##-<slug>.md` and unplanned findings to `U##-<slug>.md`; do not look up the answer key to choose an id. Status values are `open`, `fixed in lesson NN`, `won't fix: <why>` and `spec`. Keep an unresolved intermittent observation honest about attempts and uncertainty.
+
+## Experiment 02 (make-it-visible) — explorer reports at `explore-it/lesson-01`
+
+Local ids E02-F01… are provisional; the coordinator reconciles them. E01 entries above are unchanged.
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E02-F01](E02-F01-sample-worker-ignores-failN-kinds.md) Documented `fail3` kind is never leased by the sample worker run with the documented kinds | lesson-01 | README worker mode; SPEC:73 | Low | open | E02 notes H10 |
+| [E02-F02](E02-F02-unparsable-webhook-url-blocks-all-notifications.md) One unparsable webhook URL stops notification delivery for every queue and namespace | lesson-01 | SPEC:121, SPEC:10 (approx.), SPEC:17 | High | open | E02 notes H11–H11d |
+| [E02-F03](E02-F03-timeout-shorter-than-partner-unbounded-duplicates.md) A partner slower than 2 s receives the same notification forever; queuelet and partner disagree | lesson-01 | SPEC:120-121 (silent on timeout/cap) | Medium | spec | E02 notes H12 |

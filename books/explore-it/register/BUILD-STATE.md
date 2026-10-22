@@ -5,6 +5,14 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
+E02 blind record is complete and reconciled: 19 confirmed predictions, 0 refuted,
+46 model cells; two new bugs U09/U10, one spec clarification. Expected D03/D04
+were already repaired in E01. Next: fresh fixer, T1–T3 and assigned reports; see
+reconciliations/02-fixer-brief.md. No A1–A4 decisions are assigned now.
+
+## Prior checkpoint A acceptance
+
+
 Checkpoint A complete through E01 and the narrow review-nit repair. Independent
 Muse Wonder Full review of `b839fdf` returned **NITS**; evidence is preserved in
 [reviews/A/review-a.md](reviews/A/review-a.md).
