@@ -33,3 +33,36 @@ No reusable VM helper or knowledge-store write was warranted. The E06 oracle is 
   must decode `raw_body`, the original received bytes, using Decimal/integer parsing. E06's
   first current attempt failed explicitly on this measurement error; the corrected instrument
   is frozen identically for both final verification directions. The sink is unchanged.
+
+## Whole-document JSON parsing after UseNumber
+
+The E06 review of superseded fix `7a38788` exposed a second decoder obligation:
+`json.Decoder.Decode` reads one value from a stream. Success alone allows trailing
+garbage or another value, whereas `json.Unmarshal` validates the entire document.
+Changing number representation must preserve that completeness contract as well.
+
+For these already-buffered client/CLI inputs, amended fix `755d21c` shares
+`internal/client.DecodeJSON`: validate all bytes with `json.Valid`, then decode with
+`UseNumber`. This also avoids populating output from a syntactically invalid prefix.
+For a streaming reader, the existing API pattern instead requires a second Decode to
+return `io.EOF`. Trailing whitespace is valid in both approaches.
+
+Propagate malformed CLI-option errors before transport. Preserve the printer's existing
+full raw-response fallback when a response is not a complete JSON document; the shared
+JSON client returns an error. Exact numbers alone cannot prove either property.
+
+Exercise application code: `cmd/qctl/main_test.go` builds the real executable and checks
+its exit code, request count, wire body and display against an HTTP stub. Client tests
+serve actual response bytes; worker tests pass actual client-decoded payloads to perform.
+Keep whitespace, big integers, long decimals and nested values alongside malformed input,
+trailing garbage, concatenated values and omitted/default numeric consumers. A test that
+copies decoder logic can miss a forgotten application call site.
+
+The worker http-result decoder is a separate pre-existing sibling, explicitly deferred;
+the echo repair does not establish its precision. Likewise new schedule validation does
+not establish legacy-template cleanup. Scope repair claims to the paths actually exercised.
+
+Evidence: [repair acceptance](../../register/runs/06-repair-acceptance.json), all five
+required commands passed; original acceptance and raw records remain unchanged. Independent
+validation is pending. No additional reusable work script was warranted: the small shared
+decoder belongs to the application, and the acceptance launcher remains scratch under `/tmp`.

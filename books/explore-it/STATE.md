@@ -15,7 +15,7 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 - E03: exploration `09dd0a9`, fixes `8ed9177`, lesson-03; U11–U18 fixed.
 - E04: exploration `dffb1ec`, fixes `171974a`, lesson-04; U19–U23 fixed, A1 decided.
 - E05: exploration `01137b6`, fixes `0099bcd`, lesson-05; U24–U26 fixed, A2 decided.
-- **E06:** exploration `b3b0559` (blind Claude Opus 5.5); amended fix = the code commit
+- **E06:** exploration `b3b0559` (blind Claude Opus 5.5); amended fix `755d21c`,
   tagged `explore-it/lesson-06`, parent `b3b0559` (fresh Codex Sol one-round repair).
   Supersedes reviewed `7a38788`; immutable [Muse NITS review](register/reviews/E06/review.md).
   Seven reports → U27–U33, all assigned repairs implemented. A4 decided separately, not a blind
@@ -117,4 +117,6 @@ Coordinator/Nick owns policy decisions; fresh explorers own future observations:
 - Do not regenerate an E06 blind export or alter immutable records. Next is independent
   repair validation/full checkpoint B review, then a fresh E07 export/run after its gate.
 - Project knowledge: [docs/knowledge/README.md](docs/knowledge/README.md);
-  E06 reusable oracle is indexed in `project/lab/repro/README.md`. No VM kb write was needed.
+  this documentation commit appends the streaming Decode/whole-document lesson after code
+  fix `755d21c`; the lesson tag remains on the code fix. E06 reusable oracle is indexed in
+  `project/lab/repro/README.md`. No VM kb write was needed.

@@ -5,7 +5,7 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-**E06 one-round review repair complete**, amended code fix = the commit tagged
+**E06 one-round review repair complete**, amended code fix `755d21c`, tagged
 `explore-it/lesson-06`, parent `b3b0559`; supersedes reviewed `7a38788`.
 Exploration `b3b0559`: fresh blind Claude Opus 5.5, exit 0, seven reports reconciled
 U27–U33. Fresh Codex Sol fixer repaired all seven assigned paths; A4 decided separately.
@@ -66,7 +66,9 @@ child agents, no acceptance process remains, and the owned Docker lab is stopped
 - A3, delivered-outbox cleanup, worker recovery/decode-log questions, deterministic
   race hooks and remaining unprobed leads are deferred to fresh authorized chunks.
   Project knowledge: `../docs/knowledge/README.md`; E06 helper indexed in
-  `../project/lab/repro/README.md`. No VM kb write, push or external message.
+  `../project/lab/repro/README.md`. A separate documentation commit after `755d21c`
+  appends streaming Decode versus whole-document semantics; lesson-06 stays on the code fix.
+  No VM kb write, push or external message.
 
 Resume: read `../STATE.md` first. Resolve the fix SHA with
 `git rev-parse explore-it/lesson-06`; its parent is `b3b0559`. Nothing needs relaunching.
