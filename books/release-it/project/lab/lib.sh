@@ -14,7 +14,12 @@ TOXI=http://127.0.0.1:18474
 PROM=http://127.0.0.1:19090
 EDGE=http://127.0.0.1:18080
 
-compose() { docker compose -f "$PROJECT_DIR/deploy/compose.yml" "$@"; }
+# LF_COMPOSE_EXTRA holds extra -f files for a run (lesson 10's tmpfs volumes).
+compose() { docker compose -f "$PROJECT_DIR/deploy/compose.yml" ${LF_COMPOSE_EXTRA:-} "$@"; }
+
+# profiles — Compose profiles the tree under test runs with: the ledger
+# purger exists from lesson 10.
+profiles() { [[ -e $LF_TREE/cmd/control/purge.go ]] && echo "--profile maintenance" || true; }
 
 log() { printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*" >&2; }
 
@@ -46,7 +51,7 @@ reset_stack() {
   local extra=("$@") key hit=0
   key=$(seed_key)
   log "resetting stack (seed $key)"
-  compose "${extra[@]}" --profile lab down --remove-orphans >/dev/null 2>&1 || true
+  compose "${extra[@]}" --profile lab --profile maintenance down --remove-orphans >/dev/null 2>&1 || true
   docker volume rm -f litefleet_node-a-data litefleet_node-b-data litefleet_blobs >/dev/null
   docker volume create litefleet-seedcache >/dev/null
   compose "${extra[@]}" up -d --no-build --wait postgres >/dev/null 2>&1
@@ -58,7 +63,7 @@ reset_stack() {
   else
     psql_ "CREATE DATABASE litefleet"
   fi
-  compose "${extra[@]}" up -d --no-build >/dev/null 2>&1
+  compose "${extra[@]}" $(profiles) up -d --no-build >/dev/null 2>&1
   wait_http http://127.0.0.1:18090/health
   wait_http http://127.0.0.1:18071/health
   wait_http http://127.0.0.1:18072/health
@@ -74,10 +79,10 @@ reset_stack() {
   else
     log "seeding (first run for seed $key)"
     compose run --rm --no-deps seedgen "${SEED_ARGS[@]}" 2>&1 | grep -E 'seeded|wrote' >&2
-    compose stop control postgres-exporter >/dev/null 2>&1
+    compose $(profiles) stop control postgres-exporter $( [[ -n $(profiles) ]] && echo purger) >/dev/null 2>&1
     psql_ "DROP DATABASE IF EXISTS seed_$key"
     psql_ "CREATE DATABASE seed_$key TEMPLATE litefleet"
-    compose start control postgres-exporter >/dev/null 2>&1
+    compose $(profiles) start control postgres-exporter $( [[ -n $(profiles) ]] && echo purger) >/dev/null 2>&1
     docker run --rm -v litefleet-seedcache:/cache -v litefleet_node-a-data:/a:ro -v litefleet_node-b-data:/b:ro \
       -v "$RESULTS":/results:ro alpine sh -c "
         rm -rf /cache/$key && mkdir -p /cache/$key/node-a /cache/$key/node-b &&

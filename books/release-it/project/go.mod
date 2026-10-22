@@ -3,6 +3,7 @@ module litefleet
 go 1.26.0
 
 require (
+	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/ncruces/go-sqlite3 v0.35.6
 	github.com/prometheus/client_golang v1.25.0

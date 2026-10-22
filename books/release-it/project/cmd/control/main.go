@@ -41,6 +41,11 @@ func main() {
 		time.Sleep(time.Second)
 	}
 
+	if len(os.Args) > 1 && os.Args[1] == "purge" {
+		purge(reg, os.Args[2:])
+		return
+	}
+
 	c := &control{reg: reg, nodes: newNodeCommands(env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"))}
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /internal/resolve", budget(450*time.Millisecond, c.resolve))

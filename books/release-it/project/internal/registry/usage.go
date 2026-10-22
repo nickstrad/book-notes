@@ -66,3 +66,25 @@ func (r *Registry) UsageReport(ctx context.Context, since time.Time) (_ []wire.T
 	}
 	return out, rows.Err()
 }
+
+// PurgeBatch rolls up to n ledger rows older than cutoff into usage_daily and
+// deletes them, in one statement, and returns how many it moved.
+func (r *Registry) PurgeBatch(ctx context.Context, cutoff time.Time, n int) (moved int, err error) {
+	defer observe(time.Now(), &err)
+	err = r.db.QueryRowContext(ctx, `
+		WITH old AS (
+			DELETE FROM usage_ledger
+			WHERE id IN (SELECT id FROM usage_ledger WHERE at < $1 ORDER BY at LIMIT $2)
+			RETURNING tenant_id, at, statements, rows, bytes
+		), rolled AS (
+			INSERT INTO usage_daily AS d (tenant_id, day, statements, rows, bytes)
+			SELECT tenant_id, at::date, sum(statements), sum(rows), sum(bytes) FROM old GROUP BY 1, 2
+			ON CONFLICT (tenant_id, day) DO UPDATE SET
+				statements = d.statements + excluded.statements,
+				rows = d.rows + excluded.rows,
+				bytes = d.bytes + excluded.bytes
+			RETURNING 1
+		)
+		SELECT count(*) FROM old`, cutoff, n).Scan(&moved)
+	return moved, err
+}

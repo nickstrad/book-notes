@@ -73,6 +73,7 @@ func main() {
 
 	n.exportMetrics()
 	n.usage.Run()
+	go n.eng.Maintain()
 	// On SIGTERM, keep the usage events: everything queued in memory goes to
 	// the outbox before the process exits.
 	go func() {

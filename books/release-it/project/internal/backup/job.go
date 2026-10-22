@@ -45,7 +45,7 @@ func New(eng *engine.Engine, b *blob.Client, interval time.Duration, tmp string)
 // the interval so the snapshots do not land together.
 func (j *Job) Run() {
 	for range time.Tick(j.interval) {
-		var dirty []string
+		dirty := j.eng.TakeEvictedDirty() // closed by the handle cache before their backup
 		for _, h := range j.eng.Open() {
 			if h.Dirty() {
 				dirty = append(dirty, h.ID)
@@ -73,6 +73,7 @@ func (j *Job) Backup(id string) (int, error) {
 	if err != nil {
 		return 0, err
 	}
+	defer h.Release()
 	ctx := context.Background()
 	gen := h.Generation() + 1
 	tmp := filepath.Join(j.tmp, fmt.Sprintf("%s.%d.db", id, gen))

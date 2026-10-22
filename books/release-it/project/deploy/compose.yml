@@ -74,6 +74,16 @@ services:
     depends_on:
       postgres: { condition: service_healthy }
 
+  # The ledger purge, every minute in the lab (daily in production).
+  purger:
+    image: litefleet/control:${CONTROL_TAG:-cur}
+    command: ["purge", "-every", "60s"]
+    profiles: [maintenance]
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://litefleet:litefleet@postgres:5432/litefleet
+    depends_on: [control]
+
   node-a:
     <<: *node
     environment:

@@ -18,7 +18,7 @@ migrate:
 	lab/migrate.sh
 
 down:
-	$(COMPOSE) --profile lab down -v --remove-orphans
+	$(COMPOSE) --profile lab --profile maintenance down -v --remove-orphans
 
 verify:
 	lab/verify.sh $(LESSON)

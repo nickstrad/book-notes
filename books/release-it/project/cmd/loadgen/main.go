@@ -411,10 +411,17 @@ func (g *gen) whaleScan(tg target) time.Duration {
 	return g.do(tg, "whale", "query", map[string]any{"sql": "SELECT * FROM events"}, new(queryResp))
 }
 
+// createRequest creates a database the way a new app does, then reads from
+// it once.
 func (g *gen) createRequest() {
 	tg := g.pick()
 	name := fmt.Sprintf("lg-%d-%d", time.Now().UnixNano()%1_000_000_000, rndInt(1000))
-	g.send(tg.t.Key, "create", "normal", "", http.MethodPost, "/v1/databases", map[string]any{"name": name}, new(createResp))
+	var d createResp
+	g.send(tg.t.Key, "create", "normal", "", http.MethodPost, "/v1/databases", map[string]any{"name": name}, &d)
+	if d.Name == "" {
+		return
+	}
+	g.do(target{tg.t, dbEntry{Name: d.Name, ID: d.ID, Node: d.Node}}, "cold", "query", map[string]any{"sql": "SELECT count(*) FROM _meta"}, new(queryResp))
 }
 
 func (g *gen) report() time.Duration {

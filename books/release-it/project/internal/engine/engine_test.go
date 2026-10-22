@@ -7,6 +7,8 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"os"
+	"strconv"
 	"testing"
 	"time"
 
@@ -201,5 +203,48 @@ func TestQueryAnswersAreCapped(t *testing.T) {
 	q, truncated, err = query(e, "db1", 1, `SELECT * FROM fat`)
 	if err != nil || !truncated || len(q.Rows) >= 600 || len(q.Rows) < 200 {
 		t.Fatalf("rows = %d, truncated = %v, err = %v; want the 1 MB cap", len(q.Rows), truncated, err)
+	}
+}
+
+func TestCheckpointerTruncatesTheWAL(t *testing.T) {
+	e := newEngine(t)
+	exec(t, e, `CREATE TABLE notes (id integer PRIMARY KEY, body text)`)
+	for i := 0; i < 40; i++ {
+		exec(t, e, `INSERT INTO notes (body) VALUES (hex(randomblob(2000)))`)
+	}
+	h, _ := e.Handle("db1")
+	h.Release()
+	if fi, err := os.Stat(h.Path + "-wal"); err != nil || fi.Size() < CheckpointBytes {
+		t.Fatalf("WAL %v (%v); want it past %d bytes before the checkpoint", fi.Size(), err, CheckpointBytes)
+	}
+	e.checkpoint()
+	if fi, err := os.Stat(h.Path + "-wal"); err == nil && fi.Size() != 0 {
+		t.Fatalf("WAL is %d bytes after the checkpoint; want truncated", fi.Size())
+	}
+}
+
+func TestHandleCacheEvictsButNeverClosesAHandleInUse(t *testing.T) {
+	e := newEngine(t)
+	held, _ := e.Handle("db1") // in use throughout
+	for i := 0; i < HandleCache+5; i++ {
+		id := "x" + strconv.Itoa(i)
+		if err := e.Provision(wire.ProvisionRequest{DatabaseID: id, TenantID: "t", Epoch: 1}); err != nil {
+			t.Fatal(err)
+		}
+		h, err := e.Handle(id)
+		if err != nil {
+			t.Fatal(err)
+		}
+		h.Release()
+	}
+	if n := len(e.Open()); n != HandleCache {
+		t.Fatalf("%d handles cached; want %d", n, HandleCache)
+	}
+	if err := held.DB().Ping(); err != nil {
+		t.Fatalf("an evicted handle in use was closed: %v", err)
+	}
+	held.Release()
+	if err := held.DB().Ping(); err == nil {
+		t.Fatal("an evicted handle stayed open after its last user released it")
 	}
 }

@@ -138,6 +138,7 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 	if err != nil {
 		return false, err
 	}
+	defer h.Release()
 	if err := h.admit(epoch); err != nil {
 		return false, err
 	}
@@ -223,6 +224,7 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 	if err != nil {
 		return nil, err
 	}
+	defer h.Release()
 	if err := h.admit(epoch); err != nil {
 		return nil, err
 	}

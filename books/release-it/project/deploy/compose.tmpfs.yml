@@ -1,0 +1,9 @@
+# Lesson 10: the node data volumes as 48 MB tmpfs, so a disk that fills in a
+# quarter in production fills during one run here.
+volumes:
+  node-a-data:
+    driver: local
+    driver_opts: { type: tmpfs, device: tmpfs, o: "size=48m" }
+  node-b-data:
+    driver: local
+    driver_opts: { type: tmpfs, device: tmpfs, o: "size=48m" }
