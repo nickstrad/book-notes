@@ -52,3 +52,8 @@ Tables namespaces, api_keys, queues, jobs, attempts, workers, schedules, webhook
 
 Console producers: API process log has no request or lifecycle logging and no ids; worker stdout has no job ids
 (internal/worker/worker.go:48,71); hooksink keeps per-POST records in memory (cmd/hooksink/main.go:67). ★ console inventory O.
+
+
+## E06 coordinator navigation addendum (after blind record closed)
+
+The explorer’s [observed per-hop journey](entities.md) locates copies and transformations: enqueue → jobs JSONB → lease → sample worker echo → ack → jobs result → webhook_outbox snapshot → partner. API/storage/lease/manual ack/webhook preserve the large integer; sample-worker decoding and qctl input/output round it (E06-F03/F04). Errors copy from nack to jobs.last_error and attempts.error, then into dead-letter notifications; job removal leaves unreachable attempt rows (E06-F07). Snapshot destination/secret survive job/queue deletion; API logs and job_events retain transitions. These are navigation pointers to the original evidence, added by the coordinator rather than attributed to the blind explorer.

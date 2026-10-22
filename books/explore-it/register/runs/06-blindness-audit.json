@@ -1,0 +1,25 @@
+{
+  "experiment": 6,
+  "source_tag": "explore-it/lesson-05",
+  "source_commit": "0099bcd0a91e86a25f39cfdf347fbbc3b8f5704e",
+  "created_before_run_utc": "2026-10-22T15:28:19.178543+00:00",
+  "tracked_source_files": 123,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "b7f6d3e58b668685c36c257e1645ed118933d332e8b8c27de7d541dc0a104dc7",
+  "brief_sha256": "38b1313316967c5fa0073c8c2e9d5cc925ec3526d16762dbedc2f7580a0fcf58",
+  "start": "2026-10-22T15:28:37Z",
+  "end": "2026-10-22T15:48:00Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 61,
+    "Write": 9
+  },
+  "flagged_inputs": [],
+  "audit_pattern": "Every tool input checked for /root, register/, PLAN.md, .git, other exports, booknotes/book-notes, ~/, $HOME",
+  "inherited_source_and_raw_records": "Unchanged: collector integrity checks passed",
+  "manifest_hashes_verified": 3447,
+  "boundary": "Prompt and plain export; no OS isolation",
+  "register_exposure": "Prior disclosed lessons were available as allowed prior knowledge. No hidden plan/register/history path in tool inputs. A4 not directly probed; coordinator policy disclosure is separate from seven blind reports."
+}

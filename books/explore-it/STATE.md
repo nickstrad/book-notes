@@ -5,9 +5,9 @@ direction: skip the fluff and soft-skills material; keep the probing/testing/lea
 codebase core — a good system (`queuelet`, a baby job queue, Go + Postgres 17) with nine
 structured exploration experiments run against it, plus 8 codebase-exploration skills.
 Spec: `books/explore-it/PLAN.md` (sharpened pass) + repo `AGENTS.md`.
-Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at the end.
+E06 builder: Codex Sol per Nick 2026-10-22; fresh blind Claude explorer. Astra reviews at the end.
 
-**Status (2026-10-22): experiment 05 complete, tag `explore-it/lesson-05`. Next: experiment 06.**
+**Status (2026-10-22): experiment 06 exploration complete and reconciled; fresh Sol fix next.**
 
 ## Done
 - Plan: `78e56de` + scoped revision `7dcfb05`.
@@ -32,7 +32,9 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
   break). A3–A4 still PRESENT. The walk check does not catch U24 at lesson-04 (W1 never fired).
 
 ## In progress
-- Nothing running. The `queuelet` lab stack may still be up (current tree); that is not an agent.
+- E06 blind Claude exploration closed exit 0 (~20 min): 7 reports → U27–U33; all assigned to fresh Sol fixer along with A4. Raw score 20 stated / 18 confirmed / 2 refuted, 2 qualified reading contradictions, 30 cells. Export closed; no explorer running.
+- Next dispatch: `register/reconciliations/06-fixer-brief.md`, scope in `06.md` / `06.json`. A4 is policy disclosure, not a blind find. Attempt cleanup decision U33 recorded there.
+- Pool check: Claude 23% weekly used, Codex 90% weekly left; Muse gauge unavailable. No limits reported.
 
 ## Incidents (history)
 - Sol run 1 stopped 2026-10-21 ~21:13 CDT by the Codex content filter after E01.
@@ -59,8 +61,7 @@ a delivery cancelled in flight (left with A3).
 
 ## Open decisions
 - A3–A4 spec silences: E06–E07 (coordinator decides one line each in the fix commit).
-- Explorer seat for E06+ (E04 and E05 ran on Opus again; Muse CLI not on PATH this session): the plan wants explorer and fixer from different families; with
-  Opus building, a Muse or Codex explorer would restore that. Owner: Nick / Twin.
+- E06 seats resolved by Nick’s brief: Sol executes the chunk, Claude explores blind, fresh Sol fixes. E07+ dispatch remains a future chunk.
 
 ## Resume
 - Worktree `/root/Software/booknotes-work/explore-it`, branch `plan/explore-it`; never touch

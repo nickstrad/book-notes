@@ -1,0 +1,30 @@
+15:36:27
+# enqueue payload with \u0000
+{"error":{"code":"invalid_job","message":"pq: unsupported Unicode escape sequence"}}
+ [400]
+# kind with \u0000
+{"error":{"code":"invalid_job","message":"pq: invalid byte sequence for encoding \"UTF8\": 0x00"}}
+ [400]
+[312,{"big":9007199254740992,"dec":1.1}]
+[313,{"big":9007199254740993,"dec":1.10}]
+[314,{"case":"ack-nul"}]
+[315,{"case":"nack-nul"}]
+# ack 314 with result containing \u0000
+{"error":{"code":"state_conflict","message":"pq: unsupported Unicode escape sequence"}}
+ [409]
+id | state | has_token | attempts
+314 | leased | t | 0
+# retry the same ack with a clean result
+{"ok":true}
+ [200]
+# nack 315 with error containing \u0000
+{"error":{"code":"state_conflict","message":"pq: invalid byte sequence for encoding \"UTF8\": 0x00"}}
+ [409]
+id | state | has_token | attempts | last_error
+315 | leased | t | 0 | 
+# nack again with clean error
+{"ok":true}
+ [200]
+id | state | attempts | last_error
+314 | succeeded | 1 | 
+315 | dead | 1 | bad byte

@@ -1,0 +1,18 @@
+15:36:13
+# qctl job get 311 (stored big 9007199254740993)
+    "big": 9007199254740992,
+    "dec": 1.1,
+    "big": 9007199254740992,
+    "dec": 1.1
+# qctl enqueue with big payload
+{
+  "id": 312,
+  "state": "queued"
+}
+id | payload
+312 | {"big": 9007199254740992, "dec": 1.1}
+# same through curl for control
+{"id":313,"state":"queued"}
+ [201]
+id | payload
+313 | {"big": 9007199254740993, "dec": 1.10}

@@ -60,3 +60,17 @@ Local ids E03-F01… are provisional; the coordinator reconciles them. E01/E02 e
 | [E03-F06](E03-F06-backoff-overflow-immediate-retry.md) Backoff overflow: attempt ≥32 (default base) retried immediately | lesson-02 | SPEC:27-28 | Medium | open | E03 notes H08 |
 | [E03-F07](E03-F07-backoff-max-seconds-ignored.md) Undocumented backoff.max_seconds accepted, stored, never applied | lesson-02 | SPEC:17, :26-28 | Low–medium | open | E03 notes H07 |
 | [E03-F08](E03-F08-patch-webhook-partial-clears-other-member.md) PATCH partial webhook clears the omitted member (notifications off / unsigned) | lesson-02 | approximation: RFC 7396 + SPEC:33-34 | Medium | open | E03 notes H10 |
+
+## Experiment 06 (relate-it) — explorer reports at `explore-it/lesson-05`
+
+Local ids E06-F01… are provisional; the coordinator reconciles them. Earlier entries above are unchanged.
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E06-F01](E06-F01-schedule-delete-missing-204.md) DELETE schedule answers 204 for a missing id and another tenant's schedule | lesson-05 | SPEC:15, :10 | Low | open | E06 notes P2, H-E06-03 |
+| [E06-F02](E06-F02-schedule-payload-not-validated.md) Schedules accept non-object payloads; cron fires them into jobs; sample worker cannot decode them | lesson-05 | SPEC:60; run's own check | Medium | open | E06 notes P2, P2b, P3 |
+| [E06-F03](E06-F03-sample-worker-echo-loses-precision.md) Sample worker echo rounds payload numbers | lesson-05 | README echo; SPEC:63 | Low–medium | open | E06 notes P4 |
+| [E06-F04](E06-F04-qctl-rounds-payload-numbers.md) qctl rounds numbers on input (stored) and display | lesson-05 | README CLI = API; SPEC:63 | Medium | open | E06 notes P5 |
+| [E06-F05](E06-F05-nul-in-result-or-error-409-conflict.md) U+0000 in ack result / nack error → 409 state_conflict, lease kept | lesson-05 | SPEC:16, :19-22 | Low–medium | open | E06 notes P6 |
+| [E06-F06](E06-F06-enqueue-racing-queue-delete-400-fk-text.md) Writes racing queue delete → 400/500 with FK text, not 404 | lesson-05 | SPEC:15 | Low | open | E06 notes P9b, P9c |
+| [E06-F07](E06-F07-attempts-outlive-their-job.md) Attempt rows outlive their job after purge/DELETE/retention | lesson-05 | approximation SPEC:122 + :80-81 | Low | open | E06 notes P10 |

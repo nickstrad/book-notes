@@ -1,0 +1,37 @@
+15:41:24
+## purge
+id | state | attempts
+885 | retry_wait | 1
+{"deleted":1}
+ [200]
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+job_id | n | outcome | error
+885 | 1 | failed | secret-ish detail
+event
+created
+leased
+retry_wait
+purged
+## DELETE dead job with 2 attempts, idempotency key K1
+id | state | attempts
+886 | dead | 2
+ [204]
+job_id | n | outcome | error
+886 | 1 | failed | fail 1
+886 | 2 | failed | fail 2
+## same idempotency key after delete
+{"id":887,"state":"queued"}
+ [201]
+## retention removal of a succeeded job
+acked 887
+{"error":{"code":"job_not_found","message":"job not found"}}
+job_id | n | outcome
+887 | 1 | succeeded
+## residue totals
+orphan_attempts | jobs
+4 | 3
+outbox_rows_for_missing_jobs | delivered
+3 | 3

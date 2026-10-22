@@ -1,0 +1,77 @@
+{
+  "experiment": 6,
+  "raw_reports": 7,
+  "new_catalogue_defects": 0,
+  "catalogue_expected": [
+    "D15",
+    "D16",
+    "D17",
+    "A4"
+  ],
+  "catalogue_expected_found_early_in": {
+    "D15": 1,
+    "D16": 1,
+    "D17": 1
+  },
+  "new_unplanned_bugs": 7,
+  "assigned": [
+    "U27",
+    "U28",
+    "U29",
+    "U30",
+    "U31",
+    "U32",
+    "U33",
+    "A4"
+  ],
+  "raw_hypotheses": {
+    "stated": 20,
+    "confirmed": 18,
+    "refuted": 2,
+    "reading_contradictions": 2,
+    "model_cells": 30
+  },
+  "crosswalk": [
+    {
+      "original": "E06-F01",
+      "canonical": "U27",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F02",
+      "canonical": "U28",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F03",
+      "canonical": "U29",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F04",
+      "canonical": "U30",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F05",
+      "canonical": "U31",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F06",
+      "canonical": "U32",
+      "classification": "bug"
+    },
+    {
+      "original": "E06-F07",
+      "canonical": "U33",
+      "classification": "bug plus ownership decision"
+    }
+  ],
+  "silence_resolved_here": {
+    "A4": "Not directly probed by explorer; disclosed policy decision: dead jobs exempt from automatic retention"
+  },
+  "silences_left_for_later": [
+    "A3"
+  ]
+}

@@ -51,3 +51,13 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 |---|---|---|---|
 | C25 Exits from `leased` written independently, each choosing which columns to reset | five UPDATEs leave `leased`: nack.go:60, expire.go:116, api/jobs.go:126 (clear lease, differ on attempts), ack.go:25, operator.go:6 (keep lease) — no shared "end lease" routine | E05-F01 (release skips attempt accounting), E05-F02 (ack/cancel keep lease fields) | release paths 13:24:30Z → confirmed (H-E05-13); nack retry=false clears 13:29:40Z → confirmed (H-E05-17). Related to C23 (release paths and readiness), fixed in lesson 04 for run_at only |
 | C26 Observation keyed on sticky error text | 002.sql `observe_job()` labels `lease_expired` by `NEW.last_error='lease expired'`; `last_error` survives later transitions | E05-F03 | ack/cancel after expiry 13:34Z → confirmed (H-E05-18); nack with that literal text: predicted, not probed |
+
+## E06 additions — `explore-it/lesson-05` (sibling predictions timestamped in [E06 notes](../experiments/06-relate-it/notes.md))
+
+| Cause | Findings | Sibling predictions (time) | Outcome |
+|---|---|---|---|
+| Client code decodes JSON into `float64`/`map[string]any` (client.go:57, worker.go:21, qctl main.go:52-57, :277-280) | E06-F03, E06-F04 | qctl display and input (15:35:59Z) | confirmed (P5); `http` kind and other qctl verbs predicted, not probed |
+| A second job writer bypasses `insertJob` validation (fire.go:76) | E06-F02 | none other found: enqueue, batch, run all call insertJob | — |
+| Handler ignores RowsAffected on DELETE (schedules.go:136-143) | E06-F01 | other DELETE handlers check (read) | none found |
+| Every store error mapped to one HTTP class per handler (api/jobs.go:88 → 409; enqueue.go:87 → 400; schedules.go:57 → 500) | E06-F05, E06-F06 | schedule create race 500 (15:40Z, confirmed); batch race 400 (15:40Z, not hit) | partly confirmed |
+| No owner link or cleanup for job sub-records (001.sql:7) | E06-F07 | delivered outbox rows (observed P10) | confirmed as sibling |

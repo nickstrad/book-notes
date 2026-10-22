@@ -94,3 +94,16 @@ Invariants I1–I13 were written at 13:22:19Z before any probe and asserted afte
 | ★ R47 Purge removes pending only; leased survives | SPEC purge | queues.go:169 | holds | `deleted 0` while leased; nack → retry_wait → purged next (P3) | holds |
 | ★ R48 Pause blocks leases; expiry, promotion continue; no catch-up burst | SPEC pause/resume | jobs.go:53, fire.go:74 | holds | P2, P7 | holds (promotion while paused judged not a "delivery") |
 | I1, I2, I3, I5, I9, I10, I12, I13 | SPEC states, terminal/finished, R3, R38, R35, R34, loop | — | hold | no violation in the walks | holds within walk coverage |
+
+## E06 revision — `explore-it/lesson-05` ([E06 notes](../experiments/06-relate-it/notes.md)); ★ = new observation
+
+| Rule | Authority | Scope | E06 observation |
+|---|---|---|---|
+| R13 Delete queue: no orphans, conflict if nonempty | SPEC:49-50 | DELETE queue | ★ (r) holds: 409 for queued or only-terminal jobs and for a lone schedule; 0 orphans across 70 race rounds (P1, P9b, P9c) |
+| R7 Missing resource → 404 | SPEC:15 | DELETE schedule; race losers | ★ violated: DELETE schedule 204 (E06-F01); race losers 400/500 (E06-F06) |
+| ★ R-E06-1 Every job payload is a JSON object, whatever path creates the job | SPEC:60 (+ run's own check) | enqueue, batch, run, cron fire | violated by cron fire (E06-F02) |
+| ★ R-E06-2 Numbers keep their value end to end, including the shipped worker and CLI | SPEC:63; README echo/CLI lines | worker, qctl | violated (E06-F03, E06-F04); API/storage/webhook hold (P4 control) |
+| ★ R-E06-3 409 only for state incompatibility | SPEC:16 | ack/nack | violated for NUL (E06-F05) |
+| ★ R-E06-4 Queue PATCH: existing jobs keep max_attempts; pending notifications keep their snapshot; retention applies to existing terminal jobs | SPEC:46, :161-163, :122 | PATCH queue | holds (P8); retention-retroactive is SPEC-silent, treated as intended |
+| ★ R-E06-5 Removing a job removes what it owns (attempts) | approximation (SPEC:122 + :80-81 + :49-50) | purge/DELETE/retain | violated (E06-F07) |
+| ★ R-E06-6 Idempotency key returns the original job while it exists | SPEC:68 | enqueue after delete | key freed after delete → new job (P10); not a defect |

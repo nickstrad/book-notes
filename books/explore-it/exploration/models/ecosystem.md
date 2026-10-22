@@ -25,3 +25,13 @@ Testability requests: TR1 (hooksink records received signature), TR2 (lab clock 
 
 Testability requests from this run: TR-E02-1…6 in the [E02 notes](../experiments/02-make-it-visible/notes.md) (correlated
 lifecycle events; per-POST outbox history; backlog/liveness metrics; eligibility reason; lease start; controllable clock).
+
+## E06 revision — `explore-it/lesson-05` ([E06 notes](../experiments/06-relate-it/notes.md)); ★ = new observed cell
+
+| Neighbour | Trust boundary | Data path | What-if tried (E06) | Result |
+|---|---|---|---|---|
+| ★ Sample worker (`internal/worker`) | client decode of lease JSON | lease bytes → `map[string]any` → result | payload > 2^53, `1.10`; array payload from a schedule; its own row deleted | rounds numbers (E06-F03); array undecodable → job dies by expiry, log names no job (E06-F02); deleted row → zombie polling, recovered only by container restart (P7) |
+| ★ qctl | operator input → HTTP | `--payload` → `any` → JSON | big number | stores a different number; display rounds (E06-F04) |
+| ★ PostgreSQL as validator | API → jsonb/text columns | result/error/payload | `\u0000` | jsonb/text reject; mapped to 409 on worker verbs (E06-F05), 400 on enqueue |
+| ★ PostgreSQL FKs (002) | owner deletion vs concurrent writes | queue lookup → insert | DELETE racing enqueue/schedule create | no orphans; losers get 400/500 with constraint names (E06-F06) |
+| ★ Webhook partner | snapshot at terminal time | outbox url/secret/body | PATCH url+secret while row pending; delete job and queue while pending | pending row keeps old url/secret (valid signature); delivered after owner deletion (P8) |

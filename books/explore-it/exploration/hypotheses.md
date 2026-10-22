@@ -188,3 +188,38 @@ Stated before their probes in [E05 notes](experiments/05-sequence-it/notes.md) (
 | Q-E05-2 | Should terminal rows retain `leased_by` (who completed) while clearing token/expiry? | E05-F02 | spec decision | spec decision | open | |
 | T-E05-1 | Testability: `/admin/clock` has no "offset, keep ticking" mode; advance/set freeze semantic time until reset, so real-time lease expiry and clock jumps cannot be combined | clock.go:182-191 | — | testability request | open | minimal hook: `{"action":"offset","seconds":n}`; validation: lease_seconds 2 expires 2 s after an offset jump |
 | #offcharter | `GET /v1/jobs/{id}` returns the live `lease_token` to any holder of the namespace key, so any client can ack another worker's lease | P5 GET output | token hidden | boundary / later | open | observed in output, not judged |
+
+## Experiment 06 (relate-it) — `explore-it/lesson-05`
+
+Stated before their probes in [E06 notes](experiments/06-relate-it/notes.md) (15:31Z table, 15:33Z, 15:35Z, 15:37Z, 15:38Z,
+15:39Z, 15:40Z, 15:41Z).
+
+| Id | Statement / prediction | Source and evidence pointer | Would be wrong if | Probe family / experiment | Status | Outcome evidence |
+|---|---|---|---|---|---|---|
+| H-E06-C | Charter: "deleting an owner leaves orphans" (no FK with ON DELETE) | charter 06 (migration reading) | code guards or cascades | entity / E06 | experiment 06: refuted for queue→job/schedule (409, FK); holds only for job→attempt | P1, P9b, P10 (E06-F07) |
+| H-E06-01 | DELETE queue: any job or schedule → 409; empty 204; missing 404; foreign 404 | queues.go:109-151 | 204 with dependents | entity / E06 | experiment 06: confirmed | P1 |
+| H-E06-02 | pending outbox row delivered after its job and queue are deleted | SPEC:163 | row dropped | entity / E06 | experiment 06: confirmed | P8e |
+| H-E06-03 | DELETE schedule missing / foreign id → 204 | schedules.go:136-143 | 404 | entity / E06 | experiment 06: confirmed | P2 (E06-F01) |
+| H-E06-04 | schedule accepts non-object payload; run 400; cron fire stores it | schedules.go:42-60, fire.go:76 | create 400 / fired `{}` | data / E06 | experiment 06: confirmed | P2b (E06-F02) |
+| H-E06-05 | sample worker echo rounds `9007199254740993` | client.go:57 | exact | data / E06 | experiment 06: confirmed | P4 (E06-F03) |
+| H-E06-06 | manual ack keeps digits to webhook | api.go:53-62 | digits lost | data / E06 | experiment 06: confirmed | P4 |
+| H-E06-07 | NUL in ack result / nack error → 409; enqueue → 400 driver text | ack.go, api/jobs.go:88 | 2xx | data / E06 | experiment 06: confirmed | P6 (E06-F05) |
+| H-E06-08 | deleting a running sample worker's row: release counted; process polls 404 forever | worker.go:34-46 | re-registers/exits | entity / E06 | experiment 06: confirmed | P7 |
+| H-E06-09a–d | queue PATCH: max_attempts per job; webhook snapshot; url "" stops rows; retention retroactive | SPEC; Notify; Retain | re-targeted / changed | entity / E06 | experiment 06: confirmed | P8 |
+| H-E06-10 | enqueue ‖ DELETE queue: no orphans; occasional 4xx/5xx with FK text | LOCK + FK | orphan / only 201,404 | race / E06 | experiment 06: confirmed | P9b (E06-F06) |
+| H-E06-11 | purge leaves attempts rows | queues.go:170 | rows removed | entity / E06 | experiment 06: confirmed | P10 (E06-F07) |
+| H-E06-12 | cron-fired `[1,2]` poisons sample worker: 3 expiries → dead "lease expired" | worker.go:21 | acked/nacked | data / E06 | experiment 06: confirmed | P3 (E06-F02) |
+| H-E06-13 | jsonb normalises and Go HTML-escapes; values equal | jsonb; encoding/json | value changes | data / E06 | experiment 06: confirmed | P4 (not a defect) |
+| H-E06-14 | qctl job get displays rounded number | qctl main.go:277-280 | exact | data / E06 | experiment 06: confirmed | P5 (E06-F04) |
+| H-E06-15 | qctl enqueue stores rounded number | qctl main.go:52-57 | exact | data / E06 | experiment 06: confirmed | P5 (E06-F04) |
+| H-E06-16 | schedule create ‖ DELETE queue → some 500 FK text | schedules.go:42-57 | only 201/404 | race / E06 | experiment 06: confirmed | P9c (E06-F06) |
+| H-E06-17 | batch ‖ DELETE queue → some 400 FK text | enqueue.go:92-124 | only 201/404 | race / E06 | experiment 06: refuted (0 of 320; sampling) | P9c |
+| H-E06-18 | DELETE and retention leave attempts rows; ids not reused | api/jobs.go:32, expire.go:90-92 | rows removed | entity / E06 | experiment 06: confirmed | P10 (E06-F07) |
+| H-E06-19 | idempotency key freed after delete → new id | enqueue.go:74 | old id | entity / E06 | experiment 06: confirmed | P10 (not a defect) |
+| H-E06-20 | Lease on a queue deleted between lookup and lease tx → 500 `sql: no rows` | jobs.go:42-50 | 404 | race / later | open | not probed |
+| H-E06-21 | Sample worker acking a result with U+0000 (http kind) → 409 logged `completed`, job dies by expiry | E06-F05 + worker.go | job succeeds | data / later | open | not probed |
+| H-E06-22 | `createWorker` with NUL in name/kinds → 500 database_error | api/jobs.go:107 | 400 | data / later | open | not probed |
+| Q-E06-1 | Should the sample worker exit non-zero (so `restart: on-failure` re-registers) or re-register on `worker_not_found`? | P7 | spec decision | spec decision | open | |
+| Q-E06-2 | Should attempts (and delivered outbox rows) follow job retention, or be documented history like `job_events`? | E06-F07 | spec decision | spec decision | open | |
+| T-E06-1 | Testability: the worker's decode-failure log line has no job id; add the raw job ids to the error (or a `decode_failed` event) so a poison job can be identified | P3 | — | testability request | open | validation: fire `[1,2]` schedule → log names the job |
+| T-E06-2 | Testability: no way to hold the queue-delete lock window deterministically; a lab hook (e.g. `QUEUELET_TEST_DELETE_PAUSE_MS`) would make E06-F06 reproducible on demand | P9 | — | testability request | open | validation: enqueue during pause → 404 |

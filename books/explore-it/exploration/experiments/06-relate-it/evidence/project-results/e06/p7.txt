@@ -1,0 +1,29 @@
+15:37:00
+worker-a before: 0 running
+job 316
+15:37:00
+job 316: leased by 2
+{"ok":true}
+ [200]
+deleted at 2026-10-22T15:37:00Z
+id | state | attempts | leased_by | no_token
+316 | queued | 1 |  | t
+[1,2,"released","worker deleted"]
+15:37:25
+id | state | attempts | leased_by
+316 | queued | 1 | 
+worker-a after: 0 running
+      1 worker-a-1  | {"time":"2026-10-22T15:37:25.566330306Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:24.560085683Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:23.556597114Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:22.553462431Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:21.549641935Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:20.54572641Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:19.542349861Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+      1 worker-a-1  | {"time":"2026-10-22T15:37:18.537898816Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"worker_not_found\",\"message\":\"unknown worker\"}}"}
+id | name
+1 | fixture-writer
+3 | worker-b
+4 | e6-manual
+{"cancelled":6,"dead":7,"leased":0,"oldest_queued_age":25.534024,"queued":1,"retry_wait":6,"scheduled":25,"succeeded":58,"throughput_last_hour":58}
+ [200]
