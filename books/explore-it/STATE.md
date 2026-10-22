@@ -34,6 +34,8 @@ nits). Next: Astra's (Codex) end review. Not merged; nothing pushed.**
   01–09 `FIXED AND CHECKED` 35/5/8/6/4/8/3/4/7 absent; `make checks` (94 check functions) exit 0
   in 706.9 s; `go test -count=1 ./...` and `go vet ./...` exit 0. Every step exited 0; the stack
   was taken down.
+- Walkthrough: [WALKTHROUGH.md](WALKTHROUGH.md), a guided tour for a cold reader (reading order,
+  lab commands, tag itinerary); its commands checked live on 2026-10-22 through lesson 07.
 
 ## In progress
 
