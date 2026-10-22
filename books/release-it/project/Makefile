@@ -3,7 +3,7 @@ COMPOSE := docker compose -f deploy/compose.yml
 LESSON  ?= 00
 export REF REF_SERVICES
 
-.PHONY: up down build seed verify calibrate audit report test logs ps
+.PHONY: up down build seed migrate verify calibrate audit report test logs ps
 
 build:
 	$(COMPOSE) --profile lab build
@@ -13,6 +13,9 @@ up: build
 
 seed:
 	$(COMPOSE) run --rm seedgen
+
+migrate:
+	lab/migrate.sh
 
 down:
 	$(COMPOSE) --profile lab down -v --remove-orphans

@@ -19,6 +19,7 @@ Docker with Compose v2+ and GNU make. Host ports are all in the 1xxxx range.
 make up        # build images, start the stack
 make seed      # 200 tenants, 240 databases, a 5 M-row usage ledger (~1 min)
 make verify LESSON=00
+make migrate   # online migrations (migrations/online/*.sql); safe while serving, safe twice
 make down      # remove everything, volumes included
 ```
 

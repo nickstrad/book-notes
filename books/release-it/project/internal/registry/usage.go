@@ -38,54 +38,31 @@ func recordUsage(ctx context.Context, tx *sql.Tx, dbs []wire.DatabaseReport) err
 	return err
 }
 
-// LedgerRow is one row of the usage ledger.
-type LedgerRow struct {
-	At         time.Time
-	TenantID   string
-	DatabaseID string
-	Kind       string
-	Statements int64
-	Rows       int64
-	Bytes      int64
-}
-
-// LedgerSince returns every ledger row recorded after since.
-func (r *Registry) LedgerSince(ctx context.Context, since time.Time) (_ []LedgerRow, err error) {
+// UsageReport aggregates the ledger in Postgres: the window's statements,
+// rows and bytes per tenant, plus current storage, the 50 heaviest tenants
+// first. Only 50 rows cross the wire, however large the ledger.
+func (r *Registry) UsageReport(ctx context.Context, since time.Time) (_ []wire.TenantUsage, err error) {
 	defer observe(time.Now(), &err)
 	rows, err := r.reporting.QueryContext(ctx, `
-		SELECT at, tenant_id, database_id::text, kind, statements, rows, bytes
-		FROM usage_ledger WHERE at > $1`, since)
+		SELECT l.tenant_id, sum(l.statements), sum(l.rows), sum(l.bytes), coalesce(max(s.storage), 0)
+		FROM usage_ledger l
+		LEFT JOIN (SELECT tenant_id, sum(size_bytes) AS storage FROM databases
+		           WHERE state = 'active' GROUP BY tenant_id) s ON s.tenant_id = l.tenant_id
+		WHERE l.at > $1
+		GROUP BY l.tenant_id
+		ORDER BY sum(l.bytes) DESC
+		LIMIT 50`, since)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var out []LedgerRow
+	out := []wire.TenantUsage{}
 	for rows.Next() {
-		var l LedgerRow
-		if err := rows.Scan(&l.At, &l.TenantID, &l.DatabaseID, &l.Kind, &l.Statements, &l.Rows, &l.Bytes); err != nil {
+		var u wire.TenantUsage
+		if err := rows.Scan(&u.TenantID, &u.Statements, &u.Rows, &u.Bytes, &u.StorageBytes); err != nil {
 			return nil, err
 		}
-		out = append(out, l)
-	}
-	return out, rows.Err()
-}
-
-// StorageByTenant returns the current storage per tenant.
-func (r *Registry) StorageByTenant(ctx context.Context) (_ map[string]int64, err error) {
-	defer observe(time.Now(), &err)
-	rows, err := r.reporting.QueryContext(ctx, `SELECT tenant_id, sum(size_bytes) FROM databases WHERE state = 'active' GROUP BY tenant_id`)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	out := map[string]int64{}
-	for rows.Next() {
-		var t string
-		var n int64
-		if err := rows.Scan(&t, &n); err != nil {
-			return nil, err
-		}
-		out[t] = n
+		out = append(out, u)
 	}
 	return out, rows.Err()
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"sort"
 	"time"
 
 	"litefleet/internal/httpx"
@@ -39,35 +38,11 @@ func (c *control) usage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ledger, err := c.reg.LedgerSince(r.Context(), time.Now().Add(-d))
+	tenants, err := c.reg.UsageReport(r.Context(), time.Now().Add(-d))
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
 	}
-	storage, err := c.reg.StorageByTenant(r.Context())
-	if err != nil {
-		writeRegistryError(w, r, err)
-		return
-	}
-	byTenant := map[string]*wire.TenantUsage{}
-	for _, l := range ledger {
-		u := byTenant[l.TenantID]
-		if u == nil {
-			u = &wire.TenantUsage{TenantID: l.TenantID}
-			byTenant[l.TenantID] = u
-		}
-		u.Statements += l.Statements
-		u.Rows += l.Rows
-		u.Bytes += l.Bytes
-	}
-	report := wire.UsageReport{Window: window, Tenants: []wire.TenantUsage{}}
-	for t, u := range byTenant {
-		u.StorageBytes = storage[t]
-		report.Tenants = append(report.Tenants, *u)
-	}
-	sort.Slice(report.Tenants, func(i, j int) bool { return report.Tenants[i].Bytes > report.Tenants[j].Bytes })
-	if len(report.Tenants) > 50 {
-		report.Tenants = report.Tenants[:50]
-	}
+	report := wire.UsageReport{Window: window, Tenants: tenants}
 	httpx.WriteJSON(w, http.StatusOK, report)
 }

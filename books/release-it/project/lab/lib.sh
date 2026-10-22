@@ -99,6 +99,17 @@ warmup() {
   sleep 2
 }
 
+# migrate_online — apply the tree under test's online migrations, if it has
+# any (migrations/online appears in lesson 08).
+migrate_online() {
+  local f
+  for f in "$LF_TREE"/migrations/online/*.sql; do
+    [[ -e $f ]] || continue
+    log "migration $(basename "$f")"
+    compose exec -T postgres psql -U litefleet -d litefleet -v ON_ERROR_STOP=1 -q < "$f"
+  done
+}
+
 # toxic PROXY NAME TYPE STREAM TOXICITY ATTRS_JSON
 toxic() {
   curl -fs -XPOST "$TOXI/proxies/$1/toxics" -H 'Content-Type: application/json' \
