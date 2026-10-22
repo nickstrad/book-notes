@@ -24,10 +24,15 @@ func TestBackoffSaturates(t *testing.T) {
 		base, n, cap int
 		want         time.Duration
 	}{
-		{"exponential", 5, 29, 0, 5 << 28 * time.Second},
-		{"exponential", 5, 30, 0, limit},
-		{"exponential", 5, 32, 0, limit},
-		{"exponential", 5, 65, 0, limit},
+		{"exponential", 5, 29, MaxSeconds, 5 << 28 * time.Second},
+		{"exponential", 5, 30, MaxSeconds, limit},
+		{"exponential", 5, 32, MaxSeconds, limit},
+		{"exponential", 5, 65, MaxSeconds, limit},
+		{"exponential", 5, 10, 0, 2560 * time.Second},
+		{"exponential", 5, 11, 0, time.Hour},
+		{"exponential", 5, 65, 0, time.Hour},
+		{"linear", 5, 1000, 0, time.Hour},
+		{"exponential", 7200, 3, 0, 2 * time.Hour},
 		{"exponential", MaxSeconds, 4, 0, limit},
 		{"linear", MaxSeconds, 5, 0, limit},
 		{"exponential", 10, 1, 1, time.Second},
@@ -39,7 +44,7 @@ func TestBackoffSaturates(t *testing.T) {
 		}
 	}
 	for n := 1; n < 100; n++ {
-		if Backoff("exponential", 5, n+1, 0) < Backoff("exponential", 5, n, 0) {
+		if Backoff("exponential", 5, n+1, MaxSeconds) < Backoff("exponential", 5, n, MaxSeconds) {
 			t.Fatalf("backoff decreases after attempt %d", n)
 		}
 	}

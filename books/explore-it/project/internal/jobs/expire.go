@@ -38,11 +38,11 @@ func (j *Service) Expire(now time.Time) error {
 			state = "dead"
 			dead = append(dead, r.id)
 		}
-		_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$4,attempts=$3,last_error='lease expired',lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now)
+		_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$4,attempts=$3,last_error='lease expired',run_at=$4,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now)
 		if e != nil {
 			return e
 		}
-		_, e = tx.Exec(`INSERT INTO attempts SELECT $1,$2,$3,leased_at,$4,'expired','lease expired' FROM jobs WHERE id=$1`, r.id, r.n, r.worker, now)
+		_, e = tx.Exec(`INSERT INTO attempts SELECT $1,(SELECT count(*)+1 FROM attempts WHERE job_id=$1),$2,leased_at,$3,'expired','lease expired' FROM jobs WHERE id=$1`, r.id, r.worker, now)
 		if e != nil {
 			return e
 		}

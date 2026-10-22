@@ -57,3 +57,15 @@ be swept, then deletes the held job so a historical stack recovers. U13 acts on
 the job the lease returned: its own wrapped enqueue is due first, so FIFO does not
 give back the job just enqueued (the first REF attempt failed on exactly that).
 U16 and U17 use a fresh queue holding one job. Run these instruments serially.
+
+E04 adds `probe04.py`, wrappers U19–U23 and A1, `lesson-04.ids`, and
+`invariants04.py`. A1 is the plan's spec-silence id: the black-box probe walks two
+attempts at base 3000 s with no `max_seconds`, so a missing default cap shows as a
+6000 s wait. U22 and U23 freeze and step the lab clock and always reset it. Every
+probe leases with `lease_job`, which requires the lease to return the probe's own
+job; U22 uses a fresh queue per round because the sweep requeues the last round's
+job, and U21 enqueues its negative delay last because an accepted one is due at
+once (the first REF attempt failed on exactly that). `invariants04.py I04 [seed]`
+is the E04 rules list as a seeded random walk over 200 jobs (I1–I7, see its
+docstring); `TestL04Invariants` runs it. It is a check, not a reproduction, so it
+is not in `lesson-04.ids`.

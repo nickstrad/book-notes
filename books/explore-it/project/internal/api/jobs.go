@@ -64,8 +64,8 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
 		case "ack":
 			e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)
 		case "nack":
-			if in.DelaySeconds != nil && *in.DelaySeconds > jobs.MaxSeconds {
-				fail(w, 400, "invalid_delay", "delay_seconds must be at most 2147483647")
+			if in.DelaySeconds != nil && (*in.DelaySeconds < 0 || *in.DelaySeconds > jobs.MaxSeconds) {
+				fail(w, 400, "invalid_delay", "delay_seconds must be 0–2147483647")
 				return
 			}
 			retry := true
@@ -123,7 +123,7 @@ func (s *Server) deleteWorker(w http.ResponseWriter, r *http.Request) {
 		fail(w, 404, "worker_not_found", e)
 		return
 	}
-	_, e = tx.Exec(`UPDATE jobs SET state='queued',event_at=$2,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"), s.Clock.Now())
+	_, e = tx.Exec(`UPDATE jobs SET state='queued',event_at=$2,run_at=$2,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"), s.Clock.Now())
 	if e == nil {
 		e = tx.Commit()
 	}

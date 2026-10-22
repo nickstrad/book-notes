@@ -5,24 +5,29 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-E03 complete, tag explore-it/lesson-03 (the fix commit containing this state). Builder from
-E03 on: Claude Opus 5.5, per Nick 2026-10-22, after two Codex Sol runs were stopped by the
-Codex content filter (2026-10-21 ~21:13 and ~23:1x CDT). Astra still reviews at the end.
+E04 complete, tag explore-it/lesson-04 (the fix commit containing this state). Builder: Claude
+Opus 5.5 (explorer also Opus; the cross-family check rests on the Astra end review).
 
-- Exploration record `09dd0a9` (blind Opus explorer, 50/50 manifest hashes rechecked).
-- Reconciliation `reconciliations/03.md`: eight reports → U11–U18, all fixed; D05–D08 and
-  D26 were found early in E01 and held. A1 stays with E04.
-- Acceptance (`runs/03-acceptance.json`): verify current `FIXED AND CHECKED: 8 absent`;
-  REF lesson-02 `DEFECTS REPRODUCED: 8 present` (second attempt; the first stopped on a
-  probe bug, retained with diagnostics); 54/54 integration checks; unit tests pass;
-  A1–A4 controls still PRESENT.
-- Deviation: the explorer and the fixer are both Claude this time (Nick's seat move). The
-  cross-family guarantee for E03 rests on the Astra end review.
-- Process note: a probe that leases "the next job" must act on the id the lease returned;
-  a wrapped or earlier job may be due first. Recorded in `project/lab/repro/README.md`.
+- Exploration record `dffb1ec` (blind Opus explorer, 15 min, 67/67 manifest hashes rechecked).
+  Blindness audit: zero flagged tool inputs; corrected afterwards for one `find /` that listed
+  skill directory names in other exports (none opened). The exported lesson 03 note named A1,
+  so the explorer's A1 observation is not counted blind.
+- Reconciliation `reconciliations/04.md`: five reports → U19–U23, all fixed; A1 resolved by
+  decision (default cap 3600 s, or base if larger). D09–D11 held as regressions; D25 not re-probed.
+- Acceptance (`runs/04-acceptance.json`): verify current `FIXED AND CHECKED: 6 absent`;
+  REF lesson-03 `DEFECTS REPRODUCED: 6 present` (second attempt; the first stopped on a probe
+  ordering bug, retained with diagnostics); 61/61 integration checks incl. TestL04Invariants;
+  unit tests pass; seeder A1 control ABSENT, A2–A4 still PRESENT.
+- Process notes: probes lease with `lease_job`, which demands its own job back; an accepted bad
+  input can be due first. Lesson notes must not name which experiment an open silence belongs to.
 
-Resume: fresh agent for E04 from lesson-03; coordinator prepares the export with
-`register/tools/prepare-export.py 4 explore-it/lesson-03`.
+Resume: fresh agent for E05 from lesson-04; coordinator prepares the export with
+`register/tools/prepare-export.py 5 explore-it/lesson-04`.
+
+## E03 unit (historical)
+
+E03 complete at explore-it/lesson-03: blind record 09dd0a9, fix 8ed9177. Eight reports → U11–U18,
+all fixed; verify current 8 absent, REF lesson-02 8 present, 54 checks (runs/03-acceptance.json).
 
 ## E02 unit (historical)
 

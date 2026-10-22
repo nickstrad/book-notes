@@ -1,0 +1,6 @@
+NAME                      IMAGE                COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+queuelet-ref-api-1        queuelet:ref         "api"                    api        22 seconds ago   Up 12 seconds             0.0.0.0:18210->8200/tcp, [::]:18210->8200/tcp
+queuelet-ref-hooksink-1   queuelet:ref         "hooksink"               hooksink   22 seconds ago   Up 21 seconds             0.0.0.0:18211->8201/tcp, [::]:18211->8201/tcp
+queuelet-ref-postgres-1   postgres:17-alpine   "docker-entrypoint.s…"   postgres   22 seconds ago   Up 21 seconds (healthy)   0.0.0.0:15443->5432/tcp, [::]:15443->5432/tcp
+queuelet-ref-worker-a-1   queuelet:ref         "worker"                 worker-a   22 seconds ago   Up 2 seconds              
+queuelet-ref-worker-b-1   queuelet:ref         "worker"                 worker-b   22 seconds ago   Up 2 seconds              

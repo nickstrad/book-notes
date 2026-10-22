@@ -168,9 +168,35 @@ func (s *Server) Handler() http.Handler {
 			}
 			return
 		}
-		m.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), authKey{}, id)))
+		r = r.WithContext(context.WithValue(r.Context(), authKey{}, id))
+		if h, pattern := m.Handler(r); pattern == "" {
+			unmatched(w, r, h)
+			return
+		}
+		m.ServeHTTP(w, r)
 	})
 }
+
+// unmatched answers a request no route accepts with the documented error
+// envelope instead of the mux's plain-text 404 or 405.
+func unmatched(w http.ResponseWriter, r *http.Request, h http.Handler) {
+	c := &statusOnly{ResponseWriter: w}
+	h.ServeHTTP(c, r)
+	if c.status == http.StatusMethodNotAllowed {
+		fail(w, 405, "method_not_allowed", r.Method+" is not allowed on "+r.URL.Path)
+		return
+	}
+	fail(w, 404, "not_found", "no route for "+r.URL.Path)
+}
+
+// statusOnly keeps the headers (Allow) and status a handler sets and drops its body.
+type statusOnly struct {
+	http.ResponseWriter
+	status int
+}
+
+func (c *statusOnly) WriteHeader(status int)      { c.status = status }
+func (c *statusOnly) Write(b []byte) (int, error) { return len(b), nil }
 func (s *Server) Loop(ctx context.Context) {
 	// Event console reads committed history; it never controls transitions.
 	go s.logEvents(ctx)

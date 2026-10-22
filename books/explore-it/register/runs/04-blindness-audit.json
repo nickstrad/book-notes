@@ -19,5 +19,6 @@
   "flagged_inputs": [],
   "inherited_source_and_raw_records": "unchanged (collector check passed); append-only defect index preserved",
   "register_exposure": "lessons/03-vary-it.md (exported) names A1 as a default-backoff-cap spec silence; the explorer read it and cited it (notes lines 28, 239). The A1 observation is therefore not a blind find.",
-  "boundary": "Prompt boundary and exported file tree; no OS isolation"
+  "boundary": "Prompt boundary and exported file tree; no OS isolation",
+  "boundary_probe": "Correction after commit dffb1ec: the audit pattern did not match a bare `find /`. The explorer's third Bash call ran `find / -path /proc -prune -o -type d -name derive-oracles -print | head`, which listed six skill directory names: four other /tmp exports, its own export, and this worktree's skills/derive-oracles. No later tool input names any of those paths (pattern check over every input), and the explorer self-reported the listing in notes.md. Directory names only; no answer-key content."
 }

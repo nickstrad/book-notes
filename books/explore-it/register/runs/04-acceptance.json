@@ -1,0 +1,16 @@
+{
+  "experiment": 4,
+  "builder": "claude-opus-5-5 (Opus seat per Nick 2026-10-22)",
+  "assigned": ["U19", "U20", "U21", "U22", "U23", "A1"],
+  "commands": [
+    {"cmd": "make up", "exit": 0, "elapsed_s": 90, "log": "04-up.log"},
+    {"cmd": "make verify LESSON=04 REF=explore-it/lesson-03", "attempt": 1, "exit": 2, "result": "PROBE ERROR: U21 (the accepted negative-delay enqueue was due first and was leased instead of the probe's job); retained", "log": "04-historical-attempt1.log", "diagnostics": "04-historical-attempt1-diagnostics/"},
+    {"cmd": "make verify LESSON=04 REF=explore-it/lesson-03", "attempt": 2, "exit": 0, "elapsed_s": 36, "result": "DEFECTS REPRODUCED: 6 present", "log": "04-historical.log"},
+    {"cmd": "make verify LESSON=04", "exit": 0, "elapsed_s": 50, "result": "FIXED AND CHECKED: 6 absent; regression checks pass", "log": "04-current.log"},
+    {"cmd": "go test -tags checks ./test/checks -count=1 -v", "exit": 0, "elapsed_s": 273, "result": "61 checks pass (54 earlier, 7 new incl. TestL04Invariants)", "log": "04-checks.log"},
+    {"cmd": "make test", "exit": 0, "result": "unit suite passes", "log": "04-test.log"},
+    {"cmd": "register/proof/A1.sh..A4.sh", "result": "A1 ABSENT (resolved here); A2-A4 PRESENT (left for E05-E07)", "log": "04-unresolved-controls.log"}
+  ],
+  "instruments": "04-instruments.sha256 (frozen before the final current and REF runs)",
+  "dwell": "04-dwell.tsv (paired lesson-03 / lesson-04 only; no make dwell sweep)"
+}

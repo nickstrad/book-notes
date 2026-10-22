@@ -20,12 +20,15 @@ func Token() string { b := make([]byte, 16); rand.Read(b); return hex.EncodeToSt
 // leaves time.Duration's range (about 292 years).
 const MaxSeconds = math.MaxInt32
 
+// DefaultMaxSeconds caps each retry wait of a queue without backoff.max_seconds.
+const DefaultMaxSeconds = 3600
+
 // Backoff is the wait before retry attempt+1. It saturates at the queue's cap
-// (maxSeconds > 0) or at MaxSeconds instead of overflowing.
+// (maxSeconds > 0), or at DefaultMaxSeconds or the base if that is larger.
 func Backoff(kind string, base, attempt, maxSeconds int) time.Duration {
-	limit := float64(MaxSeconds)
+	limit := float64(max(DefaultMaxSeconds, base))
 	if maxSeconds > 0 {
-		limit = min(limit, float64(maxSeconds))
+		limit = float64(maxSeconds)
 	}
 	steps := float64(attempt)
 	if kind != "linear" {
@@ -94,7 +97,7 @@ func (j *Service) Notify(id int64, now time.Time) error {
 	return e
 }
 func (j *Service) Heartbeat(id int64, token string, seconds int, now time.Time) error {
-	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND state='leased'`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
+	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND state='leased' AND lease_expires_at > $4`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
 	return Changed(r, e)
 }
 func Changed(r sql.Result, e error) error {

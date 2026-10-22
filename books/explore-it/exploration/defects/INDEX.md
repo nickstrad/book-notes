@@ -65,3 +65,19 @@ All eight E03 reports are new unplanned faults, fixed in lesson 03. The planned 
 | U18 | [E03-F08](E03-F08-patch-webhook-partial-clears-other-member.md) | [fixed in lesson 03](U18-patch-webhook-partial-clears-other-member.md) |
 
 Original E03-F reports and raw scores are immutable.
+
+## Experiment 04 additions
+
+All five E04 reports are new unplanned faults, fixed in lesson 04. The planned E04 defects
+(D09–D11, D25) were already fixed in lesson 01; D09–D11 held as regressions here. The spec silence A1
+(no default backoff cap) is resolved in lesson 04 by decision.
+
+| ID | Original | Current record |
+|---|---|---|
+| U19 | [E04-F01](E04-F01-unmatched-route-errors-not-json.md) | [fixed in lesson 04](U19-unmatched-route-errors-not-json.md) |
+| U20 | [E04-F02](E04-F02-attempt-history-after-retry-ambiguous.md) | [fixed in lesson 04](U20-attempt-history-after-retry.md) |
+| U21 | [E04-F03](E04-F03-negative-delay-wraps-and-precedes-failure.md) | [fixed in lesson 04](U21-negative-delay-accepted.md) |
+| U22 | [E04-F04](E04-F04-expired-lease-honoured-until-sweep.md) | [fixed in lesson 04](U22-expired-lease-honoured-until-sweep.md) |
+| U23 | [E04-F05](E04-F05-queued-age-counts-leased-time.md) | [fixed in lesson 04](U23-queued-age-counts-leased-time.md) |
+
+Original E04-F reports and raw scores are immutable.

@@ -7,7 +7,7 @@ structured exploration experiments run against it, plus 8 codebase-exploration s
 Spec: `books/explore-it/PLAN.md` (sharpened pass) + repo `AGENTS.md`.
 Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at the end.
 
-**Status (2026-10-22): experiment 04 exploration committed; fix in progress (Opus builder).**
+**Status (2026-10-22): experiment 04 complete, tag `explore-it/lesson-04`. Next: experiment 05.**
 
 ## Done
 - Plan: `78e56de` + scoped revision `7dcfb05`.
@@ -15,14 +15,17 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
 - Experiment 01: `6e4dd4a`, fixes `b839fdf`, `0386a14`, `99d42fc` (tag `explore-it/lesson-01`).
 - Experiment 02: `e390c31`, hooks `3287bd9`, fixes `9394782` (tag `explore-it/lesson-02`).
   **Checkpoint A complete.**
-- Experiment 03 (Vary it): exploration `09dd0a9`; fix = the commit containing this state
-  (tag `explore-it/lesson-03`). 8 findings, all 8 fixed (U11–U18), none deferred.
-  Verify current `FIXED AND CHECKED: 8 absent`; REF lesson-02 `DEFECTS REPRODUCED: 8
-  present`; 54/54 integration checks; A1–A4 still PRESENT for later experiments.
+- Experiment 03 (Vary it): exploration `09dd0a9`, fix `8ed9177` (tag `explore-it/lesson-03`).
+  8 findings, all fixed (U11–U18).
+- Experiment 04 (Judge it): exploration `dffb1ec`; fix = the commit containing this state
+  (tag `explore-it/lesson-04`). 5 findings, all 5 fixed (U19–U23), none deferred; A1
+  resolved by decision (default backoff cap 3600 s). Verify current `FIXED AND CHECKED: 6
+  absent`; REF lesson-03 `DEFECTS REPRODUCED: 6 present`; 61/61 integration checks incl.
+  the rules-as-invariants walk (200 jobs). Prediction contradicted: only the charter's
+  ("the code honours every rule"). A2–A4 still PRESENT.
 
 ## In progress
-- E04 fix: reconcile E04-F01..F05 and A1, patch, repro, checks, note, tag `explore-it/lesson-04`.
-  The blind explorer run is closed (exit 0, 15 min); its stack `queuelet-e04` is down.
+- Nothing running. The `queuelet` lab stack may still be up (current tree); that is not an agent.
 
 ## Incidents (history)
 - Sol run 1 stopped 2026-10-21 ~21:13 CDT by the Codex content filter after E01.
@@ -31,16 +34,21 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
   E03's cross-family check rests on the Astra end review.
 
 ## Next
-1. Experiment 04 (Judge it): fresh run; export from `explore-it/lesson-03`
-   (`register/tools/prepare-export.py 4 explore-it/lesson-03`). Carries A1 (default backoff
-   cap); its planned defects D09–D11 and D25 were already fixed in E01.
-2. Experiments 05–06, then checkpoint B review.
+1. Experiment 05 (Sequence it): fresh run; export from `explore-it/lesson-04`
+   (`register/tools/prepare-export.py 5 explore-it/lesson-04`). Carries A2; its planned
+   defects D12–D14 were already fixed in E01.
+2. Experiment 06, then checkpoint B review.
 3. Checkpoint C: 07–09, final skills, landing commit; Astra end review.
 4. Merge into `main` adds-only after Release It! lands.
 
+Handed forward from E04 (open in `exploration/hypotheses.md`): Q-E04-4 (does "completed"
+include dead/cancelled), H-E04-08 (FIFO under a backward clock step), H-E04-09 (stats read
+without a snapshot), H-E04-10 (ack not atomic: needs DB fault injection), R42 linear backoff
+not re-probed, TR-E04-1/2 testability requests (sweep-lag signal, stats snapshot hook).
+
 ## Open decisions
-- A1–A4 spec silences: E04–E07 (coordinator decides one line each in the fix commit).
-- Explorer seat for E04+: the plan wants explorer and fixer from different families; with
+- A2–A4 spec silences: E05–E07 (coordinator decides one line each in the fix commit).
+- Explorer seat for E05+ (E04 ran on Opus again; Muse CLI not on PATH this session): the plan wants explorer and fixer from different families; with
   Opus building, a Muse or Codex explorer would restore that. Owner: Nick / Twin.
 
 ## Resume

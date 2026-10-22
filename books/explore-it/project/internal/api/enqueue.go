@@ -52,8 +52,8 @@ func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[
 		at = *in.RunAt
 	}
 	if in.DelaySeconds != nil {
-		if *in.DelaySeconds > jobs.MaxSeconds {
-			return nil, fmt.Errorf("delay_seconds must be at most %d", jobs.MaxSeconds)
+		if *in.DelaySeconds < 0 || *in.DelaySeconds > jobs.MaxSeconds {
+			return nil, fmt.Errorf("delay_seconds must be 0–%d", jobs.MaxSeconds)
 		}
 		at = now.Add(time.Duration(*in.DelaySeconds) * time.Second)
 	}

@@ -11,7 +11,7 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	var attempts, max, base, cap int
 	var kind string
 	var worker int64
-	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,COALESCE(q.backoff_max,0),j.leased_by FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND j.state='leased' AND j.lease_token=$2 FOR UPDATE OF j`, id, token).Scan(&attempts, &max, &kind, &base, &cap, &worker)
+	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,COALESCE(q.backoff_max,0),j.leased_by FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND j.state='leased' AND j.lease_token=$2 AND j.lease_expires_at > $3 FOR UPDATE OF j`, id, token, now).Scan(&attempts, &max, &kind, &base, &cap, &worker)
 	if e != nil {
 		return e
 	}
@@ -27,7 +27,7 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	if e != nil {
 		return e
 	}
-	_, e = tx.Exec(`INSERT INTO attempts SELECT $1,$2,$3,leased_at,$4,'failed',$5 FROM jobs WHERE id=$1`, id, attempts, worker, now, message)
+	_, e = tx.Exec(`INSERT INTO attempts SELECT $1,(SELECT count(*)+1 FROM attempts WHERE job_id=$1),$2,leased_at,$3,'failed',$4 FROM jobs WHERE id=$1`, id, worker, now, message)
 	if e != nil {
 		return e
 	}

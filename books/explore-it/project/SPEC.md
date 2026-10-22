@@ -14,11 +14,14 @@ Errors have the form `{"error":{"code":"…","message":"…"}}` and a 4xx or 5xx
 HTTP status. Successful reads and mutations return 200 unless stated otherwise.
 Creation returns 201. Deletion returns 204. A missing resource returns 404.
 A command incompatible with the current state returns 409.
+A path no route serves is 404 and a method a route does not accept is 405, both
+in the same error form.
 Unknown fields and invalid enum values should be rejected as invalid commands.
 A command body is exactly one JSON object in UTF-8. Trailing data, invalid UTF-8
 and member names that match a documented field only when case is ignored are
 rejected with 400 `invalid_json`.
 Every seconds-valued field and `max_attempts` accepts at most 2147483647.
+A `delay_seconds` (enqueue or nack) is never negative; a negative value is 400.
 
 ## Queues
 
@@ -32,7 +35,8 @@ Lease duration and maximum attempts must be positive; retention hours range from
 Backoff kind is `linear` or `exponential`; the base is a nonnegative number
 of seconds. Failed jobs retry with exponential backoff from `base_seconds`
 or linear backoff when configured. An optional `backoff.max_seconds`, at least
-`base_seconds`, caps each wait. A computed wait never overflows: it is capped
+`base_seconds`, caps each wait. Without it each wait is capped at 3600 seconds,
+or at `base_seconds` when that is larger. A computed wait never overflows: it is capped
 at 2147483647 seconds, so a retry is never scheduled before the failure.
 An optional `webhook:{url,secret}` receives terminal notifications.
 
@@ -72,6 +76,8 @@ Valid state filters are `scheduled`, `queued`, `leased`, `retry_wait`,
 `succeeded`, `dead` and `cancelled`.
 `GET /v1/jobs/{id}` returns the current job, payload, result and last error.
 `GET /v1/jobs/{id}/attempts` returns completed attempts in numeric order.
+Attempt `n` numbers every execution of the job and is never reused, across
+operator retries too; the lease's `attempt` counts toward `max_attempts`.
 `DELETE /v1/jobs/{id}` removes a terminal job.
 
 ## Worker protocol
@@ -90,7 +96,9 @@ A worker sends `POST /v1/jobs/{id}/heartbeat` with the lease token and positive
 `POST /v1/jobs/{id}/ack` supplies the lease token and result and completes work.
 `POST /v1/jobs/{id}/nack` supplies the lease token, an error and optional retry
 boolean (default true) or a `delay_seconds` override.
-Only the current lease holder may complete or extend a job.
+Only the current lease holder may complete or extend a job. A lease ends at its
+`lease_expires_at`: from that instant heartbeat, ack and nack are 409, whether or
+not the background loop has released the job yet. There is no grace period.
 Ack moves a leased job to `succeeded`.
 Nack with retry moves a job to `retry_wait`; when due it becomes `queued`.
 A failed job reaches `dead` when its maximum attempts are exhausted, or when
@@ -133,6 +141,7 @@ Failed notifications are retried. Delivery is at least once.
 `GET /v1/queues/{name}/stats` and `GET /v1/namespaces/{name}/stats` expose counts
 by exact state, oldest queued age in seconds and completed jobs in the last hour.
 Queued age uses the later of creation and readiness, over queued rows only.
+A job released by lease expiry or worker deletion becomes ready at the release.
 `GET /health` returns service health; `GET /metrics` returns minimal text metrics.
 The background loop promotes scheduled jobs, expires leases, fires cron schedules,
 sweeps retention and delivers webhooks. It should recover after a database restart. Webhook latency must not block core
