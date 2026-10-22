@@ -5,6 +5,19 @@ root=Path(m['root']); repo=Path(subprocess.check_output(['git','rev-parse','--sh
 exp=Path(m['experiment'])
 for required in ['charter.md','brief.md','notes.md','revealed.md']:
     if not (exp/required).is_file():raise SystemExit(f'missing {required}')
+# Reject edits to inherited raw records rather than silently replacing history.
+import tarfile,io
+snapshot=subprocess.check_output(['git','archive',m['tag'],'books/explore-it/exploration','books/explore-it/project'])
+violations=[]
+with tarfile.open(fileobj=io.BytesIO(snapshot)) as archive:
+    for member in archive.getmembers():
+        if not member.isfile():continue
+        rel=Path(member.name).relative_to('books/explore-it')
+        immutable=(rel.parts[0]=='project' or rel.parts[:2] in [('exploration','experiments'),('exploration','defects')])
+        if not immutable:continue
+        path=root/rel
+        if not path.is_file() or path.read_bytes()!=archive.extractfile(member).read():violations.append(str(rel))
+if violations:raise SystemExit('Inherited artifacts changed; preserve originals and reconcile explicitly: '+', '.join(violations))
 # Retain the explorer's text scripts and raw evidence used by recorded commands.
 # Binary qctl builds are reproducible from the exported source and are omitted.
 for p in (root/'project/results').rglob('*'):

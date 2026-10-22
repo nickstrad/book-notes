@@ -8,12 +8,11 @@ The approved scope omits the people/process material. Specification and order:
 
 ## Status
 
-2026-10-22 UTC: checkpoint A's E01 fix is complete and ready for independent
-review. Current/historical verification, all 39 regression checks, unit suite and
+2026-10-22 UTC: E01 fix `b839fdf` is complete; independent checkpoint A
+review is running in `/tmp/explore-it-review-a` (fresh Muse Wonder Full). Current/historical verification, all 39 regression checks, unit suite and
 A1–A4 preservation controls pass. Branch `plan/explore-it`, worktree
 `/root/Software/booknotes-work/explore-it`. The inherited patch belonged to E01,
-as git and reconciliation evidence show. This fresh unit stops here; E02 has not
-started. Git history/tags take precedence over this file. Detailed evidence and
+as git and reconciliation evidence show. E02's blind export and pre-run charter are prepared; its explorer has not started. Git history/tags take precedence over this file. Detailed evidence and
 deviations: [BUILD-STATE.md](register/BUILD-STATE.md).
 
 ## Done
@@ -21,7 +20,7 @@ deviations: [BUILD-STATE.md](register/BUILD-STATE.md).
 - `78e56de`, `7dcfb05`: proposal and scoped plan revision.
 - `847f1b3`, `explore-it/v0-inherited`: inherited system, protocol and eight skill drafts.
 - `6e4dd4a`: E01 blind experiment and canonical reconciliation, original evidence preserved.
-- E01 fix: the commit containing this state, tagged `explore-it/lesson-01`.
+- `b839fdf`: E01 fix, tagged `explore-it/lesson-01`.
   Acceptance: `register/runs/01-acceptance.json`; 35 findings absent now/present at v0.
 
 ## Next, in order
@@ -35,7 +34,7 @@ deviations: [BUILD-STATE.md](register/BUILD-STATE.md).
 
 ## Open work and owners
 
-- Checkpoint A review: coordinator dispatches the fresh independent reviewer.
+- Checkpoint A review: fresh Muse reviewer; coordinator records its actual verdict and assigns repairs.
 - A1–A4 policy decisions: coordinator after their actual later probes; not decided here.
 - T1–T3 visibility/clock instruments: next fresh E02 fixer after blind exploration.
 - Detailed source-text citation validation and final skills: later author/reviewer.
@@ -52,6 +51,13 @@ Read this file, `register/BUILD-STATE.md`, the latest reconciliation/fixer brief
 amend original experiment/F-report records. Use the existing branch/worktree and
 only `books/explore-it/`; scratch goes under `/tmp`. Coordinator edits to
 `register/tools/` belong to a separate unit and must not enter the E01 fix commit.
+
+Active review: `/tmp/explore-it-coordinator/review-a.jsonl`, `review-a.stderr`,
+`review-a-start.txt`, `review-a-end.txt`, `review-a-exit.txt`; its `muse exec`
+command names `review-a-brief.md`. If it died, preserve logs and use a fresh reviewer,
+not a reused stalled agent. Prepared E02 export: `/tmp/explore-it-experiment-02`;
+metadata `/tmp/explore-it-coordinator/current.json`. Do not launch before checking
+review status and existing processes.
 
 Before launching a duplicate worker, check the coordinator's active run and local
 process/log liveness. The continuation runner uses `/tmp/bn-sol-exploreit2.log`
