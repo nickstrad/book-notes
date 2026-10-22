@@ -90,8 +90,9 @@ plus the reader audit (`consumer | tolerant? | fix needed first`) and the rollou
 
 *Release It!* 2nd ed.: Ch. 13 "Phases of Deployment", "The Fallacy of Planned Downtime"; Ch. 14
 "Handling Versions" (help others handle your versions; handle others' versions); Ch. 12 case
-study "Waiting for Godot" (the in-place change that stalled a site). Demonstrated in lesson 12
-(`../../lessons/12-handling-versions.md`), with a first online migration in lesson 08.
+study "Waiting for Godot" (a release night spent waiting on schema scripts that ran far past
+plan). Demonstrated in lesson 12 (`../../lessons/12-handling-versions.md`), with a first online
+migration in lesson 08.
 
 ## Worked example: litefleet lesson 12
 

@@ -31,9 +31,13 @@ handle theirs.
   ranges, and ignore the rest. A reader that rejects unknown fields turns every additive change
   into a breaking one.
 
-Chapter 12's case study, **Waiting for Godot**, shows what happens without phases. One in-place
-`ALTER` on a big table is queued behind a long report. Every query on that table then queues
-behind the `ALTER`, and the site waits for a rewrite nobody can see.
+Chapter 12's case study, **Waiting for Godot**, shows what happens without phases: a release
+night spent waiting on database scripts that ran far longer than planned while the site stayed
+down. It is the story behind Chapter 13's case against planned downtime. `make godot` replays
+the shape of that night on litefleet: a migration that takes a lock and holds everyone behind
+it. One in-place `ALTER` on a big table queues behind a long report, every query on that table
+then queues behind the `ALTER`, and the platform waits for a rewrite nobody can see. The lock
+queue is the lab's mechanism, not the book's.
 
 ## The flaws (at `release-it/lesson-11`)
 
