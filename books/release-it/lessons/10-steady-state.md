@@ -1,7 +1,7 @@
 # 10 · Steady state: checkpoint WALs, purge the ledger, evict idle handles
 
 Tag: `release-it/lesson-10` · Fixes: F15 · Verify: `make verify LESSON=10` (before: `REF=release-it/lesson-09`)
-Book: Ch. 5 "Steady State" (data purging, log files, in-memory caching, avoid fiddling)
+Book: Ch. 5 "Steady State" (Data Purging, Log Files, Limit Caching)
 
 ## The idea
 
