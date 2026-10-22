@@ -3,7 +3,7 @@ COMPOSE := docker compose -f deploy/compose.yml
 LESSON  ?= 00
 export REF REF_SERVICES
 
-.PHONY: up down build seed migrate verify calibrate audit report test logs ps
+.PHONY: up down build seed migrate verify calibrate audit report test test-chaos logs ps
 
 build:
 	$(COMPOSE) --profile lab build
@@ -34,6 +34,9 @@ report:
 
 test:
 	go test ./...
+
+test-chaos:
+	lab/chaos.sh | jq -r 'select(.Action == "output") | .Output' | grep -E 'MATRIX|^(--- |ok|FAIL|PASS)' 
 
 logs:
 	$(COMPOSE) logs -f --tail=50
