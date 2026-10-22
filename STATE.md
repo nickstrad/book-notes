@@ -53,10 +53,15 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
     singleflight. Lessons 08, 11 and 12 are two commits each.
   - The verify runner restores a seeded snapshot (Postgres template database + tenant files) after
     the first seed, so a reset is ~25 s instead of ~1 min.
-- **Phase 3 (skills):** not started. It follows the build, driven by the coordinator. Eight skills as in PLAN.md section 5.
-- **Phase 4 (review):** not started. Reviewer from a different model family than the builder;
-  final big review by the planner seat is also requested by Nick.
+- **Phase 3 (skills):** done 2026-10-22, Claude Opus 5.5, commit `f27e8aa`. Eight
+  `books/release-it/skills/<name>/SKILL.md` per PLAN.md section 5, each with a litefleet worked
+  example (files, tags, measured before/after numbers); skills index and landing page updated.
+- **Phase 4 (review):** not started. Next: Fable's final review of the build and the skills
+  (findings reported, not gating). AGENTS.md also asks for a reviewer from a different model
+  family than the builder (Claude); the per-checkpoint Codex reviews in PLAN.md section 6 are not
+  recorded in git. Whether Fable's review replaces them is Nick's call.
 
 ## Next action
 
-Cross-family review of the build (checkpoints A–C) per the plan, then phase 3 (skills).
+Fable final review of release-it (`release-it/v0-flawed` … `release-it/v1-hardened` and the skills),
+then Twin verification and the report to Nick.
