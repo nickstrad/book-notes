@@ -12,7 +12,7 @@ reproduces the flaw.
 |---|---|---|---|---|---|---|
 | 00 | `release-it/v0-flawed` | [The flawed start](00-the-flawed-start.md) | the register, F01–F18 | `make verify LESSON=00` | — | baseline holds: 100 % served at 50 % load, p99 ≈ 30 ms; `up = 0` for every platform service |
 | 01 | `release-it/lesson-01` | [Transparency](01-transparency.md) | F01 | `make verify LESSON=01` | nothing scraped, no health, 0 % JSON logs | 3 gateways up; a slow dependency visible as p99 1.02 s; health fails in 0.8 s |
-| 02 | `release-it/lesson-02` | [Timeouts](02-timeouts.md) | F02–F04 | `make verify LESSON=02` | 1 130 requests in flight, 0 % timeouts, runaway statements | 149 in flight; 99.4 % answer 504 inside 2.9 s; a statement cancels in 0.5 ms |
+| 02 | `release-it/lesson-02` | [Timeouts](02-timeouts.md) | F02–F04 | `make verify LESSON=02` | 1 130 requests in flight, 0 % answered 504 (every failure was the client giving up), runaway statements | 149 in flight; 99.4 % answer 504 inside 2.9 s; a statement cancels in 0.5 ms |
 | 03 | `release-it/lesson-03` | [Blocked threads](03-blocked-threads.md) | F05–F07 | `make verify LESSON=03` | node at 1 024 fds, 14 750 5xx, 22 % valid writes | 471 fds, no node 5xx, 99.9 % valid writes |
 | 04 | `release-it/lesson-04` | [Retries](04-retries.md) | F08 | `make verify LESSON=04` | 308 duplicate rows, 19 s recovery | no duplicates, 2 s recovery, hot-database load ratio 1.00 |
 | 05 | `release-it/lesson-05` | [Circuit breaker](05-circuit-breaker.md) | F09 | `make verify LESSON=05` | 0 % served while control is down, gateways unhealthy | 99.25 % served from the route cache; breaker closes 4.8 s after recovery |
