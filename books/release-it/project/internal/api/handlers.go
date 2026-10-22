@@ -131,6 +131,10 @@ func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "body: "+err.Error())
 		return
 	}
+	if len(req.Statements) == 0 && req.SQL != "" { // the older single-statement form
+		req.Statements = []wire.Statement{{SQL: req.SQL, Args: req.Args}}
+		req.SQL, req.Args = "", nil
+	}
 	if len(req.Statements) == 0 {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "no statements")
 		return
@@ -156,7 +160,11 @@ func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
 	}
-	httpx.WriteJSON(w, http.StatusOK, res)
+	// Every field of the first version, plus stats and node_epoch.
+	httpx.WriteJSON(w, http.StatusOK, map[string]any{
+		"rows_affected": res.RowsAffected, "last_insert_rowid": res.LastInsertRowID,
+		"stats": map[string]int64{"statements": int64(len(req.Statements))}, "node_epoch": rt.Epoch,
+	})
 }
 
 func (g *Gateway) create(w http.ResponseWriter, r *http.Request) {

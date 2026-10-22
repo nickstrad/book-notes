@@ -56,9 +56,12 @@ type Engine struct {
 	usage Recorder
 	// MaxOpen is the node-wide budget of open handles; 0 means unbounded.
 	MaxOpen int
-	slots   chan struct{} // node-wide statement limit (admission.go)
-	admitMu sync.Mutex
-	tenants map[string]chan struct{} // each tenant's share of slots
+	// WireVersion is the answer format the node speaks: 1, or 2 (additive:
+	// column types and stats).
+	WireVersion int
+	slots       chan struct{} // node-wide statement limit (admission.go)
+	admitMu     sync.Mutex
+	tenants     map[string]chan struct{} // each tenant's share of slots
 
 	canaryOnce sync.Once
 	canary     *sql.DB
@@ -67,6 +70,7 @@ type Engine struct {
 	handles      *lru.Cache[string, *Handle] // at most HandleCache, least recently used evicted
 	open         atomic.Int64                // handles not yet closed, evicted ones included
 	evictedDirty map[string]bool             // evicted before their backup
+	opening      map[string]*opening         // databases being opened right now
 }
 
 // Handle is an open tenant database.
@@ -98,7 +102,7 @@ func New(dir string, usage Recorder) (*Engine, error) {
 		return nil, err
 	}
 	e := &Engine{dir: dir, usage: usage, slots: make(chan struct{}, NodeStatements), tenants: map[string]chan struct{}{},
-		evictedDirty: map[string]bool{}}
+		evictedDirty: map[string]bool{}, opening: map[string]*opening{}}
 	e.handles, _ = lru.NewWithEvict(HandleCache, e.evict)
 	return e, nil
 }
@@ -118,20 +122,55 @@ func dsn(path string) string {
 }
 
 // Handle returns the open database for id, opening it on first use. The
-// caller must Release it.
+// caller must Release it. Files are opened outside the engine's lock, one
+// opener per database, so a node that starts cold (after a restart) opens
+// its databases in parallel instead of one at a time behind the lock.
 func (e *Engine) Handle(id string) (*Handle, error) {
 	e.mu.Lock()
-	defer e.mu.Unlock()
 	if h, ok := e.handles.Get(id); ok {
 		h.use()
+		e.mu.Unlock()
 		return h, nil
 	}
+	if o, ok := e.opening[id]; ok {
+		e.mu.Unlock()
+		<-o.done
+		if o.err != nil {
+			return nil, o.err
+		}
+		return e.Handle(id)
+	}
+	if e.MaxOpen > 0 && e.open.Load()+int64(len(e.opening)) >= int64(e.MaxOpen) {
+		e.mu.Unlock()
+		return nil, ErrNodeFull
+	}
+	o := &opening{done: make(chan struct{})}
+	e.opening[id] = o
+	e.mu.Unlock()
+
+	h, err := e.openHandle(id)
+	e.mu.Lock()
+	delete(e.opening, id)
+	if err == nil {
+		e.open.Add(1)
+		h.use()
+		e.handles.Add(id, h)
+	}
+	o.err = err
+	close(o.done)
+	e.mu.Unlock()
+	return h, err
+}
+
+type opening struct {
+	done chan struct{}
+	err  error
+}
+
+func (e *Engine) openHandle(id string) (*Handle, error) {
 	path := e.path(id)
 	if _, err := os.Stat(path); err != nil {
 		return nil, ErrNoSuchDatabase
-	}
-	if e.MaxOpen > 0 && e.open.Load() >= int64(e.MaxOpen) {
-		return nil, ErrNodeFull
 	}
 	db, err := sql.Open("sqlite3", dsn(path))
 	if err != nil {
@@ -145,9 +184,6 @@ func (e *Engine) Handle(id string) (*Handle, error) {
 		db.Close()
 		return nil, fmt.Errorf("open %s: %w", id, err)
 	}
-	e.open.Add(1)
-	h.use()
-	e.handles.Add(id, h)
 	return h, nil
 }
 

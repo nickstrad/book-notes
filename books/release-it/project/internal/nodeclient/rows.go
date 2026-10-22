@@ -15,6 +15,7 @@ import (
 // Rows is a node's answer to a query, read as it arrives.
 type Rows struct {
 	node    string
+	epoch   int
 	resp    *http.Response
 	dec     *json.Decoder
 	Columns []string
@@ -27,7 +28,7 @@ func (c *Client) openQuery(ctx context.Context, rt wire.Route, body []byte) (*Ro
 	if err != nil {
 		return nil, err
 	}
-	r := &Rows{node: rt.Node, resp: resp, dec: json.NewDecoder(resp.Body)}
+	r := &Rows{node: rt.Node, epoch: rt.Epoch, resp: resp, dec: json.NewDecoder(resp.Body)}
 	r.dec.UseNumber()
 	if err := r.preamble(); err != nil {
 		resp.Body.Close()
@@ -36,6 +37,10 @@ func (c *Client) openQuery(ctx context.Context, rt wire.Route, body []byte) (*Ro
 	return r, nil
 }
 
+// preamble reads the answer up to its first row. It is a tolerant reader:
+// it requires the fields it uses (columns, rows) with the right types and
+// skips any it does not know, so a node that adds a field (wire v2's
+// column_types) does not break a gateway that predates it.
 func (r *Rows) preamble() error {
 	if err := expect(r.dec, json.Delim('{')); err != nil {
 		return err
@@ -51,9 +56,15 @@ func (r *Rows) preamble() error {
 				return err
 			}
 		case "rows":
+			if r.Columns == nil {
+				return fmt.Errorf("json: rows before columns")
+			}
 			return expect(r.dec, json.Delim('['))
 		default:
-			return fmt.Errorf("json: unknown field %q", key)
+			var skip json.RawMessage
+			if err := r.dec.Decode(&skip); err != nil {
+				return err
+			}
 		}
 	}
 }
@@ -82,13 +93,16 @@ func expect(dec *json.Decoder, want json.Delim) error {
 }
 
 // WriteTo copies the answer to w row by row, as
-// {"columns":[...],"rows":[...],"truncated":bool}, and closes it. An error
-// after the first byte means the answer is incomplete.
+// {"columns":[...],"rows":[...],"truncated":bool,"stats":{...},"node_epoch":n},
+// and closes it. Every field of the first version is still there; stats and
+// node_epoch are additions. An error after the first byte means the answer
+// is incomplete.
 func (r *Rows) WriteTo(w io.Writer) (int64, error) {
 	defer r.Close()
 	cw := &counter{w: w}
 	cols, _ := json.Marshal(r.Columns)
 	fmt.Fprintf(cw, `{"columns":%s,"rows":[`, cols)
+	var count int64
 	for first := true; r.dec.More(); first = false {
 		var row json.RawMessage
 		if err := r.dec.Decode(&row); err != nil {
@@ -98,6 +112,7 @@ func (r *Rows) WriteTo(w io.Writer) (int64, error) {
 			cw.Write([]byte{','})
 		}
 		cw.Write(bytes.TrimSpace(row))
+		count++
 	}
 	if err := expect(r.dec, json.Delim(']')); err != nil {
 		return cw.n, fmt.Errorf("node %s: rows cut short: %w", r.node, err)
@@ -108,14 +123,15 @@ func (r *Rows) WriteTo(w io.Writer) (int64, error) {
 		if err != nil {
 			return cw.n, err
 		}
-		if key != "truncated" {
-			return cw.n, fmt.Errorf("node %s: bad rows: json: unknown field %q", r.node, key)
+		var target any = new(json.RawMessage) // skip fields we do not use
+		if key == "truncated" {
+			target = &truncated
 		}
-		if err := r.dec.Decode(&truncated); err != nil {
+		if err := r.dec.Decode(target); err != nil {
 			return cw.n, err
 		}
 	}
-	fmt.Fprintf(cw, `],"truncated":%t}`, truncated)
+	fmt.Fprintf(cw, `],"truncated":%t,"stats":{"rows":%d,"bytes":%d},"node_epoch":%d}`, truncated, count, cw.n, r.epoch)
 	return cw.n, cw.err
 }
 

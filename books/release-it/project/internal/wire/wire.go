@@ -23,9 +23,12 @@ type QueryResult struct {
 }
 
 // ExecuteRequest is the body of POST .../execute: every statement runs in one
-// transaction.
+// transaction. The older single-statement form {sql, args} is still
+// accepted at the gateway.
 type ExecuteRequest struct {
 	Statements []Statement `json:"statements"`
+	SQL        string      `json:"sql,omitempty"`
+	Args       []any       `json:"args,omitempty"`
 }
 
 // ExecuteResult is the body of a successful execute.

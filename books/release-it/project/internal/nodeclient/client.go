@@ -71,6 +71,9 @@ func (c *Client) Execute(ctx context.Context, rt wire.Route, req wire.ExecuteReq
 	if err := c.do(ctx, rt, "execute", body, &out); err != nil {
 		return nil, err
 	}
+	if out.RowsAffected < 0 {
+		return nil, httpx.BadPayload(rt.Node, fmt.Errorf("rows_affected %d", out.RowsAffected))
+	}
 	return &out, nil
 }
 
@@ -130,11 +133,10 @@ func (c *Client) send(ctx context.Context, rt wire.Route, op string, body []byte
 	return resp, nil
 }
 
-// decode reads a node response exactly: an unexpected field means the node
-// and gateway disagree about the wire format.
+// decode reads a node response tolerantly: fields the gateway does not use
+// are ignored, so a node may add fields without breaking older gateways.
 func decode(data []byte, out any) error {
 	dec := json.NewDecoder(bytes.NewReader(data))
-	dec.DisallowUnknownFields()
 	dec.UseNumber()
 	return dec.Decode(out)
 }

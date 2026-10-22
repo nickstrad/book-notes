@@ -169,8 +169,21 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 	}
 	head, _ := json.Marshal(cols)
 	w := start()
-	n, _ := fmt.Fprintf(w, `{"columns":%s,"rows":[`, head)
+	n, _ := fmt.Fprintf(w, `{"columns":%s,`, head)
 	size := int64(n)
+	if e.WireVersion >= 2 { // v2 adds column types; every v1 field stays
+		types := make([]string, len(cols))
+		if cts, err := rows.ColumnTypes(); err == nil {
+			for i, ct := range cts {
+				types[i] = ct.DatabaseTypeName()
+			}
+		}
+		b, _ := json.Marshal(types)
+		n, _ = fmt.Fprintf(w, `"column_types":%s,`, b)
+		size += int64(n)
+	}
+	n, _ = io.WriteString(w, `"rows":[`)
+	size += int64(n)
 	vals := make([]any, len(cols))
 	ptrs := make([]any, len(cols))
 	for i := range vals {
@@ -205,7 +218,11 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 	if err := rows.Err(); err != nil {
 		return true, classify(ctx, err)
 	}
-	n, _ = fmt.Fprintf(w, `],"truncated":%t}`, truncated)
+	if e.WireVersion >= 2 {
+		n, _ = fmt.Fprintf(w, `],"truncated":%t,"stats":{"rows_read":%d,"bytes":%d}}`, truncated, count, size)
+	} else {
+		n, _ = fmt.Fprintf(w, `],"truncated":%t}`, truncated)
+	}
 	size += int64(n)
 	h.recordRead(count, size)
 	e.emit(h, "read", count, size)

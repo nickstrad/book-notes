@@ -99,6 +99,7 @@ services:
     <<: *node
     environment:
       NODE_NAME: node-a
+      NODE_WIRE_VERSION: "${NODE_A_WIRE_VERSION:-1}"
       NODE_URL: http://toxiproxy:9071
       CONTROL_URL: http://control:8090
       BLOBSTORE_URL: http://toxiproxy:9081
@@ -110,6 +111,7 @@ services:
     <<: *node
     environment:
       NODE_NAME: node-b
+      NODE_WIRE_VERSION: "${NODE_B_WIRE_VERSION:-1}"
       NODE_URL: http://toxiproxy:9072
       CONTROL_URL: http://control:8090
       BLOBSTORE_URL: http://toxiproxy:9081

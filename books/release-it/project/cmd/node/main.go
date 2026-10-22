@@ -67,6 +67,7 @@ func main() {
 		log.Fatal(err)
 	}
 	n.eng.MaxOpen = engine.MaxOpenDatabases(fdLimit())
+	n.eng.WireVersion, _ = strconv.Atoi(env("NODE_WIRE_VERSION", "1"))
 	interval, _ := time.ParseDuration(env("BACKUP_INTERVAL", "60s"))
 	tmp := filepath.Join(n.data, "tmp")
 	os.MkdirAll(tmp, 0o755)
@@ -151,6 +152,11 @@ func (n *node) execute(w http.ResponseWriter, r *http.Request) {
 		writeEngineError(w, r, err)
 		return
 	}
+	if n.eng.WireVersion >= 2 {
+		httpx.WriteJSON(w, http.StatusOK, map[string]any{"rows_affected": res.RowsAffected, "last_insert_rowid": res.LastInsertRowID,
+			"stats": map[string]int{"statements": len(req.Statements)}})
+		return
+	}
 	httpx.WriteJSON(w, http.StatusOK, res)
 }
 
@@ -213,7 +219,7 @@ func writeEngineError(w http.ResponseWriter, r *http.Request, err error) {
 func (n *node) heartbeats(controlURL string) {
 	client := httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2 * time.Second, Total: 2 * time.Second})
 	for range time.Tick(5 * time.Second) {
-		hb := wire.Heartbeat{Node: n.name, URL: n.url, FDs: openFDs(), DiskFree: diskFree(n.data), Databases: n.eng.Report()}
+		hb := wire.Heartbeat{Node: n.name, WireVersion: n.eng.WireVersion, URL: n.url, FDs: openFDs(), DiskFree: diskFree(n.data), Databases: n.eng.Report()}
 		body, _ := json.Marshal(hb)
 		resp, err := client.Post(controlURL+"/internal/heartbeat", "application/json", bytes.NewReader(body))
 		if err != nil {

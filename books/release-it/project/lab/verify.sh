@@ -34,7 +34,9 @@ if [[ -n ${REF:-} ]]; then
       node) export NODE_TAG=ref ;;
     esac
   done
-  export LF_CONF="$dir/deploy" LF_TREE="$dir"
+  export LF_CONF="$dir/deploy"
+  # Migrations, profiles and online migrations follow the tree control comes from.
+  [[ " ${REF_SERVICES:-gateway control node} " == *" control "* ]] && export LF_TREE="$dir"
   echo "REF=$REF ($sha): ${REF_SERVICES:-gateway control node} built from REF; harness from the working tree"
 fi
 

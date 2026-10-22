@@ -69,3 +69,28 @@ func TestTypedErrorPassesThrough(t *testing.T) {
 		t.Fatalf("err = %#v; want 409 stale_epoch", err)
 	}
 }
+
+// A node that speaks a newer wire version adds fields; the gateway reads
+// what it needs and passes on every first-version field.
+func TestReadsANewerNodeAnswer(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"columns":["id"],"column_types":["INTEGER"],"rows":[[1],[2]],"truncated":false,"stats":{"rows_read":2,"bytes":40}}`))
+	}))
+	defer srv.Close()
+	rows, err := New().Query(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 7}, wire.QueryRequest{SQL: "SELECT id FROM t"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	var buf bytes.Buffer
+	if _, err := rows.WriteTo(&buf); err != nil {
+		t.Fatal(err)
+	}
+	var got struct {
+		wire.QueryResult
+		NodeEpoch int `json:"node_epoch"`
+	}
+	if err := json.Unmarshal(buf.Bytes(), &got); err != nil || len(got.Rows) != 2 || got.Columns[0] != "id" || got.NodeEpoch != 7 {
+		t.Fatalf("answer %s (%v)", buf.String(), err)
+	}
+}

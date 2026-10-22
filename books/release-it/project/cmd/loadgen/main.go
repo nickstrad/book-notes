@@ -3,8 +3,8 @@
 // ones have answered) with named scenarios. It writes one CSV row per request
 // and prints a JSON summary line at the end.
 //
-// It is also the platform's reference consumer: it reads responses strictly,
-// with the exact field sets the API documents.
+// It is also the platform's reference consumer: a tolerant reader, it needs
+// the fields it uses and ignores any it does not know.
 package main
 
 import (
@@ -46,7 +46,7 @@ type manifest struct {
 	Tenants  []tenant `json:"tenants"`
 }
 
-// The API's documented response shapes. The consumer reads them exactly.
+// The fields of the API's responses the consumer uses.
 type queryResp struct {
 	Columns   []string `json:"columns"`
 	Rows      [][]any  `json:"rows"`
@@ -473,12 +473,12 @@ func (g *gen) send(key, route, class, node, method, path string, body any, out a
 			rec.errClass = "client_timeout"
 		}
 	case resp.StatusCode >= 200 && resp.StatusCode < 300:
-		if len(data) > 0 && strict(data, out) != nil {
+		if len(data) > 0 && decodeAnswer(data, out) != nil {
 			rec.errClass = "decode"
 		}
 	default:
 		var e errorResp
-		if strict(data, &e) != nil || e.Error.Code == "" {
+		if decodeAnswer(data, &e) != nil || e.Error.Code == "" {
 			rec.errClass = "http"
 		} else {
 			rec.errClass = e.Error.Code
@@ -491,11 +491,16 @@ func (g *gen) send(key, route, class, node, method, path string, body any, out a
 	return 0
 }
 
-// strict decodes exactly the documented fields.
-func strict(data []byte, out any) error {
-	dec := json.NewDecoder(bytes.NewReader(data))
-	dec.DisallowUnknownFields()
-	return dec.Decode(out)
+// decodeAnswer decodes the fields the consumer uses and ignores the rest; a query
+// answer must have columns.
+func decodeAnswer(data []byte, out any) error {
+	if err := json.Unmarshal(data, out); err != nil {
+		return err
+	}
+	if q, ok := out.(*queryResp); ok && q.Columns == nil {
+		return fmt.Errorf("query answer without columns")
+	}
+	return nil
 }
 
 func ms(d time.Duration) float64 { return float64(d.Microseconds()) / 1000 }
