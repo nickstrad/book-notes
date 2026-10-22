@@ -57,7 +57,7 @@ func observe(start time.Time, err *error) {
 	if errors.Is(e, ErrUnauthorized) || errors.Is(e, ErrNoSuchDatabase) || errors.Is(e, ErrExists) {
 		e = nil
 	}
-	httpx.Dependency("postgres", start, 0, e)
+	httpx.DependencyMetric("postgres", start, 0, e)
 }
 
 // HashKey is how API keys are stored.

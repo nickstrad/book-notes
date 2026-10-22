@@ -26,6 +26,7 @@ type control struct {
 }
 
 func main() {
+	httpx.SetupLogging("control")
 	reg, err := registry.Open(env("DATABASE_URL", "postgres://litefleet:litefleet@postgres:5432/litefleet"))
 	if err != nil {
 		log.Fatal(err)
@@ -90,6 +91,8 @@ func (c *control) resolve(w http.ResponseWriter, r *http.Request) {
 		writeRegistryError(w, r, err)
 		return
 	}
+	httpx.Annotate(r.Context(), "tenant_id", rt.TenantID)
+	httpx.Annotate(r.Context(), "database_id", rt.DatabaseID)
 	httpx.WriteJSON(w, http.StatusOK, rt)
 }
 

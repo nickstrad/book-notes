@@ -13,8 +13,8 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   re-vehicled to `litefleet`, a baby multitenant SQLite platform (18 flaws, 12 lessons).
   **Nick approved v3**; v2 archived as `PLAN-v2-checkout.md`, v1 as `PLAN-v1-per-topic-projects.md`.
 - **Phase 2 (build v0 + lessons):** in progress, builder seat Claude Opus 5.5, linear history on
-  `main`. Done: `release-it/v0-flawed` (platform, lab, lesson 00 tour; `topics/` stubs removed).
-  Next: lessons L01–L12 in plan order, one tag each.
+  `main`. Done: `release-it/v0-flawed` (platform, lab, lesson 00 tour; `topics/` stubs removed),
+  `release-it/lesson-01` (checkpoint A complete). Next: lessons L02–L12 in plan order, one tag each.
   Deviations from the plan so far (each also in the lesson note it concerns):
   - v0 + lab are one commit (checkpoints A1 and A2 merged): the plan requires `make verify
     LESSON=00` to pass before the v0 tag, and that needs the lab.
@@ -26,6 +26,8 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   - v0 control keeps 32 idle Postgres connections (open connections still unbounded), so v0 serves
     gentle load; the backup job spreads snapshots over its interval.
   - Calibrated on vm-1: gateway 300 req/s, node 250 req/s, fleet 500 req/s (`lab/capacity.env`).
+  - L01 is two commits (~650 lines of Go, plan ~350): node health reports physical facts and the
+    gateway health needs a prober.
   - The verify runner restores a seeded snapshot (Postgres template database + tenant files) after
     the first seed, so a reset is ~25 s instead of ~1 min.
 - **Phase 3 (skills):** not started; part of checkpoint C. Eight skills as in PLAN.md section 5.

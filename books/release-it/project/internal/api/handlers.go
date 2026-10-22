@@ -3,7 +3,7 @@ package api
 
 import (
 	"errors"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"litefleet/internal/httpx"
@@ -47,11 +47,14 @@ func (g *Gateway) resolve(w http.ResponseWriter, r *http.Request) (wire.Route, b
 	if !ok {
 		return wire.Route{}, false
 	}
-	rt, err := g.Routes.Resolve(key, r.PathValue("name"))
+	rt, err := g.Routes.Resolve(r.Context(), key, r.PathValue("name"))
 	if err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return rt, false
 	}
+	httpx.Annotate(r.Context(), "tenant_id", rt.TenantID)
+	httpx.Annotate(r.Context(), "database_id", rt.DatabaseID)
+	httpx.Annotate(r.Context(), "node", rt.Node)
 	return rt, true
 }
 
@@ -69,7 +72,7 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "sql must be 1..65536 bytes")
 		return
 	}
-	res, err := g.Nodes.Query(rt, req)
+	res, err := g.Nodes.Query(r.Context(), rt, req)
 	if err != nil {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
@@ -97,7 +100,7 @@ func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	res, err := g.Nodes.Execute(rt, req)
+	res, err := g.Nodes.Execute(r.Context(), rt, req)
 	if err != nil {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
@@ -115,7 +118,7 @@ func (g *Gateway) create(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "body: "+err.Error())
 		return
 	}
-	d, err := g.Routes.Create(key, req.Name)
+	d, err := g.Routes.Create(r.Context(), key, req.Name)
 	if err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return
@@ -128,7 +131,7 @@ func (g *Gateway) list(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	out, err := g.Routes.List(key)
+	out, err := g.Routes.List(r.Context(), key)
 	if err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return
@@ -141,7 +144,7 @@ func (g *Gateway) stats(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	d, err := g.Routes.Stats(key, r.PathValue("name"))
+	d, err := g.Routes.Stats(r.Context(), key, r.PathValue("name"))
 	if err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return
@@ -154,7 +157,7 @@ func (g *Gateway) drop(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	if err := g.Routes.Drop(key, r.PathValue("name")); err != nil {
+	if err := g.Routes.Drop(r.Context(), key, r.PathValue("name")); err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return
 	}
@@ -170,7 +173,7 @@ func (g *Gateway) usage(w http.ResponseWriter, r *http.Request) {
 	if window == "" {
 		window = "24h"
 	}
-	out, err := g.Routes.Usage(key, window)
+	out, err := g.Routes.Usage(r.Context(), key, window)
 	if err != nil {
 		writeUpstreamError(w, r, "control", err)
 		return
@@ -186,6 +189,6 @@ func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err 
 		httpx.WriteError(w, r, re.Status, re.Code, re.Message)
 		return
 	}
-	log.Printf("%s: %v", dep, err)
+	slog.Warn("upstream error", "request_id", httpx.RequestID(r), "dep", dep, "error", err.Error())
 	httpx.WriteError(w, r, http.StatusBadGateway, "upstream_error", dep+" unavailable")
 }

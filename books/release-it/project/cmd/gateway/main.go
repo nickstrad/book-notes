@@ -16,6 +16,7 @@ import (
 
 func main() {
 	instance := env("INSTANCE", "gateway")
+	httpx.SetupLogging(instance)
 	controlURL := env("CONTROL_URL", "http://control:8090")
 	g := &api.Gateway{
 		Routes: routes.New(controlURL),
@@ -34,7 +35,6 @@ func main() {
 
 	served := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-Served-By", instance)
-		httpx.RequestID(r)
 		mux.ServeHTTP(w, r)
 	})
 	addr := env("LISTEN", ":8080")

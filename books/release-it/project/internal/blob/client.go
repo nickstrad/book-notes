@@ -3,6 +3,7 @@
 package blob
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -33,7 +34,7 @@ type PutResult struct {
 // Put uploads the file at path as generation gen of database dbID.
 func (c *Client) Put(dbID string, gen int, path string) (_ *PutResult, err error) {
 	start, status := time.Now(), 0
-	defer func() { httpx.Dependency("blobstore", start, status, err) }()
+	defer func() { httpx.Dependency(context.Background(), "blobstore", start, status, err) }()
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err

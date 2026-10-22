@@ -40,6 +40,7 @@ func main() {
 		url:  env("NODE_URL", "http://node-a:8070"),
 		data: env("DATA_DIR", "/data"),
 	}
+	httpx.SetupLogging(n.name)
 	self, err := sql.Open("sqlite3", "file:"+filepath.Join(n.data, "_node.db")+"?_pragma=journal_mode(wal)")
 	if err != nil {
 		log.Fatal(err)
@@ -98,6 +99,7 @@ func (n *node) query(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", err.Error())
 		return
 	}
+	httpx.Annotate(r.Context(), "database_id", r.PathValue("id"))
 	_, body, err := n.eng.Query(r.PathValue("id"), epoch(r), req)
 	if err != nil {
 		writeEngineError(w, r, err)
@@ -113,6 +115,7 @@ func (n *node) execute(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", err.Error())
 		return
 	}
+	httpx.Annotate(r.Context(), "database_id", r.PathValue("id"))
 	res, err := n.eng.Execute(r.PathValue("id"), epoch(r), req)
 	if err != nil {
 		writeEngineError(w, r, err)

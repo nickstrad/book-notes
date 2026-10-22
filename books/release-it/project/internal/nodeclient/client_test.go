@@ -1,6 +1,7 @@
 package nodeclient
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -33,7 +34,7 @@ func stubNode(t *testing.T) *httptest.Server {
 
 func TestQuery(t *testing.T) {
 	srv := stubNode(t)
-	res, err := New().Query(wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3}, wire.QueryRequest{SQL: "SELECT id FROM t"})
+	res, err := New().Query(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3}, wire.QueryRequest{SQL: "SELECT id FROM t"})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -44,7 +45,7 @@ func TestQuery(t *testing.T) {
 
 func TestExecute(t *testing.T) {
 	srv := stubNode(t)
-	res, err := New().Execute(wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3},
+	res, err := New().Execute(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3},
 		wire.ExecuteRequest{Statements: []wire.Statement{{SQL: "INSERT 1"}, {SQL: "INSERT 2"}}})
 	if err != nil {
 		t.Fatal(err)
@@ -56,7 +57,7 @@ func TestExecute(t *testing.T) {
 
 func TestTypedErrorPassesThrough(t *testing.T) {
 	srv := stubNode(t)
-	_, err := New().Query(wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 1}, wire.QueryRequest{SQL: "SELECT 1"})
+	_, err := New().Query(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 1}, wire.QueryRequest{SQL: "SELECT 1"})
 	re, ok := err.(*httpx.RemoteError)
 	if !ok || re.Status != http.StatusConflict || re.Code != "stale_epoch" {
 		t.Fatalf("err = %#v; want 409 stale_epoch", err)

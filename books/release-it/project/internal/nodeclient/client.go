@@ -4,6 +4,7 @@ package nodeclient
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,18 +27,18 @@ func New() *Client {
 }
 
 // Query runs a read statement on the route's node.
-func (c *Client) Query(rt wire.Route, req wire.QueryRequest) (*wire.QueryResult, error) {
+func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest) (*wire.QueryResult, error) {
 	var out wire.QueryResult
-	if err := c.call(rt, "query", req, &out); err != nil {
+	if err := c.call(ctx, rt, "query", req, &out); err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
 
 // Execute runs a write transaction on the route's node.
-func (c *Client) Execute(rt wire.Route, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
+func (c *Client) Execute(ctx context.Context, rt wire.Route, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
 	var out wire.ExecuteResult
-	if err := c.call(rt, "execute", req, &out); err != nil {
+	if err := c.call(ctx, rt, "execute", req, &out); err != nil {
 		return nil, err
 	}
 	return &out, nil
@@ -49,13 +50,13 @@ const (
 	retryDelay = 100 * time.Millisecond
 )
 
-func (c *Client) call(rt wire.Route, op string, in, out any) error {
+func (c *Client) call(ctx context.Context, rt wire.Route, op string, in, out any) error {
 	body, err := json.Marshal(in)
 	if err != nil {
 		return err
 	}
 	for attempt := 0; ; attempt++ {
-		err = c.do(rt, op, body, out)
+		err = c.do(ctx, rt, op, body, out)
 		if err == nil || !transient(err) || attempt == retries {
 			return err
 		}
@@ -72,15 +73,16 @@ func transient(err error) bool {
 	return true
 }
 
-func (c *Client) do(rt wire.Route, op string, body []byte, out any) (err error) {
+func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, out any) (err error) {
 	req, err := http.NewRequest(http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Epoch", strconv.Itoa(rt.Epoch))
+	httpx.Propagate(ctx, req)
 	start, status := time.Now(), 0
-	defer func() { httpx.Dependency(rt.Node, start, status, err) }()
+	defer func() { httpx.Dependency(ctx, rt.Node, start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return fmt.Errorf("node %s: %w", rt.Node, err)

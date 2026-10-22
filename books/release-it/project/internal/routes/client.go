@@ -5,6 +5,7 @@ package routes
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -28,58 +29,59 @@ func New(base string) *Client {
 }
 
 // Resolve authenticates apiKey and locates its database dbName.
-func (c *Client) Resolve(apiKey, dbName string) (wire.Route, error) {
+func (c *Client) Resolve(ctx context.Context, apiKey, dbName string) (wire.Route, error) {
 	var rt wire.Route
 	body, _ := json.Marshal(wire.ResolveRequest{APIKey: apiKey, DBName: dbName})
-	err := c.do(http.MethodPost, "/internal/resolve", "", body, &rt)
+	err := c.do(ctx, http.MethodPost, "/internal/resolve", "", body, &rt)
 	return rt, err
 }
 
 // Create asks control to place and provision a new database.
-func (c *Client) Create(apiKey, name string) (wire.Database, error) {
+func (c *Client) Create(ctx context.Context, apiKey, name string) (wire.Database, error) {
 	var d wire.Database
 	body, _ := json.Marshal(wire.CreateDatabaseRequest{Name: name})
-	err := c.do(http.MethodPost, "/internal/databases", apiKey, body, &d)
+	err := c.do(ctx, http.MethodPost, "/internal/databases", apiKey, body, &d)
 	return d, err
 }
 
 // List returns the tenant's databases.
-func (c *Client) List(apiKey string) (json.RawMessage, error) {
+func (c *Client) List(ctx context.Context, apiKey string) (json.RawMessage, error) {
 	var out json.RawMessage
-	err := c.do(http.MethodGet, "/internal/databases", apiKey, nil, &out)
+	err := c.do(ctx, http.MethodGet, "/internal/databases", apiKey, nil, &out)
 	return out, err
 }
 
 // Stats returns one database's registry record.
-func (c *Client) Stats(apiKey, name string) (wire.Database, error) {
+func (c *Client) Stats(ctx context.Context, apiKey, name string) (wire.Database, error) {
 	var d wire.Database
-	err := c.do(http.MethodGet, "/internal/databases/"+url.PathEscape(name), apiKey, nil, &d)
+	err := c.do(ctx, http.MethodGet, "/internal/databases/"+url.PathEscape(name), apiKey, nil, &d)
 	return d, err
 }
 
 // Drop deletes a database.
-func (c *Client) Drop(apiKey, name string) error {
-	return c.do(http.MethodDelete, "/internal/databases/"+url.PathEscape(name), apiKey, nil, nil)
+func (c *Client) Drop(ctx context.Context, apiKey, name string) error {
+	return c.do(ctx, http.MethodDelete, "/internal/databases/"+url.PathEscape(name), apiKey, nil, nil)
 }
 
 // Usage fetches the fleet usage report (admin key).
-func (c *Client) Usage(apiKey, window string) (json.RawMessage, error) {
+func (c *Client) Usage(ctx context.Context, apiKey, window string) (json.RawMessage, error) {
 	var out json.RawMessage
-	err := c.do(http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
+	err := c.do(ctx, http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
 	return out, err
 }
 
-func (c *Client) do(method, path, apiKey string, body []byte, out any) (err error) {
+func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) (err error) {
 	req, err := http.NewRequest(method, c.base+path, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
 	req.Header.Set("Content-Type", "application/json")
+	httpx.Propagate(ctx, req)
 	if apiKey != "" {
 		req.Header.Set("Authorization", "Bearer "+apiKey)
 	}
 	start, status := time.Now(), 0
-	defer func() { httpx.Dependency("control", start, status, err) }()
+	defer func() { httpx.Dependency(ctx, "control", start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return fmt.Errorf("control: %w", err)

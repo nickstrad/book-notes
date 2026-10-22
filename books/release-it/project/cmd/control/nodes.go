@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -50,7 +51,7 @@ func (n *nodeCommands) send(node, method, path string, body []byte) (err error) 
 	}
 	req.Header.Set("Content-Type", "application/json")
 	start, status := time.Now(), 0
-	defer func() { httpx.Dependency(node, start, status, err) }()
+	defer func() { httpx.Dependency(context.Background(), node, start, status, err) }()
 	resp, err := n.http.Do(req)
 	if err != nil {
 		return err

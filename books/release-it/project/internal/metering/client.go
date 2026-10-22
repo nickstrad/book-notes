@@ -3,6 +3,7 @@ package metering
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -27,7 +28,7 @@ func NewClient(base string) *Client {
 // Send posts one batch.
 func (c *Client) Send(events []wire.UsageEvent) (err error) {
 	start, status := time.Now(), 0
-	defer func() { httpx.Dependency("metering", start, status, err) }()
+	defer func() { httpx.Dependency(context.Background(), "metering", start, status, err) }()
 	body, err := json.Marshal(events)
 	if err != nil {
 		return err

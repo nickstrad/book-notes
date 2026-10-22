@@ -3,6 +3,7 @@ package httpx
 import (
 	"context"
 	"errors"
+	"log/slog"
 	"net"
 	"net/http"
 	"time"
@@ -56,9 +57,46 @@ func Outcome(status int, err error) string {
 	}
 }
 
-// Dependency records one call to dep, so a slow request can be attributed to
-// the dependency that made it slow.
-func Dependency(dep string, start time.Time, status int, err error) {
-	depRequests.WithLabelValues(dep, Outcome(status, err)).Inc()
-	depDuration.WithLabelValues(dep).Observe(time.Since(start).Seconds())
+// Dependency records one call to dep: a metric sample and a log line with the
+// request id, so a slow request can be attributed to the dependency that made
+// it slow.
+func Dependency(ctx context.Context, dep string, start time.Time, status int, err error) {
+	d := time.Since(start)
+	outcome := DependencyMetric(dep, start, status, err)
+	attrs := []any{"dep", dep, "dur_ms", ms(d), "outcome", outcome}
+	if id := RequestIDFrom(ctx); id != "" {
+		attrs = append([]any{"request_id", id}, attrs...)
+	}
+	if status != 0 {
+		attrs = append(attrs, "status", status)
+	}
+	if err != nil {
+		attrs = append(attrs, "error", err.Error())
+	}
+	slog.Info("dependency", attrs...)
+}
+
+// DependencyMetric records a dependency call in metrics only (for calls too
+// frequent to log one line each, such as registry queries) and returns its
+// outcome; failed and slow calls are still logged.
+func DependencyMetric(dep string, start time.Time, status int, err error) string {
+	d := time.Since(start)
+	outcome := Outcome(status, err)
+	depRequests.WithLabelValues(dep, outcome).Inc()
+	depDuration.WithLabelValues(dep).Observe(d.Seconds())
+	if dep == "postgres" && (outcome != "ok" || d > 100*time.Millisecond) {
+		attrs := []any{"dep", dep, "dur_ms", ms(d), "outcome", outcome}
+		if err != nil {
+			attrs = append(attrs, "error", err.Error())
+		}
+		slog.Warn("slow or failed dependency call", attrs...)
+	}
+	return outcome
+}
+
+// Propagate copies the request id from ctx onto an outgoing request.
+func Propagate(ctx context.Context, req *http.Request) {
+	if id := RequestIDFrom(ctx); id != "" {
+		req.Header.Set("X-Request-Id", id)
+	}
 }

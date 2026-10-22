@@ -160,3 +160,39 @@ verdict() {
 }
 
 SEED_ARGS=()
+
+# start_load ARGS... — run loadgen in the background; sets T0 (epoch seconds,
+# fractional) to roughly when its first request goes out and LOAD_PID.
+start_load() {
+  compose run --rm --no-deps loadgen "$@" 2>/dev/null | tail -n 1 > "$RESULTS/.summary.json" &
+  LOAD_PID=$!
+  sleep 1.5   # container start
+  T0=$(date +%s.%N)
+}
+
+# at SECONDS — sleep until T0 + SECONDS.
+at() {
+  local wait
+  wait=$(awk -v t0="$T0" -v s="$1" -v now="$(date +%s.%N)" 'BEGIN { w = t0 + s - now; print (w > 0 ? w : 0) }')
+  sleep "$wait"
+}
+
+# wait_load — wait for the background loadgen; prints its summary.
+wait_load() { wait "$LOAD_PID" || true; cat "$RESULTS/.summary.json"; }
+
+# poll_health NAME URL OUT — append "t_seconds http_code body" every 0.25 s
+# until killed. Used to time health transitions against T0.
+poll_health() {
+  local url=$2 out=$3
+  while true; do
+    local now code body
+    now=$(date +%s.%N)
+    body=$(curl -s --max-time 2 -w ' %{http_code}' "$url" || echo ' 000')
+    code=${body##* }
+    printf '%s %s %s\n' "$(awk -v a="$now" -v b="$T0" 'BEGIN { printf "%.2f", a - b }')" "$code" "${body% *}" >> "$out"
+    sleep 0.25
+  done
+}
+
+# haproxy_up — gateways HAProxy currently considers UP.
+haproxy_up() { curl -s "http://127.0.0.1:18404/stats;csv" | awk -F, '$1 == "gateways" && $2 ~ /^gateway/ && $18 ~ /^UP/' | wc -l; }
