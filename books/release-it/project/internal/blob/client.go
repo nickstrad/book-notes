@@ -20,9 +20,11 @@ type Client struct {
 	http *http.Client
 }
 
-// New returns a client for the blob store at base.
+// New returns a client for the blob store at base. An upload of a large
+// database legitimately takes a while, so the total is 5 minutes; that is
+// also a floor on bandwidth: the 60 MB whale must move at 200 KB/s or more.
 func New(base string) *Client {
-	return &Client{base: base, http: &http.Client{}}
+	return &Client{base: base, http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: time.Second, Total: 5 * time.Minute})}
 }
 
 // PutResult is the blob store's answer to an upload.

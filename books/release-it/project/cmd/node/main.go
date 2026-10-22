@@ -100,7 +100,7 @@ func (n *node) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	httpx.Annotate(r.Context(), "database_id", r.PathValue("id"))
-	_, body, err := n.eng.Query(r.PathValue("id"), epoch(r), req)
+	_, body, err := n.eng.Query(r.Context(), r.PathValue("id"), epoch(r), req)
 	if err != nil {
 		writeEngineError(w, r, err)
 		return
@@ -116,7 +116,7 @@ func (n *node) execute(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	httpx.Annotate(r.Context(), "database_id", r.PathValue("id"))
-	res, err := n.eng.Execute(r.PathValue("id"), epoch(r), req)
+	res, err := n.eng.Execute(r.Context(), r.PathValue("id"), epoch(r), req)
 	if err != nil {
 		writeEngineError(w, r, err)
 		return
@@ -176,7 +176,7 @@ func writeEngineError(w http.ResponseWriter, r *http.Request, err error) {
 // heartbeats reports liveness, fds, disk and per-database activity to
 // control every 5 seconds.
 func (n *node) heartbeats(controlURL string) {
-	client := &http.Client{}
+	client := httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2 * time.Second, Total: 2 * time.Second})
 	for range time.Tick(5 * time.Second) {
 		hb := wire.Heartbeat{Node: n.name, URL: n.url, FDs: openFDs(), DiskFree: diskFree(n.data), Databases: n.eng.Report()}
 		body, _ := json.Marshal(hb)

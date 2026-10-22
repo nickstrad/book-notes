@@ -22,7 +22,7 @@ type nodeCommands struct {
 }
 
 func newNodeCommands(spec string) *nodeCommands {
-	n := &nodeCommands{urls: map[string]string{}, http: &http.Client{}}
+	n := &nodeCommands{urls: map[string]string{}, http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2 * time.Second, Total: 2 * time.Second})}
 	for _, kv := range strings.Split(spec, ",") {
 		if name, url, ok := strings.Cut(strings.TrimSpace(kv), "="); ok {
 			n.urls[name] = url

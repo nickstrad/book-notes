@@ -12,7 +12,7 @@ import (
 // usage serves the fleet-wide per-tenant usage report the ops dashboard
 // polls: statements, rows and bytes over a window, plus current storage.
 func (c *control) usage(w http.ResponseWriter, r *http.Request) {
-	_, admin, err := c.reg.Tenant(httpx.Bearer(r))
+	_, admin, err := c.reg.Tenant(r.Context(), httpx.Bearer(r))
 	if err != nil || !admin {
 		httpx.WriteError(w, r, http.StatusUnauthorized, "unauthorized", "admin key required")
 		return
@@ -27,12 +27,12 @@ func (c *control) usage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ledger, err := c.reg.LedgerSince(time.Now().Add(-d))
+	ledger, err := c.reg.LedgerSince(r.Context(), time.Now().Add(-d))
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
 	}
-	storage, err := c.reg.StorageByTenant()
+	storage, err := c.reg.StorageByTenant(r.Context())
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return

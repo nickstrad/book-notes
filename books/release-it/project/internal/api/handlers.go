@@ -2,9 +2,11 @@
 package api
 
 import (
+	"context"
 	"errors"
 	"log/slog"
 	"net/http"
+	"time"
 
 	"litefleet/internal/httpx"
 	"litefleet/internal/nodeclient"
@@ -14,6 +16,18 @@ import (
 
 // MaxSQLBytes is the largest statement the platform accepts.
 const MaxSQLBytes = 64 << 10
+
+// RequestDeadline bounds a tenant's query or execute end to end. It sits
+// just inside the 3 s our clients wait, so a timeout reaches them as a 504
+// from the gateway rather than as silence.
+const RequestDeadline = 2900 * time.Millisecond
+
+// withDeadline gives the request the platform's deadline; every call it
+// makes (control, node) inherits it.
+func withDeadline(r *http.Request) (*http.Request, context.CancelFunc) {
+	ctx, cancel := context.WithTimeout(r.Context(), RequestDeadline)
+	return r.WithContext(ctx), cancel
+}
 
 // Gateway serves the tenant API.
 type Gateway struct {
@@ -59,6 +73,8 @@ func (g *Gateway) resolve(w http.ResponseWriter, r *http.Request) (wire.Route, b
 }
 
 func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
+	r, cancel := withDeadline(r)
+	defer cancel()
 	rt, ok := g.resolve(w, r)
 	if !ok {
 		return
@@ -81,6 +97,8 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 }
 
 func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
+	r, cancel := withDeadline(r)
+	defer cancel()
 	rt, ok := g.resolve(w, r)
 	if !ok {
 		return
@@ -182,11 +200,16 @@ func (g *Gateway) usage(w http.ResponseWriter, r *http.Request) {
 }
 
 // writeUpstreamError passes typed errors from control or a node through to
-// the tenant and turns anything else into a 502.
+// the tenant, turns a dependency that ran out of time into a 504 and anything
+// else into a 502.
 func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err error) {
 	var re *httpx.RemoteError
 	if errors.As(err, &re) {
 		httpx.WriteError(w, r, re.Status, re.Code, re.Message)
+		return
+	}
+	if httpx.Outcome(0, err) == "timeout" {
+		httpx.WriteError(w, r, http.StatusGatewayTimeout, "timeout", dep+" timeout")
 		return
 	}
 	slog.Warn("upstream error", "request_id", httpx.RequestID(r), "dep", dep, "error", err.Error())

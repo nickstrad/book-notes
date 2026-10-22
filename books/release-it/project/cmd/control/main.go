@@ -86,7 +86,7 @@ func (c *control) resolve(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", err.Error())
 		return
 	}
-	rt, err := c.reg.Resolve(req.APIKey, req.DBName)
+	rt, err := c.reg.Resolve(r.Context(), req.APIKey, req.DBName)
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
@@ -98,7 +98,7 @@ func (c *control) resolve(w http.ResponseWriter, r *http.Request) {
 
 // tenant authenticates the bearer key forwarded by the gateway.
 func (c *control) tenant(w http.ResponseWriter, r *http.Request) (string, bool) {
-	t, _, err := c.reg.Tenant(httpx.Bearer(r))
+	t, _, err := c.reg.Tenant(r.Context(), httpx.Bearer(r))
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return "", false
@@ -116,30 +116,30 @@ func (c *control) createDatabase(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "name must match "+dbName.String())
 		return
 	}
-	id, err := c.reg.BeginCreate(tenantID, req.Name)
+	id, err := c.reg.BeginCreate(r.Context(), tenantID, req.Name)
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
 	}
-	load, err := c.reg.NodeLoad()
+	load, err := c.reg.NodeLoad(r.Context())
 	if err != nil {
-		c.reg.AbortCreate(id)
+		c.reg.AbortCreate(r.Context(), id)
 		writeRegistryError(w, r, err)
 		return
 	}
 	node, err := placement.Pick(load)
 	if err != nil {
-		c.reg.AbortCreate(id)
+		c.reg.AbortCreate(r.Context(), id)
 		httpx.WriteError(w, r, http.StatusServiceUnavailable, "no_capacity", err.Error())
 		return
 	}
 	const epoch = 1
 	if err := c.nodes.provision(node, wire.ProvisionRequest{DatabaseID: id, TenantID: tenantID, Epoch: epoch}); err != nil {
-		c.reg.AbortCreate(id)
+		c.reg.AbortCreate(r.Context(), id)
 		httpx.WriteError(w, r, http.StatusBadGateway, "provision_failed", err.Error())
 		return
 	}
-	if err := c.reg.FinishCreate(id, node, epoch); err != nil {
+	if err := c.reg.FinishCreate(r.Context(), id, node, epoch); err != nil {
 		writeRegistryError(w, r, err)
 		return
 	}
@@ -151,7 +151,7 @@ func (c *control) listDatabases(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	dbs, err := c.reg.ListDatabases(tenantID)
+	dbs, err := c.reg.ListDatabases(r.Context(), tenantID)
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
@@ -167,7 +167,7 @@ func (c *control) getDatabase(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	d, err := c.reg.Database(tenantID, r.PathValue("name"))
+	d, err := c.reg.Database(r.Context(), tenantID, r.PathValue("name"))
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
@@ -180,7 +180,7 @@ func (c *control) dropDatabase(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	d, err := c.reg.Database(tenantID, r.PathValue("name"))
+	d, err := c.reg.Database(r.Context(), tenantID, r.PathValue("name"))
 	if err != nil {
 		writeRegistryError(w, r, err)
 		return
@@ -189,7 +189,7 @@ func (c *control) dropDatabase(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadGateway, "drop_failed", err.Error())
 		return
 	}
-	if err := c.reg.MarkDropped(d.ID); err != nil {
+	if err := c.reg.MarkDropped(r.Context(), d.ID); err != nil {
 		writeRegistryError(w, r, err)
 		return
 	}
@@ -202,7 +202,7 @@ func (c *control) heartbeat(w http.ResponseWriter, r *http.Request) {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "bad heartbeat")
 		return
 	}
-	if err := c.reg.Heartbeat(hb); err != nil {
+	if err := c.reg.Heartbeat(r.Context(), hb); err != nil {
 		log.Printf("heartbeat from %s: %v", hb.Node, err)
 		httpx.WriteError(w, r, http.StatusInternalServerError, "internal", err.Error())
 		return

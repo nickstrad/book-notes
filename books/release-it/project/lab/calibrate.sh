@@ -8,13 +8,20 @@ source "$(dirname "$0")/lib.sh"
 reset_stack
 
 ramp() { # label loadgen-args... ; prints the capacity
-  local label=$1 best=0; shift
+  # The highest passing rate; one failing step is forgiven (this VM is shared
+  # and has steal time), two in a row end the ramp.
+  local label=$1 best=0 fails=0; shift
   for r in $RATES; do
     local s ok sent p99
     s=$(loadgen "$@" -scenario steady -rate "$r" -duration 8s -out /results/calibrate.csv)
     ok=$(jq .ok <<<"$s"); sent=$(jq .sent <<<"$s"); p99=$(jq .p99_ms <<<"$s")
     log "$label rate $r: ok $ok/$sent p99 ${p99} ms"
-    if cmp "$ok" ">=" "$(awk -v s="$sent" 'BEGIN{print s*0.995}')" && cmp "$p99" "<=" 100; then best=$r; else break; fi
+    if cmp "$ok" ">=" "$(awk -v s="$sent" 'BEGIN{print s*0.995}')" && cmp "$p99" "<=" 100; then
+      best=$r fails=0
+    else
+      fails=$((fails + 1))
+      ((fails < 2)) || break
+    fi
     sleep 3
   done
   echo "$best"

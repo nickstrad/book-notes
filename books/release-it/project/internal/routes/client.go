@@ -17,15 +17,22 @@ import (
 	"litefleet/internal/wire"
 )
 
-// Client talks to control.
+// Client talks to control. Control answers from an indexed registry in
+// milliseconds, so 500 ms is generous; the usage report is a heavy read and
+// gets its own client.
 type Client struct {
-	base string
-	http *http.Client
+	base   string
+	http   *http.Client
+	report *http.Client
 }
 
 // New returns a client for the control plane at base.
 func New(base string) *Client {
-	return &Client{base: base, http: &http.Client{}}
+	return &Client{
+		base:   base,
+		http:   httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 500 * time.Millisecond, Total: 500 * time.Millisecond}),
+		report: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 10 * time.Second, Total: 10 * time.Second}),
+	}
 }
 
 // Resolve authenticates apiKey and locates its database dbName.
@@ -66,12 +73,16 @@ func (c *Client) Drop(ctx context.Context, apiKey, name string) error {
 // Usage fetches the fleet usage report (admin key).
 func (c *Client) Usage(ctx context.Context, apiKey, window string) (json.RawMessage, error) {
 	var out json.RawMessage
-	err := c.do(ctx, http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
+	err := c.doWith(ctx, c.report, http.MethodGet, "/internal/usage?window="+url.QueryEscape(window), apiKey, nil, &out)
 	return out, err
 }
 
-func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) (err error) {
-	req, err := http.NewRequest(method, c.base+path, bytes.NewReader(body))
+func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) error {
+	return c.doWith(ctx, c.http, method, path, apiKey, body, out)
+}
+
+func (c *Client) doWith(ctx context.Context, client *http.Client, method, path, apiKey string, body []byte, out any) (err error) {
+	req, err := http.NewRequestWithContext(ctx, method, c.base+path, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
@@ -82,7 +93,7 @@ func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byt
 	}
 	start, status := time.Now(), 0
 	defer func() { httpx.Dependency(ctx, "control", start, status, err) }()
-	resp, err := c.http.Do(req)
+	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("control: %w", err)
 	}

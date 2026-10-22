@@ -110,7 +110,8 @@ untoxic() { curl -fs -XDELETE "$TOXI/proxies/$1/toxics/$2" >/dev/null; log "remo
 # prom EXPR — first value of an instant query, or "NaN".
 prom() {
   curl -fsG "$PROM/api/v1/query" --data-urlencode "query=$1" |
-    jq -r '.data.result[0].value[1] // "NaN"'
+    jq -r '.data.result[0].value[1] // "NaN"' |
+    awk '/^-?[0-9.e+-]+$/ { printf "%.4g\n", $1; next } { print }'
 }
 
 # loadgen ARGS... — run the load generator; prints its JSON summary.
@@ -161,13 +162,14 @@ verdict() {
 
 SEED_ARGS=()
 
-# start_load ARGS... — run loadgen in the background; sets T0 (epoch seconds,
-# fractional) to roughly when its first request goes out and LOAD_PID.
+# start_load ARGS... — run loadgen in the background, its first request at
+# T0 (epoch seconds, set here, 3 s from now so the container has started), so
+# the CSV's ts_ms and the script's `at` share one clock. Sets LOAD_PID.
 start_load() {
-  compose run --rm --no-deps loadgen "$@" 2>/dev/null | tail -n 1 > "$RESULTS/.summary.json" &
+  local t0_ms=$(( $(date +%s%3N) + 3000 ))
+  T0=$(awk -v m="$t0_ms" 'BEGIN { printf "%.3f", m / 1000 }')
+  compose run --rm --no-deps loadgen -start-at "$t0_ms" "$@" 2>/dev/null | tail -n 1 > "$RESULTS/.summary.json" &
   LOAD_PID=$!
-  sleep 1.5   # container start
-  T0=$(date +%s.%N)
 }
 
 # at SECONDS — sleep until T0 + SECONDS.

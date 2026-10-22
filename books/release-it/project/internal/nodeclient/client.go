@@ -21,9 +21,10 @@ type Client struct {
 	http *http.Client
 }
 
-// New returns a node client.
+// New returns a node client. A node runs a statement for at most 2 s (its
+// statement deadline), so an attempt gets 2.5 s for headers and body.
 func New() *Client {
-	return &Client{http: &http.Client{}}
+	return &Client{http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2500 * time.Millisecond, Total: 2500 * time.Millisecond})}
 }
 
 // Query runs a read statement on the route's node.
@@ -60,7 +61,11 @@ func (c *Client) call(ctx context.Context, rt wire.Route, op string, in, out any
 		if err == nil || !transient(err) || attempt == retries {
 			return err
 		}
-		time.Sleep(retryDelay)
+		select {
+		case <-time.After(retryDelay):
+		case <-ctx.Done():
+			return err
+		}
 	}
 }
 
@@ -74,7 +79,7 @@ func transient(err error) bool {
 }
 
 func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, out any) (err error) {
-	req, err := http.NewRequest(http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}

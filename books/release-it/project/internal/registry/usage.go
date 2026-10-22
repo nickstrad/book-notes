@@ -1,6 +1,7 @@
 package registry
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"strings"
@@ -11,7 +12,7 @@ import (
 
 // recordUsage appends one ledger row per database and kind with activity in
 // this heartbeat.
-func recordUsage(tx *sql.Tx, dbs []wire.DatabaseReport) error {
+func recordUsage(ctx context.Context, tx *sql.Tx, dbs []wire.DatabaseReport) error {
 	var vals []string
 	var args []any
 	add := func(id, kind string, statements, rows, bytes int64) {
@@ -29,7 +30,7 @@ func recordUsage(tx *sql.Tx, dbs []wire.DatabaseReport) error {
 	if len(vals) == 0 {
 		return nil
 	}
-	_, err := tx.Exec(`
+	_, err := tx.ExecContext(ctx, `
 		INSERT INTO usage_ledger (tenant_id, database_id, kind, statements, rows, bytes)
 		SELECT d.tenant_id, v.id, v.kind, v.statements, v.rows, v.bytes
 		FROM (VALUES `+strings.Join(vals, ", ")+`) AS v(id, kind, statements, rows, bytes)
@@ -49,9 +50,9 @@ type LedgerRow struct {
 }
 
 // LedgerSince returns every ledger row recorded after since.
-func (r *Registry) LedgerSince(since time.Time) (_ []LedgerRow, err error) {
+func (r *Registry) LedgerSince(ctx context.Context, since time.Time) (_ []LedgerRow, err error) {
 	defer observe(time.Now(), &err)
-	rows, err := r.db.Query(`
+	rows, err := r.db.QueryContext(ctx, `
 		SELECT at, tenant_id, database_id::text, kind, statements, rows, bytes
 		FROM usage_ledger WHERE at > $1`, since)
 	if err != nil {
@@ -70,9 +71,9 @@ func (r *Registry) LedgerSince(since time.Time) (_ []LedgerRow, err error) {
 }
 
 // StorageByTenant returns the current storage per tenant.
-func (r *Registry) StorageByTenant() (_ map[string]int64, err error) {
+func (r *Registry) StorageByTenant(ctx context.Context) (_ map[string]int64, err error) {
 	defer observe(time.Now(), &err)
-	rows, err := r.db.Query(`SELECT tenant_id, sum(size_bytes) FROM databases WHERE state = 'active' GROUP BY tenant_id`)
+	rows, err := r.db.QueryContext(ctx, `SELECT tenant_id, sum(size_bytes) FROM databases WHERE state = 'active' GROUP BY tenant_id`)
 	if err != nil {
 		return nil, err
 	}

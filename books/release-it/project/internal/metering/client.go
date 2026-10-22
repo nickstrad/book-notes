@@ -22,7 +22,7 @@ type Client struct {
 
 // NewClient returns a client for the metering partner at base.
 func NewClient(base string) *Client {
-	return &Client{base: base, http: &http.Client{}}
+	return &Client{base: base, http: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: time.Second, Total: 2 * time.Second})}
 }
 
 // Send posts one batch.

@@ -19,9 +19,18 @@ import (
 	"litefleet/internal/wire"
 )
 
-// NewServer returns the HTTP server a litefleet service listens with.
+// NewServer returns the HTTP server a litefleet service listens with. A
+// client that sends its headers slowly, never finishes its body or never
+// reads the answer is cut off instead of holding a goroutine and a socket.
 func NewServer(addr string, h http.Handler) *http.Server {
-	return &http.Server{Addr: addr, Handler: h}
+	return &http.Server{
+		Addr:              addr,
+		Handler:           h,
+		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       10 * time.Second,
+		WriteTimeout:      15 * time.Second,
+		IdleTimeout:       60 * time.Second,
+	}
 }
 
 // SetupLogging sends every log line, including the standard library's, to

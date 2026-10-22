@@ -12,6 +12,8 @@ import (
 	"time"
 
 	"github.com/ncruces/go-sqlite3"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 
 	"litefleet/internal/wire"
 )
@@ -25,8 +27,27 @@ type StatementError struct {
 
 func (e *StatementError) Error() string { return e.Code + ": " + e.Message }
 
-// classify turns a SQLite error into the typed error tenants see.
-func classify(err error) error {
+// StatementDeadline is the longest a tenant statement may run. The gateway
+// gives the whole request 2.9 s, so a statement that hits this deadline still
+// gets its 504 back to the tenant in time.
+const StatementDeadline = 2 * time.Second
+
+var statementsCancelled = promauto.NewCounterVec(prometheus.CounterOpts{
+	Name: "statements_cancelled_total", Help: "Statements interrupted because their deadline passed or their caller went away.",
+}, []string{"reason"})
+
+// classify turns a SQLite error into the typed error tenants see. A
+// statement whose context ended was interrupted by the driver
+// (sqlite3_interrupt) wherever it was.
+func classify(ctx context.Context, err error) error {
+	switch ctx.Err() {
+	case context.DeadlineExceeded:
+		statementsCancelled.WithLabelValues("deadline").Inc()
+		return &StatementError{http.StatusGatewayTimeout, "statement_deadline", "statement exceeded the " + StatementDeadline.String() + " deadline"}
+	case context.Canceled:
+		statementsCancelled.WithLabelValues("caller_gone").Inc()
+		return &StatementError{499, "canceled", "caller went away"}
+	}
 	var se *sqlite3.Error
 	if !errors.As(err, &se) {
 		return err
@@ -57,8 +78,10 @@ func isRead(q string) bool {
 
 // Query runs one read statement on a query_only connection and returns every
 // row.
-func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.QueryResult, []byte, error) {
+func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.QueryRequest) (*wire.QueryResult, []byte, error) {
 	defer observeStatement("read", time.Now())
+	ctx, cancel := context.WithTimeout(ctx, StatementDeadline)
+	defer cancel()
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, nil, err
@@ -70,14 +93,14 @@ func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.Query
 		return nil, nil, &StatementError{http.StatusBadRequest, "bad_request", "query takes a single read statement; use execute for writes"}
 	}
 
-	tx, err := h.db.BeginTx(context.Background(), &sql.TxOptions{ReadOnly: true})
+	tx, err := h.db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
 	if err != nil {
 		return nil, nil, err
 	}
 	defer tx.Rollback()
-	rows, err := queryBusy(tx, req.SQL, req.Args)
+	rows, err := queryBusy(ctx, tx, req.SQL, req.Args)
 	if err != nil {
-		return nil, nil, classify(err)
+		return nil, nil, classify(ctx, err)
 	}
 	defer rows.Close()
 	cols, err := rows.Columns()
@@ -92,12 +115,12 @@ func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.Query
 			ptrs[i] = &vals[i]
 		}
 		if err := rows.Scan(ptrs...); err != nil {
-			return nil, nil, err
+			return nil, nil, classify(ctx, err)
 		}
 		res.Rows = append(res.Rows, vals)
 	}
 	if err := rows.Err(); err != nil {
-		return nil, nil, classify(err)
+		return nil, nil, classify(ctx, err)
 	}
 	body, err := json.Marshal(res)
 	if err != nil {
@@ -109,8 +132,10 @@ func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.Query
 }
 
 // Execute runs every statement in one write transaction.
-func (e *Engine) Execute(id string, epoch int, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
+func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
 	defer observeStatement("write", time.Now())
+	ctx, cancel := context.WithTimeout(ctx, StatementDeadline)
+	defer cancel()
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, err
@@ -130,9 +155,9 @@ func (e *Engine) Execute(id string, epoch int, req wire.ExecuteRequest) (*wire.E
 	var inBytes int64
 	affected := make([]int64, 0, len(req.Statements))
 	for _, st := range req.Statements {
-		r, err := execBusy(tx, st.SQL, st.Args)
+		r, err := execBusy(ctx, tx, st.SQL, st.Args)
 		if err != nil {
-			return nil, classify(err)
+			return nil, classify(ctx, err)
 		}
 		n, _ := r.RowsAffected()
 		res.RowsAffected += n
@@ -144,7 +169,7 @@ func (e *Engine) Execute(id string, epoch int, req wire.ExecuteRequest) (*wire.E
 	}
 	if err := tx.Commit(); err != nil {
 		tx.Rollback()
-		return nil, classify(err)
+		return nil, classify(ctx, err)
 	}
 	h.recordWrite(res.RowsAffected, inBytes)
 	for i, n := range affected {
@@ -157,11 +182,11 @@ func (e *Engine) Execute(id string, epoch int, req wire.ExecuteRequest) (*wire.E
 // few times before giving up.
 const busyRetries = 50
 
-func execBusy(tx *sql.Tx, q string, args []any) (sql.Result, error) {
+func execBusy(ctx context.Context, tx *sql.Tx, q string, args []any) (sql.Result, error) {
 	var err error
 	for i := 0; i < busyRetries; i++ {
 		var r sql.Result
-		r, err = tx.Exec(q, args...)
+		r, err = tx.ExecContext(ctx, q, args...)
 		if !errors.Is(err, sqlite3.BUSY) {
 			return r, err
 		}
@@ -169,11 +194,11 @@ func execBusy(tx *sql.Tx, q string, args []any) (sql.Result, error) {
 	return nil, err
 }
 
-func queryBusy(tx *sql.Tx, q string, args []any) (*sql.Rows, error) {
+func queryBusy(ctx context.Context, tx *sql.Tx, q string, args []any) (*sql.Rows, error) {
 	var err error
 	for i := 0; i < busyRetries; i++ {
 		var rows *sql.Rows
-		rows, err = tx.Query(q, args...)
+		rows, err = tx.QueryContext(ctx, q, args...)
 		if !errors.Is(err, sqlite3.BUSY) {
 			return rows, err
 		}
