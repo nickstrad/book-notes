@@ -10,14 +10,15 @@ Downtime"; Ch. 12 case study ("Waiting for Godot")
 A release is not an instant. For a while the old and the new versions run side by side: old
 gateways talk to new nodes, new code reads rows that old code wrote, and a consumer built last
 year reads an answer that gained a field this morning. Chapter 13's **Phases of Deployment**
-turns one risky step into several safe ones:
+turns one risky step into several safe ones. Martin Fowler calls the same idea expand/contract
+(ParallelChange); the walkthrough below uses his shorter words.
 
-1. **Expand.** Make additive changes that old code ignores, such as a nullable column or a new
+1. **Expansion.** Make additive changes that old code ignores, such as a nullable column or a new
    field.
-2. **Roll out.** Replace instances one at a time, each taken out of rotation and drained first.
-3. **Relax.** Let the mixed fleet run until nothing depends on the old shape.
-4. **Contract.** Remove the old shape in a later release, guarded by a check that it is truly
-   unused.
+2. **Rollout.** Replace instances one at a time, each taken out of rotation and drained first.
+3. **Relax between phases.** Let the mixed fleet run until nothing depends on the old shape.
+4. **Cleanup** (contract). Remove the old shape in a later release, guarded by a check that it
+   is truly unused.
 
 Chapter 13's **Fallacy of Planned Downtime** is the reason to bother: "we'll do it in a
 maintenance window" stops working once the platform's tenants are in every time zone.
