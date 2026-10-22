@@ -74,3 +74,12 @@ Boundary table (what crosses → where checked → what-if → observed → reco
 Uncertainty: lib/pq cancellation behaviour behind E08-F04 is inferred, not read. Untested cells: redirecting partner
 (H-E08-22), pool exhaustion during freeze (H-E08-24), DB fault between ack statements (T-E08-1), workers' own
 behaviour against a frozen API (their HTTP timeout not read this run).
+
+## E09 revision — `explore-it/lesson-08` ([E09 notes](../experiments/09-explain-it/notes.md)); ★ = new observed cell
+
+| Neighbour / path | What if | Observed |
+|---|---|---|
+| ★ robfig/cron parser (library) | caller passes a `CRON_TZ=`/`TZ=` prefix | library zone wins over the API's `timezone` (E09-F03) |
+| ★ robfig/cron `Next` | expression never matches | zero time, no error; API stores year 1 (E09-F02) |
+| ★ Go `time.LoadLocation` | `Local` | server process zone accepted (E09-F09) |
+| ★ operator / cleanup client | deletes terminal jobs as they appear | notifications lost, success reported as 409/500 (E09-F07, F08) |

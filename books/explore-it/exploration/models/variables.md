@@ -78,3 +78,14 @@ behaviour (accepted; expiry not observed), very long `kind` / `idempotency_key`.
 | ★ count | default backoff attempt | Count | 1…21 | spec bound 2^31−1 s | 5·2^(n−1) exact | holds; A1 spec silence |
 | ★ concurrency | parallel leases | Many | 30 calls, 2 workers, 40 jobs | atomic lease | 40 distinct | holds |
 | ★ time source | app clock step back between enqueues | Timing | −60 s | FIFO by creation | inverted | lab-only; risk H-E04-08 |
+
+## E09 additions — `explore-it/lesson-08` ([E09 notes](../experiments/09-explain-it/notes.md))
+
+| Family | Variable | Kind | Variations | Oracle | Observed | Outcome |
+|---|---|---|---|---|---|---|
+| ★ content | cron day/month combination | Selection | Feb 30, Apr 31 (fixed and wildcard hour) | no impossible next fire | next_run_at 0001-01-01 | E09-F02 |
+| ★ content | cron prefix token | Selection | `CRON_TZ=Asia/Tokyo`, `TZ=Asia/Tokyo` | 5 fields | accepted, zone overrides | E09-F03 |
+| ★ content | timezone alias | Selection | `Local` | IANA only | accepted | E09-F09 |
+| ★ position | schedule id order relative to a failing schedule | Position | lower, higher | independent | higher ids blocked | E09-F01 |
+| ★ concurrency | DELETE of a just-terminal job | Timing | ‖ cancel (300), ‖ ack (300), ‖ expiry pass (40), ‖ worker delete (40) | outbox + true status | 2/300, 125/300, 2/40, 1/40 hits | E09-F07, F08 |
+| ★ time source | app clock step back after promotion | Timing | −11 min 35 s | due-only lease | future job leased | risk H-E04-08 |

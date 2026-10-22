@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E08 done (exploration `a2e7b01`, fix tagged `explore-it/lesson-08`). Independent non-Claude reviews of E07 and E08 pending; E09 next.**
+**Status (2026-10-22): E09 exploration committed (blind Opus, 7 reports reconciled U39–U45); E09 fix in progress. Independent non-Claude reviews of E07 and E08 pending.**
 
 ## Done
 

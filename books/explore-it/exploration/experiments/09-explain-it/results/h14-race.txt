@@ -1,0 +1,3 @@
+{"jobs": [319, 618], "summary": {"cancel=200 delete=204": 298, "cancel=409 delete=204": 2}}
+{"job": 350, "cancel": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}", "delete": 204}
+{"job": 545, "cancel": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}", "delete": 204}

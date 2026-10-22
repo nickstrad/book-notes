@@ -181,3 +181,15 @@ the table has no missing arrow. The extra arrows found are **two-actor overlaps*
 
 Unobserved / inferred here: cancel ‖ lease/nack/release, retry ‖ purge, promote ‖ purge (guard re-check predicts a
 serial outcome); retention interleavings; clock set backwards (lab-only).
+
+## E09 revision — build `explore-it/lesson-08` ([E09 notes](../experiments/09-explain-it/notes.md)); ★ = new observed cell
+
+| From → to | Trigger | Should | Observed | Evidence |
+|---|---|---|---|---|
+| ★ schedule enabled, next_run_at year 1 | create/PATCH with never-matching cron | 400 or no next fire | stays due forever; every fire attempt errors | H-E09-01/04/05 (E09-F02) |
+| ★ schedule enabled due (higher id) | loop tick while a lower-id schedule errors | fires | never fires; resumes the tick after the bad one is disabled/deleted | H-E09-02/03/06 (E09-F01) |
+| ★ leased → succeeded / queued → cancelled | ack / cancel ‖ DELETE of the job | 200 + outbox row | 200 or 409/FK error; outbox row missing in 14/300 (cancel) and 125/300 (ack) | H-E09-14/16 (E09-F07) |
+| ★ leased → dead (expiry, worker delete) | pass with several dead jobs ‖ DELETE of the first | every dead job notified | later jobs of the pass never notified; worker DELETE 500 | H-E09-15/17 (E09-F08) |
+| ★ queued (run_at future) → leased | lease after clock set back | not leasable (scheduled) | leased | H-E09-11 (risk H-E04-08) |
+
+Still unobserved: nack → dead ‖ DELETE (H-E09-18); retention ‖ ack (H-E09-19).

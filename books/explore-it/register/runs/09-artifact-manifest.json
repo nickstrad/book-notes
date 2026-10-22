@@ -1,0 +1,147 @@
+{
+  "experiment": 9,
+  "source_tag": "explore-it/lesson-08",
+  "export_path": "/tmp/explore-it-experiment-09",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "dfed087ba71964ffa68abee50443961696e7284b6b492a9e0f39f3a6b9c460dd"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "e7b4b007a5cb9574ee8b13ff1d3ce060583fadd2fbd9a52a2780b388c9840668"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "fed7c5e64d52e49f34335c450fe7a329f32a5938baea7bffa7799c26e17312b1"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "bf28185facd186e3a01edd043c30c7ff0fa3bbbf6dc4cf3206e2600c1ffe369b"
+    },
+    {
+      "file": "exploration/models/ecosystem.md",
+      "sha256": "0e10c3e611a737bca3ceb84935043e2029402afbc55c00949222abb45d668a5b"
+    },
+    {
+      "file": "exploration/models/variables.md",
+      "sha256": "22265342826b2e55c14c5e20b6ab3902846e4337368344827a10f07e311ac233"
+    },
+    {
+      "file": "exploration/defects/E09-F08-one-vanished-job-drops-other-dead-notifications.md",
+      "sha256": "faec386cba794f9c9dbe281941ed494d5452d1bc8312ce8851e7b2ddf60636ce"
+    },
+    {
+      "file": "exploration/defects/E09-F02-never-matching-cron-accepted-year-one.md",
+      "sha256": "18285f7c848e85b92884c929f391483aefabc65f89e1c1bffb363d0c6f97e341"
+    },
+    {
+      "file": "exploration/defects/E09-F07-ack-cancel-error-after-commit-and-lost-notification.md",
+      "sha256": "ade411fc89fe161ca36c87be1d48a377769a7f830e41ff6b9bb2a46ca9b5b10c"
+    },
+    {
+      "file": "exploration/defects/E09-F01-one-unadvanceable-schedule-stops-all-later-schedules.md",
+      "sha256": "bb7beec4ce0fe44092621c4db36d9c4dcbded7aca8a9f2786cb9862c8bbe7ea7"
+    },
+    {
+      "file": "exploration/defects/README.md",
+      "sha256": "5dad3c7f5ac12c5d83cbeb696f93700ad6dbb631ec54f064e3e83b1a36a9d5d7"
+    },
+    {
+      "file": "exploration/defects/E09-F03-cron-zone-prefix-overrides-timezone.md",
+      "sha256": "56094b2b4e97d62909ab0c6c3f532f8eda481e84a454d8e84bae57cdd73f78e3"
+    },
+    {
+      "file": "exploration/defects/E09-F09-non-iana-local-timezone-accepted.md",
+      "sha256": "90fbea235011dc61e1d303215ce47e550b03b6dd21d35f8096286c9183aa2146"
+    },
+    {
+      "file": "exploration/defects/E09-F06-schedule-zone-offset-frozen-in-record.md",
+      "sha256": "14e393c3178a96b4b7a53eab42dd951fb1105bc04a85fc40d7091cc5a2090bf2"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/revealed.md",
+      "sha256": "dc1d7de684853d3149cd53ff19bf4f524b90869982c3d398cd6e134155c35b8e"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/charter.md",
+      "sha256": "eeda9dd8cecac9aac76f8e12ef54538b99a278b65c4e282fb4f4daec2ebc7c80"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/brief.md",
+      "sha256": "ed088e8b23e4cf85560b0f7bb338a9020a7261f352abf3069df4bea3b4c64502"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/notes.md",
+      "sha256": "b02034d977f56672d886f3e50c850fc534e53bd0121f953272c5f275146151c8"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/q.sh",
+      "sha256": "5415ee534f9a7ef0a5f85e0bdcc4faed03f64b588d475572ddad5a818b4a0921"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/psql.sh",
+      "sha256": "a8782bbb1179c3be0011d44e70fd100f90f1ddda83db31b0c3456481aa9dd7bc"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/race_workerdel_delete.py",
+      "sha256": "a05eaf2874369e3ee139b32df00933a26f1959baf81595b307dfe4f582e8fc15"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/race_cancel_delete.py",
+      "sha256": "d5586cd70e16a69f1b057af0304fa08aba24b0b224dbe5b41e83bc27c298db5a"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/race_expire_delete.py",
+      "sha256": "c785b6b94bd86452bd0d2bb2bce7328699ffddea7fff74a0e01d2f6af7b58a12"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/env.sh",
+      "sha256": "d71ee2ac9a54a606d6dd6c31158991e660b16d41952f08a624dd7b2f810cd810"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/tools/race_ack_delete.py",
+      "sha256": "b63f2e229358cc801a752f27d3db807cb18c67e6949d786313be48cb33ac9505"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/evidence/export-state.md",
+      "sha256": "b27777f9fc8ad0de62ed77da219a33ee043757f6125d49f4dc98246d3c84b9f8"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h01.txt",
+      "sha256": "59d5730fdfada5f14307e54355ee9ca01b05b307eccb367de6a675de402fc89e"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/api.log",
+      "sha256": "904b532fc78d67cae4eef30e6241d427013c2a186cc498b6285f8eae0b7a9a50"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/make-up.log",
+      "sha256": "d5ad3796e4c5cc3124ed41967e2b2a8cdff8fad0950a7d7feb0e1ddb530dcd85"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h14-race.txt",
+      "sha256": "fd865aa7afd9bb1863fd19c6ae144da1fc6f1fc9e4e449ea68a2b5ab2e25c5d4"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h02-create.txt",
+      "sha256": "b1b3488311f4351992c2495373fb9ecce7287ccc6cb873ec0c25ba00b9551c4c"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h16-race.txt",
+      "sha256": "e831cf7a4cd90b04f0c581497c4607c5ff2c290417455e9f63420591ec574e96"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h15-race.jsonl",
+      "sha256": "cad8e3b184c13163913d49690a47e2ef911a24a89e6d0a356bc5691294db4ae7"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/results/h17-race.jsonl",
+      "sha256": "2ba8b5a99fb132e0d65300360260e46648dec1c9e475a95fe88a385b6d9a13f4"
+    },
+    {
+      "file": "exploration/experiments/09-explain-it/evidence/project-results/manifest.json",
+      "sha256": "33a4293de5267592220f5fe5baebb407165d79e6f5da2110dd9799a48d169a1b"
+    }
+  ]
+}

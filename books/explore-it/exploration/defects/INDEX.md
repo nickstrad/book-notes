@@ -146,3 +146,21 @@ here as controls; they are not E08 discoveries.
 | A5 | [E08-F03](E08-F03-dst-gap-skips-and-overlap-double-fires.md) | [resolved in lesson 08](A5-dst-gap-and-overlap.md) (spec decision) |
 
 Original score: 21 stated / 20 confirmed / 1 refuted / 1 contradicted reading prediction / 4 reports / 7 new cells.
+
+## Experiment 09 (explain-it), reconciled at `explore-it/lesson-08`
+
+Seven original reports remain immutable. E09-F04 and E09-F05 were withdrawn by the explorer
+during the run (ids unused). D27, the plan's target for this experiment, was found and
+repaired in E01 (F07) and runs here as an early-fixed control; it is not an E09 discovery.
+
+| ID | Original | Current record |
+|---|---|---|
+| U39 | [E09-F01](E09-F01-one-unadvanceable-schedule-stops-all-later-schedules.md) | [open](U39-one-schedule-stops-later-schedules.md) |
+| U40 | [E09-F02](E09-F02-never-matching-cron-accepted-year-one.md) | [open](U40-never-matching-cron-accepted.md) |
+| U41 | [E09-F03](E09-F03-cron-zone-prefix-overrides-timezone.md) | [open](U41-cron-zone-prefix-overrides-timezone.md) |
+| U42 | [E09-F06](E09-F06-schedule-zone-offset-frozen-in-record.md) | [open](U42-schedule-zone-offset-frozen.md) |
+| U43 | [E09-F07](E09-F07-ack-cancel-error-after-commit-and-lost-notification.md) | [open](U43-terminal-notification-after-commit.md) |
+| U44 | [E09-F08](E09-F08-one-vanished-job-drops-other-dead-notifications.md) | [open](U44-vanished-job-drops-pass-notifications.md) |
+| U45 | [E09-F09](E09-F09-non-iana-local-timezone-accepted.md) | [open](U45-non-iana-local-timezone.md) |
+
+Original score: 21 stated / 19 confirmed / 0 refuted / 0 contradicted reading predictions / 7 reports / 20 new cells.

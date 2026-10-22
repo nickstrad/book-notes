@@ -128,3 +128,13 @@ Invariants I1–I13 were written at 13:22:19Z before any probe and asserted afte
 | ★ R-E08-4 Health and auth report an unavailable database promptly (503) | SPEC.md:188-189 | DB refusing (holds) vs DB frozen (violated) | violated for frozen DB (E08-F04) |
 | ★ R-E08-5 The signature is HMAC-SHA256 over the exact bytes sent | SPEC.md:177 | traced datum, hand verification | holds (P4) |
 | ★ R-E08-6 Schedules follow local civil time across offset changes | SPEC.md:162 | DST gap/overlap/fixed vs wildcard hours | holds for existing times; non-existent times skipped, repeated times fire twice — unspecified (E08-F03, spec) |
+
+## E09 revision — `explore-it/lesson-08` ([E09 notes](../experiments/09-explain-it/notes.md)); ★ = new observation
+
+| Rule | Source | Variations tried | Result |
+|---|---|---|---|
+| ★ R-E09-1 Every enabled schedule fires when due, regardless of other tenants' schedules | SPEC.md:166, :189, :10 | bad schedule lower/higher id, other namespace, paused queue | violated (E09-F01) |
+| ★ R-E09-2 Cron is five fields; the schedule's zone is its IANA `timezone` | SPEC.md:160-162 | Feb 30, Apr 31, `CRON_TZ=`, `TZ=`, `Local` | violated (E09-F02, F03, F09) |
+| ★ R-E09-3 Every terminal transition of a webhook queue yields one outbox entry; deletion does not erase it | SPEC.md:177, :203 | cancel, ack, expiry, worker delete, each ‖ job DELETE | violated (E09-F07, F08) |
+| ★ R-E09-4 409 only for a command incompatible with state; 2xx when it took effect | SPEC.md:16 | ack/cancel/worker delete after commit | violated (E09-F07, F08) |
+| ★ R-E09-5 Fixed-hour vs wildcard-hour classification | SPEC.md:163-165 | `0 *` vs `0 0-23` across fall-back | holds literally; spec question Q-E09-1 |

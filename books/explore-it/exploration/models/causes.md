@@ -68,3 +68,41 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 |---|---|---|---|---|
 | C-E07-1 Set-based statements select by snapshot while concurrent transactions move rows across their predicate | purge `marked`/`removed` CTEs (api/queues.go:170) and worker release `FOR UPDATE` (expire.go:20) re-check only rows whose snapshot version already matched | E07-F01, E07-F02 | purge ‖ release, purge ‖ expiry (≈18:08:3xZ) | both confirmed (P5) |
 | C-E07-2 Lease reads the worker without locking it; holder verbs check only the token | jobs.go:57, api/jobs.go:160; ack.go:14, jobs.go:100 | E07-F01 (zombie lease, 500 on vanished worker) | queue deleted between lookup and lease (H-E06-20) — not probed | open |
+
+## E09 regrouping — `explore-it/lesson-08` (written 2026-10-22T20:35Z, before probes; predictions and outcomes in [E09 notes](../experiments/09-explain-it/notes.md))
+
+The 26 E01 defect findings (F01–F27 less F25, a spec silence) fall under five habits plus singletons. Later U findings are listed where they show the same habit again.
+
+| Habit | Code shape | E01 findings | Later findings, same habit | Where it can still live (E09 prediction) |
+|---|---|---|---|---|
+| H-A Missing predicate | `UPDATE/DELETE … WHERE id=$1` or a firing/reporting `SELECT` without the state, token, namespace, enabled or tiebreak term the rule needs | F01, F02, F03, F06, F07, F15, F18, F23 (8) | U22 (expiry not in ack guard), E06-F01 (RowsAffected), E07-F02 | Lease has no `run_at <= now` (jobs.go:66); Retry/Lease/Ack never reset `last_error` (operator.go:50, jobs.go:83, ack.go:14) |
+| H-B Silent acceptance | value stored or used without the rule the spec states; lossy decode | F09, F16, F17, F19, F20 (5) | E03-F01..F03, F07; E06-F02..F04; E02-F02 (URL) | create/PATCH accept a cron whose `Next` is the zero time (api/schedules.go:264, :341; fire.go:32-33); `CRON_TZ=` prefix (fire.go:12, :23); non-IANA `Local` zone (api/schedules.go:259) |
+| H-C Clock/time reference | time computed once, from the wrong field, or with a too-coarse unit | F24, F26, F27 (3) | E04-F05, E08-F03 | wildcard detection by string prefix of the hour field (fire.go:23) |
+| H-D Console that lies | status/exit/health reports something not checked | F14, F22 (2) | F21-style 200 errors, E05-F03, U38 | error after commit answered as 409 (ack.go:25, operator.go:38 via api/jobs.go:110) |
+| H-E One row's error aborts a set-based pass | `return e` inside a per-row loop of a background step | (F08 at loop level) | E02-F02, E03-F05, E08-F02 | Fire (fire.go:73-75) with any schedule whose fireOne errors; Expire notify loop (expire.go:26-29); worker-delete notify loop (api/jobs.go:154-158) |
+| Singletons | — | F04, F05, F08, F10, F11, F12, F13, F21 (8) | — | — |
+
+Counts are the explorer's grouping; a finding with two causes is placed by its dominant code habit (F23 could be H-C: one-second `created_at`).
+
+### E09 outcomes (probes 20:36–20:44Z; [E09 notes](../experiments/09-explain-it/notes.md))
+
+| Predicted defect (20:35:43Z) | Habit | Outcome | Report |
+|---|---|---|---|
+| PD1 never-matching cron accepted → Fire stops at it every tick | H-B + H-E | confirmed; cross-namespace; pause irrelevant; only higher ids blocked | E09-F01, E09-F02 |
+| PD2 same via PATCH | H-B | confirmed | E09-F02 |
+| PD3 `CRON_TZ=`/`TZ=` prefix | H-B | confirmed; with non-UTC `timezone` the instant matches neither zone | E09-F03 |
+| PD4 `Local` zone | H-B | confirmed | E09-F09 |
+| PD5 `0-23` hour treated as fixed | H-C | behaviour confirmed; not a defect by SPEC:163-165 literal reading (Q-E09-1) | — |
+| PD6 error after commit answered 409 | H-D | confirmed for cancel and ack under a concurrent DELETE; **plus** silent 200 with no notification (INSERT…SELECT of zero rows, jobs.go:102) — not predicted | E09-F07 |
+| PD7 notify loop aborts | H-E | confirmed for Expire and worker DELETE (500 after commit) | E09-F08 |
+| PD8 stale last_error on success | H-A | behaviour confirmed; spec silence (Q-E09-2) | — |
+| PD9 lease ignores run_at | H-A + H-C | behaviour confirmed after a backward clock step; lab-only clock class, kept as risk H-E04-08 | — |
+| (sibling) FIFO by settable created_at | H-C | confirmed = re-observation of E04 P9 | — |
+| (extra) zone_offset frozen in the record | H-D | confirmed | E09-F06 |
+
+Model delta: a sixth habit is now explicit — **H-F the post-commit tail**. Terminal transitions commit first, then
+write their attempt row and outbox snapshot as separate statements (ack.go:14→21→25, operator.go:35→38,
+expire.go:23→26, api/jobs.go:152→156). Anything that removes the row in between turns a success into a 409/500 or
+into a silent loss. H-E (per-row abort) and H-F combine in E09-F08. The habit grouping predicted 7 defect sites;
+6 produced reports (E09-F01, F02, F03, F07, F08, F09). One more report (F06) came from a sibling. Three predictions
+showed the behaviour, but the prior record or the spec does not make it a defect.

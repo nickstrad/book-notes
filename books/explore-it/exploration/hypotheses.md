@@ -285,10 +285,42 @@ H-E08-21 ≈19:35:05Z). Regression holds are not discoveries.
 | H-E08-20 | frozen DB 12 s: auth requests hang then 200; `/health` 503 within ≈1 s | api.go:132,153 | prompt 503 on auth | DB / E08 | experiment 08: refuted (health clause: hung 11.8 s then 200) | P8 (E08-F04) |
 | H-E08-21 | frozen DB 25 s: all DB-path requests incl. /health return only after unpause | P8 | any returns early | DB / E08 | experiment 08: confirmed | P8b (E08-F04) |
 | H-E08-22 | A partner answering 302 (→ GET 200) is recorded as delivered without receiving the body (Go client follows redirects) | ship.go:31 default client | marked failed | partner / next | open | needs a redirect-capable partner (TR-E08-3) |
-| H-E08-23 | One schedule that cannot advance starves later schedules every tick (Fire returns on first error) | fire.go:37-40 | later schedules fire | core loop / next | open | no external trigger found |
+| H-E08-23 | One schedule that cannot advance starves later schedules every tick (Fire returns on first error) | fire.go:37-40 | later schedules fire | core loop / next | experiment 09: confirmed (trigger: a never-matching cron, E09-F01) | no external trigger found (E08); E09 H-E09-01/02 |
 | H-E08-24 | More than 16 concurrent requests during a DB freeze exhaust the pool; requests queue behind it after unfreeze | store.go:16 | no queueing | DB / next | open | not probed |
 | Q-E08-1 | What does the worker `token` (SPEC.md:91) authorise? Should lease/ack require it so attempt history attribution is trustworthy? | P7 | spec decision | spec decision | open | |
 | Q-E08-2 | DST rule for non-existent and repeated local times (skip/once-after/twice)? | E08-F03 | spec decision | spec decision | open | |
 | T-E08-1 | Testability: deterministic single-statement DB fault (for H-E04-10 / ack non-atomicity) | ack.go:13-26 | — | testability request | open | see notes "Not run / testability requests" |
 | T-E08-2 | Testability: shipper backlog/lag metric and health signal | P5c (/health 200 during permanent stall) | — | testability request | open | validation: P5b blackhole flips it |
 | T-E08-3 | Testability: hooksink records received signature (E01 TR1) and offers 302/307 modes | P4 needed a capture listener | — | testability request | open | |
+
+## Experiment 09 (explain-it) — `explore-it/lesson-08`
+
+Predicted-defect table (PD1–PD9) timestamped 20:35:43Z in [E09 notes](experiments/09-explain-it/notes.md), before any probe.
+
+| Id | Statement / prediction | Source | Refutation | Probe / experiment | Status | Evidence |
+|---|---|---|---|---|---|---|
+| H-E09-01 | Never-matching cron `0 0 30 2 *` → 201, next_run_at 0001-01-01 | api/schedules.go:264; fire.go:32-33 | 400 or real next | E09 | experiment 09: confirmed | E09-F02 |
+| H-E09-02 | With it enabled, a later-id globex `* * * * *` schedule never fires; /health degraded | fire.go:73-75, :106 | victim fires | E09 | experiment 09: confirmed | E09-F01 |
+| H-E09-02b | Lower-id schedule 2 keeps firing | fire.go:68 order | schedule 2 stops | E09 | experiment 09: confirmed | E09-F01 |
+| H-E09-03 | Disabling only the bad schedule releases the victim next tick | control | still blocked | E09 | experiment 09: confirmed | E09-F01 |
+| H-E09-04 | PATCH to `0 0 31 4 *` → 200, year-1 next_run_at | api/schedules.go:341 | 400 | E09 | experiment 09: confirmed | E09-F02 |
+| H-E09-05 | Wildcard-hour `* * 30 2 *` → 201, year 1 | fire.go:25 | 400 | E09 | experiment 09: confirmed | E09-F02 |
+| H-E09-06 | Pausing the bad schedule's queue does not help | fire.go:102 vs :110 | victim fires | E09 | experiment 09: confirmed | E09-F01 |
+| H-E09-07 | `CRON_TZ=Asia/Tokyo 0 9 * * *`, timezone UTC → 201, next ≠ 09:00Z | fire.go:12, :23; robfig (memory) | 400 / 09:00Z | E09 | experiment 09: confirmed (00:00Z) | E09-F03 |
+| H-E09-07b | Same with timezone New York → neither zone's 09:00 | fire.go:29-37 | equals either | E09 | experiment 09: confirmed (05:00Z) | E09-F03 |
+| H-E09-08 | timezone `Local` → 201 | api/schedules.go:259 | 400 | E09 | experiment 09: confirmed | E09-F09 |
+| H-E09-09 | NY at 05:30Z 2026-11-01: `0 * * * *` → 06:00Z, `0 0-23 * * *` → 07:00Z | fire.go:23 | both 06:00Z | E09 | experiment 09: confirmed | not a defect (SPEC:163-165 literal); Q-E09-1 |
+| H-E09-10 | After nack then ack, job/events/webhook keep last_error "boom1" on success | operator.go:50; jobs.go:83; ack.go:14; 003.sql:27 | last_error "" | E09 | experiment 09: confirmed | not a defect (SPEC:79/:178 say "last error"); Q-E09-2 |
+| H-E09-11 | After a backward clock step a queued future job is leased | jobs.go:66 | lease empty | E09 | experiment 09: confirmed | not filed: lab-only clock class, evidence for H-E04-08 (draft E09-F04 withdrawn) |
+| H-E09-12 | After a backward clock step a later-created job is leased first | jobs.go:43 | A first | E09 | experiment 09: confirmed | not filed: re-observation of E04 P9 / H-E04-08 (draft E09-F05 withdrawn) |
+| H-E09-13 | Schedule zone_offset stays -14400 after NY falls back | api/schedules.go:282, :350 | -18000 | E09 | experiment 09: confirmed | E09-F06 |
+| H-E09-14 | Cancel racing DELETE: some cancels 409 after commit, no outbox row | operator.go:35-38; api/jobs.go:110 | all 200 | E09 | experiment 09: confirmed (2/300; plus 12 silent 200s) | E09-F07 |
+| H-E09-15 | Expire pass: a vanished first dead job drops other dead jobs' notifications forever | expire.go:26-29 | all survivors notified | E09 | experiment 09: confirmed (2/40 trials, 8 jobs) | E09-F08 |
+| H-E09-16 | Ack racing DELETE: 409 after commit and lost notifications | ack.go:21, :25 | all 200 and notified | E09 | experiment 09: confirmed (68×409, 125 lost) | E09-F07 |
+| H-E09-17 | Worker DELETE racing job DELETE: 500 after commit, survivors un-notified | api/jobs.go:154-158 | all 200 and notified | E09 | experiment 09: confirmed (1/40) | E09-F08 |
+| H-E09-18 | Nack → dead racing DELETE loses its notification / answers 409 | nack.go:35-39 | always notified | next | open (needs more) | not probed |
+| H-E09-19 | Retention (retention_hours 0, real clock) can delete a just-acked job before Notify → same loss without any operator | expire.go:91 + ack.go:25 | never | next | open | not probed |
+| Q-E09-1 | Is an hour field covering every hour (`0-23`, `*/1` vs `0-23/1`) "wildcard-hour" under SPEC:163-165? | H-E09-09 | spec decision | spec | open | |
+| Q-E09-2 | Should success (or operator retry) clear `last_error`, and should events carry the previous attempt's error? | H-E09-10 | spec decision | spec | open | |
+| TR-E09-1 | Testability: background-task log lines name the step and schedule/job id | H-E09-02, H-E09-15 | — | testability request | open | validate by re-running both |
+| TR-E09-2 | Testability: test-only switch making Notify fail once for a given job id (deterministic post-commit fault) | H-E09-14/15/17 | — | testability request | open | extends T-E08-1 |

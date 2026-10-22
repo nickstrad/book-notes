@@ -95,3 +95,19 @@ Rows added by the coordinator from the explorer's reports (the explorer did not 
 | [E08-F02](E08-F02-slow-destination-starves-all-later-notifications.md) Twenty slow or unreachable webhook rows starve every later notification, for every tenant | lesson-07 | SPEC:179, :197-198, :10 | High | open | E08 notes P5, P5b, P5c |
 | [E08-F03](E08-F03-dst-gap-skips-and-overlap-double-fires.md) Fixed-time schedule in the DST gap skips that day; in the repeated hour runs twice | lesson-07 | SPEC:162 (silent); classic cron | Medium | spec | E08 notes P6 |
 | [E08-F04](E08-F04-frozen-database-hangs-health-and-api.md) Frozen database hangs every request, `/health` included; no 503 | lesson-07 | SPEC:188-189; code's 1 s ping deadline | Medium–high | open | E08 notes P8, P8b |
+
+## Experiment 09 (explain-it) — explorer reports at `explore-it/lesson-08`
+
+Local ids E09-F01… are provisional; the coordinator reconciles them. Earlier entries above are unchanged. E09-F04 and
+E09-F05 were drafted and withdrawn during the run (lab-only clock class, already judged under H-E04-08); the ids are
+unused.
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E09-F01](E09-F01-one-unadvanceable-schedule-stops-all-later-schedules.md) One schedule that cannot advance stops every later schedule, in every namespace | lesson-08 | SPEC:166, :189, :10 (approx.) | High | open | E09 notes H-E09-02/02b/03/06 |
+| [E09-F02](E09-F02-never-matching-cron-accepted-year-one.md) Never-matching cron accepted; next_run_at 0001-01-01 | lesson-08 | SPEC:19 (approx.), :170-171 | Medium | open | E09 notes H-E09-01/04/05 |
+| [E09-F03](E09-F03-cron-zone-prefix-overrides-timezone.md) `CRON_TZ=`/`TZ=` prefix accepted and overrides `timezone` | lesson-08 | SPEC:160-162 | Medium | open | E09 notes H-E09-07/07b |
+| [E09-F06](E09-F06-schedule-zone-offset-frozen-in-record.md) Schedule record reports a frozen `zone_offset` after DST | lesson-08 | SPEC:162 (approx.) | Low | open | E09 notes H-E09-13 |
+| [E09-F07](E09-F07-ack-cancel-error-after-commit-and-lost-notification.md) Ack/cancel ‖ job DELETE: committed transition answered 409; notification lost (also with 200) | lesson-08 | SPEC:177, :203, :16 | Medium–high | open | E09 notes H-E09-14/16 |
+| [E09-F08](E09-F08-one-vanished-job-drops-other-dead-notifications.md) Expiry/worker-delete pass: one vanished job drops later jobs' notifications; worker DELETE 500 | lesson-08 | SPEC:177, :204-205, :15 | Medium–high | open | E09 notes H-E09-15/17 |
+| [E09-F09](E09-F09-non-iana-local-timezone-accepted.md) Schedule timezone `Local` accepted | lesson-08 | SPEC:161 | Low | open | E09 notes H-E09-08 |
