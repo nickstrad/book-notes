@@ -12,3 +12,8 @@
   `docker kill` is an operator stop, a frozen database is not a stopped one, lib/pq ignores
   context deadlines against a frozen server, and probes must leave shared queues drained.
   Evidence: `register/runs/08-opus-*`.
+
+- [E09: post-commit races, frozen clocks and table checks](09-post-commit-races.md): a delete
+  spinner per job, judging races by what committed, draining outbox rows before resetting a
+  far-future clock, and checking handlers against the table and the table against SPEC.
+  Evidence: `register/runs/09-opus-*`.
