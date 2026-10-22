@@ -10,9 +10,17 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
+
 	"litefleet/internal/blob"
 	"litefleet/internal/engine"
 )
+
+var backupDuration = promauto.NewHistogram(prometheus.HistogramOpts{
+	Name: "backup_duration_seconds", Help: "Time to snapshot and upload one database.",
+	Buckets: prometheus.ExponentialBuckets(0.005, 2, 16),
+})
 
 // Job uploads a snapshot of every database written since its last backup.
 type Job struct {
@@ -53,6 +61,7 @@ func (j *Job) Run() {
 // generation in _meta, so a generation recorded in the file always names an
 // uploaded snapshot of exactly that state.
 func (j *Job) Backup(id string) (int, error) {
+	defer func(start time.Time) { backupDuration.Observe(time.Since(start).Seconds()) }(time.Now())
 	h, err := j.eng.Handle(id)
 	if err != nil {
 		return 0, err

@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 
 	"litefleet/internal/httpx"
 	"litefleet/internal/wire"
@@ -68,7 +69,7 @@ func (c *Client) Usage(apiKey, window string) (json.RawMessage, error) {
 	return out, err
 }
 
-func (c *Client) do(method, path, apiKey string, body []byte, out any) error {
+func (c *Client) do(method, path, apiKey string, body []byte, out any) (err error) {
 	req, err := http.NewRequest(method, c.base+path, bytes.NewReader(body))
 	if err != nil {
 		return err
@@ -77,11 +78,14 @@ func (c *Client) do(method, path, apiKey string, body []byte, out any) error {
 	if apiKey != "" {
 		req.Header.Set("Authorization", "Bearer "+apiKey)
 	}
+	start, status := time.Now(), 0
+	defer func() { httpx.Dependency("control", start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return fmt.Errorf("control: %w", err)
 	}
 	defer resp.Body.Close()
+	status = resp.StatusCode
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return fmt.Errorf("control: %w", err)

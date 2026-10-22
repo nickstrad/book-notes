@@ -37,6 +37,20 @@ func (q *Queue) Len() int {
 	return len(q.pending)
 }
 
+// OldestAge is how long the oldest waiting event has waited.
+func (q *Queue) OldestAge() time.Duration {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	if len(q.pending) == 0 {
+		return 0
+	}
+	at, err := time.Parse(time.RFC3339Nano, q.pending[0].At)
+	if err != nil {
+		return 0
+	}
+	return time.Since(at)
+}
+
 // Run ships events until the process exits.
 func (q *Queue) Run() {
 	for {

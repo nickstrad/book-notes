@@ -59,6 +59,7 @@ func main() {
 	os.MkdirAll(tmp, 0o755)
 	n.backup = backup.New(n.eng, blob.New(env("BLOBSTORE_URL", "http://blobstore:8081")), interval, tmp)
 
+	n.exportMetrics()
 	go n.usage.Run()
 	go n.backup.Run()
 	go n.heartbeats(env("CONTROL_URL", "http://control:8090"))
@@ -69,7 +70,10 @@ func main() {
 	mux.HandleFunc("POST /internal/provision", n.provision)
 	mux.HandleFunc("DELETE /internal/db/{id}", n.drop)
 	mux.HandleFunc("POST /internal/backup/{id}", n.backupNow)
-	mux.HandleFunc("GET /health", httpx.Health)
+	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{
+		"canary": n.canaryCheck, "fds": n.fdCheck, "disk": n.diskCheck, "wal": n.walCheck,
+	}))
+	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	addr := env("LISTEN", ":8070")
 	log.Printf("%s listening on %s", n.name, addr)

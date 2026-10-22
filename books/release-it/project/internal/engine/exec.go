@@ -58,6 +58,7 @@ func isRead(q string) bool {
 // Query runs one read statement on a query_only connection and returns every
 // row.
 func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.QueryResult, []byte, error) {
+	defer observeStatement("read", time.Now())
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, nil, err
@@ -109,6 +110,7 @@ func (e *Engine) Query(id string, epoch int, req wire.QueryRequest) (*wire.Query
 
 // Execute runs every statement in one write transaction.
 func (e *Engine) Execute(id string, epoch int, req wire.ExecuteRequest) (*wire.ExecuteResult, error) {
+	defer observeStatement("write", time.Now())
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, err

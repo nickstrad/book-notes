@@ -1,5 +1,6 @@
 // Package httpx is the HTTP plumbing shared by gateway, control and node:
-// server construction, request logging, JSON helpers and typed errors.
+// server construction, request logging and metrics, JSON helpers and typed
+// errors.
 package httpx
 
 import (
@@ -8,7 +9,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
+	"time"
 
 	"litefleet/internal/wire"
 )
@@ -18,10 +21,43 @@ func NewServer(addr string, h http.Handler) *http.Server {
 	return &http.Server{Addr: addr, Handler: h}
 }
 
-// Logged logs every request after it has been handled.
+type statusWriter struct {
+	http.ResponseWriter
+	status int
+}
+
+func (w *statusWriter) WriteHeader(code int) {
+	if w.status == 0 {
+		w.status = code
+	}
+	w.ResponseWriter.WriteHeader(code)
+}
+
+func (w *statusWriter) Write(b []byte) (int, error) {
+	if w.status == 0 {
+		w.status = http.StatusOK
+	}
+	return w.ResponseWriter.Write(b)
+}
+
+// Logged counts and times every request by route, and logs it after it has
+// been handled.
 func Logged(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h.ServeHTTP(w, r)
+		start := time.Now()
+		sw := &statusWriter{ResponseWriter: w}
+		inflight.Inc()
+		h.ServeHTTP(sw, r)
+		inflight.Dec()
+		if sw.status == 0 {
+			sw.status = http.StatusOK
+		}
+		route := r.Pattern
+		if route == "" {
+			route = "unmatched"
+		}
+		requests.WithLabelValues(route, r.Method, strconv.Itoa(sw.status)).Inc()
+		duration.WithLabelValues(route).Observe(time.Since(start).Seconds())
 		log.Printf("handled %s %s", r.Method, r.URL.Path)
 	})
 }
@@ -67,11 +103,6 @@ func Bearer(r *http.Request) string {
 		return ""
 	}
 	return strings.TrimSpace(strings.TrimPrefix(h, "Bearer "))
-}
-
-// Health answers the load balancer's health check.
-func Health(w http.ResponseWriter, r *http.Request) {
-	WriteJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
 // RemoteError is a typed error returned by another litefleet service.

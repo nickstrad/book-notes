@@ -16,13 +16,21 @@ import (
 
 func main() {
 	instance := env("INSTANCE", "gateway")
+	controlURL := env("CONTROL_URL", "http://control:8090")
 	g := &api.Gateway{
-		Routes: routes.New(env("CONTROL_URL", "http://control:8090")),
+		Routes: routes.New(controlURL),
 		Nodes:  nodeclient.New(),
 	}
+	health := newProber(controlURL, env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"))
+	go health.run()
+
 	mux := http.NewServeMux()
 	g.Register(mux)
-	mux.HandleFunc("GET /health", httpx.Health)
+	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{
+		"control": health.controlCheck,
+		"nodes":   health.nodesCheck,
+	}))
+	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	served := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-Served-By", instance)

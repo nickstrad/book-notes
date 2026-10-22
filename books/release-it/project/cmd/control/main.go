@@ -4,6 +4,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"log"
 	"net/http"
@@ -48,11 +49,25 @@ func main() {
 	mux.HandleFunc("DELETE /internal/databases/{name}", c.dropDatabase)
 	mux.HandleFunc("POST /internal/heartbeat", c.heartbeat)
 	mux.HandleFunc("GET /internal/usage", c.usage)
-	mux.HandleFunc("GET /health", httpx.Health)
+	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{"postgres": c.postgresCheck}))
+	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	addr := env("LISTEN", ":8090")
 	log.Printf("control listening on %s", addr)
 	log.Fatal(httpx.NewServer(addr, httpx.Logged(mux)).ListenAndServe())
+}
+
+// postgresCheck: control cannot answer anything without its registry.
+func (c *control) postgresCheck() (string, string) {
+	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+	defer cancel()
+	if err := c.reg.Ping(ctx); err != nil {
+		if errors.Is(err, context.DeadlineExceeded) || ctx.Err() != nil {
+			return httpx.Failed, "postgres timeout"
+		}
+		return httpx.Failed, "postgres: " + err.Error()
+	}
+	return httpx.OK, ""
 }
 
 func env(k, def string) string {

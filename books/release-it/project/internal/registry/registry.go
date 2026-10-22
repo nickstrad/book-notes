@@ -3,6 +3,7 @@
 package registry
 
 import (
+	"context"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
@@ -13,6 +14,7 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 	_ "github.com/jackc/pgx/v5/stdlib"
 
+	"litefleet/internal/httpx"
 	"litefleet/internal/wire"
 )
 
@@ -35,6 +37,7 @@ func Open(dsn string) (*Registry, error) {
 	}
 	// Keep connections warm: every request resolves through here.
 	db.SetMaxIdleConns(32)
+	exportPool(db)
 	return &Registry{db: db}, nil
 }
 
@@ -42,7 +45,20 @@ func Open(dsn string) (*Registry, error) {
 func (r *Registry) DB() *sql.DB { return r.db }
 
 // Ping checks that Postgres answers.
-func (r *Registry) Ping() error { return r.db.Ping() }
+func (r *Registry) Ping(ctx context.Context) (err error) {
+	defer observe(time.Now(), &err)
+	return r.db.PingContext(ctx)
+}
+
+// observe records one registry call as a call to the postgres dependency.
+// Answers such as "unknown key" are successful calls.
+func observe(start time.Time, err *error) {
+	e := *err
+	if errors.Is(e, ErrUnauthorized) || errors.Is(e, ErrNoSuchDatabase) || errors.Is(e, ErrExists) {
+		e = nil
+	}
+	httpx.Dependency("postgres", start, 0, e)
+}
 
 // HashKey is how API keys are stored.
 func HashKey(key string) string {
@@ -52,6 +68,7 @@ func HashKey(key string) string {
 
 // Tenant returns the tenant that owns an API key.
 func (r *Registry) Tenant(apiKey string) (tenantID string, admin bool, err error) {
+	defer observe(time.Now(), &err)
 	err = r.db.QueryRow(`SELECT tenant_id, admin FROM api_keys WHERE key_hash = $1`, HashKey(apiKey)).Scan(&tenantID, &admin)
 	if errors.Is(err, sql.ErrNoRows) {
 		return "", false, ErrUnauthorized
@@ -61,11 +78,11 @@ func (r *Registry) Tenant(apiKey string) (tenantID string, admin bool, err error
 
 // Resolve authenticates a key and locates one of its databases in one round
 // trip.
-func (r *Registry) Resolve(apiKey, dbName string) (wire.Route, error) {
-	var rt wire.Route
+func (r *Registry) Resolve(apiKey, dbName string) (rt wire.Route, err error) {
+	defer observe(time.Now(), &err)
 	var dbID, url, node sql.NullString
 	var epoch sql.NullInt64
-	err := r.db.QueryRow(`
+	err = r.db.QueryRow(`
 		SELECT k.tenant_id, d.id::text, n.url, n.name, p.epoch
 		FROM api_keys k
 		LEFT JOIN databases d ON d.tenant_id = k.tenant_id AND d.name = $2 AND d.state = 'active'
@@ -87,7 +104,8 @@ func (r *Registry) Resolve(apiKey, dbName string) (wire.Route, error) {
 
 // NodeLoad returns every node with a recent heartbeat and how many databases
 // it holds.
-func (r *Registry) NodeLoad() (map[string]int, error) {
+func (r *Registry) NodeLoad() (_ map[string]int, err error) {
+	defer observe(time.Now(), &err)
 	rows, err := r.db.Query(`
 		SELECT n.name, count(p.database_id)
 		FROM nodes n LEFT JOIN placement p ON p.owner_node = n.name
@@ -110,9 +128,9 @@ func (r *Registry) NodeLoad() (map[string]int, error) {
 }
 
 // BeginCreate records a database in state 'provisioning' and returns its id.
-func (r *Registry) BeginCreate(tenantID, name string) (string, error) {
-	var id string
-	err := r.db.QueryRow(`
+func (r *Registry) BeginCreate(tenantID, name string) (id string, err error) {
+	defer observe(time.Now(), &err)
+	err = r.db.QueryRow(`
 		INSERT INTO databases (id, tenant_id, name, state)
 		VALUES (gen_random_uuid(), $1, $2, 'provisioning')
 		RETURNING id::text`, tenantID, name).Scan(&id)
@@ -124,7 +142,8 @@ func (r *Registry) BeginCreate(tenantID, name string) (string, error) {
 }
 
 // FinishCreate publishes the placement once the node has confirmed the file.
-func (r *Registry) FinishCreate(dbID, node string, epoch int) error {
+func (r *Registry) FinishCreate(dbID, node string, epoch int) (err error) {
+	defer observe(time.Now(), &err)
 	tx, err := r.db.Begin()
 	if err != nil {
 		return err
@@ -146,7 +165,8 @@ func (r *Registry) AbortCreate(dbID string) error {
 }
 
 // ListDatabases returns a tenant's active databases.
-func (r *Registry) ListDatabases(tenantID string) ([]wire.Database, error) {
+func (r *Registry) ListDatabases(tenantID string) (_ []wire.Database, err error) {
+	defer observe(time.Now(), &err)
 	rows, err := r.db.Query(`
 		SELECT d.id::text, d.name, p.owner_node, d.state, d.bytes_total, d.rows_total, d.size_bytes,
 		       coalesce(to_char(d.last_backup_at, 'YYYY-MM-DD"T"HH24:MI:SSOF'), '')
@@ -200,7 +220,8 @@ func (r *Registry) MarkDropped(dbID string) error {
 
 // Heartbeat records a node's liveness, its databases' sizes and activity, and
 // appends the activity to the usage ledger.
-func (r *Registry) Heartbeat(hb wire.Heartbeat) error {
+func (r *Registry) Heartbeat(hb wire.Heartbeat) (err error) {
+	defer observe(time.Now(), &err)
 	tx, err := r.db.Begin()
 	if err != nil {
 		return err

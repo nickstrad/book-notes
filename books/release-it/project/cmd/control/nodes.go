@@ -7,7 +7,9 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
+	"litefleet/internal/httpx"
 	"litefleet/internal/wire"
 )
 
@@ -37,7 +39,7 @@ func (n *nodeCommands) drop(node, dbID string) error {
 	return n.send(node, http.MethodDelete, "/internal/db/"+dbID, nil)
 }
 
-func (n *nodeCommands) send(node, method, path string, body []byte) error {
+func (n *nodeCommands) send(node, method, path string, body []byte) (err error) {
 	base, ok := n.urls[node]
 	if !ok {
 		return fmt.Errorf("unknown node %q", node)
@@ -47,11 +49,14 @@ func (n *nodeCommands) send(node, method, path string, body []byte) error {
 		return err
 	}
 	req.Header.Set("Content-Type", "application/json")
+	start, status := time.Now(), 0
+	defer func() { httpx.Dependency(node, start, status, err) }()
 	resp, err := n.http.Do(req)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
+	status = resp.StatusCode
 	if resp.StatusCode >= 300 {
 		msg, _ := io.ReadAll(resp.Body)
 		return fmt.Errorf("%s %s: %s %s", method, path, resp.Status, bytes.TrimSpace(msg))

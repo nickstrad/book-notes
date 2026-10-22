@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
+	"litefleet/internal/httpx"
 	"litefleet/internal/wire"
 )
 
@@ -23,7 +25,9 @@ func NewClient(base string) *Client {
 }
 
 // Send posts one batch.
-func (c *Client) Send(events []wire.UsageEvent) error {
+func (c *Client) Send(events []wire.UsageEvent) (err error) {
+	start, status := time.Now(), 0
+	defer func() { httpx.Dependency("metering", start, status, err) }()
 	body, err := json.Marshal(events)
 	if err != nil {
 		return err
@@ -33,6 +37,7 @@ func (c *Client) Send(events []wire.UsageEvent) error {
 		return err
 	}
 	defer resp.Body.Close()
+	status = resp.StatusCode
 	io.Copy(io.Discard, resp.Body)
 	if resp.StatusCode >= 300 {
 		return fmt.Errorf("metering: %s", resp.Status)

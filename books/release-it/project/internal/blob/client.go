@@ -8,6 +8,9 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
+
+	"litefleet/internal/httpx"
 )
 
 // Client uploads snapshots to the blob store.
@@ -28,7 +31,9 @@ type PutResult struct {
 }
 
 // Put uploads the file at path as generation gen of database dbID.
-func (c *Client) Put(dbID string, gen int, path string) (*PutResult, error) {
+func (c *Client) Put(dbID string, gen int, path string) (_ *PutResult, err error) {
+	start, status := time.Now(), 0
+	defer func() { httpx.Dependency("blobstore", start, status, err) }()
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
@@ -49,6 +54,7 @@ func (c *Client) Put(dbID string, gen int, path string) (*PutResult, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	status = resp.StatusCode
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err

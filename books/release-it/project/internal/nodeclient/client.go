@@ -72,18 +72,21 @@ func transient(err error) bool {
 	return true
 }
 
-func (c *Client) do(rt wire.Route, op string, body []byte, out any) error {
+func (c *Client) do(rt wire.Route, op string, body []byte, out any) (err error) {
 	req, err := http.NewRequest(http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Epoch", strconv.Itoa(rt.Epoch))
+	start, status := time.Now(), 0
+	defer func() { httpx.Dependency(rt.Node, start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return fmt.Errorf("node %s: %w", rt.Node, err)
 	}
 	defer resp.Body.Close()
+	status = resp.StatusCode
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return fmt.Errorf("node %s: %w", rt.Node, err)
