@@ -1,0 +1,167 @@
+{
+  "experiment": 5,
+  "source_tag": "explore-it/lesson-04",
+  "export_path": "/tmp/explore-it-experiment-05",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "67889e05d7c9c77e0487606e0acf22de4766156a6b27fa13961607d2fa86a85a"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "4982ddd39db9a77c5122cd75d56b55834e0ff649851275d406c8180d70d5d14c"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "d5e5cd5ebbc7ab04f08d03fe7545496a80e565c8d75a2696c6d5a28eb65ac519"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "66a817cdbd3fa84f603957d8418b9e440ff1509b7618c10a505b1426e8b1e030"
+    },
+    {
+      "file": "exploration/models/nouns-verbs.md",
+      "sha256": "64123ddc7a17abe791a04253a36b1fb33645214af5066c6efa4e5f8d9bceddb6"
+    },
+    {
+      "file": "exploration/defects/E05-F03-worker-release-logged-as-lease-expired.md",
+      "sha256": "af0dd4a38232b9463e163c2fd6a4b28d3d2eb7e310dbef5b6e8aa37320d9f3d4"
+    },
+    {
+      "file": "exploration/defects/E05-F02-terminal-rows-keep-lease-fields.md",
+      "sha256": "018131a840627e343043b2109d94ef7e3208c0f95689b87ce82997af53aec81c"
+    },
+    {
+      "file": "exploration/defects/E05-F01-worker-delete-release-uncounted-attempt.md",
+      "sha256": "1139f33002767031d566c5a8d0d1372ef5b494b00690cc307560cba05ac658a1"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/revealed.md",
+      "sha256": "88b83badd7a8045ddbec2b49955aa52bb775cbb8aea8777b508225ed97f79332"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/charter.md",
+      "sha256": "5f628efa457951a723b5ec06c0f0b30ef5b0a5a1776f4e6c145fa242b4eb8aee"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/brief.md",
+      "sha256": "b45b72d615b363afc720baae40c08687460d25e844e3d548d018fa48d4a7496b"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/walk.sh",
+      "sha256": "3e970129bce1d8ba40434166f72431a6ef1313434a4af408ef5bac9de46d3d45"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/notes.md",
+      "sha256": "b105658f439fd97c0f43c5c52a7910d1d5fda20ed0cff6e60bb5cd408de22677"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/f03sib.sh",
+      "sha256": "16feb09379c1e364eebb322c24c53002603c11283d602ccd7111c441bb50719b"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/isolate.sh",
+      "sha256": "4cf5448b47bba0664a31de045223576f93ff3755944d8097de0edc0fb0d72598"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/run-walks.sh",
+      "sha256": "2d796f0d09bb835cab8446b27438e0d4d77dc91b9a7a560da5a79c418cd50afd"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/f02.sh",
+      "sha256": "b72f7c94121fa51e7a164855077465ff31583f4cb123db9985e4487965d28802"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/pairs.sh",
+      "sha256": "5e15ee8224560002a08f24d9414a9eaf68367e2a268cc2772ddfcc746a0851e3"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/tools/e05env.sh",
+      "sha256": "1fcf7c2fa4a48b4f0ef9dc7eefdd591543125b1569d83a2c8b61f4488463fb20"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/export-state.md",
+      "sha256": "d559250b7dd880f7a0530a46b9123df9103b986dc7cf2984ce84609591750651"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-b22-killed.txt",
+      "sha256": "7c247874d2324f5e96df52df7ec0d27fdc8590bfb4affc89c8ed6988684cb911"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-b32.txt",
+      "sha256": "e1ed2c6aeeca3e15f8a1edfba7458ceb535c4a401eabb86e006371688e29e446"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/p6-p7.txt",
+      "sha256": "329f78cd4fbc2f6817ec9fe16cd2c4bef3c0e358b9cdcfa1ef3088e1f421cd9a"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-b.done",
+      "sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/up.log",
+      "sha256": "684f6248964db53175a4a5be96e5d3292367fbf0e3977cafa6b656674f5bb1f0"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/p1-p5.txt",
+      "sha256": "3a3bc8cd2980c2ad7c885141106c146afaa4e3f6e8b6b87417f955ab64212a3f"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-12.txt",
+      "sha256": "4bd9f4b751a9e1c6cb2b3d13566a2e82c899439d590156e72f832df914b9a135"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-bg.done",
+      "sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/f03-sibling.txt",
+      "sha256": "2c9a228adf5cebe9b84a966c37a661c7f9d2288ba0a60104b186a3b4d93e3718"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/final-snapshot.txt",
+      "sha256": "9b8e93e98109caba3528c3bdc7f7c238e4741cd6e9d4d9dc20cf52fe790055af"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-b31.txt",
+      "sha256": "ba19f7ab9ebc2d248b7ad75b8f798d444dc9359dbe7c134da0a3ea4b14da0842"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-11.txt",
+      "sha256": "00273b64e83c28a9288c87ad593e98f8ab50213653b703c7d1c9a0184e47823b"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/all-logs-at-stop.txt",
+      "sha256": "da86a3a1ba481ecbb46d521f36f3fa4811f65c263c8e181e658cd2ccb70cd523"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/f02-f03.txt",
+      "sha256": "2c0b939ccb5ddb3df0fc551b54797098d0f247a3f30f832d059527304b2d3381"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-b21-killed-starved.txt",
+      "sha256": "7ebf56f467dfdcdc194706119ef2d8b1af88da540242f52549b4fdc4f592acfc"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/isolate.txt",
+      "sha256": "d003cdb9124efb5b7c850a5bada4dba8713975b39acdcce4fd6a1351b3e184ed"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/p8-p2.txt",
+      "sha256": "504e5cdb60618ce77bba25f3811e10122ddf00748d3244707337a23906916713"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/up-start.txt",
+      "sha256": "9245418a3641e9986e6ade319c1071ee444879238059dd64b8522d68291c5a16"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/walk-13.txt",
+      "sha256": "c011404deeecbe3bdc93e012f35e86a73a5f2fdd111698118a0377edc372dce5"
+    },
+    {
+      "file": "exploration/experiments/05-sequence-it/evidence/project-results/e05/stop-time.txt",
+      "sha256": "c041a977c690abe5e1a9315da629058efdbdefedfe4890980809c198e3a3568c"
+    }
+  ]
+}

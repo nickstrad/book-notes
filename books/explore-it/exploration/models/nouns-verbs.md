@@ -25,3 +25,25 @@ Legend: **O** walked in E01 with evidence, **I** read only, **—** not tried.
 | ★ webhook outbox entry | ack → POST 500 ×11 → mode ok → delivered | delivered once on 2xx |
 | ★ webhook outbox entry | bad-URL queue → ack → PATCH URL → DELETE job | stays, blocks all (E02-F02) |
 | ★ worker | crash → container restart → re-register | row per incarnation, stale rows remain |
+
+## E05 revision — `explore-it/lesson-04`; sequence grid ([E05 notes](../experiments/05-sequence-it/notes.md))
+
+Nouns × verbs driven by [walk.sh](../experiments/05-sequence-it/walk.sh): job {enqueue now/delay, ack, nack, nack
+retry=false, heartbeat, stale-token ack, cancel, retry, delete}, lease {lease max 1–3}, queue {pause, resume, purge},
+worker {create, delete}, clock {advance +6/+25}. Directed pairs/triples:
+
+| Sequence (start state) | Result | Evidence |
+|---|---|---|
+| ★ purge → enqueue delay with same idempotency key (scheduled) | new job; key freed | P1 |
+| ★ pause → clock +1 h → resume (scheduled job, minute schedule) | promoted while paused, not leasable; 0 catch-up | P2 |
+| ★ lease → purge → nack | purge skips leased; nack → retry_wait; purged later | P3 |
+| ★ cancel → retry; nack(max) → cancel; ack → retry, cancel | 409 each | P4 |
+| ★ lease → cancel → worker delete | cancelled row keeps lease fields and names deleted worker | P5, H-E05-13 |
+| ★ (lease → worker delete) ×4 | 4 deliveries, attempt 1 each | P6 (E05-F01) |
+| ★ lease → pause → expiry | dead while paused | P7 |
+| ★ cancel scheduled / retry_wait → clock past due | stay cancelled | P8 |
+| ★ lease → expiry → lease → ack / cancel / worker delete | events all `lease_expired` | H-E05-15/18 (E05-F03) |
+| random walks seeds 11–13 (uniform, 550 steps) and 31–32 (holder-biased, 400 steps) | only E05-F01/F02 classes (F03 visible in event history) | walk-11/12/13.txt, walk-b31/b32.txt |
+
+Untested sequences: schedule PATCH/run interleaved with pause and purge; queue DELETE between lease and ack; retention
+sweep vs retry; webhook outbox during cancel-of-leased; two API instances with skewed clocks.

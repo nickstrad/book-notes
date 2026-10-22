@@ -94,3 +94,44 @@ in E02 (O) unless marked I (inferred). Counted new cells are marked ★.
 | ★ leased → queued by expiry / worker delete | stats age | ≈0 (readiness = release) | from created/run_at | O 600 / 100 (E04-F05) |
 | ★ queued ×40 | 30 concurrent leases | each once | each once | O 40 distinct (P4) |
 | ★ retry_wait, attempts 20 (defaults) | nack | bounded? (spec silent) | 30.34 d | O run_at +2 621 440 s (P10; A1 spec silence) |
+
+## E05 revision — build `explore-it/lesson-04` ([E05 notes](../experiments/05-sequence-it/notes.md)); ★ = new observed cell
+
+Sequence probes P1–P8, isolation probes and seeded random walks ([walk.sh](../experiments/05-sequence-it/walk.sh), seeds
+11–13 uniform, 31–32 holder-biased; 21/22 stopped early, not counted). O = observed in E05 with the cited probe; I = inferred from code only.
+
+```text
+ queued ─lease(w)─► leased(w, attempt = attempts+1)
+   ▲                  │ DELETE worker w ─► queued, attempts unchanged, no attempt row       (E05-F01: budget bypass)
+   └──────────────────┘   …repeatable without bound; next lease reports the same attempt number
+ leased ─ack─► succeeded   (lease_token / leased_by / lease_expires_at kept)               (E05-F02)
+ leased ─cancel─► cancelled (lease fields kept; no attempt row for the delivery)            (E05-F02)
+ leased ─nack / expiry / worker release─► lease fields cleared
+ event console: any exit from leased after an earlier expiry is logged `lease_expired`      (E05-F03)
+ pause: blocks lease only; Promote and Expire keep running; schedules advance without enqueuing
+```
+
+| State | Event (sequence) | Should (oracle) | Predicted (code) | Observed (E05) |
+|---|---|---|---|---|
+| ★ leased | DELETE holder worker, repeated ×4 (max 2) | ≤ max executions; attempt never reused (SPEC Worker/Jobs) | queued, attempts unchanged | O 4 deliveries all `attempt 1`, attempts `[]` (P6, E05-F01) |
+| ★ leased (attempt 2) | DELETE worker → lease | next attempt 3 | attempt 2 again | O attempt 2 twice (H-E05-11) |
+| ★ leased (max 1) | DELETE worker → lease → nack | dead after 1 execution | 2 deliveries | O 2 deliveries, then dead (H-E05-12) |
+| ★ released by worker delete | old-token heartbeat | 409 | 409 | O 409 ×4 (P6) |
+| ★ leased | cancel | cancelled, lease ended | lease fields kept | O token, leased_by, future expiry kept; attempts `[]` (P5, H-E05-14, E05-F02) |
+| ★ cancelled (ex-leased) | DELETE that worker | unchanged | unchanged | O still `leased_by` deleted worker (H-E05-13) |
+| ★ leased | ack | succeeded, lease ended | lease fields kept | O kept (H-E05-16, walks; E05-F02) |
+| ★ leased | nack retry=false | dead, lease cleared | cleared | O cleared (H-E05-17) |
+| ★ leased (after an earlier expiry) | ack / cancel / worker delete | event `succeeded` / `cancelled` / `queued` | `lease_expired` | O `lease_expired` ×3 (H-E05-15, H-E05-18, E05-F03) |
+| ★ leased | purge | not pending → kept | kept | O `deleted 0`; nack 200 → retry_wait; next purge deletes it (P3) |
+| ★ scheduled (idempotency K) | purge → enqueue K | new job | new id | O id 1 purged, id 2 scheduled (P1) |
+| ★ cancelled | retry | 409 | 409 | O (P4) |
+| ★ dead | cancel | 409 | 409 | O (P4); dead keeps future `run_at` (backoff computed) |
+| ★ succeeded | retry / cancel | 409 / 409 | 409 | O (P4) |
+| ★ scheduled, retry_wait | cancel → clock past run_at | stays cancelled | stays | O (P8) |
+| ★ scheduled, queue paused | clock past run_at | (SPEC: pause blocks leases/scheduled deliveries) | promoted to queued | O queued while paused, lease `[]` (P2); judged not a delivery |
+| ★ schedule `* * * * *`, queue paused | clock +3600, resume | bounded catch-up | 0 jobs, next advances | O 0 jobs, next_run_at 14:26 (P2) |
+| ★ leased, queue paused | lease expires (max 1) | expiry still applies | dead | O dead + `expired` row (P7) |
+| all | random walks (950 steps, 5 completed walks: seeds 11–13 uniform, 31–32 holder-biased) — I1 state set, I2 finished⇔terminal, I3 attempts≤max, I5 contiguous history, I6 cancelled never leased, I9 retry not before failure, I10 stats=count, I12 promote after tick, I13 sweep after tick, R2 stale token | hold | hold | O no violation (walk logs results/e05/walk-*.txt) |
+
+Unobserved / untried here: schedules PATCH sequences, queue DELETE mid-lease, retention sweep interleavings, two API
+replicas, webhooks during these sequences (`#offcharter`).

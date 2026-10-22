@@ -1,0 +1,217 @@
+0|setup|queue w32|201|{"backoff_base":5,"backoff_kind":"linear","backoff_max":null,"id":22,"lease_seconds":20,"max_attempts":2,"name":"w32","namespace_id":1,"paused":false,"retention
+0|setup|worker|201|{"token":"eec9bc58b5b9dd480c41e4c232ef09af","worker_id":75}
+0|setup|worker|201|{"token":"c7ef637d3e8710f678b0072e6fb10524","worker_id":76}
+4|worker.delete|w=76|200|{"ok":true}
+5|job.enqueue|now|201|{"id":194,"state":"queued"}
+6|worker.delete|w=75|200|{"ok":true}
+7|job.ack|j=194|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+8|job.cancel|j=194|200|{"ok":true}
+9|job.retry|j=194|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+10|worker.create|auto|201|{"token":"e86974209e4ff9e6919aa18474fa58dd","worker_id":77}
+10|lease.lease|w=77 n=2|200|{"jobs":[]}
+11|job.nack|j=194|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+12|job.enqueue|now|201|{"id":195,"state":"queued"}
+13|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+14|queue.resume||200|{"ok":true}
+15|worker.create||201|{"token":"bf360080151c98515580f2acb89ad373","worker_id":78}
+16|job.nack|j=194 retry=false|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+17|queue.resume||200|{"ok":true}
+18|lease.lease|w=78 n=2|200|{"jobs":[{"attempt":1,"id":195,"kind":"k","lease_expires_at":"2026-10-22T14:45:47.414039622Z","lease_token":"08cdd46fe9f3ec7fcef4647b646681a0","payload":{}}]}
+19|worker.delete|w=77|200|{"ok":true}
+20|job.nack|j=195|200|{"ok":true}
+21|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+22|job.retry|j=194|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+23|lease.lease|w=78 n=2|200|{"jobs":[]}
+24|job.delete|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+25|job.enqueue|delay15|201|{"id":196,"state":"scheduled"}
+26|job.ack|j=194|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+27|job.nack|j=196|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+28|job.enqueue|now|201|{"id":197,"state":"queued"}
+29|lease.lease|w=78 n=2|200|{"jobs":[{"attempt":1,"id":197,"kind":"k","lease_expires_at":"2026-10-22T14:45:47.414039622Z","lease_token":"35445a2cd19903da2b37be9e18080435","payload":{}}]}
+30|lease.lease|w=78 n=1|200|{"jobs":[]}
+31|job.delete|j=194|204|
+32|lease.lease|w=78 n=3|200|{"jobs":[]}
+33|job.ack|j=197|200|{"ok":true}
+VIOLATION step=33 inv=I7 job=197 state=succeeded
+34|clock.advance|+6|200|{"now":"2026-10-22T14:45:33.414039622Z"}
+35|queue.resume||200|{"ok":true}
+36|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+37|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+38|queue.pause||200|{"ok":true}
+39|queue.resume||200|{"ok":true}
+40|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+41|queue.pause||200|{"ok":true}
+42|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+43|job.enqueue|delay15|201|{"id":198,"state":"scheduled"}
+44|job.nack|j=195|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+45|lease.lease|w=78 n=3|200|{"jobs":[]}
+46|queue.resume||200|{"ok":true}
+47|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+48|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+49|job.heartbeat|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+50|worker.create||201|{"token":"bfdb6cf456328d812caefdf1814ad53b","worker_id":79}
+51|lease.lease|w=78 n=3|200|{"jobs":[{"attempt":2,"id":195,"kind":"k","lease_expires_at":"2026-10-22T14:45:53.414039622Z","lease_token":"2ecbf014fc0b9ebd33fe6dab273ad748","payload":{}}]}
+52|job.nack|j=197|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+53|job.enqueue|delay15|201|{"id":199,"state":"scheduled"}
+54|job.cancel|j=198|200|{"ok":true}
+55|job.nack|j=195 retry=false|200|{"ok":true}
+56|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+57|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+58|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+59|lease.lease|w=79 n=2|200|{"jobs":[]}
+60|job.nack|j=197|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+61|job.heartbeat|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+62|job.enqueue|delay15|201|{"id":200,"state":"scheduled"}
+63|lease.lease|w=79 n=3|200|{"jobs":[]}
+64|job.ack|j=196|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+65|lease.lease|w=79 n=1|200|{"jobs":[]}
+66|clock.advance|+6|200|{"now":"2026-10-22T14:45:39.414039622Z"}
+67|job.enqueue|now|201|{"id":201,"state":"queued"}
+68|queue.pause||200|{"ok":true}
+69|clock.advance|+6|200|{"now":"2026-10-22T14:45:45.414039622Z"}
+70|job.ack|j=199|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+71|job.enqueue|delay15|201|{"id":202,"state":"scheduled"}
+72|clock.advance|+6|200|{"now":"2026-10-22T14:45:51.414039622Z"}
+73|clock.advance|+6|200|{"now":"2026-10-22T14:45:57.414039622Z"}
+74|job.enqueue|delay15|201|{"id":203,"state":"scheduled"}
+75|job.ack|j=195 STALE token|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+76|job.cancel|j=194|404|{"error":{"code":"job_not_found","message":"job not found"}}
+77|clock.advance|+6|200|{"now":"2026-10-22T14:46:03.414039622Z"}
+78|worker.create||201|{"token":"304facd8fbf4a6872677f70c926d4e22","worker_id":80}
+79|lease.lease|w=80 n=3|200|{"jobs":[]}
+80|job.enqueue|now|201|{"id":205,"state":"queued"}
+81|queue.resume||200|{"ok":true}
+82|clock.advance|+6|200|{"now":"2026-10-22T14:46:09.414039622Z"}
+83|job.retry|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+84|job.enqueue|now|201|{"id":206,"state":"queued"}
+85|lease.lease|w=80 n=1|200|{"jobs":[{"attempt":1,"id":196,"kind":"k","lease_expires_at":"2026-10-22T14:46:29.414039622Z","lease_token":"845290b46b55463fc48387052568aab1","payload":{}}]}
+86|job.enqueue|now|201|{"id":207,"state":"queued"}
+87|job.ack|j=195 STALE token|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+88|job.nack|j=197|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+89|job.retry|j=205|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+90|job.enqueue|now|201|{"id":208,"state":"queued"}
+91|queue.purge||200|{"deleted":9}
+92|job.enqueue|now|201|{"id":209,"state":"queued"}
+93|queue.pause||200|{"ok":true}
+94|queue.resume||200|{"ok":true}
+95|job.ack|j=195 STALE token|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+96|job.delete|j=198|204|
+97|lease.lease|w=80 n=1|200|{"jobs":[{"attempt":1,"id":209,"kind":"k","lease_expires_at":"2026-10-22T14:46:29.414039622Z","lease_token":"576a03df9db58d5ecd29e7fb8176d3c9","payload":{}}]}
+98|clock.advance|+6|200|{"now":"2026-10-22T14:46:15.414039622Z"}
+99|job.ack|j=196|200|{"ok":true}
+VIOLATION step=99 inv=I7 job=196 state=succeeded
+100|lease.lease|w=80 n=2|200|{"jobs":[]}
+101|job.enqueue|now|201|{"id":210,"state":"queued"}
+102|job.enqueue|now|201|{"id":211,"state":"queued"}
+103|job.retry|j=208|404|{"error":{"code":"job_not_found","message":"job not found"}}
+104|job.ack|j=209|200|{"ok":true}
+VIOLATION step=104 inv=I7 job=209 state=succeeded
+105|lease.lease|w=80 n=2|200|{"jobs":[{"attempt":1,"id":210,"kind":"k","lease_expires_at":"2026-10-22T14:46:35.414039622Z","lease_token":"7b8a106c875968dd89aaa2274258cb0b","payload":{}},{"a
+106|lease.lease|w=78 n=1|200|{"jobs":[]}
+107|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+108|job.enqueue|now|201|{"id":212,"state":"queued"}
+109|job.cancel|j=205|404|{"error":{"code":"job_not_found","message":"job not found"}}
+110|clock.advance|+6|200|{"now":"2026-10-22T14:46:21.414039622Z"}
+111|job.delete|j=205|404|{"error":{"code":"job_not_found","message":"job not found"}}
+112|lease.lease|w=79 n=1|200|{"jobs":[{"attempt":1,"id":212,"kind":"k","lease_expires_at":"2026-10-22T14:46:41.414039622Z","lease_token":"3c8b3975e457c954b5666aa4ebf447cb","payload":{}}]}
+113|queue.resume||200|{"ok":true}
+114|lease.lease|w=80 n=1|200|{"jobs":[]}
+115|lease.lease|w=80 n=2|200|{"jobs":[]}
+116|job.ack|j=210|200|{"ok":true}
+VIOLATION step=116 inv=I7 job=210 state=succeeded
+117|job.ack|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+118|worker.delete|w=79|200|{"ok":true}
+119|job.enqueue|delay15|201|{"id":213,"state":"scheduled"}
+120|lease.lease|w=78 n=2|200|{"jobs":[{"attempt":1,"id":212,"kind":"k","lease_expires_at":"2026-10-22T14:46:41.414039622Z","lease_token":"b3dcf142dfd8e09022a326712268d79f","payload":{}}]}
+VIOLATION step=120 inv=I8 job=212 attempt 1 <= previous 1
+121|job.enqueue|now|201|{"id":214,"state":"queued"}
+122|job.ack|j=211|200|{"ok":true}
+VIOLATION step=122 inv=I7 job=211 state=succeeded
+123|worker.delete|w=80|200|{"ok":true}
+124|job.retry|j=205|404|{"error":{"code":"job_not_found","message":"job not found"}}
+125|lease.lease|w=78 n=3|200|{"jobs":[{"attempt":1,"id":214,"kind":"k","lease_expires_at":"2026-10-22T14:46:41.414039622Z","lease_token":"4934581581e22153dfbc427d09075400","payload":{}}]}
+126|job.nack|j=198|404|{"error":{"code":"job_not_found","message":"job not found"}}
+127|lease.lease|w=78 n=2|200|{"jobs":[]}
+128|clock.advance|+6|200|{"now":"2026-10-22T14:46:27.414039622Z"}
+129|job.nack|j=212|200|{"ok":true}
+130|queue.pause||200|{"ok":true}
+131|job.retry|j=200|404|{"error":{"code":"job_not_found","message":"job not found"}}
+132|job.enqueue|delay15|201|{"id":215,"state":"scheduled"}
+133|worker.delete|w=78|200|{"ok":true}
+134|clock.advance|+6|200|{"now":"2026-10-22T14:46:33.414039622Z"}
+135|queue.resume||200|{"ok":true}
+136|job.retry|j=195|200|{"ok":true}
+137|worker.create|auto|201|{"token":"ea0a60e1881e1576fb7c334f983f89b1","worker_id":81}
+137|lease.lease|w=81 n=2|200|{"jobs":[{"attempt":1,"id":195,"kind":"k","lease_expires_at":"2026-10-22T14:46:53.414039622Z","lease_token":"128c38c4b15434496853d50bf1150217","payload":{}},{"a
+VIOLATION step=137 inv=I4 job=212 grant 3 > max 2 (attempt=2)
+138|job.enqueue|now|201|{"id":216,"state":"queued"}
+139|job.retry|j=199|404|{"error":{"code":"job_not_found","message":"job not found"}}
+140|job.retry|j=195|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+141|job.enqueue|now|201|{"id":217,"state":"queued"}
+142|job.enqueue|delay15|201|{"id":218,"state":"scheduled"}
+143|job.enqueue|now|201|{"id":219,"state":"queued"}
+144|job.ack|j=195|200|{"ok":true}
+VIOLATION step=144 inv=I7 job=195 state=succeeded
+145|job.nack|j=194|404|{"error":{"code":"job_not_found","message":"job not found"}}
+146|job.enqueue|delay15|201|{"id":220,"state":"scheduled"}
+147|job.enqueue|now|201|{"id":221,"state":"queued"}
+148|job.nack|j=221 retry=false|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+149|lease.lease|w=81 n=1|200|{"jobs":[{"attempt":1,"id":214,"kind":"k","lease_expires_at":"2026-10-22T14:46:53.414039622Z","lease_token":"d039ce16048d20928d8abef3947e3c53","payload":{}}]}
+VIOLATION step=149 inv=I8 job=214 attempt 1 <= previous 1
+150|job.ack|j=195 STALE token|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+151|job.enqueue|now|201|{"id":222,"state":"queued"}
+152|job.enqueue|now|201|{"id":223,"state":"queued"}
+153|job.enqueue|now|201|{"id":224,"state":"queued"}
+154|clock.advance|+6|200|{"now":"2026-10-22T14:46:39.414039622Z"}
+155|job.enqueue|now|201|{"id":225,"state":"queued"}
+156|job.cancel|j=200|404|{"error":{"code":"job_not_found","message":"job not found"}}
+157|lease.lease|w=81 n=2|200|{"jobs":[{"attempt":1,"id":213,"kind":"k","lease_expires_at":"2026-10-22T14:46:59.414039622Z","lease_token":"72e6570e52c4d43dbdb34895d5041c56","payload":{}},{"a
+158|job.delete|j=209|204|
+159|lease.lease|w=81 n=1|200|{"jobs":[{"attempt":1,"id":217,"kind":"k","lease_expires_at":"2026-10-22T14:46:59.414039622Z","lease_token":"50f1d884b5f4ab863dcda8de8b8f2471","payload":{}}]}
+160|job.enqueue|now|201|{"id":226,"state":"queued"}
+161|job.enqueue|now|201|{"id":227,"state":"queued"}
+162|clock.advance|+6|200|{"now":"2026-10-22T14:46:45.414039622Z"}
+163|clock.advance|+6|200|{"now":"2026-10-22T14:46:51.414039622Z"}
+164|job.enqueue|now|201|{"id":228,"state":"queued"}
+165|job.enqueue|now|201|{"id":229,"state":"queued"}
+166|job.nack|j=211|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+167|job.ack|j=217|200|{"ok":true}
+VIOLATION step=167 inv=I7 job=217 state=succeeded
+168|job.enqueue|now|201|{"id":230,"state":"queued"}
+169|job.enqueue|delay15|201|{"id":231,"state":"scheduled"}
+170|job.heartbeat|j=196|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+171|worker.delete|w=81|200|{"ok":true}
+172|job.cancel|j=217|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+173|job.enqueue|now|201|{"id":232,"state":"queued"}
+174|job.delete|j=217|204|
+175|job.nack|j=217|404|{"error":{"code":"job_not_found","message":"job not found"}}
+176|clock.advance|+25|200|{"now":"2026-10-22T14:47:16.414039622Z"}
+177|clock.advance|+6|200|{"now":"2026-10-22T14:47:22.414039622Z"}
+178|job.nack|j=209|404|{"error":{"code":"job_not_found","message":"job not found"}}
+179|job.enqueue|now|201|{"id":234,"state":"queued"}
+180|worker.create|auto|201|{"token":"341751d350137a4613f3ef80f19927b2","worker_id":82}
+180|lease.lease|w=82 n=1|200|{"jobs":[{"attempt":2,"id":212,"kind":"k","lease_expires_at":"2026-10-22T14:47:42.414039622Z","lease_token":"bd9cd3e10f728b4e0ecc89ff1a364147","payload":{}}]}
+181|job.nack|j=203|404|{"error":{"code":"job_not_found","message":"job not found"}}
+182|clock.advance|+6|200|{"now":"2026-10-22T14:47:28.414039622Z"}
+183|lease.lease|w=82 n=3|200|{"jobs":[{"attempt":1,"id":213,"kind":"k","lease_expires_at":"2026-10-22T14:47:48.414039622Z","lease_token":"0509012b6873d9d93c11fad20013de68","payload":{}},{"a
+VIOLATION step=183 inv=I8 job=213 attempt 1 <= previous 1
+VIOLATION step=183 inv=I4 job=214 grant 3 > max 2 (attempt=1)
+184|job.nack|j=197 retry=false|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+185|queue.resume||200|{"ok":true}
+186|job.retry|j=214|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+187|job.cancel|j=218|200|{"ok":true}
+188|job.nack|j=212|200|{"ok":true}
+189|job.nack|j=216|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+190|job.retry|j=206|404|{"error":{"code":"job_not_found","message":"job not found"}}
+191|clock.advance|+6|200|{"now":"2026-10-22T14:47:34.414039622Z"}
+192|job.enqueue|now|201|{"id":235,"state":"queued"}
+193|job.nack|j=224 retry=false|409|{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+194|job.enqueue|now|201|{"id":236,"state":"queued"}
+195|job.enqueue|now|201|{"id":237,"state":"queued"}
+196|job.ack|j=197|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+197|job.enqueue|now|201|{"id":238,"state":"queued"}
+198|job.ack|j=215|200|{"ok":true}
+VIOLATION step=198 inv=I7 job=215 state=succeeded
+199|job.enqueue|now|201|{"id":239,"state":"queued"}
+200|job.nack|j=209|404|{"error":{"code":"job_not_found","message":"job not found"}}
+SUMMARY bias=1 seed=32 steps=200 jobs=44 violations=13 keys=      2 I4       8 I7       3 I8 

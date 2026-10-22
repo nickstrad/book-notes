@@ -154,3 +154,37 @@ Rules R31–R43 were stated as hypotheses with predictions and refutations at 12
 | Q-E04-2 | Does "readiness" in queued age mean the time a job last became queued? | E04-F05 | spec decision | spec decision | open | |
 | Q-E04-3 | Is there a lease grace window after `lease_expires_at`? | E04-F04 | spec decision | spec decision | open | |
 | Q-E04-4 | Should `throughput_last_hour` ("completed jobs") include dead/cancelled? Code counts succeeded only | stats.go:21 | spec decision | spec decision | open | |
+
+## Experiment 05 (sequence-it) — `explore-it/lesson-04`
+
+Stated before their probes in [E05 notes](experiments/05-sequence-it/notes.md) (13:22:19Z table; 13:24:30Z; 13:29:40Z;
+13:34Z; 13:33Z walker v2). Invariants I1–I13 are listed in notes and [rules.md](models/rules.md) E05 revision.
+
+| Id | Statement / prediction | Source and evidence pointer | Would be wrong if | Probe family / experiment | Status | Outcome evidence |
+|---|---|---|---|---|---|---|
+| H-E05-C | Charter: "every verb either does what it says from any starting point or is refused" | charter 05 (handler reading) | a sequence leaves a job in a state the spec calls impossible | sequence / E05 | experiment 05: refuted | P6: max 2 job delivered 4× as attempt 1 (E05-F01) |
+| H-E05-01 | purge (scheduled, key K) → enqueue delay with K → new id, scheduled | queues.go:169 | old id / scheduled kept | sequence / E05 | experiment 05: confirmed | P1 |
+| H-E05-02 | pause → clock +1 h → resume: lease [] while paused; delayed job promoted while paused; 0 schedule catch-up | fire.go:74, expire.go:137, jobs.go:53 | lease while paused or >1 catch-up | sequence+clock / E05 | experiment 05: confirmed | P2 |
+| H-E05-03 | lease → purge → nack: purge deletes 0; nack 200 → retry_wait | queues.go:169 | leased purged / nack 409 | sequence / E05 | experiment 05: confirmed | P3 |
+| H-E05-04 | cancel→retry 409; dead→cancel 409; succeeded→retry 409 | operator.go | any 200 | sequence / E05 | experiment 05: confirmed | P4 |
+| H-E05-05 | lease → cancel keeps lease fields | operator.go:6 | cleared | sequence / E05 | experiment 05: confirmed | P5 (E05-F02) |
+| H-E05-06 | (lease → DELETE worker) ×(max+2): attempt 1 each, attempts 0, never dead | api/jobs.go:126 | attempt rises / dead | sequence / E05 | experiment 05: confirmed | P6 (E05-F01) |
+| H-E05-07 | lease expires while paused → dead (max 1) | expire.go:87 | stays leased | sequence / E05 | experiment 05: confirmed | P7 |
+| H-E05-08 | cancelled scheduled / retry_wait stay cancelled past due | expire.go:137 | promoted | sequence+clock / E05 | experiment 05: confirmed | P8 |
+| H-E05-09 | released holder's token → heartbeat 409 | jobs.go:100 | 200 | sequence / E05 | experiment 05: confirmed | P6 |
+| H-E05-10 | walk finds only I4/I8 (worker delete) and I7c classes | above | other invariant fires | walk / E05 | experiment 05: refuted | I7 fired on **succeeded** rows (ack keeps lease fields), not predicted; no other class |
+| H-E05-11 | after one counted failure, worker-delete release reuses attempt 2 | api/jobs.go:126 | attempt 3 | isolation / E05 | experiment 05: confirmed | isolate.txt |
+| H-E05-12 | max 1: lease → delete worker → lease succeeds | same | empty | isolation / E05 | experiment 05: confirmed | isolate.txt |
+| H-E05-13 | delete holder of a cancelled job → cancelled row unchanged | state filter | changed | sibling / E05 | experiment 05: confirmed | isolate.txt |
+| H-E05-14 | cancelled in-flight delivery has no attempt row | operator.go:6 | row exists | sibling / E05 | experiment 05: confirmed | isolate.txt |
+| H-E05-15 | after an expiry, worker-delete release is logged `lease_expired` | 002.sql trigger | `queued` | observation / E05 | experiment 05: confirmed | f02-f03.txt (E05-F03) |
+| H-E05-16 | ack keeps lease fields on succeeded | ack.go:25 | null | sibling / E05 | experiment 05: confirmed | f02-f03.txt (E05-F02) |
+| H-E05-17 | nack retry=false clears lease fields | nack.go:60 | kept | sibling / E05 | experiment 05: confirmed | f02-f03.txt |
+| H-E05-18 | after an expiry, ack and cancel are logged `lease_expired` | 002.sql trigger | `succeeded`/`cancelled` | sibling / E05 | experiment 05: confirmed | f03-sibling.txt (E05-F03) |
+| H-E05-19 | holder-biased walks: ≥10 successful holder verbs/seed; violations only E05-F01/F02 classes | walk v2 | other invariant | walk / E05 | experiment 05: confirmed (on its refutation condition; coverage sub-prediction ≥10 missed for seed 31: 7) | walk-b31/b32.txt |
+| H-E05-20 | Worker nack with error text exactly `lease expired` is logged as an expiry | 002.sql | labelled by state | sibling / later | open | not probed |
+| H-E05-21 | A third-party worker that deregisters on SIGTERM while executing turns a crash-looping poison job into unbounded redelivery (E05-F01 in the field) | E05-F01 | job reaches dead | ecosystem / later | open | sample worker does not deregister (code) |
+| Q-E05-1 | Should worker deregistration count the released lease as an attempt (like expiry), or record a distinct non-counted "released" attempt with a cap? | E05-F01 | spec decision | spec decision | open | |
+| Q-E05-2 | Should terminal rows retain `leased_by` (who completed) while clearing token/expiry? | E05-F02 | spec decision | spec decision | open | |
+| T-E05-1 | Testability: `/admin/clock` has no "offset, keep ticking" mode; advance/set freeze semantic time until reset, so real-time lease expiry and clock jumps cannot be combined | clock.go:182-191 | — | testability request | open | minimal hook: `{"action":"offset","seconds":n}`; validation: lease_seconds 2 expires 2 s after an offset jump |
+| #offcharter | `GET /v1/jobs/{id}` returns the live `lease_token` to any holder of the namespace key, so any client can ack another worker's lease | P5 GET output | token hidden | boundary / later | open | observed in output, not judged |

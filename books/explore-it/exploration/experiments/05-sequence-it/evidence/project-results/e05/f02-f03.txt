@@ -1,0 +1,48 @@
+== H-E05-15 2026-10-22T13:32:08.229Z
+$ mkq f3 "lease_seconds":2,"max_attempts":5
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":16,"lease_seconds":2,"max_attempts":5,"name":"f3","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 108
+$ lease1 f3 52
+{"jobs":[{"attempt":1,"id":108,"kind":"k","lease_expires_at":"2026-10-22T14:35:37.414039622Z","lease_token":"5e18209b7d11be2486e429cd1419c103","payload":{}}]}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":3}
+{"now":"2026-10-22T14:35:38.414039622Z"}
+ [200]
+$ jget 108
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+108 | queued | 1 | 5 | 2026-10-22 14:35:38.41404+00 | 2026-10-22 14:35:35.41404+00 |  |  | f |  | lease expired
+(1 row)
+$ lease1 f3 53
+{"jobs":[{"attempt":2,"id":108,"kind":"k","lease_expires_at":"2026-10-22T14:35:40.414039622Z","lease_token":"29ce353f79f771de53b3a90e90ea13d2","payload":{}}]}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":0}
+{"now":"2026-10-22T14:35:38.414039622Z"}
+ [200]
+$ api DELETE /v1/workers/53
+{"ok":true}
+ [200]
+$ jget 108
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+108 | queued | 1 | 5 | 2026-10-22 14:35:38.41404+00 | 2026-10-22 14:35:35.41404+00 |  |  | f |  | lease expired
+(1 row)
+{"id":333,"at":"2026-10-22T14:35:35.41404Z","event":"created","worker":null,"attempt":0,"error":""}
+{"id":334,"at":"2026-10-22T14:35:35.41404Z","event":"leased","worker":52,"attempt":1,"error":""}
+{"id":336,"at":"2026-10-22T14:35:38.41404Z","event":"lease_expired","worker":52,"attempt":1,"error":"lease expired"}
+{"id":337,"at":"2026-10-22T14:35:38.41404Z","event":"leased","worker":53,"attempt":2,"error":"lease expired"}
+{"id":338,"at":"2026-10-22T14:35:38.41404Z","event":"lease_expired","worker":53,"attempt":1,"error":"lease expired"}
+== H-E05-16 2026-10-22T13:32:10.534Z
+$ mkq f2
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":17,"lease_seconds":30,"max_attempts":3,"name":"f2","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 109
+$ api POST /v1/jobs/109/ack -d {"lease_token":"dccccdadde5a201febc3bbcb977d5109","result":{"ok":1}}
+{"ok":true}
+ [200]
+{"state":"succeeded","leased_by":54,"lease_token":"dccccdadde5a201febc3bbcb977d5109","lease_expires_at":"2026-10-22T14:36:08.41404Z","finished_at":"2026-10-22T14:35:38.41404Z"}
+== H-E05-17 2026-10-22T13:32:10.718Z
+job 110
+$ api POST /v1/jobs/110/nack -d {"lease_token":"cecb982ed5a1a12cab0e7986e3981ddc","error":"no","retry":false}
+{"ok":true}
+ [200]
+{"state":"dead","leased_by":null,"lease_token":null,"lease_expires_at":null,"finished_at":"2026-10-22T14:35:38.41404Z"}

@@ -1,0 +1,64 @@
+== H-E05-11 2026-10-22T13:24:37.790Z
+$ mkq i1 "max_attempts":3,"backoff":{"kind":"linear","base_seconds":5}
+{"backoff_base":5,"backoff_kind":"linear","backoff_max":null,"id":9,"lease_seconds":30,"max_attempts":3,"name":"i1","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 13
+lease by 13: {"jobs":[{"attempt":1,"id":13,"kind":"k","lease_expires_at":"2026-10-22T14:25:59.414039622Z","lease_token":"5376bd5c4c3c0233c69668eac6c54f95","payload":{}}]}
+ [200]
+$ api POST /v1/jobs/13/nack -d {"lease_token":"5376bd5c4c3c0233c69668eac6c54f95","error":"fail1"}
+{"ok":true}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":10}
+{"now":"2026-10-22T14:25:39.414039622Z"}
+ [200]
+$ jget 13
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+13 | queued | 1 | 3 | 2026-10-22 14:25:34.41404+00 | 2026-10-22 14:25:29.41404+00 |  |  | f |  | fail1
+(1 row)
+lease by 14: {"jobs":[{"attempt":2,"id":13,"kind":"k","lease_expires_at":"2026-10-22T14:26:09.414039622Z","lease_token":"7b2e0865b4cdaaf68517f184f4b08be3","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/14
+{"ok":true}
+ [200]
+lease by 15: {"jobs":[{"attempt":2,"id":13,"kind":"k","lease_expires_at":"2026-10-22T14:26:09.414039622Z","lease_token":"b980e9de95b24174cb47e9205b29de5b","payload":{}}]}
+ [200]
+$ jget 13
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+13 | leased | 1 | 3 | 2026-10-22 14:25:39.41404+00 | 2026-10-22 14:25:29.41404+00 |  | 15 | t | 2026-10-22 14:26:09.41404+00 | fail1
+(1 row)
+$ api GET /v1/jobs/13/attempts
+{"attempts":[{"error":"fail1","finished_at":"2026-10-22T14:25:29.41404Z","job_id":13,"n":1,"outcome":"failed","started_at":"2026-10-22T14:25:29.41404Z","worker_id":13}]}
+ [200]
+== H-E05-12 2026-10-22T13:24:40.853Z
+$ mkq i2 "max_attempts":1
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":10,"lease_seconds":30,"max_attempts":1,"name":"i2","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 14
+lease by 16: {"jobs":[{"attempt":1,"id":14,"kind":"k","lease_expires_at":"2026-10-22T14:26:09.414039622Z","lease_token":"b0f3e153b5188600a1dd6679314e677f","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/16
+{"ok":true}
+ [200]
+lease by 17: {"jobs":[{"attempt":1,"id":14,"kind":"k","lease_expires_at":"2026-10-22T14:26:09.414039622Z","lease_token":"a9b3492322f27e084880e0da2699c66f","payload":{}}]}
+ [200]
+$ api POST /v1/jobs/14/nack -d {"lease_token":"a9b3492322f27e084880e0da2699c66f","error":"fail"}
+{"ok":true}
+ [200]
+$ jget 14
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+14 | dead | 1 | 1 | 2026-10-22 14:25:44.41404+00 | 2026-10-22 14:25:39.41404+00 | 2026-10-22 14:25:39.41404+00 |  | f |  | fail
+(1 row)
+$ api GET /v1/jobs/14/attempts
+{"attempts":[{"error":"fail","finished_at":"2026-10-22T14:25:39.41404Z","job_id":14,"n":1,"outcome":"failed","started_at":"2026-10-22T14:25:39.41404Z","worker_id":17}]}
+ [200]
+== H-E05-13/14 2026-10-22T13:24:41.193Z
+$ api GET /v1/jobs/7/attempts
+{"attempts":[]}
+ [200]
+$ api DELETE /v1/workers/5
+{"ok":true}
+ [200]
+$ jget 7
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+7 | cancelled | 0 | 3 | 2026-10-22 13:22:54.725872+00 | 2026-10-22 13:22:54.725872+00 | 2026-10-22 13:22:54.907341+00 | 5 | t | 2026-10-22 13:23:24.810896+00 | 
+(1 row)

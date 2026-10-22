@@ -1,0 +1,26 @@
+{
+  "experiment": 5,
+  "source_tag": "explore-it/lesson-04",
+  "source_commit": "171974a3417418fe5c3f326df0494e28f2b69daa",
+  "created_before_run_utc": "2026-10-22T13:17:39.150085+00:00",
+  "tracked_source_files": 114,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "5f628efa457951a723b5ec06c0f0b30ef5b0a5a1776f4e6c145fa242b4eb8aee",
+  "brief_sha256": "b45b72d615b363afc720baae40c08687460d25e844e3d548d018fa48d4a7496b",
+  "start": "2026-10-22T13:17:45Z",
+  "end": "2026-10-22T13:42:07Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 65,
+    "Write": 6,
+    "Grep": 1
+  },
+  "flagged_inputs": [],
+  "audit_pattern": "every tool input checked for /root, register/, PLAN.md, .git, other explore-it exports, booknotes/book-notes, a bare `find /`, ~/ and $HOME",
+  "inherited_source_and_raw_records": "unchanged (collector check passed); defect index untouched",
+  "register_exposure": "lessons/01-map-it.md (exported) names A2 (purge vs leased jobs); the explorer did not open it (the only lesson read was lessons/04-judge-it.md). The charter itself names the lease \u2192 purge \u2192 nack sequence, so A2's sequence was probed as chartered (P3) and judged consistent with SPEC; not counted as a blind defect find.",
+  "boundary": "Prompt boundary and exported file tree; no OS isolation",
+  "process_note": "the explorer ran `pkill -f walk.sh`, which killed its own shell and stopped seed 22 (self-reported); no walker was left running after the run"
+}

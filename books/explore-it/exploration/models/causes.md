@@ -44,3 +44,10 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 | C22 Lease validity decided by the sweep, not by the request | ack/nack/heartbeat guard state+token only (ack.go:10, nack.go:14, jobs.go:97); expiry evaluated once per tick (expire.go:12) | E04-F04 | nack before sweep 12:49:30Z → confirmed |
 | C23 Release paths do not record readiness | expiry and worker delete set `queued` without touching `run_at` (expire.go:41, internal/api/jobs.go:126); stats derives readiness from `run_at` (stats.go:18) | E04-F05 | worker delete: predicted after P6 but logged only after probe P8 → confirmed (not counted as stated) |
 | C24 Attempt counter reused as history key | Retry resets `attempts` (operator.go:13); history rows numbered from it, no incarnation key (001.sql:7) | E04-F02 | job_events order by id: inferred unaffected |
+
+## E05 additions — `explore-it/lesson-04` (sibling predictions timestamped in [E05 notes](../experiments/05-sequence-it/notes.md))
+
+| Cause | Mechanism (source) | Findings | Sibling predictions (time, status) |
+|---|---|---|---|
+| C25 Exits from `leased` written independently, each choosing which columns to reset | five UPDATEs leave `leased`: nack.go:60, expire.go:116, api/jobs.go:126 (clear lease, differ on attempts), ack.go:25, operator.go:6 (keep lease) — no shared "end lease" routine | E05-F01 (release skips attempt accounting), E05-F02 (ack/cancel keep lease fields) | release paths 13:24:30Z → confirmed (H-E05-13); nack retry=false clears 13:29:40Z → confirmed (H-E05-17). Related to C23 (release paths and readiness), fixed in lesson 04 for run_at only |
+| C26 Observation keyed on sticky error text | 002.sql `observe_job()` labels `lease_expired` by `NEW.last_error='lease expired'`; `last_error` survives later transitions | E05-F03 | ack/cancel after expiry 13:34Z → confirmed (H-E05-18); nack with that literal text: predicted, not probed |

@@ -76,3 +76,21 @@ prediction / observation / judgment. C = comparable system, as recalled and not 
 | ★ R41 Operator retry makes a dead job immediately available with attempts 0 | SPEC Operator | operator.go:12-14 | holds | retry → next lease attempt 1 (P2) | holds |
 | ★ R42 Backoff follows kind/base | SPEC Queues | jobs.go:25-35 | holds | exp base 2: 2 s; exp base 5: exact doubling to 2^20·5 (P2, P10) | holds (linear not re-probed) |
 | ★ R43 404 missing / 409 state conflict / 400 invalid | SPEC Responses | handlers | holds for job verbs | 404 missing job and unknown verb; 409 for verbs on cancelled job (P1, P5) | holds; message text leaks driver error (`sql: no rows in result set`, E01 Q3) |
+
+## E05 revision — `explore-it/lesson-04` ([E05 notes](../experiments/05-sequence-it/notes.md)); ★ = new observation
+
+Invariants I1–I13 were written at 13:22:19Z before any probe and asserted after every walk step
+([walk.sh](../experiments/05-sequence-it/walk.sh) `check`). They restate R3/R5/R34/R35/R37/R38 as row checks.
+
+| Rule | Authority / bound | Enforcing source | Predicted | Observed (E05) | Judgment |
+|---|---|---|---|---|---|
+| ★ R3/R32 (I4) No job executes more than max_attempts — counted as lease grants between operator retries | SPEC Worker Never rule; "the lease's attempt counts toward max_attempts"; C SQS receive count (recalled) | expire.go and nack.go count; worker release (api/jobs.go:126) does not | violated via worker delete | 4 grants on max 2 (P6); 2 on max 1 (H-E05-12); walks 11, 13 | **violated**: [E05-F01](../defects/E05-F01-worker-delete-release-uncounted-attempt.md) |
+| ★ R44 (I8) A lease's attempt number is never reused for the same job (between operator retries) | SPEC Jobs "Attempt n … never reused" | jobs.go:77 `attempts+1` | violated via worker delete | attempt 1 ×4 (P6), attempt 2 ×2 (H-E05-11) | **violated**: E05-F01 |
+| ★ R45 (I7) Only a leased job carries lease fields | approximation: consistency with nack/expiry/release, which clear them | ack.go:25, operator.go:6 do not clear | violated on cancel | violated on cancel **and ack** (P5, H-E05-16); holds for nack, expiry, release | **violated** (low): [E05-F02](../defects/E05-F02-terminal-rows-keep-lease-fields.md) |
+| ★ R46 An event label names the transition that happened | event console contract (002.sql "observation only"); consistency | 002.sql CASE on sticky `last_error` | mislabel after expiry | ack, cancel, worker release logged `lease_expired` (H-E05-15/18) | **violated**: [E05-F03](../defects/E05-F03-worker-release-logged-as-lease-expired.md) |
+| R5/R37 (I6) Cancelled job never runs | SPEC Operator | state guards | holds | 0 in walks; P8 cancelled scheduled/retry_wait stay cancelled | holds |
+| R6 Succeeded/cancelled cannot be retried | SPEC Operator | operator.go:13 | holds | 409 (P4; walks) | holds (regression, not counted) |
+| R2 Only current holder completes (stale token) | SPEC Worker | token guard | holds | 0 accepted in walks (stale acks 409/404) | holds |
+| ★ R47 Purge removes pending only; leased survives | SPEC purge | queues.go:169 | holds | `deleted 0` while leased; nack → retry_wait → purged next (P3) | holds |
+| ★ R48 Pause blocks leases; expiry, promotion continue; no catch-up burst | SPEC pause/resume | jobs.go:53, fire.go:74 | holds | P2, P7 | holds (promotion while paused judged not a "delivery") |
+| I1, I2, I3, I5, I9, I10, I12, I13 | SPEC states, terminal/finished, R3, R38, R35, R34, loop | — | hold | no violation in the walks | holds within walk coverage |

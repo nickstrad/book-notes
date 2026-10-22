@@ -1,0 +1,11 @@
+{
+  "experiment": 5,
+  "source_tag": "explore-it/lesson-04",
+  "source_commit": "171974a3417418fe5c3f326df0494e28f2b69daa",
+  "created_before_run_utc": "2026-10-22T13:17:39.150085+00:00",
+  "tracked_source_files": 114,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "5f628efa457951a723b5ec06c0f0b30ef5b0a5a1776f4e6c145fa242b4eb8aee",
+  "brief_sha256": "b45b72d615b363afc720baae40c08687460d25e844e3d548d018fa48d4a7496b"
+}

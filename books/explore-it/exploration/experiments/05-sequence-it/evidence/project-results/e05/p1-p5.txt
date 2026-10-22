@@ -1,0 +1,86 @@
+== P1 purge then enqueue-with-delay (idempotency key) 2026-10-22T13:22:50.688Z
+$ mkq p1
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":1,"lease_seconds":30,"max_attempts":3,"name":"p1","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+$ api POST /v1/queues/p1/jobs -d {"kind":"k","delay_seconds":60,"idempotency_key":"K1"}
+{"id":1,"state":"scheduled"}
+ [201]
+$ api POST /v1/queues/p1/purge
+{"deleted":1}
+ [200]
+$ api POST /v1/queues/p1/jobs -d {"kind":"k","delay_seconds":60,"idempotency_key":"K1"}
+{"id":2,"state":"scheduled"}
+ [201]
+$ sql select id,state,idempotency_key from jobs where queue_id=(select id from queues where name='p1')
+id | state | idempotency_key
+2 | scheduled | K1
+(1 row)
+== P3 lease, purge, nack 2026-10-22T13:22:51.261Z
+$ mkq p3
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":2,"lease_seconds":30,"max_attempts":3,"name":"p3","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 3
+{"jobs":[{"attempt":1,"id":3,"kind":"k","lease_expires_at":"2026-10-22T13:23:21.558782502Z","lease_token":"e23c35044040e1fcb5baffd89c18285b","payload":{}}]}
+ [200]
+$ api POST /v1/queues/p3/purge
+{"deleted":0}
+ [200]
+$ api POST /v1/jobs/3/nack -d {"lease_token":"e23c35044040e1fcb5baffd89c18285b","error":"after purge"}
+{"ok":true}
+ [200]
+$ jget 3
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+3 | retry_wait | 1 | 3 | 2026-10-22 13:22:56.777758+00 | 2026-10-22 13:22:51.439066+00 |  |  | f |  | after purge
+(1 row)
+$ api POST /v1/queues/p3/purge
+{"deleted":1}
+ [200]
+$ jget 3
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+(0 rows)
+== P4 cancel->retry, dead->cancel, succeeded->retry 2026-10-22T13:22:52.489Z
+$ mkq p4 "max_attempts":1
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":3,"lease_seconds":30,"max_attempts":1,"name":"p4","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+$ api POST /v1/jobs/4/cancel
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/4/retry
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ api POST /v1/jobs/5/nack -d {"lease_token":"2af4692ce5f53ab0a88f859a2fb52990","error":"x"}
+{"ok":true}
+ [200]
+$ jget 5
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+5 | dead | 1 | 1 | 2026-10-22 13:22:58.002757+00 | 2026-10-22 13:22:52.828402+00 | 2026-10-22 13:22:53.002757+00 |  | f |  | x
+(1 row)
+$ api POST /v1/jobs/5/cancel
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ api POST /v1/jobs/6/ack -d {"lease_token":"bda2ed284454256307564c343321cb3b","result":1}
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/6/retry
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ api POST /v1/jobs/6/cancel
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+== P5 lease, cancel: lease fields 2026-10-22T13:22:54.545Z
+$ mkq p5
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":4,"lease_seconds":30,"max_attempts":3,"name":"p5","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+$ lease1 p5 5
+{"jobs":[{"attempt":1,"id":7,"kind":"k","lease_expires_at":"2026-10-22T13:23:24.810896095Z","lease_token":"edbb7c8897466f1871d5d2767123acc6","payload":{}}]}
+ [200]
+$ api POST /v1/jobs/7/cancel
+{"ok":true}
+ [200]
+$ jget 7
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+7 | cancelled | 0 | 3 | 2026-10-22 13:22:54.725872+00 | 2026-10-22 13:22:54.725872+00 | 2026-10-22 13:22:54.907341+00 | 5 | t | 2026-10-22 13:23:24.810896+00 | 
+(1 row)
+$ api GET /v1/jobs/7
+{"attempts":0,"created_at":"2026-10-22T13:22:54.725872Z","event_at":"2026-10-22T13:22:54.907341Z","finished_at":"2026-10-22T13:22:54.907341Z","id":7,"idempotency_key":null,"kind":"k","last_error":"","lease_expires_at":"2026-10-22T13:23:24.810896Z","lease_token":"edbb7c8897466f1871d5d2767123acc6","leased_at":"2026-10-22T13:22:54.810896Z","leased_by":5,"max_attempts":3,"namespace_id":1,"payload":{},"priority":5,"queue_id":4,"result":null,"run_at":"2026-10-22T13:22:54.725872Z","state":"cancelled"}
+ [200]

@@ -1,0 +1,30 @@
+== H-E05-18 2026-10-22T13:32:51.262Z
+$ mkq f3s "lease_seconds":2,"max_attempts":5
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":18,"lease_seconds":2,"max_attempts":5,"name":"f3s","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+jobs 111 112
+$ api POST /v1/queues/f3s/lease -d {"worker_id":55,"max_jobs":2}
+{"jobs":[{"attempt":1,"id":111,"kind":"k","lease_expires_at":"2026-10-22T14:35:40.414039622Z","lease_token":"fb46d29686128d44eb2e65808e7587ad","payload":{}},{"attempt":1,"id":112,"kind":"k","lease_expires_at":"2026-10-22T14:35:40.414039622Z","lease_token":"05fcef8b8d3669e8965b96c0fd6973c9","payload":{}}]}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":3}
+{"now":"2026-10-22T14:35:41.414039622Z"}
+ [200]
+$ sql select id,state,attempts,last_error from jobs where id in (111,112)
+id | state | attempts | last_error
+111 | queued | 1 | lease expired
+112 | queued | 1 | lease expired
+(2 rows)
+{"jobs":[{"attempt":2,"id":111,"kind":"k","lease_expires_at":"2026-10-22T14:35:43.414039622Z","lease_token":"f8ccc3104f915673dbea06b5f61d1cbe","payload":{}},{"attempt":2,"id":112,"kind":"k","lease_expires_at":"2026-10-22T14:35:43.414039622Z","lease_token":"d22dc12ed8cd6c3df64f2433dbe130da","payload":{}}]}
+ [200]
+$ api POST /v1/jobs/111/ack -d {"lease_token":"f8ccc3104f915673dbea06b5f61d1cbe","result":{"ok":true}}
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/112/cancel
+{"ok":true}
+ [200]
+{"id":111,"state":"succeeded","last_error":"lease expired"}
+{"id":351,"event":"leased","worker":55,"attempt":2}
+{"id":353,"event":"lease_expired","worker":55,"attempt":2}
+{"id":112,"state":"cancelled","last_error":"lease expired"}
+{"id":352,"event":"leased","worker":55,"attempt":2}
+{"id":354,"event":"lease_expired","worker":55,"attempt":1}
