@@ -69,9 +69,10 @@ service, but gateway, control and node expose nothing.
 
 ## The lab
 
-- `make calibrate` measured, on this VM, one gateway at 300 req/s and one node at 250 req/s
-  (`lab/capacity.env`). The fleet sustains 500 req/s, bounded by the two nodes. Every scenario rate
-  is a fraction of that. The instances are deliberately small (`cpus: 0.5`, `nofile: 1024`,
+- `make calibrate` measured, on this VM, one gateway at 300 req/s and one node at 250 req/s. The
+  fleet sustains 500 req/s, bounded by the two nodes. Every scenario rate is a fraction of that.
+  The lab was recalibrated at the start of lesson 02 (gateway 350, node 300, fleet 600 req/s);
+  `lab/capacity.env` holds the current numbers, and every verify reads them from there. The instances are deliberately small (`cpus: 0.5`, `nofile: 1024`,
   `mem_limit` 512 MB for nodes and 256 MB for gateways) so a failure that takes a quarter to arrive
   in production arrives in a minute here.
 - `cmd/loadgen` is open-loop: requests go out at a fixed arrival rate whatever happened to the
