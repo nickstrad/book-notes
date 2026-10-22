@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"queuelet/internal/stats"
 	"regexp"
-	"time"
 )
 
 type QueueInput struct {
@@ -144,7 +143,7 @@ func (s *Server) queueVerb(w http.ResponseWriter, r *http.Request) {
 		_, e := s.S.DB.Exec(`UPDATE queues SET paused=$2 WHERE id=$1`, q["id"], r.PathValue("verb") == "pause")
 		output(w, map[string]any{"ok": true}, e)
 	case "purge":
-		res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE queue_id=$1 AND state IN ('queued','scheduled','retry_wait')`, q["id"])
+		res, e := s.S.DB.Exec(`WITH removed AS (DELETE FROM jobs WHERE queue_id=$1 AND state IN ('queued','scheduled','retry_wait') RETURNING *) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$2,'purged',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, q["id"], s.Clock.Now())
 		if e != nil {
 			fail(w, 500, "database_error", e)
 			return
@@ -160,7 +159,7 @@ func (s *Server) queueStats(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	v, e := stats.Read(s.S, "queue_id", q["id"], time.Now())
+	v, e := stats.Read(s.S, "queue_id", q["id"], s.Clock.Now())
 	output(w, v, e)
 }
 func (s *Server) namespaceStats(w http.ResponseWriter, r *http.Request) {
@@ -174,6 +173,6 @@ func (s *Server) namespaceStats(w http.ResponseWriter, r *http.Request) {
 		fail(w, 403, "forbidden", "namespace mismatch")
 		return
 	}
-	v, e := stats.Read(s.S, "namespace_id", id, time.Now())
+	v, e := stats.Read(s.S, "namespace_id", id, s.Clock.Now())
 	output(w, v, e)
 }

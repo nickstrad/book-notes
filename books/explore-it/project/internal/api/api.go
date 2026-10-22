@@ -9,6 +9,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"queuelet/internal/clock"
 	"queuelet/internal/jobs"
 	"queuelet/internal/schedule"
 	"queuelet/internal/store"
@@ -20,6 +22,7 @@ import (
 )
 
 type Server struct {
+	Clock      clock.Clock
 	S          *store.Store
 	Jobs       *jobs.Service
 	coreFailed atomic.Bool
@@ -59,6 +62,10 @@ func num(r *http.Request, name string) int64 {
 }
 func (s *Server) Handler() http.Handler {
 	m := http.NewServeMux()
+	m.HandleFunc("GET /v1/jobs/{id}/events", s.events)
+	if os.Getenv("QUEUELET_TEST_CLOCK") == "1" {
+		m.HandleFunc("POST /admin/clock", s.clockControl)
+	}
 	m.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(r.Context(), time.Second)
 		defer cancel()
@@ -109,6 +116,8 @@ func (s *Server) Handler() http.Handler {
 	})
 }
 func (s *Server) Loop(ctx context.Context) {
+	// Event console reads committed history; it never controls transitions.
+	go s.logEvents(ctx)
 	// A single shipper preserves delivery ordering without blocking lifecycle sweeps.
 	go func() {
 		t := time.NewTicker(time.Second)
@@ -117,7 +126,8 @@ func (s *Server) Loop(ctx context.Context) {
 			select {
 			case <-ctx.Done():
 				return
-			case now := <-t.C:
+			case <-t.C:
+				now := s.Clock.Now()
 				e := webhook.Ship(s.S, now)
 				s.shipFailed.Store(e != nil)
 				if e != nil {
@@ -132,7 +142,8 @@ func (s *Server) Loop(ctx context.Context) {
 		select {
 		case <-ctx.Done():
 			return
-		case now := <-t.C:
+		case <-t.C:
+			now := s.Clock.Now()
 			failed := false
 			for _, step := range []func(time.Time) error{s.Jobs.Promote, s.Jobs.Expire, func(t time.Time) error { return schedule.Fire(s.S, t) }, s.Jobs.Retain} {
 				if e := step(now); e != nil {

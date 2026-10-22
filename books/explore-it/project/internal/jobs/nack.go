@@ -23,11 +23,11 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	if delay != nil {
 		wait = time.Duration(*delay) * time.Second
 	}
-	_, e = tx.Exec(`UPDATE jobs SET state=$2,attempts=$3,last_error=$4,run_at=$5,finished_at=CASE WHEN $2='dead' THEN $6::timestamptz ELSE NULL END,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE id=$1`, id, state, attempts, message, now.Add(wait), now)
+	_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$6,attempts=$3,last_error=$4,run_at=$5,finished_at=CASE WHEN $2='dead' THEN $6::timestamptz ELSE NULL END,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE id=$1`, id, state, attempts, message, now.Add(wait), now)
 	if e != nil {
 		return e
 	}
-	_, e = tx.Exec(`INSERT INTO attempts VALUES($1,$2,$3,$4,$4,'failed',$5)`, id, attempts, worker, now, message)
+	_, e = tx.Exec(`INSERT INTO attempts SELECT $1,$2,$3,leased_at,$4,'failed',$5 FROM jobs WHERE id=$1`, id, attempts, worker, now, message)
 	if e != nil {
 		return e
 	}

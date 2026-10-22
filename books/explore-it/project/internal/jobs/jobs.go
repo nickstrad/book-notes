@@ -58,7 +58,7 @@ func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, e
 		var payload []byte
 		var kind string
 		var attempt int
-		e = tx.QueryRow(`UPDATE jobs SET state='leased',leased_by=$2,lease_token=$3,lease_expires_at=$4 WHERE id=$1 RETURNING kind,payload,attempts+1`, id, w, token, now.Add(time.Duration(sec)*time.Second)).Scan(&kind, &payload, &attempt)
+		e = tx.QueryRow(`UPDATE jobs SET state='leased',leased_at=$5,event_at=$5,leased_by=$2,lease_token=$3,lease_expires_at=$4 WHERE id=$1 RETURNING kind,payload,attempts+1`, id, w, token, now.Add(time.Duration(sec)*time.Second), now).Scan(&kind, &payload, &attempt)
 		if e != nil {
 			return nil, e
 		}
@@ -77,11 +77,11 @@ func (j *Service) Notify(id int64, now time.Time) error {
 		return nil
 	}
 	body, _ := json.Marshal(map[string]any{"job_id": id, "state": state, "result": json.RawMessage(result), "last_error": errtext})
-	_, e = j.S.DB.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at) VALUES($1,$2,$3,$4,$5)`, id, url, secret, string(body), now)
+	_, e = j.S.DB.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at,event_at,namespace_id,queue) SELECT $1,$2,$3,$4,$5,$5,j.namespace_id,q.name FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id, url, secret, string(body), now)
 	return e
 }
 func (j *Service) Heartbeat(id int64, token string, seconds int, now time.Time) error {
-	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3 WHERE id=$1 AND lease_token=$2 AND state='leased'`, id, token, now.Add(time.Duration(seconds)*time.Second))
+	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND state='leased'`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
 	return Changed(r, e)
 }
 func Changed(r sql.Result, e error) error {

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"queuelet/internal/client"
@@ -45,7 +46,7 @@ func Run(ctx context.Context, c *client.Client, name, queue string, kinds []stri
 			continue
 		}
 		for _, j := range batch.Jobs {
-			log.Printf("processing kind=%s attempt=%d", j.Kind, j.Attempt)
+			slog.Info("processing", "event", "processing", "job_id", j.ID, "queue", queue, "worker", reg.ID, "attempt", j.Attempt, "kind", j.Kind)
 			done := make(chan struct{})
 			go func(j Job) {
 				t := time.NewTicker(5 * time.Second)
@@ -68,7 +69,7 @@ func Run(ctx context.Context, c *client.Client, name, queue string, kinds []stri
 				body = map[string]any{"lease_token": j.Token, "error": e.Error(), "retry": true}
 			}
 			_, status, e := c.Do("POST", fmt.Sprintf("/v1/jobs/%d/%s", j.ID, verb), body)
-			log.Printf("completed status=%d error=%v", status, e)
+			slog.Info("completed", "event", verb, "job_id", j.ID, "queue", queue, "worker", reg.ID, "attempt", j.Attempt, "status", status, "error", e)
 		}
 		time.Sleep(200 * time.Millisecond)
 	}

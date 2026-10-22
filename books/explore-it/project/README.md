@@ -69,3 +69,28 @@ running service. `make verify LESSON=NN REF=explore-it/lesson-MM` builds histori
 binaries in a temporary independent Compose stack and runs current reproduction
 scripts against them. `make dwell LESSON=NN` reports those probes across tags.
 Test output belongs in ignored results/. `make down` deletes this stack's volume.
+
+### Observe jobs and control lab time
+
+`qctl job events ID` returns retained namespace-scoped history, including after
+job deletion; `qctl watch QUEUE` polls histories for up to 500 jobs once per real second. Rows identify the
+queue, worker, attempt, event time, and notification outbox/status/error. New
+attempts retain their lease start separately from completion. Pre-hook leases
+have unknown (`null`) starts; no timing history is invented. `event_at` uses
+application time. API lifecycle JSON logs mirror committed events asynchronously;
+a crash between logging and marking can repeat a log event (deduplicate event_id).
+Worker JSON logs correlate processing/completion with the same job id.
+
+The Compose **lab** enables `QUEUELET_TEST_CLOCK=1`. Production defaults to no
+clock endpoint. With `QUEUELET_KEY=admin-key`, use `qctl clock set
+2030-01-01T00:00:00Z`, `qctl clock advance 3600`, and `qctl clock reset`.
+Only admin keys can change this global lab clock; namespace keys receive 403.
+Set/advance freeze API semantic time; reset and API restart return to real UTC.
+Enqueue, leases, retries, sweeps, cron, stats and event timestamps share it.
+Background polling, worker execution/heartbeats, process sleeps, HTTP deadlines
+and hooksink timestamps stay real. Advancing the API clock cannot accelerate a
+worker's sleep or a partner's response. Avoid mixing independent clock experiments
+on the same stack. SQL receives application timestamps; observational triggers
+record them without choosing transitions. Event history is retained until lab
+reset, independently of job retention, for exploration (production retention
+policy for this diagnostic table is beyond this lab).

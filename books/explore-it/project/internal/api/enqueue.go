@@ -67,7 +67,7 @@ func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[
 	b := in.Payload
 	var id int64
 	var status string
-	e := db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
+	e := db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
 	if e == sql.ErrNoRows && in.IdempotencyKey != nil {
 		e = db.QueryRow(`SELECT id,state FROM jobs WHERE queue_id=$1 AND idempotency_key=$2`, q["id"], *in.IdempotencyKey).Scan(&id, &status)
 	}
@@ -78,7 +78,7 @@ func (s *Server) enqueue(w http.ResponseWriter, r *http.Request, q map[string]an
 	if !decode(w, r, &in) {
 		return
 	}
-	v, e := s.insertJob(q, in, time.Now())
+	v, e := s.insertJob(q, in, s.Clock.Now())
 	if e != nil {
 		fail(w, 400, "invalid_job", e)
 		return
@@ -103,7 +103,7 @@ func (s *Server) batch(w http.ResponseWriter, r *http.Request, q map[string]any)
 	}
 	defer tx.Rollback()
 	ids := []any{}
-	now := time.Now()
+	now := s.Clock.Now()
 	for _, j := range in.Jobs {
 		v, e := insertJob(tx, q, j, now)
 		if e != nil {

@@ -4,15 +4,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log/slog"
 	"net/url"
 	"os"
 	"queuelet/internal/client"
 	"queuelet/internal/worker"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func main() {
+	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stderr, nil)))
 	if e := run(os.Args[1:]); e != nil {
 		fmt.Fprintln(os.Stderr, e)
 		os.Exit(1)
@@ -67,6 +70,49 @@ func run(args []string) error {
 		return map[string]any{}
 	}
 	switch p(0) {
+	case "clock":
+		method = "POST"
+		path = "/admin/clock"
+		data = map[string]any{"action": p(1)}
+		if p(1) == "set" {
+			data.(map[string]any)["at"] = p(2)
+		}
+		if p(1) == "advance" {
+			sec, e := strconv.ParseFloat(p(2), 64)
+			if e != nil {
+				return e
+			}
+			data.(map[string]any)["seconds"] = sec
+		}
+	case "watch":
+		for {
+			b, status, e := c.Do("GET", "/v1/queues/"+url.PathEscape(p(1))+"/jobs?limit=500", nil)
+			if e != nil {
+				return e
+			}
+			if status >= 400 {
+				return fmt.Errorf("HTTP %d: %s", status, b)
+			}
+			var listing struct {
+				Jobs []struct {
+					ID json.Number `json:"id"`
+				} `json:"jobs"`
+			}
+			if e = json.Unmarshal(b, &listing); e != nil {
+				return e
+			}
+			for _, j := range listing.Jobs {
+				b, status, e = c.Do("GET", "/v1/jobs/"+j.ID.String()+"/events", nil)
+				if e != nil {
+					return e
+				}
+				if status >= 400 {
+					return fmt.Errorf("HTTP %d: %s", status, b)
+				}
+				fmt.Println(string(b))
+			}
+			time.Sleep(time.Second)
+		}
 	case "queue":
 		path = "/v1/queues"
 		switch p(1) {
@@ -139,8 +185,8 @@ func run(args []string) error {
 		path = "/v1/jobs/" + p(2)
 		switch p(1) {
 		case "get":
-		case "attempts":
-			path += "/attempts"
+		case "attempts", "events":
+			path += "/" + p(1)
 		case "rm":
 			method = "DELETE"
 		case "cancel", "retry", "ack", "nack", "heartbeat":

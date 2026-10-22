@@ -5,10 +5,12 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-E02 blind record is complete and reconciled: 19 confirmed predictions, 0 refuted,
-46 model cells; two new bugs U09/U10, one spec clarification. Expected D03/D04
-were already repaired in E01. Next: fresh fixer, T1–T3 and assigned reports; see
-reconciliations/02-fixer-brief.md. No A1–A4 decisions are assigned now.
+Fresh E02 fixer, hooks checkpoint: added T1 JSON lifecycle/worker events, T2
+namespace-owned retained event history and accurate new lease starts, T3 API
+semantic clock with authenticated lab-only controls. Schema-compatible reset
+works with old trees. Hook probe output is in runs/02-hooks-validation.log;
+unit output runs/02-hooks-test.log. U09/U10 remain for the next logical commit
+within this same authorized fixer unit. No later policy decisions changed.
 
 ## Prior checkpoint A acceptance
 

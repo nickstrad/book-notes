@@ -5,7 +5,6 @@ import (
 	"github.com/lib/pq"
 	"net/http"
 	"queuelet/internal/jobs"
-	"time"
 )
 
 func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
@@ -30,7 +29,7 @@ func (s *Server) deleteJob(w http.ResponseWriter, r *http.Request) {
 	if !s.ownJob(w, r) {
 		return
 	}
-	res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE id=$1 AND state IN ('succeeded','dead','cancelled')`, num(r, "id"))
+	res, e := s.S.DB.Exec(`WITH removed AS (DELETE FROM jobs WHERE id=$1 AND state IN ('succeeded','dead','cancelled') RETURNING *) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$2,'deleted',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, num(r, "id"), s.Clock.Now())
 	if e = jobs.Changed(res, e); e != nil {
 		fail(w, 409, "state_conflict", e)
 		return
@@ -42,7 +41,7 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	id := num(r, "id")
-	now := time.Now()
+	now := s.Clock.Now()
 	var e error
 	switch r.PathValue("verb") {
 	case "cancel":
@@ -101,7 +100,7 @@ func (s *Server) createWorker(w http.ResponseWriter, r *http.Request) {
 	}
 	token := jobs.Token()
 	var id int64
-	e := s.S.DB.QueryRow(`INSERT INTO workers(namespace_id,name,kinds,token,last_seen_at) VALUES($1,$2,$3,$4,$5) RETURNING id`, ident(r).Namespace, in.Name, pq.Array(in.Kinds), token, time.Now()).Scan(&id)
+	e := s.S.DB.QueryRow(`INSERT INTO workers(namespace_id,name,kinds,token,last_seen_at) VALUES($1,$2,$3,$4,$5) RETURNING id`, ident(r).Namespace, in.Name, pq.Array(in.Kinds), token, s.Clock.Now()).Scan(&id)
 	if e != nil {
 		fail(w, 500, "database_error", e)
 		return
@@ -120,7 +119,7 @@ func (s *Server) deleteWorker(w http.ResponseWriter, r *http.Request) {
 		fail(w, 404, "worker_not_found", e)
 		return
 	}
-	_, e = tx.Exec(`UPDATE jobs SET state='queued',lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"))
+	_, e = tx.Exec(`UPDATE jobs SET state='queued',event_at=$2,lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"), s.Clock.Now())
 	if e == nil {
 		e = tx.Commit()
 	}
@@ -145,7 +144,7 @@ func (s *Server) lease(w http.ResponseWriter, r *http.Request, q map[string]any)
 		fail(w, 404, "worker_not_found", "unknown worker")
 		return
 	}
-	v, e := s.Jobs.Lease(q["id"].(int64), in.WorkerID, in.MaxJobs, time.Now())
+	v, e := s.Jobs.Lease(q["id"].(int64), in.WorkerID, in.MaxJobs, s.Clock.Now())
 	output(w, map[string]any{"jobs": v}, e)
 }
 

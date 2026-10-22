@@ -6,8 +6,8 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"queuelet/internal/store"
 	"time"
@@ -29,12 +29,22 @@ func Ship(s *store.Store, now time.Time) error {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("X-Queuelet-Signature", hex.EncodeToString(mac.Sum(nil)))
 		resp, e := (&http.Client{Timeout: 2 * time.Second}).Do(req)
-		if e != nil || resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		status := 0
+		message := ""
+		if resp != nil {
+			status = resp.StatusCode
+		}
+		if e != nil {
+			message = e.Error()
+		} else if status < 200 || status >= 300 {
+			message = fmt.Sprintf("HTTP %d", status)
+		}
+		if message != "" {
 			if resp != nil {
 				io.Copy(io.Discard, resp.Body)
 				resp.Body.Close()
 			}
-			_, e = s.DB.Exec(`UPDATE webhook_outbox SET attempts=attempts+1,next_at=$2 WHERE id=$1`, r["id"], now.Add(5*time.Second))
+			_, e = s.DB.Exec(`UPDATE webhook_outbox SET attempts=attempts+1,next_at=$2,event_at=$3,status=$4,error=$5 WHERE id=$1`, r["id"], now.Add(5*time.Second), now, status, message)
 			if e != nil {
 				return e
 			}
@@ -42,8 +52,7 @@ func Ship(s *store.Store, now time.Time) error {
 		}
 		io.Copy(io.Discard, resp.Body)
 		resp.Body.Close()
-		log.Printf("webhook delivered status=%d", resp.StatusCode)
-		_, e = s.DB.Exec(`UPDATE webhook_outbox SET delivered_at=$2,attempts=attempts+1 WHERE id=$1`, r["id"], now)
+		_, e = s.DB.Exec(`UPDATE webhook_outbox SET delivered_at=$2,event_at=$2,attempts=attempts+1,status=$3,error='' WHERE id=$1`, r["id"], now, status)
 		if e != nil {
 			return e
 		}

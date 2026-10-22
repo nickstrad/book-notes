@@ -73,7 +73,7 @@ func fireOne(s *store.Store, id any, now time.Time) error {
 	}
 	// Advance even while paused. At most one due execution can catch up after downtime.
 	if !paused {
-		_, e = tx.Exec(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,created_at) VALUES($1,$2,$3,$4,5,'queued',$5,$6,$7)`, q, ns, kind, string(payload), due, max, now)
+		_, e = tx.Exec(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,created_at,event_at) VALUES($1,$2,$3,$4,5,'queued',$5,$6,$7,$7)`, q, ns, kind, string(payload), due, max, now)
 		if e != nil {
 			return e
 		}

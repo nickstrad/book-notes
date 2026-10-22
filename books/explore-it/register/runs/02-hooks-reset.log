@@ -1,0 +1,18 @@
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-a-1 Started 
+ Container queuelet-worker-b-1 Started 

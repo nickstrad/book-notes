@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"queuelet/internal/schedule"
-	"time"
 )
 
 type ScheduleInput struct {
@@ -29,7 +28,7 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
 		fail(w, 400, "invalid_schedule", "name and kind required")
 		return
 	}
-	now := time.Now()
+	now := s.Clock.Now()
 	off, e := schedule.Offset(in.Timezone, now)
 	if e != nil {
 		fail(w, 400, "invalid_timezone", e)
@@ -104,7 +103,7 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 	if in.Enabled != nil {
 		enabled = *in.Enabled
 	}
-	now := time.Now()
+	now := s.Clock.Now()
 	off, e := schedule.Offset(zone, now)
 	if e != nil {
 		fail(w, 400, "invalid_timezone", e)
@@ -157,7 +156,7 @@ func (s *Server) runSchedule(w http.ResponseWriter, r *http.Request) {
 	b, _ := json.Marshal(v["payload"])
 	json.Unmarshal(b, &in.Payload)
 	in.Kind = v["kind"].(string)
-	job, e := s.insertJob(q, in, time.Now())
+	job, e := s.insertJob(q, in, s.Clock.Now())
 	if e != nil {
 		fail(w, 400, "invalid_job", e)
 		return

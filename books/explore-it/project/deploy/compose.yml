@@ -20,6 +20,7 @@ services:
     image: queuelet:${QUEUELET_IMAGE_TAG:-local}
     environment:
       DATABASE_URL: postgres://queuelet:queuelet@postgres:5432/queuelet?sslmode=disable
+      QUEUELET_TEST_CLOCK: "1"
     ports: ["${QUEUELET_API_PORT:-18200}:8200"]
     depends_on:
       postgres: {condition: service_healthy}

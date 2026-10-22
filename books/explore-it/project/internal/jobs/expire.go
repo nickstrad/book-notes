@@ -38,11 +38,11 @@ func (j *Service) Expire(now time.Time) error {
 			state = "dead"
 			dead = append(dead, r.id)
 		}
-		_, e = tx.Exec(`UPDATE jobs SET state=$2,attempts=$3,last_error='lease expired',lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now)
+		_, e = tx.Exec(`UPDATE jobs SET state=$2,event_at=$4,attempts=$3,last_error='lease expired',lease_token=NULL,leased_by=NULL,lease_expires_at=NULL,finished_at=CASE WHEN $2='dead' THEN $4::timestamptz ELSE NULL END WHERE id=$1`, r.id, state, r.n, now)
 		if e != nil {
 			return e
 		}
-		_, e = tx.Exec(`INSERT INTO attempts VALUES($1,$2,$3,$4,$4,'expired','lease expired')`, r.id, r.n, r.worker, now)
+		_, e = tx.Exec(`INSERT INTO attempts SELECT $1,$2,$3,leased_at,$4,'expired','lease expired' FROM jobs WHERE id=$1`, r.id, r.n, r.worker, now)
 		if e != nil {
 			return e
 		}
@@ -59,10 +59,10 @@ func (j *Service) Expire(now time.Time) error {
 }
 
 func (j *Service) Promote(now time.Time) error {
-	_, e := j.S.DB.Exec(`UPDATE jobs SET state='queued' WHERE state IN ('scheduled','retry_wait') AND run_at <= $1`, now)
+	_, e := j.S.DB.Exec(`UPDATE jobs SET state='queued',event_at=$1 WHERE state IN ('scheduled','retry_wait') AND run_at <= $1`, now)
 	return e
 }
 func (j *Service) Retain(now time.Time) error {
-	_, e := j.S.DB.Exec(`DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled','dead') AND j.finished_at < $1::timestamptz - q.retention_hours * interval '1 hour'`, now)
+	_, e := j.S.DB.Exec(`WITH removed AS (DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled','dead') AND j.finished_at < $1::timestamptz - q.retention_hours * interval '1 hour' RETURNING j.*) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$1,'retained',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, now)
 	return e
 }

@@ -8,12 +8,11 @@ The approved scope omits the people/process material. Specification and order:
 
 ## Status
 
-2026-10-22 UTC: checkpoint A reviewed NITS and repaired (`99d42fc`, lesson-01).
-E02 blind exploration closed done (Opus 5.5, exit 0):19/19 confirmed predictions,
-0 refuted, 2 new bugs + 1 spec clarification, 46 model cells. Raw records preserved;
-source/blindness audit clean. Coordinator reconciliation is register/reconciliations/02.md.
-Next fresh fixer closes T1–T3 and repairs U09/U10; A1–A4 remain later.
-Branch/worktree: plan/explore-it, /root/Software/booknotes-work/explore-it.
+2026-10-22 UTC: fresh E02 fixer active on existing plan/explore-it. Blind record
+is committed at e390c31 and preserved. T1–T3 hooks are implemented; validating
+schema-compatible replay before U09/U10 runtime repairs. No explorer/reviewer
+runs are active. Scratch: /tmp/explore-it-e02-fix; live test sessions belong to
+this fixer. Stop after lesson-02; coordinator owns E03 onward.
 
 ## Done
 
@@ -27,7 +26,7 @@ Branch/worktree: plan/explore-it, /root/Software/booknotes-work/explore-it.
 
 ## Next, in order
 
-1. Coordinator regenerates the unrun E02 export from repaired `explore-it/lesson-01`.
+1. Finish E02 hooks and U09/U10 fixes, paired verification, checks and lesson-02 tag.
 2. E02 closes T1–T3; then E03–E06 refine/probe the stronger model and remaining
    spec silences, followed by checkpoint B review.
 3. E07–E09, structural transition guards, final skill revisions/index/landing,
