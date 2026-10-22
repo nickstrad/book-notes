@@ -1,0 +1,275 @@
+{
+  "experiment": 4,
+  "source_tag": "explore-it/lesson-03",
+  "export_path": "/tmp/explore-it-experiment-04",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "d88a14fa8fb89925e9902c443a6bc563b73871b73c02b75468313ae5a8449ce2"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "70dbe34be45f828cee8466d1f6c4dbaa3d314c64f4b35f48a17d441518f965d8"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "ab90ebbedcda916c885fa5d601ec904d1a5e0cd5de3c77625238911926aff332"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "08bbdae5bed785cb6274e9d277e933b26224cf93d4cee38cff32d3a22d310b90"
+    },
+    {
+      "file": "exploration/models/variables.md",
+      "sha256": "21014ef05b751ada1d8b2526f5a5e53bb1cded771eaa5cdedeb0b62d4f5ff496"
+    },
+    {
+      "file": "exploration/defects/E04-F01-unmatched-route-errors-not-json.md",
+      "sha256": "320208e3517495a85bcb3a8bdf8e9e9a0f7bd20653c4a8f9a780036bf1c1d844"
+    },
+    {
+      "file": "exploration/defects/E04-F03-negative-delay-wraps-and-precedes-failure.md",
+      "sha256": "04a5d9bd7ee91bd49dd4a7303c5e32fd0423a6e84b45a48a7a2c710e83ea98f8"
+    },
+    {
+      "file": "exploration/defects/E04-F04-expired-lease-honoured-until-sweep.md",
+      "sha256": "40f842e2b8fb1d70bab225aa6cfbe4c8ca83ec60f2230a9fb7c7446e0d571849"
+    },
+    {
+      "file": "exploration/defects/E04-F05-queued-age-counts-leased-time.md",
+      "sha256": "9116deab67dae2b1735eccf76fd97d193a81ce51343a62ea19acf28c5e80d8a2"
+    },
+    {
+      "file": "exploration/defects/E04-F02-attempt-history-after-retry-ambiguous.md",
+      "sha256": "10cda704b84f8e3b6ed4178eb737ff79255c9af15979e688764b8dc3abb1c790"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/revealed.md",
+      "sha256": "04134f9612cf6f12c1f4f23b8f675e6214705be788c34a1e953f9f9ecd634aa1"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/charter.md",
+      "sha256": "bf54fa9a777ecbc8acee7eadf9fb8073d18fd1dc044c5f93188169d8c98862ac"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/brief.md",
+      "sha256": "cc05dee234907853a80110efdb02f04be8bf97714eb0efaca9a66a036a8bac68"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/notes.md",
+      "sha256": "a5f8235457756d86fd18651561a88af0409ee9b19242a5964d735d39c1de7488"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/tools/lease1.sh",
+      "sha256": "c26bde6109488cda9fffca733e983eba59245dfaa18088d5b86abf22c0bf1ae1"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/tools/walk-backoff.sh",
+      "sha256": "95136cb42039dfaac7a14a77a7f7fc46a10c284786815a641c8e39d25f1795b7"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/tools/e04env.sh",
+      "sha256": "9fcb435a127e72f09f41b2853febdf194277eeae7ae498c8edb948b0208b280f"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/export-state.md",
+      "sha256": "d16a085638896efff4b94f54ac0132b8e2bafdce3547f3ad565824ebcd3e0b3e"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l15.txt",
+      "sha256": "4cb1d91b149a455dc79448f86ab10beeb1aaf6aa1da1dc2a44f949e4d8341242"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l13.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l8.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/b40.json",
+      "sha256": "a0b07eeef1bebaab5a568c94abfb2aef0dc304adc3f435fe536c2a3bf2757f68"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l11.txt",
+      "sha256": "559e2d44a194aabf5c2c245eb24524ea0962cc2195b1b830a5087be25b040437"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l6.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l29.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p8-age-sibling.txt",
+      "sha256": "dcd04823382b0693f50d157f677fb60bfaab8b89ca57c83739ad1b0d0ef47f55"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l9.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p5-cancel-stats.txt",
+      "sha256": "af95e5ad4d20fe76d26b80a2ff82b8f350e05f0718bc547ae63e4221ef47f0a6"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-concurrent.txt",
+      "sha256": "429676b9f329cadcffba9ffa25dd0d67ccf746b949d9bb773e148c49521e4618"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p1-errors.txt",
+      "sha256": "0cbc38e5f6098ce1a6e2d074281ad31ed95ea6cbe4ee224a78d88d3b98918673"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l30.txt",
+      "sha256": "f25035b98f1b379542e31337306dfe4dbdfbacb8ab812127524705a433c9f491"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l26.txt",
+      "sha256": "c96fa3c6acb2a966030494be3a065b38ed93e9bc992a6d66454fef74556086d3"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p9-fifo.txt",
+      "sha256": "9ebd1695094633fc9e2a29db1a8cde8a56e31a76f05703746c3d8c2d49aaf081"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l3.txt",
+      "sha256": "d91b9645cf81be60ad1867f0070b97ca106f42fcb313875d7993eba16376975d"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l7.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p2-retry-history.txt",
+      "sha256": "f60e75164dff058847f920ebb5c59ac816fd8bca903ce8f13ad384f988ee6d6e"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/up.log",
+      "sha256": "73024cf5247de946eb600fcc2fc1eb735cfcec9d5e7ecab81118a096d8f6ab9f"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l28.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l14.txt",
+      "sha256": "669a6d05896bb7f2ec339f52333cf43f2e24d2fdd9e6a39b4eaef972ba6a0a6b"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l27.txt",
+      "sha256": "962b1d50cc40f2976d93cde9e14d5c075c860aab58dc5f2fc1ec5377494d85f4"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l2.txt",
+      "sha256": "a5df2af1a172bcf3b4fca319d6e823fe4dbe326274ce034996e09550b40bcc23"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l12.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l4.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l5.txt",
+      "sha256": "175d99027850bf2378d719f45cd7926cc1637c9ba45913cf00ada2e76e96854b"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l24.txt",
+      "sha256": "155eb5d5eef408264b3bf7200573c7c2aa717d18c1955c82d64afec305a8bbe2"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p11-siblings.txt",
+      "sha256": "601cc10deab94e2db51cf79989254e3da55781148fad47054e7e849a7486e359"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p6-expiry.txt",
+      "sha256": "85d79f587e72dd23a029c9720195f7ef0e8ee89f07c1c7e8e43df58b6cf097d8"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l22.txt",
+      "sha256": "192545887a24074ed97412dad761e71ed4038c53d2eb2e3f14ac09229bdd8a22"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l18.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p10-backoff-walk.txt",
+      "sha256": "b83afb5011e2e2b84ffaa76d90a59fb3ac6e276a957bfcc01f173bb4f69e3943"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l1.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p5-state.env",
+      "sha256": "3146a685b28c6eb777f597bcdee0c7762d85c4654a941863a1f5d215d86b5d21"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/final-snapshot.txt",
+      "sha256": "909f3c6de9fa652b3d76e6c5dc9b5aab50a0b84bb37da023bc07f4210bda6435"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l20.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l25.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/all-logs-at-stop.txt",
+      "sha256": "8b4103f7a5c59b66183295107ae4105d64fd34ea92828f3573896b8028211602"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l19.txt",
+      "sha256": "5df0c99ad491d075559117f25d2017ad344e6381888e13e51886e6ff3b9ef6c6"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p7-grace-control.txt",
+      "sha256": "c8bf3f7b0e5a541567a560947c3dc86ce7ed0dbb89c6b7764f6db162b22619bf"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l10.txt",
+      "sha256": "5fe3c13c72952dc383a247ee300875b697a4172cf3cda1958481031c690f8b6c"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/up-start.txt",
+      "sha256": "a387507413541cf700c9b49574c6a0640b62259f0f0fed1bb9f19c59481e5a7a"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l21.txt",
+      "sha256": "fb61e70058e08ab5874c9cdb8b11e0f9525d433dab0ff54215dc6e323c409302"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p12-priority.txt",
+      "sha256": "68c1b1eb37999659fdafefc998647ecad8b229cc636cd0ff3700f7b5f0cd3d7d"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l16.txt",
+      "sha256": "fc06542d8fcf875b6c8af6595fb115e60525fedf2bb604165367f694c86931d7"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l23.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p3-negative-delay.txt",
+      "sha256": "b3f8bb63fe3f04d56cf9d6b0145c3053f99f2fa60ee9bf4ef68a9d5a76e7ac5d"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/stop-time.txt",
+      "sha256": "a7a094865d2c015d563ee59cee71e23d83e6788c4e69118b4df8be18e13c382f"
+    },
+    {
+      "file": "exploration/experiments/04-judge-it/evidence/project-results/e04/p4-l17.txt",
+      "sha256": "f097857a204b825e6b216e6b2c64a2ccd68e8e22eaf6f588c12f1ad5095096ea"
+    }
+  ]
+}

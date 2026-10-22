@@ -76,3 +76,21 @@ in E02 (O) unless marked I (inferred). Counted new cells are marked ★.
 | ★ scheduled (delay) | DB restart during wait | promoted after recovery | promoted next good tick | O job 306 promoted+acked 0.5 s after due (H15; regression context) |
 | leased | lease expiry | attempt recorded; queued or dead | (E01 row: no attempt) | **revised**: O recorded at lesson-01 (F05 fix holds) |
 | leased | nack, attempts = max | dead | dead | O at lesson-01 (job 303) — E01 F04 row superseded |
+
+## E04 revision — build `explore-it/lesson-03` ([E04 notes](../experiments/04-judge-it/notes.md)); ★ = new observed cell
+
+| State | Event | Should (SPEC / rule) | Predicted (code) | Observed (E04) |
+|---|---|---|---|---|
+| ★ dead (via nack, max 2) | operator retry, lease, ack | succeeded; history distinguishes runs | attempts restart at 1 | O succeeded; attempts list n=1,1,2 (E04-F02) |
+| ★ dead | lease | not leased | not leased | O `{"jobs":[]}` (P2) |
+| ★ leased, `lease_expires_at` passed, before sweep | heartbeat | 409 (not current holder) | 200, lease extended | O 200 ×6; no expired attempt (E04-F04) |
+| ★ leased, expired, before sweep | ack | 409 / or stated grace | 200 succeeded | O succeeded attempts 1 (E04-F04) |
+| ★ leased, expired, before sweep | nack | expired attempt | 200 failed attempt | O attempt "failed: late nack" (E04-F04) |
+| ★ leased, expired, after sweep | heartbeat | 409 | 409 | O 409; queued, attempts+1 (P7) |
+| ★ leased | nack delay −5 | retry not before failure | run_at failure−5 s | O (E04-F03) |
+| ★ leased | nack delay −9223372037 | ≤ bounded, monotone | run_at +292 y | O 2322-04-12 (E04-F03) |
+| ★ leased | cancel, then holder heartbeat/ack/nack/retry | 409 each | 409 | O 409 ×4 (P5) |
+| ★ queued (cancelled) | lease | skipped | skipped | O next job leased (P5) |
+| ★ leased → queued by expiry / worker delete | stats age | ≈0 (readiness = release) | from created/run_at | O 600 / 100 (E04-F05) |
+| ★ queued ×40 | 30 concurrent leases | each once | each once | O 40 distinct (P4) |
+| ★ retry_wait, attempts 20 (defaults) | nack | bounded? (spec silent) | 30.34 d | O run_at +2 621 440 s (P10; A1 spec silence) |

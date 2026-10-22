@@ -1,0 +1,21 @@
+2026-10-22T12:48:31.341Z
+--- R33 FIFO: batch order, then app-clock step back
+{"now":"2031-09-01T00:00:00Z"}
+ [200]
+{"ids":[66,67,68]}
+ [201]
+lease 66
+lease 67
+lease 68
+{"id":69,"state":"queued"} [201]
+{"now":"2031-08-31T23:59:00Z"}
+ [200]
+{"id":70,"state":"queued"} [201]
+lease 70
+id | payload | created_at | state
+66 | {"o": "b1"} | 2031-09-01 00:00:00+00 | leased
+67 | {"o": "b2"} | 2031-09-01 00:00:00+00 | leased
+68 | {"o": "b3"} | 2031-09-01 00:00:00+00 | leased
+69 | {"o": "A-first"} | 2031-09-01 00:00:00+00 | queued
+70 | {"o": "B-second"} | 2031-08-31 23:59:00+00 | leased
+(5 rows)

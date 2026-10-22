@@ -65,3 +65,16 @@ Variation table for the E03 charter (enqueue, batch, queue configuration). "Obse
 Untried rows (backlog): schedule create/PATCH body shape and payload (#offcharter), lease `max_jobs` / list `limit`
 coercion (#offcharter), worker `kinds` array shapes, concurrent idempotent enqueue race, `lease_seconds` 2147483647 expiry
 behaviour (accepted; expiry not observed), very long `kind` / `idempotency_key`.
+
+## E04 additions — `explore-it/lesson-03` ([E04 notes](../experiments/04-judge-it/notes.md))
+
+| Family | Variable | Heuristic | Values | Oracle | Observed | Judgment |
+|---|---|---|---|---|---|---|
+| ★ sign/range | nack `delay_seconds` | Numbers, Boundaries | −5, −9223372036, −9223372037, −18446744073 | SPEC backoff "never before the failure"; monotone | past / 1737 / 2322 / +0.71 s | bug E04-F03 |
+| ★ sign/range | enqueue `delay_seconds` | Numbers | −5, −9223372037 | monotone | queued past / scheduled 2322 | E04-F03 |
+| ★ timing | request vs sweep after expiry | Timing | immediate vs +1.5 s | SPEC current holder | 200 vs 409 | bug E04-F04 |
+| ★ method/path | HTTP method on /v1 routes | — | PUT, DELETE, GET, OPTIONS, PATCH, unknown path | SPEC error envelope | text/plain 404/405 | bug E04-F01 |
+| ★ count | attempt number across retry | Count | 2 failures, retry, 1 success | numeric = execution order | 1,1,2 | bug E04-F02 |
+| ★ count | default backoff attempt | Count | 1…21 | spec bound 2^31−1 s | 5·2^(n−1) exact | holds; A1 spec silence |
+| ★ concurrency | parallel leases | Many | 30 calls, 2 workers, 40 jobs | atomic lease | 40 distinct | holds |
+| ★ time source | app clock step back between enqueues | Timing | −60 s | FIFO by creation | inverted | lab-only; risk H-E04-08 |

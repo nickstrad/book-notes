@@ -34,3 +34,13 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 | C17 Storage limits stand in for validation | upper bounds come from `int` columns / btree index size / timestamptz range (migrations/001.sql:3); errors mapped by call site (queues.go:47-49 → 409, :93-94 → 500) | E03-F04, E03-F05 | enqueue maps DB faults to 400 (enqueue.go:81-84): predicted, not probed |
 | C18 Accepted input with no consumer | `backoff.max_seconds` stored, never read (queues.go:20,46) | E03-F07 | other unread fields: none found |
 | C19 Nested PATCH object replaced wholesale | `Webhook *struct{URL,Secret string}` then both assigned (queues.go:72-75, 85-92) | E03-F08 | schedule PATCH nested objects: none found (pointers only), not probed |
+
+## E04 additions — `explore-it/lesson-03` (sibling predictions timestamped in [E04 notes](../experiments/04-judge-it/notes.md))
+
+| Cause | Mechanism (source) | Findings | Sibling predictions (time, status) |
+|---|---|---|---|
+| C20 Routing fallbacks bypass the error writer | method-qualified `ServeMux` patterns; mux 404/405 written by net/http, `fail()` only in handlers (api.go:119-172) | E04-F01 | OPTIONS/PATCH on known routes 12:49:30Z → confirmed; `{verb}` wildcard gives JSON 404 instead of 405: observed |
+| C21 One-sided bounds on caller seconds | `> MaxSeconds` checks only (internal/api/jobs.go:67, enqueue.go:55); same `Duration(n)*Second` as C16 | E04-F03 | heartbeat lower bound guarded (jobs.go:77): inferred safe; clock advance both signs: inferred safe |
+| C22 Lease validity decided by the sweep, not by the request | ack/nack/heartbeat guard state+token only (ack.go:10, nack.go:14, jobs.go:97); expiry evaluated once per tick (expire.go:12) | E04-F04 | nack before sweep 12:49:30Z → confirmed |
+| C23 Release paths do not record readiness | expiry and worker delete set `queued` without touching `run_at` (expire.go:41, internal/api/jobs.go:126); stats derives readiness from `run_at` (stats.go:18) | E04-F05 | worker delete: predicted after P6 but logged only after probe P8 → confirmed (not counted as stated) |
+| C24 Attempt counter reused as history key | Retry resets `attempts` (operator.go:13); history rows numbered from it, no incarnation key (001.sql:7) | E04-F02 | job_events order by id: inferred unaffected |

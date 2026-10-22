@@ -54,3 +54,25 @@ Authority: SPEC.md unless stated. Scope: v0-inherited. Observation column cites 
 | ★ R29 A future delay/extension is never honoured as "now" | SPEC:48-49; worker heartbeat | enqueue, nack, heartbeat | Violated above 9 223 372 036 s (E03-F03) |
 | ★ R25 One tenant's configuration must not stop another tenant's processing | approximation of SPEC:10 | Retain | Violated: one acme queue blocks globex retention (E03-F05) |
 | ★ R30 PATCH omissions keep current values | approximation (RFC 7396) + SPEC:33-34 | queue PATCH | Holds top-level; violated inside `webhook` (E03-F08) |
+
+## E04 revision — `explore-it/lesson-03` ([E04 notes](../experiments/04-judge-it/notes.md)); ★ = new observation
+
+Written as Never/Always rules before probing (notes 12:44Z). Oracle table: rule / authority / bound / enforcing source /
+prediction / observation / judgment. C = comparable system, as recalled and not verified in this run.
+
+| Rule | Authority / bound | Enforcing source | Predicted | Observed (E04) | Judgment / uncertainty |
+|---|---|---|---|---|---|
+| ★ R31 A job is never leased by two workers at once | SPEC "Leasing is atomic" | jobs.go:57 `FOR UPDATE SKIP LOCKED` | holds | 30 parallel leases × 2 workers on 40 jobs: 40 distinct, 0 duplicates (P4) | holds |
+| R32 Attempts never exceed max_attempts | SPEC Worker | nack.go:19, expire.go:37 | holds | max 2 → dead after 2; max 21 → dead at 21; lease after dead empty (P2, P10) | holds (regression) |
+| ★ R33 Within a priority, FIFO by creation order | SPEC Worker; C SQS FIFO (sequence numbers per group) | `LeaseOrder` jobs.go:37 | holds; app-clock step back inverts | batch order and priority 9,9,5,5,0 hold (P9, P12); clock −60 s → later job leased first (P9) | holds in real time; inversion needs the lab clock to step back — not a defect here; risk H-E04-08 |
+| ★ R34 Stats always equal a direct count | SPEC "counts by exact state"; psql count, exact at rest | stats.go:8-15 | holds | queue and namespace views equal psql counts across 6 states; throughput = psql (P5) | holds at rest; concurrent consistency untested (three statements, no snapshot) |
+| ★ R35 A retry comes after the failure, within a bounded delay | SPEC backoff line ("never scheduled before the failure", cap 2^31−1 s) | nack.go:22-25 computed wait bounded; override unbounded below | override can precede failure / wrap | −5 s → before failure; −9223372037 → +292 y; enqueue same (P3) | **violated**: [E04-F03](../defects/E04-F03-negative-delay-wraps-and-precedes-failure.md) |
+| ★ R35b Default retry delay is bounded by something operational | — (spec silence; lesson 03 A1); C SQS 12 h visibility max | jobs.go:25-35 | 30 d at attempt 20 | 5·2^(n−1): 30.34 d at attempt 20, 60.68 d at 21 (P10) | spec-compliant (bound 68 y); open decision Q-E04-1, not counted |
+| ★ R36 An error is always 4xx/5xx with the JSON envelope | SPEC Responses | api.go:50 `fail()` only in handlers | mux fallbacks plain text | 404/405 text/plain for wrong method/unknown path (P1, P11) | **violated**: [E04-F01](../defects/E04-F01-unmatched-route-errors-not-json.md) |
+| ★ R37 A cancelled job never runs | SPEC Operator | operator.go:5-6; ack/nack/heartbeat `state='leased'` | holds | cancel leased → heartbeat/ack/nack/retry 409; cancelled queued job skipped by lease (P5) | holds |
+| ★ R38 Attempt history: one numbered row per execution, numeric order = execution order | SPEC "completed attempts in numeric order"; consistency approx. | 001.sql:7 no key; operator.go:13 attempts=0 | duplicates after retry | n=1 failed, n=1 succeeded, n=2 failed (P2) | **violated** (spec silent on retry history): [E04-F02](../defects/E04-F02-attempt-history-after-retry-ambiguous.md) |
+| ★ R39 An expired lease is not current: no extend/complete after `lease_expires_at` | SPEC Worker ("current lease holder"; expired lease records an attempt) | only expire.go:12 checks expiry | honoured until sweep | heartbeat/ack/nack 200 before the tick, 409 after (P6, P7, P11) | **violated** unless owner specifies a grace: [E04-F04](../defects/E04-F04-expired-lease-honoured-until-sweep.md) |
+| ★ R40 Queued age measures waiting since the job became ready | SPEC "later of creation and readiness"; bound ≤ time since release | stats.go:18 uses run_at; expiry/release keep run_at | counts leased time | age 600 / 100 for a job queued 0 s (P6, P8); control correct | **violated** under the reading "readiness = became queued": [E04-F05](../defects/E04-F05-queued-age-counts-leased-time.md) |
+| ★ R41 Operator retry makes a dead job immediately available with attempts 0 | SPEC Operator | operator.go:12-14 | holds | retry → next lease attempt 1 (P2) | holds |
+| ★ R42 Backoff follows kind/base | SPEC Queues | jobs.go:25-35 | holds | exp base 2: 2 s; exp base 5: exact doubling to 2^20·5 (P2, P10) | holds (linear not re-probed) |
+| ★ R43 404 missing / 409 state conflict / 400 invalid | SPEC Responses | handlers | holds for job verbs | 404 missing job and unknown verb; 409 for verbs on cancelled job (P1, P5) | holds; message text leaks driver error (`sql: no rows in result set`, E01 Q3) |

@@ -7,7 +7,7 @@ structured exploration experiments run against it, plus 8 codebase-exploration s
 Spec: `books/explore-it/PLAN.md` (sharpened pass) + repo `AGENTS.md`.
 Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at the end.
 
-**Status (2026-10-22): experiment 03 complete, tag `explore-it/lesson-03`. Next: experiment 04.**
+**Status (2026-10-22): experiment 04 exploration committed; fix in progress (Opus builder).**
 
 ## Done
 - Plan: `78e56de` + scoped revision `7dcfb05`.
@@ -21,7 +21,8 @@ Builder: Claude Opus 5.5 per Nick 2026-10-22 (was Codex Sol); Astra reviews at t
   present`; 54/54 integration checks; A1–A4 still PRESENT for later experiments.
 
 ## In progress
-- Nothing running. The `queuelet` lab stack may still be up (reseeded); that is not an agent.
+- E04 fix: reconcile E04-F01..F05 and A1, patch, repro, checks, note, tag `explore-it/lesson-04`.
+  The blind explorer run is closed (exit 0, 15 min); its stack `queuelet-e04` is down.
 
 ## Incidents (history)
 - Sol run 1 stopped 2026-10-21 ~21:13 CDT by the Codex content filter after E01.

@@ -1,0 +1,26 @@
+2026-10-22T12:49:59.827Z
+leased 58 attempt 2
+{"ok":true}
+ [200]
+job_id | n | outcome | error
+58 | 1 | expired | lease expired
+58 | 2 | failed | late nack
+(2 rows)
+--- S2
+HTTP/1.1 405 Method Not Allowed
+Allow: GET, HEAD, POST
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+HTTP/1.1 405 Method Not Allowed
+Allow: DELETE, GET, HEAD
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Content-Length: 61
+
+{"error":{"code":"not_found","message":"unknown operation"}}

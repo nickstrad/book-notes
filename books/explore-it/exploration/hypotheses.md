@@ -122,3 +122,35 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H56 | queue lease_seconds 2147483647 lease never expires within any test horizon; heartbeat cannot shorten it | E03 variables row | expiry | config / next | open |  |
 
 Allowed sources: recon, spec silence, code reading, model cell, surprise and risk headline. Status: `open` or `experiment NN: confirmed`, `experiment NN: refuted`, `experiment NN: needs more`.
+
+## Experiment 04 (judge-it) — `explore-it/lesson-03`
+
+Rules R31–R43 were stated as hypotheses with predictions and refutations at 12:44Z, before any probe
+([E04 notes](experiments/04-judge-it/notes.md)); siblings S1/S2 at 12:49:30Z before their probe.
+
+| Id | Statement / prediction | Source and evidence pointer | Would be wrong if | Probe family / experiment | Status | Outcome evidence |
+|---|---|---|---|---|---|---|
+| H-E04-C | Charter: "the code honours every rule on my list" | charter 04 (code reading of nack.go, stats, lease query) | any rule violated | oracle / E04 | experiment 04: refuted | R35, R36, R38, R39, R40 violated |
+| R31 | No job leased by two workers at once | SPEC; jobs.go:57 | duplicate id across parallel leases | concurrency / E04 | experiment 04: confirmed | P4 |
+| R32 | Attempts never exceed max_attempts | SPEC; nack.go:19 | lease after dead returns the job | sequence / E04 | experiment 04: confirmed | P2, P10 |
+| R33 | FIFO within priority holds; an app-clock step back would invert it | SPEC; jobs.go:37 | batch/priority order wrong, or no inversion | ordering / E04 | experiment 04: confirmed | P9, P12; inversion judged lab-only |
+| R34 | Stats equal a direct psql count at rest | SPEC; stats.go | mismatch | approximation / E04 | experiment 04: confirmed | P5 |
+| R35 | Negative nack delay precedes failure; ≤ −9223372037 wraps to future | code nack.go:23-25, internal/api/jobs.go:67 | 400 or bounded | numbers / E04 | experiment 04: confirmed | E04-F03 |
+| R36 | Mux-level 404/405 are plain text, not envelope | code api.go:119-172 | JSON envelope | errors / E04 | experiment 04: confirmed | E04-F01 |
+| R37 | A cancelled job never runs | SPEC; operator.go:5-6 | leased or holder verb 200 | state / E04 | experiment 04: confirmed | P5 |
+| R38 | After retry, attempts renumber from 1; history interleaves | code operator.go:13, 001.sql:7 | unique monotone n | sequence / E04 | experiment 04: confirmed | E04-F02 |
+| R39 | Heartbeat/ack after expiry but before the sweep succeed | code jobs.go:97, ack.go:10 | 409 | timing / E04 | experiment 04: confirmed | E04-F04 |
+| R40 | Requeued-by-expiry job reports age including leased time | code stats.go:18, expire.go:41 | age ≈ 0 | approximation / E04 | experiment 04: confirmed | E04-F05 |
+| R41 | Retry of dead: immediately leasable, attempt 1 | SPEC; operator.go:12-14 | not leasable / attempt ≠ 1 | state / E04 | experiment 04: confirmed | P2 |
+| R42 | Backoff exp base·2^(n−1), linear base·n | SPEC; jobs.go:25-35 | other waits | sequence / E04 | experiment 04: confirmed (exponential); linear needs more | P2, P10 |
+| R43 | 404 missing, 409 conflict for job verbs | SPEC | other class | errors / E04 | experiment 04: confirmed | P1, P5 |
+| H-E04-S1 | Nack after expiry before sweep → 200, recorded as failed | sibling of E04-F04 | 409 | timing / E04 | experiment 04: confirmed | P11 |
+| H-E04-S2 | OPTIONS / wrong method on /v1/jobs/{id} also plain text | sibling of E04-F01 | JSON | errors / E04 | experiment 04: confirmed | P11 |
+| H-E04-08 | Ordering by app-supplied `created_at` inverts FIFO on a real wall-clock step back or between skewed API replicas | P9 lab inversion; jobs.go:37 | id order used / no inversion with skewed replicas | ordering / later (risk) | open | lab-only evidence |
+| H-E04-09 | Stats are three statements without a snapshot; under concurrent transitions sums can disagree with any single instant | code stats.go:9-23 | identical sums under load | approximation / later | open | not probed |
+| H-E04-10 | Ack is not transactional (UPDATE, then INSERT attempts, then Notify): a fault after the UPDATE reports 409 for a succeeded job | code ack.go:10-18; internal/api/jobs.go:87 | 5xx or atomic | ecosystem / later | open | needs DB fault injection |
+| H-E04-11 | `schedules.go:158 v["kind"].(string)` panics on a NULL kind | code read | no panic | #offcharter | open | |
+| Q-E04-1 | Default backoff has no cap: 30.34 d at attempt 20 (lesson-03 A1) — should a default cap exist? | P10 | spec decision | spec decision | open | |
+| Q-E04-2 | Does "readiness" in queued age mean the time a job last became queued? | E04-F05 | spec decision | spec decision | open | |
+| Q-E04-3 | Is there a lease grace window after `lease_expires_at`? | E04-F04 | spec decision | spec decision | open | |
+| Q-E04-4 | Should `throughput_last_hour` ("completed jobs") include dead/cancelled? Code counts succeeded only | stats.go:21 | spec decision | spec decision | open | |

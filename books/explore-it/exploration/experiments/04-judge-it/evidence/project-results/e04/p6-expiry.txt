@@ -1,0 +1,38 @@
+2026-10-22T12:47:17.559Z
+{"now":"2031-06-01T00:00:00Z"}
+ [200]
+{"id":55,"state":"queued"} [201]
+{"id":56,"state":"queued"} [201]
+leased x=55 y=56
+id | lease_expires_at
+55 | 2031-06-01 00:00:30+00
+56 | 2031-06-01 00:00:30+00
+(2 rows)
+--- R39 advance 31 s then immediately heartbeat x and ack y
+{"now":"2031-06-01T00:00:31Z"}
+ [200]
+2026-10-22T12:47:18.218Z
+{"ok":true}
+ [200]
+{"ok":true}
+ [200]
+2026-10-22T12:47:18.294Z
+id | state | attempts | lease_expires_at | last_error
+55 | leased | 0 | 2031-06-01 00:01:01+00 | 
+56 | succeeded | 1 | 2031-06-01 00:00:30+00 | 
+(2 rows)
+created 2031-06-01T00:00:00Z 0
+leased 2031-06-01T00:00:00Z 1
+heartbeat 2031-06-01T00:00:31Z 1
+--- R40 isolated queued age after lease expiry
+{"now":"2031-07-01T00:00:00Z"}
+ [200]
+{"id":57,"state":"queued"} [201]
+leased z=57
+{"now":"2031-07-01T00:10:00Z"}
+ [200]
+id | state | attempts | created_at | run_at | event_at
+57 | queued | 1 | 2031-07-01 00:00:00+00 | 2031-07-01 00:00:00+00 | 2031-07-01 00:10:00+00
+(1 row)
+{"cancelled":0,"dead":0,"leased":0,"oldest_queued_age":600,"queued":1,"retry_wait":0,"scheduled":0,"succeeded":0,"throughput_last_hour":0}
+ [200]

@@ -1,0 +1,26 @@
+2026-10-22T12:48:49.346Z
+{"now":"2031-10-01T00:00:00Z"}
+ [200]
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":10,"lease_seconds":30,"max_attempts":21,"name":"e04j","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""} [201]
+{"id":71,"state":"queued"} [201]
+lease attempt 1 → retry_wait attempts=1 wait_s=5 (0.0 d) run_at=2031-10-01T00:00:05Z
+lease attempt 2 → retry_wait attempts=2 wait_s=10 (0.0 d) run_at=2031-10-01T00:00:15Z
+lease attempt 3 → retry_wait attempts=3 wait_s=20 (0.0 d) run_at=2031-10-01T00:00:35Z
+lease attempt 4 → retry_wait attempts=4 wait_s=40 (0.0 d) run_at=2031-10-01T00:01:15Z
+lease attempt 5 → retry_wait attempts=5 wait_s=80 (0.0 d) run_at=2031-10-01T00:02:35Z
+lease attempt 6 → retry_wait attempts=6 wait_s=160 (0.0 d) run_at=2031-10-01T00:05:15Z
+lease attempt 7 → retry_wait attempts=7 wait_s=320 (0.0 d) run_at=2031-10-01T00:10:35Z
+lease attempt 8 → retry_wait attempts=8 wait_s=640 (0.01 d) run_at=2031-10-01T00:21:15Z
+lease attempt 9 → retry_wait attempts=9 wait_s=1280 (0.01 d) run_at=2031-10-01T00:42:35Z
+lease attempt 10 → retry_wait attempts=10 wait_s=2560 (0.03 d) run_at=2031-10-01T01:25:15Z
+lease attempt 11 → retry_wait attempts=11 wait_s=5120 (0.06 d) run_at=2031-10-01T02:50:35Z
+lease attempt 12 → retry_wait attempts=12 wait_s=10240 (0.12 d) run_at=2031-10-01T05:41:15Z
+lease attempt 13 → retry_wait attempts=13 wait_s=20480 (0.24 d) run_at=2031-10-01T11:22:35Z
+lease attempt 14 → retry_wait attempts=14 wait_s=40960 (0.47 d) run_at=2031-10-01T22:45:15Z
+lease attempt 15 → retry_wait attempts=15 wait_s=81920 (0.95 d) run_at=2031-10-02T21:30:35Z
+lease attempt 16 → retry_wait attempts=16 wait_s=163840 (1.9 d) run_at=2031-10-04T19:01:15Z
+lease attempt 17 → retry_wait attempts=17 wait_s=327680 (3.79 d) run_at=2031-10-08T14:02:35Z
+lease attempt 18 → retry_wait attempts=18 wait_s=655360 (7.59 d) run_at=2031-10-16T04:05:15Z
+lease attempt 19 → retry_wait attempts=19 wait_s=1310720 (15.17 d) run_at=2031-10-31T08:10:35Z
+lease attempt 20 → retry_wait attempts=20 wait_s=2621440 (30.34 d) run_at=2031-11-30T16:21:15Z
+lease attempt 21 → dead attempts=21 wait_s=5242880 (60.68 d) run_at=2032-01-30T08:42:35Z

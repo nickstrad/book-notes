@@ -1,0 +1,46 @@
+2026-10-22T12:45:57.514Z
+{"now":"2030-01-01T00:00:00Z"}
+ [200]
+enq 2 leased 2 attempt 1
+nack delay=-5:
+{"ok":true}
+ [200]
+id | state | attempts | run_at | event_at
+2 | retry_wait | 1 | 2029-12-31 23:59:55+00 | 2030-01-01 00:00:00+00
+(1 row)
+enq 3 leased 3 attempt 1
+nack delay=-9223372036:
+{"ok":true}
+ [200]
+id | state | attempts | run_at | event_at
+3 | retry_wait | 1 | 1737-09-22 00:12:44+00 | 2030-01-01 00:00:00+00
+(1 row)
+enq 4 leased 2 attempt 2
+nack delay=-9223372037:
+{"ok":true}
+ [200]
+id | state | attempts | run_at | event_at
+2 | retry_wait | 2 | 2322-04-12 23:47:16.709552+00 | 2030-01-01 00:00:00+00
+(1 row)
+enq 5 leased 3 attempt 2
+nack delay=-18446744073:
+{"ok":true}
+ [200]
+id | state | attempts | run_at | event_at
+3 | retry_wait | 2 | 2030-01-01 00:00:00.709552+00 | 2030-01-01 00:00:00+00
+(1 row)
+--- enqueue with negative delays
+enqueue delay=-5:
+{"id":6,"state":"queued"}
+ [201]
+enqueue delay=-9223372037:
+{"id":7,"state":"scheduled"}
+ [201]
+id | state | run_at | created_at
+2 | retry_wait | 2322-04-12 23:47:16.709552+00 | 2030-01-01 00:00:00+00
+3 | retry_wait | 2030-01-01 00:00:00.709552+00 | 2030-01-01 00:00:00+00
+4 | queued | 2030-01-01 00:00:00+00 | 2030-01-01 00:00:00+00
+5 | queued | 2030-01-01 00:00:00+00 | 2030-01-01 00:00:00+00
+6 | queued | 2029-12-31 23:59:55+00 | 2030-01-01 00:00:00+00
+7 | scheduled | 2322-04-12 23:47:16.709552+00 | 2030-01-01 00:00:00+00
+(6 rows)
