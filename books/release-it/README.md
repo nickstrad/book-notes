@@ -74,11 +74,18 @@ The register (what each flaw is, where it lives, how it shows) is `PLAN.md` sect
 
 ## Skills
 
-Not written yet; they are the next phase. See [`skills/README.md`](skills/README.md). Planned: `test-integration-points`,
-`hunt-stability-antipatterns`, `suggest-stability-patterns`, `budget-timeouts-and-retries`,
-`review-capacity-headroom`, `review-operational-transparency`, `plan-safe-release`,
-`design-chaos-experiment`. Each cites the project as its worked example; the register is the answer
-key for the hunt.
+Eight procedures that codify the book for your own code and designs. Each ends with a worked
+example on litefleet (real files, tags and measured numbers); the register is the answer key for
+the hunt. Index with triggers: [`skills/README.md`](skills/README.md).
+
+[`test-integration-points`](skills/test-integration-points/SKILL.md) ·
+[`hunt-stability-antipatterns`](skills/hunt-stability-antipatterns/SKILL.md) ·
+[`suggest-stability-patterns`](skills/suggest-stability-patterns/SKILL.md) ·
+[`budget-timeouts-and-retries`](skills/budget-timeouts-and-retries/SKILL.md) ·
+[`review-capacity-headroom`](skills/review-capacity-headroom/SKILL.md) ·
+[`review-operational-transparency`](skills/review-operational-transparency/SKILL.md) ·
+[`plan-safe-release`](skills/plan-safe-release/SKILL.md) ·
+[`design-chaos-experiment`](skills/design-chaos-experiment/SKILL.md)
 
 ## Earlier plans
 
