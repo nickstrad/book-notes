@@ -68,9 +68,11 @@ func budget(d time.Duration, h http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-// postgresCheck: control cannot answer anything without its registry.
+// postgresCheck: control cannot answer anything without its registry. It
+// pings on the health pool's own connection, so a busy oltp or reporting
+// pool does not read as a dead database.
 func (c *control) postgresCheck() (string, string) {
-	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 	if err := c.reg.Ping(ctx); err != nil {
 		if errors.Is(err, context.DeadlineExceeded) || ctx.Err() != nil {

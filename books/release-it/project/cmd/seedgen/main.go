@@ -1,4 +1,4 @@
-// Command seedgen loads the lab's data set: 200 tenants with 240 databases
+// Command seedgen loads the lab's data set: 200 tenants with 243 databases
 // spread over the two nodes (SQLite files written straight onto the node
 // volumes and registered in Postgres in the same run), one whale tenant with a
 // 60 MB events table (15 000 rows of 4 KB), a 5 MB "bulky" database, and a usage ledger with
@@ -91,6 +91,9 @@ func main() {
 		names := []string{"default"}
 		if i%10 == 5 {
 			names = append(names, "analytics", "staging")
+		}
+		if t.Class == "noisy" {
+			names = append(names, "reports", "exports", "scratch") // a tenant that spreads its load
 		}
 		for _, name := range names {
 			node := nodes[dbIndex%2]

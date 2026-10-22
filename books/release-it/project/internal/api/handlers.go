@@ -232,6 +232,9 @@ func (g *Gateway) usage(w http.ResponseWriter, r *http.Request) {
 func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err error) {
 	var re *httpx.RemoteError
 	if errors.As(err, &re) {
+		if re.Status == http.StatusTooManyRequests || re.Status == http.StatusServiceUnavailable {
+			w.Header().Set("Retry-After", "1") // refused, not failed: come back shortly
+		}
 		httpx.WriteError(w, r, re.Status, re.Code, re.Message)
 		return
 	}

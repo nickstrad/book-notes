@@ -32,6 +32,7 @@ import (
 type Client struct {
 	base    string
 	http    *http.Client
+	admin   *http.Client // creates and drops provision on a node: control's budget for them is 2 s
 	report  *http.Client
 	resolve retry.Policy
 	breaker *breaker.Breaker
@@ -43,6 +44,7 @@ func New(base string) *Client {
 	return &Client{
 		base:   base,
 		http:   httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 500 * time.Millisecond, Total: 500 * time.Millisecond}),
+		admin:  httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 2500 * time.Millisecond, Total: 2500 * time.Millisecond}),
 		report: httpx.NewClient(httpx.Timeouts{Dial: 200 * time.Millisecond, Header: 10 * time.Second, Total: 10 * time.Second}),
 		// A resolve is a read and may be retried, within the same limits
 		// as node reads.
@@ -110,7 +112,9 @@ func (c *Client) refresh(k, apiKey, dbName string) {
 func (c *Client) Create(ctx context.Context, apiKey, name string) (wire.Database, error) {
 	var d wire.Database
 	body, _ := json.Marshal(wire.CreateDatabaseRequest{Name: name})
-	err := c.do(ctx, http.MethodPost, "/internal/databases", apiKey, body, &d)
+	err := c.breaker.Call(func() error {
+		return c.doWith(ctx, c.admin, http.MethodPost, "/internal/databases", apiKey, body, &d)
+	}, retryable)
 	return d, err
 }
 
@@ -130,7 +134,9 @@ func (c *Client) Stats(ctx context.Context, apiKey, name string) (wire.Database,
 
 // Drop deletes a database.
 func (c *Client) Drop(ctx context.Context, apiKey, name string) error {
-	return c.do(ctx, http.MethodDelete, "/internal/databases/"+url.PathEscape(name), apiKey, nil, nil)
+	return c.breaker.Call(func() error {
+		return c.doWith(ctx, c.admin, http.MethodDelete, "/internal/databases/"+url.PathEscape(name), apiKey, nil, nil)
+	}, retryable)
 }
 
 // Usage fetches the fleet usage report (admin key).

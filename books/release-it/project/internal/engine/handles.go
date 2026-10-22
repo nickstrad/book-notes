@@ -54,6 +54,12 @@ type Engine struct {
 	usage Recorder
 	// MaxOpen is the node-wide budget of open handles; 0 means unbounded.
 	MaxOpen int
+	slots   chan struct{} // node-wide statement limit (admission.go)
+	admitMu sync.Mutex
+	tenants map[string]chan struct{} // each tenant's share of slots
+
+	canaryOnce sync.Once
+	canary     *sql.DB
 
 	mu      sync.Mutex
 	handles map[string]*Handle
@@ -66,6 +72,7 @@ type Handle struct {
 	Epoch    int
 	Path     string
 	db       *sql.DB
+	lanes    *lanes
 
 	mu         sync.Mutex
 	activity   wire.DatabaseReport // since the last heartbeat
@@ -79,7 +86,7 @@ func New(dir string, usage Recorder) (*Engine, error) {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return nil, err
 	}
-	return &Engine{dir: dir, usage: usage, handles: map[string]*Handle{}}, nil
+	return &Engine{dir: dir, usage: usage, handles: map[string]*Handle{}, slots: make(chan struct{}, NodeStatements), tenants: map[string]chan struct{}{}}, nil
 }
 
 // Dir is the directory holding the tenant files.
@@ -117,7 +124,7 @@ func (e *Engine) Handle(id string) (*Handle, error) {
 	db.SetMaxOpenConns(maxConnsPerDB)
 	db.SetMaxIdleConns(maxIdlePerDB)
 	db.SetConnMaxIdleTime(connIdleTime)
-	h := &Handle{ID: id, Path: path, db: db}
+	h := &Handle{ID: id, Path: path, db: db, lanes: newLanes()}
 	if err := h.loadMeta(); err != nil {
 		db.Close()
 		return nil, fmt.Errorf("open %s: %w", id, err)

@@ -1,6 +1,9 @@
 package engine
 
 import (
+	"context"
+	"database/sql"
+	"errors"
 	"os"
 	"time"
 
@@ -47,24 +50,30 @@ func (e *Engine) WALBytes() int64 {
 	return n
 }
 
-// CanaryID is the database the node's health check opens through the same
-// handle path tenants use.
+// CanaryID is the database the node's health check opens.
 const CanaryID = "00000000-0000-4000-8000-000000000000"
 
-// Canary opens (creating if needed) the canary database and reads from it.
+// Canary reads from the node's canary database on a dedicated handle of one
+// connection, outside the tenant handle cache and its budgets, so a busy
+// tenant path cannot make a healthy node look dead (or the other way round).
 func (e *Engine) Canary() error {
-	h, err := e.Handle(CanaryID)
-	if err == ErrNoSuchDatabase {
-		if err := e.Provision(wireCanary); err != nil && err != ErrExists {
-			return err
+	e.canaryOnce.Do(func() {
+		if _, err := os.Stat(e.path(CanaryID)); err != nil {
+			e.Provision(wireCanary)
 		}
-		h, err = e.Handle(CanaryID)
+		db, err := sql.Open("sqlite3", dsn(e.path(CanaryID)))
+		if err == nil {
+			db.SetMaxOpenConns(1)
+			e.canary = db
+		}
+	})
+	if e.canary == nil {
+		return errors.New("canary database unavailable")
 	}
-	if err != nil {
-		return err
-	}
+	ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+	defer cancel()
 	var n int
-	return h.db.QueryRow(`SELECT count(*) FROM _meta`).Scan(&n)
+	return e.canary.QueryRowContext(ctx, `SELECT count(*) FROM _meta`).Scan(&n)
 }
 
 var wireCanary = wire.ProvisionRequest{DatabaseID: CanaryID, TenantID: "_node", Epoch: 1}

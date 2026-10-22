@@ -161,6 +161,9 @@ func writeEngineError(w http.ResponseWriter, r *http.Request, err error) {
 	var se *engine.StatementError
 	switch {
 	case errors.As(err, &se):
+		if se.Status == http.StatusTooManyRequests {
+			w.Header().Set("Retry-After", "1")
+		}
 		httpx.WriteError(w, r, se.Status, se.Code, se.Message)
 	case errors.Is(err, engine.ErrNoSuchDatabase):
 		httpx.WriteError(w, r, http.StatusNotFound, "no_such_database", err.Error())

@@ -100,6 +100,7 @@ type gen struct {
 	target   string
 	scenario string
 	client   *http.Client
+	slow     *http.Client // the ops dashboard waits longer for its report
 	m        manifest
 	steady   []target // tenants' default databases, weighted
 	weights  []float64
@@ -187,6 +188,7 @@ func main() {
 	if len(g.steady) == 0 {
 		log.Fatal("no steady targets")
 	}
+	g.slow = &http.Client{Timeout: 10 * time.Second, Transport: g.client.Transport}
 	// Mild skew: weight 1/sqrt(rank).
 	total := 0.0
 	for i := range g.steady {
@@ -228,16 +230,22 @@ func main() {
 		}()
 	}
 	if *extra > 0 {
-		var fn func()
+		// Each extra loop is a client that backs off for as long as the
+		// platform's Retry-After says when it is refused.
+		var fn func() time.Duration
 		switch *scenario {
 		case "noisy":
 			nt := g.special("noisy")
-			fn = func() { g.noisyQuery(nt) }
+			fn = func() time.Duration {
+				t := nt
+				t.db = nt.t.DBs[rndInt(len(nt.t.DBs))] // the noisy tenant spreads over its databases
+				return g.noisyQuery(t)
+			}
 		case "reports":
 			fn = g.report
 		case "whale":
 			wt := g.special("whale")
-			fn = func() { g.whaleScan(wt) }
+			fn = func() time.Duration { return g.whaleScan(wt) }
 		}
 		if fn != nil {
 			extraEnd := end
@@ -250,7 +258,7 @@ func main() {
 					defer wg.Done()
 					time.Sleep(time.Until(g.start.Add(*extraFrom)))
 					for time.Now().Before(extraEnd) {
-						fn()
+						time.Sleep(fn())
 					}
 				}()
 			}
@@ -391,15 +399,15 @@ func (g *gen) violate(tg target) {
 	}}}, new(executeResp))
 }
 
-func (g *gen) noisyQuery(tg target) {
-	g.do(tg, "noisy", "query", map[string]any{
+func (g *gen) noisyQuery(tg target) time.Duration {
+	return g.do(tg, "noisy", "query", map[string]any{
 		"sql":  "WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < ?) SELECT count(*), sum(x) FROM c",
 		"args": []any{g.recursion},
 	}, new(queryResp))
 }
 
-func (g *gen) whaleScan(tg target) {
-	g.do(tg, "whale", "query", map[string]any{"sql": "SELECT * FROM events"}, new(queryResp))
+func (g *gen) whaleScan(tg target) time.Duration {
+	return g.do(tg, "whale", "query", map[string]any{"sql": "SELECT * FROM events"}, new(queryResp))
 }
 
 func (g *gen) createRequest() {
@@ -408,15 +416,17 @@ func (g *gen) createRequest() {
 	g.send(tg.t.Key, "create", "normal", "", http.MethodPost, "/v1/databases", map[string]any{"name": name}, new(createResp))
 }
 
-func (g *gen) report() {
-	g.send(g.m.AdminKey, "usage", "ops", "", http.MethodGet, "/v1/admin/usage?window=24h", nil, new(usageResp))
+func (g *gen) report() time.Duration {
+	return g.send(g.m.AdminKey, "usage", "ops", "", http.MethodGet, "/v1/admin/usage?window=24h", nil, new(usageResp))
 }
 
-func (g *gen) do(tg target, class, op string, body any, out any) {
-	g.send(tg.t.Key, op, class, tg.db.Node, http.MethodPost, "/v1/databases/"+tg.db.Name+"/"+op, body, out)
+func (g *gen) do(tg target, class, op string, body any, out any) time.Duration {
+	return g.send(tg.t.Key, op, class, tg.db.Node, http.MethodPost, "/v1/databases/"+tg.db.Name+"/"+op, body, out)
 }
 
-func (g *gen) send(key, route, class, node, method, path string, body any, out any) {
+// send makes one request and records it; it returns how long the platform
+// asked the client to wait before trying again (Retry-After), if it did.
+func (g *gen) send(key, route, class, node, method, path string, body any, out any) time.Duration {
 	var rd io.Reader
 	if body != nil {
 		b, _ := json.Marshal(body)
@@ -427,7 +437,11 @@ func (g *gen) send(key, route, class, node, method, path string, body any, out a
 	req.Header.Set("Content-Type", "application/json")
 	t0 := time.Now()
 	rec := record{ts: t0.Sub(g.start).Milliseconds(), route: route, class: class, node: node}
-	resp, err := g.client.Do(req)
+	client := g.client
+	if route == "usage" {
+		client = g.slow
+	}
+	resp, err := client.Do(req)
 	if err != nil {
 		rec.latency = ms(time.Since(t0))
 		rec.errClass = "conn"
@@ -436,7 +450,7 @@ func (g *gen) send(key, route, class, node, method, path string, body any, out a
 			rec.errClass = "client_timeout"
 		}
 		g.out <- rec
-		return
+		return 0
 	}
 	data, err := io.ReadAll(resp.Body)
 	resp.Body.Close()
@@ -463,6 +477,10 @@ func (g *gen) send(key, route, class, node, method, path string, body any, out a
 		}
 	}
 	g.out <- rec
+	if secs, err := strconv.Atoi(resp.Header.Get("Retry-After")); err == nil {
+		return time.Duration(secs) * time.Second
+	}
+	return 0
 }
 
 // strict decodes exactly the documented fields.

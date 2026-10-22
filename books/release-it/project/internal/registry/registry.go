@@ -27,39 +27,66 @@ var (
 )
 
 // Registry wraps the control plane's connection pool.
+//
+// Three pools from one DSN, so one kind of work cannot starve another: oltp
+// for the short statements of the critical path (resolve, create, heartbeat),
+// reporting for the usage report, and a single connection for health checks.
 type Registry struct {
-	db *sql.DB
+	db        *sql.DB
+	reporting *sql.DB
+	health    *sql.DB
 }
 
 // StatementTimeout is the most any registry statement may run; Postgres
 // cancels it server-side even if control has already given up.
 const StatementTimeout = 2 * time.Second
 
+// ReportTimeout is the most a usage-report statement may run.
+const ReportTimeout = 5 * time.Second
+
 // Open connects to Postgres.
 func Open(dsn string) (*Registry, error) {
+	oltp, err := openPool(dsn, "oltp", 8, StatementTimeout)
+	if err != nil {
+		return nil, err
+	}
+	reporting, err := openPool(dsn, "reporting", 2, ReportTimeout)
+	if err != nil {
+		return nil, err
+	}
+	health, err := openPool(dsn, "health", 1, 200*time.Millisecond)
+	if err != nil {
+		return nil, err
+	}
+	return &Registry{db: oltp, reporting: reporting, health: health}, nil
+}
+
+// openPool opens a bounded pool: Postgres serves 100 connections for
+// everyone, and a control plane that opens one per concurrent request turns
+// a burst into a Postgres outage. Waits are bounded by the caller's context.
+func openPool(dsn, name string, size int, timeout time.Duration) (*sql.DB, error) {
 	cfg, err := pgx.ParseConfig(dsn)
 	if err != nil {
 		return nil, err
 	}
-	cfg.RuntimeParams["statement_timeout"] = strconv.Itoa(int(StatementTimeout.Milliseconds()))
+	cfg.RuntimeParams["statement_timeout"] = strconv.Itoa(int(timeout.Milliseconds()))
+	cfg.RuntimeParams["application_name"] = "control-" + name
 	db := stdlib.OpenDB(*cfg)
-	// A bounded pool: Postgres serves 100 connections for everyone, and a
-	// control plane that opens one per concurrent request turns a burst into
-	// a Postgres outage. Waits are bounded by the caller's context.
-	db.SetMaxOpenConns(20)
-	db.SetMaxIdleConns(20)
+	db.SetMaxOpenConns(size)
+	db.SetMaxIdleConns(size)
 	db.SetConnMaxLifetime(30 * time.Minute)
-	exportPool(db)
-	return &Registry{db: db}, nil
+	exportPool(db, name)
+	return db, nil
 }
 
 // DB exposes the pool (migrations, health).
 func (r *Registry) DB() *sql.DB { return r.db }
 
-// Ping checks that Postgres answers.
+// Ping checks that Postgres answers, on the health check's own connection,
+// so a saturated oltp pool is not mistaken for a dead database.
 func (r *Registry) Ping(ctx context.Context) (err error) {
 	defer observe(time.Now(), &err)
-	return r.db.PingContext(ctx)
+	return r.health.PingContext(ctx)
 }
 
 // observe records one registry call as a call to the postgres dependency.

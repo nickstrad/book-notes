@@ -148,3 +148,24 @@ func TestWriterWaitsForTheLock(t *testing.T) {
 		t.Fatalf("write finished in %s while the lock was held for 300 ms", d)
 	}
 }
+
+func TestOneDatabaseCannotTakeTheNode(t *testing.T) {
+	e := newEngine(t)
+	slow := wire.QueryRequest{SQL: `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 400000) SELECT count(*) FROM c`}
+	done := make(chan error, readsPerDB+waitingPerDB)
+	for i := 0; i < readsPerDB+waitingPerDB; i++ {
+		go func() { _, _, err := e.Query(context.Background(), "db1", 1, slow); done <- err }()
+	}
+	time.Sleep(100 * time.Millisecond)
+	start := time.Now()
+	_, _, err := e.Query(context.Background(), "db1", 1, slow)
+	if err != ErrTenantBusy {
+		t.Fatalf("err = %v; want ErrTenantBusy for the 13th concurrent reader", err)
+	}
+	if d := time.Since(start); d > 50*time.Millisecond {
+		t.Fatalf("refusal took %s; want immediate", d)
+	}
+	for i := 0; i < readsPerDB+waitingPerDB; i++ {
+		<-done
+	}
+}

@@ -38,8 +38,10 @@ services:
       POSTGRES_DB: litefleet
     command: ["postgres", "-c", "max_connections=100", "-c", "shared_buffers=256MB", "-c", "synchronous_commit=off"]
     # The registry and control stand in for services on their own machines:
-    # on this shared VM they get a higher CPU weight than the tiers under test.
+    # on this shared VM they get a higher CPU weight than the tiers under test,
+    # and the registry is capped so a heavy report cannot take the whole VM.
     cpu_shares: 4096
+    cpus: 1.5
     ports: ["15432:5432"]
     volumes: [pgdata:/var/lib/postgresql/data]
     healthcheck:

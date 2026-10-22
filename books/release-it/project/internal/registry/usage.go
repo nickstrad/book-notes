@@ -52,7 +52,7 @@ type LedgerRow struct {
 // LedgerSince returns every ledger row recorded after since.
 func (r *Registry) LedgerSince(ctx context.Context, since time.Time) (_ []LedgerRow, err error) {
 	defer observe(time.Now(), &err)
-	rows, err := r.db.QueryContext(ctx, `
+	rows, err := r.reporting.QueryContext(ctx, `
 		SELECT at, tenant_id, database_id::text, kind, statements, rows, bytes
 		FROM usage_ledger WHERE at > $1`, since)
 	if err != nil {
@@ -73,7 +73,7 @@ func (r *Registry) LedgerSince(ctx context.Context, since time.Time) (_ []Ledger
 // StorageByTenant returns the current storage per tenant.
 func (r *Registry) StorageByTenant(ctx context.Context) (_ map[string]int64, err error) {
 	defer observe(time.Now(), &err)
-	rows, err := r.db.QueryContext(ctx, `SELECT tenant_id, sum(size_bytes) FROM databases WHERE state = 'active' GROUP BY tenant_id`)
+	rows, err := r.reporting.QueryContext(ctx, `SELECT tenant_id, sum(size_bytes) FROM databases WHERE state = 'active' GROUP BY tenant_id`)
 	if err != nil {
 		return nil, err
 	}

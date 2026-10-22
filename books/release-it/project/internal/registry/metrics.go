@@ -7,13 +7,14 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
-// exportPool publishes the connection pool's sql.DBStats as db_pool_*.
-func exportPool(db *sql.DB) {
+// exportPool publishes a connection pool's sql.DBStats as db_pool_*{pool}.
+func exportPool(db *sql.DB, pool string) {
+	labels := prometheus.Labels{"pool": pool}
 	gauge := func(name, help string, f func(sql.DBStats) float64) {
-		promauto.NewGaugeFunc(prometheus.GaugeOpts{Name: name, Help: help}, func() float64 { return f(db.Stats()) })
+		promauto.NewGaugeFunc(prometheus.GaugeOpts{Name: name, Help: help, ConstLabels: labels}, func() float64 { return f(db.Stats()) })
 	}
 	counter := func(name, help string, f func(sql.DBStats) float64) {
-		promauto.NewCounterFunc(prometheus.CounterOpts{Name: name, Help: help}, func() float64 { return f(db.Stats()) })
+		promauto.NewCounterFunc(prometheus.CounterOpts{Name: name, Help: help, ConstLabels: labels}, func() float64 { return f(db.Stats()) })
 	}
 	gauge("db_pool_max_open", "Pool size limit (0 = unbounded).", func(s sql.DBStats) float64 { return float64(s.MaxOpenConnections) })
 	gauge("db_pool_open_connections", "Connections open.", func(s sql.DBStats) float64 { return float64(s.OpenConnections) })
