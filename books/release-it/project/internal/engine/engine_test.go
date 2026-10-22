@@ -1,8 +1,11 @@
 package engine
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
+	"io"
 	"net/http"
 	"testing"
 	"time"
@@ -31,6 +34,23 @@ func exec(t *testing.T, e *Engine, sql string, args ...any) *wire.ExecuteResult 
 	return res
 }
 
+// query runs a read and decodes the streamed answer.
+func query(e *Engine, id string, epoch int, sql string) (*wire.QueryResult, bool, error) {
+	var buf bytes.Buffer
+	_, err := e.Query(context.Background(), id, epoch, wire.QueryRequest{SQL: sql}, func() io.Writer { return &buf })
+	if err != nil {
+		return nil, false, err
+	}
+	var out struct {
+		wire.QueryResult
+		Truncated bool `json:"truncated"`
+	}
+	if err := json.Unmarshal(buf.Bytes(), &out); err != nil {
+		return nil, false, err
+	}
+	return &out.QueryResult, out.Truncated, nil
+}
+
 func TestExecuteAndQuery(t *testing.T) {
 	e := newEngine(t)
 	exec(t, e, `CREATE TABLE items (id integer PRIMARY KEY, seq integer UNIQUE, body text)`)
@@ -38,7 +58,7 @@ func TestExecuteAndQuery(t *testing.T) {
 	if res.RowsAffected != 1 || res.LastInsertRowID != 1 {
 		t.Fatalf("execute result = %+v", res)
 	}
-	q, _, err := e.Query(context.Background(), "db1", 1, wire.QueryRequest{SQL: `SELECT seq, body FROM items`})
+	q, _, err := query(e, "db1", 1, `SELECT seq, body FROM items`)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -49,7 +69,7 @@ func TestExecuteAndQuery(t *testing.T) {
 
 func TestQueryRejectsWrites(t *testing.T) {
 	e := newEngine(t)
-	_, _, err := e.Query(context.Background(), "db1", 1, wire.QueryRequest{SQL: `DELETE FROM _meta`})
+	_, _, err := query(e, "db1", 1, `DELETE FROM _meta`)
 	var se *StatementError
 	if !errors.As(err, &se) || se.Status != http.StatusBadRequest {
 		t.Fatalf("err = %v; want 400", err)
@@ -58,7 +78,7 @@ func TestQueryRejectsWrites(t *testing.T) {
 
 func TestStaleEpoch(t *testing.T) {
 	e := newEngine(t)
-	if _, _, err := e.Query(context.Background(), "db1", 2, wire.QueryRequest{SQL: `SELECT 1`}); !errors.Is(err, ErrStaleEpoch) {
+	if _, _, err := query(e, "db1", 2, `SELECT 1`); !errors.Is(err, ErrStaleEpoch) {
 		t.Fatalf("err = %v; want ErrStaleEpoch", err)
 	}
 }
@@ -76,7 +96,7 @@ func TestConstraintViolationIsConflict(t *testing.T) {
 
 func TestNoSuchDatabase(t *testing.T) {
 	e := newEngine(t)
-	if _, _, err := e.Query(context.Background(), "nope", 1, wire.QueryRequest{SQL: `SELECT 1`}); !errors.Is(err, ErrNoSuchDatabase) {
+	if _, _, err := query(e, "nope", 1, `SELECT 1`); !errors.Is(err, ErrNoSuchDatabase) {
 		t.Fatalf("err = %v; want ErrNoSuchDatabase", err)
 	}
 }
@@ -85,7 +105,7 @@ func TestReportCountsActivity(t *testing.T) {
 	e := newEngine(t)
 	exec(t, e, `CREATE TABLE items (id integer PRIMARY KEY)`)
 	exec(t, e, `INSERT INTO items DEFAULT VALUES`)
-	e.Query(context.Background(), "db1", 1, wire.QueryRequest{SQL: `SELECT * FROM items`})
+	query(e, "db1", 1, `SELECT * FROM items`)
 	r := e.Report()
 	if len(r) != 1 || r[0].Writes != 2 || r[0].Reads != 1 || r[0].Bytes == 0 {
 		t.Fatalf("report = %+v", r)
@@ -98,9 +118,7 @@ func TestReportCountsActivity(t *testing.T) {
 func TestRunawayStatementIsInterrupted(t *testing.T) {
 	e := newEngine(t)
 	start := time.Now()
-	_, _, err := e.Query(context.Background(), "db1", 1, wire.QueryRequest{
-		SQL: `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 1000000000) SELECT count(*) FROM c`,
-	})
+	_, _, err := query(e, "db1", 1, `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 1000000000) SELECT count(*) FROM c`)
 	var se *StatementError
 	if !errors.As(err, &se) || se.Code != "statement_deadline" {
 		t.Fatalf("err = %v; want statement_deadline", err)
@@ -151,14 +169,14 @@ func TestWriterWaitsForTheLock(t *testing.T) {
 
 func TestOneDatabaseCannotTakeTheNode(t *testing.T) {
 	e := newEngine(t)
-	slow := wire.QueryRequest{SQL: `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 400000) SELECT count(*) FROM c`}
+	slow := `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 400000) SELECT count(*) FROM c`
 	done := make(chan error, readsPerDB+waitingPerDB)
 	for i := 0; i < readsPerDB+waitingPerDB; i++ {
-		go func() { _, _, err := e.Query(context.Background(), "db1", 1, slow); done <- err }()
+		go func() { _, _, err := query(e, "db1", 1, slow); done <- err }()
 	}
 	time.Sleep(100 * time.Millisecond)
 	start := time.Now()
-	_, _, err := e.Query(context.Background(), "db1", 1, slow)
+	_, _, err := query(e, "db1", 1, slow)
 	if err != ErrTenantBusy {
 		t.Fatalf("err = %v; want ErrTenantBusy for the 13th concurrent reader", err)
 	}
@@ -167,5 +185,21 @@ func TestOneDatabaseCannotTakeTheNode(t *testing.T) {
 	}
 	for i := 0; i < readsPerDB+waitingPerDB; i++ {
 		<-done
+	}
+}
+
+func TestQueryAnswersAreCapped(t *testing.T) {
+	e := newEngine(t)
+	exec(t, e, `CREATE TABLE big (id integer PRIMARY KEY, body text)`)
+	exec(t, e, `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 3000) INSERT INTO big SELECT x, 'row ' || x FROM c`)
+	q, truncated, err := query(e, "db1", 1, `SELECT * FROM big`)
+	if err != nil || !truncated || len(q.Rows) != MaxRows {
+		t.Fatalf("rows = %d, truncated = %v, err = %v; want %d rows, truncated", len(q.Rows), truncated, err, MaxRows)
+	}
+	exec(t, e, `CREATE TABLE fat (id integer PRIMARY KEY, body text)`)
+	exec(t, e, `WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 600) INSERT INTO fat SELECT x, hex(randomblob(2000)) FROM c`)
+	q, truncated, err = query(e, "db1", 1, `SELECT * FROM fat`)
+	if err != nil || !truncated || len(q.Rows) >= 600 || len(q.Rows) < 200 {
+		t.Fatalf("rows = %d, truncated = %v, err = %v; want the 1 MB cap", len(q.Rows), truncated, err)
 	}
 }

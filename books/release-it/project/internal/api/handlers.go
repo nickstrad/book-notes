@@ -103,18 +103,24 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	res, err := g.Nodes.Query(r.Context(), rt, req)
+	rows, err := g.Nodes.Query(r.Context(), rt, req)
 	if staleEpoch(err) {
 		if rt, ok = g.reresolve(w, r); !ok {
 			return
 		}
-		res, err = g.Nodes.Query(r.Context(), rt, req)
+		rows, err = g.Nodes.Query(r.Context(), rt, req)
 	}
 	if err != nil {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
 	}
-	httpx.WriteJSON(w, http.StatusOK, res)
+	// Stream the rows through as the node sends them.
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	if _, err := rows.WriteTo(w); err != nil {
+		slog.Warn("query answer cut short", "request_id", httpx.RequestID(r), "dep", rt.Node, "error", err.Error())
+		panic(http.ErrAbortHandler) // the tenant must see an incomplete answer, not a short one
+	}
 }
 
 func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {

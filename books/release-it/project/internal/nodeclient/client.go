@@ -40,19 +40,24 @@ func New() *Client {
 	}
 }
 
-// Query runs a read statement on the route's node.
-func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest) (*wire.QueryResult, error) {
+// Query starts a read on the route's node and returns once the node has
+// begun its answer with the columns. The rows follow through Rows.WriteTo,
+// one at a time, so neither side holds a whole result in memory. Retries
+// happen only before an answer has begun.
+func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest) (*Rows, error) {
 	body, err := json.Marshal(req)
 	if err != nil {
 		return nil, err
 	}
-	var out wire.QueryResult
+	var rows *Rows
 	p := c.reads
 	p.Dep = rt.Node
-	if err := p.Do(ctx, transient, func(ctx context.Context) error { return c.do(ctx, rt, "query", body, &out) }); err != nil {
-		return nil, err
-	}
-	return &out, nil
+	err = p.Do(ctx, transient, func(ctx context.Context) error {
+		var err error
+		rows, err = c.openQuery(ctx, rt, body)
+		return err
+	})
+	return rows, err
 }
 
 // Execute runs a write transaction on the route's node.
@@ -78,10 +83,28 @@ func transient(err error) bool {
 	return true
 }
 
-func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, out any) (err error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
+func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, out any) error {
+	resp, err := c.send(ctx, rt, op, body)
 	if err != nil {
 		return err
+	}
+	defer resp.Body.Close()
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("node %s: %w", rt.Node, err)
+	}
+	if err := decode(data, out); err != nil {
+		return fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
+	}
+	return nil
+}
+
+// send posts to the node and returns its response if it is a 200; any other
+// status becomes an error built from the node's error body.
+func (c *Client) send(ctx context.Context, rt wire.Route, op string, body []byte) (_ *http.Response, err error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
+	if err != nil {
+		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Epoch", strconv.Itoa(rt.Epoch))
@@ -90,25 +113,22 @@ func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, 
 	defer func() { httpx.Dependency(ctx, rt.Node, start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
-		return fmt.Errorf("node %s: %w", rt.Node, err)
+		return nil, fmt.Errorf("node %s: %w", rt.Node, err)
+	}
+	status = resp.StatusCode
+	if resp.StatusCode == http.StatusOK {
+		return resp, nil
 	}
 	defer resp.Body.Close()
-	status = resp.StatusCode
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return fmt.Errorf("node %s: %w", rt.Node, err)
+		return nil, fmt.Errorf("node %s: %w", rt.Node, err)
 	}
-	if resp.StatusCode != http.StatusOK {
-		var eb wire.ErrorBody
-		if err := decode(data, &eb); err != nil {
-			return fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
-		}
-		return &httpx.RemoteError{Status: resp.StatusCode, Code: eb.Error.Code, Message: eb.Error.Message}
+	var eb wire.ErrorBody
+	if err := decode(data, &eb); err != nil {
+		return nil, fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
 	}
-	if err := decode(data, out); err != nil {
-		return fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
-	}
-	return nil
+	return nil, &httpx.RemoteError{Status: resp.StatusCode, Code: eb.Error.Code, Message: eb.Error.Message}
 }
 
 // decode reads a node response exactly: an unexpected field means the node

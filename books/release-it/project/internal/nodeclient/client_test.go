@@ -1,6 +1,7 @@
 package nodeclient
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -34,12 +35,17 @@ func stubNode(t *testing.T) *httptest.Server {
 
 func TestQuery(t *testing.T) {
 	srv := stubNode(t)
-	res, err := New().Query(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3}, wire.QueryRequest{SQL: "SELECT id FROM t"})
+	rows, err := New().Query(context.Background(), wire.Route{NodeURL: srv.URL, DatabaseID: "db1", Epoch: 3}, wire.QueryRequest{SQL: "SELECT id FROM t"})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(res.Rows) != 2 || res.Columns[0] != "id" {
-		t.Fatalf("result = %+v", res)
+	var buf bytes.Buffer
+	if _, err := rows.WriteTo(&buf); err != nil {
+		t.Fatal(err)
+	}
+	var res wire.QueryResult
+	if err := json.Unmarshal(buf.Bytes(), &res); err != nil || len(res.Rows) != 2 || res.Columns[0] != "id" {
+		t.Fatalf("result = %s (%v)", buf.String(), err)
 	}
 }
 

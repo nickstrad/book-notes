@@ -99,8 +99,8 @@ func Logged(h http.Handler) http.Handler {
 		r2 := r.WithContext(ctx)
 		sw := &statusWriter{ResponseWriter: w}
 		inflight.Inc()
+		defer inflight.Dec() // also when a streaming handler aborts
 		h.ServeHTTP(sw, r2)
-		inflight.Dec()
 		if sw.status == 0 {
 			sw.status = http.StatusOK
 		}

@@ -7,6 +7,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -111,69 +113,102 @@ func isRead(q string) bool {
 	return false
 }
 
-// Query runs one read statement on a query_only connection and returns every
-// row.
-func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.QueryRequest) (*wire.QueryResult, []byte, error) {
+// A query's answer is capped at MaxRows rows or MaxBytes of JSON, whichever
+// comes first; a capped answer says "truncated": true. Tenants page with
+// keyset queries (WHERE id > ? ORDER BY id LIMIT n). The cap is the
+// platform's bulkhead for the node's memory, not a suggestion.
+const (
+	MaxRows  = 1000
+	MaxBytes = 1 << 20
+)
+
+// Query runs one read statement on a query_only connection and streams its
+// rows to the writer start returns, as they are scanned:
+// {"columns":[...],"rows":[[...],...],"truncated":bool}. Nothing is written
+// unless the statement starts; started reports whether the answer had begun
+// when err happened (the caller can then only abandon it).
+func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.QueryRequest, start func() io.Writer) (started bool, err error) {
 	defer observeStatement("read", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, StatementDeadline)
 	defer cancel()
 	if !isRead(req.SQL) {
-		return nil, nil, &StatementError{http.StatusBadRequest, "bad_request", "query takes a single read statement; use execute for writes"}
+		return false, &StatementError{http.StatusBadRequest, "bad_request", "query takes a single read statement; use execute for writes"}
 	}
 	h, err := e.Handle(id)
 	if err != nil {
-		return nil, nil, err
+		return false, err
 	}
 	if err := h.admit(epoch); err != nil {
-		return nil, nil, err
+		return false, err
 	}
 	release, err := e.acquire(ctx, h, false)
 	if err != nil {
-		return nil, nil, err
+		return false, err
 	}
 	defer release()
 
 	c, err := h.conn(ctx)
 	if err != nil {
-		return nil, nil, err
+		return false, err
 	}
 	defer c.Close()
 	tx, err := c.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
 	if err != nil {
-		return nil, nil, classify(ctx, err)
+		return false, classify(ctx, err)
 	}
 	defer tx.Rollback()
 	rows, err := tx.QueryContext(ctx, req.SQL, req.Args...)
 	if err != nil {
-		return nil, nil, classify(ctx, err)
+		return false, classify(ctx, err)
 	}
 	defer rows.Close()
 	cols, err := rows.Columns()
 	if err != nil {
-		return nil, nil, err
+		return false, err
 	}
-	res := &wire.QueryResult{Columns: cols, Rows: [][]any{}}
+	head, _ := json.Marshal(cols)
+	w := start()
+	n, _ := fmt.Fprintf(w, `{"columns":%s,"rows":[`, head)
+	size := int64(n)
+	vals := make([]any, len(cols))
+	ptrs := make([]any, len(cols))
+	for i := range vals {
+		ptrs[i] = &vals[i]
+	}
+	var count int64
+	truncated := false
 	for rows.Next() {
-		vals := make([]any, len(cols))
-		ptrs := make([]any, len(cols))
-		for i := range vals {
-			ptrs[i] = &vals[i]
+		if count == MaxRows {
+			truncated = true
+			break
 		}
 		if err := rows.Scan(ptrs...); err != nil {
-			return nil, nil, classify(ctx, err)
+			return true, classify(ctx, err)
 		}
-		res.Rows = append(res.Rows, vals)
+		row, err := json.Marshal(vals)
+		if err != nil {
+			return true, err
+		}
+		if size+int64(len(row)) > MaxBytes {
+			truncated = true
+			break
+		}
+		if count > 0 {
+			w.Write([]byte{','})
+			size++
+		}
+		w.Write(row)
+		size += int64(len(row))
+		count++
 	}
 	if err := rows.Err(); err != nil {
-		return nil, nil, classify(ctx, err)
+		return true, classify(ctx, err)
 	}
-	body, err := json.Marshal(res)
-	if err != nil {
-		return nil, nil, err
-	}
-	h.recordRead(int64(len(res.Rows)), int64(len(body)))
-	e.emit(h, "read", int64(len(res.Rows)), int64(len(body)))
-	return res, body, nil
+	n, _ = fmt.Fprintf(w, `],"truncated":%t}`, truncated)
+	size += int64(n)
+	h.recordRead(count, size)
+	e.emit(h, "read", count, size)
+	return true, nil
 }
 
 // Execute runs every statement in one write transaction.

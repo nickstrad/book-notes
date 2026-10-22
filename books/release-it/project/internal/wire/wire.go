@@ -14,10 +14,12 @@ type QueryRequest struct {
 	Args []any  `json:"args,omitempty"`
 }
 
-// QueryResult is the body of a successful query.
+// QueryResult is the body of a successful query. Truncated is set when the
+// answer hit the platform's cap (1 000 rows or 1 MB).
 type QueryResult struct {
-	Columns []string `json:"columns"`
-	Rows    [][]any  `json:"rows"`
+	Columns   []string `json:"columns"`
+	Rows      [][]any  `json:"rows"`
+	Truncated bool     `json:"truncated"`
 }
 
 // ExecuteRequest is the body of POST .../execute: every statement runs in one

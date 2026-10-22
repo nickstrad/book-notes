@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -108,13 +109,19 @@ func (n *node) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	httpx.Annotate(r.Context(), "database_id", r.PathValue("id"))
-	_, body, err := n.eng.Query(r.Context(), r.PathValue("id"), epoch(r), req)
-	if err != nil {
+	started, err := n.eng.Query(r.Context(), r.PathValue("id"), epoch(r), req, func() io.Writer {
+		w.Header().Set("Content-Type", "application/json")
+		return w
+	})
+	switch {
+	case err == nil:
+	case started:
+		// The rows had begun: the only honest signal left is to cut the
+		// connection, so the gateway sees an incomplete answer.
+		panic(http.ErrAbortHandler)
+	default:
 		writeEngineError(w, r, err)
-		return
 	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(body)
 }
 
 func (n *node) execute(w http.ResponseWriter, r *http.Request) {

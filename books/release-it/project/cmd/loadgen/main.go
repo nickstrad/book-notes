@@ -48,8 +48,9 @@ type manifest struct {
 
 // The API's documented response shapes. The consumer reads them exactly.
 type queryResp struct {
-	Columns []string `json:"columns"`
-	Rows    [][]any  `json:"rows"`
+	Columns   []string `json:"columns"`
+	Rows      [][]any  `json:"rows"`
+	Truncated bool     `json:"truncated"`
 }
 
 type executeResp struct {

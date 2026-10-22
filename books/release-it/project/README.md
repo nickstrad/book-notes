@@ -53,6 +53,14 @@ All routes take `Authorization: Bearer <api-key>`. Errors are
 
 `query` takes one read statement. `execute` runs its statements in one transaction.
 
+A query's answer is capped at **1 000 rows or 1 MB**, whichever comes first, and says
+`"truncated": true` when it was cut. The cap is the platform's bulkhead for its nodes' memory, not a
+suggestion: to read a large table, page through it with a keyset query.
+
+```
+{"sql": "SELECT id, body FROM events WHERE id > ? ORDER BY id LIMIT 500", "args": [last_id_seen]}
+```
+
 ```
 KEY=$(jq -r '.tenants[10].key' results/manifest.json)
 curl -s localhost:18080/v1/databases/default/query -H "Authorization: Bearer $KEY" \
