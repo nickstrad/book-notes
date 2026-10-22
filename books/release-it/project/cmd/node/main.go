@@ -55,6 +55,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	n.eng.MaxOpen = engine.MaxOpenDatabases(fdLimit())
 	interval, _ := time.ParseDuration(env("BACKUP_INTERVAL", "60s"))
 	tmp := filepath.Join(n.data, "tmp")
 	os.MkdirAll(tmp, 0o755)
@@ -167,6 +168,8 @@ func writeEngineError(w http.ResponseWriter, r *http.Request, err error) {
 		httpx.WriteError(w, r, http.StatusConflict, "exists", err.Error())
 	case errors.Is(err, engine.ErrStaleEpoch):
 		httpx.WriteError(w, r, http.StatusConflict, "stale_epoch", err.Error())
+	case errors.Is(err, engine.ErrNodeFull):
+		httpx.WriteError(w, r, http.StatusServiceUnavailable, "node_full", err.Error())
 	default:
 		log.Printf("engine: %v", err)
 		httpx.WriteError(w, r, http.StatusInternalServerError, "internal", err.Error())

@@ -20,7 +20,28 @@ import (
 var (
 	ErrNoSuchDatabase = errors.New("no such database")
 	ErrExists         = errors.New("database already exists")
+	ErrNodeFull       = errors.New("node has its maximum of open databases")
 )
+
+// Per-database pool: up to 4 statements at once, 2 connections kept warm,
+// idle ones closed after a minute. Each WAL connection costs 3 fds.
+const (
+	maxConnsPerDB = 4
+	maxIdlePerDB  = 2
+	connIdleTime  = time.Minute
+	fdsPerConn    = 3
+)
+
+// MaxOpenDatabases is the node-wide budget of open handles that fits the
+// process's file-descriptor limit with every handle at its idle size, keeping
+// headroom for sockets and the node's own files.
+func MaxOpenDatabases(fdLimit int) int {
+	const reserve = 124
+	if fdLimit <= reserve {
+		return 1
+	}
+	return (fdLimit - reserve) / (maxIdlePerDB * fdsPerConn)
+}
 
 // Recorder receives one usage event per statement.
 type Recorder interface {
@@ -31,6 +52,8 @@ type Recorder interface {
 type Engine struct {
 	dir   string
 	usage Recorder
+	// MaxOpen is the node-wide budget of open handles; 0 means unbounded.
+	MaxOpen int
 
 	mu      sync.Mutex
 	handles map[string]*Handle
@@ -82,10 +105,16 @@ func (e *Engine) Handle(id string) (*Handle, error) {
 	if _, err := os.Stat(path); err != nil {
 		return nil, ErrNoSuchDatabase
 	}
+	if e.MaxOpen > 0 && len(e.handles) >= e.MaxOpen {
+		return nil, ErrNodeFull
+	}
 	db, err := sql.Open("sqlite3", dsn(path))
 	if err != nil {
 		return nil, err
 	}
+	db.SetMaxOpenConns(maxConnsPerDB)
+	db.SetMaxIdleConns(maxIdlePerDB)
+	db.SetConnMaxIdleTime(connIdleTime)
 	h := &Handle{ID: id, Path: path, db: db}
 	if err := h.loadMeta(); err != nil {
 		db.Close()

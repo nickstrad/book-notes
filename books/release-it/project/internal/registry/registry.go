@@ -43,8 +43,12 @@ func Open(dsn string) (*Registry, error) {
 	}
 	cfg.RuntimeParams["statement_timeout"] = strconv.Itoa(int(StatementTimeout.Milliseconds()))
 	db := stdlib.OpenDB(*cfg)
-	// Keep connections warm: every request resolves through here.
-	db.SetMaxIdleConns(32)
+	// A bounded pool: Postgres serves 100 connections for everyone, and a
+	// control plane that opens one per concurrent request turns a burst into
+	// a Postgres outage. Waits are bounded by the caller's context.
+	db.SetMaxOpenConns(20)
+	db.SetMaxIdleConns(20)
+	db.SetConnMaxLifetime(30 * time.Minute)
 	exportPool(db)
 	return &Registry{db: db}, nil
 }

@@ -75,10 +75,7 @@ func (g *Gateway) resolve(w http.ResponseWriter, r *http.Request) (wire.Route, b
 func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 	r, cancel := withDeadline(r)
 	defer cancel()
-	rt, ok := g.resolve(w, r)
-	if !ok {
-		return
-	}
+	// Reject what can be rejected before spending a control round trip.
 	var req wire.QueryRequest
 	if err := httpx.DecodeJSON(r, &req); err != nil {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "body: "+err.Error())
@@ -86,6 +83,10 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 	}
 	if req.SQL == "" || len(req.SQL) > MaxSQLBytes {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "sql must be 1..65536 bytes")
+		return
+	}
+	rt, ok := g.resolve(w, r)
+	if !ok {
 		return
 	}
 	res, err := g.Nodes.Query(r.Context(), rt, req)
@@ -99,10 +100,6 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 	r, cancel := withDeadline(r)
 	defer cancel()
-	rt, ok := g.resolve(w, r)
-	if !ok {
-		return
-	}
 	var req wire.ExecuteRequest
 	if err := httpx.DecodeJSON(r, &req); err != nil {
 		httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "body: "+err.Error())
@@ -117,6 +114,10 @@ func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 			httpx.WriteError(w, r, http.StatusBadRequest, "bad_request", "sql must be 1..65536 bytes")
 			return
 		}
+	}
+	rt, ok := g.resolve(w, r)
+	if !ok {
+		return
 	}
 	res, err := g.Nodes.Execute(r.Context(), rt, req)
 	if err != nil {

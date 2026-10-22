@@ -32,6 +32,34 @@ func (e *StatementError) Error() string { return e.Code + ": " + e.Message }
 // gets its 504 back to the tenant in time.
 const StatementDeadline = 2 * time.Second
 
+// PoolWait bounds how long a statement waits for one of its database's
+// connections. Past it the node answers 503 at once rather than queueing
+// the request behind the ones holding them.
+const PoolWait = 250 * time.Millisecond
+
+// ErrPoolTimeout means every connection to the database is in use.
+var ErrPoolTimeout = &StatementError{http.StatusServiceUnavailable, "pool_timeout", "database busy: no connection free"}
+
+var poolTimeouts = promauto.NewCounter(prometheus.CounterOpts{
+	Name: "sqlite_pool_timeouts_total", Help: "Statements refused because no connection to their database came free within PoolWait.",
+})
+
+// conn checks out a connection, waiting at most PoolWait. The caller must
+// Close it.
+func (h *Handle) conn(ctx context.Context) (*sql.Conn, error) {
+	wait, cancel := context.WithTimeout(ctx, PoolWait)
+	defer cancel()
+	c, err := h.db.Conn(wait)
+	if err != nil {
+		if ctx.Err() == nil && wait.Err() != nil {
+			poolTimeouts.Inc()
+			return nil, ErrPoolTimeout
+		}
+		return nil, classify(ctx, err)
+	}
+	return c, nil
+}
+
 var statementsCancelled = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "statements_cancelled_total", Help: "Statements interrupted because their deadline passed or their caller went away.",
 }, []string{"reason"})
@@ -82,6 +110,9 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 	defer observeStatement("read", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, StatementDeadline)
 	defer cancel()
+	if !isRead(req.SQL) {
+		return nil, nil, &StatementError{http.StatusBadRequest, "bad_request", "query takes a single read statement; use execute for writes"}
+	}
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, nil, err
@@ -89,13 +120,15 @@ func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.Query
 	if err := h.admit(epoch); err != nil {
 		return nil, nil, err
 	}
-	if !isRead(req.SQL) {
-		return nil, nil, &StatementError{http.StatusBadRequest, "bad_request", "query takes a single read statement; use execute for writes"}
-	}
 
-	tx, err := h.db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
+	c, err := h.conn(ctx)
 	if err != nil {
 		return nil, nil, err
+	}
+	defer c.Close()
+	tx, err := c.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
+	if err != nil {
+		return nil, nil, classify(ctx, err)
 	}
 	defer tx.Rollback()
 	rows, err := queryBusy(ctx, tx, req.SQL, req.Args)
@@ -136,6 +169,9 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 	defer observeStatement("write", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, StatementDeadline)
 	defer cancel()
+	if len(req.Statements) == 0 {
+		return nil, &StatementError{http.StatusBadRequest, "bad_request", "no statements"}
+	}
 	h, err := e.Handle(id)
 	if err != nil {
 		return nil, err
@@ -143,14 +179,19 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 	if err := h.admit(epoch); err != nil {
 		return nil, err
 	}
-	if len(req.Statements) == 0 {
-		return nil, &StatementError{http.StatusBadRequest, "bad_request", "no statements"}
-	}
 
-	tx, err := h.db.Begin()
+	c, err := h.conn(ctx)
 	if err != nil {
 		return nil, err
 	}
+	defer c.Close()
+	tx, err := c.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, classify(ctx, err)
+	}
+	// Every return path below rolls back unless Commit succeeded, which
+	// releases the file's write lock and returns the connection.
+	defer tx.Rollback()
 	var res wire.ExecuteResult
 	var inBytes int64
 	affected := make([]int64, 0, len(req.Statements))
@@ -168,7 +209,6 @@ func (e *Engine) Execute(ctx context.Context, id string, epoch int, req wire.Exe
 		inBytes += int64(len(st.SQL))
 	}
 	if err := tx.Commit(); err != nil {
-		tx.Rollback()
 		return nil, classify(ctx, err)
 	}
 	h.recordWrite(res.RowsAffected, inBytes)

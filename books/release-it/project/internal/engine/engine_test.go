@@ -109,3 +109,19 @@ func TestRunawayStatementIsInterrupted(t *testing.T) {
 		t.Fatalf("interrupted after %s; want just past %s", d, StatementDeadline)
 	}
 }
+
+func TestFailedWriteReleasesTheWriteLock(t *testing.T) {
+	e := newEngine(t)
+	exec(t, e, `CREATE TABLE items (id integer PRIMARY KEY, seq integer UNIQUE)`)
+	exec(t, e, `INSERT INTO items (seq) VALUES (1)`)
+	for i := 0; i < 10; i++ {
+		if _, err := e.Execute(context.Background(), "db1", 1, wire.ExecuteRequest{Statements: []wire.Statement{{SQL: `INSERT INTO items (seq) VALUES (1)`}}}); err == nil {
+			t.Fatal("duplicate insert succeeded")
+		}
+	}
+	exec(t, e, `INSERT INTO items (seq) VALUES (2)`)
+	h, _ := e.Handle("db1")
+	if open := h.DB().Stats().OpenConnections; open > maxConnsPerDB {
+		t.Fatalf("%d connections open after failed writes; want <= %d", open, maxConnsPerDB)
+	}
+}

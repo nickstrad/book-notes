@@ -43,19 +43,29 @@ func main() {
 
 	c := &control{reg: reg, nodes: newNodeCommands(env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"))}
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /internal/resolve", c.resolve)
-	mux.HandleFunc("POST /internal/databases", c.createDatabase)
-	mux.HandleFunc("GET /internal/databases", c.listDatabases)
-	mux.HandleFunc("GET /internal/databases/{name}", c.getDatabase)
-	mux.HandleFunc("DELETE /internal/databases/{name}", c.dropDatabase)
-	mux.HandleFunc("POST /internal/heartbeat", c.heartbeat)
-	mux.HandleFunc("GET /internal/usage", c.usage)
+	mux.HandleFunc("POST /internal/resolve", budget(450*time.Millisecond, c.resolve))
+	mux.HandleFunc("POST /internal/databases", budget(2*time.Second, c.createDatabase))
+	mux.HandleFunc("GET /internal/databases", budget(450*time.Millisecond, c.listDatabases))
+	mux.HandleFunc("GET /internal/databases/{name}", budget(450*time.Millisecond, c.getDatabase))
+	mux.HandleFunc("DELETE /internal/databases/{name}", budget(2*time.Second, c.dropDatabase))
+	mux.HandleFunc("POST /internal/heartbeat", budget(2*time.Second, c.heartbeat))
+	mux.HandleFunc("GET /internal/usage", budget(8*time.Second, c.usage))
 	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{"postgres": c.postgresCheck}))
 	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	addr := env("LISTEN", ":8090")
 	log.Printf("control listening on %s", addr)
 	log.Fatal(httpx.NewServer(addr, httpx.Logged(mux)).ListenAndServe())
+}
+
+// budget gives a handler's registry calls a deadline inside its caller's, so
+// a request waiting for a pool connection fails fast instead of hanging.
+func budget(d time.Duration, h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ctx, cancel := context.WithTimeout(r.Context(), d)
+		defer cancel()
+		h(w, r.WithContext(ctx))
+	}
 }
 
 // postgresCheck: control cannot answer anything without its registry.
@@ -218,6 +228,8 @@ func writeRegistryError(w http.ResponseWriter, r *http.Request, err error) {
 		httpx.WriteError(w, r, http.StatusNotFound, "no_such_database", err.Error())
 	case errors.Is(err, registry.ErrExists):
 		httpx.WriteError(w, r, http.StatusConflict, "exists", err.Error())
+	case errors.Is(err, context.DeadlineExceeded) || errors.Is(err, context.Canceled):
+		httpx.WriteError(w, r, http.StatusServiceUnavailable, "pool_timeout", "registry busy")
 	default:
 		log.Printf("registry: %v", err)
 		httpx.WriteError(w, r, http.StatusInternalServerError, "internal", strings.TrimSpace(err.Error()))
