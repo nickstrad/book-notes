@@ -83,3 +83,9 @@ Nick rules on the open decisions in `books/release-it/STATE.md`: the cross-famil
 order a Codex/Muse review, M5), whether to fold H1 into lesson 06's history and re-point the lesson
 tags, M3's thresholds, and the two rewritten case-study sentences. Then Twin verification and the
 report to Nick.
+
+## Diagram site
+
+- [Plan](docs/diagram-site/PLAN.md) approved for destination B: `pages/` in this repo,
+  base `/book-notes/`. Item 1 shell implemented; [site state](docs/diagram-site/STATE.md)
+  records acceptance, pinned reuse sources, evidence and handoff. Items 2–8 remain separate runs.

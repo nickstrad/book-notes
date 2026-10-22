@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "shell-alternate",
+  "title": "Shell test: alternate architecture",
+  "revision": "shell-fixture-1",
+  "defaultDiagramId": "context",
+  "model": {
+    "elements": [
+      {
+        "id": "fixture-user",
+        "kind": "person",
+        "name": "Alternate reader",
+        "description": "Uses the fixture system",
+        "status": "existing",
+        "sourceIds": [
+          "shell-spec"
+        ]
+      },
+      {
+        "id": "fixture-system",
+        "kind": "softwareSystem",
+        "name": "Alternate system",
+        "description": "Invented shell test data; does not describe a book project.",
+        "status": "existing",
+        "sourceIds": [
+          "shell-spec"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": "fixture-rel-1",
+        "sourceId": "fixture-user",
+        "targetId": "fixture-system",
+        "label": "Sends requests",
+        "technology": "HTTPS",
+        "status": "existing",
+        "sourceIds": [
+          "shell-spec"
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "id": "context",
+      "kind": "context",
+      "title": "System context: alternate shell test",
+      "status": "existing",
+      "scopeId": "fixture-system",
+      "nodes": [
+        {
+          "elementId": "fixture-user"
+        },
+        {
+          "elementId": "fixture-system"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "fixture-rel-1",
+          "displayNumber": 1
+        }
+      ],
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "key-person",
+            "label": "Person",
+            "description": "A person",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "key-planned",
+            "label": "System",
+            "description": "Invented shell test data",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "key-request",
+            "label": "Relationship",
+            "description": "Invented shell test data",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "shell-context"
+      ],
+      "sourceIds": [
+        "shell-spec"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "shell-context",
+      "title": "About this shell test",
+      "plain": "This invented example verifies catalog loading, navigation, documentation and layout. It does not model Litefleet or Queuelet. Their source-backed datasets are separate plan items.",
+      "ste": {
+        "text": "This example tests the site shell. It does not show a book project.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "termIds": [],
+      "sourceIds": [
+        "shell-spec"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "shell-spec",
+      "title": "Approved diagram site plan, item 1",
+      "url": "https://github.com/nickstrad/book-notes/blob/e1476560b695f0ce240f5f6cf9fa785805b28c02/docs/diagram-site/PLAN.md",
+      "revision": "e1476560b695f0ce240f5f6cf9fa785805b28c02",
+      "path": "docs/diagram-site/PLAN.md",
+      "notes": "Specifies minimal invented test data for the shell, not architecture evidence."
+    }
+  ]
+}

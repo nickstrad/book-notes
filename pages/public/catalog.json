@@ -1,0 +1,15 @@
+{
+  "defaultId": "shell-example",
+  "entries": [
+    {
+      "id": "shell-example",
+      "title": "Shell test: example architecture",
+      "url": "architectures/shell-example.json"
+    },
+    {
+      "id": "shell-alternate",
+      "title": "Shell test: alternate architecture",
+      "url": "architectures/shell-alternate.json"
+    }
+  ]
+}

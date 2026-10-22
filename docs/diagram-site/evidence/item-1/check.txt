@@ -1,0 +1,69 @@
+
+> book-notes-architecture-pages@0.0.0 check
+> npm run typecheck && npm run test && npm run build && npm run test:browser
+
+
+> book-notes-architecture-pages@0.0.0 typecheck
+> tsc -b
+
+
+> book-notes-architecture-pages@0.0.0 test
+> vitest run
+
+
+ RUN  v5.0.4 /root/Software/book-notes/pages
+
+
+ Test Files  5 passed (5)
+      Tests  50 passed (50)
+   Start at  23:44:43
+   Duration  2.69s (import 69%, tests 21%, transform 8%, worker 2%)
+
+    Isolate  5 workers spawned · ~544ms startup each (spawn + environment, per file)
+             at least ~363ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> book-notes-architecture-pages@0.0.0 build
+> vite build --base /book-notes/
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            0.69 kB │ gzip:   0.39 kB
+dist/assets/layout-worker-BeIcR9gj.js  2,107.55 kB
+dist/assets/index-ChqLlcAG.css            33.27 kB │ gzip:   6.31 kB
+dist/assets/index-DeMpY6Is.js            800.91 kB │ gzip: 251.70 kB
+
+✓ built in 1.15s
+
+> book-notes-architecture-pages@0.0.0 test:browser
+> playwright test
+
+[WebServer] (node:3986604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:3986618) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 12 tests using 1 worker
+
+(node:3986664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/12] [chromium] › tests/smoke.spec.ts:22:1 › default catalog renders with documentation at the selected base
+[2/12] [chromium] › tests/smoke.spec.ts:35:1 › dropdown switches in both directions and browser history returns
+[3/12] [chromium] › tests/smoke.spec.ts:49:1 › a non-default deep link reloads to the same diagram
+[4/12] [chromium] › tests/smoke.spec.ts:58:1 › unknown and malformed routes offer recovery without a fallback
+[5/12] [chromium] › tests/smoke.spec.ts:69:1 › a third catalog entry works with no application change
+[6/12] [chromium] › tests/smoke.spec.ts:87:3 › reports empty catalog
+[7/12] [chromium] › tests/smoke.spec.ts:87:3 › reports malformed JSON
+[8/12] [chromium] › tests/smoke.spec.ts:87:3 › reports missing defaultId
+[9/12] [chromium] › tests/smoke.spec.ts:95:1 › reports a failed catalog request
+[10/12] [chromium] › tests/smoke.spec.ts:103:1 › the skip link and architecture selector work by keyboard
+[11/12] [chromium] › tests/smoke.spec.ts:117:3 › shell layout and screenshot at 1600×1000
+[12/12] [chromium] › tests/smoke.spec.ts:117:3 › shell layout and screenshot at 390×844
+  12 passed (31.1s)

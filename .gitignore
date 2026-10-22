@@ -3,3 +3,6 @@
 **/node_modules/
 **/*.test
 **/bin/
+# Static diagram site build output
+/pages/dist/
+/pages/*.tsbuildinfo

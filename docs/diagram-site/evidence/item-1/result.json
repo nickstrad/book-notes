@@ -1,0 +1,50 @@
+{
+  "item": 1,
+  "status": "PASS",
+  "exit_status": 0,
+  "completed_at_utc": "2026-10-22T23:46:03.945537+00:00",
+  "branch": "main",
+  "base": "/book-notes/",
+  "permission_profile": "disabled; unrestricted filesystem; no approvals",
+  "sources": {
+    "plan": "e1476560b695f0ce240f5f6cf9fa785805b28c02",
+    "ts_db": "fac3e3e5a971dcc81e62f454bb10a7643968b91e",
+    "c4_sdk": "bb12c7b3eb4a70152ed5ee13094da4bf7fa985be"
+  },
+  "commands": [
+    {
+      "command": "cd pages && npm ci",
+      "node": "22.23.2",
+      "exit_status": 0
+    },
+    {
+      "command": "cd pages && npm run check",
+      "node": "22.23.2",
+      "exit_status": 0
+    }
+  ],
+  "checks": {
+    "typecheck": "PASS",
+    "unit_schema_tests": 50,
+    "browser_tests": 12,
+    "build": "PASS",
+    "schema_diagnostics": 0,
+    "screenshots_inspected": [
+      "shell-1600.png",
+      "shell-390.png",
+      "shell-390-explanation.png"
+    ]
+  },
+  "deviations": [
+    "Committed directly on main as the explicit item brief requests, overriding the general isolated-worktree workflow."
+  ],
+  "limitations": [
+    "Invented shell datasets only; real datasets are items 2 and 3.",
+    "ts-db shell has no explicit license file; resolve reuse terms before release.",
+    "No independent review or deployment performed; those are later plan items."
+  ],
+  "iteration_notes": [
+    "Initial default shell used Node 18; acceptance rerun with required Node 22.23.2.",
+    "Added narrow drawer test initially matched inline and drawer documents; scoped to Explanation region and reran full check successfully."
+  ]
+}
