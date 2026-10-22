@@ -93,6 +93,7 @@ final tag; after that it is frozen.
 books/<slug>/
   PLAN.md                     # the confirmed plan; earlier versions archived alongside
   README.md                   # landing page: argument, lesson index with tags, skills index
+  WALKTHROUGH.md              # guided tour for a cold reader (see below)
   lessons/
     README.md                 # index: lesson, tag, flaw ids, verify command
     00-<the-flawed-start>.md  # tour of the flawed tag and the register
@@ -105,6 +106,16 @@ books/<slug>/
 ```
 
 Names are stable once committed: notes, skills and commit bodies link to them.
+
+**Every book ships a `WALKTHROUGH.md`**, written as part of the book's landing/wrap (after the
+review fixes, before the book is reported done). It is a tour a person follows, not a file listing,
+and contains: an orientation (what the project is, the shape of `books/<slug>/`); the reading order
+(plan, the flawed start, the lesson notes in order, the skills, the review and its fix pass); the
+tag/commit itinerary, with the exact `git` commands for each stop and what flaw or change to observe
+there; the commands to bring the project up and run a lesson's verify, copied from its own
+Makefile/docs and verified against the repo (run the cheap ones; confirm every file, tag and target
+named exists); and pointers to `STATE.md`, the review and `docs/knowledge/`. The worked example is
+`books/release-it/WALKTHROUGH.md`.
 
 ## Skills contract
 
