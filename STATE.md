@@ -12,10 +12,11 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   v3 written 2026-10-21 by the planner seat (Claude Fable 5.1): `books/release-it/PLAN.md`,
   re-vehicled to `litefleet`, a baby multitenant SQLite platform (18 flaws, 12 lessons).
   **Nick approved v3**; v2 archived as `PLAN-v2-checkout.md`, v1 as `PLAN-v1-per-topic-projects.md`.
-- **Phase 2 (build v0 + lessons):** in progress, builder seat Claude Opus 5.5, linear history on
-  `main`. Done: `release-it/v0-flawed` (platform, lab, lesson 00 tour; `topics/` stubs removed),
-  `release-it/lesson-01` (checkpoint A), `release-it/lesson-02` … `lesson-07` (checkpoint B).
-  Next: checkpoint C, lessons L08–L12, then the landing page and `release-it/v1-hardened`.
+- **Phase 2 (build v0 + lessons):** done 2026-10-22, builder seat Claude Opus 5.5, linear history
+  on `main`. Tags: `release-it/v0-flawed` (platform, lab, lesson 00 tour; `topics/` stubs removed),
+  `release-it/lesson-01` (checkpoint A), `lesson-02` … `lesson-07` (checkpoint B), `lesson-08` …
+  `lesson-12` (checkpoint C), `release-it/v1-hardened` (lessons index `lessons/README.md`, landing
+  page). Every lesson's verify reproduces its flaw on the parent tag and is IMPROVED on its own.
   Deviations from the plan so far (each also in the lesson note it concerns):
   - v0 + lab are one commit (checkpoints A1 and A2 merged): the plan requires `make verify
     LESSON=00` to pass before the v0 tag, and that needs the lab.
@@ -40,13 +41,22 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
     database), the noisy tenant has 4 databases (seed: 243), creates get a 2.5 s gateway budget.
     L07 makes the gateways the bottleneck for its run (0.15 CPU, nodes 0.75) and uses a
     window-median p99 (≤ 300 ms).
+  - Checkpoint C (details in each note): L08 whale threshold ≥ 99 % answered and p99 ≤ 1 s (plan
+    100 ms; lesson 6's two read lanes queue the scans), gateway streams by transcoding. L09 spills
+    the queue to the outbox on SIGTERM (the plan's check needs it), metering client 2 s. L10
+    checkpoints any WAL past 64 KB, handle cache 128 (plan 64), 48 MB tmpfs volumes (plan 256 MB).
+    L11 suite uses Toxiproxy's HTTP API (REF trees lack the Go client); 5 of 12 tests fail before
+    (plan 4). L12: the gateway refuses during a node restart instead of retrying `draining` once
+    (retries filled the shed limits and HAProxy), the gateways drain too, restart window ≤ 10 s with
+    nothing cut off (plan ≤ 2 s; a restart is a new container), the contract is guarded and belongs
+    to the next release, `make godot` stays outside the verify, and opening a database is a
+    singleflight. Lessons 08, 11 and 12 are two commits each.
   - The verify runner restores a seeded snapshot (Postgres template database + tenant files) after
     the first seed, so a reset is ~25 s instead of ~1 min.
-- **Phase 3 (skills):** not started; part of checkpoint C. Eight skills as in PLAN.md section 5.
+- **Phase 3 (skills):** not started. It follows the build, driven by the coordinator. Eight skills as in PLAN.md section 5.
 - **Phase 4 (review):** not started. Reviewer from a different model family than the builder;
   final big review by the planner seat is also requested by Nick.
 
 ## Next action
 
-Builder continues with checkpoint C (lesson 08, unbounded result sets). Cross-family review of
-checkpoints A and B per the plan.
+Cross-family review of the build (checkpoints A–C) per the plan, then phase 3 (skills).
