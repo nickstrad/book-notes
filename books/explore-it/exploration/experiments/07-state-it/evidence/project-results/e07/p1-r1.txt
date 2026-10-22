@@ -1,0 +1,30 @@
+2026-10-22T18:03:30Z queue e07p1r1 e07p1r1
+workers A 4 B 5
+H01 lease A 301 attempt 1 exp 2026-10-22T18:04:00.859795936Z
+H01 clock {'now': '2026-10-22T18:04:10.86795961Z'}
+H01 after sweep: ('queued', 0.85)
+H01 lease B -> [(301, 2)]
+H01 A ack (409, {'error': {'code': 'state_conflict', 'message': 'state conflict'}})
+H01 A nack (409, {'error': {'code': 'state_conflict', 'message': 'sql: no rows in result set'}})
+H01 A heartbeat (409, {'error': {'code': 'state_conflict', 'message': 'state conflict'}})
+H01 job after A verbs: leased leased_by 5 token==B True
+H01 B ack (200, {'ok': True})
+H01 final {'state': 'succeeded', 'attempts': 2, 'result': {'by': 'B'}, 'leased_by': None, 'lease_token': None}
+H01 attempts [(1, 4, 'expired'), (2, 5, 'succeeded')]
+H01 events [('created', None, 0), ('leased', 4, 1), ('lease_expired', 4, 1), ('leased', 5, 2), ('succeeded', 5, 2)]
+H02 after sweep: ('queued', 0.88)
+H02 relet attempt 2
+H02 ack first token (409, {'error': {'code': 'state_conflict', 'message': 'state conflict'}})
+H02 ack second token (200, {'ok': True})
+H02 attempts [(1, 4, 'expired'), (2, 4, 'succeeded')]
+H05 lease exp 2026-10-22T18:05:20.86795961Z now 2026-10-22T18:04:50.86795961Z
+H05 heartbeat 1 (200, {'ok': True})
+H05 job exp 2026-10-22T18:04:51.86796Z
+H05 after +2s: ack (409, {'error': {'code': 'state_conflict', 'message': 'state conflict'}}) state ('queued', 0.95)
+H06 purge (200, {'deleted': 0})
+H06 flag leased|t
+H06 nack(retry) (200, {'ok': True}) dead
+H06 retry (200, {'ok': True}) queued|f|0
+H06 nack(retry) after retry (200, {'ok': True}) retry_wait
+H06 attempts [(1, 'failed'), (2, 'failed')]
+clock reset {'now': '2026-10-22T18:03:34.235650868Z'}

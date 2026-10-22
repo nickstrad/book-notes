@@ -1,0 +1,12 @@
+2026-10-22T18:06:56Z probe purgenack tag r1 trials 10
+trial 0 queue e07pnr1-0 purge (200, {'deleted': 32}) nack codes {200: 60} states ['dead:13', 'retry_wait:15'] pending_ids=['3927', '3930', '3932', '3938', '3943']
+trial 1 queue e07pnr1-1 purge (200, {'deleted': 48}) nack codes {200: 60} states ['retry_wait:12'] pending_ids=['3993', '3997', '3998', '3999', '4002']
+trial 2 queue e07pnr1-2 purge (200, {'deleted': 55}) nack codes {200: 60} states ['retry_wait:5'] pending_ids=['4045', '4049', '4053', '4068', '4094']
+trial 3 queue e07pnr1-3 purge (200, {'deleted': 44}) nack codes {200: 60} states ['retry_wait:16'] pending_ids=['4105', '4116', '4118', '4122', '4124']
+trial 4 queue e07pnr1-4 purge (200, {'deleted': 53}) nack codes {200: 60} states ['retry_wait:7'] pending_ids=['4172', '4173', '4189', '4194', '4210']
+trial 5 queue e07pnr1-5 purge (200, {'deleted': 20}) nack codes {200: 60} states ['dead:12', 'retry_wait:28'] pending_ids=['4227', '4231', '4232', '4236', '4237']
+trial 6 queue e07pnr1-6 purge (200, {'deleted': 4}) nack codes {200: 60} states ['dead:12', 'retry_wait:44'] pending_ids=['4286', '4287', '4288', '4289', '4290']
+trial 7 queue e07pnr1-7 purge (200, {'deleted': 14}) nack codes {200: 60} states ['dead:13', 'retry_wait:33'] pending_ids=['4347', '4348', '4354', '4356', '4358']
+trial 8 queue e07pnr1-8 purge (200, {'deleted': 10}) nack codes {200: 60} states ['dead:4', 'retry_wait:46'] pending_ids=['4408', '4410', '4411', '4412', '4413']
+trial 9 queue e07pnr1-9 purge (200, {'deleted': 12}) nack codes {200: 60} states ['dead:17', 'retry_wait:31'] pending_ids=['4472', '4473', '4474', '4478', '4479']
+2026-10-22T18:07:09Z hits 10 of 10

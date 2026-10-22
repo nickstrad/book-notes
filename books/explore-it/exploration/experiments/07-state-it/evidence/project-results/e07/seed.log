@@ -1,0 +1,19 @@
+bash lab/reset.sh
+ Container queuelet-e07-worker-b-1 Stopping 
+ Container queuelet-e07-worker-a-1 Stopping 
+ Container queuelet-e07-worker-b-1 Stopped 
+ Container queuelet-e07-worker-a-1 Stopped 
+ Container queuelet-e07-api-1 Stopping 
+ Container queuelet-e07-api-1 Stopped 
+ Container queuelet-e07-postgres-1 Waiting 
+ Container queuelet-e07-postgres-1 Healthy 
+ Container queuelet-e07-api-1 Starting 
+ Container queuelet-e07-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-e07-postgres-1 Waiting 
+ Container queuelet-e07-postgres-1 Healthy 
+ Container queuelet-e07-worker-a-1 Starting 
+ Container queuelet-e07-worker-b-1 Starting 
+ Container queuelet-e07-worker-b-1 Started 
+ Container queuelet-e07-worker-a-1 Started 

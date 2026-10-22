@@ -118,3 +118,9 @@ follow job deletion/purge/retention; events and pending snapshots stay independe
 | U33 | [E06-F07](E06-F07-attempts-outlive-their-job.md) | [fixed in lesson 06](U33-attempts-outlive-their-job.md) |
 
 Original score: 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contradictions / 30 cells.
+
+## Experiment 07 additions
+
+- [U34](U34-worker-delete-racing-lease.md): E07-F01, worker deletion races leasing; open.
+- [U35](U35-purge-transition-race.md): E07-F02, purge misses state transitions; open.
+- A3 assigned as a coordinator policy resolution, not a blind report.

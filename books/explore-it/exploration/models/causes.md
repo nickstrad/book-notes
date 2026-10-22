@@ -61,3 +61,10 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 | Handler ignores RowsAffected on DELETE (schedules.go:136-143) | E06-F01 | other DELETE handlers check (read) | none found |
 | Every store error mapped to one HTTP class per handler (api/jobs.go:88 → 409; enqueue.go:87 → 400; schedules.go:57 → 500) | E06-F05, E06-F06 | schedule create race 500 (15:40Z, confirmed); batch race 400 (15:40Z, not hit) | partly confirmed |
 | No owner link or cleanup for job sub-records (001.sql:7) | E06-F07 | delivered outbox rows (observed P10) | confirmed as sibling |
+
+## E07 additions — `explore-it/lesson-06` (sibling predictions timestamped in [E07 notes](../experiments/07-state-it/notes.md))
+
+| Cause | Mechanism (source) | Findings | Sibling predictions (time) | Outcome |
+|---|---|---|---|---|
+| C-E07-1 Set-based statements select by snapshot while concurrent transactions move rows across their predicate | purge `marked`/`removed` CTEs (api/queues.go:170) and worker release `FOR UPDATE` (expire.go:20) re-check only rows whose snapshot version already matched | E07-F01, E07-F02 | purge ‖ release, purge ‖ expiry (≈18:08:3xZ) | both confirmed (P5) |
+| C-E07-2 Lease reads the worker without locking it; holder verbs check only the token | jobs.go:57, api/jobs.go:160; ack.go:14, jobs.go:100 | E07-F01 (zombie lease, 500 on vanished worker) | queue deleted between lookup and lease (H-E06-20) — not probed | open |

@@ -1,0 +1,10 @@
+2026-10-22T18:13:24Z queue e07mxr1 A 172 B 173
+state | lease_B | heartbeat_wrong | ack_wrong | nack_wrong | cancel | retry | delete
+scheduled | 200:[] = | 409 = | 409 = | 409 = | 200 scheduled→cancelled | 409 = | 409 =
+queued | 200:[7724] queued→leased | 409 = | 409 = | 409 = | 200 queued→cancelled | 409 = | 409 =
+leased | 200:[] = | 409 = | 409 = | 409 = | 200 leased→cancelled | 409 = | 409 =
+retry_wait | 200:[] = | 409 = | 409 = | 409 = | 200 retry_wait→cancelled | 409 = | 409 =
+succeeded | 200:[] = | 409 = | 409 = | 409 = | 409 = | 409 = | 204 succeeded→gone
+dead | 200:[] = | 409 = | 409 = | 409 = | 409 = | 200 dead→queued | 204 dead→gone
+cancelled | 200:[] = | 409 = | 409 = | 409 = | 409 = | 409 = | 204 cancelled→gone
+2026-10-22T18:13:39Z done

@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): checkpoint B review complete; E02–E06 verified. Next: a fresh E07 run from lesson-06. E07 not started.**
+**Status (2026-10-22): E07 exploration complete; U34/U35 and A3 assigned to a fresh fixer; checkpoint B is complete.**
 
 ## Done
 
@@ -39,8 +39,12 @@ Dwell remains paired evidence only; no full sweep was run.
 
 ## In progress
 
-None. Checkpoint reviewer runs are finished and owned lab containers/volumes are stopped.
-No E07 explorer, export or fixer was launched by this review.
+E07 exploration closed successfully; artifacts and boundary audit retained under
+`exploration/experiments/07-state-it/` and `register/runs/07-*`.
+Score: 13 stated / 12 confirmed / 1 refuted / 1 code-reading contradiction / 2 reports /
+41 newly observed model cells; full matrix 49 cells. U34/U35 assigned; A3 is a coordinator
+policy step, not a blind find. See `register/reconciliations/07.md` for the decision and
+all audit/deviation details. Explorer's own stack is stopped. Fresh fixer dispatch is next.
 
 ## Decisions and open items
 
@@ -84,8 +88,8 @@ resolved by these fixes are distinguished from the remaining questions in the re
 
 ## Next
 
-1. Coordinator prepares and dispatches a **fresh E07** chunk from `explore-it/lesson-06`,
-   carrying A3 and the forward questions; this reviewer does not continue as explorer.
+1. Fresh Codex fixer completes E07 U34/U35 and A3, verifies current/lesson-06, updates
+   this state and tags lesson-07; independent different-company review follows.
 2. Later authorized checkpoint C, final skills/landing page and final independent review.
 3. Merge adds-only after Release It! lands; no push or merge was performed here.
 

@@ -1,0 +1,10 @@
+H12 trial 0 job 7590: immediate B lease 200 [] state then leased; B got [(7590, 2)] after 0.68 s; A ack 409
+H12 trial 1 job 7591: immediate B lease 200 [] state then leased; B got [(7591, 2)] after 0.98 s; A ack 409
+H12 trial 2 job 7592: immediate B lease 200 [] state then leased; B got [(7592, 2)] after 1.01 s; A ack 409
+H13 run_at 2026-10-22T18:16:21.411227Z retry_wait
+H13 trial 0 job 7594: immediate B lease [] state then retry_wait; B got [(7594, 2)] after 0.76 s
+H13 run_at 2026-10-22T18:17:22.411227Z retry_wait
+H13 trial 1 job 7595: immediate B lease [] state then retry_wait; B got [(7595, 2)] after 0.86 s
+H13 run_at 2026-10-22T18:18:23.411227Z retry_wait
+H13 trial 2 job 7596: immediate B lease [] state then retry_wait; B got [(7596, 2)] after 1.01 s
+clock reset {'now': '2026-10-22T18:11:08.73999029Z'}

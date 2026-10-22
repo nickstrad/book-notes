@@ -1,0 +1,30 @@
+2026-10-22T18:05:51Z queue e07wir1
+C1 lease 200 50 then delete 200 orphan_leased 0 states 
+C2 trial 0 lease 200 n=1 delete 200 orphan_leased=0
+C2 trial 1 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 2 lease 200 n=1 delete 200 orphan_leased=0
+C2 trial 3 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 4 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 5 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 6 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 7 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 8 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 9 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 10 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 11 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 12 lease 404 n={'error': {'code': 'worker_not_found', 'message': 'unknown worker'}} delete 200 orphan_leased=0
+C2 trial 13 lease 200 n=1 delete 200 orphan_leased=0
+C2 trial 14 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 15 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 16 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 17 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 18 lease 200 n=1 delete 200 orphan_leased=1
+C2 trial 19 lease 200 n=1 delete 200 orphan_leased=1
+C2 hits 16 of 20
+C3 worker 57 exists? 0 orphan jobs 50
+C3 lease by deleted worker id -> (404, {'error': {'code': 'worker_not_found', 'message': 'unknown worker'}})
+C3 heartbeat by deleted worker (200, {'ok': True}) 2026-10-22 19:06:23.056783+00
+C3 ack by deleted worker (200, {'ok': True}) succeeded [(1, 57, 'succeeded')]
+C3 events j1 [('created', None), ('leased', 57), ('succeeded', 57)]
+C3 second DELETE of same worker (404, {'error': {'code': 'worker_not_found', 'message': 'state conflict'}})
+2026-10-22T18:06:23Z done

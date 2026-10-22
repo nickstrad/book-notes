@@ -107,3 +107,13 @@ Invariants I1–I13 were written at 13:22:19Z before any probe and asserted afte
 | ★ R-E06-4 Queue PATCH: existing jobs keep max_attempts; pending notifications keep their snapshot; retention applies to existing terminal jobs | SPEC:46, :161-163, :122 | PATCH queue | holds (P8); retention-retroactive is SPEC-silent, treated as intended |
 | ★ R-E06-5 Removing a job removes what it owns (attempts) | approximation (SPEC:122 + :80-81 + :49-50) | purge/DELETE/retain | violated (E06-F07) |
 | ★ R-E06-6 Idempotency key returns the original job while it exists | SPEC:68 | enqueue after delete | key freed after delete → new job (P10); not a defect |
+
+## E07 revision — `explore-it/lesson-06` ([E07 notes](../experiments/07-state-it/notes.md)); ★ = new observation
+
+| Rule | Authority | Scope | E07 observation |
+|---|---|---|---|
+| Only the current holder may complete or extend | SPEC:107-109 | A after B re-leased; same worker re-leased | holds (P1); ★ violated in spirit by a *deregistered* holder that keeps heartbeating/acking (E07-F01) |
+| ★ R-E07-1 Worker deletion releases every lease the worker holds when the delete returns | SPEC:93-95 | DELETE worker ‖ lease | violated (E07-F01) |
+| ★ R-E07-2 After a purge returns, no job of the queue that existed before it is pending or unflagged-leased (A2 rule under concurrency) | SPEC:54-56 | purge ‖ lease / nack / release / expiry | violated (E07-F02); holds sequentially (P4) |
+| ★ R-E07-3 A rejected lifecycle verb has no side effect | SPEC:16 | 49 state × verb cells | holds (P7) |
+| ★ R-E07-4 Two concurrent completions by one holder: exactly one wins | SPEC:107, :110-115 | ack‖ack, ack‖nack | holds (P2 dup) |

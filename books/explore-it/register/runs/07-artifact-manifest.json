@@ -1,0 +1,176 @@
+{
+  "experiment": 7,
+  "source_tag": "explore-it/lesson-06",
+  "export_path": "/tmp/explore-it-experiment-07",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "4fe470ebc03c98d662c523cc480d12d9fdd38c7dc683e2309a639a4924ac517f"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "66f70d7876d48cd6892a9f6117a634f75139c8383ae505b677b847ed072a3294"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "eff25a5abd7c67ee82a16f83cc36a75c3927ef9143db67f58e23b0a01a82477f"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "80fcd1378233a240b56791c42a45ff0d0bfe2735349418d971c9ff3994a55d5d"
+    },
+    {
+      "file": "exploration/defects/E07-F02-purge-misses-rows-changing-state-concurrently.md",
+      "sha256": "cf1dbe55e7fb4db88d730676da2e3e26cf76fc88717faf566dac724f1b845937"
+    },
+    {
+      "file": "exploration/defects/README.md",
+      "sha256": "59238e2ed10e7cd0beaed521b0120d226e9ada3a0a59c950a340347dbb32a3ef"
+    },
+    {
+      "file": "exploration/defects/E07-F01-worker-delete-racing-lease-leaves-zombie-lease.md",
+      "sha256": "9d87266232710261d60330694550830d11855646755cb3c31ad9577e889c3cc7"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/revealed.md",
+      "sha256": "8a50b9d2b9863a84d4f21e5f7198ec0cb57e00d1ccc95e248a8a9b52f9291c00"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/charter.md",
+      "sha256": "438e769bcb50e1f84ddab9cdb3ded37581a6f66129a612ef89404fa4680ff6f3"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/brief.md",
+      "sha256": "b603852d4c25bdde562b44a7c26918de4f8b25ebb3a84e4fcf99613186783deb"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/notes.md",
+      "sha256": "9bfe44243b62d04dc905f90eff876c58d754b3c8e03adae95aad1b0726fd9b90"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p2_races.py",
+      "sha256": "59dd4b163debec4da3874dfac4220e6125b97096d7a6b7c63b7907263c8c8a6c"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p3_wdel_isolate.py",
+      "sha256": "4dffa7f4bcc860d8281ec5a0d66304ca58da07a13f7cd32d8cb062aefe435c35"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p6_pre_sweep.py",
+      "sha256": "fc79509c8a41f2291a494d63223844ceffa598f7f08cf7061de5e0a7cecc6d55"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p5_purge_siblings.py",
+      "sha256": "b9263ffe78112e6505a88478b216d3a5190857c5b72767837356001faab5b885"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p7_matrix.py",
+      "sha256": "5c7079a68fa175fc9f52a62910de535caea222b3a033deecd53ad066da85d884"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/q.py",
+      "sha256": "95f4c65b6c696f0c6095c3448750c393ca12a5590a50abdfa1df54b2f95d7686"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/env.sh",
+      "sha256": "4f1e280fe1ba2485f10a75d2e70f9cf211c187cd415d57b4b9a8d0f160e972ae"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p4_purge_control.py",
+      "sha256": "d19c2eb9bde86211e06c0b9ec491e898022fe253ce8667a80f8b121662b40b04"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/tools/p1_stale_holder.py",
+      "sha256": "37de7f8205b933d00bdc2545eb64e1a4667b847f09fa8388bf3cb8aab8282d9b"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/export-state.md",
+      "sha256": "4489ac589575d00f00d87b7e9d22c3a00e0563f7435d5fe29d7c8c1bf9a8ddc1"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/manifest.json",
+      "sha256": "c7ff1264bec9c7d90985e409d471023ced95043194ae161d23ff1e4777a514a8"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p5-wdel-n1.txt",
+      "sha256": "1275779b0be2e780105e7fd771fb8a8d226e883c996434a98e0427001b10b984"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p4-purge-control-r1.txt",
+      "sha256": "5850734f39e7051732df90bf3f4c92b4fa3e1d2c4831f23b88d04fdf11c9dc31"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p1-r1.txt",
+      "sha256": "926bc52fa2f6b077265ad9ec34565fa9b4c8be2b98e4cfe022b0d5ea3b251cce"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p6-pre-sweep-r1.txt",
+      "sha256": "46735be7ee92a6f5d30f108f8285ddd5d6f13af32f242d1c24e1706372c04851"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/up.log",
+      "sha256": "d3ad9f5bf19ba4853186d967f46eda3bc9fac5288a1f9c91997c70feaf089123"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p2-purgelease-r1.txt",
+      "sha256": "23742251a19a0859bd097028b55b02b5619c3ee5546946dcb4275efe9141de94"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p3-wdel-isolate-r1.txt",
+      "sha256": "3af124e988b5e12d0a10cb9410cbfc65a6dc0fa25aa6bdf0a53567ee448d792d"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p5-wdel-n5.txt",
+      "sha256": "c28cec9ee7f9a8aa251717ed7c9fc512750887b0f77661e1be40b53df4b7a8b8"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p2-dup-r1.txt",
+      "sha256": "ee86a256a9e3a315bb08f5c7e9138d9a7081a04f142dd3a395baa7f8d0f89b17"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p5-wdel-r1.txt",
+      "sha256": "4a306076575737fea4a68427449137ff11423fe0406381be918258750bff845e"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/seed.log",
+      "sha256": "2b2457fc83afc05d06a2bb2c7758bc1736ce578f1f84c95004b24ba9a220efb7"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p2-purgenack-r1.txt",
+      "sha256": "f5fc79bfb6aeb044e0dfc2e35647569863aec877703d7293f5c9b69d4f5d4566"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p6-pre-sweep-r2.txt",
+      "sha256": "554fd8dc493139745b6b940cc29b24fdfb761752c40f49cec3d61083eacfb886"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p7-matrix-r1.txt",
+      "sha256": "53f41125d7bcbf1aa079382f7975098da3d497ddbcc6e56f6775e5bd2a3dfa91"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/up-start.txt",
+      "sha256": "eef863414b1753d62d872819ad2e50c37da105c23ad8df8c2c8fc012a13eddc3"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p2-wdel-r1.txt",
+      "sha256": "20728d1ef561c7ceda9d9507617986434480fed297d76cafacbcd41e2f262eec"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p6-sweep-batch.txt",
+      "sha256": "f1b447ab9340c4b3026af7752953d563faf65c6f65a34eb61a7a9e62c73f7af6"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p5-expire-r1.txt",
+      "sha256": "57fa051aaf6aff1703f24245b406fc57e58e1df8f51d2df168888d5f21fbf554"
+    },
+    {
+      "file": "exploration/experiments/07-state-it/evidence/project-results/e07/p3-c1-check.txt",
+      "sha256": "95fc5253b79f58bf0c68713eaa22286eae899da4ce70b44eee94e46cd6b661cc"
+    }
+  ],
+  "inherited_tag_copies_not_applied_to_HEAD": [
+    "exploration/defects/U29-sample-worker-echo-loses-precision.md",
+    "exploration/defects/U30-qctl-rounds-payload-numbers.md",
+    "exploration/defects/INDEX.md"
+  ]
+}

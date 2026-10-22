@@ -223,3 +223,33 @@ Stated before their probes in [E06 notes](experiments/06-relate-it/notes.md) (15
 | Q-E06-2 | Should attempts (and delivered outbox rows) follow job retention, or be documented history like `job_events`? | E06-F07 | spec decision | spec decision | open | |
 | T-E06-1 | Testability: the worker's decode-failure log line has no job id; add the raw job ids to the error (or a `decode_failed` event) so a poison job can be identified | P3 | — | testability request | open | validation: fire `[1,2]` schedule → log names the job |
 | T-E06-2 | Testability: no way to hold the queue-delete lock window deterministically; a lab hook (e.g. `QUEUELET_TEST_DELETE_PAUSE_MS`) would make E06-F06 reproducible on demand | P9 | — | testability request | open | validation: enqueue during pause → 404 |
+
+## Experiment 07 (state-it) — `explore-it/lesson-06`
+
+Stated before their probes in [E07 notes](experiments/07-state-it/notes.md) (≈18:03Z block, ≈18:08:3xZ, ≈18:09:2xZ,
+≈18:13:2xZ). H-E07-08, -09 and -14 were written after their probes ran and are kept but not counted as stated.
+
+| Id | Statement / prediction | Source and evidence pointer | Would be wrong if | Probe family / experiment | Status | Outcome evidence |
+|---|---|---|---|---|---|---|
+| H-E07-01 | Lease A → clock past expiry → sweep → lease B: A's ack, nack, heartbeat 409; B acks; attempts n1 expired(A), n2 succeeded(B) | ack.go:14, nack.go:13, jobs.go:100; SPEC:107 | any A verb 200 or changes the job | state / E07 | experiment 07: confirmed | P1 |
+| H-E07-02 | Same worker re-leases after expiry: first token ack 409, second 200 | token guard | first token accepted | state / E07 | experiment 07: confirmed | P1 |
+| H-E07-03 | DELETE worker ‖ lease by that worker leaves a job leased by the deleted worker | jobs.go:57, api/jobs.go:160, expire.go:20; SPEC:93 | 0 orphans in ≤40 trials | race / E07 | experiment 07: confirmed | P2, P3 (E07-F01) |
+| H-E07-04 | Purge ‖ leases leaves pre-existing jobs leased without the purge flag; nack → retry_wait | queues.go:170; SPEC:54-56 | every surviving leased job flagged | race / E07 | experiment 07: confirmed | P2 purgelease (E07-F02) |
+| H-E07-04b | Purge ‖ nacks(retry) leaves jobs retry_wait | queues.go:170, nack.go | all dead/deleted | race / E07 | experiment 07: confirmed | P2 purgenack (E07-F02) |
+| H-E07-05 | Heartbeat extend 1 s on a 30 s lease shortens it to now+1 | jobs.go:100 | expiry unchanged | state / E07 | experiment 07: confirmed (spec silence → Q-E07-1) | P1 |
+| H-E07-06 | Purge-killed dead job → retry → lease → nack(retry) → retry_wait | operator.go:13 | dead | state / E07 | experiment 07: confirmed | P1 |
+| H-E07-07 | Holder's concurrent ack+ack / ack+nack: exactly one 200, one attempt row | guarded UPDATE / FOR UPDATE | two 200s or two rows | race / E07 | experiment 07: confirmed (40 pairs) | P2 dup |
+| H-E07-08 | (post-hoc) sequential lease→delete releases; one-job race orphans; zombie heartbeats/acks; second DELETE 404 | P2 | — | race / E07 | not counted; observed as described | P3 |
+| H-E07-09 | (post-hoc) sequential purge control flags and kills | A2 | — | state / E07 | not counted; observed as described | P4 |
+| H-E07-10 | Purge ‖ worker-delete release leaves jobs queued | expire.go:20 + queues.go:170 | all dead/deleted in 10 | race / E07 | experiment 07: confirmed (9/10) | P5 (E07-F02) |
+| H-E07-11 | Purge ‖ expiry sweep leaves jobs queued | expire.go:12 + queues.go:170 | all dead/deleted in 8 | race / E07 | experiment 07: confirmed (7/8) | P5 (E07-F02) |
+| H-E07-12 | Expired, pre-sweep: B's lease [] then B gets it ≤1.5 s; A ack 409 | jobs.go:60 guard; loop tick api.go:221 | immediate or >1.5 s | state+clock / E07 | experiment 07: confirmed | P6 r1, r2 |
+| H-E07-13 | retry_wait due, pre-promote: B's lease [] then ≤1.5 s | expire.go:69; api.go:221 | immediate or >1.5 s | state+clock / E07 | experiment 07: **refuted in r1** (3.04 s, 1,110-row sweep stalled the loop; S6), held in r2 on a quiet stack | P6 |
+| H-E07-14 | (post-hoc) one leased job suffices for purge ‖ worker-delete | — | — | race / E07 | not counted; observed 6/20 | reduction |
+| H-E07-15 | 7 states × 7 verbs matrix matches the guards; no side effect on rejection | guards table (notes 18:02Z) | any cell differs | state table / E07 | experiment 07: confirmed (49/49) | P7 |
+| H-E07-16 | Lease on a worker deleted between the API's existence check and the lease tx → 500 `sql: no rows` (sibling of H-E06-20) | jobs.go:57 | 404 | race / later | open (seen once incidentally, P2 trial 5; not driven deliberately) | E07-F01 |
+| H-E07-17 | A sweep of many expiries (≈1,000) delays Promote/cron for seconds because the loop is sequential and Expire is one unbounded transaction | P6 r1, api.go:230, expire.go:12 | promotion stays ≤1 tick under 1,000 expiries | load / later | open (#offcharter) | S6 |
+| Q-E07-1 | Should heartbeat be allowed to shorten a lease (`extend_seconds` measured from now) or only lengthen it? | P1 H05 | spec decision | spec decision | open | |
+| Q-E07-2 | Should a nack 409 say `state conflict` like ack/heartbeat rather than the driver text `sql: no rows in result set`? | P1 H01 | spec decision | #offcharter | open | |
+| T-E07-1 | Testability: job_events carry only application time; with the frozen lab clock there is no real-time commit stamp or loop-step duration, so sweep length (S6, E07-F02 window) cannot be measured | P6 r1 | — | testability request | open | minimal hook: `committed_at clock_timestamp()` on job_events or a `/metrics` gauge per loop step; validation: replay P6 r1, see the 1,110-row sweep's duration |
+| T-E07-2 | Testability: races in E07-F01/F02 are probabilistic; a lab pause hook inside the lease / purge / release transactions (e.g. `QUEUELET_TEST_TX_PAUSE_MS=lease:50`) would make the overlap deterministic (generalises T-E06-2) | P2–P5 | — | testability request | open | validation: one-job purge ‖ worker-delete → queued 20/20 |

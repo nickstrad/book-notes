@@ -74,3 +74,12 @@ Local ids E06-F01… are provisional; the coordinator reconciles them. Earlier e
 | [E06-F05](E06-F05-nul-in-result-or-error-409-conflict.md) U+0000 in ack result / nack error → 409 state_conflict, lease kept | lesson-05 | SPEC:16, :19-22 | Low–medium | open | E06 notes P6 |
 | [E06-F06](E06-F06-enqueue-racing-queue-delete-400-fk-text.md) Writes racing queue delete → 400/500 with FK text, not 404 | lesson-05 | SPEC:15 | Low | open | E06 notes P9b, P9c |
 | [E06-F07](E06-F07-attempts-outlive-their-job.md) Attempt rows outlive their job after purge/DELETE/retention | lesson-05 | approximation SPEC:122 + :80-81 | Low | open | E06 notes P10 |
+
+## Experiment 07 (state-it) — explorer reports at `explore-it/lesson-06`
+
+Local ids E07-F01… are provisional; the coordinator reconciles them. Earlier entries above are unchanged.
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E07-F01](E07-F01-worker-delete-racing-lease-leaves-zombie-lease.md) Worker DELETE racing that worker's lease leaves the job leased by the deleted worker; it can still heartbeat/ack; second DELETE 404; (other order) lease 500 `sql: no rows` | lesson-06 | SPEC:93-95, :107, :15 | Medium–high | open | E07 notes P2, P3 |
+| [E07-F02](E07-F02-purge-misses-rows-changing-state-concurrently.md) Purge racing lease / nack / worker release / expiry sweep leaves jobs pending or unflagged-leased | lesson-06 | SPEC:54-56 | Medium–high | open | E07 notes P2, P4, P5 |

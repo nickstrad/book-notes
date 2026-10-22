@@ -1,0 +1,32 @@
+2026-10-22T18:04:27Z probe wdel tag r1 trials 30
+trial 0 worker 6 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 1 worker 7 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 2 worker 8 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 3 worker 9 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 4 worker 10 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 5 worker 11 lease 500 jobs=None err={'error': {'code': 'database_error', 'message': 'sql: no rows in result set'}} delete 200 orphan_leased=0
+trial 6 worker 12 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 7 worker 13 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 8 worker 14 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 9 worker 15 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 10 worker 16 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 11 worker 17 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 12 worker 18 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 13 worker 19 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 14 worker 20 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 15 worker 21 lease 200 jobs=50 err= delete 200 orphan_leased=0
+trial 16 worker 22 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 17 worker 23 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 18 worker 24 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 19 worker 25 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 20 worker 26 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 21 worker 27 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 22 worker 28 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 23 worker 29 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 24 worker 30 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 25 worker 31 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 26 worker 32 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 27 worker 33 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 28 worker 34 lease 200 jobs=50 err= delete 200 orphan_leased=50
+trial 29 worker 35 lease 200 jobs=50 err= delete 200 orphan_leased=50
+2026-10-22T18:05:24Z hits 28 of 30

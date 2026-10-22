@@ -135,3 +135,49 @@ Sequence probes P1–P8, isolation probes and seeded random walks ([walk.sh](../
 
 Unobserved / untried here: schedules PATCH sequences, queue DELETE mid-lease, retention sweep interleavings, two API
 replicas, webhooks during these sequences (`#offcharter`).
+
+## E07 revision — build `explore-it/lesson-06` ([E07 notes](../experiments/07-state-it/notes.md)); ★ = new observed cell
+
+Single-actor lifecycle at lesson-06 (P7, 49 cells): every verb outside its guard is 409 / `[]` with no side effect;
+the table has no missing arrow. The extra arrows found are **two-actor overlaps**, drawn dashed (O = observed):
+
+```text
+ queued ─lease(W) ‖ DELETE worker W─┄┄► leased(by deleted W)   heartbeat 200 · ack 200 · DELETE W 404   (E07-F01)
+ queued ─lease ‖ purge──────────────┄┄► leased, purge flag NOT set ─nack─► retry_wait (pending again)   (E07-F02)
+ leased ─nack(retry) ‖ purge────────┄┄► retry_wait survives the purge                                   (E07-F02)
+ leased ─worker release ‖ purge─────┄┄► queued survives the purge                                       (E07-F02)
+ leased ─expiry sweep ‖ purge───────┄┄► queued survives the purge                                       (E07-F02)
+ leased(A) ─exp─► [≤1 tick: leased, nobody may run it] ─sweep─► queued ─lease(B)─► leased(B); A's token 409
+```
+
+| State | Event (actors, clock) | Should (oracle) | Predicted (code) | Observed (E07) |
+|---|---|---|---|---|
+| leased(A)→expired→leased(B) | A ack | 409 (SPEC:107) | 409 | O 409 (P1); prior-like E02 row, not counted |
+| ★ leased(A)→expired→leased(B) | A nack | 409 | 409 | O 409, B's lease intact (P1) |
+| ★ leased(A)→expired→leased(B) | A heartbeat | 409 | 409 | O 409 (P1) |
+| ★ leased(A, 2nd token) after expiry | ack with A's 1st token | 409 | 409 | O 409; 2nd token 200 (P1 H02) |
+| ★ leased | heartbeat extend < remaining | spec silent (Q-E07-1) | expiry = now+extend | O shortened to now+1; later ack 409 (P1 H05) |
+| ★ dead (purge-killed) | retry → lease → nack(retry) | retry_wait | retry_wait, flag cleared | O (P1 H06) |
+| ★ queued | lease(W) ‖ DELETE W | released or 404 | leased by deleted W | O 16/20 (1 job), 28/30 (50 jobs) (P2, P3) — **E07-F01** |
+| ★ leased by deleted W | W heartbeat / W ack | 409 (not a registered holder) | 200 | O 200 / 200 succeeded (P3 C3) — E07-F01 |
+| ★ leased by deleted W | DELETE W again | release | 404 | O 404 (P3 C3) — E07-F01 |
+| ★ queued | lease(W) ‖ DELETE W (delete first, after API check) | 404 | 500 `sql: no rows` | O once (P2 trial 5) — E07-F01 secondary |
+| ★ queued | lease ‖ purge | deleted or leased+flag | leased, unflagged | O 10/10 trials, 77–170 jobs (P2) — **E07-F02** |
+| ★ leased | nack(retry) ‖ purge | dead or deleted | retry_wait | O 10/10 (P2) — E07-F02 |
+| ★ leased | worker release ‖ purge | dead or deleted | queued | O 9/10 (60 jobs), 6/20 (1 job) (P5) — E07-F02 |
+| ★ leased | expiry sweep ‖ purge | dead or deleted | queued | O 7/8 (P5) — E07-F02 |
+| ★ leased | ack ‖ ack (holder) | one 200 | one 200 | O 20/20 pairs (P2 dup) |
+| ★ leased | ack ‖ nack (holder) | one 200, one attempt | same | O 20/20 pairs (P2 dup) |
+| ★ leased(A), exp passed, pre-sweep | lease(B) | (spec: released by loop) | `[]`, then ≤1 tick | O `[]`, B leased attempt 2 after 0.27–1.5 s (P6) |
+| ★ retry_wait, run_at passed, pre-promote | lease(B) | ≤1 tick | `[]`, then ≤1 tick | O 0.2–1.01 s quiet; **3.04 s+** behind a 1,110-row sweep (P6 r1, S6, H-E07-17) |
+| ★ scheduled | lease(B), wrong-token heartbeat/ack/nack, retry | `[]` / 409 | same | O (P7) |
+| ★ queued | wrong-token heartbeat/ack, retry | 409 | 409 | O (P7) |
+| ★ leased | lease(B) | `[]` | `[]` | O (P7) |
+| ★ retry_wait | lease(B), wrong-token heartbeat/ack/nack, retry | `[]` / 409 | same | O (P7) |
+| ★ succeeded | lease(B), wrong-token heartbeat/ack | `[]` / 409 | same | O (P7) |
+| ★ dead | wrong-token heartbeat/ack/nack | 409 | 409 | O (P7) |
+| ★ cancelled | wrong-token heartbeat/ack, cancel | 409 | 409 | O (P7) |
+| all 7 states | remaining matrix cells (cancel, delete, retry, lease where prior) | as E01–E05 | same | O (P7) — regression at lesson-06, not counted |
+
+Unobserved / inferred here: cancel ‖ lease/nack/release, retry ‖ purge, promote ‖ purge (guard re-check predicts a
+serial outcome); retention interleavings; clock set backwards (lab-only).

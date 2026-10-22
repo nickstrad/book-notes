@@ -1,0 +1,46 @@
+{
+  "experiment": 7,
+  "source_tag": "explore-it/lesson-06",
+  "source_commit": "755d21cfde3d1f933637c6c366a2036a7ee6e9af",
+  "created_before_run_utc": "2026-10-22T17:58:53.102643+00:00",
+  "tracked_source_files": 138,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "438e769bcb50e1f84ddab9cdb3ded37581a6f66129a612ef89404fa4680ff6f3",
+  "brief_sha256": "b603852d4c25bdde562b44a7c26918de4f8b25ebb3a84e4fcf99613186783deb",
+  "start": "2026-10-22T17:59:12Z",
+  "end": "2026-10-22T18:17:31Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 55,
+    "Write": 10,
+    "Edit": 1
+  },
+  "flagged_inputs": [
+    {
+      "tool": "Bash",
+      "input": {
+        "command": "cd /tmp/explore-it-experiment-07/books/explore-it && sed -n 1,200p exploration/defects/U20-attempt-history-after-retry.md | head -40; sed -n 36,70p project/migrations/005.sql 2>/dev/null | head -5; grep -n \"observe_job\" -A 16 project/migrations/*.sql | sed -n 1,40p; cat /tmp/claude-0/-tmp-explore-it-experiment-07/*/tasks/bjlx9wbwp.output 2>/dev/null | tail -3; tail -3 project/results/e07/up.log",
+        "description": "Read U20 record, event trigger, and check stack startup"
+      },
+      "matches": [
+        "/tmp/claude-0/-tmp-explore-it-experiment-07/*/tasks/bjlx9wbwp.output"
+      ]
+    },
+    {
+      "tool": "Bash",
+      "input": {
+        "command": "cd /tmp/explore-it-experiment-07/books/explore-it && grep -n \"results\" project/.gitignore .gitignore 2>/dev/null; ls exploration/experiments/06-relate-it/evidence | head; mkdir -p exploration/experiments/07-state-it/evidence/project-results && cp -r project/results/e07 exploration/experiments/07-state-it/evidence/project-results/ && sed -i 's#\\.\\./\\.\\./\\.\\./project/results/e07/#evidence/project-results/e07/#g' exploration/experiments/07-state-it/notes.md && grep -c \"evidence/project-results/e07/\" exploration/experiments/07-state-it/notes.md; grep -c \"project/results\" exploration/experiments/07-state-it/notes.md; ls exploration/experiments/07-state-it/evidence/project-results/e07",
+        "description": "Copy raw results into experiment evidence and relink notes"
+      },
+      "matches": [
+        ".git",
+        ".git"
+      ]
+    }
+  ],
+  "inherited_source_and_raw_records": "collector integrity checks passed; three unmodified older-tag canonical copies restored to current HEAD to preserve post-tag review corrections",
+  "boundary": "plain export plus prompt, no OS isolation",
+  "interpretation": "Review flagged inputs explicitly; task runtime output path outside export was attempted. No hidden answer-key source read identified."
+}
