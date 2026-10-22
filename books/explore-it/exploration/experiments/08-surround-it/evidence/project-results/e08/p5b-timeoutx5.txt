@@ -1,0 +1,4 @@
+pending before: 0
+2026-10-22T19:29:33Z mode timeout; 5 globex rows → http://hooksink:8201/hook; acme job 363 125|0|-1|f|
+2026-10-22T19:29:44Z after 11.1 s acme: 125|1|200|t|
+globex attempts: 1,1,1,1,1 err=Post "http://hooksink:8201/hook": context deadline exceeded

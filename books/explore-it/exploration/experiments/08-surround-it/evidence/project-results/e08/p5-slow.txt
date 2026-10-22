@@ -1,0 +1,7 @@
+2026-10-22T19:27:03Z mode slow; acked job 309 delayed job 310 run_at 2026-10-22T19:27:07.477878Z
+2026-10-22T19:27:08Z delayed job -> queued after 4.8 s (run_at+~4s expected)
+2026-10-22T19:27:14Z outbox 73|2|0|f|Post "http://hooksink:8201/hook": context deadline exceeded |19:27:10.265
+records: [(200, '19:27:04.319'), (200, '19:27:10.269')]
+2026-10-22T19:27:14Z mode ok
+2026-10-22T19:27:22Z outbox 73|3|200|t||19:27:15.265
+records (count = partner side-effects): [(200, '19:27:04.319'), (200, '19:27:10.269'), (200, '19:27:15.288')]

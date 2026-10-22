@@ -1,0 +1,4 @@
+pending before: 0
+2026-10-22T19:29:52Z mode ok; 20 globex rows → http://172.28.0.250/x; acme job 384 146|0|-1|f|
+2026-10-22T19:30:37Z after 45.6 s acme: 146|0|-1|f|
+globex attempts: 3,3,3,3,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1 err=Post "http://172.28.0.250/x": dial tcp 172.28.0.250:80: conn

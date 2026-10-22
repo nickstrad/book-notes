@@ -1,0 +1,4 @@
+2026-10-22T19:34:14Z worker-a id 2 lease as worker-a → 200 [(339, 1)]
+job leased_by: 2 state: leased
+nack cleanup: 200
+attempt record holder: [(1, 2, 'failed')]

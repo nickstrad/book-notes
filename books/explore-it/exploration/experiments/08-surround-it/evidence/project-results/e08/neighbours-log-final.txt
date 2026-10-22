@@ -1,0 +1,987 @@
+hooksink-1  | 2026/10/22 19:27:28 signature did not verify
+hooksink-1  | 2026/10/22 19:27:30 signature did not verify
+hooksink-1  | 2026/10/22 19:27:32 signature did not verify
+hooksink-1  | 2026/10/22 19:27:34 signature did not verify
+hooksink-1  | 2026/10/22 19:27:36 signature did not verify
+hooksink-1  | 2026/10/22 19:27:38 signature did not verify
+hooksink-1  | 2026/10/22 19:27:40 signature did not verify
+hooksink-1  | 2026/10/22 19:27:42 signature did not verify
+hooksink-1  | 2026/10/22 19:27:44 signature did not verify
+hooksink-1  | 2026/10/22 19:27:46 signature did not verify
+hooksink-1  | 2026/10/22 19:27:48 signature did not verify
+hooksink-1  | 2026/10/22 19:27:50 signature did not verify
+hooksink-1  | 2026/10/22 19:27:52 signature did not verify
+hooksink-1  | 2026/10/22 19:27:54 signature did not verify
+hooksink-1  | 2026/10/22 19:27:56 signature did not verify
+hooksink-1  | 2026/10/22 19:27:58 signature did not verify
+hooksink-1  | 2026/10/22 19:28:00 signature did not verify
+hooksink-1  | 2026/10/22 19:28:02 signature did not verify
+hooksink-1  | 2026/10/22 19:28:04 signature did not verify
+hooksink-1  | 2026/10/22 19:28:06 signature did not verify
+hooksink-1  | 2026/10/22 19:28:08 signature did not verify
+hooksink-1  | 2026/10/22 19:28:10 signature did not verify
+hooksink-1  | 2026/10/22 19:28:12 signature did not verify
+hooksink-1  | 2026/10/22 19:28:14 signature did not verify
+hooksink-1  | 2026/10/22 19:28:16 signature did not verify
+hooksink-1  | 2026/10/22 19:28:18 signature did not verify
+hooksink-1  | 2026/10/22 19:28:20 signature did not verify
+hooksink-1  | 2026/10/22 19:28:22 signature did not verify
+hooksink-1  | 2026/10/22 19:28:24 signature did not verify
+hooksink-1  | 2026/10/22 19:28:26 signature did not verify
+hooksink-1  | 2026/10/22 19:28:28 signature did not verify
+hooksink-1  | 2026/10/22 19:28:30 signature did not verify
+hooksink-1  | 2026/10/22 19:28:32 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:28:34 signature did not verify
+hooksink-1  | 2026/10/22 19:29:20 signature did not verify
+hooksink-1  | 2026/10/22 19:29:20 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:21 signature did not verify
+hooksink-1  | 2026/10/22 19:29:25 signature did not verify
+hooksink-1  | 2026/10/22 19:29:25 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:26 signature did not verify
+hooksink-1  | 2026/10/22 19:29:30 signature did not verify
+hooksink-1  | 2026/10/22 19:29:30 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:31 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:32 signature did not verify
+hooksink-1  | 2026/10/22 19:29:34 signature did not verify
+hooksink-1  | 2026/10/22 19:29:36 signature did not verify
+hooksink-1  | 2026/10/22 19:29:38 signature did not verify
+hooksink-1  | 2026/10/22 19:29:40 signature did not verify
+hooksink-1  | 2026/10/22 19:29:42 signature did not verify
+hooksink-1  | 2026/10/22 19:29:44 signature did not verify
+hooksink-1  | 2026/10/22 19:29:46 signature did not verify
+hooksink-1  | 2026/10/22 19:29:48 signature did not verify
+hooksink-1  | 2026/10/22 19:29:50 signature did not verify
+hooksink-1  | 2026/10/22 19:29:50 signature did not verify
+hooksink-1  | 2026/10/22 19:29:50 signature did not verify
+hooksink-1  | 2026/10/22 19:29:50 signature did not verify
+hooksink-1  | 2026/10/22 19:29:50 signature did not verify
+worker-b-1  | {"time":"2026-10-22T19:19:33.9579355Z","level":"INFO","msg":"worker worker-b registered"}
+worker-b-1  | {"time":"2026-10-22T19:19:33.96219161Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:34.965229937Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:35.968020045Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:36.972561601Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:37.975695657Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:38.978428877Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:39.981591124Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:40.984171247Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:41.987001123Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:42.99068893Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:43.994191934Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:45.000487061Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:46.003398109Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:47.006587918Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:48.009263343Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:49.012461929Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:50.01807309Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:51.021487702Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:52.02489657Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:53.027795218Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:54.030847448Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:55.033574134Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:56.036573127Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:57.046277842Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:58.050198531Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:19:59.058947517Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:00.071682479Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:01.076681535Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:02.098057885Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:03.108928689Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:04.124236747Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:05.158675071Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:06.176958951Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:07.182273846Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:08.193210078Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:09.197573229Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:10.205724212Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:11.209231988Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:12.212868406Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:13.21660308Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:14.220151144Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:15.235606504Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:16.238580583Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:17.241442839Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:18.244208024Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:19.251445429Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:20.263142888Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:21.265607973Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:22.274979773Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:23.280011969Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:24.283674813Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:25.286841731Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:26.28916088Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:27.293066436Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:28.296506848Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:29.303895328Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:30.315085639Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:31.318912238Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:32.337030324Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:33.342888525Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:34.349056433Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:35.353447449Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:36.356337023Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:37.359294134Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:38.370313319Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:39.374428674Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:40.377441563Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:41.380235352Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:42.383018331Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:43.385900838Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:44.389264557Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:45.392072054Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:46.396564056Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:47.399389011Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:48.402536324Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:49.40516451Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:50.411411891Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:51.420205688Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:52.423199399Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:53.425682912Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:54.432042683Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:20:55.434676671Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:21:06.732028798Z","level":"INFO","msg":"worker worker-b registered"}
+worker-a-1  | {"time":"2026-10-22T19:19:33.925062754Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T19:19:33.927687175Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:34.930887352Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:35.935896873Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:36.943660669Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:37.94605749Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:38.952441078Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:21:06.809113779Z","level":"INFO","msg":"processing","event":"processing","job_id":47,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:06.8331303Z","level":"INFO","msg":"completed","event":"ack","job_id":47,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:07.041441492Z","level":"INFO","msg":"processing","event":"processing","job_id":107,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.057025456Z","level":"INFO","msg":"completed","event":"ack","job_id":107,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:07.271839393Z","level":"INFO","msg":"processing","event":"processing","job_id":167,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.284712381Z","level":"INFO","msg":"completed","event":"ack","job_id":167,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:07.5084893Z","level":"INFO","msg":"processing","event":"processing","job_id":227,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.526195823Z","level":"INFO","msg":"completed","event":"ack","job_id":227,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:07.732797966Z","level":"INFO","msg":"processing","event":"processing","job_id":287,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.743082954Z","level":"INFO","msg":"completed","event":"ack","job_id":287,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:19:39.954998007Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:40.95778767Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:41.964113598Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:42.966997466Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:43.970148028Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:44.975863814Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:45.982203328Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:46.984778326Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:47.990255755Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:48.996133396Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:50.002946949Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.95182998Z","level":"INFO","msg":"processing","event":"processing","job_id":26,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:07.961810369Z","level":"INFO","msg":"completed","event":"ack","job_id":26,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:08.18818218Z","level":"INFO","msg":"processing","event":"processing","job_id":56,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:08.207266889Z","level":"INFO","msg":"completed","event":"ack","job_id":56,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:08.416221732Z","level":"INFO","msg":"processing","event":"processing","job_id":86,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:08.42935998Z","level":"INFO","msg":"completed","event":"ack","job_id":86,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:08.639927759Z","level":"INFO","msg":"processing","event":"processing","job_id":116,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:08.668261153Z","level":"INFO","msg":"completed","event":"ack","job_id":116,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:08.882836287Z","level":"INFO","msg":"processing","event":"processing","job_id":146,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:08.896591014Z","level":"INFO","msg":"completed","event":"ack","job_id":146,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:09.105744201Z","level":"INFO","msg":"processing","event":"processing","job_id":176,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:09.117272827Z","level":"INFO","msg":"completed","event":"ack","job_id":176,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:09.325895692Z","level":"INFO","msg":"processing","event":"processing","job_id":206,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:09.340447459Z","level":"INFO","msg":"completed","event":"ack","job_id":206,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:09.552331308Z","level":"INFO","msg":"processing","event":"processing","job_id":236,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:09.565216543Z","level":"INFO","msg":"completed","event":"ack","job_id":236,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:09.785259585Z","level":"INFO","msg":"processing","event":"processing","job_id":266,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:09.799218639Z","level":"INFO","msg":"completed","event":"ack","job_id":266,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:10.165036429Z","level":"INFO","msg":"processing","event":"processing","job_id":296,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:10.196669036Z","level":"INFO","msg":"completed","event":"ack","job_id":296,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:10.403947951Z","level":"INFO","msg":"processing","event":"processing","job_id":35,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:10.418507892Z","level":"INFO","msg":"completed","event":"ack","job_id":35,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:10.629847574Z","level":"INFO","msg":"processing","event":"processing","job_id":95,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:10.643427701Z","level":"INFO","msg":"completed","event":"ack","job_id":95,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:10.891468769Z","level":"INFO","msg":"processing","event":"processing","job_id":155,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:10.911236147Z","level":"INFO","msg":"completed","event":"ack","job_id":155,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:11.123814802Z","level":"INFO","msg":"processing","event":"processing","job_id":215,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:11.14192837Z","level":"INFO","msg":"completed","event":"ack","job_id":215,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:11.349836666Z","level":"INFO","msg":"processing","event":"processing","job_id":275,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:11.361297519Z","level":"INFO","msg":"completed","event":"ack","job_id":275,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:11.571433552Z","level":"INFO","msg":"processing","event":"processing","job_id":14,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:11.585803466Z","level":"INFO","msg":"completed","event":"ack","job_id":14,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:11.799525486Z","level":"INFO","msg":"processing","event":"processing","job_id":44,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:11.819802847Z","level":"INFO","msg":"completed","event":"ack","job_id":44,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:12.029662508Z","level":"INFO","msg":"processing","event":"processing","job_id":74,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:12.041851543Z","level":"INFO","msg":"completed","event":"ack","job_id":74,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:12.253955704Z","level":"INFO","msg":"processing","event":"processing","job_id":104,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:12.28088786Z","level":"INFO","msg":"completed","event":"ack","job_id":104,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:12.492719031Z","level":"INFO","msg":"processing","event":"processing","job_id":134,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:12.507549711Z","level":"INFO","msg":"completed","event":"ack","job_id":134,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:12.730050937Z","level":"INFO","msg":"processing","event":"processing","job_id":164,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:12.745747797Z","level":"INFO","msg":"completed","event":"ack","job_id":164,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:12.958728037Z","level":"INFO","msg":"processing","event":"processing","job_id":194,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:12.979135724Z","level":"INFO","msg":"completed","event":"ack","job_id":194,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:13.188312344Z","level":"INFO","msg":"processing","event":"processing","job_id":224,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:13.199260869Z","level":"INFO","msg":"completed","event":"ack","job_id":224,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:13.410950016Z","level":"INFO","msg":"processing","event":"processing","job_id":254,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:13.42680041Z","level":"INFO","msg":"completed","event":"ack","job_id":254,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:13.638161167Z","level":"INFO","msg":"processing","event":"processing","job_id":284,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:13.66326744Z","level":"INFO","msg":"completed","event":"ack","job_id":284,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:13.871185191Z","level":"INFO","msg":"processing","event":"processing","job_id":23,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:13.883600636Z","level":"INFO","msg":"completed","event":"ack","job_id":23,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:14.104890981Z","level":"INFO","msg":"processing","event":"processing","job_id":83,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:14.122406496Z","level":"INFO","msg":"completed","event":"ack","job_id":83,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:14.330863021Z","level":"INFO","msg":"processing","event":"processing","job_id":143,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:14.345979152Z","level":"INFO","msg":"completed","event":"ack","job_id":143,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:14.558844061Z","level":"INFO","msg":"processing","event":"processing","job_id":203,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:14.576475339Z","level":"INFO","msg":"completed","event":"ack","job_id":203,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:14.789364846Z","level":"INFO","msg":"processing","event":"processing","job_id":263,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:14.804073951Z","level":"INFO","msg":"completed","event":"ack","job_id":263,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:15.013314681Z","level":"INFO","msg":"processing","event":"processing","job_id":2,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:15.026142553Z","level":"INFO","msg":"completed","event":"ack","job_id":2,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:15.239781444Z","level":"INFO","msg":"processing","event":"processing","job_id":32,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:15.258190583Z","level":"INFO","msg":"completed","event":"ack","job_id":32,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:15.473533216Z","level":"INFO","msg":"processing","event":"processing","job_id":62,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:15.495270168Z","level":"INFO","msg":"completed","event":"ack","job_id":62,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:15.707053426Z","level":"INFO","msg":"processing","event":"processing","job_id":92,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:15.718570477Z","level":"INFO","msg":"completed","event":"ack","job_id":92,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:15.929509225Z","level":"INFO","msg":"processing","event":"processing","job_id":122,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:15.944238517Z","level":"INFO","msg":"completed","event":"ack","job_id":122,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:19:51.006071794Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:52.009029805Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:53.014873485Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:54.017815514Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:55.021230063Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:56.025073786Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:57.044482894Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:58.049660409Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:19:59.059978241Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:00.06705414Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:01.072035935Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:02.108512859Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:03.1130432Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:04.124877805Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:05.141419198Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:06.156677232Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:07.161756578Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:08.177332371Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:09.182349995Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:10.190439807Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:11.1941769Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:12.197041819Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:13.200352798Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:14.206968128Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:15.210284926Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:16.215897434Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:17.2194141Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:18.233657407Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:19.236690667Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:20.239918916Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:21.24397877Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:22.254008181Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:23.257339618Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:24.260323115Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:25.263908469Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:26.266979665Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:27.269845872Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:28.284347587Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:29.287324066Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:30.294196211Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:31.296787851Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:32.300413809Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:33.307752484Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:34.312512491Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:35.316198154Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:36.330698073Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:37.333712916Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:38.336496993Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:39.347089105Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:40.349931033Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:41.352895922Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:42.356414406Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:43.35923597Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:44.362486551Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:45.366126027Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:46.383689395Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:47.391311215Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:48.394462812Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:49.397463141Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:50.403002463Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:51.406637856Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:52.410450897Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:53.412727169Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:54.41552982Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:20:55.41845768Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:21:06.852157205Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T19:21:06.863515597Z","level":"INFO","msg":"processing","event":"processing","job_id":7,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:06.87328434Z","level":"INFO","msg":"completed","event":"ack","job_id":7,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:07.082176732Z","level":"INFO","msg":"processing","event":"processing","job_id":67,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:07.099965629Z","level":"INFO","msg":"completed","event":"ack","job_id":67,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:07.360753364Z","level":"INFO","msg":"processing","event":"processing","job_id":127,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:07.371737967Z","level":"INFO","msg":"completed","event":"ack","job_id":127,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:07.588063281Z","level":"INFO","msg":"processing","event":"processing","job_id":187,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:07.598136954Z","level":"INFO","msg":"completed","event":"ack","job_id":187,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:07.805340967Z","level":"INFO","msg":"processing","event":"processing","job_id":247,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:07.816446838Z","level":"INFO","msg":"completed","event":"ack","job_id":247,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:08.023932523Z","level":"INFO","msg":"processing","event":"processing","job_id":16,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:08.03167836Z","level":"INFO","msg":"completed","event":"ack","job_id":16,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:08.24888209Z","level":"INFO","msg":"processing","event":"processing","job_id":46,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:08.268106886Z","level":"INFO","msg":"completed","event":"ack","job_id":46,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:08.477468704Z","level":"INFO","msg":"processing","event":"processing","job_id":76,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:08.489415592Z","level":"INFO","msg":"completed","event":"ack","job_id":76,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:08.712162827Z","level":"INFO","msg":"processing","event":"processing","job_id":106,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:08.726092082Z","level":"INFO","msg":"completed","event":"ack","job_id":106,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:08.935265103Z","level":"INFO","msg":"processing","event":"processing","job_id":136,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:08.950114839Z","level":"INFO","msg":"completed","event":"ack","job_id":136,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:09.158968223Z","level":"INFO","msg":"processing","event":"processing","job_id":166,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:09.167705935Z","level":"INFO","msg":"completed","event":"ack","job_id":166,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:09.375517189Z","level":"INFO","msg":"processing","event":"processing","job_id":196,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:09.384250014Z","level":"INFO","msg":"completed","event":"ack","job_id":196,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:09.59577399Z","level":"INFO","msg":"processing","event":"processing","job_id":226,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:09.609244557Z","level":"INFO","msg":"completed","event":"ack","job_id":226,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:09.822878085Z","level":"INFO","msg":"processing","event":"processing","job_id":256,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:09.835128666Z","level":"INFO","msg":"completed","event":"ack","job_id":256,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:10.164707219Z","level":"INFO","msg":"processing","event":"processing","job_id":286,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:10.19305293Z","level":"INFO","msg":"completed","event":"ack","job_id":286,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:10.40151904Z","level":"INFO","msg":"processing","event":"processing","job_id":55,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:10.409747008Z","level":"INFO","msg":"completed","event":"ack","job_id":55,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:10.62018594Z","level":"INFO","msg":"processing","event":"processing","job_id":115,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:10.629803014Z","level":"INFO","msg":"completed","event":"ack","job_id":115,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:10.847869952Z","level":"INFO","msg":"processing","event":"processing","job_id":175,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:10.871991443Z","level":"INFO","msg":"completed","event":"ack","job_id":175,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:11.085489918Z","level":"INFO","msg":"processing","event":"processing","job_id":235,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:11.101958767Z","level":"INFO","msg":"completed","event":"ack","job_id":235,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:11.311897079Z","level":"INFO","msg":"processing","event":"processing","job_id":295,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:11.321110554Z","level":"INFO","msg":"completed","event":"ack","job_id":295,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:11.531199512Z","level":"INFO","msg":"processing","event":"processing","job_id":4,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:11.540982351Z","level":"INFO","msg":"completed","event":"ack","job_id":4,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:11.757810497Z","level":"INFO","msg":"processing","event":"processing","job_id":34,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:11.76749408Z","level":"INFO","msg":"completed","event":"ack","job_id":34,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:11.976574818Z","level":"INFO","msg":"processing","event":"processing","job_id":64,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:11.986891183Z","level":"INFO","msg":"completed","event":"ack","job_id":64,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:12.204596548Z","level":"INFO","msg":"processing","event":"processing","job_id":94,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:12.22188004Z","level":"INFO","msg":"completed","event":"ack","job_id":94,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:12.435441952Z","level":"INFO","msg":"processing","event":"processing","job_id":124,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:12.452121348Z","level":"INFO","msg":"completed","event":"ack","job_id":124,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:12.660748431Z","level":"INFO","msg":"processing","event":"processing","job_id":154,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:12.67202401Z","level":"INFO","msg":"completed","event":"ack","job_id":154,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:12.881664995Z","level":"INFO","msg":"processing","event":"processing","job_id":184,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:12.893047905Z","level":"INFO","msg":"completed","event":"ack","job_id":184,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:13.103336994Z","level":"INFO","msg":"processing","event":"processing","job_id":214,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:13.112696153Z","level":"INFO","msg":"completed","event":"ack","job_id":214,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:13.321172948Z","level":"INFO","msg":"processing","event":"processing","job_id":244,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:13.330170762Z","level":"INFO","msg":"completed","event":"ack","job_id":244,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:13.540890122Z","level":"INFO","msg":"processing","event":"processing","job_id":274,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:13.551413258Z","level":"INFO","msg":"completed","event":"ack","job_id":274,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:13.759486374Z","level":"INFO","msg":"processing","event":"processing","job_id":43,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:13.771865929Z","level":"INFO","msg":"completed","event":"ack","job_id":43,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:13.98471409Z","level":"INFO","msg":"processing","event":"processing","job_id":103,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:13.993980884Z","level":"INFO","msg":"completed","event":"ack","job_id":103,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:14.201525181Z","level":"INFO","msg":"processing","event":"processing","job_id":163,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:14.212376966Z","level":"INFO","msg":"completed","event":"ack","job_id":163,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:14.426085358Z","level":"INFO","msg":"processing","event":"processing","job_id":223,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:14.4447569Z","level":"INFO","msg":"completed","event":"ack","job_id":223,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:14.683845568Z","level":"INFO","msg":"processing","event":"processing","job_id":283,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:14.709154171Z","level":"INFO","msg":"completed","event":"ack","job_id":283,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:14.91860729Z","level":"INFO","msg":"processing","event":"processing","job_id":22,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:14.928760244Z","level":"INFO","msg":"completed","event":"ack","job_id":22,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:15.148560844Z","level":"INFO","msg":"processing","event":"processing","job_id":52,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:15.159267495Z","level":"INFO","msg":"completed","event":"ack","job_id":52,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:15.37015209Z","level":"INFO","msg":"processing","event":"processing","job_id":82,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:15.385975196Z","level":"INFO","msg":"completed","event":"ack","job_id":82,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:15.593979776Z","level":"INFO","msg":"processing","event":"processing","job_id":112,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:16.152364268Z","level":"INFO","msg":"processing","event":"processing","job_id":152,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:16.167343903Z","level":"INFO","msg":"completed","event":"ack","job_id":152,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:16.379436566Z","level":"INFO","msg":"processing","event":"processing","job_id":182,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:16.393638157Z","level":"INFO","msg":"completed","event":"ack","job_id":182,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:16.602039894Z","level":"INFO","msg":"processing","event":"processing","job_id":212,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:16.61453356Z","level":"INFO","msg":"completed","event":"ack","job_id":212,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:16.823394734Z","level":"INFO","msg":"processing","event":"processing","job_id":242,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:16.836343651Z","level":"INFO","msg":"completed","event":"ack","job_id":242,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:17.046087791Z","level":"INFO","msg":"processing","event":"processing","job_id":272,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:17.057321296Z","level":"INFO","msg":"completed","event":"ack","job_id":272,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:17.272894003Z","level":"INFO","msg":"processing","event":"processing","job_id":11,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:17.290502217Z","level":"INFO","msg":"completed","event":"ack","job_id":11,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:17.507200195Z","level":"INFO","msg":"processing","event":"processing","job_id":71,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:17.521758208Z","level":"INFO","msg":"completed","event":"ack","job_id":71,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:17.730207679Z","level":"INFO","msg":"processing","event":"processing","job_id":131,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:17.741547823Z","level":"INFO","msg":"completed","event":"ack","job_id":131,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:17.948464521Z","level":"INFO","msg":"processing","event":"processing","job_id":191,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:17.958598201Z","level":"INFO","msg":"completed","event":"ack","job_id":191,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:21:18.168563833Z","level":"INFO","msg":"processing","event":"processing","job_id":251,"queue":"reports","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:21:18.187257355Z","level":"INFO","msg":"completed","event":"ack","job_id":251,"queue":"reports","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:22:39.46066453Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:23:13.971525931Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:23:14.980083718Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:15.9935352Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:16.998296515Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:21:15.60283545Z","level":"INFO","msg":"completed","event":"ack","job_id":112,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:15.81004807Z","level":"INFO","msg":"processing","event":"processing","job_id":142,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:15.819101759Z","level":"INFO","msg":"completed","event":"ack","job_id":142,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:16.038131786Z","level":"INFO","msg":"processing","event":"processing","job_id":172,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:16.047016114Z","level":"INFO","msg":"completed","event":"ack","job_id":172,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:16.261343985Z","level":"INFO","msg":"processing","event":"processing","job_id":202,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:16.27623475Z","level":"INFO","msg":"completed","event":"ack","job_id":202,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:16.489882555Z","level":"INFO","msg":"processing","event":"processing","job_id":232,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:16.500409647Z","level":"INFO","msg":"completed","event":"ack","job_id":232,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:16.710237392Z","level":"INFO","msg":"processing","event":"processing","job_id":262,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:16.725749368Z","level":"INFO","msg":"completed","event":"ack","job_id":262,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:16.933544921Z","level":"INFO","msg":"processing","event":"processing","job_id":292,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:16.941769099Z","level":"INFO","msg":"completed","event":"ack","job_id":292,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:17.154086244Z","level":"INFO","msg":"processing","event":"processing","job_id":31,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.166171452Z","level":"INFO","msg":"completed","event":"ack","job_id":31,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:17.379081763Z","level":"INFO","msg":"processing","event":"processing","job_id":91,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:23:18.008082596Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:19.035468526Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:20.040540831Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:21.046205573Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:22.052734409Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:23.0596131Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:24.064479991Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:25.07139646Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:26.080432107Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.393268713Z","level":"INFO","msg":"completed","event":"ack","job_id":91,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:23:27.08772484Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.602453649Z","level":"INFO","msg":"processing","event":"processing","job_id":151,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:23:28.092538597Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:29.097282437Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:30.102389104Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:31.106707467Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:32.111968436Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:33.11645115Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:34.120638358Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:35.124524574Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:36.129848138Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:37.134491572Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:38.146024306Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.613790085Z","level":"INFO","msg":"completed","event":"ack","job_id":151,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:23:39.152553252Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.821883179Z","level":"INFO","msg":"processing","event":"processing","job_id":211,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:17.829640714Z","level":"INFO","msg":"completed","event":"ack","job_id":211,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:21:18.037830723Z","level":"INFO","msg":"processing","event":"processing","job_id":271,"queue":"emails","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:21:18.047838686Z","level":"INFO","msg":"completed","event":"ack","job_id":271,"queue":"emails","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:22:39.46302204Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:23:13.960160743Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:23:14.969194858Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:15.976006187Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:16.980871476Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:17.985991572Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:19.005423361Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:20.010076461Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:21.014215278Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:22.019017488Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:23.024794775Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:24.029731459Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:40.156787113Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:41.165388639Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:42.180098535Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:43.185342093Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:44.202142502Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:45.207544734Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:46.212600407Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:47.217538826Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:48.226165693Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:49.236287486Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:50.250520622Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:25.038962075Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:51.258869166Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:52.265689528Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:53.271475873Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:54.275925509Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:55.280809045Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:56.284889052Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:57.289526294Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:58.296443639Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:23:59.301654923Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:00.315264159Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:01.325960247Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:26.05308819Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:02.33487346Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:03.342269703Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:04.349788908Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:22.702398811Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+worker-b-1  | {"time":"2026-10-22T19:24:23.706691736Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:25.342446253Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:26.347396257Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:27.352912886Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:28.360399529Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:23:27.057670358Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:29.365704566Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:30.373331112Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:31.378476771Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:32.390481139Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:33.398574936Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:23:28.063107276Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:24:34.403428058Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:35.408919098Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:36.413494772Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:37.420173064Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:38.42770154Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:39.433530079Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:40.450135265Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:24:41.452530784Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:05.942978202Z","level":"INFO","msg":"worker worker-b registered"}
+worker-b-1  | {"time":"2026-10-22T19:32:05.964292085Z","level":"INFO","msg":"processing","event":"processing","job_id":47,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:23:29.069103462Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:30.075893165Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:31.082779503Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:32.086677796Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:33.091132618Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:34.095054166Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:35.099645599Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:36.10433553Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:32:05.986057876Z","level":"INFO","msg":"completed","event":"ack","job_id":47,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:06.196596105Z","level":"INFO","msg":"processing","event":"processing","job_id":107,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:06.217135231Z","level":"INFO","msg":"completed","event":"ack","job_id":107,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:06.424833051Z","level":"INFO","msg":"processing","event":"processing","job_id":167,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:06.43792179Z","level":"INFO","msg":"completed","event":"ack","job_id":167,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:06.662419839Z","level":"INFO","msg":"processing","event":"processing","job_id":227,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:06.701885163Z","level":"INFO","msg":"completed","event":"ack","job_id":227,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:06.912365534Z","level":"INFO","msg":"processing","event":"processing","job_id":287,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:06.931054094Z","level":"INFO","msg":"completed","event":"ack","job_id":287,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:07.141459675Z","level":"INFO","msg":"processing","event":"processing","job_id":26,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:07.172810958Z","level":"INFO","msg":"completed","event":"ack","job_id":26,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:07.38577532Z","level":"INFO","msg":"processing","event":"processing","job_id":56,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:07.401804467Z","level":"INFO","msg":"completed","event":"ack","job_id":56,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:07.612224903Z","level":"INFO","msg":"processing","event":"processing","job_id":86,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:07.633799719Z","level":"INFO","msg":"completed","event":"ack","job_id":86,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:07.846469253Z","level":"INFO","msg":"processing","event":"processing","job_id":116,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:07.859883839Z","level":"INFO","msg":"completed","event":"ack","job_id":116,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:08.094470014Z","level":"INFO","msg":"processing","event":"processing","job_id":146,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:23:37.110250614Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:38.140761387Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:39.147849162Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:40.153703046Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:41.162823167Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:42.16818961Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:32:08.119918098Z","level":"INFO","msg":"completed","event":"ack","job_id":146,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:08.329634925Z","level":"INFO","msg":"processing","event":"processing","job_id":176,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:08.345902154Z","level":"INFO","msg":"completed","event":"ack","job_id":176,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:08.55539066Z","level":"INFO","msg":"processing","event":"processing","job_id":206,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:08.577981874Z","level":"INFO","msg":"completed","event":"ack","job_id":206,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:08.807410341Z","level":"INFO","msg":"processing","event":"processing","job_id":236,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:08.838071046Z","level":"INFO","msg":"completed","event":"ack","job_id":236,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:09.051701932Z","level":"INFO","msg":"processing","event":"processing","job_id":266,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:09.074140057Z","level":"INFO","msg":"completed","event":"ack","job_id":266,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:09.293436607Z","level":"INFO","msg":"processing","event":"processing","job_id":296,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:09.314307679Z","level":"INFO","msg":"completed","event":"ack","job_id":296,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:09.526182324Z","level":"INFO","msg":"processing","event":"processing","job_id":35,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:09.548316494Z","level":"INFO","msg":"completed","event":"ack","job_id":35,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:09.757369809Z","level":"INFO","msg":"processing","event":"processing","job_id":95,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:09.771702993Z","level":"INFO","msg":"completed","event":"ack","job_id":95,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:09.999153389Z","level":"INFO","msg":"processing","event":"processing","job_id":155,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:10.029911472Z","level":"INFO","msg":"completed","event":"ack","job_id":155,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:23:43.17659747Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:44.181788528Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:45.186287883Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:46.190700119Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:47.195781481Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:48.200363642Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:49.20513092Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:50.211865014Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:51.217095577Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:52.222174681Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:53.227492878Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:54.231932988Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:55.236487741Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:56.241254491Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:57.254270387Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:58.268572844Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:23:59.273710005Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T19:32:10.241324776Z","level":"INFO","msg":"processing","event":"processing","job_id":215,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:10.26794694Z","level":"INFO","msg":"completed","event":"ack","job_id":215,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:10.496345454Z","level":"INFO","msg":"processing","event":"processing","job_id":275,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:10.514397971Z","level":"INFO","msg":"completed","event":"ack","job_id":275,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:10.746272321Z","level":"INFO","msg":"processing","event":"processing","job_id":14,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:10.761995932Z","level":"INFO","msg":"completed","event":"ack","job_id":14,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:11.017581383Z","level":"INFO","msg":"processing","event":"processing","job_id":44,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:11.049238909Z","level":"INFO","msg":"completed","event":"ack","job_id":44,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:11.319378289Z","level":"INFO","msg":"processing","event":"processing","job_id":74,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:11.354076497Z","level":"INFO","msg":"completed","event":"ack","job_id":74,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:11.563522876Z","level":"INFO","msg":"processing","event":"processing","job_id":104,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:11.586027092Z","level":"INFO","msg":"completed","event":"ack","job_id":104,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:11.847505923Z","level":"INFO","msg":"processing","event":"processing","job_id":134,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:11.962467158Z","level":"INFO","msg":"completed","event":"ack","job_id":134,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:12.174972647Z","level":"INFO","msg":"processing","event":"processing","job_id":164,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:12.321891276Z","level":"INFO","msg":"completed","event":"ack","job_id":164,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:24:00.30006695Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:01.305454068Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:02.333520511Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:03.342255361Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:04.351053433Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:07.675797909Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp 172.28.0.4:8200: connect: connection refused"}
+worker-a-1  | {"time":"2026-10-22T19:24:08.688570421Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:09.69330321Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:10.698275519Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:11.702093135Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:12.707125739Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:13.711737153Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:14.716143943Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:15.721061063Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:16.726043684Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:17.730417782Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:18.734583366Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:19.739191764Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:20.745005433Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:21.751433959Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:22.756756068Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:23.762274041Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T19:24:25.389505961Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:26.394181715Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:27.400010764Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:28.406689283Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:29.416185351Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:30.421464776Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:31.426385876Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:32.431730118Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:33.437332015Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:34.458802523Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:35.465448794Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:12.550629446Z","level":"INFO","msg":"processing","event":"processing","job_id":194,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:12.612038863Z","level":"INFO","msg":"completed","event":"ack","job_id":194,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:12.837424326Z","level":"INFO","msg":"processing","event":"processing","job_id":224,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:24:36.469413845Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:12.912819481Z","level":"INFO","msg":"completed","event":"ack","job_id":224,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:24:37.474496023Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:13.205607693Z","level":"INFO","msg":"processing","event":"processing","job_id":254,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:24:38.484462619Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:13.279478715Z","level":"INFO","msg":"completed","event":"ack","job_id":254,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:24:39.489457449Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-b-1  | {"time":"2026-10-22T19:32:13.49065514Z","level":"INFO","msg":"processing","event":"processing","job_id":284,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:24:40.494932295Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:24:41.497753001Z","level":"INFO","msg":"HTTP 503: {\"error\":{\"code\":\"auth_unavailable\",\"message\":\"authentication store unavailable\"}}"}
+worker-a-1  | {"time":"2026-10-22T19:32:05.880022513Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T19:32:05.913270235Z","level":"INFO","msg":"processing","event":"processing","job_id":7,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:05.953097466Z","level":"INFO","msg":"completed","event":"ack","job_id":7,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:06.162191876Z","level":"INFO","msg":"processing","event":"processing","job_id":67,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:06.175055678Z","level":"INFO","msg":"completed","event":"ack","job_id":67,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:06.384183835Z","level":"INFO","msg":"processing","event":"processing","job_id":127,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:06.394957098Z","level":"INFO","msg":"completed","event":"ack","job_id":127,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:06.655977985Z","level":"INFO","msg":"processing","event":"processing","job_id":187,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:06.677407555Z","level":"INFO","msg":"completed","event":"ack","job_id":187,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:06.892858904Z","level":"INFO","msg":"processing","event":"processing","job_id":247,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:06.903871437Z","level":"INFO","msg":"completed","event":"ack","job_id":247,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:13.5121881Z","level":"INFO","msg":"completed","event":"ack","job_id":284,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:13.724547806Z","level":"INFO","msg":"processing","event":"processing","job_id":23,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:13.749024248Z","level":"INFO","msg":"completed","event":"ack","job_id":23,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:13.961457731Z","level":"INFO","msg":"processing","event":"processing","job_id":83,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:13.976300972Z","level":"INFO","msg":"completed","event":"ack","job_id":83,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:14.191758364Z","level":"INFO","msg":"processing","event":"processing","job_id":143,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:14.219766856Z","level":"INFO","msg":"completed","event":"ack","job_id":143,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:14.439656831Z","level":"INFO","msg":"processing","event":"processing","job_id":203,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:14.465781062Z","level":"INFO","msg":"completed","event":"ack","job_id":203,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:14.685144532Z","level":"INFO","msg":"processing","event":"processing","job_id":263,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:14.713943769Z","level":"INFO","msg":"completed","event":"ack","job_id":263,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:14.928728529Z","level":"INFO","msg":"processing","event":"processing","job_id":2,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:14.947848569Z","level":"INFO","msg":"completed","event":"ack","job_id":2,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:07.113830179Z","level":"INFO","msg":"processing","event":"processing","job_id":16,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:07.122823194Z","level":"INFO","msg":"completed","event":"ack","job_id":16,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:07.334111811Z","level":"INFO","msg":"processing","event":"processing","job_id":46,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:07.346307513Z","level":"INFO","msg":"completed","event":"ack","job_id":46,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:07.554512801Z","level":"INFO","msg":"processing","event":"processing","job_id":76,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:07.56344801Z","level":"INFO","msg":"completed","event":"ack","job_id":76,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:07.773515689Z","level":"INFO","msg":"processing","event":"processing","job_id":106,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:15.158026193Z","level":"INFO","msg":"processing","event":"processing","job_id":32,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:07.78560177Z","level":"INFO","msg":"completed","event":"ack","job_id":106,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:07.993601127Z","level":"INFO","msg":"processing","event":"processing","job_id":136,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:08.0056415Z","level":"INFO","msg":"completed","event":"ack","job_id":136,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:08.220052166Z","level":"INFO","msg":"processing","event":"processing","job_id":166,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:08.23106212Z","level":"INFO","msg":"completed","event":"ack","job_id":166,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:08.440794055Z","level":"INFO","msg":"processing","event":"processing","job_id":196,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:08.451293737Z","level":"INFO","msg":"completed","event":"ack","job_id":196,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:08.661404835Z","level":"INFO","msg":"processing","event":"processing","job_id":226,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:08.679928146Z","level":"INFO","msg":"completed","event":"ack","job_id":226,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:08.903146768Z","level":"INFO","msg":"processing","event":"processing","job_id":256,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:08.935525275Z","level":"INFO","msg":"completed","event":"ack","job_id":256,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:09.145332042Z","level":"INFO","msg":"processing","event":"processing","job_id":286,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:09.165074835Z","level":"INFO","msg":"completed","event":"ack","job_id":286,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:09.373899575Z","level":"INFO","msg":"processing","event":"processing","job_id":55,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:09.385507886Z","level":"INFO","msg":"completed","event":"ack","job_id":55,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:09.598110737Z","level":"INFO","msg":"processing","event":"processing","job_id":115,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:09.610368751Z","level":"INFO","msg":"completed","event":"ack","job_id":115,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:09.832891995Z","level":"INFO","msg":"processing","event":"processing","job_id":175,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:09.863335852Z","level":"INFO","msg":"completed","event":"ack","job_id":175,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:10.077007567Z","level":"INFO","msg":"processing","event":"processing","job_id":235,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:10.087716132Z","level":"INFO","msg":"completed","event":"ack","job_id":235,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:10.296750849Z","level":"INFO","msg":"processing","event":"processing","job_id":295,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:10.309675912Z","level":"INFO","msg":"completed","event":"ack","job_id":295,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:10.517775841Z","level":"INFO","msg":"processing","event":"processing","job_id":4,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:10.531803603Z","level":"INFO","msg":"completed","event":"ack","job_id":4,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:10.744604664Z","level":"INFO","msg":"processing","event":"processing","job_id":34,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:10.756041912Z","level":"INFO","msg":"completed","event":"ack","job_id":34,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:10.999699358Z","level":"INFO","msg":"processing","event":"processing","job_id":64,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:11.031888653Z","level":"INFO","msg":"completed","event":"ack","job_id":64,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:11.247313267Z","level":"INFO","msg":"processing","event":"processing","job_id":94,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:11.272837927Z","level":"INFO","msg":"completed","event":"ack","job_id":94,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:11.502776925Z","level":"INFO","msg":"processing","event":"processing","job_id":124,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:11.516884185Z","level":"INFO","msg":"completed","event":"ack","job_id":124,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:11.727468605Z","level":"INFO","msg":"processing","event":"processing","job_id":154,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:11.739909698Z","level":"INFO","msg":"completed","event":"ack","job_id":154,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:11.95912123Z","level":"INFO","msg":"processing","event":"processing","job_id":184,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:11.990276584Z","level":"INFO","msg":"completed","event":"ack","job_id":184,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:12.276876438Z","level":"INFO","msg":"processing","event":"processing","job_id":214,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:12.33721132Z","level":"INFO","msg":"completed","event":"ack","job_id":214,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:12.590023367Z","level":"INFO","msg":"processing","event":"processing","job_id":244,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:12.630232425Z","level":"INFO","msg":"completed","event":"ack","job_id":244,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:12.840838364Z","level":"INFO","msg":"processing","event":"processing","job_id":274,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:12.908254026Z","level":"INFO","msg":"completed","event":"ack","job_id":274,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:13.258338254Z","level":"INFO","msg":"processing","event":"processing","job_id":43,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:13.296795871Z","level":"INFO","msg":"completed","event":"ack","job_id":43,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:13.526707693Z","level":"INFO","msg":"processing","event":"processing","job_id":103,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:13.542365007Z","level":"INFO","msg":"completed","event":"ack","job_id":103,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:13.753346494Z","level":"INFO","msg":"processing","event":"processing","job_id":163,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:13.765141285Z","level":"INFO","msg":"completed","event":"ack","job_id":163,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:13.981022208Z","level":"INFO","msg":"processing","event":"processing","job_id":223,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:13.999749777Z","level":"INFO","msg":"completed","event":"ack","job_id":223,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:14.211338267Z","level":"INFO","msg":"processing","event":"processing","job_id":283,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:14.227574615Z","level":"INFO","msg":"completed","event":"ack","job_id":283,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:14.442153078Z","level":"INFO","msg":"processing","event":"processing","job_id":22,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:14.465448121Z","level":"INFO","msg":"completed","event":"ack","job_id":22,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:14.683897896Z","level":"INFO","msg":"processing","event":"processing","job_id":52,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:14.727181273Z","level":"INFO","msg":"completed","event":"ack","job_id":52,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:14.945179515Z","level":"INFO","msg":"processing","event":"processing","job_id":82,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:15.178058198Z","level":"INFO","msg":"completed","event":"ack","job_id":32,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:15.40555952Z","level":"INFO","msg":"processing","event":"processing","job_id":62,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:15.431879919Z","level":"INFO","msg":"completed","event":"ack","job_id":62,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:15.645794466Z","level":"INFO","msg":"processing","event":"processing","job_id":92,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:15.658907923Z","level":"INFO","msg":"completed","event":"ack","job_id":92,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:15.871458239Z","level":"INFO","msg":"processing","event":"processing","job_id":122,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:15.887378328Z","level":"INFO","msg":"completed","event":"ack","job_id":122,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:16.097349265Z","level":"INFO","msg":"processing","event":"processing","job_id":152,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:16.121509202Z","level":"INFO","msg":"completed","event":"ack","job_id":152,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:16.333230121Z","level":"INFO","msg":"processing","event":"processing","job_id":182,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:16.347811942Z","level":"INFO","msg":"completed","event":"ack","job_id":182,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:16.561174927Z","level":"INFO","msg":"processing","event":"processing","job_id":212,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:16.577002131Z","level":"INFO","msg":"completed","event":"ack","job_id":212,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:16.795548104Z","level":"INFO","msg":"processing","event":"processing","job_id":242,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:16.809537227Z","level":"INFO","msg":"completed","event":"ack","job_id":242,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:17.022842396Z","level":"INFO","msg":"processing","event":"processing","job_id":272,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:17.05178859Z","level":"INFO","msg":"completed","event":"ack","job_id":272,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:17.281295834Z","level":"INFO","msg":"processing","event":"processing","job_id":11,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:17.307441394Z","level":"INFO","msg":"completed","event":"ack","job_id":11,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:17.517608365Z","level":"INFO","msg":"processing","event":"processing","job_id":71,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:17.532568476Z","level":"INFO","msg":"completed","event":"ack","job_id":71,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:17.744864041Z","level":"INFO","msg":"processing","event":"processing","job_id":131,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:17.760595932Z","level":"INFO","msg":"completed","event":"ack","job_id":131,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:17.982831497Z","level":"INFO","msg":"processing","event":"processing","job_id":191,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:18.004243541Z","level":"INFO","msg":"completed","event":"ack","job_id":191,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:18.223057601Z","level":"INFO","msg":"processing","event":"processing","job_id":251,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:18.243580253Z","level":"INFO","msg":"completed","event":"ack","job_id":251,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:56.464817948Z","level":"INFO","msg":"processing","event":"processing","job_id":50,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:56.496120035Z","level":"INFO","msg":"completed","event":"ack","job_id":50,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:56.717215342Z","level":"INFO","msg":"processing","event":"processing","job_id":170,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:56.768205738Z","level":"INFO","msg":"completed","event":"ack","job_id":170,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:56.978606495Z","level":"INFO","msg":"processing","event":"processing","job_id":290,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:57.00432288Z","level":"INFO","msg":"completed","event":"ack","job_id":290,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:57.220157544Z","level":"INFO","msg":"processing","event":"processing","job_id":29,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:57.237474267Z","level":"INFO","msg":"completed","event":"ack","job_id":29,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:57.449722757Z","level":"INFO","msg":"processing","event":"processing","job_id":89,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:57.471477Z","level":"INFO","msg":"completed","event":"ack","job_id":89,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:57.691306215Z","level":"INFO","msg":"processing","event":"processing","job_id":149,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:57.716344027Z","level":"INFO","msg":"completed","event":"ack","job_id":149,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:58.111777244Z","level":"INFO","msg":"processing","event":"processing","job_id":209,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:58.170886288Z","level":"INFO","msg":"completed","event":"ack","job_id":209,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:58.387413853Z","level":"INFO","msg":"processing","event":"processing","job_id":239,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:58.418705854Z","level":"INFO","msg":"completed","event":"ack","job_id":239,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:58.631647455Z","level":"INFO","msg":"processing","event":"processing","job_id":269,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:58.653291651Z","level":"INFO","msg":"completed","event":"ack","job_id":269,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:58.867136662Z","level":"INFO","msg":"processing","event":"processing","job_id":68,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:58.892864012Z","level":"INFO","msg":"completed","event":"ack","job_id":68,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:59.16384421Z","level":"INFO","msg":"processing","event":"processing","job_id":188,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:59.18845053Z","level":"INFO","msg":"completed","event":"ack","job_id":188,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:59.401970675Z","level":"INFO","msg":"processing","event":"processing","job_id":17,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:59.426793389Z","level":"INFO","msg":"completed","event":"ack","job_id":17,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:59.637017393Z","level":"INFO","msg":"processing","event":"processing","job_id":77,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:59.671722014Z","level":"INFO","msg":"completed","event":"ack","job_id":77,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:32:59.886589353Z","level":"INFO","msg":"processing","event":"processing","job_id":137,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:32:59.908028078Z","level":"INFO","msg":"completed","event":"ack","job_id":137,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:00.187831368Z","level":"INFO","msg":"processing","event":"processing","job_id":197,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:00.219899804Z","level":"INFO","msg":"completed","event":"ack","job_id":197,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:00.485518307Z","level":"INFO","msg":"processing","event":"processing","job_id":257,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:00.529878639Z","level":"INFO","msg":"completed","event":"ack","job_id":257,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:00.78515737Z","level":"INFO","msg":"processing","event":"processing","job_id":5,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:00.844784388Z","level":"INFO","msg":"completed","event":"ack","job_id":5,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:01.085591198Z","level":"INFO","msg":"processing","event":"processing","job_id":65,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:01.117114005Z","level":"INFO","msg":"completed","event":"ack","job_id":65,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:01.349828982Z","level":"INFO","msg":"processing","event":"processing","job_id":125,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:01.364695629Z","level":"INFO","msg":"completed","event":"ack","job_id":125,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:01.592970297Z","level":"INFO","msg":"processing","event":"processing","job_id":185,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:01.627691597Z","level":"INFO","msg":"completed","event":"ack","job_id":185,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:01.886400648Z","level":"INFO","msg":"processing","event":"processing","job_id":245,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:01.919939399Z","level":"INFO","msg":"completed","event":"ack","job_id":245,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:02.15786141Z","level":"INFO","msg":"processing","event":"processing","job_id":53,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:02.22418287Z","level":"INFO","msg":"completed","event":"ack","job_id":53,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:02.447938634Z","level":"INFO","msg":"processing","event":"processing","job_id":113,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:02.483672576Z","level":"INFO","msg":"completed","event":"ack","job_id":113,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:02.71846257Z","level":"INFO","msg":"processing","event":"processing","job_id":173,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:02.760923564Z","level":"INFO","msg":"completed","event":"ack","job_id":173,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:02.980215851Z","level":"INFO","msg":"processing","event":"processing","job_id":233,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:03.023201845Z","level":"INFO","msg":"completed","event":"ack","job_id":233,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:03.287402002Z","level":"INFO","msg":"processing","event":"processing","job_id":293,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:03.369593252Z","level":"INFO","msg":"completed","event":"ack","job_id":293,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:14.955211322Z","level":"INFO","msg":"completed","event":"ack","job_id":82,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:15.166081771Z","level":"INFO","msg":"processing","event":"processing","job_id":112,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:15.185220772Z","level":"INFO","msg":"completed","event":"ack","job_id":112,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:15.409105948Z","level":"INFO","msg":"processing","event":"processing","job_id":142,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:15.429934027Z","level":"INFO","msg":"completed","event":"ack","job_id":142,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:15.641096084Z","level":"INFO","msg":"processing","event":"processing","job_id":172,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:15.659830303Z","level":"INFO","msg":"completed","event":"ack","job_id":172,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:15.879901214Z","level":"INFO","msg":"processing","event":"processing","job_id":202,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:15.891274898Z","level":"INFO","msg":"completed","event":"ack","job_id":202,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:16.111195364Z","level":"INFO","msg":"processing","event":"processing","job_id":232,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:16.120673686Z","level":"INFO","msg":"completed","event":"ack","job_id":232,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:16.331500227Z","level":"INFO","msg":"processing","event":"processing","job_id":262,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:16.342155428Z","level":"INFO","msg":"completed","event":"ack","job_id":262,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:16.551070765Z","level":"INFO","msg":"processing","event":"processing","job_id":292,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:16.564114625Z","level":"INFO","msg":"completed","event":"ack","job_id":292,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:16.774988246Z","level":"INFO","msg":"processing","event":"processing","job_id":31,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:16.789250634Z","level":"INFO","msg":"completed","event":"ack","job_id":31,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:17.000780826Z","level":"INFO","msg":"processing","event":"processing","job_id":91,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:17.023461317Z","level":"INFO","msg":"completed","event":"ack","job_id":91,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:17.234425757Z","level":"INFO","msg":"processing","event":"processing","job_id":151,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:17.255265626Z","level":"INFO","msg":"completed","event":"ack","job_id":151,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:17.475876404Z","level":"INFO","msg":"processing","event":"processing","job_id":211,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:17.48726612Z","level":"INFO","msg":"completed","event":"ack","job_id":211,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:17.698014642Z","level":"INFO","msg":"processing","event":"processing","job_id":271,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:17.709050968Z","level":"INFO","msg":"completed","event":"ack","job_id":271,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:56.526964609Z","level":"INFO","msg":"processing","event":"processing","job_id":40,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:56.548156597Z","level":"INFO","msg":"completed","event":"ack","job_id":40,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:56.813502701Z","level":"INFO","msg":"processing","event":"processing","job_id":160,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:56.85554096Z","level":"INFO","msg":"completed","event":"ack","job_id":160,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:57.073520906Z","level":"INFO","msg":"processing","event":"processing","job_id":280,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:57.090848361Z","level":"INFO","msg":"completed","event":"ack","job_id":280,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:57.34492156Z","level":"INFO","msg":"processing","event":"processing","job_id":49,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:57.366927902Z","level":"INFO","msg":"completed","event":"ack","job_id":49,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:57.597919093Z","level":"INFO","msg":"processing","event":"processing","job_id":109,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:57.624320887Z","level":"INFO","msg":"completed","event":"ack","job_id":109,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:57.845120275Z","level":"INFO","msg":"processing","event":"processing","job_id":169,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:57.864313599Z","level":"INFO","msg":"completed","event":"ack","job_id":169,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:58.146802717Z","level":"INFO","msg":"processing","event":"processing","job_id":199,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:58.179754864Z","level":"INFO","msg":"completed","event":"ack","job_id":199,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:58.410322268Z","level":"INFO","msg":"processing","event":"processing","job_id":229,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:58.434777109Z","level":"INFO","msg":"completed","event":"ack","job_id":229,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:58.646536514Z","level":"INFO","msg":"processing","event":"processing","job_id":289,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:58.662098791Z","level":"INFO","msg":"completed","event":"ack","job_id":289,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:58.880005044Z","level":"INFO","msg":"processing","event":"processing","job_id":88,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:58.895448281Z","level":"INFO","msg":"completed","event":"ack","job_id":88,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:59.123447461Z","level":"INFO","msg":"processing","event":"processing","job_id":208,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:59.136992253Z","level":"INFO","msg":"completed","event":"ack","job_id":208,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:59.358781004Z","level":"INFO","msg":"processing","event":"processing","job_id":37,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:59.386932009Z","level":"INFO","msg":"completed","event":"ack","job_id":37,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:32:59.611395916Z","level":"INFO","msg":"processing","event":"processing","job_id":97,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:59.622415506Z","level":"INFO","msg":"completed","event":"ack","job_id":97,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:03.633057702Z","level":"INFO","msg":"processing","event":"processing","job_id":41,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:03.705667247Z","level":"INFO","msg":"completed","event":"ack","job_id":41,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:03.955058455Z","level":"INFO","msg":"processing","event":"processing","job_id":101,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:03.978635669Z","level":"INFO","msg":"completed","event":"ack","job_id":101,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:04.195301598Z","level":"INFO","msg":"processing","event":"processing","job_id":161,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:04.225445915Z","level":"INFO","msg":"completed","event":"ack","job_id":161,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:04.436852985Z","level":"INFO","msg":"processing","event":"processing","job_id":221,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:04.465107035Z","level":"INFO","msg":"completed","event":"ack","job_id":221,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:33:04.69531298Z","level":"INFO","msg":"processing","event":"processing","job_id":281,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T19:33:04.716453767Z","level":"INFO","msg":"completed","event":"ack","job_id":281,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T19:35:28.197135378Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/reports/lease\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+worker-a-1  | {"time":"2026-10-22T19:32:59.852130198Z","level":"INFO","msg":"processing","event":"processing","job_id":157,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:32:59.882952147Z","level":"INFO","msg":"completed","event":"ack","job_id":157,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:00.166235515Z","level":"INFO","msg":"processing","event":"processing","job_id":217,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:00.233214135Z","level":"INFO","msg":"completed","event":"ack","job_id":217,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:00.481883508Z","level":"INFO","msg":"processing","event":"processing","job_id":277,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:00.498836565Z","level":"INFO","msg":"completed","event":"ack","job_id":277,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:00.732646843Z","level":"INFO","msg":"processing","event":"processing","job_id":25,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:00.809439776Z","level":"INFO","msg":"completed","event":"ack","job_id":25,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:01.063471054Z","level":"INFO","msg":"processing","event":"processing","job_id":85,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:01.089219842Z","level":"INFO","msg":"completed","event":"ack","job_id":85,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:01.318083004Z","level":"INFO","msg":"processing","event":"processing","job_id":145,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:01.348353587Z","level":"INFO","msg":"completed","event":"ack","job_id":145,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:01.558827023Z","level":"INFO","msg":"processing","event":"processing","job_id":205,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:01.574048665Z","level":"INFO","msg":"completed","event":"ack","job_id":205,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:01.840843881Z","level":"INFO","msg":"processing","event":"processing","job_id":265,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:01.891248286Z","level":"INFO","msg":"completed","event":"ack","job_id":265,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:02.124774857Z","level":"INFO","msg":"processing","event":"processing","job_id":13,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:02.155921679Z","level":"INFO","msg":"completed","event":"ack","job_id":13,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:02.405398865Z","level":"INFO","msg":"processing","event":"processing","job_id":73,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:02.438885058Z","level":"INFO","msg":"completed","event":"ack","job_id":73,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:02.693010566Z","level":"INFO","msg":"processing","event":"processing","job_id":133,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:02.722598165Z","level":"INFO","msg":"completed","event":"ack","job_id":133,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:02.94296622Z","level":"INFO","msg":"processing","event":"processing","job_id":193,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:02.985291127Z","level":"INFO","msg":"completed","event":"ack","job_id":193,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:03.203210713Z","level":"INFO","msg":"processing","event":"processing","job_id":253,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:03.261724808Z","level":"INFO","msg":"completed","event":"ack","job_id":253,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:03.570166676Z","level":"INFO","msg":"processing","event":"processing","job_id":1,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:03.642910185Z","level":"INFO","msg":"completed","event":"ack","job_id":1,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:03.85606215Z","level":"INFO","msg":"processing","event":"processing","job_id":61,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:03.868092334Z","level":"INFO","msg":"completed","event":"ack","job_id":61,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:04.090505596Z","level":"INFO","msg":"processing","event":"processing","job_id":121,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:04.115276042Z","level":"INFO","msg":"completed","event":"ack","job_id":121,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:04.334149995Z","level":"INFO","msg":"processing","event":"processing","job_id":181,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:04.369588236Z","level":"INFO","msg":"completed","event":"ack","job_id":181,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:33:04.579364111Z","level":"INFO","msg":"processing","event":"processing","job_id":241,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T19:33:04.597254647Z","level":"INFO","msg":"completed","event":"ack","job_id":241,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T19:35:28.137225412Z","level":"INFO","msg":"Post \"http://api:8200/v1/queues/emails/lease\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}

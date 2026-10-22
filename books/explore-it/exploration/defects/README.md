@@ -83,3 +83,15 @@ Local ids E07-F01… are provisional; the coordinator reconciles them. Earlier e
 |---|---|---|---|---|---|
 | [E07-F01](E07-F01-worker-delete-racing-lease-leaves-zombie-lease.md) Worker DELETE racing that worker's lease leaves the job leased by the deleted worker; it can still heartbeat/ack; second DELETE 404; (other order) lease 500 `sql: no rows` | lesson-06 | SPEC:93-95, :107, :15 | Medium–high | open | E07 notes P2, P3 |
 | [E07-F02](E07-F02-purge-misses-rows-changing-state-concurrently.md) Purge racing lease / nack / worker release / expiry sweep leaves jobs pending or unflagged-leased | lesson-06 | SPEC:54-56 | Medium–high | open | E07 notes P2, P4, P5 |
+
+## Experiment 08 (surround-it) — explorer reports at `explore-it/lesson-07`
+
+Local ids E08-F01… are provisional; the coordinator reconciles them. Earlier entries above are unchanged.
+Rows added by the coordinator from the explorer's reports (the explorer did not edit this index).
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E08-F01](E08-F01-api-does-not-recover-from-start-without-database.md) API started while PostgreSQL is unreachable exits for good; stays down after the database returns | lesson-07 | SPEC:186-189; approximation 30 s | Medium | open | E08 notes P3, P3b |
+| [E08-F02](E08-F02-slow-destination-starves-all-later-notifications.md) Twenty slow or unreachable webhook rows starve every later notification, for every tenant | lesson-07 | SPEC:179, :197-198, :10 | High | open | E08 notes P5, P5b, P5c |
+| [E08-F03](E08-F03-dst-gap-skips-and-overlap-double-fires.md) Fixed-time schedule in the DST gap skips that day; in the repeated hour runs twice | lesson-07 | SPEC:162 (silent); classic cron | Medium | spec | E08 notes P6 |
+| [E08-F04](E08-F04-frozen-database-hangs-health-and-api.md) Frozen database hangs every request, `/health` included; no 503 | lesson-07 | SPEC:188-189; code's 1 s ping deadline | Medium–high | open | E08 notes P8, P8b |

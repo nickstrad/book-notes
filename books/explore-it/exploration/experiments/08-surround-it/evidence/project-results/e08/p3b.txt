@@ -1,0 +1,25 @@
+19:24:03.2 recover: start api
+ Container queuelet-e08-api-1 Started 
+19:24:05.5 health 200 after 2s
+19:24:05.5 control: restart api with postgres up
+ Container queuelet-e08-api-1 Started 
+19:24:07.4 health 200 after 2s
+19:24:07.4 sibling 1: SIGKILL api (simulated crash)
+19:24:23.0 health still 000 after 15 s
+api state=exited exit=137 restarts=0
+19:24:23.1 recover: start api
+ Container queuelet-e08-api-1 Started 
+19:24:25.2 health 200 after 2s
+19:24:25.2 sibling 2: SIGKILL postgres (simulated crash)
+19:24:40.9 health still 503 after 15 s
+postgres state=exited exit=137 restarts=0 policy=no
+{"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+
+19:24:40.9 recover: start postgres
+ Container queuelet-e08-postgres-1 Started 
+19:24:42.6 health 200 after 2s
+api running Up 18 seconds
+hooksink running Up 5 minutes
+postgres running Up 1 second (healthy)
+worker-a running Up 3 minutes
+worker-b running Up 3 minutes

@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E07 done (fix committed, tag `explore-it/lesson-07`); independent review pending.**
+**Status (2026-10-22): E08 exploration complete (U36–U38, A5 assigned); E08 fix in progress. E07 independent review pending.**
 
 ## Done
 
@@ -54,7 +54,11 @@ Dwell remains paired evidence only; no full sweep was run.
 
 ## In progress
 
-Nothing is running; no stack is up for this book.
+E08 exploration closed (blind Opus, exit 0, 19:18–19:40Z): 21 stated / 20 confirmed /
+1 refuted / 1 contradicted reading prediction / 4 reports / 7 new ecosystem cells.
+E08-F01/F02/F04 → U36/U37/U38; E08-F03 → spec silence A5 (decision in
+[reconciliation](register/reconciliations/08.md)). Explorer stack removed. The fix step is next
+(Opus fixer seat, isolated project `queuelet-fix08`).
 
 ## Decisions and open items
 

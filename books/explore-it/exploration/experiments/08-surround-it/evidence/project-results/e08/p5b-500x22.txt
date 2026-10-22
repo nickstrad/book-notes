@@ -1,0 +1,4 @@
+pending before: 0
+2026-10-22T19:29:21Z mode 500; 22 globex rows → http://hooksink:8201/hook; acme job 357 119|0|-1|f|
+2026-10-22T19:29:22Z after 1.4 s acme: 119|1|200|t|
+globex attempts: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 err=HTTP 500

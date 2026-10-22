@@ -253,3 +253,42 @@ Stated before their probes in [E07 notes](experiments/07-state-it/notes.md) (≈
 | Q-E07-2 | Should a nack 409 say `state conflict` like ack/heartbeat rather than the driver text `sql: no rows in result set`? | P1 H01 | spec decision | #offcharter | open | |
 | T-E07-1 | Testability: job_events carry only application time; with the frozen lab clock there is no real-time commit stamp or loop-step duration, so sweep length (S6, E07-F02 window) cannot be measured | P6 r1 | — | testability request | open | minimal hook: `committed_at clock_timestamp()` on job_events or a `/metrics` gauge per loop step; validation: replay P6 r1, see the 1,110-row sweep's duration |
 | T-E07-2 | Testability: races in E07-F01/F02 are probabilistic; a lab pause hook inside the lease / purge / release transactions (e.g. `QUEUELET_TEST_TX_PAUSE_MS=lease:50`) would make the overlap deterministic (generalises T-E06-2) | P2–P5 | — | testability request | open | validation: one-job purge ‖ worker-delete → queued 20/20 |
+
+## Experiment 08 (surround-it) — `explore-it/lesson-07`
+
+Stated before their probes in [E08 notes](experiments/08-surround-it/notes.md) (hypothesis table written
+19:21Z; H-E08-14 19:25:45Z; H-E08-15..17 19:29Z; H-E08-18 19:30:45Z; H-E08-19 ≈19:34:10Z; H-E08-20 ≈19:34:30Z;
+H-E08-21 ≈19:35:05Z). Regression holds are not discoveries.
+
+| Id | Statement / prediction | Source and evidence pointer | Would be wrong if | Probe family / experiment | Status | Outcome evidence |
+|---|---|---|---|---|---|---|
+| H-E08-C | Charter: "every route is namespace-scoped and the loop survives a database restart" | charter 08 (auth middleware and loop reading) | a route crosses tenants, or a DB event the loop/service does not survive | ecosystem / E08 | experiment 08: confirmed for routes and for a DB restart of a running API; refuted per neighbour for start-without-DB (E08-F01), frozen DB (E08-F04) and the shipper (E08-F02) | P1–P8 |
+| H-E08-01 | globex-key on acme job ids → 404 on all nine job routes; acme job unchanged | api/jobs.go:200 ownJob | any 2xx/409 or change | tenant / E08 | experiment 08: confirmed (D21 regression) | P1 |
+| H-E08-02 | foreign worker id in lease, foreign worker delete, foreign schedule routes → 404; foreign ns stats → 403 | jobs.go:174; queues.go:194 | any 2xx | tenant / E08 | experiment 08: confirmed | P1 |
+| H-E08-03 | admin-key = acme tenant (200 on acme job, 404 on globex job) + stats anywhere | 001.sql:16 | otherwise | admin / E08 | experiment 08: confirmed | P1 |
+| H-E08-04 | `compose restart postgres`: brief 503 auth_unavailable/health, delayed job promoted on time | api.go:149-245 | loop dead or 401 | DB / E08 | experiment 08: confirmed (regression) | P2 |
+| H-E08-05 | API restart while DB down → exits and stays down after DB returns | main.go:19-22; compose (no restart policy) | api back within 30 s | DB+supervisor / E08 | experiment 08: confirmed | P3 (E08-F01) |
+| H-E08-06 | partner 500 → retried every ~5 s, delivered on first 200 | ship.go:40-48 | delivered during 500 | partner / E08 | experiment 08: confirmed (D04 regression) | P5 |
+| H-E08-07 | partner slow 3 s → failure at 2 s, partner records 200s; core promotion on time | ship.go:32 | delivered while slow / promotion late | partner / E08 | experiment 08: confirmed | P5 |
+| H-E08-08 | ≥20 timed-out rows → later acme row never attempted for ≥60 s | ship.go:17, api.go:212 | acme attempted in 60 s | partner×tenant / E08 | experiment 08: confirmed | P5 (E08-F02) |
+| H-E08-09 | hand HMAC over received bytes = header; bodies semantically equal to outbox | ship.go:22-30 | mismatch | data journey / E08 | experiment 08: confirmed (D24 regression) | P4 |
+| H-E08-10 | DST gap: `30 2`/`0 2` NY skip 2027-03-14 | fire.go:20 | a run on 3/14 | clock / E08 | experiment 08: confirmed | P6 (E08-F03) |
+| H-E08-11 | hourly NY across gap: 01:00 EST → 03:00 EDT | fire.go:20 | other | clock / E08 | experiment 08: confirmed | P6 |
+| H-E08-12 | DST overlap: `30 1`/`0 1` NY fire twice on 2027-11-07 | fire.go:20 | once | clock / E08 | experiment 08: confirmed | P6 (E08-F03) |
+| H-E08-13 | `0 9` NY: 14:00Z then 13:00Z across the gap | fire.go:20; SPEC.md:162 | 14:00Z on 3/14 | clock / E08 | experiment 08: confirmed (D23 regression) | P6 |
+| H-E08-14 | sent bytes = jsonb reorder + Go HTML/U+2028 escaping; semantically equal; exact numbers; signature over sent bytes | store.go:44; ship.go:22 | semantic diff / rounding / bad signature | data journey / E08 | experiment 08: confirmed | P4 |
+| H-E08-15 | 22 fast-failing (500) rows → acme delivered ≤3 s | ship.go:41 | >5 s | isolation / E08 | experiment 08: confirmed | P5b (1.4 s) |
+| H-E08-16 | 5 timed-out rows → acme delivered after ≈10–12 s | ship.go:17 | never / <8 s | isolation / E08 | experiment 08: confirmed | P5b (11.1 s) |
+| H-E08-17 | 20 rows to an unreachable tenant URL (partner healthy) → acme not attempted for 40 s | ship.go | delivered | sibling / E08 | experiment 08: confirmed | P5b (45.6 s, 0 attempts) |
+| H-E08-18 | no tenant API action (PATCH url "", delete jobs, delete queue) ends the stall | SPEC.md:196-204 | acme attempted | recovery / E08 | experiment 08: confirmed | P5c |
+| H-E08-19 | lease as another acme worker by id alone → 200, attributed to that worker | api/jobs.go:128-178 | refused | worker identity / E08 | experiment 08: confirmed | P7 (not a bug: spec silence, Q-E08-1) |
+| H-E08-20 | frozen DB 12 s: auth requests hang then 200; `/health` 503 within ≈1 s | api.go:132,153 | prompt 503 on auth | DB / E08 | experiment 08: refuted (health clause: hung 11.8 s then 200) | P8 (E08-F04) |
+| H-E08-21 | frozen DB 25 s: all DB-path requests incl. /health return only after unpause | P8 | any returns early | DB / E08 | experiment 08: confirmed | P8b (E08-F04) |
+| H-E08-22 | A partner answering 302 (→ GET 200) is recorded as delivered without receiving the body (Go client follows redirects) | ship.go:31 default client | marked failed | partner / next | open | needs a redirect-capable partner (TR-E08-3) |
+| H-E08-23 | One schedule that cannot advance starves later schedules every tick (Fire returns on first error) | fire.go:37-40 | later schedules fire | core loop / next | open | no external trigger found |
+| H-E08-24 | More than 16 concurrent requests during a DB freeze exhaust the pool; requests queue behind it after unfreeze | store.go:16 | no queueing | DB / next | open | not probed |
+| Q-E08-1 | What does the worker `token` (SPEC.md:91) authorise? Should lease/ack require it so attempt history attribution is trustworthy? | P7 | spec decision | spec decision | open | |
+| Q-E08-2 | DST rule for non-existent and repeated local times (skip/once-after/twice)? | E08-F03 | spec decision | spec decision | open | |
+| T-E08-1 | Testability: deterministic single-statement DB fault (for H-E04-10 / ack non-atomicity) | ack.go:13-26 | — | testability request | open | see notes "Not run / testability requests" |
+| T-E08-2 | Testability: shipper backlog/lag metric and health signal | P5c (/health 200 during permanent stall) | — | testability request | open | validation: P5b blackhole flips it |
+| T-E08-3 | Testability: hooksink records received signature (E01 TR1) and offers 302/307 modes | P4 needed a capture listener | — | testability request | open | |

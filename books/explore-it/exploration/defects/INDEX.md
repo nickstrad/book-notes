@@ -132,3 +132,10 @@ blind finding.
 | U35 | [E07-F02](E07-F02-purge-misses-rows-changing-state-concurrently.md) | [fixed in lesson 07](U35-purge-transition-race.md) |
 
 Original score: 13 stated / 12 confirmed / 1 refuted / 1 contradicted reading prediction / 41 new cells (49-cell matrix).
+
+## Experiment 08 additions
+
+- [U36](U36-api-start-without-database.md): E08-F01, API start without a database exits for good; open.
+- [U37](U37-webhook-shipper-starvation.md): E08-F02, slow destinations starve later notifications; open.
+- [U38](U38-frozen-database-hangs-requests.md): E08-F04, frozen database hangs requests and `/health`; open.
+- [A5](A5-dst-gap-and-overlap.md): E08-F03, spec silence on non-existent and repeated local times; coordinator decision.

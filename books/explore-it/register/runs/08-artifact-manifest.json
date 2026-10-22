@@ -1,0 +1,223 @@
+{
+  "experiment": 8,
+  "source_tag": "explore-it/lesson-07",
+  "export_path": "/tmp/explore-it-experiment-08",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "42ec9b883027f60489e26a04b6ec563a0357491d6fb7a82f19e6f5eaf761fcc9"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "57e83b1509ce05d9e1e79211043ad53e7ed286f87c60d6a47cf1ec55536ecdb3"
+    },
+    {
+      "file": "exploration/models/ecosystem.md",
+      "sha256": "739b13f2b7fc3307b83a3f976d2b61ccb8b2e5ff5f4ad465e637615592668e93"
+    },
+    {
+      "file": "exploration/defects/E08-F02-slow-destination-starves-all-later-notifications.md",
+      "sha256": "466645a1dbafb996809d8489c08982b46b0a0983ea752f1504f9edc94aa1936b"
+    },
+    {
+      "file": "exploration/defects/E08-F04-frozen-database-hangs-health-and-api.md",
+      "sha256": "16620b7dd232b7ead32a53372c9852aee2cab5a06cc17a90e5487e33e4b5ada7"
+    },
+    {
+      "file": "exploration/defects/E08-F01-api-does-not-recover-from-start-without-database.md",
+      "sha256": "8b83c65dc1fbbfea9dee950686e0584e58fd0c2c007cf0501c968dada9715bc3"
+    },
+    {
+      "file": "exploration/defects/E08-F03-dst-gap-skips-and-overlap-double-fires.md",
+      "sha256": "f6208f5756cbaa6ef7c176d5aaf2b619c8e398c0a4b7d615d1702c711140206b"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/revealed.md",
+      "sha256": "9d530788cdef899dd2b742b3218a33003c7bb87be8a866d63fbeafa642ee9a6d"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/charter.md",
+      "sha256": "3e3d68a3b7baef60d80c9e30c725f9190b05ef41d529bc5c3cf33bf29f69ca1f"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/brief.md",
+      "sha256": "f989d16677a7346a5c92f6781f6ca816dbfe249e43a9bbe406b8c90e3c2b752b"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/notes.md",
+      "sha256": "2c6629c64467f2ea9b7f9de57cc800c93f2a6440d2e130e5709dab23ac8622d9"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p8b_pg_pause_long.sh",
+      "sha256": "9f0aa12bc27cda4139f453d369c75338184e4531d3b8cae1e9f22199f83070ef"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p5_partner_modes.py",
+      "sha256": "9c15ebb1af744cd5180288bd0c9923c4c0a6d2764762b55e0cb5d33ab57da20a"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p2_pg_restart.py",
+      "sha256": "1b988d6ceb0eba97a8387d68f5a6ac78b0c52f4f694fcda6293ddb7f4b13ac13"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p6_dst.py",
+      "sha256": "f567c83f8858776021bdde058ee30661e51e20f3520aafafc6a4def678e78394"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p4_journey.py",
+      "sha256": "605b6119a09a74c2a50867d734d542a6d711b431cef72455a6ea7bec9b30b724"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p3b_isolate.sh",
+      "sha256": "18b64e2dad2276f583372b604e5f0187db712255f1b5348dad87c0447e299564"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/q.py",
+      "sha256": "74d47a3404bee2fb2ad90daedc5a17ba083d2e7d7d8a0ba9d5720bcc1f0b7490"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p8_pg_pause.sh",
+      "sha256": "bb82ef8ca7d712a60ce827d9b070eccc149e440e9ce3887aa7b709d2342a334d"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p5c_recovery.py",
+      "sha256": "566319572b0226172bc3439ff0f884af096d5b39b9fc4a2ee7dad99e4b0f74fe"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/env.sh",
+      "sha256": "e01591a4c32bc341b72d2ce1b202c24edfe84a29ffbb645073ecaa32bc4ea781"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/capture.py",
+      "sha256": "127f414399ad42dee5155ac27018408bf67a96e6d18262d1efd8f5591f78fcdc"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p5b_isolate.py",
+      "sha256": "c88e95e475bc4216ae469dc3cc3f55897b9922ef5c98f647d74e0cd45822e086"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p1_tenant.py",
+      "sha256": "37deb509c2c8cdf44c4c8537e78f4c011743101d8deb1d7672c92f9bc6ac6e24"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p3_api_restart_db_down.sh",
+      "sha256": "40ee4267d50f25456d0fa7afa6c55553045b54a435be0ed391694e9e8719585d"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/tools/p7_worker_identity.py",
+      "sha256": "9fcf79a41d393528c78ceee930db72cdefa02640c37cc58c4ed9b28851277c99"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/export-state.md",
+      "sha256": "d1d2dfcdbdbd4f1191f4fc5b4ab1b41d82259af6c69a36b473a7c83757eaed98"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/manifest.json",
+      "sha256": "d9b246d025a2838c117ccbee3b33d290d6927ce9cf063efb6b3358a263ac9bb7"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p6-dst.txt",
+      "sha256": "4ab337b5f997213cb12091148cc22de72fd1fad8ca6bc3005ce6369ef15f9498"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/capture.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5b-500x22.txt",
+      "sha256": "e139c29fac9783af9badd70e4fe78640e8a930f415e4c83aa42e627e3de98ae2"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8-body-badkey",
+      "sha256": "8216fbbcd845c1796c7ace2ed35993502a2a75021efe3c6020e46f96592be9c8"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8b.txt",
+      "sha256": "99517b855b910633e53025b4791d32c4eaba126c0b47ed25bbe814d247406149"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p3.txt",
+      "sha256": "cc2f88462c8e0dc20ae41a6bc399ced4d2ba06d9f469c7a47a2138c06f04cef8"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5-slow.txt",
+      "sha256": "1632f052dbf357b94405035ac02caa5febdc04c510530459bc1bb6ae71440d7f"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8-body-auth1",
+      "sha256": "b0e552d50525b1186fe3282c62ffabcebdcf75e9a9f816474e82611b3a45ec7a"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p4.txt",
+      "sha256": "86fd7f4b5de3f2ba56c49fce1950aaf04500a6af3e4a9b8026283a6bcc884760"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/neighbours-log-final.txt",
+      "sha256": "ac4d64e5870377e4452ef82b2f1025600b75f84aa1450d75e3f2b2cc85509f84"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p2.txt",
+      "sha256": "0d5943cd37d120c1b34e3c1d21698651266bafac69c95d71e48e605c6b75f52d"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p3b.txt",
+      "sha256": "0cbdaf6643aad23b3e98b26fac65329132e3fcd7cd9b0a4109a821469ff8be6c"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8-body-auth2",
+      "sha256": "bcb3c88f87c38974e6faa0f6b4d965e1568764b333d18ad3df4c9d2af1be69ba"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/api-log-final.txt",
+      "sha256": "65c024c24109c82234959b538cc2e692a450ffaf44342325afc60a8741dc0ad2"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5-timeout22.txt",
+      "sha256": "0b785ec1aa122531c91651d9a1e78d02a2a90d8235d2757c48f59f8d59293038"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p1.txt",
+      "sha256": "ef303c9c855a95d039ec6d293580cce86c8df91ec04530a80781736b8db357f7"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/up.log",
+      "sha256": "509a57162cbafff4e6ac8805385b1f577c96442df9f82dede527df9175439e6f"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p7.txt",
+      "sha256": "39da42d8b16039643921b49de07e8497d1c18ea1f6f4edffe2d62c1f2c76a0f7"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5b-timeoutx5.txt",
+      "sha256": "5cfa7ea44b20dd57a5b1a21aaec655fc00320d4decb768badad214027c174463"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5c-recovery.txt",
+      "sha256": "82daa6721a511d6e69f0f13b06a0b17af6e5737d806a633ef88c1af3f9d134e7"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8.txt",
+      "sha256": "718f4d291e68a0ce95b0f133ac915172a9a647624c0f4cc7e01a46b3a777b64e"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/capture.jsonl",
+      "sha256": "471a1587154053b20d6d7e734c4436183226da33812d8ca7bf1bc95f44070a4c"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5b-blackholex20.txt",
+      "sha256": "af37753f7e5f58c119101aae3f65b42a1b04132b1233f42f4018949a17c9a2f3"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p5-500.txt",
+      "sha256": "dcc1e8346978a6757ae3b464a8e4afd803d0aa77ad5ab7c64b2dd71fbd381246"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8-body-health",
+      "sha256": "6489d6d7a33c5d40e18fc61eeb6c34c341279ee61816394dde5189aa4ad8fae5"
+    },
+    {
+      "file": "exploration/experiments/08-surround-it/evidence/project-results/e08/p8-body-health-after",
+      "sha256": "6489d6d7a33c5d40e18fc61eeb6c34c341279ee61816394dde5189aa4ad8fae5"
+    }
+  ]
+}

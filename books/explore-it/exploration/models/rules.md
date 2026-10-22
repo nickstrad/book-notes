@@ -117,3 +117,14 @@ Invariants I1–I13 were written at 13:22:19Z before any probe and asserted afte
 | ★ R-E07-2 After a purge returns, no job of the queue that existed before it is pending or unflagged-leased (A2 rule under concurrency) | SPEC:54-56 | purge ‖ lease / nack / release / expiry | violated (E07-F02); holds sequentially (P4) |
 | ★ R-E07-3 A rejected lifecycle verb has no side effect | SPEC:16 | 49 state × verb cells | holds (P7) |
 | ★ R-E07-4 Two concurrent completions by one holder: exactly one wins | SPEC:107, :110-115 | ack‖ack, ack‖nack | holds (P2 dup) |
+
+## E08 revision — `explore-it/lesson-07` ([E08 notes](../experiments/08-surround-it/notes.md)); ★ = new observation
+
+| Rule | Source | Variable / boundary | Status at lesson-07 |
+|---|---|---|---|
+| ★ R-E08-1 Every `/v1/` id or name route is scoped to the key's namespace | SPEC.md:10 | globex key × 9 job routes, worker, schedule ×4, stats | holds (P1); events answer `[]` rather than 404 for foreign/nonexistent ids |
+| ★ R-E08-2 A notification with a healthy receiver is eventually attempted, whatever other rows do | SPEC.md:179, :197-198 | ≥20 slow/unreachable earlier rows | violated (E08-F02) |
+| ★ R-E08-3 The service survives a database outage, including one at API start | SPEC.md:186-189 | DB restart (holds, P2); DB absent at API start (violated, E08-F01) | partly violated |
+| ★ R-E08-4 Health and auth report an unavailable database promptly (503) | SPEC.md:188-189 | DB refusing (holds) vs DB frozen (violated) | violated for frozen DB (E08-F04) |
+| ★ R-E08-5 The signature is HMAC-SHA256 over the exact bytes sent | SPEC.md:177 | traced datum, hand verification | holds (P4) |
+| ★ R-E08-6 Schedules follow local civil time across offset changes | SPEC.md:162 | DST gap/overlap/fixed vs wildcard hours | holds for existing times; non-existent times skipped, repeated times fire twice — unspecified (E08-F03, spec) |
