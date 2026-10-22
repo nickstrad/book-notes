@@ -142,3 +142,26 @@ that partner to `ok` and waits for this probe's rows to deliver before removing 
 because U03's control waits for the whole outbox to drain.
 D21–D24 (fixed in E01) run as unchanged early-fixed controls in both directions
 and are excluded from the four-item verdict count.
+
+E09 adds `probe09.py`, U39–U45 and `lesson-09.ids`. The probes freeze the lab clock
+and always reset it. U39 stores a never-matching acme schedule ahead of a globex
+every-minute schedule (by create, or by PATCH when create refuses it) and requires
+the globex schedule to fire within two minute ticks; when nothing unadvanceable can
+be stored, the victim must still fire, or the probe is an error. U40, U41 and U45
+send the spec's unnamed inputs (impossible dates, zone prefixes, `Local`, an empty
+PATCH zone) on create and PATCH beside a valid control; a disable-only PATCH must
+succeed. U42 creates a New York schedule at 01:30 EDT and reads `zone_offset` from
+GET and list at 02:10 EST. U43 races up to 150 acks and 150 cancels each against a
+delete spinner on the same job and counts committed transitions (read-only
+`job_events`) answered non-2xx or without an outbox row. U44 ends eight leases per
+trial, by expiry and by worker deletion, while a spinner deletes every job, for up
+to 20 trials each, and requires an outbox row for every dead job and no 500. U44 waits for its
+own outbox rows to deliver before resetting the clock: they are due at the frozen
+2033 time, and U03's control drains the whole outbox. U43 and
+U44 sample a race: historical runs stop at the first hits; current runs exhaust the
+bounds. `TestL09LegacyUnadvanceableSchedule` inserts a pre-U40 row with SQL (checks
+may use internals) and runs `Fire` in-process. `TestL09ModelWalk` is the
+transition-table check: 1 000 random events through the public API, each predicted
+from `jobs.Targets` before it is sent (`QUEUELET_WALK_STEPS`, `QUEUELET_WALK_SEED`).
+D12, D14, D18, D19, D20 and D27 (the missing-guard group, fixed in E01) run as
+unchanged early-fixed controls in both directions, outside the seven-item count.

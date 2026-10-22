@@ -63,7 +63,7 @@ func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, e
 	if paused {
 		return []map[string]any{}, nil
 	}
-	rows, e := tx.Query(`SELECT id FROM jobs WHERE queue_id=$1 AND state='queued' AND kind=ANY($2) ORDER BY `+LeaseOrder+` LIMIT $3 FOR UPDATE SKIP LOCKED`, q, kinds, max)
+	rows, e := tx.Query(`SELECT id FROM jobs WHERE queue_id=$1 AND `+Guard("state", EvLease)+` AND kind=ANY($2) ORDER BY `+LeaseOrder+` LIMIT $3 FOR UPDATE SKIP LOCKED`, q, kinds, max)
 	if e != nil {
 		return nil, e
 	}
@@ -88,10 +88,14 @@ func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, e
 	}
 	return out, tx.Commit()
 }
-func (j *Service) Notify(id int64, now time.Time) error {
+
+// notify queues the terminal notification in the transaction that made the job
+// terminal, so a commit always carries its outbox row and a concurrent delete
+// waits for both.
+func notify(tx *sql.Tx, id int64, now time.Time) error {
 	var url, secret, state, errtext string
 	var result []byte
-	e := j.S.DB.QueryRow(`SELECT q.webhook_url,q.webhook_secret,j.state,COALESCE(j.result,'null'),j.last_error FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id).Scan(&url, &secret, &state, &result, &errtext)
+	e := tx.QueryRow(`SELECT q.webhook_url,q.webhook_secret,j.state,COALESCE(j.result,'null'),j.last_error FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id).Scan(&url, &secret, &state, &result, &errtext)
 	if e != nil {
 		return e
 	}
@@ -99,11 +103,11 @@ func (j *Service) Notify(id int64, now time.Time) error {
 		return nil
 	}
 	body, _ := json.Marshal(map[string]any{"job_id": id, "state": state, "result": json.RawMessage(result), "last_error": errtext})
-	_, e = j.S.DB.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at,event_at,namespace_id,queue) SELECT $1,$2,$3,$4,$5,$5,j.namespace_id,q.name FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id, url, secret, string(body), now)
+	_, e = tx.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at,event_at,namespace_id,queue) SELECT $1,$2,$3,$4,$5,$5,j.namespace_id,q.name FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id, url, secret, string(body), now)
 	return e
 }
 func (j *Service) Heartbeat(id int64, token string, seconds int, now time.Time) error {
-	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND state='leased' AND lease_expires_at > $4`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
+	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND `+Guard("state", EvHeartbeat)+` AND lease_expires_at > $4`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
 	return Changed(r, e)
 }
 func Changed(r sql.Result, e error) error {

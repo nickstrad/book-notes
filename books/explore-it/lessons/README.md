@@ -15,6 +15,7 @@ commit and fix commit. Original explorer reports remain immutable; the canonical
 | [06 — relate it](06-relate-it.md) | `explore-it/lesson-06` | U27–U33, A4 | `make verify LESSON=06` |
 | [07 — state it](07-state-it.md) | `explore-it/lesson-07` | U34–U35, A3 | `make verify LESSON=07` |
 | [08 — surround it](08-surround-it.md) | `explore-it/lesson-08` | U36–U38, A5 | `make verify LESSON=08` |
+| [09 — explain it](09-explain-it.md) | `explore-it/lesson-09` | U39–U45; transition table | `make verify LESSON=09` |
 
 Use `REF=<previous tag>` for the same public repros against historical binaries.
 See each note for exact verdicts and measurement limits. This index records

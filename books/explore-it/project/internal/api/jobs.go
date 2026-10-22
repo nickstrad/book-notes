@@ -30,7 +30,7 @@ func (s *Server) deleteJob(w http.ResponseWriter, r *http.Request) {
 	if !s.ownJob(w, r) {
 		return
 	}
-	res, e := s.S.DB.Exec(`WITH removed AS (DELETE FROM jobs WHERE id=$1 AND state IN ('succeeded','dead','cancelled') RETURNING *) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$2,'deleted',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, num(r, "id"), s.Clock.Now())
+	res, e := s.S.DB.Exec(`WITH removed AS (DELETE FROM jobs WHERE id=$1 AND `+jobs.Guard("state", jobs.EvDelete)+` RETURNING *) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$2,'deleted',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, num(r, "id"), s.Clock.Now())
 	if e = jobs.Changed(res, e); e != nil {
 		fail(w, 409, "state_conflict", e)
 		return
@@ -147,14 +147,9 @@ func (s *Server) deleteWorker(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	now := s.Clock.Now()
-	dead, e := s.Jobs.ReleaseWorker(tx, num(r, "id"), now)
+	e = s.Jobs.ReleaseWorker(tx, num(r, "id"), now)
 	if e == nil {
 		e = tx.Commit()
-	}
-	for _, id := range dead {
-		if e == nil {
-			e = s.Jobs.Notify(id, now)
-		}
 	}
 	output(w, map[string]any{"ok": true}, e)
 }

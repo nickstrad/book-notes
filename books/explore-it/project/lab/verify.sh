@@ -70,6 +70,8 @@ done
 controls=()
 [[ $lesson == 07 ]] && controls=(D18 D19 D20)
 [[ $lesson == 08 ]] && controls=(D21 D22 D23 D24)
+# The missing-guard group (fixed in E01), now taken from the transition table.
+[[ $lesson == 09 ]] && controls=(D12 D14 D18 D19 D20 D27)
 if ((${#controls[@]})); then
   for control in "${controls[@]}"; do
     result=$(bash "lab/repro/$control.sh" </dev/null)

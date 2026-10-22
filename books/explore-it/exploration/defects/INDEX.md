@@ -155,12 +155,12 @@ repaired in E01 (F07) and runs here as an early-fixed control; it is not an E09 
 
 | ID | Original | Current record |
 |---|---|---|
-| U39 | [E09-F01](E09-F01-one-unadvanceable-schedule-stops-all-later-schedules.md) | [open](U39-one-schedule-stops-later-schedules.md) |
-| U40 | [E09-F02](E09-F02-never-matching-cron-accepted-year-one.md) | [open](U40-never-matching-cron-accepted.md) |
-| U41 | [E09-F03](E09-F03-cron-zone-prefix-overrides-timezone.md) | [open](U41-cron-zone-prefix-overrides-timezone.md) |
-| U42 | [E09-F06](E09-F06-schedule-zone-offset-frozen-in-record.md) | [open](U42-schedule-zone-offset-frozen.md) |
-| U43 | [E09-F07](E09-F07-ack-cancel-error-after-commit-and-lost-notification.md) | [open](U43-terminal-notification-after-commit.md) |
-| U44 | [E09-F08](E09-F08-one-vanished-job-drops-other-dead-notifications.md) | [open](U44-vanished-job-drops-pass-notifications.md) |
-| U45 | [E09-F09](E09-F09-non-iana-local-timezone-accepted.md) | [open](U45-non-iana-local-timezone.md) |
+| U39 | [E09-F01](E09-F01-one-unadvanceable-schedule-stops-all-later-schedules.md) | [fixed in lesson 09](U39-one-schedule-stops-later-schedules.md) |
+| U40 | [E09-F02](E09-F02-never-matching-cron-accepted-year-one.md) | [fixed in lesson 09](U40-never-matching-cron-accepted.md) |
+| U41 | [E09-F03](E09-F03-cron-zone-prefix-overrides-timezone.md) | [fixed in lesson 09](U41-cron-zone-prefix-overrides-timezone.md) |
+| U42 | [E09-F06](E09-F06-schedule-zone-offset-frozen-in-record.md) | [fixed in lesson 09](U42-schedule-zone-offset-frozen.md) |
+| U43 | [E09-F07](E09-F07-ack-cancel-error-after-commit-and-lost-notification.md) | [fixed in lesson 09](U43-terminal-notification-after-commit.md) |
+| U44 | [E09-F08](E09-F08-one-vanished-job-drops-other-dead-notifications.md) | [fixed in lesson 09](U44-vanished-job-drops-pass-notifications.md) |
+| U45 | [E09-F09](E09-F09-non-iana-local-timezone-accepted.md) | [fixed in lesson 09](U45-non-iana-local-timezone.md) |
 
 Original score: 21 stated / 19 confirmed / 0 refuted / 0 contradicted reading predictions / 7 reports / 20 new cells.

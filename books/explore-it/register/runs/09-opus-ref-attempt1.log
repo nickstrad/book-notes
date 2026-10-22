@@ -1,0 +1,143 @@
+{"command": ["make", "verify", "LESSON=09", "REF=explore-it/lesson-08"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix09", "QUEUELET_IMAGE_TAG": "fix09", "QUEUELET_API_PORT": "18400", "QUEUELET_HOOK_PORT": "18401", "QUEUELET_PG_PORT": "15633", "QUEUELET_URL": "http://localhost:18400", "QUEUELET_HOOK_URL": "http://localhost:18401", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15633/queuelet?sslmode=disable"}, "start": "2026-10-22T21:09:44.651204+00:00"}
+REF='explore-it/lesson-08' bash lab/verify.sh 09
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 300.20kB 0.0s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#7 DONE 0.1s
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 4/6] RUN go mod download
+#10 CACHED
+
+#11 [build 5/6] COPY . .
+#11 CACHED
+
+#12 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#12 CACHED
+
+#13 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#13 CACHED
+
+#14 [stage-1 3/5] WORKDIR /app
+#14 CACHED
+
+#15 [build 3/6] COPY go.mod go.sum ./
+#15 CACHED
+
+#16 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:4e51d24f9f225d1b16bf6dc03485a31d5913fad2a7adc753ae0a29a405655341 done
+#18 exporting config sha256:8bfa4fc4fb111127f18e116ae263c2594e299331a8af1cbde891661649f1f189 done
+#18 exporting attestation manifest sha256:b9b3b5c699cab2e03833cb7bbbd004dd569009f7cbd412a58c2411d29abc0ff6 0.0s done
+#18 exporting manifest list sha256:9962c70381b7a55d220cd548b4f2f345369662c5e14465f2dbdfb7283eb9f412 0.0s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref 0.0s done
+#18 DONE 0.2s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+{"jobs": 0, "label": "victim", "probe": "U39", "unadvanceable_accepted": true}
+PRESENT: U39 — unadvanceable schedule stored=True; later globex every-minute schedule fired jobs=0 over two minute ticks
+PRESENT: U40 — accepted={'create 0 0 30 2 *': '0001-01-01T00:00:00Z', 'create * * 30 2 *': '0001-01-01T00:00:00Z', 'patch 0 0 31 4 *': '0001-01-01T00:00:00Z'}; valid control 201
+PRESENT: U41 — accepted={'CRON_TZ=Asia/Tokyo 0 9 * * * in UTC': '2033-04-02T00:00:00Z', 'TZ=Asia/Tokyo 0 9 * * * in UTC': '2033-04-02T00:00:00Z', 'CRON_TZ=Asia/Tokyo 0 9 * * * in America/New_York': '2033-04-01T04:00:00Z'}; plain 0 9 * * * UTC next=09:00Z
+PRESENT: U42 — created at EDT offset -14400; at 07:10Z (EST, -18000) GET zone_offset=-14400, list=-14400
+{"defects": [[303, 200, false], [304, 409, false], [308, 409, false], [312, 409, false], [314, 200, false], [315, 409, false], [316, 409, false], [318, 409, false], [319, 409, false], [321, 409, false]], "label": "ack", "probe": "U43", "statuses": {"200": 16, "409": 10}, "trials": 26}
+{"defects": [[329, 200, false], [348, 200, false], [354, 409, false], [371, 200, false]], "label": "cancel", "probe": "U43", "statuses": {"200": 50, "409": 1}, "trials": 51}
+PRESENT: U43 — committed transitions answered non-2xx or never notified: {'ack': 12, 'cancel': 4} (ack 150, cancel 150 trials max; delete spinner per job)
+{"label": "expire", "probe": "U44", "problems": [{"missing": [382, 383, 384, 385, 386, 387], "trial": 0, "worker_delete": null}], "trials": 1}
+{"label": "worker delete", "probe": "U44", "problems": [{"missing": [391, 392, 393, 394, 395, 396, 397], "trial": 0, "worker_delete": 500}], "trials": 1}
+PRESENT: U44 — dead jobs without notification or 500 for a committed delete: expire 1 trial(s) [{'trial': 0, 'missing': [382, 383, 384, 385, 386, 387], 'worker_delete': None}], worker delete 1 trial(s) [{'trial': 0, 'missing': [391, 392, 393, 394, 395, 396, 397], 'worker_delete': 500}] (20 trials × 8 jobs max)
+PRESENT: U45 — accepted={'create Local': True, "patch 'Local'": True, "patch ''": True}; America/New_York control 201
+ABSENT: D12 — purged scheduled/retry_wait/queued GET statuses=[404, 404, 404]
+ABSENT: D14 — non-dead retry outcomes=[('cancelled', 409, 'cancelled'), ('succeeded', 409, 'succeeded')]
+ABSENT: D18 — expired A ack=409; current B ack=200; stored result={'owner': 'B'}
+ABSENT: D19 — nack incompatible outcomes=[('wrong-token', 409, 'leased'), ('cancelled', 409, 'cancelled'), ('queued', 409, 'queued')]
+ABSENT: D20 — first crash max_attempts=1 leaves dead; completed attempts=1
+ABSENT: D27 — disabled schedule after real minute boundary produced=0; enabled control fired
+DEFECTS REPRODUCED: 7 present
+
+EXIT 0; ELAPSED 80.65s

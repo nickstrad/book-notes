@@ -1,0 +1,23 @@
+{
+  "project/Makefile": "43a146f4edcc40d33a1621545245ad5dde363fbd04dcce8ff0ca2108305c6dac",
+  "project/internal/jobs/transition_test.go": "a50bebe5fca09c2b22f1c82b8de6ef997bc4e86db1eabb93661850a11ee3e283",
+  "project/lab/repro/D12.sh": "179ce6811b4f2f95990eefb0678e19baed9672770161e36c8848a7743901a055",
+  "project/lab/repro/D14.sh": "844702b627258cb322a8c3c646ed32e2836e52b601d11cf579c6706840327bd1",
+  "project/lab/repro/D18.sh": "de7f9c5613487fe2f22801311433507a20bc1a4d76e3c01ebccfe3c2bb1e4b9c",
+  "project/lab/repro/D19.sh": "11ac6f8c23c379262c7b8d2436cfa9a69e7be70078169e44cabd09c19d292874",
+  "project/lab/repro/D20.sh": "58fb83b3a2a704d966523fa65419880fbb0535c884a9d0accc9f0611038c55db",
+  "project/lab/repro/D27.sh": "8e7a3ea988b6b3eec6f5c9477217c7f6cc4b85577c1640006cfd0ab9d95fb970",
+  "project/lab/repro/U39.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U40.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U41.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U42.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U43.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U44.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/U45.sh": "148261946f4a09773823e67900581af571f70524e3f1be6718f69498fb43dac9",
+  "project/lab/repro/lesson-09.ids": "c8864390b30278796bb82effc67ff7f545ccfacb57aed81efb226bfb9e144d8e",
+  "project/lab/repro/probe.py": "bfd333542888943bc75a1faaaf39655fbb2ca31937e4086f37658e0caa22bc06",
+  "project/lab/repro/probe04.py": "f5ac3ea363658297e0148caf77c726ee55c59396d4436953bddd63fc119afa3a",
+  "project/lab/repro/probe09.py": "19bbf32eefb4782aa8bdeee9c366854de1f43dc1010da65429b3dfe28f9ad957",
+  "project/lab/verify.sh": "3bef81ad4fff9f460150af8c36f14e6b173a6b9f394209e40ae5576acb62e060",
+  "project/test/checks/lesson09_test.go": "183d9f8677971a68157ac6efd79e37233edca3f91ce873891115688451d01791"
+}

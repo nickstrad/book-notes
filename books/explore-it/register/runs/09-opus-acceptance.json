@@ -1,0 +1,149 @@
+{
+  "runs": [
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T21:03:59.941423+00:00",
+      "exit": 0,
+      "elapsed_seconds": 40.49,
+      "log": "09-opus-up-attempt1.log",
+      "attempt": 1
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09"
+      ],
+      "start": "2026-10-22T21:04:40.513259+00:00",
+      "exit": 0,
+      "elapsed_seconds": 304.049,
+      "log": "09-opus-current-attempt1.log",
+      "attempt": 1
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09",
+        "REF=explore-it/lesson-08"
+      ],
+      "start": "2026-10-22T21:09:44.651204+00:00",
+      "exit": 0,
+      "elapsed_seconds": 80.65,
+      "log": "09-opus-ref-attempt1.log",
+      "attempt": 1
+    },
+    {
+      "name": "checks",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T21:11:05.383243+00:00",
+      "exit": 2,
+      "elapsed_seconds": 734.855,
+      "log": "09-opus-checks-attempt1.log",
+      "attempt": 1
+    },
+    {
+      "name": "down",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T21:23:20.420922+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.817,
+      "log": "09-opus-down-attempt1.log",
+      "attempt": 1
+    },
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T21:26:06.982710+00:00",
+      "exit": 0,
+      "elapsed_seconds": 7.737,
+      "log": "09-opus-up.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09"
+      ],
+      "start": "2026-10-22T21:26:14.802846+00:00",
+      "exit": 0,
+      "elapsed_seconds": 273.377,
+      "log": "09-opus-current.log"
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09",
+        "REF=explore-it/lesson-08"
+      ],
+      "start": "2026-10-22T21:30:48.292963+00:00",
+      "exit": 0,
+      "elapsed_seconds": 78.873,
+      "log": "09-opus-ref.log"
+    },
+    {
+      "name": "checks",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T21:32:07.291306+00:00",
+      "exit": 0,
+      "elapsed_seconds": 697.092,
+      "log": "09-opus-checks.log"
+    },
+    {
+      "name": "test",
+      "command": [
+        "make",
+        "test"
+      ],
+      "start": "2026-10-22T21:43:44.457979+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.147,
+      "log": "09-opus-test.log"
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T21:43:46.687862+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.276,
+      "log": "09-opus-vet.log"
+    },
+    {
+      "name": "down",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T21:43:47.150585+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.816,
+      "log": "09-opus-down.log"
+    }
+  ],
+  "note": "attempt 1: TestL01U03 failed because U44 left outbox rows due in 2033 (frozen clock); U44 now drains its rows before resetting the clock; hashes re-frozen; full sequence rerun as attempt 2"
+}

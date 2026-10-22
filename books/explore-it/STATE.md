@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E09 exploration committed (blind Opus, 7 reports reconciled U39–U45); E09 fix in progress. Independent non-Claude reviews of E07 and E08 pending.**
+**Status (2026-10-22): E09 done (exploration `2fee853`, fix tagged `explore-it/lesson-09`); all nine experiments complete. Next: checkpoint C wrap (fresh run). Independent non-Claude reviews of E07, E08 and E09 pending.**
 
 ## Done
 
@@ -60,6 +60,23 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
   drain control and the suite exceeded Go's 10-minute default; U37 now drains its rows and
   `make checks` passes `-timeout 30m`. Paired dwell only. Fixer seat was Opus per the brief.
 
+- E09: exploration `2fee853` (blind Opus, exit 0, 20:31–20:50Z), fix tagged
+  `explore-it/lesson-09`. Score: 21 stated / 19 confirmed / 0 refuted / 0 contradicted
+  reading predictions / 7 reports / 20 new model cells; 6 of 9 pre-probe predicted sites
+  produced reports. Cause model (`models/causes.md`): five habits for E01 plus H-F, the
+  post-commit tail. U39 (one unadvanceable schedule stops all later ones), U40 (never-
+  matching cron accepted), U41 (`CRON_TZ=` prefix), U42 (frozen `zone_offset`), U43 (ack/
+  cancel ‖ delete: 409 or lost notification after commit), U44 (one vanished job drops a
+  pass's notifications), U45 (`Local` zone) fixed. Structural fix: `internal/jobs/transition.go`
+  (the state table as code; every state guard comes from it), `TestTransitionContract`,
+  `TestL09ModelWalk` (1 000 steps clean; a reinjected D14 caught at step 241). D27 (plan's
+  target, fixed in E01) and D12/D14/D18–D20 are early-fixed controls, ABSENT at both tags.
+- Acceptance (`register/runs/09-opus-acceptance.json`, attempt 2): current `FIXED AND CHECKED:
+  7 absent` (273 s), REF lesson-08 `DEFECTS REPRODUCED: 7 present` (79 s), `make checks`
+  (94 check functions, 697 s), `make test`, `go vet`, integrity all exit 0. Attempt 1 retained:
+  U44's 2033-dated outbox rows broke U03's drain control; U44 now drains before resetting the
+  clock. Stop signal did not fall (raw reports E01–E09: 27/3/8/5/3/7/2/4/7).
+
 All 27 planted defects were fixed in E01. Later experiments tested remaining questions
 and new faults, not fictional late discoveries. E06's original score remains
 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contradictions / 30 cells.
@@ -68,7 +85,7 @@ Dwell remains paired evidence only; no full sweep was run.
 
 ## In progress
 
-Nothing is running; no stack is up for this book (`queuelet-e08`, `queuelet-fix08` and
+Nothing is running; no stack is up for this book (`queuelet-e09`, `queuelet-fix09` and
 `queuelet-ref` are down with volumes removed).
 
 ## Decisions and open items
@@ -80,14 +97,20 @@ is the complete checkpoint disposition, alongside the original
 [defect index](exploration/defects/INDEX.md). Original “open” wording in raw records
 is historical, not an override of later documented decisions.
 
+- **E09 forward questions:** Q-E09-1 (is `0-23` a wildcard hour under A5?) and Q-E09-2
+  (should success clear `last_error`?) are spec decisions for Nick; H-E04-08 gained a
+  lease-before-`run_at` symptom after backward clock steps (explorer withdrew E09-F04/F05);
+  TR-E09-2 deterministic post-commit fault hook not built; H-E09-18/19 unprobed (covered
+  structurally); stored legacy unadvanceable schedules keep `/health` degraded until disabled
+  (no migration, same policy question as legacy templates).
 - **E08 forward questions:** Q-E08-1 worker identity within a tenant (any key holder can
   lease as any worker id), H-E08-22 redirects counted as delivered, H-E08-23 one schedule
   that cannot advance stops later schedules (`Fire` returns on first error), H-E08-24 pool
   exhaustion during a freeze, T-E08-1…3 (fault hook, shipper lag metric/health, partner
   signature and redirect modes); handlers past auth and the loop are still unbounded
   against a frozen database.
-- **E07/E08 review seat:** both fixers were Claude (Opus) rather than the planned Codex
-  seeder family, so their independent reviews should be Codex or Muse, not Claude.
+- **E07/E08/E09 review seat:** all three fixers were Claude (Opus) rather than the planned
+  Codex seeder family, so their independent reviews should be Codex or Muse, not Claude.
 - E07 forward questions: Q-E07-1 heartbeat shortening, Q-E07-2 error message consistency,
   H-E07-17 large-sweep latency, T-E07-1/2 sweep duration and deterministic race
   instruments; unprobed cancel/retry/promote/retention interleavings.
@@ -125,11 +148,11 @@ resolved by these fixes are distinguished from the remaining questions in the re
 
 ## Next
 
-1. Independent reviews of E07 (`explore-it/lesson-07`) and E08 (`explore-it/lesson-08`)
-   from a non-Claude family.
-2. E09 (Explain it) as a separate fresh explorer run from `explore-it/lesson-08`
-   (`prepare-export.py 9 explore-it/lesson-08`); then checkpoint C review, final skills
-   and landing page.
+1. Checkpoint C wrap as a separate fresh run: final skill revisions from E01–E09 (worked
+   examples, the answer-key measure for the skills index), landing page `README.md`,
+   final fixes, `v1-explored` tag (PLAN 5.1, 7, 9).
+2. Independent non-Claude reviews of E07, E08 and E09 (`explore-it/lesson-07…09`), or one
+   checkpoint C review covering them.
 3. Merge adds-only after Release It! lands; no push or merge was performed here.
 
 ## Resume
@@ -142,6 +165,9 @@ resolved by these fixes are distinguished from the remaining questions in the re
   Its first HEAD E02 attempt omitted that variable and failed against default port
   15433; retained logs show five public repros passed before two direct checks failed.
   Corrected acceptance reran with the explicit database URL. No SUT change was needed.
+- E09: explorer export `/tmp/explore-it-experiment-09` (coordinator metadata in
+  `/tmp/explore-it-coordinator/current.json`); fix acceptance `register/runs/09-opus-runner.py`,
+  project `queuelet-fix09` (ports 18400/18401/15633); REF `queuelet-ref`. All stacks down.
 - E08: explorer export `/tmp/explore-it-experiment-08` (coordinator metadata in
   `/tmp/explore-it-coordinator/current.json`); fix acceptance `register/runs/08-opus-runner.py`,
   project `queuelet-fix08` (ports 18390/18391/15623); REF `queuelet-ref`. All stacks down.

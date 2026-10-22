@@ -12,7 +12,7 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	var kind string
 	var purged bool
 	var worker int64
-	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,COALESCE(q.backoff_max,0),j.leased_by,j.purge_requested FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND j.state='leased' AND j.lease_token=$2 AND j.lease_expires_at > $3 FOR UPDATE OF j`, id, token, now).Scan(&attempts, &max, &kind, &base, &cap, &worker, &purged)
+	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,COALESCE(q.backoff_max,0),j.leased_by,j.purge_requested FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND `+Guard("j.state", EvNack)+` AND j.lease_token=$2 AND j.lease_expires_at > $3 FOR UPDATE OF j`, id, token, now).Scan(&attempts, &max, &kind, &base, &cap, &worker, &purged)
 	if e != nil {
 		return e
 	}
@@ -32,11 +32,10 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	if e != nil {
 		return e
 	}
-	if e = tx.Commit(); e != nil {
-		return e
-	}
 	if state == "dead" {
-		return j.Notify(id, now)
+		if e = notify(tx, id, now); e != nil {
+			return e
+		}
 	}
-	return nil
+	return tx.Commit()
 }

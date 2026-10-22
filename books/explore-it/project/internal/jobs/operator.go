@@ -15,7 +15,7 @@ func (j *Service) Cancel(id int64, now time.Time) error {
 	}
 	defer tx.Rollback()
 	var state string
-	e = tx.QueryRow(`SELECT state FROM jobs WHERE id=$1 AND state NOT IN ('succeeded','dead','cancelled') FOR UPDATE`, id).Scan(&state)
+	e = tx.QueryRow(`SELECT state FROM jobs WHERE id=$1 AND `+Guard("state", EvCancel)+` FOR UPDATE`, id).Scan(&state)
 	if e == sql.ErrNoRows {
 		return fmt.Errorf("state conflict")
 	}
@@ -32,10 +32,10 @@ func (j *Service) Cancel(id int64, now time.Time) error {
 	if e != nil {
 		return e
 	}
-	if e = tx.Commit(); e != nil {
+	if e = notify(tx, id, now); e != nil {
 		return e
 	}
-	return j.Notify(id, now)
+	return tx.Commit()
 }
 
 // CancelRequested is an observation, never an extension of the revoked lease.
@@ -47,6 +47,6 @@ func (j *Service) CancelRequested(id int64, token string) (bool, error) {
 }
 
 func (j *Service) Retry(id int64, now time.Time) error {
-	r, e := j.S.DB.Exec(`UPDATE jobs SET state='queued',event_at=$2,attempts=0,run_at=$2,finished_at=NULL,purge_requested=false WHERE id=$1 AND state='dead'`, id, now)
+	r, e := j.S.DB.Exec(`UPDATE jobs SET state='queued',event_at=$2,attempts=0,run_at=$2,finished_at=NULL,purge_requested=false WHERE id=$1 AND `+Guard("state", EvRetry), id, now)
 	return Changed(r, e)
 }

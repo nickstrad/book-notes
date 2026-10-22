@@ -158,7 +158,11 @@ The API returns complete stored results and errors.
 
 `POST /v1/schedules` takes name, queue, kind, payload, cron, timezone and enabled.
 Cron uses five fields: minute, hour, day of month, month and day of week.
-Time zones use IANA identifiers, defaulting to UTC.
+Anything else, including a `CRON_TZ=` or `TZ=` prefix, is 400 `invalid_cron`, and so
+is an expression that never matches a real date (`0 0 30 2 *`).
+Time zones use IANA identifiers, defaulting to UTC on create; `Local` and an empty
+PATCH value are 400 `invalid_timezone`. A schedule's `zone_offset` is its zone's
+offset at the time of the request.
 Schedule times follow the named zone's local civil time, including offset changes.
 A schedule with a fixed hour runs once per matching local time: a time skipped by a
 spring-forward transition runs once at the end of the gap, and a time that occurs twice
@@ -168,13 +172,16 @@ Schedule creation follows enqueue's payload rule: omitted means `{}`, explicit n
 and non-object values are invalid. PATCH does not accept payload.
 `GET /v1/schedules` lists schedules; `GET /v1/schedules/{id}` reads one.
 `PATCH /v1/schedules/{id}` updates cron, timezone or enabled status; the next fire
-must reflect the current configuration.
+must reflect the current configuration. A PATCH that only disables a schedule
+always succeeds. One schedule that cannot fire does not stop the others.
 `DELETE /v1/schedules/{id}` removes it.
 `POST /v1/schedules/{id}/run` enqueues one immediate execution.
 
 ## Notifications and operations
 
 Terminal transitions produce a webhook outbox entry when the queue has a URL.
+The entry commits with the transition: a transition that took effect is answered as
+success and is notified, even when the job is deleted immediately afterwards.
 The entry includes job id, state, result and last error.
 Notification results preserve their JSON type; results and errors are complete.
 Each POST carries `X-Queuelet-Signature`, a hex HMAC-SHA256 over the body using

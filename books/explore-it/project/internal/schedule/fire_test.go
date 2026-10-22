@@ -49,3 +49,23 @@ func TestNextAcrossDST(t *testing.T) {
 		}
 	}
 }
+func TestNextRejectsWhatTheSpecDoesNotName(t *testing.T) {
+	now := time.Date(2026, 10, 22, 21, 0, 0, 0, time.UTC)
+	for _, tc := range []struct{ cron, zone string }{
+		{"0 0 30 2 *", "UTC"},                   // never matches (fixed hour)
+		{"* * 30 2 *", "UTC"},                   // never matches (wildcard hour)
+		{"0 0 31 4 *", "America/New_York"},      // never matches
+		{"CRON_TZ=Asia/Tokyo 0 9 * * *", "UTC"}, // zone prefix
+		{"TZ=Asia/Tokyo 0 9 * * *", "UTC"},      // zone prefix
+		{"0 9 * * *", "Local"},                  // not an IANA identifier
+		{"0 9 * * *", ""},                       // not an IANA identifier
+		{"0 9 * * * *", "UTC"},                  // six fields
+	} {
+		if next, e := Next(tc.cron, tc.zone, 0, now); e == nil {
+			t.Errorf("%q in %q accepted, next %v", tc.cron, tc.zone, next)
+		}
+	}
+	if _, e := Offset("Local", now); e == nil {
+		t.Error("Local accepted as a zone")
+	}
+}

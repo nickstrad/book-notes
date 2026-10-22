@@ -16,6 +16,16 @@ type ScheduleInput struct {
 	Enabled  *bool           `json:"enabled"`
 }
 
+// liveOffset reports zone_offset for the current time. The stored column is the
+// creation-time offset, which the scheduler no longer reads.
+func (s *Server) liveOffset(v map[string]any) map[string]any {
+	if zone, ok := v["timezone"].(string); ok {
+		if off, e := schedule.Offset(zone, s.Clock.Now()); e == nil {
+			v["zone_offset"] = off
+		}
+	}
+	return v
+}
 func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
 	var in ScheduleInput
 	if !decode(w, r, &in) {
@@ -65,10 +75,13 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	write(w, 201, v)
+	write(w, 201, s.liveOffset(v))
 }
 func (s *Server) listSchedules(w http.ResponseWriter, r *http.Request) {
 	v, e := s.S.Rows(`SELECT * FROM schedules WHERE namespace_id=$1 ORDER BY id`, ident(r).Namespace)
+	for _, row := range v {
+		s.liveOffset(row)
+	}
 	output(w, map[string]any{"schedules": v}, e)
 }
 func (s *Server) getSchedule(w http.ResponseWriter, r *http.Request) {
@@ -77,7 +90,7 @@ func (s *Server) getSchedule(w http.ResponseWriter, r *http.Request) {
 		fail(w, 404, "schedule_not_found", e)
 		return
 	}
-	write(w, 200, v)
+	write(w, 200, s.liveOffset(v))
 }
 func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 	var in struct {
@@ -112,19 +125,23 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 		enabled = *in.Enabled
 	}
 	now := s.Clock.Now()
-	off, e := schedule.Offset(zone, now)
-	if e != nil {
-		fail(w, 400, "invalid_timezone", e)
-		return
-	}
-	next, e := schedule.Next(expression, zone, off, now)
-	if e != nil {
-		fail(w, 400, "invalid_cron", e)
-		return
-	}
+	var off int
 	var nextValue any
-	if enabled {
-		nextValue = next
+	// Disabling alone never fails validation, so a stored schedule that can no
+	// longer be computed can still be switched off.
+	if enabled || in.Cron != nil || in.Timezone != nil {
+		if off, e = schedule.Offset(zone, now); e != nil {
+			fail(w, 400, "invalid_timezone", e)
+			return
+		}
+		next, e := schedule.Next(expression, zone, off, now)
+		if e != nil {
+			fail(w, 400, "invalid_cron", e)
+			return
+		}
+		if enabled {
+			nextValue = next
+		}
 	}
 	_, e = tx.Exec(`UPDATE schedules SET cron=$3,timezone=$4,enabled=$5,next_run_at=$6,zone_offset=$7 WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace, expression, zone, enabled, nextValue, off)
 	if e == nil {
@@ -139,7 +156,7 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 		fail(w, 500, "database_error", e)
 		return
 	}
-	write(w, 200, v)
+	write(w, 200, s.liveOffset(v))
 }
 func (s *Server) deleteSchedule(w http.ResponseWriter, r *http.Request) {
 	res, e := s.S.DB.Exec(`DELETE FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
