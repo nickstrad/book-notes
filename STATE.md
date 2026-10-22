@@ -14,7 +14,8 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   **Nick approved v3**; v2 archived as `PLAN-v2-checkout.md`, v1 as `PLAN-v1-per-topic-projects.md`.
 - **Phase 2 (build v0 + lessons):** in progress, builder seat Claude Opus 5.5, linear history on
   `main`. Done: `release-it/v0-flawed` (platform, lab, lesson 00 tour; `topics/` stubs removed),
-  `release-it/lesson-01` (checkpoint A complete). Next: lessons L02–L12 in plan order, one tag each.
+  `release-it/lesson-01` (checkpoint A), `release-it/lesson-02` … `lesson-07` (checkpoint B).
+  Next: checkpoint C, lessons L08–L12, then the landing page and `release-it/v1-hardened`.
   Deviations from the plan so far (each also in the lesson note it concerns):
   - v0 + lab are one commit (checkpoints A1 and A2 merged): the plan requires `make verify
     LESSON=00` to pass before the v0 tag, and that needs the lab.
@@ -28,6 +29,17 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   - Calibrated on vm-1: gateway 300 req/s, node 250 req/s, fleet 500 req/s (`lab/capacity.env`).
   - L01 is two commits (~650 lines of Go, plan ~350): node health reports physical facts and the
     gateway health needs a prober.
+  - Checkpoint B (details in each lesson note's "Deviations"): recalibrated at its start (gateway
+    350, node 300, fleet 600 req/s). Toxiproxy 2.12 wedges a proxy when a latency/timeout toxic is
+    removed under thousands of links, so faults use upstream `timeout` toxics and removal cycles
+    the proxy. Lab CPU weights on the shared VM: Postgres, control, Toxiproxy 4096 (Postgres capped
+    at 1.5 CPUs); gateways, nodes, loadgen 2048. L02 phase 1 reads only (F05 would leak cancelled
+    writes). L03 control pool 20 (plan 10; every request still resolved). L04 adds a hot-database
+    phase (the slow-node storm was already capped by L02's deadlines; duplicates were the damage).
+    L05 is two commits. L06 2 reads per database plus a per-tenant cap of 4 (plan: 4 reads per
+    database), the noisy tenant has 4 databases (seed: 243), creates get a 2.5 s gateway budget.
+    L07 makes the gateways the bottleneck for its run (0.15 CPU, nodes 0.75) and uses a
+    window-median p99 (≤ 300 ms).
   - The verify runner restores a seeded snapshot (Postgres template database + tenant files) after
     the first seed, so a reset is ~25 s instead of ~1 min.
 - **Phase 3 (skills):** not started; part of checkpoint C. Eight skills as in PLAN.md section 5.
@@ -36,4 +48,5 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
 
 ## Next action
 
-Builder continues with lesson 01 (transparency). Cross-family review of each checkpoint per the plan.
+Builder continues with checkpoint C (lesson 08, unbounded result sets). Cross-family review of
+checkpoints A and B per the plan.

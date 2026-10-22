@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -21,6 +22,7 @@ import (
 	"litefleet/internal/engine"
 	"litefleet/internal/httpx"
 	"litefleet/internal/metering"
+	"litefleet/internal/shed"
 	"litefleet/internal/wire"
 )
 
@@ -66,6 +68,11 @@ func main() {
 	go n.backup.Run()
 	go n.heartbeats(env("CONTROL_URL", "http://control:8090"))
 
+	// The node's own limit: three gateways can offer it more than it can take,
+	// and this is what keeps a burst at the gateways from queueing here.
+	limit, _ := strconv.Atoi(env("SHED_LIMIT", "48"))
+	limiter := shed.New(limit, func(r *http.Request) bool { return strings.HasPrefix(r.URL.Path, "/internal/db/") })
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /internal/db/{id}/query", n.query)
 	mux.HandleFunc("POST /internal/db/{id}/execute", n.execute)
@@ -73,13 +80,13 @@ func main() {
 	mux.HandleFunc("DELETE /internal/db/{id}", n.drop)
 	mux.HandleFunc("POST /internal/backup/{id}", n.backupNow)
 	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{
-		"canary": n.canaryCheck, "fds": n.fdCheck, "disk": n.diskCheck, "wal": n.walCheck,
+		"canary": n.canaryCheck, "fds": n.fdCheck, "disk": n.diskCheck, "wal": n.walCheck, "load": limiter.Check,
 	}))
 	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	addr := env("LISTEN", ":8070")
 	log.Printf("%s listening on %s", n.name, addr)
-	log.Fatal(httpx.NewServer(addr, httpx.Logged(mux)).ListenAndServe())
+	log.Fatal(httpx.NewServer(addr, httpx.Logged(limiter.Wrap(mux))).ListenAndServe())
 }
 
 func env(k, def string) string {

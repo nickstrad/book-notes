@@ -14,6 +14,9 @@ x-gateway: &gateway
     args: { CMD: gateway }
   restart: unless-stopped
   cpus: ${GATEWAY_CPUS:-0.5}
+  # The quota is the limit under test; the weight keeps other work on this
+  # shared VM from pushing an instance below its quota.
+  cpu_shares: 2048
   mem_limit: 256m
   depends_on: [toxiproxy]
 
@@ -24,6 +27,7 @@ x-node: &node
     args: { CMD: node }
   restart: unless-stopped
   cpus: ${NODE_CPUS:-0.5}
+  cpu_shares: 2048
   mem_limit: ${NODE_MEM:-512m}
   ulimits:
     nofile: { soft: 1024, hard: 1024 }
@@ -94,17 +98,17 @@ services:
 
   gateway-a:
     <<: *gateway
-    environment: { INSTANCE: gateway-a, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072" }
+    environment: { INSTANCE: gateway-a, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
     ports: ["18001:8080"]
 
   gateway-b:
     <<: *gateway
-    environment: { INSTANCE: gateway-b, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072" }
+    environment: { INSTANCE: gateway-b, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
     ports: ["18002:8080"]
 
   gateway-c:
     <<: *gateway
-    environment: { INSTANCE: gateway-c, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072" }
+    environment: { INSTANCE: gateway-c, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
     ports: ["18003:8080"]
 
   haproxy:
@@ -158,6 +162,7 @@ services:
       <<: *go-build
       args: { CMD: loadgen }
     profiles: [lab]
+    cpu_shares: 2048
     volumes: [../results:/results]
 
   report:
