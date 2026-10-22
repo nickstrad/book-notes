@@ -24,7 +24,7 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
   `d6c34d0` disambiguates the historical U09 copy without editing raw observations.
   [Review record](register/reviews/B/review-b.md),
   [commands/exits/timings](register/reviews/B/acceptance.json), original logs and audits
-  are in the checkpoint review commit. This brief explicitly assigned Sol rather than
+  are committed in `8435db8`. This brief explicitly assigned Sol rather than
   PLAN's Muse seat; the record states the cross-company coverage limit.
   Own-tag and HEAD E03–E06 verify counts 8/6/4/8; HEAD E02 count 5. All five
   previous-tag REF replays reproduced 5/8/6/4/8 items. All 74 integration checks,
@@ -104,4 +104,6 @@ resolved by these fixes are distinguished from the remaining questions in the re
   a completed reviewer as the E07 explorer. Coordinator owns blind export lifecycle.
 - [E06 lesson](lessons/06-relate-it.md), original `register/runs/06-acceptance.json`
   and `06-repair-acceptance.json` preserve earlier successes and failures. Own B evidence
-  supplements them. Project knowledge: [index](docs/knowledge/README.md).
+  supplements them. Project knowledge: [index](docs/knowledge/README.md), including
+  the separately committed [review database configuration](docs/knowledge/review-isolation.md).
+  Knowledge assessment found no new VM fact; reusable project guidance belongs here.
