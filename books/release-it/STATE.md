@@ -59,6 +59,9 @@ A post-review defect (cut-off queries not logged) is fixed in `9367863`. Nothing
   1.33 s once). The pre-fix `REF=` run missed as well (whale p99 1.14 s), and idle usage reports
   match before and after (0.20–0.35 s), so it is the host-load item below. Teaching note: lesson 01,
   "After the review"; `docs/knowledge/verify-workarounds-hide-defects.md`.
+- Walkthrough: `WALKTHROUGH.md`, the guided tour for a cold reader (orientation, reading order,
+  tag itinerary, run commands), with what was checked at its end. The repo `AGENTS.md` now requires
+  one per book.
 
 ## In progress
 - Nothing.
