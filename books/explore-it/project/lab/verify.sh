@@ -5,11 +5,34 @@ lesson=${1:-00}
 if [[ -n ${REF:-} && ${QUEUELET_REF_ACTIVE:-0} != 1 ]]; then
   root=$(git rev-parse --show-toplevel)
   scratch=$(mktemp -d /tmp/queuelet-ref.XXXXXX)
-  trap 'docker compose -f "$scratch/books/explore-it/project/deploy/compose.yml" down -v >/dev/null 2>&1; rm -rf "$scratch"' EXIT
+  original_project=$PWD
+  target="$scratch/books/explore-it/project"
+  cleanup_ref() {
+    status=$?
+    trap - EXIT
+    set +e
+    if ((status != 0)); then
+      mkdir -p "$original_project/results"
+      diagnostics=$(mktemp -d "$original_project/results/ref-failure.XXXXXX")
+      if [[ -n $diagnostics ]]; then
+        printf 'REF=%s\nlesson=%s\nexit_status=%s\n' "$REF" "$lesson" "$status" > "$diagnostics/run.txt"
+        docker compose -f "$target/deploy/compose.yml" ps -a > "$diagnostics/compose-ps.log" 2>&1
+        docker compose -f "$target/deploy/compose.yml" logs --no-color > "$diagnostics/compose.log" 2>&1
+        printf 'REF verification failed (exit %s); diagnostics: %s\n' "$status" "$diagnostics" >&2
+      else
+        echo 'Could not create REF diagnostics directory; dumping Compose state to stderr' >&2
+        docker compose -f "$target/deploy/compose.yml" ps -a >&2
+        docker compose -f "$target/deploy/compose.yml" logs --no-color >&2
+      fi
+    fi
+    docker compose -f "$target/deploy/compose.yml" down -v >/dev/null 2>&1
+    rm -rf "$scratch"
+    exit "$status"
+  }
+  trap cleanup_ref EXIT
   git -C "$root" archive "$REF" books/explore-it/project | tar -x -C "$scratch"
   export COMPOSE_PROJECT_NAME=queuelet-ref QUEUELET_API_PORT=18210 QUEUELET_HOOK_PORT=18211 QUEUELET_PG_PORT=15443 QUEUELET_IMAGE_TAG=ref
   export QUEUELET_URL=http://localhost:18210 QUEUELET_HOOK_URL=http://localhost:18211 QUEUELET_REF_ACTIVE=1
-  target="$scratch/books/explore-it/project"
   docker compose -f "$target/deploy/compose.yml" up -d --build
   bash lab/wait.sh
   # Run current instruments against the historical binaries.
@@ -52,7 +75,7 @@ if [[ -n ${REF:-} ]]; then
   [[ $absent == 0 ]] || { echo 'Historical reproduction incomplete' >&2; exit 1; }
   echo "DEFECTS REPRODUCED: $present present"
 else
-  [[ $present == 0 ]] || exit 1
+  [[ $present == 0 ]] || { echo "VERIFICATION FAILED: $present present; $absent absent" >&2; exit 1; }
   go test -tags checks ./test/checks -run "L$lesson" -count=1
   echo "FIXED AND CHECKED: $absent absent; regression checks pass"
 fi

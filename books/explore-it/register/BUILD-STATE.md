@@ -5,9 +5,13 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-Checkpoint A build complete through E01 fix, ready for independent review.
+Checkpoint A complete through E01 and the narrow review-nit repair. Independent
+Muse Wonder Full review of `b839fdf` returned **NITS**; evidence is preserved in
+[reviews/A/review-a.md](reviews/A/review-a.md).
 v0: `847f1b3`, tag `explore-it/v0-inherited`; blind E01: `6e4dd4a`; fix:
-commit containing this state, tag `explore-it/lesson-01`. All D01–D27 and U01–U08
+`b839fdf`; diagnostic/docs repair: commit containing this state, the new target
+of `explore-it/lesson-01`. SUT and behavioral oracles are unchanged from reviewed
+`b839fdf`; the tag moves only for this authorized pre-acceptance repair. All D01–D27 and U01–U08
 assigned by reconciliation are repaired. Original discovery remains 25 live-probed
 registered defects, D23 harness evidence and partial D07; eight additional faults
 across 27 original reports. Raw score stays 48 stated / 44 confirmed / 2 refuted /
@@ -32,9 +36,9 @@ historically (2 resumed jobs) and 110.0 s currently (0). U03 measured 11.47 s vs
 
 All 57 original explorer artifacts are byte-identical to `6e4dd4a`; only canonical
 D/U statuses and their index changed. Source-text citation review, final skill
-revisions and checkpoint review remain pending. Next unit: coordinator's fresh
-independent checkpoint A review, then fresh E02 exploration/fix. This fixer does
-not continue into E02.
+revisions remain pending. Checkpoint A review is complete. Next unit: coordinator
+regenerates the unrun E02 export at the repaired lesson tag, then dispatches fresh
+E02 exploration/fix. This fixer does not continue into E02.
 
 ## Execution discipline
 
@@ -52,7 +56,7 @@ not continue into E02.
 
 1. DONE: baseline, 27 proofs and four silence probes; commit and tag v0.
 2. DONE: E01 experiment, reconciliation, fix, both verification directions and lesson tag.
-3. Checkpoint A review; E02–E06; checkpoint B review; E07–E09 and final skills/index; checkpoint C review.
+3. DONE: checkpoint A review and nits 1/2. Next E02–E06; checkpoint B review; E07–E09 and final skills/index; checkpoint C review.
 4. Final clean tree and ordered commit, score, skills, deviation report.
 
 ## Measured corrections / deviations
@@ -70,8 +74,11 @@ not continue into E02.
 - Preserved and completed every inherited modification (17 source/spec files plus
   the migration); no part was discarded or shifted into a fictional E02 experiment.
   Thirty-five assigned faults make this larger than the plan's two-finding estimate.
-  Measured SUT-source/migration diff: 375 added and 97 removed lines across
-  17 files, before the separate repro/check/lesson evidence.
+  Corrected measured diff (`6e4dd4a` → `b839fdf`): 17 source/spec files
+  excluding migration = +364/-101; including `migrations/002.sql` = 18 files,
+  +383/-101, before separate repro/check/lesson evidence. The historical
+  `b839fdf` commit body incorrectly says +375/-97 across 17 files; this note
+  corrects that claim without rewriting history.
 - D12 decision: pending = scheduled/queued/retry_wait. U03: partner latency must
   not block core progression; the warm-lab bound is five seconds. U08: queued age
   starts at greatest(created_at, run_at). A1–A4 remain undecided; T1–T3 remain E02.
@@ -98,3 +105,36 @@ not continue into E02.
   sample worker's float decoding remain unprobed siblings. Coordinator explicitly
   keeps the measured API-side D08 scope here; later variation/data-journey runs
   should probe those paths and record an evidenced new finding if warranted.
+
+## Checkpoint A review repair and handoff
+
+- Independent verdict **NITS**, reviewed target `b839fdf`: baseline, current
+  verification, historical retry, both unit suites, v0 vet and A1–A4 controls
+  passed. Exact verdicts: `FIXED AND CHECKED: 35 absent; regression checks pass`
+  and `DEFECTS REPRODUCED: 35 present`. Full evidence: `reviews/A/`.
+- Retained failure: first independent REF attempt exited 2 after 144 seconds
+  with no probe verdicts because the API did not answer within 60 seconds. Its
+  container logs were lost by the old trap; manual bring-up and retry passed.
+  The cause remains unproven. The original failed log is preserved unchanged.
+- Nit 1 corrects the diff counts above. Nit 2 saves REF Compose ps/logs and run
+  metadata in the original project's ignored `results/ref-failure.*` before
+  teardown, preserves the original status despite diagnostic/cleanup errors,
+  and emits `VERIFICATION FAILED:` for current-tree PRESENT results. No SUT,
+  repro, regression oracle or immutable experiment record changed.
+- Validation: `bash -n project/lab/verify.sh`, `git diff --check`, and six
+  controlled command simulations passed (details in
+  `reviews/A/a-nits-validation.md`). No full behavioral suite rerun for this
+  diagnostics/docs-only patch; the independent reviewed runs supply that evidence.
+  Full staged whitespace check exits 2 for preserved raw Compose log trailing
+  whitespace; the scoped check of authored repair files passes (see validation).
+- Deferred note 3: E07/E09 adds direct Go lease/token/tenant invariant assertions
+  alongside shared-oracle checks. Note 4: E09 final skills pass updates worked
+  examples. Note 5: intentionally retain stable canonical filenames. Source-text
+  citation validation and unprobed numeric sibling leads remain later work.
+- Resume: existing branch/worktree; coordinator regenerates
+  `/tmp/explore-it-experiment-02` using the repaired `explore-it/lesson-01` and
+  refreshes `/tmp/explore-it-coordinator/current.json` before fresh E02 launch.
+  Completed review logs are under `reviews/A/`; no active reviewer remains.
+- Durable finding: failure diagnostics must be captured before scratch-stack
+  teardown and must not replace the failing status. This project-specific note
+  is sufficient; the simulation helper stays in `/tmp/explore-it-a-nits/`.
