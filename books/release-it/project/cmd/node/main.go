@@ -133,7 +133,12 @@ func (n *node) query(w http.ResponseWriter, r *http.Request) {
 	case err == nil:
 	case started:
 		// The rows had begun: the only honest signal left is to cut the
-		// connection, so the gateway sees an incomplete answer.
+		// connection, so the gateway sees an incomplete answer. The log
+		// line still says why.
+		var se *engine.StatementError
+		if errors.As(err, &se) {
+			httpx.Annotate(r.Context(), "error_code", se.Code)
+		}
 		panic(http.ErrAbortHandler)
 	default:
 		writeEngineError(w, r, err)

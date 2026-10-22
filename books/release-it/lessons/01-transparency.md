@@ -163,3 +163,27 @@ story. On metric cardinality, the Prometheus documentation on naming and labels.
 - **Registry queries are logged only when slow or failed;** every query is still in the metrics.
 - The verify removes node-a's latency at t=33 s, before the Postgres pause, so the two signals do
   not overlap.
+
+## After the review: a request the log missed
+
+This lesson promises one log line per request. From lesson 08 until a fix made after the final
+review, that was false. Lesson 08 taught the node to stream rows, and when a statement fails after
+the answer has begun the handler cuts the connection by panicking with `http.ErrAbortHandler`.
+`Logged` counted and logged the request in the code after `h.ServeHTTP`, so the panic skipped it:
+the cut-off request had no log line, no `http_requests_total` count and no duration sample, while
+the gateway logged its 504 and the node's statement metrics recorded the cancel. The request that
+went wrong was the one the node never mentioned.
+
+No lesson's verify caught it. Lesson 02's check for "a cancelled statement stops on time" reads
+the node's request line, so at `main` it read `NaN`. The review-fix pass made the script fall back
+to the statement histogram when the line was missing: the check passed again and the defect hid
+behind it.
+
+The fix (`internal/httpx/httpx.go`, `Logged`) counts and logs in a `defer`, which runs during a
+panic. It `recover`s, writes the line with `aborted: true`, then panics again with the same value,
+so the server still cuts the connection. The node also annotates the line with the statement's
+`error_code` before it cuts. Lesson 02's verify reads the log again; the fallback is gone.
+
+The general rule: observability code must survive the failure it observes. Code that records an
+outcome belongs in a `defer` (or a `finally`), not after the call. And when a verify can't find a
+signal, treat that as a finding, not as something to route around.

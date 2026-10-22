@@ -11,3 +11,5 @@ Durable findings about building and verifying this repo's lab projects, cut from
   initdb, and select fixtures by property, not by name.
 - [plan-size-estimates.md](plan-size-estimates.md) — Release It!'s planned against delivered
   lesson sizes, for the next plan's estimates.
+- [verify-workarounds-hide-defects.md](verify-workarounds-hide-defects.md) — a script that routes
+  around a missing signal can hide the defect; log in a `defer`.

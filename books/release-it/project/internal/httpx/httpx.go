@@ -100,27 +100,43 @@ func Logged(h http.Handler) http.Handler {
 		sw := &statusWriter{ResponseWriter: w}
 		inflight.Inc()
 		defer inflight.Dec() // also when a streaming handler aborts
+		// Count and log in a defer: a handler that cuts its answer off
+		// panics with http.ErrAbortHandler, and that request must be
+		// counted and logged like any other. The panic is passed on, so
+		// the server still aborts the connection.
+		defer func() {
+			p := recover()
+			finish(r2, sw, id, f, time.Since(start), p != nil)
+			if p != nil {
+				panic(p)
+			}
+		}()
 		h.ServeHTTP(sw, r2)
-		if sw.status == 0 {
-			sw.status = http.StatusOK
-		}
-		route := r2.Pattern
-		if route == "" {
-			route = "unmatched"
-		}
-		d := time.Since(start)
-		requests.WithLabelValues(route, r.Method, strconv.Itoa(sw.status)).Inc()
-		duration.WithLabelValues(route).Observe(d.Seconds())
-		if r.URL.Path == "/health" || r.URL.Path == "/metrics" {
-			return
-		}
-		attrs := []any{"request_id", id, "method", r.Method, "path", r.URL.Path, "route", route,
-			"status", sw.status, "duration_ms", ms(d)}
-		f.mu.Lock()
-		attrs = append(attrs, f.attrs...)
-		f.mu.Unlock()
-		slog.Info("request", attrs...)
 	})
+}
+
+func finish(r *http.Request, sw *statusWriter, id string, f *fields, d time.Duration, aborted bool) {
+	if sw.status == 0 {
+		sw.status = http.StatusOK
+	}
+	route := r.Pattern
+	if route == "" {
+		route = "unmatched"
+	}
+	requests.WithLabelValues(route, r.Method, strconv.Itoa(sw.status)).Inc()
+	duration.WithLabelValues(route).Observe(d.Seconds())
+	if r.URL.Path == "/health" || r.URL.Path == "/metrics" {
+		return
+	}
+	attrs := []any{"request_id", id, "method", r.Method, "path", r.URL.Path, "route", route,
+		"status", sw.status, "duration_ms", ms(d)}
+	if aborted { // the status went out, but the answer was cut off
+		attrs = append(attrs, "aborted", true)
+	}
+	f.mu.Lock()
+	attrs = append(attrs, f.attrs...)
+	f.mu.Unlock()
+	slog.Info("request", attrs...)
 }
 
 func ms(d time.Duration) float64 { return float64(d.Microseconds()) / 1000 }

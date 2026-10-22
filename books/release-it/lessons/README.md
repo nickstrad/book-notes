@@ -8,8 +8,9 @@ Run every command from `books/release-it/project`. `make verify LESSON=NN` judge
 tree. Add `REF=<parent tag>` to build the parent's images and run today's script against them: that
 reproduces the flaw. Every lesson's verify, as it is at `main`, also passes on the `main` tree:
 lessons 01–03's checks accept what later lessons changed on purpose (lesson 05's `degraded` gateway
-health, lesson 07's `503 overloaded` shedding, lesson 08's streamed answers). A lesson tag carries
-the scripts as they were at that tag.
+health, lesson 07's `503 overloaded` shedding). A lesson tag carries the scripts as they were at
+that tag. One defect was found after the review: from lesson 08 a cut-off query left no request
+log line. It is fixed at `release-it/v1-hardened`; see lesson 01's note, "After the review".
 
 | # | Tag | Note | Flaws | Verify | Before (`REF=` parent) | After |
 |---|---|---|---|---|---|---|
