@@ -54,20 +54,20 @@ func (c *Client) Put(dbID string, gen int, path string) (_ *PutResult, err error
 	req.Header.Set("Content-Type", "application/octet-stream")
 	resp, err := c.http.Do(req)
 	if err != nil {
-		return nil, err
+		return nil, httpx.Transport("blobstore", err)
 	}
 	defer resp.Body.Close()
 	status = resp.StatusCode
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
+	// The status first: an error page is not a bad answer, it is an error.
+	if resp.StatusCode != http.StatusOK {
+		return nil, httpx.ReadError(resp)
+	}
+	if !httpx.IsJSON(resp) {
+		return nil, httpx.BadPayload("blobstore", fmt.Errorf("answer is %q, not JSON", resp.Header.Get("Content-Type")))
 	}
 	var out PutResult
-	if err := json.Unmarshal(data, &out); err != nil {
-		return nil, fmt.Errorf("blobstore: bad response: %w", err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("blobstore: %s", resp.Status)
+	if err := json.NewDecoder(io.LimitReader(resp.Body, httpx.MaxErrorBody)).Decode(&out); err != nil {
+		return nil, httpx.BadPayload("blobstore", err)
 	}
 	return &out, nil
 }

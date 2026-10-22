@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -73,14 +74,15 @@ func (c *Client) Execute(ctx context.Context, rt wire.Route, req wire.ExecuteReq
 	return &out, nil
 }
 
-// transient reports whether a failed read is worth repeating: network errors
-// and node-side 5xx are, except a statement that ran out its deadline (it
-// would again); a 4xx is the request's own fault.
+// transient reports whether a failed read is worth repeating: a timeout, an
+// unreachable node and node-side 5xx are, except a statement that ran out its
+// deadline (it would again); a 4xx is the request's own fault, and a bad
+// payload will be bad again.
 func transient(err error) bool {
 	if re, ok := err.(*httpx.RemoteError); ok {
 		return re.Status >= 500 && re.Code != "statement_deadline"
 	}
-	return true
+	return !errors.Is(err, httpx.ErrBadPayload)
 }
 
 func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, out any) error {
@@ -89,18 +91,19 @@ func (c *Client) do(ctx context.Context, rt wire.Route, op string, body []byte, 
 		return err
 	}
 	defer resp.Body.Close()
-	data, err := io.ReadAll(resp.Body)
+	data, err := io.ReadAll(io.LimitReader(resp.Body, httpx.MaxErrorBody))
 	if err != nil {
-		return fmt.Errorf("node %s: %w", rt.Node, err)
+		return httpx.Transport(rt.Node, err)
 	}
 	if err := decode(data, out); err != nil {
-		return fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
+		return httpx.BadPayload(rt.Node, fmt.Errorf("bad rows: %w", err))
 	}
 	return nil
 }
 
-// send posts to the node and returns its response if it is a 200; any other
-// status becomes an error built from the node's error body.
+// send posts to the node and returns its response if it is a 200 with a JSON
+// body; any other status becomes a *RemoteError read from at most 1 MB of the
+// error body, and anything that is not JSON a bad payload.
 func (c *Client) send(ctx context.Context, rt wire.Route, op string, body []byte) (_ *http.Response, err error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, rt.NodeURL+"/internal/db/"+rt.DatabaseID+"/"+op, bytes.NewReader(body))
 	if err != nil {
@@ -113,22 +116,18 @@ func (c *Client) send(ctx context.Context, rt wire.Route, op string, body []byte
 	defer func() { httpx.Dependency(ctx, rt.Node, start, status, err) }()
 	resp, err := c.http.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("node %s: %w", rt.Node, err)
+		return nil, httpx.Transport(rt.Node, err)
 	}
 	status = resp.StatusCode
-	if resp.StatusCode == http.StatusOK {
-		return resp, nil
+	if resp.StatusCode != http.StatusOK {
+		defer resp.Body.Close()
+		return nil, httpx.ReadError(resp)
 	}
-	defer resp.Body.Close()
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("node %s: %w", rt.Node, err)
+	if !httpx.IsJSON(resp) {
+		resp.Body.Close()
+		return nil, httpx.BadPayload(rt.Node, fmt.Errorf("answer is %q, not JSON", resp.Header.Get("Content-Type")))
 	}
-	var eb wire.ErrorBody
-	if err := decode(data, &eb); err != nil {
-		return nil, fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
-	}
-	return nil, &httpx.RemoteError{Status: resp.StatusCode, Code: eb.Error.Code, Message: eb.Error.Message}
+	return resp, nil
 }
 
 // decode reads a node response exactly: an unexpected field means the node

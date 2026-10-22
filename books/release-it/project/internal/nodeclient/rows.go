@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 
+	"litefleet/internal/httpx"
 	"litefleet/internal/wire"
 )
 
@@ -30,7 +31,7 @@ func (c *Client) openQuery(ctx context.Context, rt wire.Route, body []byte) (*Ro
 	r.dec.UseNumber()
 	if err := r.preamble(); err != nil {
 		resp.Body.Close()
-		return nil, fmt.Errorf("node %s: bad rows: %w", rt.Node, err)
+		return nil, httpx.BadPayload(rt.Node, fmt.Errorf("bad rows: %w", err))
 	}
 	return r, nil
 }
