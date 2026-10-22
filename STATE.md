@@ -63,10 +63,18 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
   flip), 6 medium (lessons 01–03's verifies pass only at their own tags; lesson 12 mis-attributes
   the lab's Godot mechanism to the book; two before-symptoms need a loaded host; a cold-start
   Postgres race in `reset_stack`; no cross-family review; `v1-hardened` tag predates the skills),
-  10 low. Nothing was fixed; Nick decides. The cross-family review question (AGENTS.md phase 4;
-  PLAN.md section 6's Codex checkpoints) is still open.
+  10 low.
+- **Review fixes:** done 2026-10-22 by Claude Opus 5.5, forward commits on `main` from `a35f09b`
+  to `afb7274`, one per finding (per-finding SHAs and verify outcomes in
+  `books/release-it/STATE.md` and the commit bodies). 14 findings fixed (H1, M1, M2, M4, M6,
+  L1–L6, L8–L10); M3 and L7 fixed in the notes and the safe thresholds, with the rest left for
+  Nick; M5 not backfilled. Tag `release-it/v1-hardened` moved from `a338b8d` to `afb7274` so the
+  final state includes the skills and the fixes (M6); no other tag moved. `docs/knowledge/`
+  started (L8).
 
 ## Next action
 
-Nick reads `books/release-it/REVIEW.md` and decides which findings to fix (H1 first) and whether a
-Codex/Muse review is added; then Twin verification and the report to Nick.
+Nick rules on the open decisions in `books/release-it/STATE.md`: the cross-family review (waive or
+order a Codex/Muse review, M5), whether to fold H1 into lesson 06's history and re-point the lesson
+tags, M3's thresholds, and the two rewritten case-study sentences. Then Twin verification and the
+report to Nick.
