@@ -12,9 +12,13 @@ RATE=$((FLEET_CAPACITY * 6 / 10))
 OUT=04-retries.csv
 
 reset_stack
-# The hot database is an `analytics` database, which the steady mix never
-# touches, so every write it receives is the hot tenant's.
-read -r hot hot_id < <(jq -r '[.tenants[] | select(.class == "normal") | . as $t | .dbs[] | select(.node == "node-b" and .name == "analytics") | "\($t.id)/\(.name) \(.id)"][0]' "$RESULTS/manifest.json")
+# The hot database is a normal tenant's `analytics` or `staging` database on
+# node-b. The steady mix only touches `default` databases, so every write it
+# receives is the hot tenant's. Select by node, not by name: the seed places
+# databases by count parity, and lesson 06's extra noisy databases moved every
+# `analytics` database to node-a.
+read -r hot hot_id < <(jq -r '[.tenants[] | select(.class == "normal") | . as $t | .dbs[] | select(.node == "node-b" and (.name == "analytics" or .name == "staging")) | "\($t.id)/\(.name) \(.id)"][0] // empty' "$RESULTS/manifest.json")
+[[ -n ${hot:-} && -n ${hot_id:-} ]] || { log "no normal tenant's analytics/staging database on node-b in the manifest"; exit 2; }
 log "steady at $RATE req/s for 60 s; hot database $hot on node-b, 10 bulk writes/s"
 start_load -scenario steady -rate "$RATE" -duration 60s -focus "$hot" -focus-rate 10 -focus-rows 1000 -out "/results/$OUT"
 at 10; toxic node-a slow latency downstream 1.0 '{"latency":2500,"jitter":1000}'
