@@ -1,0 +1,34 @@
+PRESENT: D01 — CLI exit=0, stderr=HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+PRESENT: D02 — delete absent queue returned 204
+PRESENT: D03 — lease attempts=[1, 1, 1]; attempt rows=0
+PRESENT: D04 — sink status=500; delivered=t
+PRESENT: D05 — accepted priority=100
+PRESENT: D06 — zero status=201, 501 status=201, inserted=500
+PRESENT: D07 — create slash-name=201; address it=404
+PRESENT: D08 — input=9007199254740993 stored=9007199254740992
+PRESENT: D09 — failure states=['retry_wait', 'retry_wait', 'retry_wait', 'dead']; attempts=4
+PRESENT: D10 — stats queued=1; SQL queued=0
+PRESENT: D11 — oldest=808, after release next leased=809; tied creation timestamps
+PRESENT: D12 — purge left delayed job status=200 state=scheduled
+PRESENT: D13 — resume enqueued 4 missed ticks
+PRESENT: D14 — retry cancelled status=200, state=queued
+PRESENT: D15 — deleted owner; job=200, schedule=200
+PRESENT: D16 — cron changed to January 1, next_run_at remains 2026-10-22T01:35:00Z
+PRESENT: D17 — stored result=1512 chars, webhook result=1024, no flag
+PRESENT: D18 — stale A ack=200; current B ack=409; result={'owner': 'A'}
+PRESENT: D19 — cancel then nack leaves retry_wait
+PRESENT: D20 — lease expired at attempts=max_attempts; state=queued
+PRESENT: D21 — globex read acme=200, cancel=200
+ Container queuelet-postgres-1 Stopping 
+ Container queuelet-postgres-1 Stopped 
+ Container queuelet-postgres-1 Starting 
+ Container queuelet-postgres-1 Started 
+ Container queuelet-api-1 Restarting 
+ Container queuelet-api-1 Started 
+PRESENT: D22 — after DB outage due job state=scheduled, health=ok
+PRESENT: D23 — cron requests 02:00 America/New_York; next fire local=2027-01-01T01:00:00-05:00
+PRESENT: D24 — signature_valid=False
+PRESENT: D25 — unknown worker status=200, body={'error': {'code': 'worker_not_found', 'message': 'unknown worker'}}
+PRESENT: D26 — typo patch=200 unchanged lease=30; invalid state=200 returns job
+PRESENT: D27 — disabled schedule produced 1 jobs
+Proof failures: 0

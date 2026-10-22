@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS namespaces(id bigserial PRIMARY KEY,name text UNIQUE NOT NULL);
+CREATE TABLE IF NOT EXISTS api_keys(key_hash text PRIMARY KEY,namespace_id bigint,admin boolean NOT NULL DEFAULT false);
+CREATE TABLE IF NOT EXISTS queues(id bigserial PRIMARY KEY,namespace_id bigint NOT NULL,name text NOT NULL,lease_seconds int NOT NULL DEFAULT 30,max_attempts int NOT NULL DEFAULT 3,backoff_kind text NOT NULL DEFAULT 'exponential',backoff_base int NOT NULL DEFAULT 5,backoff_max int,retention_hours float8 NOT NULL DEFAULT 24,webhook_url text NOT NULL DEFAULT '',webhook_secret text NOT NULL DEFAULT '',paused boolean NOT NULL DEFAULT false,UNIQUE(namespace_id,name));
+CREATE TABLE IF NOT EXISTS jobs(id bigserial PRIMARY KEY,queue_id bigint NOT NULL,namespace_id bigint NOT NULL,kind text NOT NULL,payload jsonb NOT NULL,priority int NOT NULL DEFAULT 5,state text NOT NULL,run_at timestamptz NOT NULL,attempts int NOT NULL DEFAULT 0,max_attempts int NOT NULL,idempotency_key text,leased_by bigint,lease_token text,lease_expires_at timestamptz,result jsonb,last_error text NOT NULL DEFAULT '',created_at timestamp(0) NOT NULL,finished_at timestamptz);
+CREATE UNIQUE INDEX IF NOT EXISTS jobs_idempotency ON jobs(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL;
+CREATE INDEX IF NOT EXISTS jobs_ready ON jobs(queue_id,state,priority DESC,created_at);
+CREATE TABLE IF NOT EXISTS attempts(job_id bigint,n int,worker_id bigint,started_at timestamptz,finished_at timestamptz,outcome text,error text);
+CREATE TABLE IF NOT EXISTS workers(id bigserial PRIMARY KEY,namespace_id bigint,name text,kinds text[] NOT NULL,token text,last_seen_at timestamptz);
+CREATE TABLE IF NOT EXISTS schedules(id bigserial PRIMARY KEY,namespace_id bigint,queue_id bigint,name text,kind text,payload jsonb,cron text,timezone text,zone_offset int,enabled boolean,next_run_at timestamptz,last_run_at timestamptz);
+CREATE TABLE IF NOT EXISTS webhook_outbox(id bigserial PRIMARY KEY,job_id bigint,url text,secret text,body jsonb,attempts int DEFAULT 0,next_at timestamptz,delivered_at timestamptz);
+DO $$ BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='explorer') THEN CREATE ROLE explorer LOGIN PASSWORD 'explorer'; END IF; END $$;
+GRANT CONNECT ON DATABASE queuelet TO explorer;
+GRANT USAGE ON SCHEMA public TO explorer;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO explorer;
+INSERT INTO namespaces(name) VALUES ('acme'),('globex') ON CONFLICT DO NOTHING;
+INSERT INTO api_keys VALUES (encode(sha256('acme-key'::bytea),'hex'),1,false),(encode(sha256('globex-key'::bytea),'hex'),2,false),(encode(sha256('admin-key'::bytea),'hex'),1,true) ON CONFLICT DO NOTHING;

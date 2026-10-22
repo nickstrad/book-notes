@@ -1,0 +1,137 @@
+package api
+
+import (
+	"github.com/lib/pq"
+	"net/http"
+	"queuelet/internal/jobs"
+	"time"
+)
+
+func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
+	v, e := s.S.One(`SELECT * FROM jobs WHERE id=$1`, num(r, "id"))
+	if e != nil {
+		fail(w, 404, "job_not_found", e)
+		return
+	}
+	write(w, 200, v)
+}
+func (s *Server) attempts(w http.ResponseWriter, r *http.Request) {
+	v, e := s.S.Rows(`SELECT * FROM attempts WHERE job_id=$1 ORDER BY n`, num(r, "id"))
+	output(w, map[string]any{"attempts": v}, e)
+}
+func (s *Server) deleteJob(w http.ResponseWriter, r *http.Request) {
+	res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE id=$1 AND state IN ('succeeded','dead','cancelled')`, num(r, "id"))
+	if e = jobs.Changed(res, e); e != nil {
+		fail(w, 409, "state_conflict", e)
+		return
+	}
+	write(w, 204, nil)
+}
+func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
+	id := num(r, "id")
+	now := time.Now()
+	var e error
+	switch r.PathValue("verb") {
+	case "cancel":
+		e = s.Jobs.Cancel(id, now)
+	case "retry":
+		e = s.Jobs.Retry(id, now)
+	case "ack", "nack", "heartbeat":
+		var in struct {
+			LeaseToken    string `json:"lease_token"`
+			Result        any    `json:"result"`
+			Error         string `json:"error"`
+			Retry         *bool  `json:"retry"`
+			DelaySeconds  *int   `json:"delay_seconds"`
+			ExtendSeconds int    `json:"extend_seconds"`
+		}
+		if !decode(w, r, &in) {
+			return
+		}
+		switch r.PathValue("verb") {
+		case "ack":
+			e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)
+		case "nack":
+			retry := true
+			if in.Retry != nil {
+				retry = *in.Retry
+			}
+			e = s.Jobs.Nack(id, in.LeaseToken, in.Error, retry, in.DelaySeconds, now)
+		case "heartbeat":
+			if in.ExtendSeconds < 1 {
+				fail(w, 400, "invalid_extension", "positive extension required")
+				return
+			}
+			e = s.Jobs.Heartbeat(id, in.LeaseToken, in.ExtendSeconds, now)
+		}
+	default:
+		fail(w, 404, "not_found", "unknown operation")
+		return
+	}
+	if e != nil {
+		fail(w, 409, "state_conflict", e)
+		return
+	}
+	write(w, 200, map[string]any{"ok": true})
+}
+func (s *Server) createWorker(w http.ResponseWriter, r *http.Request) {
+	var in struct {
+		Name  string   `json:"name"`
+		Kinds []string `json:"kinds"`
+	}
+	if !decode(w, r, &in) {
+		return
+	}
+	if in.Name == "" || len(in.Kinds) == 0 {
+		fail(w, 400, "invalid_worker", "name and kinds required")
+		return
+	}
+	token := jobs.Token()
+	var id int64
+	e := s.S.DB.QueryRow(`INSERT INTO workers(namespace_id,name,kinds,token,last_seen_at) VALUES($1,$2,$3,$4,$5) RETURNING id`, ident(r).Namespace, in.Name, pq.Array(in.Kinds), token, time.Now()).Scan(&id)
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	write(w, 201, map[string]any{"worker_id": id, "token": token})
+}
+func (s *Server) deleteWorker(w http.ResponseWriter, r *http.Request) {
+	tx, e := s.S.DB.Begin()
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	defer tx.Rollback()
+	res, e := tx.Exec(`DELETE FROM workers WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
+	if e = jobs.Changed(res, e); e != nil {
+		fail(w, 404, "worker_not_found", e)
+		return
+	}
+	_, e = tx.Exec(`UPDATE jobs SET state='queued',lease_token=NULL,leased_by=NULL,lease_expires_at=NULL WHERE leased_by=$1 AND state='leased'`, num(r, "id"))
+	if e == nil {
+		e = tx.Commit()
+	}
+	output(w, map[string]any{"ok": true}, e)
+}
+func (s *Server) lease(w http.ResponseWriter, r *http.Request, q map[string]any) {
+	var in struct {
+		WorkerID int64 `json:"worker_id"`
+		MaxJobs  int   `json:"max_jobs"`
+	}
+	in.MaxJobs = 1
+	if !decode(w, r, &in) {
+		return
+	}
+	if in.MaxJobs < 1 || in.MaxJobs > 100 {
+		fail(w, 400, "invalid_batch", "max_jobs must be 1–100")
+		return
+	}
+	var exists bool
+	s.S.DB.QueryRow(`SELECT EXISTS(SELECT 1 FROM workers WHERE id=$1 AND namespace_id=$2)`, in.WorkerID, ident(r).Namespace).Scan(&exists)
+	if !exists {
+		fail(w, 200, "worker_not_found", "unknown worker")
+		return
+	}
+	v, e := s.Jobs.Lease(q["id"].(int64), in.WorkerID, in.MaxJobs, time.Now())
+	output(w, map[string]any{"jobs": v}, e)
+}
