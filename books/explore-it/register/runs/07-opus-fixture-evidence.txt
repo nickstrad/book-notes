@@ -1,0 +1,11 @@
+Opus verification of the REF fixture failure (07-ref-acceptance.log, job 502).
+Event history for job 502 from the retained lesson-06 Compose diagnostics (07-ref-fixture-failure-compose.log):
+"job_id":502,"queue":"repro-u34-8a7eb53d53-5","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T18:44:01.16884Z"
+"job_id":502,"queue":"repro-u34-8a7eb53d53-5","event":"leased","worker":11,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T18:44:01.365136Z"
+"job_id":502,"queue":"repro-u34-8a7eb53d53-5","event":"queued","worker":11,"attempt":1,"outbox_id":null,"status":null,"error":"worker deleted","at":"2026-10-22T18:44:01.441018Z"
+"job_id":502,"queue":"repro-u34-8a7eb53d53-5","event":"leased","worker":11,"attempt":2,"outbox_id":null,"status":null,"error":"worker deleted","at":"2026-10-22T18:44:01.498678Z"
+
+Reading: delivery 1 leased by worker 11, released by DELETE (worker deleted), then delivery 2 leased by the same deleted worker 11.
+That is a U34 zombie on a second delivery, not duplicate active ownership. The original 'id not in got' assertion was a fixture error.
+The corrected probe accepts contiguous deliveries with distinct tokens, requires the stored lease to equal the last delivery, the released attempt to be attributed, and old tokens to be rejected without changing ownership.
+Neither 07-ref-repair.log nor 07-opus-ref.log sampled a second delivery; their PRESENT verdicts rest on single-delivery zombies and 500s.

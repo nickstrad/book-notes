@@ -13,7 +13,8 @@ commit and fix commit. Original explorer reports remain immutable; the canonical
 | [04 — judge it](04-judge-it.md) | `explore-it/lesson-04` | U19–U23, A1 | `make verify LESSON=04` |
 | [05 — sequence it](05-sequence-it.md) | `explore-it/lesson-05` | U24–U26, A2 | `make verify LESSON=05` |
 | [06 — relate it](06-relate-it.md) | `explore-it/lesson-06` | U27–U33, A4 | `make verify LESSON=06` |
+| [07 — state it](07-state-it.md) | `explore-it/lesson-07` | U34–U35, A3 | `make verify LESSON=07` |
 
 Use `REF=<previous tag>` for the same public repros against historical binaries.
-See each note for exact verdicts and measurement limits. Checkpoint B review is
-next; this index records completed lessons only.
+See each note for exact verdicts and measurement limits. This index records
+completed lessons only.

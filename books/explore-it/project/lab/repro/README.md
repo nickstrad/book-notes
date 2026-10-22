@@ -97,3 +97,29 @@ storage cleanup from API 404 and prove independent snapshots still deliver. A4
 uses a frozen API clock below/above retention, checking dead plus succeeded and
 cancelled controls in API and storage; it resets time in finally. Setup, tool,
 parse, unexpected outcome or missing control always produces PROBE ERROR.
+
+E07 adds `probe07.py`, U34/U35/A3 and `lesson-07.ids`. U34 samples up to 32
+worker-delete trials with 12 concurrent lease requests each and requires actual
+historical zombie leases **and** worker-disappearance 500s. U35 samples up to eight
+trials per lease/nack/release/expiry path, requires all four historical hits, and
+checks deletion counts, lease fields, attempts and attribution. Sequential purge
+controls include pending deletion, successful ack, nack, worker release and expiry.
+Both stop historical sampling once enough positive evidence exists; current runs
+exhaust the bounds. Trial details go to stderr, including failure evidence. Bulk
+SELECT-only snapshots keep the same per-job/attempt assertions without an HTTP
+request for every field. No new runtime hook or fixture SQL write is used.
+
+A3 starts the **built target image's** sample worker for both current and REF.
+It observes an eight-second sleep, a local HTTP streaming partner's writes/socket
+closure, completion logs and subsequent quiet echo completion. Docker stop is
+cleanup after evidence, never proof of cooperation. Terminal state or process
+survival alone does not satisfy the probe. Unit tests also exercise context
+cancellation during sleep and HTTP body reads.
+
+`TestL07StateMatrix` has 49 subtests (34 rejected, 6 empty leases, 9 accepted
+transitions); `TestL07ExtraActors` adds 13 explicitly separate holder/expiry/
+cancel-request cells. Wrong-token variants include empty, arbitrary text, backslash
+and NUL. Direct checks additionally cover transactional missing-worker identity and
+unrelated-queue progress while a purge waits. Checks may use internal database
+locks; the public reproductions do not. D18–D20 stay unchanged passing controls in
+both E07 verify directions and are excluded from its three-item verdict count.

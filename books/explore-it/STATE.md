@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E07 exploration complete; U34/U35 and A3 assigned to a fresh fixer; checkpoint B is complete.**
+**Status (2026-10-22): E07 done (fix committed, tag `explore-it/lesson-07`); independent review pending.**
 
 ## Done
 
@@ -31,6 +31,21 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
   unit/application tests and vet pass; A3 control stays PRESENT. Lab cleanup passed.
   README clarification `b1aee49` documents the direct-check database URL.
 
+- E07: exploration `49d8d67`, fix commit tagged `explore-it/lesson-07`. U34 and U35 fixed,
+  A3 resolved (cancel revokes immediately; worker stops cooperatively on the heartbeat
+  `cancel_requested` signal; late ack/nack stay 409). Original score: 13 stated /
+  12 confirmed / 1 refuted / 1 contradicted reading prediction / 41 new cells; 49-cell
+  matrix plus 13 named extra cells. D18–D20 stay early-fixed (E01) controls, ABSENT at both tags.
+- Acceptance (`register/runs/07-opus-acceptance.json`): current `FIXED AND CHECKED: 3 absent`
+  (251 s), REF lesson-06 `DEFECTS REPRODUCED: 3 present` (86 s), `make checks` (81 functions),
+  `make test`, `go vet`, integrity all exit 0. Paired dwell only; no sweep.
+- **Provider interruption and seat change:** the first Codex Astra fixer ended exit 1 on the
+  provider `possible cybersecurity risk` filter. A second Astra repair run was stopped
+  mid-REF by Twin per Nick's rule (Codex stops, Opus takes over, no retries around the
+  filter). Claude Opus 5.5 reviewed the uncommitted partial work and finished the fix step.
+  REF probe fixture corrected (lease epochs after worker deletion), not an oracle; see the
+  [lesson deviations](lessons/07-state-it.md#deviations).
+
 All 27 planted defects were fixed in E01. Later experiments tested remaining questions
 and new faults, not fictional late discoveries. E06's original score remains
 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contradictions / 30 cells.
@@ -39,12 +54,7 @@ Dwell remains paired evidence only; no full sweep was run.
 
 ## In progress
 
-E07 exploration closed successfully; artifacts and boundary audit retained under
-`exploration/experiments/07-state-it/` and `register/runs/07-*`.
-Score: 13 stated / 12 confirmed / 1 refuted / 1 code-reading contradiction / 2 reports /
-41 newly observed model cells; full matrix 49 cells. U34/U35 assigned; A3 is a coordinator
-policy step, not a blind find. See `register/reconciliations/07.md` for the decision and
-all audit/deviation details. Explorer's own stack is stopped. Fresh fixer dispatch is next.
+Nothing is running; no stack is up for this book.
 
 ## Decisions and open items
 
@@ -55,7 +65,11 @@ is the complete checkpoint disposition, alongside the original
 [defect index](exploration/defects/INDEX.md). Original “open” wording in raw records
 is historical, not an override of later documented decisions.
 
-- **A3 stays open for E07:** cancel while running, including E05-F02's missing attempt.
+- **E07 review seat:** this lesson's fixer was Claude (Opus) rather than the planned Codex
+  seeder family, so its independent review should be Codex or Muse, not Claude.
+- E07 forward questions: Q-E07-1 heartbeat shortening, Q-E07-2 error message consistency,
+  H-E07-17 large-sweep latency, T-E07-1/2 sweep duration and deterministic race
+  instruments; unprobed cancel/retry/promote/retention interleavings.
 - **E06 review finding 2:** actual sample-worker http-response number decoding still
   uses float64; the echo repair does not prove that path. Deferred for a fresh run.
 - **Legacy invalid schedule templates:** no migration/revalidation; cron/manual consistency
@@ -78,7 +92,9 @@ is historical, not an override of later documented decisions.
   catch-up remain in the backlog. Direct Go assertions for D18/D19/D21 from checkpoint A,
   final skill worked examples and full book-text citation validation remain later work.
 
-Decided: A1 default retry cap 3600 seconds or larger base; A2 unsuccessful exits of
+Decided: A3 cancellation is immediate and terminal; a leased job records one `cancelled`
+attempt; the revoked holder's heartbeat answers 409 with `cancel_requested:true` (read-only);
+remote effects already performed are not rolled back. A1 default retry cap 3600 seconds or larger base; A2 unsuccessful exits of
 leased-at-purge jobs become dead; A4 dead jobs exempt from automatic retention.
 U33 attempts follow jobs; events and pending snapshots keep independent lifetimes;
 legacy orphan attempts were not bulk-cleaned. U28 uses enqueue's object/default rule
@@ -88,21 +104,24 @@ resolved by these fixes are distinguished from the remaining questions in the re
 
 ## Next
 
-1. Fresh Codex fixer completes E07 U34/U35 and A3, verifies current/lesson-06, updates
-   this state and tags lesson-07; independent different-company review follows.
-2. Later authorized checkpoint C, final skills/landing page and final independent review.
+1. Independent review of E07 (`explore-it/lesson-07`) from a non-Claude family.
+2. E08 (Surround it) as a separate fresh explorer run, then E09; checkpoint C review,
+   final skills and landing page.
 3. Merge adds-only after Release It! lands; no push or merge was performed here.
 
 ## Resume
 
 - Worktree `/root/Software/booknotes-work/explore-it`, branch `plan/explore-it`.
-  Resolve `git rev-parse explore-it/lesson-06` → `755d21c`; parent `b3b0559`.
+  `explore-it/lesson-07` is the E07 fix commit; its parent is `49d8d67`.
   Git wins over stale state. Read this file and the checkpoint B review first.
 - B acceptance used a fresh temporary clone and project `queuelet-review-b`, ports
   18260/18261/15493, with explicit `QUEUELET_DATABASE_URL` for direct integration checks.
   Its first HEAD E02 attempt omitted that variable and failed against default port
   15433; retained logs show five public repros passed before two direct checks failed.
   Corrected acceptance reran with the explicit database URL. No SUT change was needed.
+- E07 acceptance: `register/runs/07-opus-runner.py` with project `queuelet-fix07` (ports
+  18290/18291/15523); REF uses `queuelet-ref` (18210/18211/15443). Both stacks were taken
+  down. Earlier Codex runs' logs (`07-*.log` without `opus`) are retained as history.
 - Nothing is active or needs relaunching. `register/reviews/B/` retains the exact runner,
   resume script, logs, integrity/history audits and final cleanup status. Do not relaunch
   a completed reviewer as the E07 explorer. Coordinator owns blind export lifecycle.

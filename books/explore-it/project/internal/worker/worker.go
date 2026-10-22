@@ -47,21 +47,34 @@ func Run(ctx context.Context, c *client.Client, name, queue string, kinds []stri
 		}
 		for _, j := range batch.Jobs {
 			slog.Info("processing", "event", "processing", "job_id", j.ID, "queue", queue, "worker", reg.ID, "attempt", j.Attempt, "kind", j.Kind)
+			workCtx, cancel := context.WithCancel(ctx)
 			done := make(chan struct{})
+			heartbeatDone := make(chan struct{})
 			go func(j Job) {
-				t := time.NewTicker(5 * time.Second)
+				defer close(heartbeatDone)
+				t := time.NewTicker(time.Second)
 				defer t.Stop()
 				for {
 					select {
 					case <-done:
 						return
 					case <-t.C:
-						c.Do("POST", fmt.Sprintf("/v1/jobs/%d/heartbeat", j.ID), map[string]any{"lease_token": j.Token, "extend_seconds": 30})
+						b, status, err := c.Do("POST", fmt.Sprintf("/v1/jobs/%d/heartbeat", j.ID), map[string]any{"lease_token": j.Token, "extend_seconds": 30})
+						var observation struct {
+							CancelRequested bool `json:"cancel_requested"`
+						}
+						if err == nil && status == http.StatusConflict && json.Unmarshal(b, &observation) == nil && observation.CancelRequested {
+							slog.Info("cancellation observed", "event", "cancel_requested", "job_id", j.ID)
+							cancel()
+							return
+						}
 					}
 				}
 			}(j)
-			result, e := perform(j)
+			result, e := perform(workCtx, j)
 			close(done)
+			cancel()
+			<-heartbeatDone
 			verb := "ack"
 			body := map[string]any{"lease_token": j.Token, "result": result}
 			if e != nil {
@@ -74,14 +87,20 @@ func Run(ctx context.Context, c *client.Client, name, queue string, kinds []stri
 		time.Sleep(200 * time.Millisecond)
 	}
 }
-func perform(j Job) (any, error) {
+func perform(ctx context.Context, j Job) (any, error) {
 	switch {
 	case j.Kind == "echo":
 		return j.Payload, nil
 	case j.Kind == "sleep":
 		number, _ := j.Payload["seconds"].(json.Number)
 		seconds, _ := number.Float64()
-		time.Sleep(time.Duration(seconds * float64(time.Second)))
+		timer := time.NewTimer(time.Duration(seconds * float64(time.Second)))
+		defer timer.Stop()
+		select {
+		case <-ctx.Done():
+			return nil, ctx.Err()
+		case <-timer.C:
+		}
 		return j.Payload, nil
 	case j.Kind == "crash":
 		os.Exit(3)
@@ -98,12 +117,19 @@ func perform(j Job) (any, error) {
 		return j.Payload, nil
 	case j.Kind == "http":
 		url, _ := j.Payload["url"].(string)
-		resp, e := (&http.Client{Timeout: 5 * time.Second}).Get(url)
+		req, e := http.NewRequestWithContext(ctx, "GET", url, nil)
+		if e != nil {
+			return nil, e
+		}
+		resp, e := (&http.Client{Timeout: 5 * time.Second}).Do(req)
 		if e != nil {
 			return nil, e
 		}
 		defer resp.Body.Close()
-		b, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+		b, e := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+		if e != nil {
+			return nil, e
+		}
 		if resp.StatusCode >= 400 {
 			return nil, fmt.Errorf("remote status %d", resp.StatusCode)
 		}

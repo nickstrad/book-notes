@@ -119,7 +119,34 @@ unless the maximum attempts have been exhausted.
 ## Operator actions and retention
 
 `POST /v1/jobs/{id}/cancel` cancels a nonterminal job.
-A cancelled job is never run.
+Cancellation immediately makes a nonterminal job `cancelled` and revokes its lease.
+If leased, cancellation records one `cancelled` attempt attributed to that holder
+and consumes that delivery's attempt. Jobs cancelled before leasing consume none.
+Cancelled jobs are never leased again; late ack/nack remain 409 and cannot revive them.
+Already-started work stops cooperatively when the worker observes cancellation;
+cancellation cannot roll back effects already performed by a remote service.
+
+Heartbeat wire contract: a valid live lease returns 200
+`{"ok":true,"cancel_requested":false}` and extends to now + `extend_seconds`.
+After cancellation, the revoked holder's exact lease token returns 409
+`{"error":{"code":"state_conflict","message":"job cancelled"},"cancel_requested":true}`.
+This is a read-only observation: it neither extends nor recreates a lease, records
+another attempt, nor authorizes ack/nack. A hash of the revoked token authenticates
+this observation until job deletion/retention. Wrong/empty tokens, other nonleased
+states, and cancelled jobs never leased (or cancelled before this feature) keep
+409 `state_conflict` without the signal. Namespace ownership still applies (404
+for foreign/missing jobs), and invalid extension values still return 400 first.
+Repeated observations with the same revoked token are permitted and change nothing.
+
+The sample worker checks heartbeat every 1 second while performing a job and
+cancels its in-flight sleep or HTTP context on the authenticated 409 signal.
+The heartbeat client has a 15-second request timeout; transport failure or an
+ordinary 409 supplies no cancellation signal, so prompt stopping is not guaranteed
+when the API is unreachable or the job has already been removed. Remote HTTP still
+has its existing 5-second timeout. A job finishing before the next observation
+may already have performed effects; its late completion is still rejected.
+Operators should not interpret terminal cancellation as proof that remote work
+has stopped. Other worker implementations must implement the observation contract.
 `POST /v1/jobs/{id}/retry` permits an operator to retry a dead job, resets its
 attempt count and makes it immediately available.
 Succeeded and cancelled jobs cannot be retried.

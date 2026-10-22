@@ -1,0 +1,107 @@
+{
+  "runs": [
+    {
+      "name": "down-stale",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T18:59:32.153138+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.836,
+      "log": "07-opus-down-stale.log"
+    },
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T18:59:35.073367+00:00",
+      "exit": 0,
+      "elapsed_seconds": 58.365,
+      "log": "07-opus-up.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T19:00:33.543138+00:00",
+      "exit": 0,
+      "elapsed_seconds": 251.314,
+      "log": "07-opus-current.log"
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07",
+        "REF=explore-it/lesson-06"
+      ],
+      "start": "2026-10-22T19:04:44.936718+00:00",
+      "exit": 0,
+      "elapsed_seconds": 86.24,
+      "log": "07-opus-ref.log"
+    },
+    {
+      "name": "checks",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T19:06:11.277516+00:00",
+      "exit": 0,
+      "elapsed_seconds": 514.39,
+      "log": "07-opus-checks.log"
+    },
+    {
+      "name": "test",
+      "command": [
+        "make",
+        "test"
+      ],
+      "start": "2026-10-22T19:14:45.754041+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.171,
+      "log": "07-opus-test.log"
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T19:14:49.025349+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.284,
+      "log": "07-opus-vet.log"
+    },
+    {
+      "name": "integrity",
+      "command": [
+        "python3",
+        "/root/Software/booknotes-work/explore-it/books/explore-it/register/runs/07-integrity-opus.py"
+      ],
+      "start": "2026-10-22T19:14:49.393916+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.841,
+      "log": "07-opus-integrity.log"
+    },
+    {
+      "name": "down",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T19:14:50.314247+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.468,
+      "log": "07-opus-down.log"
+    }
+  ]
+}

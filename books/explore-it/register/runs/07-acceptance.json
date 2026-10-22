@@ -1,0 +1,167 @@
+{
+  "runs": [
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T18:23:52.704471+00:00",
+      "exit": 0,
+      "elapsed_seconds": 47.215,
+      "log": "07-up.log"
+    },
+    {
+      "name": "build-check",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^$"
+      ],
+      "start": "2026-10-22T18:28:22.860240+00:00",
+      "exit": 0,
+      "elapsed_seconds": 1.647,
+      "log": "07-build-check.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T18:28:32.231504+00:00",
+      "exit": 2,
+      "elapsed_seconds": 27.868,
+      "log": "07-current.log"
+    },
+    {
+      "name": "up-final",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T18:28:24.582416+00:00",
+      "exit": 0,
+      "elapsed_seconds": 53.188,
+      "log": "07-up-final.log"
+    },
+    {
+      "name": "current-final",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T18:29:49.862966+00:00",
+      "exit": 0,
+      "elapsed_seconds": 341.631,
+      "log": "07-current-final.log"
+    },
+    {
+      "name": "up-acceptance",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T18:36:47.049714+00:00",
+      "exit": 0,
+      "elapsed_seconds": 47.215,
+      "log": "07-up-acceptance.log"
+    },
+    {
+      "name": "current-acceptance",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T18:37:41.869263+00:00",
+      "exit": 0,
+      "elapsed_seconds": 280.111,
+      "log": "07-current-acceptance.log"
+    },
+    {
+      "name": "ref-acceptance",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07",
+        "REF=explore-it/lesson-06"
+      ],
+      "start": "2026-10-22T18:42:52.633406+00:00",
+      "exit": 2,
+      "elapsed_seconds": 73.427,
+      "log": "07-ref-acceptance.log"
+    },
+    {
+      "name": "up-repair",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T18:49:56.906947+00:00",
+      "exit": 0,
+      "elapsed_seconds": 49.572,
+      "log": "07-up-repair.log"
+    },
+    {
+      "name": "integrity-repair-before",
+      "command": [
+        "python3",
+        "/tmp/explore-it-coordinator/e07/fixer-repair/integrity.py"
+      ],
+      "start": "2026-10-22T18:51:35.098950+00:00",
+      "exit": 0,
+      "elapsed_seconds": 1.225,
+      "log": "07-integrity-repair-before.log"
+    },
+    {
+      "name": "current-repair",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T18:50:50.558988+00:00",
+      "exit": 0,
+      "elapsed_seconds": 268.956,
+      "log": "07-current-repair.log"
+    }
+  ],
+  "run_roles": {
+    "current": "invalid acceptance; explicitly terminated when noticed overlapping image rebuild; exit 2 wraps probe SIGTERM 143",
+    "current-final": "supplemental successful current run before wrong-token hash refinement, independent-queue check and bulk read-only probe snapshots",
+    "up-acceptance": "final image rebuild; completed before current-acceptance",
+    "current-acceptance": "successful pre-epoch-repair current half; 280.111 s; superseded by repaired frozen pair",
+    "ref-acceptance": "PROBE ERROR: duplicate job id assertion ignored released/released-again epochs; historical success not claimed",
+    "current-repair": "new frozen-instrument current half",
+    "ref-repair": "new frozen-instrument historical half (pending)"
+  },
+  "scope": {
+    "findings": [
+      "U34",
+      "U35"
+    ],
+    "policy": "A3",
+    "old_controls": [
+      "D18",
+      "D19",
+      "D20"
+    ],
+    "full_dwell_sweep": false,
+    "independent_review": "pending",
+    "exploration_commit": "49d8d67",
+    "source_tag": "explore-it/lesson-06",
+    "fix_identity": "explore-it/lesson-07"
+  },
+  "interruptions": {
+    "provider": "Initial fresh fixer exit 1: provider possible cybersecurity risk error; no permission/authentication/provider changes; new local repair run continued same authorized unit",
+    "fixture": "REF duplicate-id assertion replaced by strict token/attempt epoch reconciliation; original failure and diagnostics retained",
+    "initial_current": "Interrupted because image rebuild overlapped; retained invalid acceptance"
+  }
+}

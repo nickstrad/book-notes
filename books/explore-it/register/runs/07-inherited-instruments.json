@@ -1,0 +1,6 @@
+{
+  "baseline": "49d8d67",
+  "inherited_behavioral_instruments": 88,
+  "mismatches": [],
+  "routing_exception": "project/lab/verify.sh adds E07 controls, verbose matrix checks and scoped REF scratch; old lesson paths unchanged"
+}

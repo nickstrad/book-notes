@@ -22,7 +22,7 @@ PostgreSQL at port 15433. Seed keys are `acme-key`, `globex-key`, and `admin-key
 Set `QUEUELET_URL` and `QUEUELET_KEY` to select a service and namespace.
 For an isolated stack, also set `COMPOSE_PROJECT_NAME`, `QUEUELET_IMAGE_TAG`,
 `QUEUELET_API_PORT`, `QUEUELET_HOOK_PORT`, `QUEUELET_PG_PORT` and `QUEUELET_HOOK_URL`.
-Direct integration checks (`make checks`, also selected by `make verify LESSON=02`)
+Direct integration checks (`make checks`, also selected by `make verify LESSON=02` and `LESSON=07`)
 connect through `QUEUELET_DATABASE_URL`; when changing the PostgreSQL host port, set
 it explicitly, for example
 `postgres://queuelet:queuelet@localhost:15493/queuelet?sslmode=disable`.
@@ -47,6 +47,10 @@ Use the returned worker/job ids and lease token in those examples. Worker mode:
 `go run ./cmd/qctl worker run imports --kinds echo,sleep,fail,fail3,crash,http`.
 Echo returns its payload; sleep reads payload.seconds; fail reads payload.n (or
 use kind fail3); crash exits the worker; http GETs payload.url with a timeout.
+Cancellation immediately revokes a job's lease. The sample worker observes the
+revoked holder's `cancel_requested` heartbeat signal and interrupts ongoing sleep
+or HTTP work. Effects already performed remotely cannot be undone; see the exact
+wire contract and observation limits in [SPEC.md](SPEC.md#operator-actions-and-retention).
 
 Queue verbs: create, ls, get, patch, pause, resume, purge, rm.
 Job verbs: get, attempts, ack, nack, heartbeat, cancel, retry, rm.

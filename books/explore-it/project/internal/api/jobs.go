@@ -88,6 +88,20 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			e = s.Jobs.Heartbeat(id, in.LeaseToken, in.ExtendSeconds, now)
+			if e != nil {
+				requested, observationErr := s.Jobs.CancelRequested(id, in.LeaseToken)
+				if observationErr != nil {
+					fail(w, 500, "database_error", observationErr)
+					return
+				}
+				if requested {
+					write(w, 409, map[string]any{"error": map[string]string{"code": "state_conflict", "message": "job cancelled"}, "cancel_requested": true})
+					return
+				}
+			} else {
+				write(w, 200, map[string]any{"ok": true, "cancel_requested": false})
+				return
+			}
 		}
 	default:
 		fail(w, 404, "not_found", "unknown operation")
@@ -164,6 +178,10 @@ func (s *Server) lease(w http.ResponseWriter, r *http.Request, q map[string]any)
 		return
 	}
 	v, e := s.Jobs.Lease(q["id"].(int64), in.WorkerID, in.MaxJobs, s.Clock.Now())
+	if e == jobs.ErrWorkerNotFound {
+		fail(w, 404, "worker_not_found", "unknown worker")
+		return
+	}
 	output(w, map[string]any{"jobs": v}, e)
 }
 

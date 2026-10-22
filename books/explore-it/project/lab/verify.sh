@@ -67,6 +67,13 @@ for id in "${ids[@]}"; do
   if [[ $result == "PRESENT: $id — "* ]]; then ((present+=1)); elif [[ $result == "ABSENT: $id — "* ]]; then ((absent+=1)); else echo "PROBE ERROR: invalid verdict for $id" >&2; exit 2; fi
 done
 [[ $((present+absent)) == "$expected" ]] || exit 2
+if [[ $lesson == 07 ]]; then
+  for control in D18 D19 D20; do
+    result=$(bash "lab/repro/$control.sh" </dev/null)
+    printf '%s\n' "$result"
+    [[ $result == "ABSENT: $control — "* ]] || { echo "PROBE ERROR: early-fixed control $control failed" >&2; exit 2; }
+  done
+fi
 if [[ -n ${REF:-} ]]; then
   if [[ ${QUEUELET_DWELL:-0} == 1 ]]; then
     echo "DWELL: $present present; $absent absent"

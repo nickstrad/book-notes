@@ -16,7 +16,7 @@ func (j *Service) Expire(now time.Time) error {
 	if _, e = tx.Exec(`SET LOCAL queuelet.release='lease_expired'`); e != nil {
 		return e
 	}
-	dead, e := release(tx, now, "expired", "lease expired", `state='leased' AND lease_expires_at <= $1 FOR UPDATE SKIP LOCKED`, now)
+	dead, e := release(tx, now, "expired", "lease expired", `state='leased' AND lease_expires_at <= $1 ORDER BY id FOR UPDATE SKIP LOCKED`, now)
 	if e != nil {
 		return e
 	}
@@ -34,7 +34,7 @@ func (j *Service) Expire(now time.Time) error {
 // ReleaseWorker ends a deregistered worker's leases inside the caller's
 // transaction. The caller notifies the returned dead jobs after commit.
 func (j *Service) ReleaseWorker(tx *sql.Tx, worker int64, now time.Time) ([]int64, error) {
-	return release(tx, now, "released", "worker deleted", `state='leased' AND leased_by=$1 FOR UPDATE`, worker)
+	return release(tx, now, "released", "worker deleted", `state='leased' AND leased_by=$1 ORDER BY id FOR UPDATE`, worker)
 }
 
 // release ends the selected leases. Each records an unsuccessful attempt; the

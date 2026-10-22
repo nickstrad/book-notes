@@ -121,6 +121,14 @@ Original score: 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contr
 
 ## Experiment 07 additions
 
-- [U34](U34-worker-delete-racing-lease.md): E07-F01, worker deletion races leasing; open.
-- [U35](U35-purge-transition-race.md): E07-F02, purge misses state transitions; open.
-- A3 assigned as a coordinator policy resolution, not a blind report.
+Two original reports remain immutable; both canonical U records are fixed in lesson 07.
+D18–D20 and D14 were found and repaired in E01, not rediscovered here. A3 is the
+coordinator's cancel-while-running policy decision, resolved in lesson 07, not a third
+blind finding.
+
+| ID | Original | Current record |
+|---|---|---|
+| U34 | [E07-F01](E07-F01-worker-delete-racing-lease-leaves-zombie-lease.md) | [fixed in lesson 07](U34-worker-delete-racing-lease.md) |
+| U35 | [E07-F02](E07-F02-purge-misses-rows-changing-state-concurrently.md) | [fixed in lesson 07](U35-purge-transition-race.md) |
+
+Original score: 13 stated / 12 confirmed / 1 refuted / 1 contradicted reading prediction / 41 new cells (49-cell matrix).

@@ -1,11 +1,14 @@
 package worker
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"queuelet/internal/client"
 	"testing"
+	"time"
 )
 
 func TestDecodedWorkerDefaults(t *testing.T) {
@@ -36,7 +39,7 @@ func TestDecodedWorkerDefaults(t *testing.T) {
 				t.Fatal(err)
 			}
 			job.Kind, job.Attempt = tc.kind, tc.attempt
-			result, err := perform(job)
+			result, err := perform(context.Background(), job)
 			if (err != nil) != tc.wantFailure {
 				t.Fatalf("failure=%v, want %v", err, tc.wantFailure)
 			}
@@ -47,5 +50,57 @@ func TestDecodedWorkerDefaults(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestCancellationInterruptsSleep(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	done := make(chan error, 1)
+	go func() {
+		_, err := perform(ctx, Job{Kind: "sleep", Payload: map[string]any{"seconds": json.Number("60")}})
+		done <- err
+	}()
+	cancel()
+	select {
+	case err := <-done:
+		if !errors.Is(err, context.Canceled) {
+			t.Fatal(err)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("sleep continued")
+	}
+}
+func TestCancellationInterruptsHTTPBody(t *testing.T) {
+	started := make(chan struct{})
+	stopped := make(chan struct{})
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(" "))
+		w.(http.Flusher).Flush()
+		close(started)
+		<-r.Context().Done()
+		close(stopped)
+	}))
+	defer srv.Close()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	done := make(chan error, 1)
+	go func() {
+		_, err := perform(ctx, Job{Kind: "http", Payload: map[string]any{"url": srv.URL}})
+		done <- err
+	}()
+	<-started
+	cancel()
+	select {
+	case err := <-done:
+		if !errors.Is(err, context.Canceled) {
+			t.Fatal(err)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("HTTP body continued")
+	}
+	select {
+	case <-stopped:
+	case <-time.After(time.Second):
+		t.Fatal("remote connection remained open")
 	}
 }

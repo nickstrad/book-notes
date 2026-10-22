@@ -1,0 +1,115 @@
+{"command": ["make", "up"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix07", "QUEUELET_IMAGE_TAG": "fix07", "QUEUELET_API_PORT": "18290", "QUEUELET_HOOK_PORT": "18291", "QUEUELET_PG_PORT": "15523", "QUEUELET_URL": "http://localhost:18290", "QUEUELET_HOOK_URL": "http://localhost:18291", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15523/queuelet?sslmode=disable"}, "start": "2026-10-22T18:23:52.704471+00:00"}
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:fix07 Pulling 
+ Image queuelet:fix07 Pulling 
+ Image queuelet:fix07 Pulling 
+ Image queuelet:fix07 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:fix07 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:fix07 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:fix07 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 587B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#6 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#7 DONE 0.1s
+
+#8 [internal] load build context
+#8 transferring context: 381.28kB 0.1s done
+#8 DONE 0.1s
+
+#9 [build 3/6] COPY go.mod go.sum ./
+#9 CACHED
+
+#10 [build 2/6] WORKDIR /src
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.1s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 33.5s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 DONE 0.2s
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 DONE 0.1s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 3.7s done
+#18 exporting manifest sha256:bc2e87f5f01db346f966457272fb34b8125b3f066d510f3a2b89367c6710f0fa
+#18 exporting manifest sha256:bc2e87f5f01db346f966457272fb34b8125b3f066d510f3a2b89367c6710f0fa 0.0s done
+#18 exporting config sha256:cf991cb9a49a6fc880bd5d5fe02307a7a4e0120c7bb9ce9e7fd4986f187d3a1b 0.0s done
+#18 exporting attestation manifest sha256:16c88357efe65efbe54d85957f95490de13f90a42af9393a84932ccdc75c3b7e
+#18 exporting attestation manifest sha256:16c88357efe65efbe54d85957f95490de13f90a42af9393a84932ccdc75c3b7e 0.0s done
+#18 exporting manifest list sha256:c070f31589868db33e09877a16f398a2802b1072fe1dc524577aee47f6307cc4 0.0s done
+#18 naming to docker.io/library/queuelet:fix07 0.0s done
+#18 unpacking to docker.io/library/queuelet:fix07
+#18 unpacking to docker.io/library/queuelet:fix07 0.5s done
+#18 DONE 4.4s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:fix07 Built 
+ Network queuelet-fix07_default Creating 
+ Network queuelet-fix07_default Creating 
+ Volume queuelet-fix07_data Creating 
+ Volume queuelet-fix07_data Creating 
+ Volume queuelet-fix07_data Created 
+ Volume queuelet-fix07_data Created 
+ Network queuelet-fix07_default Created 
+ Network queuelet-fix07_default Created 
+ Container queuelet-fix07-postgres-1 Creating 
+ Container queuelet-fix07-hooksink-1 Creating 
+ Container queuelet-fix07-postgres-1 Created 
+ Container queuelet-fix07-api-1 Creating 
+ Container queuelet-fix07-hooksink-1 Created 
+ Container queuelet-fix07-api-1 Created 
+ Container queuelet-fix07-worker-b-1 Creating 
+ Container queuelet-fix07-worker-a-1 Creating 
+ Container queuelet-fix07-worker-b-1 Created 
+ Container queuelet-fix07-worker-a-1 Created 
+ Container queuelet-fix07-hooksink-1 Starting 
+ Container queuelet-fix07-postgres-1 Starting 
+ Container queuelet-fix07-hooksink-1 Started 
+ Container queuelet-fix07-postgres-1 Started 
+ Container queuelet-fix07-postgres-1 Waiting 
+ Container queuelet-fix07-postgres-1 Healthy 
+ Container queuelet-fix07-api-1 Starting 
+ Container queuelet-fix07-api-1 Started 
+ Container queuelet-fix07-worker-a-1 Starting 
+ Container queuelet-fix07-worker-b-1 Starting 
+ Container queuelet-fix07-worker-a-1 Started 
+ Container queuelet-fix07-worker-b-1 Started 
+
+EXIT 0; ELAPSED 47.215s

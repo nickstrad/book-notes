@@ -166,13 +166,11 @@ func (s *Server) queueVerb(w http.ResponseWriter, r *http.Request) {
 		_, e := s.S.DB.Exec(`UPDATE queues SET paused=$2 WHERE id=$1`, q["id"], r.PathValue("verb") == "pause")
 		output(w, map[string]any{"ok": true}, e)
 	case "purge":
-		// Leased jobs keep running; marked, a failure ends them instead of re-queueing.
-		res, e := s.S.DB.Exec(`WITH marked AS (UPDATE jobs SET purge_requested=true WHERE queue_id=$1 AND state='leased'), removed AS (DELETE FROM jobs WHERE queue_id=$1 AND state IN ('queued','scheduled','retry_wait') RETURNING *) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$2,'purged',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, q["id"], s.Clock.Now())
+		n, e := s.Jobs.Purge(q["id"].(int64), s.Clock.Now())
 		if e != nil {
 			fail(w, 500, "database_error", e)
 			return
 		}
-		n, _ := res.RowsAffected()
 		write(w, 200, map[string]any{"deleted": n})
 	default:
 		fail(w, 404, "not_found", "unknown operation")

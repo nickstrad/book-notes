@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/lib/pq"
 	"math"
@@ -37,6 +38,8 @@ func Backoff(kind string, base, attempt, maxSeconds int) time.Duration {
 	return time.Duration(min(float64(base)*steps, limit) * float64(time.Second))
 }
 
+var ErrWorkerNotFound = errors.New("worker not found")
+
 const LeaseOrder = "priority DESC, created_at, id"
 
 func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, error) {
@@ -50,12 +53,15 @@ func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, e
 	if e = tx.QueryRow(`SELECT lease_seconds,paused FROM queues WHERE id=$1`, q).Scan(&sec, &paused); e != nil {
 		return nil, e
 	}
+	var kinds pq.StringArray
+	if e = tx.QueryRow(`SELECT kinds FROM workers WHERE id=$1 FOR SHARE`, w).Scan(&kinds); e != nil {
+		if e == sql.ErrNoRows {
+			return nil, ErrWorkerNotFound
+		}
+		return nil, e
+	}
 	if paused {
 		return []map[string]any{}, nil
-	}
-	var kinds pq.StringArray
-	if e = tx.QueryRow(`SELECT kinds FROM workers WHERE id=$1`, w).Scan(&kinds); e != nil {
-		return nil, e
 	}
 	rows, e := tx.Query(`SELECT id FROM jobs WHERE queue_id=$1 AND state='queued' AND kind=ANY($2) ORDER BY `+LeaseOrder+` LIMIT $3 FOR UPDATE SKIP LOCKED`, q, kinds, max)
 	if e != nil {
