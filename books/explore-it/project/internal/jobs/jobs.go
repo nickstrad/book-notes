@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/lib/pq"
+	"math"
 	"queuelet/internal/store"
 	"time"
 )
@@ -14,11 +15,23 @@ import (
 type Service struct{ S *store.Store }
 
 func Token() string { b := make([]byte, 16); rand.Read(b); return hex.EncodeToString(b) }
-func Backoff(kind string, base, attempt int) time.Duration {
-	if kind == "linear" {
-		return time.Duration(base*attempt) * time.Second
+
+// MaxSeconds bounds every seconds-valued input so that now+seconds never
+// leaves time.Duration's range (about 292 years).
+const MaxSeconds = math.MaxInt32
+
+// Backoff is the wait before retry attempt+1. It saturates at the queue's cap
+// (maxSeconds > 0) or at MaxSeconds instead of overflowing.
+func Backoff(kind string, base, attempt, maxSeconds int) time.Duration {
+	limit := float64(MaxSeconds)
+	if maxSeconds > 0 {
+		limit = min(limit, float64(maxSeconds))
 	}
-	return time.Duration(base) * time.Second * time.Duration(uint64(1)<<uint(attempt-1))
+	steps := float64(attempt)
+	if kind != "linear" {
+		steps = math.Exp2(float64(attempt - 1))
+	}
+	return time.Duration(min(float64(base)*steps, limit) * float64(time.Second))
 }
 
 const LeaseOrder = "priority DESC, created_at, id"

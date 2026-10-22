@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"queuelet/internal/jobs"
 	"strconv"
 	"time"
 )
@@ -51,6 +52,9 @@ func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[
 		at = *in.RunAt
 	}
 	if in.DelaySeconds != nil {
+		if *in.DelaySeconds > jobs.MaxSeconds {
+			return nil, fmt.Errorf("delay_seconds must be at most %d", jobs.MaxSeconds)
+		}
 		at = now.Add(time.Duration(*in.DelaySeconds) * time.Second)
 	}
 	state := "queued"

@@ -1,12 +1,14 @@
 package api
 
 import (
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -15,10 +17,12 @@ import (
 	"queuelet/internal/schedule"
 	"queuelet/internal/store"
 	"queuelet/internal/webhook"
+	"reflect"
 	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
+	"unicode/utf8"
 )
 
 type Server struct {
@@ -47,14 +51,66 @@ func fail(w http.ResponseWriter, status int, code string, e any) {
 	write(w, status, map[string]any{"error": map[string]any{"code": code, "message": fmt.Sprint(e)}})
 }
 func decode(w http.ResponseWriter, r *http.Request, v any) bool {
-	d := json.NewDecoder(http.MaxBytesReader(w, r.Body, 2<<20))
-	d.DisallowUnknownFields()
-	d.UseNumber()
-	if e := d.Decode(v); e != nil {
+	body, e := io.ReadAll(http.MaxBytesReader(w, r.Body, 2<<20))
+	if e == nil && !utf8.Valid(body) {
+		e = fmt.Errorf("body is not valid UTF-8")
+	}
+	if e == nil {
+		d := json.NewDecoder(bytes.NewReader(body))
+		d.DisallowUnknownFields()
+		d.UseNumber()
+		if e = d.Decode(v); e == nil && d.Decode(&struct{}{}) != io.EOF {
+			e = fmt.Errorf("unexpected data after the JSON object")
+		}
+	}
+	if e == nil {
+		var tree any
+		json.Unmarshal(body, &tree)
+		e = exactNames(tree, reflect.TypeOf(v))
+	}
+	if e != nil {
 		fail(w, 400, "invalid_json", e)
 		return false
 	}
 	return true
+}
+
+// exactNames rejects members that encoding/json matched to a field only
+// case-insensitively. Free-form members (payload, result) are not walked.
+func exactNames(v any, t reflect.Type) error {
+	for t.Kind() == reflect.Pointer {
+		t = t.Elem()
+	}
+	switch t.Kind() {
+	case reflect.Slice:
+		if items, ok := v.([]any); ok && t != reflect.TypeOf(json.RawMessage{}) {
+			for _, item := range items {
+				if e := exactNames(item, t.Elem()); e != nil {
+					return e
+				}
+			}
+		}
+	case reflect.Struct:
+		object, ok := v.(map[string]any)
+		if !ok {
+			return nil
+		}
+		fields := map[string]reflect.Type{}
+		for i := 0; i < t.NumField(); i++ {
+			name, _, _ := strings.Cut(t.Field(i).Tag.Get("json"), ",")
+			fields[name] = t.Field(i).Type
+		}
+		for name, value := range object {
+			field, ok := fields[name]
+			if !ok {
+				return fmt.Errorf("json: unknown field %q", name)
+			}
+			if e := exactNames(value, field); e != nil {
+				return e
+			}
+		}
+	}
+	return nil
 }
 func num(r *http.Request, name string) int64 {
 	v, _ := strconv.ParseInt(r.PathValue(name), 10, 64)

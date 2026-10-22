@@ -1,0 +1,15 @@
+{
+  "experiment": 3,
+  "builder": "claude-opus-5-5 (Opus seat per Nick 2026-10-22)",
+  "assigned": ["U11", "U12", "U13", "U14", "U15", "U16", "U17", "U18"],
+  "commands": [
+    {"cmd": "make up", "exit": 0, "elapsed_s": 73.4, "log": "03-up.log"},
+    {"cmd": "make verify LESSON=03 REF=explore-it/lesson-02", "attempt": 1, "exit": 2, "result": "PROBE ERROR: U13 (probe leased the wrapped job, not its own); retained", "log": "03-historical-attempt1.log", "diagnostics": "03-historical-attempt1-diagnostics/"},
+    {"cmd": "make verify LESSON=03 REF=explore-it/lesson-02", "attempt": 2, "exit": 0, "elapsed_s": 145.2, "result": "DEFECTS REPRODUCED: 8 present", "log": "03-historical.log"},
+    {"cmd": "make verify LESSON=03", "exit": 0, "elapsed_s": 31.3, "result": "FIXED AND CHECKED: 8 absent; regression checks pass", "log": "03-current.log"},
+    {"cmd": "go test -tags checks ./test/checks -count=1 -v", "exit": 0, "elapsed_s": 240.8, "result": "54 checks pass", "log": "03-checks.log"},
+    {"cmd": "make test", "exit": 0, "result": "unit suite passes", "log": "03-test.log"},
+    {"cmd": "register/proof/A1.sh..A4.sh", "result": "A1-A4 PRESENT (left for E04-E07)", "log": "03-unresolved-controls.log"}
+  ],
+  "dwell": "03-dwell.tsv (paired lesson-02 / lesson-03 only; no make dwell sweep)"
+}

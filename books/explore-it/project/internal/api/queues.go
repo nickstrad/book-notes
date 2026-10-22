@@ -2,8 +2,10 @@ package api
 
 import (
 	"database/sql"
+	"github.com/lib/pq"
 	"net/http"
 	"net/url"
+	"queuelet/internal/jobs"
 	"queuelet/internal/stats"
 	"regexp"
 	"strings"
@@ -35,8 +37,12 @@ func (s *Server) createQueue(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &in) {
 		return
 	}
-	if !regexp.MustCompile(`^[A-Za-z0-9_-]+$`).MatchString(in.Name) || in.LeaseSeconds < 1 || in.MaxAttempts < 1 || in.RetentionHours < 0 || in.Backoff.BaseSeconds < 0 || (in.Backoff.Kind != "linear" && in.Backoff.Kind != "exponential") {
-		fail(w, 400, "invalid_queue", "name and positive limits required")
+	if !regexp.MustCompile(`^[A-Za-z0-9_-]{1,128}$`).MatchString(in.Name) || !inRange(&in.LeaseSeconds, &in.MaxAttempts, &in.RetentionHours) || in.Backoff.BaseSeconds < 0 || in.Backoff.BaseSeconds > jobs.MaxSeconds || (in.Backoff.Kind != "linear" && in.Backoff.Kind != "exponential") {
+		fail(w, 400, "invalid_queue", "name of 1–128 characters and limits within range required")
+		return
+	}
+	if m := in.Backoff.MaxSeconds; m != nil && (*m < 1 || *m < in.Backoff.BaseSeconds || *m > jobs.MaxSeconds) {
+		fail(w, 400, "invalid_queue", "backoff.max_seconds must be between base_seconds and 2147483647")
 		return
 	}
 	if !validWebhook(in.Webhook.URL) {
@@ -44,8 +50,12 @@ func (s *Server) createQueue(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	v, e := s.S.One(`INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`, ident(r).Namespace, in.Name, in.LeaseSeconds, in.MaxAttempts, in.RetentionHours, in.Backoff.Kind, in.Backoff.BaseSeconds, in.Backoff.MaxSeconds, in.Webhook.URL, in.Webhook.Secret)
+	if pe, ok := e.(*pq.Error); ok && pe.Code == "23505" {
+		fail(w, 409, "queue_conflict", "a queue with this name exists")
+		return
+	}
 	if e != nil {
-		fail(w, 409, "queue_conflict", e)
+		fail(w, 500, "database_error", e)
 		return
 	}
 	write(w, 201, v)
@@ -70,25 +80,28 @@ func (s *Server) patchQueue(w http.ResponseWriter, r *http.Request) {
 		MaxAttempts    *int     `json:"max_attempts"`
 		RetentionHours *float64 `json:"retention_hours"`
 		Webhook        *struct {
-			URL    string `json:"url"`
-			Secret string `json:"secret"`
+			URL    *string `json:"url"`
+			Secret *string `json:"secret"`
 		} `json:"webhook"`
 	}
 	if !decode(w, r, &in) {
 		return
 	}
-	if (in.LeaseSeconds != nil && *in.LeaseSeconds < 1) || (in.MaxAttempts != nil && *in.MaxAttempts < 1) || (in.RetentionHours != nil && *in.RetentionHours < 0) {
-		fail(w, 400, "invalid_queue", "lease_seconds must be positive")
+	if !inRange(in.LeaseSeconds, in.MaxAttempts, in.RetentionHours) {
+		fail(w, 400, "invalid_queue", "limits out of range")
 		return
 	}
+	// Webhook members merge like the top level: an omitted member keeps its value.
 	url, secret := q["webhook_url"], q["webhook_secret"]
-	if in.Webhook != nil {
-		if !validWebhook(in.Webhook.URL) {
+	if in.Webhook != nil && in.Webhook.URL != nil {
+		if !validWebhook(*in.Webhook.URL) {
 			fail(w, 400, "invalid_webhook", "absolute HTTP(S) URL required")
 			return
 		}
-		url = in.Webhook.URL
-		secret = in.Webhook.Secret
+		url = *in.Webhook.URL
+	}
+	if in.Webhook != nil && in.Webhook.Secret != nil {
+		secret = *in.Webhook.Secret
 	}
 	v, e := s.S.One(`UPDATE queues SET lease_seconds=COALESCE($2,lease_seconds),max_attempts=COALESCE($3,max_attempts),retention_hours=COALESCE($4,retention_hours),webhook_url=$5,webhook_secret=$6 WHERE id=$1 RETURNING *`, q["id"], in.LeaseSeconds, in.MaxAttempts, in.RetentionHours, url, secret)
 	output(w, v, e)
@@ -186,6 +199,16 @@ func (s *Server) namespaceStats(w http.ResponseWriter, r *http.Request) {
 	v, e := stats.Read(s.S, "namespace_id", id, s.Clock.Now())
 	output(w, v, e)
 }
+
+// inRange checks the queue limits that are present; nil means unchanged.
+func inRange(leaseSeconds, maxAttempts *int, retentionHours *float64) bool {
+	return (leaseSeconds == nil || *leaseSeconds >= 1 && *leaseSeconds <= jobs.MaxSeconds) &&
+		(maxAttempts == nil || *maxAttempts >= 1 && *maxAttempts <= jobs.MaxSeconds) &&
+		(retentionHours == nil || *retentionHours >= 0 && *retentionHours <= maxRetentionHours)
+}
+
+// maxRetentionHours (about 114 years) keeps every retention cutoff a valid timestamp.
+const maxRetentionHours = 1_000_000
 
 func validWebhook(raw string) bool {
 	if raw == "" {

@@ -1,0 +1,133 @@
+REF='explore-it/lesson-02' bash lab/verify.sh 03
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 ...
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.3s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B 0.0s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 147.36kB 0.2s done
+#6 DONE 0.3s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.7s done
+#7 DONE 0.7s
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.7s done
+#8 DONE 0.8s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.6s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 91.6s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 DONE 0.1s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 0.2s done
+#18 exporting manifest sha256:93b391ca461fa0c62745a8bef76ff49afdaa0536796794b9be9ecf4890b68015 0.0s done
+#18 exporting config sha256:19314946db7bf8472cb33479ddb959961d5fa17b3508420759c60ede9ed37743 0.0s done
+#18 exporting attestation manifest sha256:66fe2e2b2192094866c7c4a46301e6d95186b085b077eb21d9caa0433e19007b 0.0s done
+#18 exporting manifest list sha256:0768d0739b3217a03cee65661c8de9ed2958b344960bcaddec8a95c4e7981c5d 0.0s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref 0.1s done
+#18 DONE 0.5s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+PRESENT: U11 — statuses {'trailing text': 201, 'second object': 201, 'invalid UTF-8': 201}; well-formed control 201
+PRESENT: U12 — {'KIND/PAYLOAD': '201 priority=5', 'priority then PRIORITY': '201 priority=9'}; exact unknown name 400
+PROBE ERROR: U13 — RuntimeError(('heartbeat', 409, {'error': {'code': 'state_conflict', 'message': 'state conflict'}}))
+REF verification failed (exit 2); diagnostics: /root/Software/booknotes-work/explore-it/books/explore-it/project/results/ref-failure.75vdsu
+make: *** [Makefile:13: verify] Error 2
+make verify LESSON=03 REF=explore-it/lesson-02  2.93s user 1.46s system 3% cpu 2:03.86 total
+exit 2

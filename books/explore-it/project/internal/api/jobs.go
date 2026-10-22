@@ -64,14 +64,18 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
 		case "ack":
 			e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)
 		case "nack":
+			if in.DelaySeconds != nil && *in.DelaySeconds > jobs.MaxSeconds {
+				fail(w, 400, "invalid_delay", "delay_seconds must be at most 2147483647")
+				return
+			}
 			retry := true
 			if in.Retry != nil {
 				retry = *in.Retry
 			}
 			e = s.Jobs.Nack(id, in.LeaseToken, in.Error, retry, in.DelaySeconds, now)
 		case "heartbeat":
-			if in.ExtendSeconds < 1 {
-				fail(w, 400, "invalid_extension", "positive extension required")
+			if in.ExtendSeconds < 1 || in.ExtendSeconds > jobs.MaxSeconds {
+				fail(w, 400, "invalid_extension", "extend_seconds must be 1–2147483647")
 				return
 			}
 			e = s.Jobs.Heartbeat(id, in.LeaseToken, in.ExtendSeconds, now)

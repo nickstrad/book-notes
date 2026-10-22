@@ -8,10 +8,10 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 		return e
 	}
 	defer tx.Rollback()
-	var attempts, max, base int
+	var attempts, max, base, cap int
 	var kind string
 	var worker int64
-	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,j.leased_by FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND j.state='leased' AND j.lease_token=$2 FOR UPDATE OF j`, id, token).Scan(&attempts, &max, &kind, &base, &worker)
+	e = tx.QueryRow(`SELECT j.attempts+1,j.max_attempts,q.backoff_kind,q.backoff_base,COALESCE(q.backoff_max,0),j.leased_by FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1 AND j.state='leased' AND j.lease_token=$2 FOR UPDATE OF j`, id, token).Scan(&attempts, &max, &kind, &base, &cap, &worker)
 	if e != nil {
 		return e
 	}
@@ -19,7 +19,7 @@ func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, 
 	if !retry || attempts >= max {
 		state = "dead"
 	}
-	wait := Backoff(kind, base, attempts)
+	wait := Backoff(kind, base, attempts, cap)
 	if delay != nil {
 		wait = time.Duration(*delay) * time.Second
 	}

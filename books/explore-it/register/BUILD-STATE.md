@@ -5,49 +5,33 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-E02 complete, final lesson tag explore-it/lesson-02 (commit containing this state).
-Blind record e390c31; hooks checkpoint 3287bd9; final commit repairs U09/U10 and
-adds canonical records, checks, paired verification and lesson. Exact outcomes:
+E03 complete, tag explore-it/lesson-03 (the fix commit containing this state). Builder from
+E03 on: Claude Opus 5.5, per Nick 2026-10-22, after two Codex Sol runs were stopped by the
+Codex content filter (2026-10-21 ~21:13 and ~23:1x CDT). Astra still reviews at the end.
 
-- make up: exit 0, 78.833 s.
-- current verify: exit 0, 54.279 s; FIXED AND CHECKED: 5 absent; regression checks pass.
-- lesson-01 REF verify: exit 0, 61.646 s; DEFECTS REPRODUCED: 5 present.
-- make checks: exit 0, 226.464 s; all 46 named integration checks pass.
-- make test: exit 0, 1.223 s.
-- actual crash/500/slow/recovery and container qctl replay: exit 0, 14.860 s.
+- Exploration record `09dd0a9` (blind Opus explorer, 50/50 manifest hashes rechecked).
+- Reconciliation `reconciliations/03.md`: eight reports → U11–U18, all fixed; D05–D08 and
+  D26 were found early in E01 and held. A1 stays with E04.
+- Acceptance (`runs/03-acceptance.json`): verify current `FIXED AND CHECKED: 8 absent`;
+  REF lesson-02 `DEFECTS REPRODUCED: 8 present` (second attempt; the first stopped on a
+  probe bug, retained with diagnostics); 54/54 integration checks; unit tests pass;
+  A1–A4 controls still PRESENT.
+- Deviation: the explorer and the fixer are both Claude this time (Nick's seat move). The
+  cross-family guarantee for E03 rests on the Astra end review.
+- Process note: a probe that leases "the next job" must act on the id the lease returned;
+  a wrapped or earlier job may be due first. Recorded in `project/lab/repro/README.md`.
 
-Acceptance: runs/02-acceptance.json; logs runs/02-*.log. Measured dwell is only
-lesson-01 → E02, five PRESENT → ABSENT, derived from paired logs (02-dwell.tsv).
-T01/T02/T03 denote plan T1/T2/T3; two U bugs plus three observation gaps are not
-five new correctness findings. Raw score remains 19/19 confirmed, zero refuted,
-zero reading contradictions and 46 model cells. All 102 raw artifacts unchanged.
+Resume: fresh agent for E04 from lesson-03; coordinator prepares the export with
+`register/tools/prepare-export.py 4 explore-it/lesson-03`.
 
-Spec decisions: retained notification snapshots survive edits/deletion; delivered
-requires sender-received 2xx before its deadline; timed-out side effects may be
-duplicated. No cap/timeout/dead-letter policy added. A1–A4 remain later. TR-E02-3/4
-proposals deferred; TR-E02-1/2/5/6 covered. Structural guards remain E09.
+## E02 unit (historical)
 
-Retained failures: initial REF exits 2 with PROBE ERROR on historical GET events
-405 (old POST verb route). E02-only decoder/oracle now recognizes 404/405 as that
-instrument gap; it does not classify a lifecycle bug as absent. Both directions
-rerun with the same frozen instruments. Initial legacy direct-check exit 1 was a
-Go-nanosecond/PostgreSQL-microsecond fixture equality; corrected to microseconds.
-Original logs and REF Compose diagnostics remain. No required behavioral checks unrun/failing. Authored staged whitespace exits 0;
-full staged whitespace exits 2 for retained raw Compose/diagnostic trailing spaces,
-recorded non-gating rather than rewriting raw outputs.
-
-Reusable helpers: project/lab/repro/probe02.py and lab/observe02.py, indexed in
-lab/repro/README.md. E01 helpers remain unchanged. Process knowledge: missing-route
-status can be 405 when a different-method wildcard matches; fixture timestamp
-precision must match the storage boundary. Observation triggers take app time,
-retain namespace ownership, and never choose transition policy. Pre-hook lease
-starts stay unknown; old attempt histories are not reconstructed. API clock is
-semantic and resets on API restart; workers/network timers remain real.
-
-Resume: existing plan/explore-it, fresh E03 coordinator export from lesson-02.
-No active E02 agent/verification remains; lab containers may still run. Scratch
-/tmp/explore-it-e02-fix runners are completed diagnosis artifacts. Do not reuse
-this fixer. Coordinator's prepare-export.py change is outside this E02 commit.
+E02 complete at explore-it/lesson-02: blind record e390c31, hooks 3287bd9, fixes 9394782.
+Verify current 5 absent, REF lesson-01 5 present, 46 checks; details in runs/02-acceptance.json.
+Process knowledge kept from E02: a missing route can answer 405 when a different-method
+wildcard matches; fixture timestamp precision must match the storage boundary
+(microseconds); the API clock is semantic and resets on API restart, while workers and
+network timers stay real; capture failure diagnostics before scratch-stack teardown.
 
 ## Prior checkpoint A acceptance
 

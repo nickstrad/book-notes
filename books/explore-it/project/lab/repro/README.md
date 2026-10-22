@@ -47,3 +47,13 @@ slow-partner/sender deadline disagreement, recovery and container qctl
 `job events`, `watch QUEUE`, `clock set|advance|reset`. It is an observation replay,
 not a sixth counted bug. The direct legacy-row check uses a private database
 schema; it is intentionally separate from the public U10 repro.
+
+E03 adds `probe03.py`, wrappers U11–U18 and `lesson-03.ids`. U11/U12 send raw
+bodies (trailing data, a second object, invalid UTF-8, case-variant names) so the
+bytes on the wire are exactly the report's. U13 and U16 compare a stored time with
+the moment of the request: a time in the past is the wrap. U15 leaves a terminal
+job in a large-retention queue, waits six seconds for a zero-retention control to
+be swept, then deletes the held job so a historical stack recovers. U13 acts on
+the job the lease returned: its own wrapped enqueue is due first, so FIFO does not
+give back the job just enqueued (the first REF attempt failed on exactly that).
+U16 and U17 use a fresh queue holding one job. Run these instruments serially.

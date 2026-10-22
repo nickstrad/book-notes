@@ -47,3 +47,21 @@ Original F reports preserve what the blind explorer wrote. Canonical D/U records
 - E02-F03: delivery-timeout semantics clarified in SPEC.md; retained snapshots and at-least-once duplicates; no extra bug counted.
 
 Original E02-F reports and raw scores are immutable. Canonical statuses are maintained separately.
+
+## Experiment 03 additions
+
+All eight E03 reports are new unplanned faults, fixed in lesson 03. The planned E03 defects
+(D05–D08, D26) were already fixed in lesson 01 and held as regressions.
+
+| ID | Original | Current record |
+|---|---|---|
+| U11 | [E03-F01](E03-F01-malformed-json-text-accepted.md) | [fixed in lesson 03](U11-malformed-json-text-accepted.md) |
+| U12 | [E03-F02](E03-F02-case-variant-member-names-accepted.md) | [fixed in lesson 03](U12-case-variant-member-names-accepted.md) |
+| U13 | [E03-F03](E03-F03-duration-overflow-delay-and-extension.md) | [fixed in lesson 03](U13-duration-overflow-delay-and-extension.md) |
+| U14 | [E03-F04](E03-F04-storage-limit-errors-reported-as-conflict.md) | [fixed in lesson 03](U14-storage-limit-errors-reported-as-conflict.md) |
+| U15 | [E03-F05](E03-F05-large-retention-halts-global-retention.md) | [fixed in lesson 03](U15-large-retention-halts-global-retention.md) |
+| U16 | [E03-F06](E03-F06-backoff-overflow-immediate-retry.md) | [fixed in lesson 03](U16-backoff-overflow-immediate-retry.md) |
+| U17 | [E03-F07](E03-F07-backoff-max-seconds-ignored.md) | [fixed in lesson 03](U17-backoff-max-seconds-ignored.md) |
+| U18 | [E03-F08](E03-F08-patch-webhook-partial-clears-other-member.md) | [fixed in lesson 03](U18-patch-webhook-partial-clears-other-member.md) |
+
+Original E03-F reports and raw scores are immutable.

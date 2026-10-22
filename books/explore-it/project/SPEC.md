@@ -15,23 +15,33 @@ HTTP status. Successful reads and mutations return 200 unless stated otherwise.
 Creation returns 201. Deletion returns 204. A missing resource returns 404.
 A command incompatible with the current state returns 409.
 Unknown fields and invalid enum values should be rejected as invalid commands.
+A command body is exactly one JSON object in UTF-8. Trailing data, invalid UTF-8
+and member names that match a documented field only when case is ignored are
+rejected with 400 `invalid_json`.
+Every seconds-valued field and `max_attempts` accepts at most 2147483647.
 
 ## Queues
 
 `POST /v1/queues` creates a queue with a unique name within the namespace.
-Names use ASCII letters, digits, underscores and hyphens.
+Names use 1–128 ASCII letters, digits, underscores and hyphens. Only a taken name
+is a 409 conflict; an invalid or out-of-range setting is 400.
 Configuration defaults are `lease_seconds:30`, `max_attempts:3`,
 `backoff:{kind:"exponential",base_seconds:5}`, `retention_hours:24`.
-Lease duration and maximum attempts must be positive; retention hours must be nonnegative.
+Lease duration and maximum attempts must be positive; retention hours range from
+0 through 1000000.
 Backoff kind is `linear` or `exponential`; the base is a nonnegative number
 of seconds. Failed jobs retry with exponential backoff from `base_seconds`
-or linear backoff when configured.
+or linear backoff when configured. An optional `backoff.max_seconds`, at least
+`base_seconds`, caps each wait. A computed wait never overflows: it is capped
+at 2147483647 seconds, so a retry is never scheduled before the failure.
 An optional `webhook:{url,secret}` receives terminal notifications.
 
 `GET /v1/queues` lists the namespace's queues.
 `GET /v1/queues/{name}` reads configuration.
 `PATCH /v1/queues/{name}` updates lease duration, maximum attempts, retention
 or webhook settings. Existing jobs retain their maximum-attempt setting.
+Omitted members keep their value, inside `webhook` as well: a secret-only PATCH
+keeps the URL and a URL-only PATCH keeps the secret.
 `DELETE /v1/queues/{name}` removes a queue; owned jobs and schedules must not
 become orphaned. Callers must handle a conflict for a nonempty queue.
 `POST /v1/queues/{name}/pause` prevents new leases and scheduled deliveries.

@@ -63,6 +63,6 @@ func (j *Service) Promote(now time.Time) error {
 	return e
 }
 func (j *Service) Retain(now time.Time) error {
-	_, e := j.S.DB.Exec(`WITH removed AS (DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled','dead') AND j.finished_at < $1::timestamptz - q.retention_hours * interval '1 hour' RETURNING j.*) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$1,'retained',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, now)
+	_, e := j.S.DB.Exec(`WITH removed AS (DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled','dead') AND extract(epoch FROM $1::timestamptz - j.finished_at) / 3600 > q.retention_hours RETURNING j.*) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$1,'retained',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, now)
 	return e
 }
