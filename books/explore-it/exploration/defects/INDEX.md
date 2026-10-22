@@ -50,6 +50,9 @@ Original E02-F reports and raw scores are immutable. Canonical statuses are main
 The earlier [U09 observation copy](U09-sample-worker-ignores-failN-kinds.md), committed with
 E02 exploration, also preserves its original “open” wording. It is a historical copy,
 not a second unresolved defect; the current U09 status is the fixed record linked above.
+The same holds for the earlier [U10 observation copy](U10-unparsable-webhook-url-blocks-all-notifications.md),
+whose “status open” wording predates the lesson 02 fix; the current U10 status is the fixed
+record linked above.
 
 ## Experiment 03 additions
 

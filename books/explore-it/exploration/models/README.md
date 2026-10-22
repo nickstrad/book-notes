@@ -1,8 +1,8 @@
 # Living models
 
-No system models have been recorded yet. Create them from actual reading and probes; do not pre-fill expected findings. Read [the protocol](../PROTOCOL.md) for prediction, observation and score rules.
+All eight models exist; experiment 01 created the first versions and later experiments revised them (see each `revealed.md` for the delta). Grow them from actual reading and probes; do not pre-fill expected findings. Read [the protocol](../PROTOCOL.md) for prediction, observation and score rules.
 
-| File to create | Information it carries |
+| File | Information it carries |
 |---|---|
 | `map.md` | Entry points, packages, verbs and background work with source/evidence links |
 | `nouns-verbs.md` | Objects, actions and tried/untested sequences |

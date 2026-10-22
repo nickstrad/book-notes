@@ -64,5 +64,5 @@ not establish legacy-template cleanup. Scope repair claims to the paths actually
 
 Evidence: [repair acceptance](../../register/runs/06-repair-acceptance.json), all five
 required commands passed; original acceptance and raw records remain unchanged. Independent
-validation is pending. No additional reusable work script was warranted: the small shared
+repair validation later returned PASS ([revalidation](../../register/reviews/E06/revalidation/revalidation.md)). No additional reusable work script was warranted: the small shared
 decoder belongs to the application, and the acceptance launcher remains scratch under `/tmp`.
