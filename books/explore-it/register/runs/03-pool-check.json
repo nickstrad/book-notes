@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-10-22T04:05:55.252406+00:00",
+  "claude_weekly_used_percent": 15,
+  "claude_window_used_percent": 55,
+  "codex_weekly_remaining_percent": 90,
+  "muse_weekly_used_percent": 3,
+  "muse_window_used_percent": 9,
+  "paid_api_fallback": false
+}

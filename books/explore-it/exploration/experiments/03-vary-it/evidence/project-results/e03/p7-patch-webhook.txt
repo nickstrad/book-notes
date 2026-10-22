@@ -1,0 +1,27 @@
+2026-10-22T04:21:40.524Z
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":20,"lease_seconds":30,"max_attempts":3,"name":"e03-hook","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"report-secret","webhook_url":"http://hooksink:8201/hook"}
+ [201]
+== H10a secret only
+"webhook_secret":"rotated","webhook_url":""
+== H10b url only
+"webhook_secret":"","webhook_url":"http://hooksink:8201/hook2"
+== H10c webhook {}
+"webhook_secret":"","webhook_url":""
+== H10d webhook null (expect unchanged)
+"webhook_secret":"report-secret","webhook_url":"http://hooksink:8201/hook"
+== H10e top-level partial (max only) keeps webhook
+"max_attempts":4
+"webhook_secret":"report-secret","webhook_url":"http://hooksink:8201/hook"
+== effect of secret-only PATCH: terminal job produces no outbox row
+{"ok":true}
+ [200]
+outbox_rows
+0
+(1 row)
+== control: with url+secret, cancel produces outbox row
+{"ok":true}
+ [200]
+job_id | url | secret | delivered
+848 | http://hooksink:8201/hook | report-secret | t
+(1 row)
+2026-10-22T04:21:44.677Z

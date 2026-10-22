@@ -1,0 +1,15 @@
+2026-10-22T04:24:37.830Z
+{"backoff_base":5,"b
+ [201]
+{"backoff_base":5,"b
+ [201]
+== H20 ack case-variant
+leased id=1369 (enqueued 1369)
+{"ok":true}
+ [200]
+1369 | succeeded | {"ok": 1}
+== H21 raw lease bytes
+enqueued 1370
+"id":1370
+"payload":{"a":1.50,"b":12345678901234567890.123456789,"c":9007199254740993}
+2026-10-22T04:24:38.313Z

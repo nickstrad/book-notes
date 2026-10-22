@@ -24,3 +24,13 @@ Grouping is by mechanism read in source after the behaviour was observed. Siblin
 | C12 Delivery policy fixed in code, not in spec | 2 s client timeout (ship.go:31); fixed +5 s, no cap (ship.go:37) | E02-F03 (spec) | 500 and ftp rows retried forever: observed (H07, H11c) |
 | C13 Consoles lack correlation ids | log lines without job/outbox/worker ids (ship.go:45; worker.go:48,71); no request log | testability TR-E02-1…5 (not defects) | — |
 | C14 Sample worker advertises kinds by family name | default kinds list (cmd/worker/main.go:24) vs prefix handling (worker.go:86) vs exact match (jobs.go:44) | E02-F01 | none found |
+
+## E03 additions — `explore-it/lesson-02` (sibling predictions timestamped in [E03 notes](../experiments/03-vary-it/notes.md))
+
+| Cause | Mechanism (source) | Findings | Sibling predictions (time, status) |
+|---|---|---|---|
+| C15 Lenient JSON decoder framing | single `Decoder.Decode`, no EOF check; Go v1 case-insensitive field match; U+FFFD substitution (api.go:49-58) | E03-F01, E03-F02 | PATCH trailing/case 04:24Z → confirmed (H19); ack case-variant 04:24Z → confirmed (H20); schedules/clock/worker create: predicted, not probed |
+| C16 Unchecked time.Duration arithmetic on caller/config integers | `Duration(n)*Second` (enqueue.go:54, nack.go:24, jobs.go:84); `Backoff` shifts/multiplies (jobs.go:17-22) | E03-F03, E03-F06 | nack delay 04:24Z → confirmed (H17); heartbeat 04:24Z → confirmed (H18); lease_seconds bounded by int column: inferred safe |
+| C17 Storage limits stand in for validation | upper bounds come from `int` columns / btree index size / timestamptz range (migrations/001.sql:3); errors mapped by call site (queues.go:47-49 → 409, :93-94 → 500) | E03-F04, E03-F05 | enqueue maps DB faults to 400 (enqueue.go:81-84): predicted, not probed |
+| C18 Accepted input with no consumer | `backoff.max_seconds` stored, never read (queues.go:20,46) | E03-F07 | other unread fields: none found |
+| C19 Nested PATCH object replaced wholesale | `Webhook *struct{URL,Secret string}` then both assigned (queues.go:72-75, 85-92) | E03-F08 | schedule PATCH nested objects: none found (pointers only), not probed |

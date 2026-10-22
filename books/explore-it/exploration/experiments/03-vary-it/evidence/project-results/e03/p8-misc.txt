@@ -1,0 +1,36 @@
+2026-10-22T04:22:00.177Z
+== H10 url-only effect on signature
+{"records":[]}
+
+"webhook_secret":""
+{"ok":true}
+ [200]
+{"records":[{"at":"2026-10-22T04:22:01.03526056Z","body":{"job_id":849,"last_error":"","result":null,"state":"cancelled"},"raw_body":"{\"state\":\"cancelled\",\"job_id\":849,\"result\":null,\"last_error\":\"\"}","signature_valid":false,"status":200}]}
+
+job_id | secret | status | delivered
+849 |  | 200 | t
+(1 row)
+== H11 huge queue name
+1100013 bytes
+{"error":{"code":"queue_conflict","message":"pq: index row requires 12624 bytes,
+ [409]
+
+id | length
+(0 rows)
+GET:
+(eval):14: argument list too long: curl
+
+DELETE:
+(eval):15: argument list too long: curl
+
+head: cannot open '/tmp/explore-it-experiment-03/books/explore-it/project/results/e03/h11-delete.txt' for reading: No such file or directory
+
+list size:
+3899
+== H11 boundary: name 900000 chars GET
+[409]
+(eval):19: argument list too long: curl
+
+(eval):20: argument list too long: curl
+
+2026-10-22T04:22:03.994Z

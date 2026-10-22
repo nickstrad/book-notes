@@ -40,3 +40,17 @@ Authority: SPEC.md unless stated. Scope: v0-inherited. Observation column cites 
 | ★ R25 One tenant's configuration must not stop another tenant's processing | approximation of SPEC:10 tenant isolation | shared shipper | Violated (E02-F02) |
 | ★ R26 Invalid command values rejected | SPEC:17 | queue webhook URL | Violated for unparsable URL on create and PATCH (E02-F02, H11d) |
 | ★ R27 README sample worker runs documented kinds | README "Worker mode" | sample worker | Violated for `fail3` (E02-F01) |
+
+## E03 revision — `explore-it/lesson-02` ([E03 notes](../experiments/03-vary-it/notes.md)); ★ = new observation
+
+| Rule | Authority | Scope | E03 observation |
+|---|---|---|---|
+| ★ R8 Unknown fields / invalid enums rejected | SPEC:17 | all bodies | Exact unknown names rejected (holds); case-variant names accepted (E03-F02); malformed JSON text with trailing data accepted (E03-F01); undocumented `backoff.max_seconds` accepted and ignored (E03-F07) |
+| ★ R9 Documented ranges | SPEC:25-26, :46 | create, PATCH, enqueue | Lower bounds and priority hold; upper int limits misreported (E03-F04); delay beyond Duration range wraps (E03-F03); large retention accepted but breaks Retain (E03-F05) |
+| ★ R10 Payload numeric precision | SPEC:47 | enqueue → GET/lease | Holds: exact digits in raw lease bytes (H21); jsonb normalises representation (1E2→100, −0→0) without value loss |
+| ★ R11 Batch 1–500 atomic | SPEC:54-56 | batch | Holds for count/position; additional undocumented 2 MiB body cap |
+| ★ R7 Error classes | SPEC:13-16 | queue create/PATCH | 409 used for out-of-range and index-size errors; 500 on PATCH (E03-F04) |
+| ★ R28 Retry wait follows configured backoff (nonnegative, nondecreasing) | SPEC:27-28 | nack | Violated at attempt ≥32 with defaults (E03-F06); cap field ignored (E03-F07) |
+| ★ R29 A future delay/extension is never honoured as "now" | SPEC:48-49; worker heartbeat | enqueue, nack, heartbeat | Violated above 9 223 372 036 s (E03-F03) |
+| ★ R25 One tenant's configuration must not stop another tenant's processing | approximation of SPEC:10 | Retain | Violated: one acme queue blocks globex retention (E03-F05) |
+| ★ R30 PATCH omissions keep current values | approximation (RFC 7396) + SPEC:33-34 | queue PATCH | Holds top-level; violated inside `webhook` (E03-F08) |

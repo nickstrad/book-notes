@@ -7,7 +7,7 @@ for required in ['charter.md','brief.md','notes.md','revealed.md']:
     if not (exp/required).is_file():raise SystemExit(f'missing {required}')
 # Reject edits to inherited raw records rather than silently replacing history.
 import tarfile,io
-snapshot=subprocess.check_output(['git','archive',m['tag'],'books/explore-it/exploration','books/explore-it/project'])
+snapshot=subprocess.check_output(['git','archive',m.get('source_commit',m['tag']),'books/explore-it/exploration','books/explore-it/project'])
 violations=[]
 with tarfile.open(fileobj=io.BytesIO(snapshot)) as archive:
     for member in archive.getmembers():

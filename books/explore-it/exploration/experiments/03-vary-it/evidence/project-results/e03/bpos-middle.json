@@ -1,0 +1,1 @@
+{"jobs": [{"kind": "echo", "payload": {"t": "bpos-middle"}}, {"kind": "echo", "payload": {"t": "bpos-middle"}}, {"kind": "echo", "priority": 42}, {"kind": "echo", "payload": {"t": "bpos-middle"}}, {"kind": "echo", "payload": {"t": "bpos-middle"}}]}

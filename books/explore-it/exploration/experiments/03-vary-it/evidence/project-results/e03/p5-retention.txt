@@ -1,0 +1,44 @@
+2026-10-22T04:18:27.563Z
+baseline health
+{"status":"ok"}
+ [200]
+== control: terminal job in e03-ret-0 (retention 0) is removed
+c1=832
+{"ok":true}
+ [200]
+2026-10-22T04:18:27.686Z
+2026-10-22T04:18:28.404Z
+c1 deleted
+event | at
+created | 2026-10-22 04:18:27.60439+00
+cancelled | 2026-10-22 04:18:27.669214+00
+retained | 2026-10-22 04:18:28.01064+00
+(3 rows)
+== poison: terminal job in e03-ret-1e8
+p1=833
+{"ok":true}
+ [200]
+2026-10-22T04:18:28.582Z
+c2=834
+{"ok":true}
+ [200]
+2026-10-22T04:18:29.700Z health={"status":"degraded"}
+ [503] c2_rows=1
+2026-10-22T04:18:30.817Z health={"status":"degraded"}
+ [503] c2_rows=1
+2026-10-22T04:18:31.926Z health={"status":"degraded"}
+ [503] c2_rows=1
+2026-10-22T04:18:33.034Z health={"status":"degraded"}
+ [503] c2_rows=1
+2026-10-22T04:18:34.136Z health={"status":"degraded"}
+ [503] c2_rows=1
+2026-10-22T04:18:35.224Z health={"status":"degraded"}
+ [503] c2_rows=1
+== loop still promotes? delayed job in imports
+id | state
+835 | queued
+(1 row)
+api-1  | {"time":"2026-10-22T04:18:36.027881611Z","level":"INFO","msg":"background task: pq: timestamp out of range"}
+api-1  | {"time":"2026-10-22T04:18:37.03211486Z","level":"INFO","msg":"background task: pq: timestamp out of range"}
+api-1  | {"time":"2026-10-22T04:18:38.016784922Z","level":"INFO","msg":"background task: pq: timestamp out of range"}
+2026-10-22T04:18:38.795Z

@@ -1,0 +1,111 @@
+ Image queuelet:e03 Pulling 
+ Image queuelet:e03 Pulling 
+ Image queuelet:e03 Pulling 
+ Image queuelet:e03 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e03 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e03 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e03 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 561B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 147.36kB 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.2s done
+#7 DONE 0.2s
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.2s done
+#8 DONE 0.2s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.6s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 52.6s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:39f2e86dd79eaa512dab037d828072635422eaaf329b1e95b5805a68c308b013 0.0s done
+#18 exporting config sha256:b99ee1a57407d7379cc43d9114fa7b85724d9f7a514009f7e08a67a9036941dd 0.0s done
+#18 exporting attestation manifest sha256:2d67b4678d768da45e15686901cc3b788a893392fefc230f317459a965f14259 0.0s done
+#18 exporting manifest list sha256:2ddf0c68685460bbe73203c3da3eb1ac87c95dfecce774d0797a96f0cc457bc6
+#18 exporting manifest list sha256:2ddf0c68685460bbe73203c3da3eb1ac87c95dfecce774d0797a96f0cc457bc6 0.0s done
+#18 naming to docker.io/library/queuelet:e03 done
+#18 unpacking to docker.io/library/queuelet:e03 0.0s done
+#18 DONE 0.2s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:e03 Built 
+ Network queuelet-e03_default Creating 
+ Network queuelet-e03_default Creating 
+ Volume queuelet-e03_data Creating 
+ Volume queuelet-e03_data Creating 
+ Volume queuelet-e03_data Created 
+ Volume queuelet-e03_data Created 
+ Network queuelet-e03_default Created 
+ Network queuelet-e03_default Created 
+ Container queuelet-e03-hooksink-1 Creating 
+ Container queuelet-e03-postgres-1 Creating 
+ Container queuelet-e03-hooksink-1 Created 
+ Container queuelet-e03-postgres-1 Created 
+ Container queuelet-e03-api-1 Creating 
+ Container queuelet-e03-api-1 Created 
+ Container queuelet-e03-worker-b-1 Creating 
+ Container queuelet-e03-worker-a-1 Creating 
+ Container queuelet-e03-worker-a-1 Created 
+ Container queuelet-e03-worker-b-1 Created 
+ Container queuelet-e03-hooksink-1 Starting 
+ Container queuelet-e03-postgres-1 Starting 
+ Container queuelet-e03-postgres-1 Started 
+ Container queuelet-e03-postgres-1 Waiting 
+ Container queuelet-e03-hooksink-1 Started 
+ Container queuelet-e03-postgres-1 Healthy 
+ Container queuelet-e03-api-1 Starting 
+ Container queuelet-e03-api-1 Started 
+ Container queuelet-e03-worker-a-1 Starting 
+ Container queuelet-e03-worker-b-1 Starting 
+ Container queuelet-e03-worker-a-1 Started 
+ Container queuelet-e03-worker-b-1 Started 
+exit=0
+2026-10-22T04:16:17.376Z

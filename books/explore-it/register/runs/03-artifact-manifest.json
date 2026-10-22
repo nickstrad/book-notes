@@ -1,0 +1,207 @@
+{
+  "experiment": 3,
+  "source_tag": "explore-it/lesson-02",
+  "export_path": "/tmp/explore-it-experiment-03",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "f3978ef66443a42d3aade3d5e2ba08d0739972aca1b7034d87324da796b1a74e"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "600e7beba938e86a006242162dd3d715871803bad05c2d1a87f528cd445fa6d8"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "c515ee0529d68fce32114cd44453229e4c733bee692a57c79c77a32d0908e719"
+    },
+    {
+      "file": "exploration/models/variables.md",
+      "sha256": "a7b142b92ef678d14fa8e1381f19493dfb4db86d125d1b30aad2466e8648ca5f"
+    },
+    {
+      "file": "exploration/defects/E03-F02-case-variant-member-names-accepted.md",
+      "sha256": "dad1fa13c594ca2140ccadbc45d1963be2cd334238373015acd3905ee8dd0fdd"
+    },
+    {
+      "file": "exploration/defects/E03-F05-large-retention-halts-global-retention.md",
+      "sha256": "f2776f9b875c1176ea50878a4701596695d14ad14183d99435b94f7de154c8e7"
+    },
+    {
+      "file": "exploration/defects/E03-F01-malformed-json-text-accepted.md",
+      "sha256": "9fcc1fd2b12e695ead324d0a3db01cbc7682776538b37fe09e66a53eeac0908b"
+    },
+    {
+      "file": "exploration/defects/README.md",
+      "sha256": "2f5183c392c17459fa4478e3c80b82d2d4827d832f9503e4e847954eab880fcd"
+    },
+    {
+      "file": "exploration/defects/E03-F04-storage-limit-errors-reported-as-conflict.md",
+      "sha256": "f3c8fe3afd0eb8dd313b73ba650ccf14ccf07145e655419381608a5b25643a5b"
+    },
+    {
+      "file": "exploration/defects/E03-F06-backoff-overflow-immediate-retry.md",
+      "sha256": "0489ba6d0a02ca9175296e03abe06078bf333981474876251c8b5c92a97e728a"
+    },
+    {
+      "file": "exploration/defects/E03-F08-patch-webhook-partial-clears-other-member.md",
+      "sha256": "33f9e46547dd0cd8bbde2727dc0db574e1df249d1c6b3293ee76219241fc78f2"
+    },
+    {
+      "file": "exploration/defects/E03-F03-duration-overflow-delay-and-extension.md",
+      "sha256": "cebe95f056154078b24205a2b3f3e9cac81368182f522bb0d1ac12dd999ed3ef"
+    },
+    {
+      "file": "exploration/defects/E03-F07-backoff-max-seconds-ignored.md",
+      "sha256": "e07e48dd9f7bdc94f67f6c07e9c5a92bd16fcbeae79db696928d27ff85565883"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/revealed.md",
+      "sha256": "d345d96196451857523dbf311818a045da1249ff53ae437669a792add18d65b1"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/notes.md",
+      "sha256": "3248bd192a8be668175f097e5da020c28b42c5ba579cead9596d47450598d77c"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/tools/p10.sh",
+      "sha256": "db65cd6ba91a320fdf78e5041714eefa7348127bec05effb8a738bb7eb74c854"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/tools/p10b.sh",
+      "sha256": "52e93c7db98a9eaaf4c2515120de66afe1cf527cd0d1fc10f9865f8529e97462"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/tools/namelen.py",
+      "sha256": "ae25b10d8ae5a5e64911699b9025f410ffa3a98151320dc45ba8430ab054587f"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/tools/p9.sh",
+      "sha256": "a01d53dd95c1e2ced5b710e1714fa43c5ef1a35aed7350d8ae5f6c81e702f905"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/tools/e03env.sh",
+      "sha256": "dbb8719f9636ddde35ba7fc75412acb25aa4b1106b9cd41cf72b5db36d2551ad"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/export-state.md",
+      "sha256": "adfd7dd5251602258621a0659661eb31f4e5d76003dde42eaa8aa9bdeb7edbc3"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p5-ids.txt",
+      "sha256": "4733e2a2930ee1092394bd38ab62a43f2af4048db4e3938b639472ca32ebf112"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p1-shape.txt",
+      "sha256": "03c00b72738f172e1ba102487e9cd900408b71c146bef923a380eaab8ac7ab61"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/manifest.json",
+      "sha256": "5e7480aa19b23bf8912000e10de3242507182755288fa40d751a293d480ebeee"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/bpos-middle.json",
+      "sha256": "942e36ee929bff2dce4528d9d3c0a82dbc0b8e4d5c28dc76d273d74d3d62d205"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/bpos-first.json",
+      "sha256": "f950e9c80841e0c6344188030a5ff3f949f33295acbb922234b1316bfa978a26"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/h11-name.json",
+      "sha256": "59ca6dc47f21a71467152a22054863f52a3ff862ea8ce76803175d32fd532831"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p6-backoff.txt",
+      "sha256": "efb43d888d3ecef1421f1604f5a3243eb59b730cf486453e8846062285c41ac6"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p5-retention.txt",
+      "sha256": "1533483e89ca20e0f8c288ece43149b0ddffc8cb1ed889822a177a623c0b2f77"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/up.log",
+      "sha256": "7b31157f88741e62ba62693abe6d494efaafe1f8438ee740b722ea2f7ea51a71"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p6-ids.txt",
+      "sha256": "930e61644dc117aa1f89c970da58f4b9de8ea99973929d6bd88403ad8e027f99"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/b501.json",
+      "sha256": "4a4956a78fbf4c30d4abf8c424a2c05246b1b6fc5fd3218ff7ff1838f471ada2"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p4-queuecfg.txt",
+      "sha256": "8b09c0f78785214c1130702cd99915631d36d80fb18ee8b6ee281a306cf25b1e"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/bpos-last.json",
+      "sha256": "b255154cc494e2f4e6dc98d6f76403bfa30b5106752957f4488a4c6760399db8"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p10b-siblings.txt",
+      "sha256": "8d7ef261836e68b509d0d5c14cb09dfcd4b435e46ab6d377148e693c1b8c0c0a"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p8b-namelen.txt",
+      "sha256": "a5bc232efc4d0e8b3792a3382b6e9cca0334ac035c236fa90102a6f5807716a1"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p8-misc.txt",
+      "sha256": "feef4883cdf86be6ff112321d008378c770497242d314625d60da547e60a1ab8"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p3-numbers.txt",
+      "sha256": "6f816b5f4f404b7284a55bbd1b4f64ea83d137239b9caa173ed4099d78dd2a2b"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p6b-backoff-controls.txt",
+      "sha256": "b4d9e8af023ccc10d58ecaab0148504b6fd49ed31a7cc79fbb327cc1d6076444"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/all-logs-at-stop.txt",
+      "sha256": "774d828ea78e2be13adc86a949b744ab711c16bdf91acd7d1b0f22247c2322c9"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p2-ranges.txt",
+      "sha256": "80368daa23109474be6918fb2eac16c1dd10dc4aac80fe012a627cf0431cd76e"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/h11-name9.json",
+      "sha256": "c902a5b65e798ce19d8bf05e77ce974e07cd70c85dc2a23f2fed17c574b5c4da"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/b500.json",
+      "sha256": "6e8efb64a758d31f8c8efe0721153d95d830d93278f05be0e75b54baeca91368"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p5b-retention-isolate.txt",
+      "sha256": "2ded7770855f424386497ed02aaa56951de83e17428e76d1eec82d583a7c780e"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/up-start.txt",
+      "sha256": "f7bf7fcf2a1a280c916c4850f6468a1054be843eb0798d62f2cda6eee480318c"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p9b-payload-batch.txt",
+      "sha256": "fbed2db641ddf253207aeed8c5041a7448263733af1d9c2388226136dd8050b0"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p11-webhook-regress.txt",
+      "sha256": "0b642089dbe40f65f514a09430368482841635b8f2667293e9c776372657931f"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p7-patch-webhook.txt",
+      "sha256": "21b1cefef457f5fffb3478f865c37d7fd4891847f5c86c03be41a885865de3db"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p10-siblings.txt",
+      "sha256": "cb4d5b8eca7cdf415775e67646ff4cca1d67b31009caee5d43afcf4c335bf43c"
+    },
+    {
+      "file": "exploration/experiments/03-vary-it/evidence/project-results/e03/p9-payload-batch.txt",
+      "sha256": "2ed6f217bc5914ae2f5d5fef03ed9be040af09238d094783a33fa857613698bf"
+    }
+  ]
+}

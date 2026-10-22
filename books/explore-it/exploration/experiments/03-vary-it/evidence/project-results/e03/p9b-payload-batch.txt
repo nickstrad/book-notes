@@ -1,0 +1,55 @@
+2026-10-22T04:23:09.437Z
+== H12 continued (surrogates, NUL, huge exponent)
+sent {"s":"\ud800"} → {"error":{"code":"invalid_job","message":"pq: invalid input syntax for type json"}}
+ [400]
+sent {"s":"x\u0000y"} → {"error":{"code":"invalid_job","message":"pq: unsupported Unicode escape sequence"}}
+ [400]
+sent {"a":1e200000} → {"error":{"code":"invalid_job","message":"pq: value overflows numeric format"}}
+ [400]
+raw invalid UTF-8 in payload → {"error":{"code":"invalid_job","message":"pq: invalid byte sequence for encoding \"UTF8\": 0xff"}}
+ [400]
+lease payloads (worker view, worker 5):
+   850 {"a": 100}
+   851 {"a": 0}
+   852 {"a": 1.5}
+   853 {"a": 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+   854 {"a": 1.2345678901234567e+19}
+   855 {"a": 2}
+   856 {"a": 2, "b": 1}
+   857 {"s": "\ud83d\ude00"}
+== H13 batch 500 x ~4.3KB (>2MiB)
+2177011 bytes
+{"error":{"code":"invalid_json","message":"http: request body too large"}}
+ [400]
+2077511 bytes
+{"ids":[858,859,860,861,862,863,864,865,866,867,868,869,870,
+ [201]
+single job with 2.2MB payload
+{"error":{"code":"invalid_json","message":"http: request body too large"}}
+ [400]
+?column? | count
+h13b | 500
+(1 row)
+== H14 batch duplicate idempotency key
+{"ids":[1358,1358]}
+ [201]
+{"id":1358,"state":"queued"}
+ [201]
+id | kind | payload
+1358 | echo | {"v": 1}
+(1 row)
+== idempotency_key empty string
+{"id":1361,"state":"queued"}
+ [201]
+{"id":1361,"state":"queued"}
+ [201]
+== batch shape siblings
+{"ids":[1363]}
+ [201]
+{"ids":[1364]}
+ [201]
+?column? | count
+bcase | 1
+btrail | 1
+(2 rows)
+2026-10-22T04:23:11.130Z

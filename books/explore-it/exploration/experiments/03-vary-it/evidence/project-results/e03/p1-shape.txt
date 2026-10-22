@@ -1,0 +1,54 @@
+2026-10-22T04:16:44.515Z
+== H01 trailing garbage
+{"id":301,"state":"queued"}
+ [201]
+== H01 two objects
+{"id":302,"state":"queued"}
+ [201]
+== H01 control: malformed first value
+{"error":{"code":"invalid_json","message":"invalid character '}' looking for beginning of object key string"}}
+ [400]
+== H02 KIND/Priority
+{"id":303,"state":"queued"}
+ [201]
+== H02 priority then PRIORITY
+{"id":304,"state":"queued"}
+ [201]
+== H02 PRIORITY then priority
+{"id":305,"state":"queued"}
+ [201]
+== H02 exact dup keys
+{"id":306,"state":"queued"}
+ [201]
+== content-type text/plain
+{"id":307,"state":"queued"}
+ [201]
+== empty body
+{"error":{"code":"invalid_json","message":"EOF"}}
+ [400]
+== null body
+{"error":{"code":"invalid_job","message":"kind required"}}
+ [400]
+== array body
+{"error":{"code":"invalid_json","message":"json: cannot unmarshal array into Go value of type api.JobInput"}}
+ [400]
+== queue create trailing
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":5,"lease_seconds":30,"max_attempts":3,"name":"e03-trail","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+== queue create case
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":6,"lease_seconds":7,"max_attempts":3,"name":"e03-case","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+id | kind | priority | payload
+301 | echo | 5 | {"t": "h01a"}
+302 | echo | 5 | {"t": "h01b"}
+303 | echo | 3 | {"t": "h02a"}
+304 | echo | 9 | {"t": "h02b"}
+305 | echo | 1 | {"t": "h02c"}
+306 | other | 5 | {"t": "h02d"}
+307 | echo | 5 | {"t": "ctype"}
+(7 rows)
+name | lease_seconds
+e03-trail | 30
+e03-case | 7
+(2 rows)
+2026-10-22T04:16:45.037Z

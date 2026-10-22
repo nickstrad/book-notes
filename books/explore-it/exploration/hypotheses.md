@@ -60,7 +60,7 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H43 | worker deregistration release should count an attempt (like expiry) | code internal/api/jobs.go:110 | spec says release is free | state / next | open |  |
 | H44 | webhook URL that fails http.NewRequest stops the loop | code ship.go:26-28 | loop continues | ecosystem / next | experiment 02: confirmed | at lesson-01 the shipper keeps ticking but delivers nothing after the bad row, all namespaces (E02-H11, E02-F02); core loop progress not observed during it |
 | H45 | schedule catch-up after loop outage bursts like F24 | code fire.go:41 | bounded | sequence / next | open |  |
-| H46 | negative retention_hours deletes terminal jobs on next tick | code expire.go:14 | jobs kept | variation / next | open |  |
+| H46 | negative retention_hours deletes terminal jobs on next tick | code expire.go:14 | jobs kept | variation / next | experiment 03: refuted | at lesson-02 `retention_hours:-1` create and `-5` PATCH → 400 (E03 notes 04:17:13Z), so the state cannot be reached; the v0 code it was read from changed in lesson 01. Large positive values break Retain instead (E03-F05) |
 | H47 | crash-kind job loops worker containers forever (F05 + crash) | code worker.go:84-85, expire.go:6 | job goes dead | sequence / next | experiment 02: refuted | at lesson-01 job 301 dead after 3 crashes, 304 after 4 (E02-H01, H13); the v0 code it was read from was changed by the lesson-01 fix |
 | H48 | retry and ack across namespaces succeed (F03 siblings) | code operator.go:13, ack.go:10 | 404 | boundary / next | open |  |
 | E02-H01 | crash job (emails, lease 10 s, max 3) dies by expiry after exactly 3 executions; attempts 3; 3 `expired` rows | charter; code expire.go:35-45 | >3 executions or not dead/3 rows | console comparison / E02 | experiment 02: confirmed | E02 notes 03:24:03Z |
@@ -88,5 +88,37 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H50 | a webhook body larger than the partner limit or a secret change with rows pending behaves per row (no global block) | E02 C11 sibling | global block | ecosystem / next | open |  |
 | H51 | `qctl worker run --kinds echo,sleep,fail,crash,http` (README) also never leases `fail3` | E02-F01 sibling, code (same worker.Run) | fail3 leased | variation / next | open |  |
 | H52 | after operator retry of a crash-dead job, attempts numbering restarts at 1 (duplicate n with expired rows) | E01 Q2 + E02 H01 | unique n | state / next | open |  |
+| E03-HC | Charter: every documented range is enforced and unknown fields are rejected | charter 03; validators internal/api | any 2xx where SPEC says 4xx | variation / E03 | experiment 03: refuted | E03-H01/H02 (malformed and case-variant bodies 201), E03-H07 (undocumented max_seconds 201) |
+| E03-H01 | trailing garbage / two concatenated objects → 201, one job | code api.go:53 | 400 | request shape / E03 | experiment 03: confirmed | E03-F01 |
+| E03-H02 | case-variant names bound to documented fields; last variant wins | code api.go:49-52 (Go json) | 400 unknown field | request shape / E03 | experiment 03: confirmed | E03-F02 |
+| E03-H03 | lesson-01 range/enum/batch fixes hold | prior record D05/D06/D26/U05-U07 | any 2xx / partial insert | regression / E03 | experiment 03: confirmed | regression only, notes 04:17:13Z |
+| E03-H04 | delay_seconds 9223372037 → queued (wrap); 9223372036 → scheduled | code enqueue.go:53-55 | 400 / scheduled | numbers / E03 | experiment 03: confirmed | E03-F03 |
+| E03-H05 | negative delay → queued, run_at in past | code enqueue.go:53-59 | 400 | numbers / E03 | experiment 03: confirmed | not a bug (spec silent); Q-E03-2 |
+| E03-H06 | int4 overflow → 409 on create, 500 on PATCH | code queues.go:46-49, :93-94 | 400 | boundaries / E03 | experiment 03: confirmed | E03-F04 |
+| E03-H07 | backoff.max_seconds accepted (also negative), no effect | code queues.go:20,46; grep | 400 or capped | unknown field / E03 | experiment 03: confirmed | E03-F07 |
+| E03-H08 | backoff overflow → run_at in the past, immediate retry | code jobs.go:17-22, nack.go:22-26 | run_at future | config × count / E03 | experiment 03: confirmed | E03-F06 |
+| E03-H09 | retention_hours 1e8 + terminal job → Retain errors each tick, health 503, other queues not retained | code expire.go:66, api.go:148-154 | 400 or Retain works | config × loop / E03 | experiment 03: confirmed | E03-F05 |
+| E03-H10 | PATCH webhook partial clears omitted member | code queues.go:85-92 | member kept | presence / E03 | experiment 03: confirmed | E03-F08 |
+| E03-H11 | ~1.1 M-char name → 201 but unaddressable (431) | code queues.go:38 (no length bound) + Go header limit | 400 on create / GET 200 | string length / E03 | experiment 03: refuted | create → 409 at the unique index; all accepted names addressable (code-reading contradiction; folded into E03-F04) |
+| E03-H12 | payload: \u0000 / 1e200000 → 400; jsonb normalises 1E2, -0, dup keys | code enqueue.go:60-70 + jsonb | stored exactly | numbers / E03 | experiment 03: confirmed | not bugs; Q-E03-3, Q-E03-5 |
+| E03-H13 | >2 MiB batch → 400 request body too large | code api.go:50 | 201 | size / E03 | experiment 03: confirmed | not a bug (spec silent); Q-E03-4 |
+| E03-H14 | duplicate idempotency key in one batch → ids [x,x], one job | code enqueue.go:70-73 | two jobs | selection / E03 | experiment 03: confirmed | holds |
+| E03-H15 | per-job max_attempts 2147483648 → 400 with pq text | code enqueue.go:81-84 | 201 / 5xx | boundaries / E03 | experiment 03: confirmed | holds (message leak = E01 Q3) |
+| E03-H16 | kind " " → 201; invalid UTF-8 kind → U+FFFD 201 | code enqueue.go:29; Go json | 400 | strings / E03 | experiment 03: confirmed | UTF-8 part folded into E03-F01; whitespace spec silent |
+| E03-H17 | nack delay_seconds 9223372037 → run_at 1734, immediate retry | sibling of E03-H04; nack.go:23-24 | future / 400 | sibling / E03 | experiment 03: confirmed | E03-F03 sibling |
+| E03-H18 | heartbeat extend 9223372037 → lease expires at once | sibling; jobs.go:84 | 400 / future | sibling / E03 | experiment 03: confirmed | E03-F03 sibling (attempt consumed) |
+| E03-H19 | PATCH trailing garbage + MAX_ATTEMPTS → 200 applied | sibling; api.go:49 | 400 | sibling / E03 | experiment 03: confirmed | E03-F01/F02 siblings |
+| E03-H20 | ack with LEASE_TOKEN/RESULT → 200 | sibling; api.go:49 | 400 | sibling / E03 | experiment 03: confirmed | E03-F02 sibling (first attempt was a FIFO dead end) |
+| E03-H21 | raw lease bytes keep 1.50 and 20-digit decimals | code jobs.go:65 | rounded | regression / E03 | experiment 03: confirmed | D08 fix holds |
+| E03-H22 | webhook ftp / no-host / space URL → 400; "" → 201 | lesson-02 U10 fix | any 2xx for invalid | regression / E03 | experiment 03: confirmed | holds |
+| Q-E03-1 | should the API refuse non-JSON Content-Type? | E03 04:16:44Z | spec says clients only | spec decision | open |  |
+| Q-E03-2 | should negative delay_seconds be rejected? | E03-H05 | spec defines sign | spec decision | open |  |
+| Q-E03-3 | should valid-JSON payloads that jsonb cannot store (U+0000, lone surrogate, 1e200000) be documented limits with a service message? | E03-H12 | spec covers it | spec decision | open |  |
+| Q-E03-4 | document the 2 MiB request cap; 413 / `payload_too_large` instead of `invalid_json`? | E03-H13 | spec covers it | spec decision | open |  |
+| Q-E03-5 | storage amplification of exponent numbers (9-byte `1e400` → 401 digits) — bound? | E03-H12 | bounded by spec | risk / later | open | deliberately not stress-probed |
+| H53 | schedule create/PATCH bodies share E03-F01/F02 leniency and payload path | E03 C15 sibling | 400 | variation / next (#offcharter) | open |  |
+| H54 | lease `max_jobs` and list `limit`/`cursor` silently coerce out-of-range values (limit 1000 → 100) | code enqueue.go listJobs `limit` default branch | 400 or 500 cap | variation / next (#offcharter) | open |  |
+| H55 | enqueue maps real DB faults (outage) to 400 invalid_job | E03 C17 sibling, enqueue.go:81-84 | 503 | ecosystem / next | open |  |
+| H56 | queue lease_seconds 2147483647 lease never expires within any test horizon; heartbeat cannot shorten it | E03 variables row | expiry | config / next | open |  |
 
 Allowed sources: recon, spec silence, code reading, model cell, surprise and risk headline. Status: `open` or `experiment NN: confirmed`, `experiment NN: refuted`, `experiment NN: needs more`.

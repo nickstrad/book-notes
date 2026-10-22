@@ -1,0 +1,26 @@
+{
+  "experiment": 3,
+  "raw_reports": 8,
+  "new_catalogue_defects": 0,
+  "catalogue_expected": ["D05", "D06", "D07", "D08", "D26"],
+  "catalogue_expected_found_early_in": 1,
+  "new_unplanned_bugs": 8,
+  "raw_hypotheses": {
+    "stated": 23,
+    "confirmed": 21,
+    "refuted": 2,
+    "reading_contradictions": 2,
+    "model_cells": 28
+  },
+  "crosswalk": [
+    {"original": "E03-F01", "canonical": "U11", "classification": "bug"},
+    {"original": "E03-F02", "canonical": "U12", "classification": "bug"},
+    {"original": "E03-F03", "canonical": "U13", "classification": "bug"},
+    {"original": "E03-F04", "canonical": "U14", "classification": "bug"},
+    {"original": "E03-F05", "canonical": "U15", "classification": "bug"},
+    {"original": "E03-F06", "canonical": "U16", "classification": "bug"},
+    {"original": "E03-F07", "canonical": "U17", "classification": "bug"},
+    {"original": "E03-F08", "canonical": "U18", "classification": "bug plus spec line"}
+  ],
+  "silences_left_for_later": ["A1", "A2", "A3", "A4"]
+}

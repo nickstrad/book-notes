@@ -1,0 +1,44 @@
+2026-10-22T04:19:44.574Z
+{"backoff_base":2147483647,"backoff_kind":"exponential","backoff_max":null,"id":16,"lease_seconds":30,"max_attempts":10,
+ [201]
+{"backoff_base":2147483647,"backoff_kind":"linear","backoff_max":null,"id":17,"lease_seconds":30,"max_attempts":10,"name
+ [201]
+worker=4
+e03-boexp job=840
+2026-10-22T04:19:44.905Z attempt 1 nack: {"ok":true}
+[200]
+retry_wait | 1 | 2026-10-22 04:19:44.924131+00
+2026-10-22T04:19:45.950Z attempt 2 nack: {"ok":true}
+[200]
+retry_wait | 2 | 2026-10-22 04:19:45.970614+00
+2026-10-22T04:19:46.261Z attempt 3 nack: {"ok":true}
+[200]
+retry_wait | 3 | 2026-10-22 04:19:46.288935+00
+2026-10-22T04:19:47.181Z attempt 4 nack: {"ok":true}
+[200]
+retry_wait | 4 | 1986-08-30 06:38:09.501733+00
+2026-10-22T04:19:49.331Z after 2 s: queued | 4 | 1986-08-30 06:38:09.501733+00
+e03-bolin job=841
+2026-10-22T04:19:49.635Z attempt 1 nack: {"ok":true}
+[200]
+retry_wait | 1 | 2026-10-22 04:19:49.65481+00
+2026-10-22T04:19:50.444Z attempt 2 nack: {"ok":true}
+[200]
+retry_wait | 2 | 2026-10-22 04:19:50.465494+00
+2026-10-22T04:19:51.275Z attempt 3 nack: {"ok":true}
+[200]
+retry_wait | 3 | 2026-10-22 04:19:51.301451+00
+2026-10-22T04:19:52.115Z attempt 4 nack: {"ok":true}
+[200]
+retry_wait | 4 | 2026-10-22 04:19:52.138146+00
+2026-10-22T04:19:53.690Z attempt 5 nack: {"ok":true}
+[200]
+retry_wait | 5 | 1782-07-04 20:55:55.003334+00
+2026-10-22T04:19:55.908Z after 2 s: queued | 5 | 1782-07-04 20:55:55.003334+00
+== H07 effect: e03-maxs base 4 max_seconds -7, first default nack
+e03-maxs job=842
+2026-10-22T04:19:56.169Z attempt 1 nack: {"ok":true}
+[200]
+retry_wait | 1 | 2026-10-22 04:20:00.190023+00
+2026-10-22T04:19:58.313Z after 2 s: retry_wait | 1 | 2026-10-22 04:20:00.190023+00
+2026-10-22T04:19:58.397Z

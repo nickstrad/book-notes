@@ -1,0 +1,45 @@
+2026-10-22T04:22:20.959Z
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-03/books/explore-it/project/../exploration/experiments/03-vary-it/tools/namelen.py", line 6, in <module>
+    kind, n = sys.argv[1], int(sys.argv[2])
+                               ~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-03/books/explore-it/project/../exploration/experiments/03-vary-it/tools/namelen.py", line 6, in <module>
+    kind, n = sys.argv[1], int(sys.argv[2])
+                               ~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-03/books/explore-it/project/../exploration/experiments/03-vary-it/tools/namelen.py", line 6, in <module>
+    kind, n = sys.argv[1], int(sys.argv[2])
+                               ~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-03/books/explore-it/project/../exploration/experiments/03-vary-it/tools/namelen.py", line 6, in <module>
+    kind, n = sys.argv[1], int(sys.argv[2])
+                               ~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-03/books/explore-it/project/../exploration/experiments/03-vary-it/tools/namelen.py", line 6, in <module>
+    kind, n = sys.argv[1], int(sys.argv[2])
+                               ~~~~~~~~^^^
+IndexError: list index out of range
+2026-10-22T04:22:22.411Z
+2026-10-22T04:22:27.149Z
+(retry: zsh did not word-split $a in the first attempt)
+rand 2600 POST 201 b'{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":23,"lease_seconds":30,"max_attempts":3,"name":"GF'
+rand 2600 GET 200
+rand 2600 DELETE 204
+rand 2800 POST 409 b'{"error":{"code":"queue_conflict","message":"pq: index row size 2824 exceeds btree version 4 maximum 2704 for index \\"qu'
+rand 2800 GET 404
+rand 2800 DELETE 404
+rand 10000 POST 409 b'{"error":{"code":"queue_conflict","message":"pq: index row requires 10024 bytes, maximum size is 8191"}}\n'
+rand 10000 GET 404
+rand 10000 DELETE 404
+rep 100000 POST 201 b'{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":26,"lease_seconds":30,"max_attempts":3,"name":"qq'
+rep 100000 GET 200
+rep 100000 DELETE 204
+rep 900000 POST 409 b'{"error":{"code":"queue_conflict","message":"pq: index row requires 10336 bytes, maximum size is 8191"}}\n'
+rep 900000 GET 404
+rep 900000 DELETE 404
+2026-10-22T04:22:28.801Z

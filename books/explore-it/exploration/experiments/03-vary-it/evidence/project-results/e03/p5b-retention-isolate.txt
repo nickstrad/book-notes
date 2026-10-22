@@ -1,0 +1,45 @@
+2026-10-22T04:18:57.720Z
+== globex tenant control during acme poison
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max"
+ [201]
+gj=836
+{"ok":true}
+ [200]
+2026-10-22T04:19:01.859Z globex job rows=1 c2 rows=1
+== recovery: PATCH poisoned queue retention 24
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":13,"lease_seconds":30,"max_attempts":3,"name":"e03-ret-1e8","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret"
+ [200]
+2026-10-22T04:19:04.580Z health={"status":"ok"}
+[200] globex rows=0 c2 rows=0 poison rows=1
+== sibling: PATCH path to the same poison (1e8), then recover by DELETE job
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":13,"lease_seconds":30,"max_attempts":3,"name":"e0
+ [200]
+2026-10-22T04:19:06.893Z health={"status":"degraded"}
+[503]
+ [204]
+2026-10-22T04:19:08.947Z health after deleting poison job={"status":"ok"}
+[200]
+== sibling: 1e308 (interval range) with a terminal job
+{"ok":true}
+ [200]
+2026-10-22T04:19:11.604Z health={"status":"degraded"}
+[503]
+api-1  | {"time":"2026-10-22T04:19:11.027228528Z","level":"INFO","msg":"background task: pq: interval out of range"}
+ [204]
+2026-10-22T04:19:13.916Z health={"status":"ok"}
+[200]
+== threshold: 5e7 vs 6e7 hours
+{"backoff_base":5,"backoff_kin
+ [200]
+2026-10-22T04:19:16.609Z retention=50000000 health={"status":"ok"}
+[200]
+ [204]
+{"backoff_base":5,"backoff_kin
+ [200]
+2026-10-22T04:19:20.819Z retention=60000000 health={"status":"degraded"}
+[503]
+ [204]
+{"backoff_base":5,"backoff_kin
+ [200]
+2026-10-22T04:19:23.912Z final health={"status":"ok"}
+[200]

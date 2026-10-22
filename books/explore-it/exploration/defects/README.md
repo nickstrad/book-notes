@@ -45,3 +45,18 @@ Local ids E02-F01… are provisional; the coordinator reconciles them. E01 entri
 | [E02-F01](E02-F01-sample-worker-ignores-failN-kinds.md) Documented `fail3` kind is never leased by the sample worker run with the documented kinds | lesson-01 | README worker mode; SPEC:73 | Low | open | E02 notes H10 |
 | [E02-F02](E02-F02-unparsable-webhook-url-blocks-all-notifications.md) One unparsable webhook URL stops notification delivery for every queue and namespace | lesson-01 | SPEC:121, SPEC:10 (approx.), SPEC:17 | High | open | E02 notes H11–H11d |
 | [E02-F03](E02-F03-timeout-shorter-than-partner-unbounded-duplicates.md) A partner slower than 2 s receives the same notification forever; queuelet and partner disagree | lesson-01 | SPEC:120-121 (silent on timeout/cap) | Medium | spec | E02 notes H12 |
+
+## Experiment 03 (vary-it) — explorer reports at `explore-it/lesson-02`
+
+Local ids E03-F01… are provisional; the coordinator reconciles them. E01/E02 entries above are unchanged.
+
+| Report | Seen at | Oracle | Severity | Status | Experiment / evidence |
+|---|---|---|---|---|---|
+| [E03-F01](E03-F01-malformed-json-text-accepted.md) Malformed JSON bodies accepted: trailing data ignored, second object dropped, invalid UTF-8 rewritten | lesson-02 | SPEC:17; RFC 8259 §2, §8.1 | Low–medium | open | E03 notes H01, H16, H19 |
+| [E03-F02](E03-F02-case-variant-member-names-accepted.md) Case-variant member names accepted as documented fields; last variant wins | lesson-02 | SPEC:17; RFC 8259 §8.3 | Low–medium | open | E03 notes H02, H20 |
+| [E03-F03](E03-F03-duration-overflow-delay-and-extension.md) delay_seconds / nack delay / heartbeat extension beyond ≈292 y wrap: "later" becomes "now" | lesson-02 | SPEC:48-49; worker protocol | Medium | open | E03 notes H04, H17, H18 |
+| [E03-F04](E03-F04-storage-limit-errors-reported-as-conflict.md) Out-of-range settings and over-long names → 409 conflict / 500 with driver text | lesson-02 | SPEC:13-16; RFC 9110 409 | Low | open | E03 notes H06, H11 |
+| [E03-F05](E03-F05-large-retention-halts-global-retention.md) One queue's large retention_hours halts retention for all namespaces; health 503 | lesson-02 | SPEC:98, :25, :127-130; SPEC:10 approx. | High | open | E03 notes H09 |
+| [E03-F06](E03-F06-backoff-overflow-immediate-retry.md) Backoff overflow: attempt ≥32 (default base) retried immediately | lesson-02 | SPEC:27-28 | Medium | open | E03 notes H08 |
+| [E03-F07](E03-F07-backoff-max-seconds-ignored.md) Undocumented backoff.max_seconds accepted, stored, never applied | lesson-02 | SPEC:17, :26-28 | Low–medium | open | E03 notes H07 |
+| [E03-F08](E03-F08-patch-webhook-partial-clears-other-member.md) PATCH partial webhook clears the omitted member (notifications off / unsigned) | lesson-02 | approximation: RFC 7396 + SPEC:33-34 | Medium | open | E03 notes H10 |

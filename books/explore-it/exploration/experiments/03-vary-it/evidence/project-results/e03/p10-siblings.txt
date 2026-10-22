@@ -1,0 +1,25 @@
+2026-10-22T04:24:21.104Z
+{"backoff_base":5,"backoff_kind":"expone
+ [201]
+worker=6
+== H17 nack delay overflow
+{"ok":true}
+ [200]
+1365 | retry_wait | 1734-07-13 04:37:04.639086+00
+1365 | queued | 1734-07-13 04:37:04.639086+00
+== H18 heartbeat extend overflow
+1366 | leased | 2026-10-22 04:24:53.179922+00
+{"ok":true}
+ [200]
+1366 | leased | 1734-07-13 04:37:06.583643+00 | 0
+1366 | queued |  | 1 | lease expired
+== H19 PATCH shape
+"max_attempts":5
+[200]
+== H20 ack case-variant
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+1367 | queued | 
+== H21 raw lease bytes
+"payload":{"t":"h20"}
+2026-10-22T04:24:25.257Z
