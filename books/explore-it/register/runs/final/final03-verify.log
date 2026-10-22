@@ -1,0 +1,32 @@
+{"command": ["make", "verify", "LESSON=03"], "tree": "repo", "commit": "b6df7db044782dd3517d041a8aad95308a3a80c9", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-final", "QUEUELET_IMAGE_TAG": "final", "QUEUELET_API_PORT": "18270", "QUEUELET_HOOK_PORT": "18271", "QUEUELET_PG_PORT": "15503", "QUEUELET_URL": "http://localhost:18270", "QUEUELET_HOOK_URL": "http://localhost:18271", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15503/queuelet?sslmode=disable"}, "start": "2026-10-22T23:00:01.306809+00:00"}
+REF='' bash lab/verify.sh 03
+ Container queuelet-final-worker-a-1 Stopping 
+ Container queuelet-final-worker-b-1 Stopping 
+ Container queuelet-final-worker-a-1 Stopped 
+ Container queuelet-final-worker-b-1 Stopped 
+ Container queuelet-final-api-1 Stopping 
+ Container queuelet-final-api-1 Stopped 
+ Container queuelet-final-postgres-1 Waiting 
+ Container queuelet-final-postgres-1 Healthy 
+ Container queuelet-final-api-1 Starting 
+ Container queuelet-final-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-final-postgres-1 Waiting 
+ Container queuelet-final-postgres-1 Healthy 
+ Container queuelet-final-worker-b-1 Starting 
+ Container queuelet-final-worker-a-1 Starting 
+ Container queuelet-final-worker-b-1 Started 
+ Container queuelet-final-worker-a-1 Started 
+ABSENT: U11 — statuses {'trailing text': 400, 'second object': 400, 'invalid UTF-8': 400}; well-formed control 201
+ABSENT: U12 — {'KIND/PAYLOAD': 400, 'priority then PRIORITY': 400}; exact unknown name 400
+ABSENT: U13 — delay/extension 9223372037s: wrapped into the past {'enqueue': False, 'heartbeat': False, 'nack': False}
+ABSENT: U14 — statuses {'create lease 2^31': 400, 'PATCH lease 2^31': 400, 'name 2800 random': 400}; duplicate name 409
+ABSENT: U15 — create retention 1e8 → 400; zero-retention control 305 still present after 6 s=False; health 200
+ABSENT: U16 — attempt 4 at base 2147483647 s: state retry_wait, run_at 2094-11-10T02:14:36.503917Z
+ABSENT: U17 — max_seconds -7 → 400; attempt 2 at base 4, cap 5 waits 5.0 s
+ABSENT: U18 — secret-only PATCH → url 'http://hooksink:8201/hook'; url-only PATCH → secret 'rotated'
+ok  	queuelet/test/checks	7.327s
+FIXED AND CHECKED: 8 absent; regression checks pass
+
+EXIT 0; ELAPSED 39.175s

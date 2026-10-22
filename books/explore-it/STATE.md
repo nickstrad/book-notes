@@ -28,12 +28,17 @@ nits). Next: Astra's (Codex) end review. Not merged; nothing pushed.**
 - Final skills: all eight under [skills/](skills/README.md), each with its procedure revised from
   the experiments, a pitfalls section and a worked example from queuelet. Measured blind find rate
   against the register: 26 of 27, against the plan's bar of 19.
-- Landing commit: final skills, landing page, lessons index; tag `explore-it/v1-explored`.
+- Landing commit `b6df7db`: final skills, landing page, lessons index; tag `explore-it/v1-explored`.
+- Final suite at `explore-it/v1-explored`, fresh clone, project `queuelet-final`
+  ([ledger and logs](register/runs/final/acceptance.json)): verify 00 `BASELINE HOLDS`; verify
+  01–09 `FIXED AND CHECKED` 35/5/8/6/4/8/3/4/7 absent; `make checks` (94 check functions) exit 0
+  in 706.9 s; `go test -count=1 ./...` and `go vet ./...` exit 0. Every step exited 0; the stack
+  was taken down.
 
 ## In progress
 
-Nothing. No stack for this book is up from this run (`queuelet-review-c` and `queuelet-ref` are
-down with volumes removed). A stale `queuelet-e01` stack (ports 18220/18221/15453, up since early
+Nothing. No stack for this book is up from this run (`queuelet-review-c`, `queuelet-final` and
+`queuelet-ref` are down with volumes removed). A stale `queuelet-e01` stack (ports 18220/18221/15453, up since early
 2026-10-22) belongs to the E01 era and was left untouched; the coordinator can remove it
 with `COMPOSE_PROJECT_NAME=queuelet-e01 docker compose -f deploy/compose.yml down -v` from
 `project/`.
