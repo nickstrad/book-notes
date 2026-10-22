@@ -1,0 +1,45 @@
+{
+  "completed_at_utc": "2026-10-22T17:22:31.321256+00:00",
+  "experiment": 6,
+  "exploration_commit": "b3b0559",
+  "fix_commit": "755d21c",
+  "knowledge_commit": "7148dee",
+  "lesson_tag": "explore-it/lesson-06",
+  "superseded_reviewed_fix": "7a38788",
+  "reports": 7,
+  "reported_paths_fixed": 7,
+  "reported_paths_deferred": 0,
+  "policy_resolved": [
+    "A4"
+  ],
+  "score": {
+    "stated": 20,
+    "confirmed": 18,
+    "refuted": 2,
+    "qualified_code_reading_contradictions": 2,
+    "observed_model_cells": 30
+  },
+  "verification": {
+    "current": "FIXED AND CHECKED: 8 absent; regression checks pass",
+    "ref_lesson05": "DEFECTS REPRODUCED: 8 present",
+    "integration_checks": 74,
+    "unit_tests": "pass",
+    "artifacts_verified": 3447,
+    "frozen_instruments": 95
+  },
+  "reviews": {
+    "initial_muse": "NITS, two findings; written report complete, process subsequently stopped after provider retries",
+    "fresh_muse_revalidation": "stalled provider streams, no verdict",
+    "fresh_claude_revalidation": "PASS, 0 findings, exit 0"
+  },
+  "deferred_nonfindings": [
+    "pre-existing unprobed worker http-response precision sibling",
+    "legacy invalid schedule-template upgrade policy",
+    "prior forward questions in STATE.md"
+  ],
+  "next": "full checkpoint B review, then fresh E07 after its gate",
+  "full_dwell_sweep": false,
+  "book_source_limit": "approved chapter map; no full-text citation validation",
+  "review_execution_limit": "independent actual-code/unit/vet/hash checks; Docker paired/full integration evidence supplied by builder",
+  "scope": "only books/explore-it tracked changes, authorized worktree; scratch exports/clones under /tmp; no push"
+}

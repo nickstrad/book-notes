@@ -4,7 +4,7 @@
 one inherited queuelet service, nine structured experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E06 review repair complete; independent validation pending.**
+**Status (2026-10-22): E06 complete; lesson-06 at `755d21c`, independent repair revalidation PASS. Checkpoint B review next.**
 
 ## Done
 
@@ -37,14 +37,19 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
   All 3,447 raw artifact hashes, all 95 frozen instruments, original acceptance, repros,
   historic proofs and review report rechecked unchanged. Own lab stopped, `make down` exit 0.
 
+- E06 project-knowledge commit `7148dee`; coordinator closure/review evidence is in the
+  commit containing this final handoff state. Independent revalidation rechecked 3,447 raw
+  artifacts, 95 instruments, actual application tests and vet, with no findings.
+
 ## In progress
 
-This one-round repair is complete. Finding 1's introduced prefix-acceptance regression
-is addressed: complete-document validation with exact numbers; malformed CLI JSON exits
-before any request; raw response fallback is preserved. Finding 2 is explicitly deferred
-below. No acceptance command remains running and no child agent was launched. Coordinator
-owns independent validation of the amended fix; Muse's NITS verdict reviewed `7a38788`,
-not this repair. No E07 or full checkpoint B review started.
+None. Explorer, fixer, repair and reviewer runs are closed; the owned lab is stopped.
+The initial Muse NITS report is preserved. Its runtime was stopped after report/result
+completion when closing/reminder provider retries continued. A fresh Muse revalidation
+then stalled on provider-stream failures before running tests (no verdict); fresh Claude
+Opus 5.5 cross-company fallback returned **PASS, 0 findings**, exit 0, on fix `755d21c`.
+Evidence: [repair revalidation](register/reviews/E06/revalidation/revalidation.md).
+This is the bounded E06 repair review, not the full checkpoint B review. E07 not started.
 
 ## Decisions and corrected predictions
 
@@ -70,9 +75,9 @@ not this repair. No E07 or full checkpoint B review started.
 
 ## Next
 
-1. Coordinator arranges independent repair validation, then **checkpoint B review, E02–E06**,
-   using the amended lesson tag, both acceptance records and immutable exploration/review
-   evidence. No independent review was run in this repair chunk.
+1. Coordinator arranges **checkpoint B review, E02–E06**, using the amended lesson tag,
+   both acceptance records and preserved exploration/review evidence. E06 repair validation
+   is complete (Claude PASS after Muse provider failures); full checkpoint B remains unrun.
 2. After that gate, a **fresh E07** chunk from `explore-it/lesson-06`; A3 remains undecided.
 3. Later authorized checkpoint C / final skills / Astra end review; merge adds-only after
    Release It! lands. This state is a handoff, not authorization to begin those steps.
@@ -114,9 +119,9 @@ Coordinator/Nick owns policy decisions; fresh explorers own future observations:
 - To repeat E06 acceptance, from `books/explore-it/project`, run sequentially `make up`,
   `make verify LESSON=06`, `make verify LESSON=06 REF=explore-it/lesson-05`, `make checks`,
   `make test`; stop the lab with `make down`. Repros run target-image qctl/worker binaries.
-- Do not regenerate an E06 blind export or alter immutable records. Next is independent
-  repair validation/full checkpoint B review, then a fresh E07 export/run after its gate.
+- Do not regenerate an E06 blind export or alter immutable records. Independent repair
+  validation passed. Next is full checkpoint B review, then fresh E07 after its gate.
 - Project knowledge: [docs/knowledge/README.md](docs/knowledge/README.md);
-  this documentation commit appends the streaming Decode/whole-document lesson after code
+  commit `7148dee` records the streaming Decode/whole-document lesson after code
   fix `755d21c`; the lesson tag remains on the code fix. E06 reusable oracle is indexed in
   `project/lab/repro/README.md`. No VM kb write was needed.

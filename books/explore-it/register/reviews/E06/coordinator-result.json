@@ -1,0 +1,10 @@
+{
+  "verdict": "NITS",
+  "findings_count": 2,
+  "source": "Final written Muse review.md and result.json; report unchanged after dispatch",
+  "reviewed_commit": "7a38788b362948d5c81fe1ee7dae14b59a010f48",
+  "report_sha256": "7dbd40f93f55c0b495dfecc94c0e59f06b86da8297d4ecb92d8ab7dd9ac55019",
+  "repair_assignment": "restore strict JSON completeness; explicitly defer http decoder sibling",
+  "process_exit_status": 143,
+  "lifecycle_note": "Written NITS report/result complete; coordinator stopped post-report provider retries, see coordinator-stop.json"
+}

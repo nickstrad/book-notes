@@ -1,0 +1,63 @@
+{
+  "review": "E06 fresh independent spot-check (third family: Muse Wonder Full)",
+  "verdict": "NITS",
+  "findings_count": 2,
+  "findings": [
+    {
+      "id": 1,
+      "severity": "medium-low",
+      "title": "UseNumber Decode paths accept trailing data Unmarshal rejected; qctl invalid input now fails open",
+      "files": [
+        "books/explore-it/project/cmd/qctl/main.go:53",
+        "books/explore-it/project/cmd/qctl/main.go:281",
+        "books/explore-it/project/internal/client/client.go:57"
+      ],
+      "evidence": ["qctl-stub.log", "edge-probe.log"],
+      "requested_repair": "Add whole-input completeness check (mirror internal/api/api.go:62) to all three decode sites, surface qctl parse errors, add trailing-input regression control preserving paired U30 oracle semantics."
+    },
+    {
+      "id": 2,
+      "severity": "low",
+      "title": "Sample worker http kind still rounds remote JSON numbers (E06-F03 sibling); neither fixed nor recorded deferred",
+      "files": ["books/explore-it/project/internal/worker/worker.go:111"],
+      "evidence": ["edge-probe.log", "books/explore-it/exploration/defects/E06-F03-sample-worker-echo-loses-precision.md:48"],
+      "requested_repair": "Fix with UseNumber plus completeness check preserving fallback-to-string, or explicitly defer in STATE.md, U29 record, and lesson note."
+    }
+  ],
+  "scope": {
+    "experiment": 6,
+    "clone": "/tmp/explore-it-review06/source",
+    "branch": "plan/explore-it",
+    "lesson06": "7a38788b362948d5c81fe1ee7dae14b59a010f48",
+    "exploration": "b3b0559b0afe46e9552d9d4df4222508a03b822c",
+    "lesson05": "0099bcd0a91e86a25f39cfdf347fbbc3b8f5704e",
+    "diff_confined_to": "books/explore-it/",
+    "assigned_confirmed": ["U27", "U28", "U29", "U30", "U31", "U32", "U33", "A4"]
+  },
+  "checks_run": [
+    {"command": "python3 check_hashes.py (3447 artifact hashes)", "exit": 0, "result": "3447/3447 match, 0 mismatches", "log": "hash-check-full.txt"},
+    {"command": "sha256sum -c 06-instruments.sha256", "exit": 0, "result": "95/95 OK", "log": "instruments-recheck.txt"},
+    {"command": "go vet ./...", "exit": 0, "result": "clean", "log": "unit-vet.log"},
+    {"command": "go test ./...", "exit": 0, "result": "all packages ok", "log": "unit-vet.log"},
+    {"command": "go run edge/main.go (verbatim old vs new decoder logic)", "exit": 0, "result": "trailing-data divergence and http rounding observed; empty-number defaults preserved", "log": "edge-probe.log"},
+    {"command": "python3 qctl_stub_test.py (archived lesson-05 vs lesson-06 qctl binaries)", "exit": 0, "result": "lesson-06 exact on valid input/display; fail-open on trailing input", "log": "qctl-stub.log"},
+    {"command": "make up (COMPOSE_PROJECT_NAME=queuelet-review-e06, ports 18370/18371/15513)", "exit": 2, "result": "blocked: docker socket permission denied in sandbox; stack never started", "log": "lab-up-attempt.log"}
+  ],
+  "builder_acceptance_inspected": {
+    "verify_current": "FIXED AND CHECKED: 8 absent; regression checks pass",
+    "verify_ref": "DEFECTS REPRODUCED: 8 present",
+    "checks": "74/74 pass",
+    "unit": "pass",
+    "rerun_by_reviewer": false
+  },
+  "limitations": [
+    "Docker lab could not run in this sandbox (docker socket denied, escalation unavailable); paired verify rests on builder acceptance plus reviewer binary/hash/unit probes.",
+    "U32 historical race hits taken from builder REF log (2 enqueue 400, 4 schedule 500, 1 batch 400), not self-observed.",
+    "NOT VALID cascade for pre-upgrade attempt rows assessed by code inspection only.",
+    "Book chapter claims checked against approved PLAN map only; full text unavailable."
+  ],
+  "observations_not_findings": [
+    "Legacy pre-lesson-06 invalid schedule templates are not re-validated; cron Fire copies stored payload bytes directly. Post-fix creation is consistent. Suggest explicit legacy-template decision record."
+  ],
+  "artifacts": ["review.md", "result.json", "git-scope.log", "hash-check-full.txt", "instruments-recheck.txt", "edge-probe.log", "unit-vet.log", "qctl-stub.log", "qctl_stub_test.py", "lab-up-attempt.log", "diff-project.txt"]
+}

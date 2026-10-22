@@ -13,5 +13,7 @@ options now require a complete document and report a nonzero error before any re
 output keeps the prior full raw-response fallback when JSON is incomplete. Actual-binary
 stub-server unit tests cover exact numbers, whitespace, malformed input, trailing garbage,
 multiple values and zero requests on invalid options. The numeric public repro/oracle
-and original seven-report score are unchanged; independent repair validation is pending.
+and original seven-report score are unchanged; independent repair validation returned PASS (see the revalidation report).
 
+
+Final independent repair validation: [PASS, 0 findings](../../register/reviews/E06/revalidation/revalidation.md), fix `755d21c`; original report and numeric oracle unchanged.

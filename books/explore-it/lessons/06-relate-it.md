@@ -208,7 +208,7 @@ the shared client returns an error. Actual-binary CLI/stub-server tests, client 
 and worker-default tests exercise these paths. Repros, numeric PRESENT/ABSENT oracles,
 original artifacts and score are unchanged. Repair acceptance is recorded separately in
 [`06-repair-acceptance.json`](../register/runs/06-repair-acceptance.json); the earlier pair
-and failed attempts above remain evidence. Independent validation of this repair is pending.
+and failed attempts above remain evidence. Independent repair validation subsequently returned PASS; see the closure below.
 
 The repair reran the same five commands sequentially, all exit 0: `make up` 50.593 s;
 current verify 121.898 s (`FIXED AND CHECKED: 8 absent; regression checks pass`);
@@ -244,3 +244,20 @@ deferred: the actual http-worker path was not probed or changed here, so the ech
 does not establish its precision. Legacy invalid schedule templates are also unchanged;
 creation is repaired, but cron/manual consistency for pre-upgrade templates needs an
 explicit upgrade-policy decision at checkpoint B. Neither question adds a discovery or score.
+
+
+## Independent repair closure
+
+The first fresh Muse review returned NITS on superseded `7a38788`; the parsing repair
+is folded into `755d21c` at `explore-it/lesson-06`, with process knowledge separately
+committed as `7148dee`. [Fresh independent revalidation](../register/reviews/E06/revalidation/revalidation.md)
+returned **PASS, 0 findings**. Claude Opus 5.5 was the cross-company fallback after a fresh
+Muse revalidation hit repeated provider-stream failures before tests. The stalled run
+produced no verdict. The first completed Muse runtime was stopped after writing its
+report/result when closing/reminder retries continued; both lifecycles are preserved.
+
+Reviewers independently checked actual CLI/client/worker code, unit tests, vet and
+all 3,447 raw artifact / 95 instrument hashes. They did not independently rerun Docker
+acceptance: the first reviewer lacked socket access, and the bounded revalidation
+inspected the repair builder's successful current/REF/74-check logs. Full checkpoint B
+review remains the next unit. The [STATE](../STATE.md) retains every forward question.

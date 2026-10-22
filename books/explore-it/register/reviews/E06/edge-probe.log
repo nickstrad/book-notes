@@ -1,0 +1,35 @@
+cmd: go run /tmp/explore-it-review06/edge/main.go
+qctl-input "{\"big\":9007199254740993}"
+  old(Unmarshal)={"big":9007199254740992}
+  new(Decode)  ={"big":9007199254740993}
+qctl-input "{\"big\":9007199254740993}xyz"
+  old(Unmarshal)=null
+  new(Decode)  ={"big":9007199254740993}
+qctl-input "{\"big\":9007199254740993} {\"big\":1}"
+  old(Unmarshal)=null
+  new(Decode)  ={"big":9007199254740993}
+qctl-input "{\"big\":}"
+  old(Unmarshal)=null
+  new(Decode)  =null
+qctl-input "123abc"
+  old(Unmarshal)=null
+  new(Decode)  =123
+qctl-input "{\"big\":9007199254740993}   \n"
+  old(Unmarshal)={"big":9007199254740992}
+  new(Decode)  ={"big":9007199254740993}
+qctl-input ""
+  old(Unmarshal)=null
+  new(Decode)  =null
+client "{\"id\":1}\n{\"id\":2}" oldErr=invalid character '{' after top-level value newErr=<nil>
+client "" oldErr=unexpected end of JSON input newErr=EOF
+client "notjson" oldErr=invalid character 'o' in literal null (expecting 'u') newErr=invalid character 'o' in literal null (expecting 'u')
+client "{\"id\":1}  " oldErr=<nil> newErr=<nil>
+client "{\"id\":9007199254740993}" oldErr=<nil> newErr=<nil>
+worker payload=map[] assertOk=false number="" float=0 err=strconv.ParseFloat: parsing "": invalid syntax
+worker payload=map[seconds:0.3] assertOk=true number="0.3" float=0.3 err=<nil>
+worker payload=map[seconds:0.3] assertOk=false number="" float=0 err=strconv.ParseFloat: parsing "": invalid syntax
+worker payload=map[seconds:1e999] assertOk=true number="1e999" float=+Inf err=strconv.ParseFloat: parsing "1e999": value out of range
+worker payload=map[n:0] assertOk=false number="" float=0 err=strconv.ParseFloat: parsing "": invalid syntax
+worker-http Unmarshal roundtrip: {"big":9007199254740993,"fraction":0.12345678901234567890123456789} -> {"big":9007199254740992,"fraction":0.12345678901234568}
+worker-http trailing Unmarshal err=invalid character 't' after top-level value (fallback to string)
+exit:0

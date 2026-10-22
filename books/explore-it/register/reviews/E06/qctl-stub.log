@@ -1,0 +1,32 @@
+cmd: python3 /tmp/explore-it-review06/qctl_stub_test.py (actual qctl-lesson05/qctl-lesson06 binaries vs stub API)
+lesson-05 enqueue valid-big: exit=0 sent_body={"kind":"manual","payload":{"big":9007199254740992},"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740992,\n    "fraction": 0.12345678901234568\n  },\n  "result": {\n    "big": 9007199254740992\n  },\n  "state": "queued"\n}' stderr=''
+lesson-05 enqueue trailing-garbage: exit=0 sent_body={"kind":"manual","payload":null,"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740992,\n    "fraction": 0.12345678901234568\n  },\n  "result": {\n    "big": 9007199254740992\n  },\n  "state": "queued"\n}' stderr=''
+lesson-05 enqueue trailing-second-value: exit=0 sent_body={"kind":"manual","payload":null,"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740992,\n    "fraction": 0.12345678901234568\n  },\n  "result": {\n    "big": 9007199254740992\n  },\n  "state": "queued"\n}' stderr=''
+lesson-05 enqueue malformed: exit=0 sent_body={"kind":"manual","payload":null,"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740992,\n    "fraction": 0.12345678901234568\n  },\n  "result": {\n    "big": 9007199254740992\n  },\n  "state": "queued"\n}' stderr=''
+lesson-05 job-get display: exit=0 stdout={
+  "id": 7,
+  "payload": {
+    "big": 9007199254740992,
+    "fraction": 0.12345678901234568
+  },
+  "result": {
+    "big": 9007199254740992
+  },
+  "state": "queued"
+}
+lesson-06 enqueue valid-big: exit=0 sent_body={"kind":"manual","payload":{"big":9007199254740993},"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740993,\n    "fraction": 0.12345678901234567890123456789\n  },\n  "result": {\n    "big": 9007199254740993\n  },\n  "state": "queued"\n}' stderr=''
+lesson-06 enqueue trailing-garbage: exit=0 sent_body={"kind":"manual","payload":{"big":9007199254740993},"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740993,\n    "fraction": 0.12345678901234567890123456789\n  },\n  "result": {\n    "big": 9007199254740993\n  },\n  "state": "queued"\n}' stderr=''
+lesson-06 enqueue trailing-second-value: exit=0 sent_body={"kind":"manual","payload":{"big":9007199254740993},"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740993,\n    "fraction": 0.12345678901234567890123456789\n  },\n  "result": {\n    "big": 9007199254740993\n  },\n  "state": "queued"\n}' stderr=''
+lesson-06 enqueue malformed: exit=0 sent_body={"kind":"manual","payload":null,"priority":5} stdout='{\n  "id": 7,\n  "payload": {\n    "big": 9007199254740993,\n    "fraction": 0.12345678901234567890123456789\n  },\n  "result": {\n    "big": 9007199254740993\n  },\n  "state": "queued"\n}' stderr=''
+lesson-06 job-get display: exit=0 stdout={
+  "id": 7,
+  "payload": {
+    "big": 9007199254740993,
+    "fraction": 0.12345678901234567890123456789
+  },
+  "result": {
+    "big": 9007199254740993
+  },
+  "state": "queued"
+}
+exit:0

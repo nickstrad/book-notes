@@ -19,11 +19,15 @@ Finding 2's pre-existing worker http-response precision sibling is explicitly de
 unprobed through the actual http worker and unchanged here (outside the narrow echo repair).
 Legacy invalid schedule templates are not migrated/revalidated; creation is repaired,
 but upgrade policy remains coordinator/Nick's checkpoint-B question. Neither is a new find.
-No further unit or agent was started. Independent validation of the amended fix is
-pending; no final independent acceptance is claimed. Next: coordinator validation/checkpoint B review
-(E02–E06), then fresh E07 after that gate. Worktree/branch remain
-`/root/Software/booknotes-work/explore-it`, `plan/explore-it`; this repair launched no
-child agents, no acceptance process remains, and the owned Docker lab is stopped.
+Independent repair validation is complete: fresh Claude Opus 5.5 (different company
+from Codex builder) returned PASS, 0 findings, exit 0. Prior Muse NITS report remains
+immutable; fresh Muse revalidation failed provider streams before tests and produced
+no verdict. The fallback and lifecycle evidence are in `reviews/E06/revalidation/` and
+`reviews/E06/revalidation-muse/`. Initial Muse Docker checks were sandbox-blocked;
+reviewers independently ran actual-code tests, vet, hash checks and actual CLI probes,
+while current/REF/74 integration verdicts rest on the builder's recorded acceptance.
+Next is full checkpoint B (E02–E06), then fresh E07 after that gate. All owned runs are
+closed and the lab is stopped. Root book STATE.md is the current handoff.
 
 - Repair sequence, sequential and all exit 0: `make up` 50.593 s; current verify
   121.898 s → `FIXED AND CHECKED: 8 absent; regression checks pass`; unchanged REF
