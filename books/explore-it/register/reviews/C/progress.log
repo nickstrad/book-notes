@@ -1,0 +1,27 @@
+tag07-up 0 7.693 
+tag07-verify 0 255.186 FIXED AND CHECKED: 3 absent; regression checks pass
+tag07-down 0 3.235 
+tag08-up 0 7.805 
+tag08-verify 0 140.443 FIXED AND CHECKED: 4 absent; regression checks pass
+tag08-down 0 4.645 
+tag09-up 0 45.762 
+tag09-verify 0 281.657 FIXED AND CHECKED: 7 absent; regression checks pass
+tag09-down 0 3.679 
+head-up 0 12.187 
+head00-verify 0 24.795 BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass
+head01-verify 0 364.039 FIXED AND CHECKED: 35 absent; regression checks pass
+head02-verify 0 57.429 FIXED AND CHECKED: 5 absent; regression checks pass
+head03-verify 0 31.182 FIXED AND CHECKED: 8 absent; regression checks pass
+head04-verify 0 66.045 FIXED AND CHECKED: 6 absent; regression checks pass
+head05-verify 0 106.649 FIXED AND CHECKED: 4 absent; regression checks pass
+head06-verify 0 117.114 FIXED AND CHECKED: 8 absent; regression checks pass
+head07-verify 0 256.89 FIXED AND CHECKED: 3 absent; regression checks pass
+head08-verify 0 143.314 FIXED AND CHECKED: 4 absent; regression checks pass
+head09-verify 0 318.634 FIXED AND CHECKED: 7 absent; regression checks pass
+ref07-verify 0 125.88 DEFECTS REPRODUCED: 3 present
+ref08-verify 0 172.899 DEFECTS REPRODUCED: 4 present
+ref09-verify 0 146.019 DEFECTS REPRODUCED: 7 present
+head-checks 2 791.833 FAIL
+head-test 0 0.333 ok  	queuelet/internal/worker	(cached)
+head-vet 0 0.784 
+head-down 0 4.608 

@@ -1,0 +1,535 @@
+{
+  "runs": [
+    {
+      "name": "tag07-up",
+      "tree": "tag07",
+      "commit": "8787e43b24491fe7bf6d561509566661112faf4a",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T21:48:12.260878+00:00",
+      "exit": 0,
+      "elapsed_seconds": 7.693,
+      "last_verdict_line": "",
+      "log": "logs/tag07-up.log"
+    },
+    {
+      "name": "tag07-verify",
+      "tree": "tag07",
+      "commit": "8787e43b24491fe7bf6d561509566661112faf4a",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T21:48:19.954820+00:00",
+      "exit": 0,
+      "elapsed_seconds": 255.186,
+      "last_verdict_line": "FIXED AND CHECKED: 3 absent; regression checks pass",
+      "log": "logs/tag07-verify.log"
+    },
+    {
+      "name": "tag07-down",
+      "tree": "tag07",
+      "commit": "8787e43b24491fe7bf6d561509566661112faf4a",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T21:52:35.151582+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.235,
+      "last_verdict_line": "",
+      "log": "logs/tag07-down.log"
+    },
+    {
+      "name": "tag08-up",
+      "tree": "tag08",
+      "commit": "9b1b1a1e4b8c8d3dbb0506c472460158c96a05fc",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T21:52:38.387674+00:00",
+      "exit": 0,
+      "elapsed_seconds": 7.805,
+      "last_verdict_line": "",
+      "log": "logs/tag08-up.log"
+    },
+    {
+      "name": "tag08-verify",
+      "tree": "tag08",
+      "commit": "9b1b1a1e4b8c8d3dbb0506c472460158c96a05fc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-22T21:52:46.193229+00:00",
+      "exit": 0,
+      "elapsed_seconds": 140.443,
+      "last_verdict_line": "FIXED AND CHECKED: 4 absent; regression checks pass",
+      "log": "logs/tag08-verify.log"
+    },
+    {
+      "name": "tag08-down",
+      "tree": "tag08",
+      "commit": "9b1b1a1e4b8c8d3dbb0506c472460158c96a05fc",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T21:55:06.640627+00:00",
+      "exit": 0,
+      "elapsed_seconds": 4.645,
+      "last_verdict_line": "",
+      "log": "logs/tag08-down.log"
+    },
+    {
+      "name": "tag09-up",
+      "tree": "tag09",
+      "commit": "130f1999fb95298dc3a1857e2c32762891100de7",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T21:55:11.286527+00:00",
+      "exit": 0,
+      "elapsed_seconds": 45.762,
+      "last_verdict_line": "",
+      "log": "logs/tag09-up.log"
+    },
+    {
+      "name": "tag09-verify",
+      "tree": "tag09",
+      "commit": "130f1999fb95298dc3a1857e2c32762891100de7",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09"
+      ],
+      "start": "2026-10-22T21:55:57.050431+00:00",
+      "exit": 0,
+      "elapsed_seconds": 281.657,
+      "last_verdict_line": "FIXED AND CHECKED: 7 absent; regression checks pass",
+      "log": "logs/tag09-verify.log"
+    },
+    {
+      "name": "tag09-down",
+      "tree": "tag09",
+      "commit": "130f1999fb95298dc3a1857e2c32762891100de7",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T22:00:38.710822+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.679,
+      "last_verdict_line": "",
+      "log": "logs/tag09-down.log"
+    },
+    {
+      "name": "head-up",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T22:00:42.394695+00:00",
+      "exit": 0,
+      "elapsed_seconds": 12.187,
+      "last_verdict_line": "",
+      "log": "logs/head-up.log"
+    },
+    {
+      "name": "head00-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=00"
+      ],
+      "start": "2026-10-22T22:00:54.583220+00:00",
+      "exit": 0,
+      "elapsed_seconds": 24.795,
+      "last_verdict_line": "BASELINE HOLDS: enqueue\u2192lease\u2192ack\u2192webhook; unit and happy-path checks pass",
+      "log": "logs/head00-verify.log"
+    },
+    {
+      "name": "head01-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=01"
+      ],
+      "start": "2026-10-22T22:01:19.380207+00:00",
+      "exit": 0,
+      "elapsed_seconds": 364.039,
+      "last_verdict_line": "FIXED AND CHECKED: 35 absent; regression checks pass",
+      "log": "logs/head01-verify.log"
+    },
+    {
+      "name": "head02-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=02"
+      ],
+      "start": "2026-10-22T22:07:23.422109+00:00",
+      "exit": 0,
+      "elapsed_seconds": 57.429,
+      "last_verdict_line": "FIXED AND CHECKED: 5 absent; regression checks pass",
+      "log": "logs/head02-verify.log"
+    },
+    {
+      "name": "head03-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=03"
+      ],
+      "start": "2026-10-22T22:08:20.855141+00:00",
+      "exit": 0,
+      "elapsed_seconds": 31.182,
+      "last_verdict_line": "FIXED AND CHECKED: 8 absent; regression checks pass",
+      "log": "logs/head03-verify.log"
+    },
+    {
+      "name": "head04-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=04"
+      ],
+      "start": "2026-10-22T22:08:52.037980+00:00",
+      "exit": 0,
+      "elapsed_seconds": 66.045,
+      "last_verdict_line": "FIXED AND CHECKED: 6 absent; regression checks pass",
+      "log": "logs/head04-verify.log"
+    },
+    {
+      "name": "head05-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=05"
+      ],
+      "start": "2026-10-22T22:09:58.084367+00:00",
+      "exit": 0,
+      "elapsed_seconds": 106.649,
+      "last_verdict_line": "FIXED AND CHECKED: 4 absent; regression checks pass",
+      "log": "logs/head05-verify.log"
+    },
+    {
+      "name": "head06-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=06"
+      ],
+      "start": "2026-10-22T22:11:44.735320+00:00",
+      "exit": 0,
+      "elapsed_seconds": 117.114,
+      "last_verdict_line": "FIXED AND CHECKED: 8 absent; regression checks pass",
+      "log": "logs/head06-verify.log"
+    },
+    {
+      "name": "head07-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-22T22:13:41.850991+00:00",
+      "exit": 0,
+      "elapsed_seconds": 256.89,
+      "last_verdict_line": "FIXED AND CHECKED: 3 absent; regression checks pass",
+      "log": "logs/head07-verify.log"
+    },
+    {
+      "name": "head08-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-22T22:17:58.752006+00:00",
+      "exit": 0,
+      "elapsed_seconds": 143.314,
+      "last_verdict_line": "FIXED AND CHECKED: 4 absent; regression checks pass",
+      "log": "logs/head08-verify.log"
+    },
+    {
+      "name": "head09-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09"
+      ],
+      "start": "2026-10-22T22:20:22.067789+00:00",
+      "exit": 0,
+      "elapsed_seconds": 318.634,
+      "last_verdict_line": "FIXED AND CHECKED: 7 absent; regression checks pass",
+      "log": "logs/head09-verify.log"
+    },
+    {
+      "name": "ref07-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07",
+        "REF=explore-it/lesson-06"
+      ],
+      "start": "2026-10-22T22:25:40.704026+00:00",
+      "exit": 0,
+      "elapsed_seconds": 125.88,
+      "last_verdict_line": "DEFECTS REPRODUCED: 3 present",
+      "log": "logs/ref07-verify.log"
+    },
+    {
+      "name": "ref08-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08",
+        "REF=explore-it/lesson-07"
+      ],
+      "start": "2026-10-22T22:27:46.586862+00:00",
+      "exit": 0,
+      "elapsed_seconds": 172.899,
+      "last_verdict_line": "DEFECTS REPRODUCED: 4 present",
+      "log": "logs/ref08-verify.log"
+    },
+    {
+      "name": "ref09-verify",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09",
+        "REF=explore-it/lesson-08"
+      ],
+      "start": "2026-10-22T22:30:39.488014+00:00",
+      "exit": 0,
+      "elapsed_seconds": 146.019,
+      "last_verdict_line": "DEFECTS REPRODUCED: 7 present",
+      "log": "logs/ref09-verify.log"
+    },
+    {
+      "name": "head-checks",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T22:33:05.508867+00:00",
+      "exit": 2,
+      "elapsed_seconds": 791.833,
+      "last_verdict_line": "FAIL",
+      "log": "logs/head-checks.log"
+    },
+    {
+      "name": "head-test",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "test"
+      ],
+      "start": "2026-10-22T22:46:17.343860+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.333,
+      "last_verdict_line": "ok  \tqueuelet/internal/worker\t(cached)",
+      "log": "logs/head-test.log"
+    },
+    {
+      "name": "head-vet",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T22:46:17.678892+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.784,
+      "last_verdict_line": "",
+      "log": "logs/head-vet.log"
+    },
+    {
+      "name": "head-down",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T22:46:18.464216+00:00",
+      "exit": 0,
+      "elapsed_seconds": 4.608,
+      "last_verdict_line": "",
+      "log": "logs/head-down.log"
+    },
+    {
+      "name": "u32-up",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T22:46:54.903315+00:00",
+      "exit": 0,
+      "elapsed_seconds": 43.882,
+      "last_verdict_line": "",
+      "log": "logs/u32-up.log"
+    },
+    {
+      "name": "u32-rerun1",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^TestL06U32$",
+        "-count=1",
+        "-v"
+      ],
+      "start": "2026-10-22T22:47:38.787846+00:00",
+      "exit": 0,
+      "elapsed_seconds": 37.304,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t36.292s",
+      "log": "logs/u32-rerun1.log"
+    },
+    {
+      "name": "u32-rerun2",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^TestL06U32$",
+        "-count=1",
+        "-v"
+      ],
+      "start": "2026-10-22T22:48:16.093418+00:00",
+      "exit": 0,
+      "elapsed_seconds": 29.561,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t28.700s",
+      "log": "logs/u32-rerun2.log"
+    },
+    {
+      "name": "u32-rerun3",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^TestL06U32$",
+        "-count=1",
+        "-v"
+      ],
+      "start": "2026-10-22T22:48:45.656354+00:00",
+      "exit": 0,
+      "elapsed_seconds": 32.033,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t31.109s",
+      "log": "logs/u32-rerun3.log"
+    },
+    {
+      "name": "u32-rerun4",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^TestL06U32$",
+        "-count=1",
+        "-v"
+      ],
+      "start": "2026-10-22T22:49:17.691797+00:00",
+      "exit": 0,
+      "elapsed_seconds": 33.954,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t32.934s",
+      "log": "logs/u32-rerun4.log"
+    },
+    {
+      "name": "u32-rerun5",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "go",
+        "test",
+        "-tags",
+        "checks",
+        "./test/checks",
+        "-run",
+        "^TestL06U32$",
+        "-count=1",
+        "-v"
+      ],
+      "start": "2026-10-22T22:49:51.647902+00:00",
+      "exit": 0,
+      "elapsed_seconds": 48.45,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t47.541s",
+      "log": "logs/u32-rerun5.log"
+    },
+    {
+      "name": "u32-down",
+      "tree": "repo",
+      "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T22:50:40.101194+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.87,
+      "last_verdict_line": "",
+      "log": "logs/u32-down.log"
+    }
+  ]
+}

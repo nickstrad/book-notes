@@ -1,0 +1,37 @@
+{"command": ["make", "verify", "LESSON=08"], "tree": "repo", "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-review-c", "QUEUELET_IMAGE_TAG": "reviewc", "QUEUELET_API_PORT": "18270", "QUEUELET_HOOK_PORT": "18271", "QUEUELET_PG_PORT": "15503", "QUEUELET_URL": "http://localhost:18270", "QUEUELET_HOOK_URL": "http://localhost:18271", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15503/queuelet?sslmode=disable"}, "start": "2026-10-22T22:17:58.752006+00:00"}
+REF='' bash lab/verify.sh 08
+ Container queuelet-review-c-worker-b-1 Stopping 
+ Container queuelet-review-c-worker-a-1 Stopping 
+ Container queuelet-review-c-worker-b-1 Stopped 
+ Container queuelet-review-c-worker-a-1 Stopped 
+ Container queuelet-review-c-api-1 Stopping 
+ Container queuelet-review-c-api-1 Stopped 
+ Container queuelet-review-c-postgres-1 Waiting 
+ Container queuelet-review-c-postgres-1 Healthy 
+ Container queuelet-review-c-api-1 Starting 
+ Container queuelet-review-c-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-c-postgres-1 Waiting 
+ Container queuelet-review-c-postgres-1 Healthy 
+ Container queuelet-review-c-worker-b-1 Starting 
+ Container queuelet-review-c-worker-a-1 Starting 
+ Container queuelet-review-c-worker-a-1 Started 
+ Container queuelet-review-c-worker-b-1 Started 
+{"after": "running Up 5 seconds", "during": "running Up 4 seconds", "elapsed": 0.6, "label": "api start without database", "probe": "U36", "recovered": true}
+{"label": "process crashes", "probe": "U36", "recovered": {"api": true, "postgres": true}}
+ABSENT: U36 — api during outage='running Up 4 seconds'; health 200 within 30 s of database start=True (0.6s); after process crash recovered={'api': True, 'postgres': True}
+{"auth": [503, 5.0], "freeze_seconds": 12, "health": [503, 1.01], "label": "frozen database", "probe": "U38"}
+ABSENT: U38 — during freeze /health=503 after 1.01s (bound 503 ≤3s); authenticated GET=503 after 5.0s (bound 503 ≤8s); recovered after unpause
+{"label": "dst runs", "probe": "A5", "runs": {"fb-0130": ["2027-11-07T05:30:00Z"], "gap-0200": ["2027-03-14T07:00:00Z", "2027-03-15T06:00:00Z"], "gap-0230": ["2027-03-14T07:00:00Z", "2027-03-15T06:30:00Z"], "hourly": ["2027-11-07T05:00:00Z", "2027-11-07T06:00:00Z", "2027-11-07T07:00:00Z"], "nine": ["2027-03-13T14:00:00Z", "2027-03-14T13:00:00Z"]}}
+ABSENT: A5 — spring gap days={'gap-0230': ['2027-03-14', '2027-03-15'], 'gap-0200': ['2027-03-14', '2027-03-15']}; fall-back 01:30 runs=['2027-11-07T05:30:00Z']; 09:00 and hourly controls hold
+{"acme_row": "1|t", "delivered_after": 2.0, "label": "slow partner", "probe": "U37", "slow_requests": 22}
+ABSENT: U37 — acme notification delivered after=2.0s (bound 20 s) behind 22 globex rows to a timing-out destination; slow destination requests=22; acme outbox attempts|delivered=1|t
+ABSENT: D21 — foreign namespace get/attempts/cancel/retry/ack/nack/heartbeat/delete=[404, 404, 404, 404, 404, 404, 404, 404]
+ABSENT: D22 — after DB recovery delayed job=queued; health HTTP 200 ok
+ABSENT: D23 — opposite-season cron requires 02:00 America/New_York; next local fire=2027-01-01T02:00:00-05:00
+ABSENT: D24 — signature_valid=True
+ok  	queuelet/test/checks	59.860s
+FIXED AND CHECKED: 4 absent; regression checks pass
+
+EXIT 0; ELAPSED 143.314s
