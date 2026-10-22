@@ -1,0 +1,69 @@
+command: go test ./cmd/qctl ./internal/client ./internal/worker -count=1 -v
+cwd: books/explore-it/project
+start: 2026-10-22T16:54:31.750960+00:00
+
+=== RUN   TestQctlJSON
+=== RUN   TestQctlJSON/enqueue_emails
+=== RUN   TestQctlJSON/job_ack_1
+=== RUN   TestQctlJSON/batch_emails
+=== RUN   TestQctlJSON/schedule_create
+=== RUN   TestQctlJSON/omitted_options
+=== RUN   TestQctlJSON/raw_response_{"id":1}xyz
+=== RUN   TestQctlJSON/raw_response_{"id":1}_{"id":2}
+=== RUN   TestQctlJSON/raw_response_{"id":}
+--- PASS: TestQctlJSON (1.29s)
+    --- PASS: TestQctlJSON/enqueue_emails (0.05s)
+    --- PASS: TestQctlJSON/job_ack_1 (0.09s)
+    --- PASS: TestQctlJSON/batch_emails (0.04s)
+    --- PASS: TestQctlJSON/schedule_create (0.04s)
+    --- PASS: TestQctlJSON/omitted_options (0.01s)
+    --- PASS: TestQctlJSON/raw_response_{"id":1}xyz (0.01s)
+    --- PASS: TestQctlJSON/raw_response_{"id":1}_{"id":2} (0.01s)
+    --- PASS: TestQctlJSON/raw_response_{"id":} (0.01s)
+PASS
+ok  	queuelet/cmd/qctl	1.294s
+=== RUN   TestJSONResponseCompleteness
+=== RUN   TestJSONResponseCompleteness/exact_with_whitespace
+=== RUN   TestJSONResponseCompleteness/malformed
+=== RUN   TestJSONResponseCompleteness/garbage
+=== RUN   TestJSONResponseCompleteness/second_object
+=== RUN   TestJSONResponseCompleteness/second_scalar
+=== RUN   TestJSONResponseCompleteness/empty
+--- PASS: TestJSONResponseCompleteness (0.01s)
+    --- PASS: TestJSONResponseCompleteness/exact_with_whitespace (0.00s)
+    --- PASS: TestJSONResponseCompleteness/malformed (0.00s)
+    --- PASS: TestJSONResponseCompleteness/garbage (0.00s)
+    --- PASS: TestJSONResponseCompleteness/second_object (0.00s)
+    --- PASS: TestJSONResponseCompleteness/second_scalar (0.00s)
+    --- PASS: TestJSONResponseCompleteness/empty (0.00s)
+PASS
+ok  	queuelet/internal/client	0.015s
+=== RUN   TestDecodedWorkerDefaults
+=== RUN   TestDecodedWorkerDefaults/sleep_omitted
+=== RUN   TestDecodedWorkerDefaults/sleep_wrong_type
+=== RUN   TestDecodedWorkerDefaults/sleep_numeric
+=== RUN   TestDecodedWorkerDefaults/fail3_omitted
+=== RUN   TestDecodedWorkerDefaults/fail3_exhausted
+=== RUN   TestDecodedWorkerDefaults/fail3_wrong_type
+=== RUN   TestDecodedWorkerDefaults/fail3_zero_default
+=== RUN   TestDecodedWorkerDefaults/fail_omitted
+=== RUN   TestDecodedWorkerDefaults/fail_numeric
+=== RUN   TestDecodedWorkerDefaults/fail_numeric_exhausted
+=== RUN   TestDecodedWorkerDefaults/echo_exact
+--- PASS: TestDecodedWorkerDefaults (0.02s)
+    --- PASS: TestDecodedWorkerDefaults/sleep_omitted (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/sleep_wrong_type (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/sleep_numeric (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail3_omitted (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail3_exhausted (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail3_wrong_type (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail3_zero_default (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail_omitted (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail_numeric (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/fail_numeric_exhausted (0.00s)
+    --- PASS: TestDecodedWorkerDefaults/echo_exact (0.00s)
+PASS
+ok  	queuelet/internal/worker	0.024s
+
+exit: 0
+elapsed_seconds: 3.409

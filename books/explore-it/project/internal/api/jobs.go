@@ -5,6 +5,7 @@ import (
 	"github.com/lib/pq"
 	"net/http"
 	"queuelet/internal/jobs"
+	"strings"
 )
 
 func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
@@ -62,8 +63,16 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
 		}
 		switch r.PathValue("verb") {
 		case "ack":
+			if containsNUL(in.Result) {
+				fail(w, 400, "invalid_result", "result cannot contain U+0000")
+				return
+			}
 			e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)
 		case "nack":
+			if strings.ContainsRune(in.Error, 0) {
+				fail(w, 400, "invalid_error", "error cannot contain U+0000")
+				return
+			}
 			if in.DelaySeconds != nil && (*in.DelaySeconds < 0 || *in.DelaySeconds > jobs.MaxSeconds) {
 				fail(w, 400, "invalid_delay", "delay_seconds must be 0–2147483647")
 				return
@@ -170,4 +179,25 @@ func (s *Server) ownJob(w http.ResponseWriter, r *http.Request) bool {
 		return false
 	}
 	return true
+}
+
+// JSON strings and object keys can contain NUL; PostgreSQL jsonb cannot.
+func containsNUL(v any) bool {
+	switch x := v.(type) {
+	case string:
+		return strings.ContainsRune(x, 0)
+	case []any:
+		for _, value := range x {
+			if containsNUL(value) {
+				return true
+			}
+		}
+	case map[string]any:
+		for key, value := range x {
+			if strings.ContainsRune(key, 0) || containsNUL(value) {
+				return true
+			}
+		}
+	}
+	return false
 }

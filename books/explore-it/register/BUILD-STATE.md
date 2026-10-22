@@ -5,7 +5,73 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-E06 exploration complete; fresh Codex Sol fixer next, as Nick’s 2026-10-22 chunk brief directs. Blind Claude explorer ran from 15:28:37Z (exact end in runs/06-blindness-audit.json), exit 0, about 20 minutes. Seven reports assigned U27–U33, plus A4 policy disclosure. Original artifacts preserved; all 3447 hashes verified; tool audit zero flagged paths; source/prior records unchanged. Decisions, qualified score, forward uncertainty and exact fixer scope: reconciliations/06.md, 06.json and 06-fixer-brief.md. No later chunk authorized. Existing earlier sections below are historical checkpoint evidence.
+**E06 one-round review repair complete**, amended code fix = the commit tagged
+`explore-it/lesson-06`, parent `b3b0559`; supersedes reviewed `7a38788`.
+Exploration `b3b0559`: fresh blind Claude Opus 5.5, exit 0, seven reports reconciled
+U27–U33. Fresh Codex Sol fixer repaired all seven assigned paths; A4 decided separately.
+Fresh Muse Wonder Full review of `7a38788` returned NITS; its original evidence is
+immutable under `reviews/E06/`. This fresh Sol repair addresses finding 1's introduced
+JSON prefix-acceptance regression with full-document validation plus UseNumber in
+qctl options/output and shared client. Invalid CLI JSON exits before any request;
+the printer retains its full raw-response fallback. Actual-binary CLI/server tests,
+client HTTP tests and worker-default tests exercise the application, not copied decoders.
+Finding 2's pre-existing worker http-response precision sibling is explicitly deferred,
+unprobed through the actual http worker and unchanged here (outside the narrow echo repair).
+Legacy invalid schedule templates are not migrated/revalidated; creation is repaired,
+but upgrade policy remains coordinator/Nick's checkpoint-B question. Neither is a new find.
+No further unit or agent was started. Independent validation of the amended fix is
+pending; no final independent acceptance is claimed. Next: coordinator validation/checkpoint B review
+(E02–E06), then fresh E07 after that gate. Worktree/branch remain
+`/root/Software/booknotes-work/explore-it`, `plan/explore-it`; this repair launched no
+child agents, no acceptance process remains, and the owned Docker lab is stopped.
+
+- Repair sequence, sequential and all exit 0: `make up` 50.593 s; current verify
+  121.898 s → `FIXED AND CHECKED: 8 absent; regression checks pass`; unchanged REF
+  lesson-05 49.876 s → `DEFECTS REPRODUCED: 8 present`; `make checks` 399.806 s,
+  all 74 integration checks; `make test` 5.668 s, including new strictness/default tests.
+  Own `make down` 3.124 s, exit 0. Details: `runs/06-repair-acceptance.json` and
+  linked `06-repair-*.log`. Original acceptance and all earlier failures/pairs stay unchanged.
+  Final integrity: 3,447/3,447 raw artifacts, 95/95 frozen instruments, original review
+  hash, repros and historical proofs unchanged. No numeric oracle or score change.
+
+- Raw score unchanged: 20 stated / 18 confirmed / 2 refuted / 2 qualified reading
+  contradictions / 30 cells. All 3,447 original explorer artifact hashes match.
+  Only canonical U status records and their index changed under exploration/.
+- Original required sequence, all exit 0: `make up` 41.282 s;
+  `make verify LESSON=06` 151.177 s →
+  `FIXED AND CHECKED: 8 absent; regression checks pass`;
+  `make verify LESSON=06 REF=explore-it/lesson-05` 57.671 s →
+  `DEFECTS REPRODUCED: 8 present`; `make checks` 398.913 s, 74/74 checks;
+  `make test` 1.239 s. Exact output/failures/elapsed in `runs/06-*.log` and
+  `runs/06-acceptance.json`. Frozen final instrument hashes are rechecked after
+  acceptance; target-image qctl and worker binaries exercised in both directions.
+- Paired dwell only, lesson-05 PRESENT → lesson-06 ABSENT; no full sweep.
+  Historical owner-race errors actually hit both reported surfaces; batch sibling
+  also reproduced. That fixer evidence does not rewrite H-E06-17's blind non-hit.
+- A4: automatic retention exempts dead, with succeeded/cancelled age-out controls
+  observed through API clock and real storage. U33: attempts follow job deletion,
+  purge and retention; events/pending snapshots remain independent. Legacy orphan
+  attempts are left inspectable, without bulk cleanup. Schedule create uses the
+  existing enqueue object/default rule; PATCH gains no payload field. NUL result/
+  error is 400 and does not mutate a valid lease. SPEC records these decisions.
+- Retained failures: missing constraint restart guard (repaired); first current
+  probe compared hooksink's rounded convenience body (corrected to raw bytes);
+  baseline check assumed float64 after UseNumber (exact int64 parsing, same lease
+  assertions). Final full sequence repeated after a new freeze; public repro hashes
+  unchanged between the two successful pairs. No weakening or SQL fixture writes.
+- D15–D17 and all planted defects were already fixed in E01. The E06 orphan
+  prediction changed: guarded queue owners held; client decoders and attempt lifetime
+  supplied new findings. Qualified contradictions, forward questions, policy owners
+  and exact resume steps are in `../STATE.md` and `../lessons/06-relate-it.md`.
+- A3, delivered-outbox cleanup, worker recovery/decode-log questions, deterministic
+  race hooks and remaining unprobed leads are deferred to fresh authorized chunks.
+  Project knowledge: `../docs/knowledge/README.md`; E06 helper indexed in
+  `../project/lab/repro/README.md`. No VM kb write, push or external message.
+
+Resume: read `../STATE.md` first. Resolve the fix SHA with
+`git rev-parse explore-it/lesson-06`; its parent is `b3b0559`. Nothing needs relaunching.
+Do not start E07 before checkpoint B review. Earlier sections below are historical
+checkpoint evidence, not the next dispatch.
 
 ## E04 unit (historical)
 

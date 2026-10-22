@@ -96,3 +96,22 @@ queue is purged) is resolved in lesson 05 by decision.
 | U26 | [E05-F03](E05-F03-worker-release-logged-as-lease-expired.md) | [fixed in lesson 05](U26-release-logged-as-lease-expired.md) |
 
 Original E05-F reports and raw scores are immutable.
+
+## Experiment 06 additions
+
+Seven original reports remain immutable; all seven canonical U records are fixed in
+lesson 06. D15–D17 were found and repaired in E01, not rediscovered here. A4 is the
+coordinator's dead-retention policy decision, not an eighth blind finding. Attempts
+follow job deletion/purge/retention; events and pending snapshots stay independent.
+
+| ID | Original | Current record |
+|---|---|---|
+| U27 | [E06-F01](E06-F01-schedule-delete-missing-204.md) | [fixed in lesson 06](U27-schedule-delete-missing-204.md) |
+| U28 | [E06-F02](E06-F02-schedule-payload-not-validated.md) | [fixed in lesson 06](U28-schedule-payload-not-validated.md) |
+| U29 | [E06-F03](E06-F03-sample-worker-echo-loses-precision.md) | [fixed in lesson 06](U29-sample-worker-echo-loses-precision.md) |
+| U30 | [E06-F04](E06-F04-qctl-rounds-payload-numbers.md) | [fixed in lesson 06](U30-qctl-rounds-payload-numbers.md) |
+| U31 | [E06-F05](E06-F05-nul-in-result-or-error-409-conflict.md) | [fixed in lesson 06](U31-nul-in-result-or-error-409-conflict.md) |
+| U32 | [E06-F06](E06-F06-enqueue-racing-queue-delete-400-fk-text.md) | [fixed in lesson 06](U32-enqueue-racing-queue-delete-400-fk-text.md) |
+| U33 | [E06-F07](E06-F07-attempts-outlive-their-job.md) | [fixed in lesson 06](U33-attempts-outlive-their-job.md) |
+
+Original score: 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contradictions / 30 cells.

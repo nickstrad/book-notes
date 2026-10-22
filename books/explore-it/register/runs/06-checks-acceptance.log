@@ -1,0 +1,8 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: make checks
+start: 2026-10-22T16:12:39.969015+00:00
+go test -tags checks ./test/checks -count=1
+ok  	queuelet/test/checks	397.963s
+
+exit: 0
+elapsed_seconds: 398.913

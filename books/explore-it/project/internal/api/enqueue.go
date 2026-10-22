@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/lib/pq"
 	"net/http"
 	"queuelet/internal/jobs"
 	"strconv"
@@ -61,17 +63,13 @@ func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[
 	if at.After(now) {
 		state = "scheduled"
 	}
-	if in.Payload == nil {
-		in.Payload = json.RawMessage(`{}`)
+	b, e := objectPayload(in.Payload)
+	if e != nil {
+		return nil, e
 	}
-	in.Payload = bytes.TrimSpace(in.Payload)
-	if len(in.Payload) == 0 || in.Payload[0] != '{' || !json.Valid(in.Payload) {
-		return nil, fmt.Errorf("payload must be a JSON object")
-	}
-	b := in.Payload
 	var id int64
 	var status string
-	e := db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
+	e = db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
 	if e == sql.ErrNoRows && in.IdempotencyKey != nil {
 		e = db.QueryRow(`SELECT id,state FROM jobs WHERE queue_id=$1 AND idempotency_key=$2`, q["id"], *in.IdempotencyKey).Scan(&id, &status)
 	}
@@ -84,7 +82,7 @@ func (s *Server) enqueue(w http.ResponseWriter, r *http.Request, q map[string]an
 	}
 	v, e := s.insertJob(q, in, s.Clock.Now())
 	if e != nil {
-		fail(w, 400, "invalid_job", e)
+		jobInsertError(w, e)
 		return
 	}
 	write(w, 201, v)
@@ -111,7 +109,7 @@ func (s *Server) batch(w http.ResponseWriter, r *http.Request, q map[string]any)
 	for _, j := range in.Jobs {
 		v, e := insertJob(tx, q, j, now)
 		if e != nil {
-			fail(w, 400, "invalid_job", e)
+			jobInsertError(w, e)
 			return
 		}
 		ids = append(ids, v["id"])
@@ -145,4 +143,31 @@ func (s *Server) listJobs(w http.ResponseWriter, r *http.Request) {
 		next = v[len(v)-1]["id"]
 	}
 	output(w, map[string]any{"jobs": v, "next_cursor": next}, e)
+}
+
+// objectPayload is the shared enqueue/schedule-template contract.
+func objectPayload(raw json.RawMessage) (json.RawMessage, error) {
+	if raw == nil {
+		raw = json.RawMessage(`{}`)
+	}
+	raw = bytes.TrimSpace(raw)
+	if len(raw) == 0 || raw[0] != '{' || !json.Valid(raw) {
+		return nil, fmt.Errorf("payload must be a JSON object")
+	}
+	return raw, nil
+}
+
+// A queue can disappear after lookup but before the insert's owner check.
+func missingQueue(w http.ResponseWriter, e error) bool {
+	var pe *pq.Error
+	if errors.As(e, &pe) && pe.Code == "23503" && (pe.Constraint == "jobs_queue_owner" || pe.Constraint == "schedules_queue_owner") {
+		fail(w, 404, "queue_not_found", "queue not found")
+		return true
+	}
+	return false
+}
+func jobInsertError(w http.ResponseWriter, e error) {
+	if !missingQueue(w, e) {
+		fail(w, 400, "invalid_job", e)
+	}
 }

@@ -80,3 +80,20 @@ charter as a seeded random walk of 100 verbs (W1–W7, see its docstring) on a
 frozen clock; `TestL05Walk` runs it. Holder verbs are favoured while a lease is
 held, because a uniform walk rarely acks. It is a check, not a reproduction, so
 it is not in `lesson-05.ids`.
+
+E06 adds `probe06.py`, U27–U33/A4 wrappers and `lesson-06.ids`; eight named
+`TestL06*` checks run these same oracles. U29 executes a separate worker from the
+target image on its unique queue and checks exact echo result and signed webhook,
+plus sleep/fail numeric consumers. U30 executes the target API container's qctl:
+input and display have independent API controls; ack/batch/schedule JSON siblings
+are also checked. Numbers are observed with Decimal, not float parsing. U28
+compares manual and cron jobs on an API clock and verifies PATCH rejects payload.
+U31 requires unchanged valid leases after NUL rejection and exact clean retries.
+U32 bounds public enqueue/schedule/batch races, checks accepted-row cardinality,
+known statuses/codes, controls and zero orphans; historical PRESENT needs actual
+errors on both reported paths, not merely a sampling inference. U33 creates real
+attempts then removes their jobs three ways; SELECT-only observations distinguish
+storage cleanup from API 404 and prove independent snapshots still deliver. A4
+uses a frozen API clock below/above retention, checking dead plus succeeded and
+cancelled controls in API and storage; it resets time in finally. Setup, tool,
+parse, unexpected outcome or missing control always produces PROBE ERROR.

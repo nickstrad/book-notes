@@ -54,5 +54,15 @@ func (c *Client) JSON(method, path string, data, out any) error {
 	if status >= 400 {
 		return fmt.Errorf("HTTP %d: %s", status, b)
 	}
-	return json.Unmarshal(b, out)
+	return DecodeJSON(b, out)
+}
+
+// DecodeJSON preserves numbers and requires one complete JSON document.
+func DecodeJSON(b []byte, out any) error {
+	if !json.Valid(b) {
+		return fmt.Errorf("invalid JSON: expected one complete value")
+	}
+	decoder := json.NewDecoder(bytes.NewReader(b))
+	decoder.UseNumber()
+	return decoder.Decode(out)
 }

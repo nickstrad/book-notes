@@ -1,0 +1,88 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: make up
+start: 2026-10-22T16:07:50.147300+00:00
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 581B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#6 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#6 DONE 0.1s
+
+#7 [internal] load build context
+#7 transferring context: 369.29kB 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.1s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 36.6s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:bbe4e864832948bbd45dc24e1fd1d8675215a133861f5e52ac2014fce1123f41 done
+#18 exporting config sha256:47b0a42590af482f572adaaab8a30e75d2eb2b0f989e4ca6321c3e4fca81f66c 0.0s done
+#18 exporting attestation manifest sha256:b7de98fa661d00c9c96b06833849612040d352989245e826a51222757f01151c
+#18 exporting attestation manifest sha256:b7de98fa661d00c9c96b06833849612040d352989245e826a51222757f01151c 0.2s done
+#18 exporting manifest list sha256:a3ab3857270dea67c16087b820051d284f6afdb36aa959ec875dcd5659d6d1e4
+#18 exporting manifest list sha256:a3ab3857270dea67c16087b820051d284f6afdb36aa959ec875dcd5659d6d1e4 0.1s done
+#18 naming to docker.io/library/queuelet:local done
+#18 unpacking to docker.io/library/queuelet:local
+#18 unpacking to docker.io/library/queuelet:local 0.4s done
+#18 DONE 1.2s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:local Built 
+ Container queuelet-worker-a-1 Running 
+ Container queuelet-worker-b-1 Running 
+ Container queuelet-postgres-1 Running 
+ Container queuelet-api-1 Running 
+ Container queuelet-hooksink-1 Running 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+
+exit: 0
+elapsed_seconds: 41.282

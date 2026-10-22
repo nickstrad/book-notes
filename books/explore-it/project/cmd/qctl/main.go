@@ -49,12 +49,15 @@ func run(args []string) error {
 	}
 	method, path := "GET", ""
 	var data any
-	jsonOpt := func(key string) any {
-		var v any
-		if raw := opts[key]; raw != "" {
-			json.Unmarshal([]byte(raw), &v)
+	jsonOpts := map[string]any{}
+	for _, key := range []string{"json", "payload", "result"} {
+		if raw, ok := opts[key]; ok {
+			var v any
+			if e := client.DecodeJSON([]byte(raw), &v); e != nil {
+				return fmt.Errorf("--%s: %w", key, e)
+			}
+			jsonOpts[key] = v
 		}
-		return v
 	}
 	integer := func(key string, fallback int) int {
 		n, e := strconv.Atoi(opts[key])
@@ -64,7 +67,7 @@ func run(args []string) error {
 		return n
 	}
 	body := func() map[string]any {
-		if v, ok := jsonOpt("json").(map[string]any); ok {
+		if v, ok := jsonOpts["json"].(map[string]any); ok {
 			return v
 		}
 		return map[string]any{}
@@ -152,7 +155,7 @@ func run(args []string) error {
 			v["kind"] = "echo"
 		}
 		if opts["payload"] != "" {
-			v["payload"] = jsonOpt("payload")
+			v["payload"] = jsonOpts["payload"]
 		}
 		v["priority"] = integer("priority", 5)
 		if opts["delay"] != "" {
@@ -197,7 +200,7 @@ func run(args []string) error {
 				v["lease_token"] = opts["lease-token"]
 			}
 			if opts["result"] != "" {
-				v["result"] = jsonOpt("result")
+				v["result"] = jsonOpts["result"]
 			}
 			if opts["error"] != "" {
 				v["error"] = opts["error"]
@@ -275,7 +278,7 @@ func run(args []string) error {
 	}
 	if len(b) > 0 {
 		var v any
-		if json.Unmarshal(b, &v) == nil {
+		if client.DecodeJSON(b, &v) == nil {
 			out, _ := json.MarshalIndent(v, "", "  ")
 			fmt.Println(string(out))
 		} else {

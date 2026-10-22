@@ -81,6 +81,8 @@ Valid state filters are `scheduled`, `queued`, `leased`, `retry_wait`,
 Attempt `n` numbers every execution of the job and is never reused, across
 operator retries too; the lease's `attempt` counts toward `max_attempts`.
 `DELETE /v1/jobs/{id}` removes a terminal job.
+Attempt records belong to their job and are removed with it on deletion, purge and
+automatic retention; durable job events and pending webhook snapshots keep their independent lifetime.
 Only a `leased` job has a lease token, holder and expiry; every exit from
 `leased` clears all three; attempt rows keep the worker that ran them.
 
@@ -106,6 +108,8 @@ Only the current lease holder may complete or extend a job. A lease ends at its
 `lease_expires_at`: from that instant heartbeat, ack and nack are 409, whether or
 not the background loop has released the job yet. There is no grace period.
 Ack moves a leased job to `succeeded`.
+A result containing U+0000 (including object keys), or an error containing U+0000,
+is 400 `invalid_result` or `invalid_error`; the valid lease remains usable.
 Nack with retry moves a job to `retry_wait`; when due it becomes `queued`.
 A failed job reaches `dead` when its maximum attempts are exhausted, or when
 nacked with retry false. No job may execute more than its maximum attempts.
@@ -119,7 +123,8 @@ A cancelled job is never run.
 `POST /v1/jobs/{id}/retry` permits an operator to retry a dead job, resets its
 attempt count and makes it immediately available.
 Succeeded and cancelled jobs cannot be retried.
-Terminal jobs are deleted after `retention_hours`.
+Succeeded and cancelled jobs are deleted after `retention_hours`.
+Dead jobs remain until an operator retries or explicitly deletes them; automatic retention exempts them.
 The API returns complete stored results and errors.
 
 ## Schedules
@@ -129,6 +134,8 @@ Cron uses five fields: minute, hour, day of month, month and day of week.
 Time zones use IANA identifiers, defaulting to UTC.
 Schedule times follow the named zone's local civil time, including offset changes.
 The enabled flag defaults to true; disabled schedules do not enqueue jobs.
+Schedule creation follows enqueue's payload rule: omitted means `{}`, explicit null
+and non-object values are invalid. PATCH does not accept payload.
 `GET /v1/schedules` lists schedules; `GET /v1/schedules/{id}` reads one.
 `PATCH /v1/schedules/{id}` updates cron, timezone or enabled status; the next fire
 must reflect the current configuration.

@@ -28,6 +28,12 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
 		fail(w, 400, "invalid_schedule", "name and kind required")
 		return
 	}
+	payload, e := objectPayload(in.Payload)
+	if e != nil {
+		fail(w, 400, "invalid_schedule", e)
+		return
+	}
+	in.Payload = payload
 	now := s.Clock.Now()
 	off, e := schedule.Offset(in.Timezone, now)
 	if e != nil {
@@ -54,7 +60,9 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
 	}
 	v, e := s.S.One(`INSERT INTO schedules(namespace_id,queue_id,name,kind,payload,cron,timezone,zone_offset,enabled,next_run_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`, ident(r).Namespace, q["id"], in.Name, in.Kind, schedule.JSON(in.Payload), in.Cron, in.Timezone, off, enabled, nextValue)
 	if e != nil {
-		fail(w, 500, "database_error", e)
+		if !missingQueue(w, e) {
+			fail(w, 500, "database_error", e)
+		}
 		return
 	}
 	write(w, 201, v)
@@ -134,9 +142,18 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 	write(w, 200, v)
 }
 func (s *Server) deleteSchedule(w http.ResponseWriter, r *http.Request) {
-	_, e := s.S.DB.Exec(`DELETE FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
+	res, e := s.S.DB.Exec(`DELETE FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
 	if e != nil {
 		fail(w, 500, "database_error", e)
+		return
+	}
+	n, e := res.RowsAffected()
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	if n == 0 {
+		fail(w, 404, "schedule_not_found", "schedule not found")
 		return
 	}
 	write(w, 204, nil)
@@ -158,7 +175,7 @@ func (s *Server) runSchedule(w http.ResponseWriter, r *http.Request) {
 	in.Kind = v["kind"].(string)
 	job, e := s.insertJob(q, in, s.Clock.Now())
 	if e != nil {
-		fail(w, 400, "invalid_job", e)
+		jobInsertError(w, e)
 		return
 	}
 	write(w, 201, job)

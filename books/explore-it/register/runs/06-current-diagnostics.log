@@ -1,0 +1,351 @@
+command: docker compose -f deploy/compose.yml ps -a
+NAME                  IMAGE                COMMAND                  SERVICE    CREATED          STATUS                    PORTS
+queuelet-api-1        queuelet:local       "api"                    api        38 seconds ago   Up 19 seconds             0.0.0.0:18200->8200/tcp, [::]:18200->8200/tcp
+queuelet-hooksink-1   queuelet:local       "hooksink"               hooksink   38 seconds ago   Up 35 seconds             0.0.0.0:18201->8201/tcp, [::]:18201->8201/tcp
+queuelet-postgres-1   postgres:17-alpine   "docker-entrypoint.s…"   postgres   14 hours ago     Up 38 minutes (healthy)   0.0.0.0:15433->5432/tcp, [::]:15433->5432/tcp
+queuelet-worker-a-1   queuelet:local       "worker"                 worker-a   37 seconds ago   Up 6 seconds              
+queuelet-worker-b-1   queuelet:local       "worker"                 worker-b   37 seconds ago   Up 6 seconds              
+command: docker compose -f deploy/compose.yml logs --no-color --tail=120
+postgres-1  | 2026-10-22 13:09:14.039 UTC [15831] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:09:14.050 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 13:09:14.055 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 13:09:14.060 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 13:09:14.093 UTC [15858] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:09:14.115 UTC [27] LOG:  checkpoint complete: wrote 194 buffers (1.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.017 s, total=0.061 s; sync files=65, longest=0.006 s, average=0.001 s; distance=2470 kB, estimate=4094 kB; lsn=0/342E420, redo lsn=0/342E420
+postgres-1  | 2026-10-22 13:09:14.128 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 13:09:17.617 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 13:09:17.617 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 13:09:17.618 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 13:09:17.628 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 13:09:17.641 UTC [29] LOG:  database system was shut down at 2026-10-22 13:09:14 UTC
+postgres-1  | 2026-10-22 13:09:17.658 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 13:10:17.985 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 13:10:17.990 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 13:10:17.991 UTC [459] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:10:17.992 UTC [372] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:10:18.002 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 13:10:18.050 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 13:10:18.055 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 13:10:18.118 UTC [471] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:10:18.121 UTC [27] LOG:  checkpoint complete: wrote 68 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.021 s, sync=0.019 s, total=0.071 s; sync files=40, longest=0.007 s, average=0.001 s; distance=309 kB, estimate=309 kB; lsn=0/347B850, redo lsn=0/347B850
+postgres-1  | 2026-10-22 13:10:18.134 UTC [472] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:10:18.160 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 13:10:22.876 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 13:10:22.876 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 13:10:22.877 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+worker-a-1  | {"time":"2026-10-22T16:00:13.910264718Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T16:00:40.712562693Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T16:00:40.735161541Z","level":"INFO","msg":"processing","event":"processing","job_id":7,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:40.75518613Z","level":"INFO","msg":"completed","event":"ack","job_id":7,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:40.969153889Z","level":"INFO","msg":"processing","event":"processing","job_id":67,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:40.998029215Z","level":"INFO","msg":"completed","event":"ack","job_id":67,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:41.242870604Z","level":"INFO","msg":"processing","event":"processing","job_id":127,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:41.25557882Z","level":"INFO","msg":"completed","event":"ack","job_id":127,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:41.5068864Z","level":"INFO","msg":"processing","event":"processing","job_id":187,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:41.533562383Z","level":"INFO","msg":"completed","event":"ack","job_id":187,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:41.768666234Z","level":"INFO","msg":"processing","event":"processing","job_id":247,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:41.785410582Z","level":"INFO","msg":"completed","event":"ack","job_id":247,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+postgres-1  | 2026-10-22 13:10:22.894 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 13:10:22.928 UTC [29] FATAL:  the database system is starting up
+worker-a-1  | {"time":"2026-10-22T16:00:42.009103918Z","level":"INFO","msg":"processing","event":"processing","job_id":16,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+postgres-1  | 2026-10-22 13:10:22.935 UTC [28] LOG:  database system was shut down at 2026-10-22 13:10:18 UTC
+worker-a-1  | {"time":"2026-10-22T16:00:42.027258579Z","level":"INFO","msg":"completed","event":"ack","job_id":16,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+postgres-1  | 2026-10-22 13:10:22.987 UTC [30] FATAL:  the database system is starting up
+worker-a-1  | {"time":"2026-10-22T16:00:42.251200158Z","level":"INFO","msg":"processing","event":"processing","job_id":46,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+postgres-1  | 2026-10-22 13:10:22.990 UTC [1] LOG:  database system is ready to accept connections
+worker-a-1  | {"time":"2026-10-22T16:00:42.273955774Z","level":"INFO","msg":"completed","event":"ack","job_id":46,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] ERROR:  duplicate key value violates unique constraint "queues_namespace_id_name_key"
+worker-a-1  | {"time":"2026-10-22T16:00:42.507394134Z","level":"INFO","msg":"processing","event":"processing","job_id":40,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] DETAIL:  Key (namespace_id, name)=(1, repro-u14-ba69631eef) already exists.
+worker-a-1  | {"time":"2026-10-22T16:00:42.543026951Z","level":"INFO","msg":"completed","event":"ack","job_id":40,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:42.75495977Z","level":"INFO","msg":"processing","event":"processing","job_id":160,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] STATEMENT:  INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
+worker-a-1  | {"time":"2026-10-22T16:00:42.772994117Z","level":"INFO","msg":"completed","event":"ack","job_id":160,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+postgres-1  | 2026-10-22 13:15:23.009 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:15:46.093 UTC [26] LOG:  checkpoint complete: wrote 226 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=22.966 s, sync=0.051 s, total=23.084 s; sync files=70, longest=0.014 s, average=0.001 s; distance=1947 kB, estimate=1947 kB; lsn=0/3662738, redo lsn=0/36626A8
+postgres-1  | 2026-10-22 13:50:23.710 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:50:41.790 UTC [26] LOG:  checkpoint complete: wrote 180 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.005 s, sync=0.026 s, total=18.080 s; sync files=47, longest=0.014 s, average=0.001 s; distance=1313 kB, estimate=1884 kB; lsn=0/37ACCF0, redo lsn=0/37AAE60
+postgres-1  | 2026-10-22 13:55:23.890 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:55:30.675 UTC [26] LOG:  checkpoint complete: wrote 68 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.754 s, sync=0.008 s, total=6.785 s; sync files=26, longest=0.006 s, average=0.001 s; distance=329 kB, estimate=1728 kB; lsn=0/3808E80, redo lsn=0/37FD650
+postgres-1  | 2026-10-22 14:00:23.763 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:00:30.960 UTC [26] LOG:  checkpoint complete: wrote 71 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.123 s, sync=0.022 s, total=7.197 s; sync files=26, longest=0.016 s, average=0.001 s; distance=350 kB, estimate=1590 kB; lsn=0/385E380, redo lsn=0/3854FA0
+postgres-1  | 2026-10-22 14:05:24.055 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:05:30.426 UTC [26] LOG:  checkpoint complete: wrote 63 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.328 s, sync=0.013 s, total=6.371 s; sync files=24, longest=0.008 s, average=0.001 s; distance=299 kB, estimate=1461 kB; lsn=0/38A7120, redo lsn=0/389FE60
+postgres-1  | 2026-10-22 14:10:24.529 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:10:32.156 UTC [26] LOG:  checkpoint complete: wrote 76 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.556 s, sync=0.037 s, total=7.628 s; sync files=28, longest=0.035 s, average=0.002 s; distance=361 kB, estimate=1351 kB; lsn=0/3907110, redo lsn=0/38FA2D8
+postgres-1  | 2026-10-22 14:15:24.255 UTC [26] LOG:  checkpoint starting: time
+worker-a-1  | {"time":"2026-10-22T16:00:43.123244647Z","level":"INFO","msg":"processing","event":"processing","job_id":280,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+postgres-1  | 2026-10-22 14:15:29.992 UTC [26] LOG:  checkpoint complete: wrote 57 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.681 s, sync=0.033 s, total=5.738 s; sync files=22, longest=0.025 s, average=0.002 s; distance=320 kB, estimate=1248 kB; lsn=0/3956AD0, redo lsn=0/394A2E8
+postgres-1  | 2026-10-22 14:20:25.094 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:20:34.945 UTC [26] LOG:  checkpoint complete: wrote 93 buffers (0.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=9.300 s, sync=0.500 s, total=9.852 s; sync files=28, longest=0.445 s, average=0.018 s; distance=486 kB, estimate=1172 kB; lsn=0/39CEFF0, redo lsn=0/39C3D30
+postgres-1  | 2026-10-22 14:25:26.032 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:25:30.568 UTC [26] LOG:  checkpoint complete: wrote 45 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.468 s, sync=0.029 s, total=4.537 s; sync files=19, longest=0.019 s, average=0.002 s; distance=231 kB, estimate=1078 kB; lsn=0/39FDC50, redo lsn=0/39FDBF8
+postgres-1  | 2026-10-22 14:55:27.174 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:55:33.670 UTC [26] LOG:  checkpoint complete: wrote 65 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.464 s, sync=0.008 s, total=6.497 s; sync files=26, longest=0.004 s, average=0.001 s; distance=317 kB, estimate=1002 kB; lsn=0/3A57868, redo lsn=0/3A4D320
+postgres-1  | 2026-10-22 15:00:27.770 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:00:33.673 UTC [26] LOG:  checkpoint complete: wrote 59 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.858 s, sync=0.018 s, total=5.903 s; sync files=22, longest=0.014 s, average=0.001 s; distance=281 kB, estimate=930 kB; lsn=0/3A9EF68, redo lsn=0/3A939B0
+postgres-1  | 2026-10-22 15:05:27.773 UTC [26] LOG:  checkpoint starting: time
+worker-a-1  | {"time":"2026-10-22T16:00:43.178558763Z","level":"INFO","msg":"completed","event":"ack","job_id":280,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:43.441105212Z","level":"INFO","msg":"processing","event":"processing","job_id":49,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:43.480475265Z","level":"INFO","msg":"completed","event":"ack","job_id":49,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:43.705646775Z","level":"INFO","msg":"processing","event":"processing","job_id":109,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:43.74166268Z","level":"INFO","msg":"completed","event":"ack","job_id":109,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:44.00911371Z","level":"INFO","msg":"processing","event":"processing","job_id":169,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:44.036891342Z","level":"INFO","msg":"completed","event":"ack","job_id":169,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:44.354104487Z","level":"INFO","msg":"processing","event":"processing","job_id":199,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:44.389523782Z","level":"INFO","msg":"completed","event":"ack","job_id":199,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:44.609073784Z","level":"INFO","msg":"processing","event":"processing","job_id":229,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:44.625805676Z","level":"INFO","msg":"completed","event":"ack","job_id":229,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:44.848722937Z","level":"INFO","msg":"processing","event":"processing","job_id":289,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:44.872728652Z","level":"INFO","msg":"completed","event":"ack","job_id":289,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:45.089207576Z","level":"INFO","msg":"processing","event":"processing","job_id":88,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:45.109003662Z","level":"INFO","msg":"completed","event":"ack","job_id":88,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:45.340212267Z","level":"INFO","msg":"processing","event":"processing","job_id":208,"queue":"emails","worker":2,"attempt":2,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:45.366732551Z","level":"INFO","msg":"completed","event":"ack","job_id":208,"queue":"emails","worker":2,"attempt":2,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:45.575788295Z","level":"INFO","msg":"processing","event":"processing","job_id":37,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:45.599504743Z","level":"INFO","msg":"completed","event":"ack","job_id":37,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:45.828400022Z","level":"INFO","msg":"processing","event":"processing","job_id":97,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:45.846448739Z","level":"INFO","msg":"completed","event":"ack","job_id":97,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:46.07057335Z","level":"INFO","msg":"processing","event":"processing","job_id":157,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:46.088397286Z","level":"INFO","msg":"completed","event":"ack","job_id":157,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:46.371216163Z","level":"INFO","msg":"processing","event":"processing","job_id":217,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:46.396662139Z","level":"INFO","msg":"completed","event":"ack","job_id":217,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:46.616365652Z","level":"INFO","msg":"processing","event":"processing","job_id":277,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:46.640880684Z","level":"INFO","msg":"completed","event":"ack","job_id":277,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:46.862933792Z","level":"INFO","msg":"processing","event":"processing","job_id":76,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:46.892508513Z","level":"INFO","msg":"completed","event":"ack","job_id":76,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:47.121248076Z","level":"INFO","msg":"processing","event":"processing","job_id":106,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+worker-a-1  | {"time":"2026-10-22T16:00:47.140608883Z","level":"INFO","msg":"completed","event":"ack","job_id":106,"queue":"emails","worker":2,"attempt":1,"status":200,"error":null}
+worker-a-1  | {"time":"2026-10-22T16:00:47.414949762Z","level":"INFO","msg":"processing","event":"processing","job_id":136,"queue":"emails","worker":2,"attempt":1,"kind":"echo"}
+postgres-1  | 2026-10-22 15:05:32.563 UTC [26] LOG:  checkpoint complete: wrote 48 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.744 s, sync=0.016 s, total=4.790 s; sync files=21, longest=0.008 s, average=0.001 s; distance=251 kB, estimate=862 kB; lsn=0/3AD2930, redo lsn=0/3AD28A0
+postgres-1  | 2026-10-22 15:20:27.840 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:20:42.485 UTC [26] LOG:  checkpoint complete: wrote 147 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=14.589 s, sync=0.019 s, total=14.645 s; sync files=66, longest=0.008 s, average=0.001 s; distance=1514 kB, estimate=1514 kB; lsn=0/3C4D320, redo lsn=0/3C4D290
+postgres-1  | 2026-10-22 15:21:11.988 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 15:21:11.998 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 15:21:11.998 UTC [104135] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:21:11.998 UTC [103914] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:21:12.014 UTC [1] LOG:  background worker "logical replication launcher" (PID 33) exited with exit code 1
+postgres-1  | 2026-10-22 15:21:12.015 UTC [26] LOG:  shutting down
+postgres-1  | 2026-10-22 15:21:12.022 UTC [26] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 15:21:12.076 UTC [26] LOG:  checkpoint complete: wrote 33 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.016 s, total=0.062 s; sync files=27, longest=0.010 s, average=0.001 s; distance=117 kB, estimate=1374 kB; lsn=0/3C6A850, redo lsn=0/3C6A850
+postgres-1  | 2026-10-22 15:21:12.080 UTC [104216] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 15:21:12.094 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 15:21:15.217 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 15:21:15.228 UTC [29] LOG:  database system was shut down at 2026-10-22 15:21:12 UTC
+postgres-1  | 2026-10-22 15:21:15.244 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 15:22:12.986 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 15:22:12.992 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 15:22:12.992 UTC [127] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:22:12.992 UTC [397] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:22:12.997 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 15:22:13.002 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 15:22:13.008 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 15:22:13.048 UTC [502] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 15:22:13.052 UTC [27] LOG:  checkpoint complete: wrote 61 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.021 s, total=0.051 s; sync files=41, longest=0.009 s, average=0.001 s; distance=274 kB, estimate=274 kB; lsn=0/3CAF298, redo lsn=0/3CAF298
+postgres-1  | 2026-10-22 15:22:13.064 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 15:22:16.257 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 15:22:16.268 UTC [29] LOG:  database system was shut down at 2026-10-22 15:22:13 UTC
+postgres-1  | 2026-10-22 15:22:16.270 UTC [30] FATAL:  the database system is starting up
+postgres-1  | 2026-10-22 15:22:16.286 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] ERROR:  duplicate key value violates unique constraint "queues_namespace_id_name_key"
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] DETAIL:  Key (namespace_id, name)=(1, repro-u14-84c44b5265) already exists.
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] STATEMENT:  INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
+postgres-1  | 2026-10-22 15:27:16.365 UTC [27] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:27:35.175 UTC [27] LOG:  checkpoint complete: wrote 189 buffers (1.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.782 s, sync=0.010 s, total=18.811 s; sync files=68, longest=0.004 s, average=0.001 s; distance=1855 kB, estimate=1855 kB; lsn=0/3E7F228, redo lsn=0/3E7F198
+postgres-1  | 2026-10-22 15:57:16.769 UTC [27] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:57:20.995 UTC [27] LOG:  checkpoint complete: wrote 42 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.154 s, sync=0.014 s, total=4.226 s; sync files=34, longest=0.010 s, average=0.001 s; distance=187 kB, estimate=1688 kB; lsn=0/3EAE1A8, redo lsn=0/3EAE150
+postgres-1  | 2026-10-22 15:57:47.248 UTC [18400] ERROR:  constraint "attempts_job_owner" for relation "attempts" already exists
+postgres-1  | 2026-10-22 15:57:47.248 UTC [18400] STATEMENT:  -- Attempts share the lifetime of their job. Legacy orphans remain inspectable;
+postgres-1  | 	-- NOT VALID still enforces new writes and cascades all subsequent job deletions.
+postgres-1  | 	ALTER TABLE attempts ADD CONSTRAINT attempts_job_owner
+worker-b-1  | {"time":"2026-10-22T16:00:13.973368449Z","level":"INFO","msg":"worker worker-b registered"}
+worker-b-1  | {"time":"2026-10-22T16:00:40.78191601Z","level":"INFO","msg":"worker worker-b registered"}
+worker-b-1  | {"time":"2026-10-22T16:00:40.806856519Z","level":"INFO","msg":"processing","event":"processing","job_id":47,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:40.830922069Z","level":"INFO","msg":"completed","event":"ack","job_id":47,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:41.043840713Z","level":"INFO","msg":"processing","event":"processing","job_id":107,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:41.067681996Z","level":"INFO","msg":"completed","event":"ack","job_id":107,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:41.322131979Z","level":"INFO","msg":"processing","event":"processing","job_id":167,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:41.386076192Z","level":"INFO","msg":"completed","event":"ack","job_id":167,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:41.625321145Z","level":"INFO","msg":"processing","event":"processing","job_id":227,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:41.673101808Z","level":"INFO","msg":"completed","event":"ack","job_id":227,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:41.91214639Z","level":"INFO","msg":"processing","event":"processing","job_id":287,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:41.937002747Z","level":"INFO","msg":"completed","event":"ack","job_id":287,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:42.156938801Z","level":"INFO","msg":"processing","event":"processing","job_id":26,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:42.190263103Z","level":"INFO","msg":"completed","event":"ack","job_id":26,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:42.441684718Z","level":"INFO","msg":"processing","event":"processing","job_id":50,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:42.498541528Z","level":"INFO","msg":"completed","event":"ack","job_id":50,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:42.715555863Z","level":"INFO","msg":"processing","event":"processing","job_id":170,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:42.736202867Z","level":"INFO","msg":"completed","event":"ack","job_id":170,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:43.048458727Z","level":"INFO","msg":"processing","event":"processing","job_id":290,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:43.10781006Z","level":"INFO","msg":"completed","event":"ack","job_id":290,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:43.352281Z","level":"INFO","msg":"processing","event":"processing","job_id":29,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:43.454443541Z","level":"INFO","msg":"completed","event":"ack","job_id":29,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:43.760862134Z","level":"INFO","msg":"processing","event":"processing","job_id":89,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:43.833054851Z","level":"INFO","msg":"completed","event":"ack","job_id":89,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:44.052207159Z","level":"INFO","msg":"processing","event":"processing","job_id":149,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:44.085278399Z","level":"INFO","msg":"completed","event":"ack","job_id":149,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:44.395249173Z","level":"INFO","msg":"processing","event":"processing","job_id":209,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:44.433624871Z","level":"INFO","msg":"completed","event":"ack","job_id":209,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:44.648991837Z","level":"INFO","msg":"processing","event":"processing","job_id":239,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:44.668555995Z","level":"INFO","msg":"completed","event":"ack","job_id":239,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:44.898759649Z","level":"INFO","msg":"processing","event":"processing","job_id":269,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:44.929379225Z","level":"INFO","msg":"completed","event":"ack","job_id":269,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:45.156527827Z","level":"INFO","msg":"processing","event":"processing","job_id":68,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:45.177501083Z","level":"INFO","msg":"completed","event":"ack","job_id":68,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:45.407397627Z","level":"INFO","msg":"processing","event":"processing","job_id":188,"queue":"reports","worker":3,"attempt":2,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:45.45950982Z","level":"INFO","msg":"completed","event":"ack","job_id":188,"queue":"reports","worker":3,"attempt":2,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:45.677935213Z","level":"INFO","msg":"processing","event":"processing","job_id":17,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:45.70818049Z","level":"INFO","msg":"completed","event":"ack","job_id":17,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:45.921041422Z","level":"INFO","msg":"processing","event":"processing","job_id":77,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:45.96774748Z","level":"INFO","msg":"completed","event":"ack","job_id":77,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:46.181523924Z","level":"INFO","msg":"processing","event":"processing","job_id":137,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+api-1       | {"time":"2026-10-22T16:00:43.421723689Z","level":"INFO","msg":"job event","event_id":658,"job_id":38,"queue":"reports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.426134921Z","level":"INFO","msg":"job event","event_id":659,"job_id":168,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.43758123Z","level":"INFO","msg":"job event","event_id":660,"job_id":270,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.446790811Z","level":"INFO","msg":"job event","event_id":661,"job_id":150,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.45915847Z","level":"INFO","msg":"job event","event_id":662,"job_id":138,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.469760982Z","level":"INFO","msg":"job event","event_id":663,"job_id":120,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.492018982Z","level":"INFO","msg":"job event","event_id":664,"job_id":99,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.498699949Z","level":"INFO","msg":"job event","event_id":665,"job_id":18,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.507584862Z","level":"INFO","msg":"job event","event_id":666,"job_id":30,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.515734251Z","level":"INFO","msg":"job event","event_id":667,"job_id":288,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.523427742Z","level":"INFO","msg":"job event","event_id":668,"job_id":240,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.527478615Z","level":"INFO","msg":"job event","event_id":669,"job_id":159,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.533220522Z","level":"INFO","msg":"job event","event_id":670,"job_id":48,"queue":"imports","event":"retained","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.536701275Z","level":"INFO","msg":"job event","event_id":671,"job_id":258,"queue":"imports","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.544708647Z","level":"INFO","msg":"job event","event_id":672,"job_id":50,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.548326092Z","level":"INFO","msg":"job event","event_id":673,"job_id":50,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.551302414Z","level":"INFO","msg":"job event","event_id":674,"job_id":50,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":26,"status":null,"error":"","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.555285135Z","level":"INFO","msg":"job event","event_id":675,"job_id":40,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.55884672Z","level":"INFO","msg":"job event","event_id":676,"job_id":40,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2032-06-01T00:01:01Z"}
+api-1       | {"time":"2026-10-22T16:00:43.564682275Z","level":"INFO","msg":"job event","event_id":677,"job_id":170,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:42.705995Z"}
+api-1       | {"time":"2026-10-22T16:00:43.569391458Z","level":"INFO","msg":"job event","event_id":678,"job_id":170,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:42.718093Z"}
+api-1       | {"time":"2026-10-22T16:00:43.577558357Z","level":"INFO","msg":"job event","event_id":679,"job_id":170,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":27,"status":null,"error":"","at":"2026-10-22T16:00:42.718093Z"}
+api-1       | {"time":"2026-10-22T16:00:43.583542605Z","level":"INFO","msg":"job event","event_id":680,"job_id":160,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:42.748483Z"}
+api-1       | {"time":"2026-10-22T16:00:43.58630444Z","level":"INFO","msg":"job event","event_id":681,"job_id":160,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:42.759664Z"}
+api-1       | {"time":"2026-10-22T16:00:43.590853445Z","level":"INFO","msg":"job event","event_id":682,"job_id":307,"queue":"repro-u29-2593a5047f","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:42.921357Z"}
+api-1       | {"time":"2026-10-22T16:00:43.596783803Z","level":"INFO","msg":"job event","event_id":683,"job_id":290,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:42.983763Z"}
+api-1       | {"time":"2026-10-22T16:00:43.602646032Z","level":"INFO","msg":"job event","event_id":684,"job_id":290,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:43.061519Z"}
+api-1       | {"time":"2026-10-22T16:00:43.60994816Z","level":"INFO","msg":"job event","event_id":685,"job_id":290,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":28,"status":null,"error":"","at":"2026-10-22T16:00:43.061519Z"}
+api-1       | {"time":"2026-10-22T16:00:43.626906303Z","level":"INFO","msg":"job event","event_id":686,"job_id":280,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:43.047113Z"}
+api-1       | {"time":"2026-10-22T16:00:43.633718897Z","level":"INFO","msg":"job event","event_id":687,"job_id":280,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:43.130069Z"}
+postgres-1  | 	 FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE NOT VALID;
+postgres-1  | 	CREATE INDEX IF NOT EXISTS attempts_job ON attempts(job_id);
+postgres-1  | 	
+worker-b-1  | {"time":"2026-10-22T16:00:46.224964712Z","level":"INFO","msg":"completed","event":"ack","job_id":137,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:46.446985701Z","level":"INFO","msg":"processing","event":"processing","job_id":197,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+api-1       | {"time":"2026-10-22T16:00:43.636860349Z","level":"INFO","msg":"job event","event_id":688,"job_id":170,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":27,"status":200,"error":"","at":"2026-10-22T16:00:43.279179Z"}
+api-1       | {"time":"2026-10-22T16:00:43.640895647Z","level":"INFO","msg":"job event","event_id":689,"job_id":290,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":28,"status":200,"error":"","at":"2026-10-22T16:00:43.279179Z"}
+api-1       | {"time":"2026-10-22T16:00:43.645229433Z","level":"INFO","msg":"job event","event_id":690,"job_id":29,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.32131Z"}
+api-1       | {"time":"2026-10-22T16:00:43.649290875Z","level":"INFO","msg":"job event","event_id":691,"job_id":29,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.36293Z"}
+api-1       | {"time":"2026-10-22T16:00:43.654110895Z","level":"INFO","msg":"job event","event_id":692,"job_id":49,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.405339Z"}
+api-1       | {"time":"2026-10-22T16:00:43.657921556Z","level":"INFO","msg":"job event","event_id":693,"job_id":29,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":29,"status":null,"error":"","at":"2026-10-22T16:00:43.36293Z"}
+api-1       | {"time":"2026-10-22T16:00:43.66384373Z","level":"INFO","msg":"job event","event_id":694,"job_id":49,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.446545Z"}
+api-1       | {"time":"2026-10-22T16:00:43.880298662Z","level":"INFO","msg":"job event","event_id":695,"job_id":109,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.69028Z"}
+api-1       | {"time":"2026-10-22T16:00:43.885449375Z","level":"INFO","msg":"job event","event_id":696,"job_id":109,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.717875Z"}
+api-1       | {"time":"2026-10-22T16:00:43.893092406Z","level":"INFO","msg":"job event","event_id":697,"job_id":89,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.703061Z"}
+api-1       | {"time":"2026-10-22T16:00:43.92455336Z","level":"INFO","msg":"job event","event_id":698,"job_id":89,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.76427Z"}
+api-1       | {"time":"2026-10-22T16:00:43.933465481Z","level":"INFO","msg":"job event","event_id":699,"job_id":89,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":30,"status":null,"error":"","at":"2026-10-22T16:00:43.76427Z"}
+api-1       | {"time":"2026-10-22T16:00:44.08089048Z","level":"INFO","msg":"job event","event_id":700,"job_id":169,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:43.970562Z"}
+api-1       | {"time":"2026-10-22T16:00:44.090307513Z","level":"INFO","msg":"job event","event_id":701,"job_id":169,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.012454Z"}
+api-1       | {"time":"2026-10-22T16:00:44.095464085Z","level":"INFO","msg":"job event","event_id":702,"job_id":149,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.04208Z"}
+api-1       | {"time":"2026-10-22T16:00:44.098895817Z","level":"INFO","msg":"job event","event_id":703,"job_id":149,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.055641Z"}
+api-1       | {"time":"2026-10-22T16:00:44.282064897Z","level":"INFO","msg":"job event","event_id":704,"job_id":149,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":31,"status":null,"error":"","at":"2026-10-22T16:00:44.055641Z"}
+api-1       | {"time":"2026-10-22T16:00:44.48638436Z","level":"INFO","msg":"job event","event_id":705,"job_id":199,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:44.325331Z"}
+api-1       | {"time":"2026-10-22T16:00:44.496602927Z","level":"INFO","msg":"job event","event_id":706,"job_id":29,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":29,"status":200,"error":"","at":"2026-10-22T16:00:44.28056Z"}
+api-1       | {"time":"2026-10-22T16:00:44.502805068Z","level":"INFO","msg":"job event","event_id":707,"job_id":89,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":30,"status":200,"error":"","at":"2026-10-22T16:00:44.28056Z"}
+api-1       | {"time":"2026-10-22T16:00:44.508513473Z","level":"INFO","msg":"job event","event_id":708,"job_id":199,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:44.359768Z"}
+api-1       | {"time":"2026-10-22T16:00:44.51811201Z","level":"INFO","msg":"job event","event_id":709,"job_id":149,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":31,"status":200,"error":"","at":"2026-10-22T16:00:44.28056Z"}
+api-1       | {"time":"2026-10-22T16:00:44.520788897Z","level":"INFO","msg":"job event","event_id":710,"job_id":209,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.363845Z"}
+api-1       | {"time":"2026-10-22T16:00:44.52850447Z","level":"INFO","msg":"job event","event_id":711,"job_id":209,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.403034Z"}
+api-1       | {"time":"2026-10-22T16:00:44.536853765Z","level":"INFO","msg":"job event","event_id":712,"job_id":209,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":32,"status":null,"error":"","at":"2026-10-22T16:00:44.403034Z"}
+api-1       | {"time":"2026-10-22T16:00:44.679919323Z","level":"INFO","msg":"job event","event_id":713,"job_id":229,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.598587Z"}
+api-1       | {"time":"2026-10-22T16:00:44.694751384Z","level":"INFO","msg":"job event","event_id":714,"job_id":229,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.611517Z"}
+api-1       | {"time":"2026-10-22T16:00:44.699277712Z","level":"INFO","msg":"job event","event_id":715,"job_id":239,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:44.636799Z"}
+api-1       | {"time":"2026-10-22T16:00:44.702076842Z","level":"INFO","msg":"job event","event_id":716,"job_id":239,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:44.655305Z"}
+api-1       | {"time":"2026-10-22T16:00:44.705696538Z","level":"INFO","msg":"job event","event_id":717,"job_id":239,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":33,"status":null,"error":"","at":"2026-10-22T16:00:44.655305Z"}
+api-1       | {"time":"2026-10-22T16:00:44.882679107Z","level":"INFO","msg":"job event","event_id":718,"job_id":307,"queue":"repro-u29-2593a5047f","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.72157Z"}
+api-1       | {"time":"2026-10-22T16:00:44.886594159Z","level":"INFO","msg":"job event","event_id":719,"job_id":307,"queue":"repro-u29-2593a5047f","event":"succeeded","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.739158Z"}
+api-1       | {"time":"2026-10-22T16:00:44.893345738Z","level":"INFO","msg":"job event","event_id":720,"job_id":307,"queue":"repro-u29-2593a5047f","event":"notification_queued","worker":null,"attempt":0,"outbox_id":34,"status":null,"error":"","at":"2026-10-22T16:00:44.739158Z"}
+api-1       | {"time":"2026-10-22T16:00:44.901112604Z","level":"INFO","msg":"job event","event_id":721,"job_id":289,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.835809Z"}
+api-1       | {"time":"2026-10-22T16:00:44.907207608Z","level":"INFO","msg":"job event","event_id":722,"job_id":289,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.851384Z"}
+api-1       | {"time":"2026-10-22T16:00:45.080968074Z","level":"INFO","msg":"job event","event_id":723,"job_id":269,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.87484Z"}
+api-1       | {"time":"2026-10-22T16:00:45.084009611Z","level":"INFO","msg":"job event","event_id":724,"job_id":269,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:44.902446Z"}
+api-1       | {"time":"2026-10-22T16:00:45.086758712Z","level":"INFO","msg":"job event","event_id":725,"job_id":269,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":35,"status":null,"error":"","at":"2026-10-22T16:00:44.902446Z"}
+api-1       | {"time":"2026-10-22T16:00:45.288825775Z","level":"INFO","msg":"job event","event_id":726,"job_id":88,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.080936Z"}
+api-1       | {"time":"2026-10-22T16:00:45.29428257Z","level":"INFO","msg":"job event","event_id":727,"job_id":88,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.091713Z"}
+api-1       | {"time":"2026-10-22T16:00:45.306245831Z","level":"INFO","msg":"job event","event_id":728,"job_id":68,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.137999Z"}
+api-1       | {"time":"2026-10-22T16:00:45.312878158Z","level":"INFO","msg":"job event","event_id":729,"job_id":68,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.159518Z"}
+api-1       | {"time":"2026-10-22T16:00:45.320790945Z","level":"INFO","msg":"job event","event_id":730,"job_id":68,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":36,"status":null,"error":"","at":"2026-10-22T16:00:45.159518Z"}
+api-1       | {"time":"2026-10-22T16:00:45.482587831Z","level":"INFO","msg":"job event","event_id":731,"job_id":208,"queue":"emails","event":"leased","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.325807Z"}
+api-1       | {"time":"2026-10-22T16:00:45.490173948Z","level":"INFO","msg":"job event","event_id":732,"job_id":209,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":32,"status":200,"error":"","at":"2026-10-22T16:00:45.288549Z"}
+api-1       | {"time":"2026-10-22T16:00:45.498136587Z","level":"INFO","msg":"job event","event_id":733,"job_id":208,"queue":"emails","event":"succeeded","worker":2,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.343738Z"}
+api-1       | {"time":"2026-10-22T16:00:45.512307471Z","level":"INFO","msg":"job event","event_id":734,"job_id":239,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":33,"status":200,"error":"","at":"2026-10-22T16:00:45.288549Z"}
+api-1       | {"time":"2026-10-22T16:00:45.521576595Z","level":"INFO","msg":"job event","event_id":735,"job_id":307,"queue":"repro-u29-2593a5047f","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":34,"status":200,"error":"","at":"2026-10-22T16:00:45.288549Z"}
+api-1       | {"time":"2026-10-22T16:00:45.524651586Z","level":"INFO","msg":"job event","event_id":736,"job_id":269,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":35,"status":200,"error":"","at":"2026-10-22T16:00:45.288549Z"}
+api-1       | {"time":"2026-10-22T16:00:45.532066447Z","level":"INFO","msg":"job event","event_id":737,"job_id":68,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":36,"status":200,"error":"","at":"2026-10-22T16:00:45.288549Z"}
+api-1       | {"time":"2026-10-22T16:00:45.538221474Z","level":"INFO","msg":"job event","event_id":738,"job_id":188,"queue":"reports","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.390288Z"}
+api-1       | {"time":"2026-10-22T16:00:45.546803152Z","level":"INFO","msg":"job event","event_id":739,"job_id":188,"queue":"reports","event":"succeeded","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"fixture retry","at":"2026-10-22T16:00:45.414512Z"}
+api-1       | {"time":"2026-10-22T16:00:45.5492648Z","level":"INFO","msg":"job event","event_id":740,"job_id":188,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":37,"status":null,"error":"","at":"2026-10-22T16:00:45.414512Z"}
+api-1       | {"time":"2026-10-22T16:00:45.679367429Z","level":"INFO","msg":"job event","event_id":741,"job_id":37,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.570491Z"}
+api-1       | {"time":"2026-10-22T16:00:45.684968454Z","level":"INFO","msg":"job event","event_id":742,"job_id":37,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.580768Z"}
+api-1       | {"time":"2026-10-22T16:00:45.696547523Z","level":"INFO","msg":"job event","event_id":743,"job_id":17,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.66879Z"}
+api-1       | {"time":"2026-10-22T16:00:45.880872292Z","level":"INFO","msg":"job event","event_id":744,"job_id":17,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.68006Z"}
+api-1       | {"time":"2026-10-22T16:00:45.888765289Z","level":"INFO","msg":"job event","event_id":745,"job_id":17,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":38,"status":null,"error":"","at":"2026-10-22T16:00:45.68006Z"}
+api-1       | {"time":"2026-10-22T16:00:45.89751241Z","level":"INFO","msg":"job event","event_id":746,"job_id":97,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.812595Z"}
+api-1       | {"time":"2026-10-22T16:00:45.903799352Z","level":"INFO","msg":"job event","event_id":747,"job_id":97,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.831114Z"}
+api-1       | {"time":"2026-10-22T16:00:46.082994252Z","level":"INFO","msg":"job event","event_id":748,"job_id":77,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.912955Z"}
+api-1       | {"time":"2026-10-22T16:00:46.088993763Z","level":"INFO","msg":"job event","event_id":749,"job_id":77,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:45.923127Z"}
+api-1       | {"time":"2026-10-22T16:00:46.094654205Z","level":"INFO","msg":"job event","event_id":750,"job_id":77,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":39,"status":null,"error":"","at":"2026-10-22T16:00:45.923127Z"}
+api-1       | {"time":"2026-10-22T16:00:46.099902804Z","level":"INFO","msg":"job event","event_id":751,"job_id":157,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.06021Z"}
+api-1       | {"time":"2026-10-22T16:00:46.304480896Z","level":"INFO","msg":"job event","event_id":752,"job_id":157,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.074891Z"}
+api-1       | {"time":"2026-10-22T16:00:46.333374574Z","level":"INFO","msg":"job event","event_id":753,"job_id":137,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.174975Z"}
+api-1       | {"time":"2026-10-22T16:00:46.341847597Z","level":"INFO","msg":"job event","event_id":754,"job_id":137,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.189831Z"}
+api-1       | {"time":"2026-10-22T16:00:46.357708383Z","level":"INFO","msg":"job event","event_id":755,"job_id":137,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":40,"status":null,"error":"","at":"2026-10-22T16:00:46.189831Z"}
+api-1       | {"time":"2026-10-22T16:00:46.48839552Z","level":"INFO","msg":"job event","event_id":756,"job_id":188,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":37,"status":200,"error":"","at":"2026-10-22T16:00:46.279847Z"}
+api-1       | {"time":"2026-10-22T16:00:46.490904156Z","level":"INFO","msg":"job event","event_id":757,"job_id":17,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":38,"status":200,"error":"","at":"2026-10-22T16:00:46.279847Z"}
+api-1       | {"time":"2026-10-22T16:00:46.494648043Z","level":"INFO","msg":"job event","event_id":758,"job_id":77,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":39,"status":200,"error":"","at":"2026-10-22T16:00:46.279847Z"}
+api-1       | {"time":"2026-10-22T16:00:46.49980855Z","level":"INFO","msg":"job event","event_id":759,"job_id":137,"queue":"reports","event":"notification_delivered","worker":null,"attempt":1,"outbox_id":40,"status":200,"error":"","at":"2026-10-22T16:00:46.279847Z"}
+api-1       | {"time":"2026-10-22T16:00:46.505903965Z","level":"INFO","msg":"job event","event_id":760,"job_id":217,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.344353Z"}
+api-1       | {"time":"2026-10-22T16:00:46.508510167Z","level":"INFO","msg":"job event","event_id":761,"job_id":217,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.379556Z"}
+api-1       | {"time":"2026-10-22T16:00:46.511166414Z","level":"INFO","msg":"job event","event_id":762,"job_id":197,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.431593Z"}
+api-1       | {"time":"2026-10-22T16:00:46.516983488Z","level":"INFO","msg":"job event","event_id":763,"job_id":197,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.450098Z"}
+api-1       | {"time":"2026-10-22T16:00:46.692818542Z","level":"INFO","msg":"job event","event_id":764,"job_id":197,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":41,"status":null,"error":"","at":"2026-10-22T16:00:46.450098Z"}
+api-1       | {"time":"2026-10-22T16:00:46.698516293Z","level":"INFO","msg":"job event","event_id":765,"job_id":277,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.608424Z"}
+api-1       | {"time":"2026-10-22T16:00:46.70436432Z","level":"INFO","msg":"job event","event_id":766,"job_id":277,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.620938Z"}
+api-1       | {"time":"2026-10-22T16:00:46.883097925Z","level":"INFO","msg":"job event","event_id":767,"job_id":257,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.712736Z"}
+api-1       | {"time":"2026-10-22T16:00:46.888109612Z","level":"INFO","msg":"job event","event_id":768,"job_id":257,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.745667Z"}
+api-1       | {"time":"2026-10-22T16:00:46.891425504Z","level":"INFO","msg":"job event","event_id":769,"job_id":257,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":42,"status":null,"error":"","at":"2026-10-22T16:00:46.745667Z"}
+api-1       | {"time":"2026-10-22T16:00:46.894311648Z","level":"INFO","msg":"job event","event_id":770,"job_id":76,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.852606Z"}
+api-1       | {"time":"2026-10-22T16:00:46.89697563Z","level":"INFO","msg":"job event","event_id":771,"job_id":76,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.872375Z"}
+api-1       | {"time":"2026-10-22T16:00:47.085464298Z","level":"INFO","msg":"job event","event_id":772,"job_id":56,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.973064Z"}
+api-1       | {"time":"2026-10-22T16:00:47.090518017Z","level":"INFO","msg":"job event","event_id":773,"job_id":56,"queue":"reports","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:46.987423Z"}
+api-1       | {"time":"2026-10-22T16:00:47.097225611Z","level":"INFO","msg":"job event","event_id":774,"job_id":56,"queue":"reports","event":"notification_queued","worker":null,"attempt":0,"outbox_id":43,"status":null,"error":"","at":"2026-10-22T16:00:46.987423Z"}
+api-1       | {"time":"2026-10-22T16:00:47.312777177Z","level":"INFO","msg":"job event","event_id":775,"job_id":106,"queue":"emails","event":"leased","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:47.095444Z"}
+api-1       | {"time":"2026-10-22T16:00:47.330030297Z","level":"INFO","msg":"job event","event_id":776,"job_id":106,"queue":"emails","event":"succeeded","worker":2,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:47.125254Z"}
+api-1       | {"time":"2026-10-22T16:00:47.339443714Z","level":"INFO","msg":"job event","event_id":777,"job_id":86,"queue":"reports","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2026-10-22T16:00:47.26537Z"}
+worker-b-1  | {"time":"2026-10-22T16:00:46.503420367Z","level":"INFO","msg":"completed","event":"ack","job_id":197,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:46.733870125Z","level":"INFO","msg":"processing","event":"processing","job_id":257,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:46.768753596Z","level":"INFO","msg":"completed","event":"ack","job_id":257,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:46.978798512Z","level":"INFO","msg":"processing","event":"processing","job_id":56,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:47.050976223Z","level":"INFO","msg":"completed","event":"ack","job_id":56,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}
+worker-b-1  | {"time":"2026-10-22T16:00:47.302282805Z","level":"INFO","msg":"processing","event":"processing","job_id":86,"queue":"reports","worker":3,"attempt":1,"kind":"echo"}
+worker-b-1  | {"time":"2026-10-22T16:00:47.355518711Z","level":"INFO","msg":"completed","event":"ack","job_id":86,"queue":"reports","worker":3,"attempt":1,"status":200,"error":null}

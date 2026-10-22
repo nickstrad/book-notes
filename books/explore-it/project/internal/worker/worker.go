@@ -79,13 +79,15 @@ func perform(j Job) (any, error) {
 	case j.Kind == "echo":
 		return j.Payload, nil
 	case j.Kind == "sleep":
-		seconds, _ := j.Payload["seconds"].(float64)
+		number, _ := j.Payload["seconds"].(json.Number)
+		seconds, _ := number.Float64()
 		time.Sleep(time.Duration(seconds * float64(time.Second)))
 		return j.Payload, nil
 	case j.Kind == "crash":
 		os.Exit(3)
 	case strings.HasPrefix(j.Kind, "fail"):
-		n, _ := j.Payload["n"].(float64)
+		number, _ := j.Payload["n"].(json.Number)
+		n, _ := number.Float64()
 		if n == 0 {
 			v, _ := strconv.Atoi(strings.TrimPrefix(j.Kind, "fail"))
 			n = float64(v)

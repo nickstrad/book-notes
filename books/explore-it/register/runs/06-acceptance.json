@@ -1,0 +1,279 @@
+{
+  "experiment": 6,
+  "exploration_commit": "b3b0559",
+  "historical_ref": "explore-it/lesson-05",
+  "runs": [
+    {
+      "name": "up",
+      "command": "make up",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T15:55:50.275759+00:00",
+      "exit": 0,
+      "elapsed_seconds": 53.076,
+      "log": "06-up.log"
+    },
+    {
+      "name": "up-final",
+      "command": "make up",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T15:56:54.210019+00:00",
+      "exit": 2,
+      "elapsed_seconds": 114.832,
+      "log": "06-up-final.log"
+    },
+    {
+      "name": "up-repaired",
+      "command": "make up",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T15:59:26.908963+00:00",
+      "exit": 0,
+      "elapsed_seconds": 47.157,
+      "log": "06-up-repaired.log"
+    },
+    {
+      "name": "current",
+      "command": "make verify LESSON=06",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:00:24.167956+00:00",
+      "exit": 2,
+      "elapsed_seconds": 22.283,
+      "log": "06-current.log",
+      "instrument_manifest": "06-instruments-attempt1.sha256"
+    },
+    {
+      "name": "current-final",
+      "command": "make verify LESSON=06",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:01:15.323988+00:00",
+      "exit": 0,
+      "elapsed_seconds": 144.842,
+      "log": "06-current-final.log",
+      "instrument_manifest": "06-instruments-pair1.sha256"
+    },
+    {
+      "name": "historical",
+      "command": "make verify LESSON=06 REF=explore-it/lesson-05",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:03:51.351770+00:00",
+      "exit": 0,
+      "elapsed_seconds": 110.856,
+      "log": "06-historical.log",
+      "instrument_manifest": "06-instruments-pair1.sha256"
+    },
+    {
+      "name": "checks",
+      "command": "make checks",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:05:51.726596+00:00",
+      "exit": 2,
+      "elapsed_seconds": 1.799,
+      "log": "06-checks.log",
+      "instrument_manifest": "06-instruments-pair1.sha256"
+    },
+    {
+      "name": "instrument-integrity-pair1",
+      "command": "sha256sum -c ../register/runs/06-instruments.sha256",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:06:20.424229+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.009,
+      "log": "06-instrument-integrity-pair1.log",
+      "instrument_manifest": "06-instruments-pair1.sha256"
+    },
+    {
+      "name": "record-integrity",
+      "command": "python3 /tmp/explore-it-fix06/record-integrity.py",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:06:20.637858+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.514,
+      "log": "06-record-integrity.log"
+    },
+    {
+      "name": "up-acceptance",
+      "command": "make up",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:07:50.147300+00:00",
+      "exit": 0,
+      "elapsed_seconds": 41.282,
+      "log": "06-up-acceptance.log"
+    },
+    {
+      "name": "current-acceptance",
+      "command": "make verify LESSON=06",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:08:53.049147+00:00",
+      "exit": 0,
+      "elapsed_seconds": 151.177,
+      "log": "06-current-acceptance.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "historical-acceptance",
+      "command": "make verify LESSON=06 REF=explore-it/lesson-05",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:11:39.531718+00:00",
+      "exit": 0,
+      "elapsed_seconds": 57.671,
+      "log": "06-historical-acceptance.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "instrument-integrity-after",
+      "command": "sha256sum -c ../register/runs/06-instruments.sha256",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:13:10.292295+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.007,
+      "log": "06-instrument-integrity-after.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "checks-acceptance",
+      "command": "make checks",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:12:39.969015+00:00",
+      "exit": 0,
+      "elapsed_seconds": 398.913,
+      "log": "06-checks-acceptance.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "test",
+      "command": "make test",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:19:46.807898+00:00",
+      "exit": 0,
+      "elapsed_seconds": 1.239,
+      "log": "06-test.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "down",
+      "command": "make down",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:19:54.915838+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.949,
+      "log": "06-down.log"
+    },
+    {
+      "name": "instrument-integrity-final",
+      "command": "sha256sum -c ../register/runs/06-instruments.sha256",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:20:55.429149+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.006,
+      "log": "06-instrument-integrity-final.log",
+      "instrument_manifest": "06-instruments.sha256"
+    },
+    {
+      "name": "record-integrity-final",
+      "command": "python3 /tmp/explore-it-fix06/record-integrity.py",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:20:55.520773+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.505,
+      "log": "06-record-integrity-final.log"
+    }
+  ],
+  "status": "PASS",
+  "fix_commit": "self: commit containing this acceptance, tagged explore-it/lesson-06",
+  "final_sequence": [
+    "up-acceptance",
+    "current-acceptance",
+    "historical-acceptance",
+    "checks-acceptance",
+    "test"
+  ],
+  "tag": "explore-it/lesson-06",
+  "findings_fixed": [
+    "U27",
+    "U28",
+    "U29",
+    "U30",
+    "U31",
+    "U32",
+    "U33"
+  ],
+  "findings_deferred": [],
+  "decisions": {
+    "A4": "Dead jobs remain until operator retry or explicit deletion; automatic retention applies only to succeeded/cancelled.",
+    "U33": "Attempts leave with their job on deletion, purge and retention; events and pending webhook snapshots remain independent.",
+    "U28": "Schedule create uses existing enqueue payload semantics; PATCH gains no payload field.",
+    "U31": "NUL result/error is 400 invalid_result/invalid_error without mutating a valid lease."
+  },
+  "raw_score": {
+    "stated": 20,
+    "confirmed": 18,
+    "refuted": 2,
+    "qualified_reading_contradictions": 2,
+    "model_cells": 30,
+    "reports": 7
+  },
+  "catalogue_found_early": {
+    "D15": 1,
+    "D16": 1,
+    "D17": 1
+  },
+  "policy_is_not_blind_find": true,
+  "verdicts": {
+    "current": "FIXED AND CHECKED: 8 absent; regression checks pass",
+    "historical": "DEFECTS REPRODUCED: 8 present"
+  },
+  "integration_checks": 74,
+  "unit_tests": "PASS",
+  "paired_observations": {
+    "current": {
+      "U27": "ABSENT: U27 \u2014 foreign/repeated/missing DELETE=404/404/404; owner delete=204, foreign untouched, deleted GET=404",
+      "U28": "ABSENT: U28 \u2014 null/array/string/number/bool create=[400, 400, 400, 400, 400]; omitted payload={}, run=201; cron fired 2 templates; object run/cron and PATCH controls hold",
+      "U29": "ABSENT: U29 \u2014 raw payload exact; worker echo big=9007199254740993, fraction=0.12345678901234567890123456789; stored result=valid signed webhook; sleep/fail numeric controls hold",
+      "U30": "ABSENT: U30 \u2014 exact numeric value by path={'enqueue-input': True, 'job-get-payload': True, 'job-get-result': True, 'ack-result': True, 'batch-json': True, 'schedule-json': True}; direct API input/result controls exact",
+      "U31": "ABSENT: U31 \u2014 ack string/nested/key and nack NUL statuses=[400, 400, 400, 400]; valid lease unchanged, clean retry stored exact value and one attempt each",
+      "U32": "ABSENT: U32 \u2014 concurrent statuses={'enqueue': {404: 368, 201: 432}, 'schedule': {404: 560, 201: 240}, 'batch': {404: 32, 201: 96}}; FK errors={'enqueue': 0, 'schedule': 0, 'batch': 0}; accepted writes equal stored rows, no orphans; positive/missing-owner controls hold; historical examples={}",
+      "U33": "ABSENT: U33 \u2014 attempt rows after purge/delete/retention={'purge': 0, 'delete': 0, 'retention': 0}; removed jobs absent in API+storage; live attempt retained; durable events and pending deliveries survive",
+      "A4": "ABSENT: A4 \u2014 API clock ages 3599/3602/7202s: all remain below cutoff; succeeded/cancelled API=404 storage=0; dead API=200 storage=1; retained dead retry control holds when present"
+    },
+    "historical": {
+      "U27": "PRESENT: U27 \u2014 foreign/repeated/missing DELETE=204/204/204; owner delete=204, foreign untouched, deleted GET=404",
+      "U28": "PRESENT: U28 \u2014 null/array/string/number/bool create=[201, 201, 201, 201, 201]; omitted payload=None, run=400; cron fired 7 templates; object run/cron and PATCH controls hold",
+      "U29": "PRESENT: U29 \u2014 raw payload exact; worker echo big=9007199254740992, fraction=0.12345678901234568; stored result=valid signed webhook; sleep/fail numeric controls hold",
+      "U30": "PRESENT: U30 \u2014 exact numeric value by path={'enqueue-input': False, 'job-get-payload': False, 'job-get-result': False, 'ack-result': False, 'batch-json': False, 'schedule-json': False}; direct API input/result controls exact",
+      "U31": "PRESENT: U31 \u2014 ack string/nested/key and nack NUL statuses=[409, 409, 409, 409]; valid lease unchanged, clean retry stored exact value and one attempt each",
+      "U32": "PRESENT: U32 \u2014 concurrent statuses={'enqueue': {404: 62, 201: 16, 400: 2}, 'schedule': {404: 44, 500: 4, 201: 16}, 'batch': {201: 80, 404: 47, 400: 1}}; FK errors={'enqueue': 2, 'schedule': 4, 'batch': 1}; accepted writes equal stored rows, no orphans; positive/missing-owner controls hold; historical examples={'enqueue': {'error': {'code': 'invalid_job', 'message': 'pq: insert or update on table \"jobs\" violates foreign key constraint \"jobs_queue_owner\"'}}, 'schedule': {'error': {'code': 'database_error', 'message': 'pq: insert or update on table \"schedules\" violates foreign key constraint \"schedules_queue_owner\"'}}, 'batch': {'error': {'code': 'invalid_job', 'message': 'pq: insert or update on table \"jobs\" violates foreign key constraint \"jobs_queue_owner\"'}}}",
+      "U33": "PRESENT: U33 \u2014 attempt rows after purge/delete/retention={'purge': 1, 'delete': 1, 'retention': 1}; removed jobs absent in API+storage; live attempt retained; durable events and pending deliveries survive",
+      "A4": "PRESENT: A4 \u2014 API clock ages 3599/3602/7202s: all remain below cutoff; succeeded/cancelled API=404 storage=0; dead API=404 storage=0; retained dead retry control holds when present"
+    }
+  },
+  "frozen_instruments": {
+    "manifest": "06-instruments.sha256",
+    "sha256": "379fef80486e0a18aa9d466b0251e72405a46f68cc56a5986fdae721fb9f4873",
+    "identical_final_pair": true,
+    "rechecked_after_pair_and_full_suite": true,
+    "between_successful_pairs_only_changed": "test/checks/baseline_test.go; all public repro hashes identical"
+  },
+  "historical_clients": "Target image qctl via compose exec; target image worker via isolated compose run. No current application decoder in historical probes.",
+  "original_explorer_artifacts": {
+    "count": 3447,
+    "mismatches": 0,
+    "final_log": "06-record-integrity-final.log"
+  },
+  "dwell": {
+    "kind": "paired only",
+    "table": "06-dwell.tsv",
+    "full_sweep": false
+  },
+  "deviations": [
+    "Seven actual unplanned findings replaced the already-fixed D15-D17 teaching sketch; no rediscovery.",
+    "U33 cascading FK NOT VALID retains preexisting orphan evidence; no bulk cleanup.",
+    "Retained failed startup: missing new-constraint restart guard, repaired.",
+    "Retained first current PROBE ERROR: sink convenience body rounds numbers; instrument corrected to raw bytes before paired runs.",
+    "Retained first full-suite panic: baseline assumed float64 after UseNumber; changed only exact ID parsing, then repeated full required sequence with new freeze.",
+    "Fixer hit batch owner-race sibling; blind H-E06-17 score and artifacts stay unchanged."
+  ],
+  "cleanup": {
+    "lab": "stopped via make down, exit 0",
+    "background_agents": "none launched; explorer closed before fixer; no running agents"
+  },
+  "next": "Checkpoint B review E02-E06, then fresh E07 after its gate; neither initiated"
+}

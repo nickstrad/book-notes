@@ -98,13 +98,17 @@ func TestL00ConcurrentLeases(t *testing.T) {
 	if e := c.JSON("POST", "/v1/queues", map[string]any{"name": name}, &out); e != nil {
 		t.Fatal(e)
 	}
-	var highID float64
+	var highID int64
 	for _, priority := range []int{1, 9, 3} {
 		if e := c.JSON("POST", "/v1/queues/"+name+"/jobs", map[string]any{"kind": "echo", "payload": map[string]any{}, "priority": priority}, &out); e != nil {
 			t.Fatal(e)
 		}
 		if priority == 9 {
-			highID = out["id"].(float64)
+			var e error
+			highID, e = out["id"].(json.Number).Int64()
+			if e != nil {
+				t.Fatal(e)
+			}
 		}
 	}
 	workers := []any{}
@@ -123,7 +127,7 @@ func TestL00ConcurrentLeases(t *testing.T) {
 	if e := c.JSON("POST", "/v1/queues/"+name+"/lease", map[string]any{"worker_id": workers[0], "max_jobs": 1}, &first); e != nil {
 		t.Fatal(e)
 	}
-	if len(first.Jobs) != 1 || first.Jobs[0].ID != int64(highID) {
+	if len(first.Jobs) != 1 || first.Jobs[0].ID != highID {
 		t.Fatalf("highest priority was not leased first: %+v", first)
 	}
 	type answer struct {

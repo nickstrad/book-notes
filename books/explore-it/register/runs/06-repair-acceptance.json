@@ -1,0 +1,157 @@
+{
+  "unit": "E06 one review repair",
+  "superseded_fix": "7a38788b362948d5c81fe1ee7dae14b59a010f48",
+  "exploration_commit": "b3b0559",
+  "historical_ref": "explore-it/lesson-05",
+  "review": "../reviews/E06/review.md",
+  "runs": [
+    {
+      "name": "focused",
+      "command": "go test ./cmd/qctl ./internal/client ./internal/worker -count=1 -v",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:54:31.750960+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.409,
+      "log": "06-repair-focused.log"
+    },
+    {
+      "name": "focused-final",
+      "command": "go test ./cmd/qctl ./internal/client ./internal/worker -count=1 -v",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:55:01.546534+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.932,
+      "log": "06-repair-focused-final.log"
+    },
+    {
+      "name": "up",
+      "command": "make up",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:55:05.677275+00:00",
+      "exit": 0,
+      "elapsed_seconds": 50.593,
+      "log": "06-repair-up.log"
+    },
+    {
+      "name": "instruments-before",
+      "command": "sha256sum -c ../register/runs/06-instruments.sha256",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:56:14.459430+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.006,
+      "log": "06-repair-instruments-before.log"
+    },
+    {
+      "name": "current",
+      "command": "make verify LESSON=06",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:56:31.156466+00:00",
+      "exit": 0,
+      "elapsed_seconds": 121.898,
+      "log": "06-repair-current.log"
+    },
+    {
+      "name": "historical",
+      "command": "make verify LESSON=06 REF=explore-it/lesson-05",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:58:35.544515+00:00",
+      "exit": 0,
+      "elapsed_seconds": 49.876,
+      "log": "06-repair-historical.log"
+    },
+    {
+      "name": "checks",
+      "command": "make checks",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T16:59:30.627055+00:00",
+      "exit": 0,
+      "elapsed_seconds": 399.806,
+      "log": "06-repair-checks.log"
+    },
+    {
+      "name": "test",
+      "command": "make test",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T17:06:13.245283+00:00",
+      "exit": 0,
+      "elapsed_seconds": 5.668,
+      "log": "06-repair-test.log"
+    },
+    {
+      "name": "down",
+      "command": "make down",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T17:06:23.046193+00:00",
+      "exit": 0,
+      "elapsed_seconds": 3.124,
+      "log": "06-repair-down.log"
+    },
+    {
+      "name": "integrity-final",
+      "command": "python3 /tmp/explore-it-repair06/integrity.py",
+      "cwd": "books/explore-it/project",
+      "start": "2026-10-22T17:06:30.397457+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.476,
+      "log": "06-repair-integrity-final.log"
+    }
+  ],
+  "status": "PASS (repair acceptance; independent validation pending)",
+  "final_sequence": [
+    "up",
+    "current",
+    "historical",
+    "checks",
+    "test"
+  ],
+  "fix_commit": "amended code commit containing this record, tagged explore-it/lesson-06; parent b3b0559",
+  "original_acceptance": "06-acceptance.json (unchanged, including earlier successful pair and failed attempts)",
+  "review_report_sha256": "7dbd40f93f55c0b495dfecc94c0e59f06b86da8297d4ecb92d8ab7dd9ac55019",
+  "review_verdict": "NITS on superseded 7a38788; not independent acceptance of the repair",
+  "addressed": "Finding 1: restore whole-document JSON parsing in qctl options/output and shared client; reject invalid CLI JSON before requests while retaining exact numbers",
+  "deferred": {
+    "finding_2": "Pre-existing worker http response-number decoder; explicitly deferred in STATE/U29/lesson, unprobed through actual http worker and unchanged here; outside narrow echo assignment",
+    "observation_legacy_templates": "Existing invalid schedule templates are not migrated/revalidated; creation repaired, checkpoint-B upgrade policy owned by coordinator/Nick"
+  },
+  "actual_code_tests": {
+    "cmd/qctl": "Build and execute qctl against httptest server; valid exact numbers/whitespace/nested/scalar results/default options, CLI exit 1 plus zero requests on malformed/trailing/concatenated JSON, raw response fallback",
+    "internal/client": "Client.JSON against httptest server; exact numbers and whitespace accepted, malformed/trailing/concatenated/empty documents rejected before populating output",
+    "internal/worker": "Actual client decoding and perform; echo precision, sleep/fail omitted/wrong-type/numeric defaults"
+  },
+  "integration_checks": 74,
+  "unit_tests": "PASS, including three new actual-code unit packages",
+  "frozen_instruments": {
+    "manifest": "06-instruments.sha256",
+    "sha256": "379fef80486e0a18aa9d466b0251e72405a46f68cc56a5986fdae721fb9f4873",
+    "all_95_unchanged": true,
+    "numeric_present_absent_oracle": "unchanged",
+    "final_recheck": "06-repair-integrity-final.log"
+  },
+  "original_explorer_artifacts": {
+    "count": 3447,
+    "mismatches": 0
+  },
+  "original_score": {
+    "stated": 20,
+    "confirmed": 18,
+    "refuted": 2,
+    "qualified_reading_contradictions": 2,
+    "model_cells": 30,
+    "reports": 7
+  },
+  "code_and_test_sha256": {
+    "cmd/qctl/main.go": "f89ead1af9676801551be0afa273854c2e08e152a4173ecdd073c880b6041710",
+    "cmd/qctl/main_test.go": "cc4cd21b2389187e144c49c539a0fd4310ae0f4af4bf895dcb41a9a6b5943495",
+    "internal/client/client.go": "48dc7471b46e1309a24392487b1e63e1043c540abfea29dbcdb5c1796eb54127",
+    "internal/client/client_test.go": "991b94b8120a221b6fc4f933cc5156ff4e4d9ea229036eddbe3ca932b4b62411",
+    "internal/worker/worker_test.go": "2414ba5aa715bdc149437bb926b218b93c3b3374d8447331c948ce536102b335"
+  },
+  "cleanup": "Only this repair lab stopped with make down; REF harness removed its own scratch stack",
+  "deviations": [
+    "Worker http sibling explicitly deferred as requested",
+    "Legacy-template policy recorded without cleanup claims",
+    "No repro/oracle/historic proof changes or new discoveries",
+    "No independent reviewer launched; coordinator owns validation, then checkpoint B and fresh E07"
+  ],
+  "next": "Coordinator independent repair validation, full checkpoint B review, then fresh E07 after gate; none initiated by repair unit"
+}
