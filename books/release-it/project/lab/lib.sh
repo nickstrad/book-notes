@@ -55,6 +55,10 @@ reset_stack() {
   docker volume rm -f litefleet_node-a-data litefleet_node-b-data litefleet_blobs >/dev/null
   docker volume create litefleet-seedcache >/dev/null
   compose "${extra[@]}" up -d --no-build --wait postgres >/dev/null 2>&1
+  # On a fresh volume the image's initdb runs a temporary server, so the
+  # healthcheck can pass before the real one listens: retry for up to 30 s.
+  local tries
+  for tries in $(seq 60); do psql_ "SELECT 1" >/dev/null 2>&1 && break; sleep 0.5; done
   psql_ "DROP DATABASE IF EXISTS litefleet WITH (FORCE)"
   if [[ $(psql_ "SELECT count(*) FROM pg_database WHERE datname = 'seed_$key'") == 1 ]] &&
      docker run --rm -v litefleet-seedcache:/cache alpine test -f "/cache/$key/manifest.json"; then
