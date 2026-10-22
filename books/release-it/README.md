@@ -44,9 +44,9 @@ make verify LESSON=05                                  # IMPROVED
 make down
 ```
 
-Each verify runs in 1–3 minutes with warm images. It resets the stack, runs one scenario with its
-fault timeline through Toxiproxy or Docker, and prints a table and a verdict line with explicit
-thresholds. Exit status 0 means the lesson's thresholds hold.
+Each verify runs in 2–4 minutes with warm images, the reset included. It resets the stack, runs
+one scenario with its fault timeline through Toxiproxy or Docker, and prints a table and a verdict
+line with explicit thresholds. Exit status 0 means the lesson's thresholds hold.
 
 ## Lessons
 
