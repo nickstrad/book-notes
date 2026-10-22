@@ -26,13 +26,16 @@ import (
 //
 // Every call except the usage report goes through a circuit breaker: when
 // control keeps failing, callers get breaker.ErrOpen at once instead of
-// spending their deadline on it.
+// spending their deadline on it. Resolves are answered from a TTL route
+// cache first, so the data plane keeps serving known databases while
+// control is down.
 type Client struct {
 	base    string
 	http    *http.Client
 	report  *http.Client
 	resolve retry.Policy
 	breaker *breaker.Breaker
+	cache   *cache
 }
 
 // New returns a client for the control plane at base.
@@ -46,20 +49,61 @@ func New(base string) *Client {
 		resolve: retry.Policy{Dep: "control", Base: 50 * time.Millisecond, Cap: 400 * time.Millisecond, MaxRetries: 2,
 			MinAttempt: 100 * time.Millisecond, Budget: retry.NewBudget(0.1, 10)},
 		breaker: breaker.New("control"),
+		cache:   newCache(TTL),
 	}
 }
 
 // BreakerState is the state of the breaker around control.
 func (c *Client) BreakerState() breaker.State { return c.breaker.State() }
 
-// Resolve authenticates apiKey and locates its database dbName.
+// CachedRoutes is the number of routes the gateway could serve without
+// control.
+func (c *Client) CachedRoutes() int { return c.cache.len() }
+
+// Evict drops a cached route, after the node said its epoch is stale.
+func (c *Client) Evict(apiKey, dbName string) { c.cache.evict(cacheKey(apiKey, dbName)) }
+
+// Resolve authenticates apiKey and locates its database dbName, from the
+// cache when it can.
 func (c *Client) Resolve(ctx context.Context, apiKey, dbName string) (wire.Route, error) {
+	k := cacheKey(apiKey, dbName)
+	if rt, refresh, ok := c.cache.get(k); ok {
+		if refresh {
+			go c.refresh(k, apiKey, dbName)
+		}
+		return rt, nil
+	}
+	rt, err := c.resolveRemote(ctx, apiKey, dbName)
+	if err == nil {
+		c.cache.put(k, rt)
+	}
+	return rt, err
+}
+
+func (c *Client) resolveRemote(ctx context.Context, apiKey, dbName string) (wire.Route, error) {
 	var rt wire.Route
 	body, _ := json.Marshal(wire.ResolveRequest{APIKey: apiKey, DBName: dbName})
 	err := c.resolve.Do(ctx, retryable, func(ctx context.Context) error {
 		return c.do(ctx, http.MethodPost, "/internal/resolve", "", body, &rt)
 	})
 	return rt, err
+}
+
+// refresh re-resolves a cached route in the background. A key or database
+// that no longer exists is evicted; anything else leaves the entry serving.
+func (c *Client) refresh(k, apiKey, dbName string) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	rt, err := c.resolveRemote(ctx, apiKey, dbName)
+	var re *httpx.RemoteError
+	switch {
+	case err == nil:
+		c.cache.put(k, rt)
+	case errors.As(err, &re) && re.Status < 500:
+		c.cache.evict(k)
+	default:
+		c.cache.refreshFailed(k)
+	}
 }
 
 // Create asks control to place and provision a new database.

@@ -73,6 +73,19 @@ func (g *Gateway) resolve(w http.ResponseWriter, r *http.Request) (wire.Route, b
 	return rt, true
 }
 
+// staleEpoch: the node says the database's placement changed since the
+// route was cached.
+func staleEpoch(err error) bool {
+	var re *httpx.RemoteError
+	return errors.As(err, &re) && re.Code == "stale_epoch"
+}
+
+// reresolve evicts a stale cached route and resolves it again.
+func (g *Gateway) reresolve(w http.ResponseWriter, r *http.Request) (wire.Route, bool) {
+	g.Routes.Evict(httpx.Bearer(r), r.PathValue("name"))
+	return g.resolve(w, r)
+}
+
 func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 	r, cancel := withDeadline(r)
 	defer cancel()
@@ -91,6 +104,12 @@ func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	res, err := g.Nodes.Query(r.Context(), rt, req)
+	if staleEpoch(err) {
+		if rt, ok = g.reresolve(w, r); !ok {
+			return
+		}
+		res, err = g.Nodes.Query(r.Context(), rt, req)
+	}
 	if err != nil {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
@@ -121,6 +140,12 @@ func (g *Gateway) execute(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	res, err := g.Nodes.Execute(r.Context(), rt, req)
+	if staleEpoch(err) { // the node refused before running anything
+		if rt, ok = g.reresolve(w, r); !ok {
+			return
+		}
+		res, err = g.Nodes.Execute(r.Context(), rt, req)
+	}
 	if err != nil {
 		writeUpstreamError(w, r, rt.Node, err)
 		return
@@ -212,7 +237,7 @@ func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err 
 	}
 	if errors.Is(err, breaker.ErrOpen) {
 		w.Header().Set("Retry-After", "5")
-		httpx.WriteError(w, r, http.StatusServiceUnavailable, "control_unavailable", "control plane unavailable")
+		httpx.WriteError(w, r, http.StatusServiceUnavailable, "control_unavailable", "control plane unavailable; known databases keep working")
 		return
 	}
 	if httpx.Outcome(0, err) == "timeout" {

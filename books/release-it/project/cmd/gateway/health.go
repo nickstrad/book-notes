@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"sort"
 	"strings"
@@ -61,12 +62,15 @@ func (p *prober) isDown(name string) bool {
 	return p.down[name]
 }
 
-// The gateway cannot serve anything without control: every request resolves
-// through it. An open breaker is reported as it happens.
+// Without control the gateway still serves every database whose route it
+// has cached: degraded, not failed, unless it has nothing cached at all.
 func (p *prober) controlCheck() (string, string) {
+	cached := p.routes.CachedRoutes()
 	switch {
+	case p.isDown("control") && cached == 0:
+		return httpx.Failed, "control unreachable and no routes cached"
 	case p.isDown("control"):
-		return httpx.Failed, "control unreachable"
+		return httpx.Degraded, fmt.Sprintf("control unreachable; serving %d cached routes", cached)
 	case p.routes.BreakerState() != breaker.Closed:
 		return httpx.Degraded, "control breaker " + p.routes.BreakerState().String()
 	}
