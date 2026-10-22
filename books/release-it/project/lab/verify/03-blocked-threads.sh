@@ -37,7 +37,7 @@ start_load -scenario errs -rate "$RATE" -duration 60s -out "/results/$OUT"
 for t in 15 30 45 60; do at "$t"; log "t=$t s fds node-a $(prom 'process_open_fds{instance="node-a"}') node-b $(prom 'process_open_fds{instance="node-b"}')"; done
 wait_load >&2
 max_fds=$(prom 'max(max_over_time(process_open_fds{job="node"}[75s]))')
-node_5xx=$(prom 'sum(increase(http_requests_total{job="node",route=~"POST /internal/db/.*",status=~"5.."}[75s]))')
+node_5xx=$(prom 'sum(increase(http_requests_total{job="node",route=~"POST /internal/db/.*",status=~"5.."}[75s])) or vector(0)')
 at 68
 health_a=$(curl -s -m 2 -o /dev/null -w '%{http_code}' http://127.0.0.1:18071/health || true)
 health_b=$(curl -s -m 2 -o /dev/null -w '%{http_code}' http://127.0.0.1:18072/health || true)

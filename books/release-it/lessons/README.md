@@ -6,7 +6,10 @@ the before and after verdicts, and its deviations from `../PLAN.md`.
 
 Run every command from `books/release-it/project`. `make verify LESSON=NN` judges the checked-out
 tree. Add `REF=<parent tag>` to build the parent's images and run today's script against them: that
-reproduces the flaw.
+reproduces the flaw. Every lesson's verify, as it is at `main`, also passes on the `main` tree:
+lessons 01–03's checks accept what later lessons changed on purpose (lesson 05's `degraded` gateway
+health, lesson 07's `503 overloaded` shedding, lesson 08's streamed answers). A lesson tag carries
+the scripts as they were at that tag.
 
 | # | Tag | Note | Flaws | Verify | Before (`REF=` parent) | After |
 |---|---|---|---|---|---|---|

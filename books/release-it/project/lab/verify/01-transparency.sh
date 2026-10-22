@@ -33,10 +33,13 @@ report_table "$OUT"
 
 # Health: seconds from the pause (t=35) to the first failed answer.
 first_failed() { awk '$1 >= 35 && $1 <= 47 && ($2 == 503 || $0 ~ /failed/) { printf "%.2f", $1 - 35; found = 1; exit } END { if (!found) print "NaN" }' "$1"; }
+# The gateway's health counts as reporting the outage when it says failed
+# or, from lesson 05 (it keeps serving from cached routes), degraded.
+first_reported() { awk '$1 >= 35 && $1 <= 47 && ($2 == 503 || $0 ~ /failed|degraded/) { printf "%.2f", $1 - 35; found = 1; exit } END { if (!found) print "NaN" }' "$1"; }
 ctl_failed=$(first_failed "$RESULTS/01-health-control.txt")
-gw_failed=$(first_failed "$RESULTS/01-health-gateway.txt")
+gw_failed=$(first_reported "$RESULTS/01-health-gateway.txt")
 ctl_detail=$(awk '$1 >= 35 && $1 <= 47 && $2 == 503 { $1 = ""; $2 = ""; print; exit }' "$RESULTS/01-health-control.txt")
-gw_detail=$(awk '$1 >= 35 && $1 <= 47 && $2 == 503 { $1 = ""; $2 = ""; print; exit }' "$RESULTS/01-health-gateway.txt")
+gw_detail=$(awk '$1 >= 35 && $1 <= 47 && ($2 == 503 || $0 ~ /failed|degraded/) { $1 = ""; $2 = ""; print; exit }' "$RESULTS/01-health-gateway.txt")
 up_during_pause=$(awk '$1 >= 38 && $1 <= 45 { if (min == "" || $2 < min) min = $2 } END { print (min == "" ? "NaN" : min) }' "$TL")
 
 # Logs: every line JSON; every request line carries a request id; a slow
@@ -58,7 +61,7 @@ printf '  gateway → node-a p99 at t=32 s (latency on node-a) %s s\n' "$node_a_
 printf '  gateway → node-b p99 at t=32 s                     %s s\n' "$node_b_p99"
 printf '  gateway request p99 at t=32 s                      %s s\n' "$edge_p99"
 printf '  control /health first failed after pause           %s s  %s\n' "$ctl_failed" "$ctl_detail"
-printf '  gateway-a /health first failed after pause         %s s  %s\n' "$gw_failed" "$gw_detail"
+printf '  gateway-a /health first failed/degraded after pause %s s  %s\n' "$gw_failed" "$gw_detail"
 printf '  HAProxy gateways UP during pause (min)             %s of 3\n' "$up_during_pause"
 printf '  log lines that are JSON                            %s of %s (%s %%)\n' "$json" "$total" "$json_pct"
 printf '  request log lines with a request_id                %s of %s (%s %%)\n' "$reqs_with_id" "$reqs" "$id_pct"

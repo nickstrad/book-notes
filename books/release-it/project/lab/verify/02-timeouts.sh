@@ -27,8 +27,12 @@ at 36
 inflight_after=$(prom 'max(http_inflight_requests{job="gateway"})')
 wait_load >&2
 report_table "$OUT"
+# A fast failure is the gateway's own answer: 504 when its deadline passes,
+# or (from lesson 07) 503 `overloaded`, shed with Retry-After before the
+# deadline is even reached.
 read -r p99_out n_fail n_504 < <(q "$OUT" "SELECT round(quantile_cont(latency_ms, 0.99)) / 1000,
-    count(*) FILTER (status <> 200 OR err_class IS NOT NULL), count(*) FILTER (status = 504)
+    count(*) FILTER (status <> 200 OR err_class IS NOT NULL),
+    count(*) FILTER (status = 504 OR (status = 503 AND err_class = 'overloaded'))
   FROM runs WHERE node = 'node-a' AND ts_ms BETWEEN 12000 AND 29000" | tr ',' ' ')
 share_504=$(awk -v a="$n_504" -v b="$n_fail" 'BEGIN { printf "%.1f", b ? 100 * a / b : 0 }')
 recovered=$(q "$OUT" "SELECT round(100.0 * count(*) FILTER (status = 200 AND err_class IS NULL) / count(*), 1)
@@ -37,6 +41,9 @@ recovered=$(q "$OUT" "SELECT round(100.0 * count(*) FILTER (status = 200 AND err
 log "phase 2: a runaway query from the noisy tenant; phase 3: a stalled client"
 key=$(jq -r '.tenants[] | select(.class == "noisy") | .key' "$RESULTS/manifest.json")
 since=$(date -u +%Y-%m-%dT%H:%M:%S.%NZ)
+# Read statements on node-a that ran past the 2.048 s histogram bucket.
+over_bucket='sum(statement_duration_seconds_count{instance="node-a",kind="read"}) - sum(statement_duration_seconds_bucket{instance="node-a",kind="read",le="2.048"})'
+over0=$(prom "$over_bucket")
 curl -s -o /dev/null --max-time 3 "$EDGE/v1/databases/default/query" -H "Authorization: Bearer $key" \
   -d '{"sql": "WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x + 1 FROM c WHERE x < 8000000) SELECT count(*) FROM c"}' || true &
 stalled_start=$(date +%s.%N)
@@ -49,9 +56,17 @@ cpu=$(prom 'rate(process_cpu_seconds_total{instance="node-a"}[3s])')
 cancelled=$(prom 'sum(statements_cancelled_total{instance="node-a",reason="deadline"})')
 cancel_ms=$(compose logs --no-log-prefix --no-color --since "$since" node-a 2>/dev/null |
   jq -R -r -n 'first(inputs | fromjson? | select(.msg == "request" and .error_code == "statement_deadline") | .duration_ms) // "NaN"')
+over1=$(prom "$over_bucket")
 wait "$stalled_pid" || true
 held=$(awk -v a="$(cat "$RESULTS/02-stalled.txt")" -v b="$stalled_start" 'BEGIN { printf "%.1f", a - b }')
 late_ms=$(awk -v d="$cancel_ms" 'BEGIN { if (d == "NaN") print "NaN"; else printf "%.1f", d - 2000 }')
+# From lesson 08 the node streams rows, so a statement cut off mid-answer
+# aborts the connection and leaves no request line. Then the statement
+# histogram bounds the lateness: cancelled, and no read past the 2.048 s
+# bucket, means it stopped within 48 ms of the deadline.
+if [[ $cancel_ms == NaN && $cancelled != NaN ]] && cmp "$cancelled" ">=" 1 && [[ $over0 != NaN && $over1 != NaN ]] && cmp "$over1" "==" "$over0"; then
+  cancel_ms="<= 2048 (histogram)" late_ms=48
+fi
 
 echo
 echo "Phase 1: node-a accepts and never answers (t=10-30 s)"
@@ -59,7 +74,7 @@ printf '  max gateway in-flight during the outage     %s\n' "$inflight"
 printf '  max gateway goroutines during the outage    %s\n' "$goroutines"
 printf '  gateway in-flight 6 s after the toxic left  %s\n' "$inflight_after"
 printf '  node-a p99 during the outage                %s s\n' "$p99_out"
-printf '  node-a failures answered 504 by the gateway %s of %s (%s %%)\n' "$n_504" "$n_fail" "$share_504"
+printf '  node-a failures the gateway answered fast    %s of %s (%s %%) (504, or 503 overloaded)\n' "$n_504" "$n_fail" "$share_504"
 printf '  node-a success rate t=34-44 s               %s %%\n' "$recovered"
 echo "Phase 2: runaway WITH RECURSIVE (~30 s of work), client gives up at 3 s"
 printf '  node-a CPU 4-7 s after submit               %s cores\n' "$cpu"
