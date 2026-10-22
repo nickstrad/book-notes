@@ -1,0 +1,7 @@
+[
+  {"name": "control",   "listen": "0.0.0.0:9090", "upstream": "control:8090",   "enabled": true},
+  {"name": "node-a",    "listen": "0.0.0.0:9071", "upstream": "node-a:8070",    "enabled": true},
+  {"name": "node-b",    "listen": "0.0.0.0:9072", "upstream": "node-b:8070",    "enabled": true},
+  {"name": "blobstore", "listen": "0.0.0.0:9081", "upstream": "blobstore:8081", "enabled": true},
+  {"name": "metering",  "listen": "0.0.0.0:9082", "upstream": "metering:8082",  "enabled": true}
+]

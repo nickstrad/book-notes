@@ -1,0 +1,11 @@
+# DuckDB CLI with the sqlite extension preinstalled, for run reports and
+# tenant-file audits.
+FROM debian:bookworm-slim
+ARG DUCKDB_VERSION=1.5.6
+RUN apt-get update && apt-get install -y --no-install-recommends curl unzip ca-certificates jq \
+ && curl -fsSL -o /tmp/duckdb.zip https://github.com/duckdb/duckdb/releases/download/v${DUCKDB_VERSION}/duckdb_cli-linux-amd64.zip \
+ && unzip /tmp/duckdb.zip -d /usr/local/bin && rm /tmp/duckdb.zip \
+ && duckdb -c "INSTALL sqlite;" \
+ && apt-get purge -y curl unzip && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+WORKDIR /lab
+ENTRYPOINT ["duckdb"]

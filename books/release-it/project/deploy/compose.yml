@@ -1,0 +1,168 @@
+# litefleet lab topology. Host ports are in the 1xxxx range (5432 and 8080
+# are taken on this VM). Service images are tagged ${*_TAG:-cur}; the verify
+# runner builds images from another commit as :ref to run REF comparisons.
+name: litefleet
+
+x-go-build: &go-build
+  context: ..
+  dockerfile: deploy/Dockerfile
+
+x-gateway: &gateway
+  image: litefleet/gateway:${GATEWAY_TAG:-cur}
+  build:
+    <<: *go-build
+    args: { CMD: gateway }
+  restart: unless-stopped
+  cpus: ${GATEWAY_CPUS:-0.5}
+  mem_limit: 256m
+  depends_on: [toxiproxy]
+
+x-node: &node
+  image: litefleet/node:${NODE_TAG:-cur}
+  build:
+    <<: *go-build
+    args: { CMD: node }
+  restart: unless-stopped
+  cpus: ${NODE_CPUS:-0.5}
+  mem_limit: ${NODE_MEM:-512m}
+  ulimits:
+    nofile: { soft: 1024, hard: 1024 }
+  depends_on: [control, toxiproxy]
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: litefleet
+      POSTGRES_PASSWORD: litefleet
+      POSTGRES_DB: litefleet
+    command: ["postgres", "-c", "max_connections=100", "-c", "shared_buffers=256MB", "-c", "synchronous_commit=off"]
+    ports: ["15432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "litefleet"]
+      interval: 1s
+      timeout: 2s
+      retries: 30
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:v0.18.1
+    environment:
+      DATA_SOURCE_NAME: postgresql://litefleet:litefleet@postgres:5432/litefleet?sslmode=disable
+    depends_on: [postgres]
+
+  control:
+    image: litefleet/control:${CONTROL_TAG:-cur}
+    build:
+      <<: *go-build
+      args: { CMD: control }
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://litefleet:litefleet@postgres:5432/litefleet
+      NODES: node-a=http://node-a:8070,node-b=http://node-b:8070
+    ports: ["18090:8090"]
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  node-a:
+    <<: *node
+    environment:
+      NODE_NAME: node-a
+      NODE_URL: http://toxiproxy:9071
+      CONTROL_URL: http://control:8090
+      BLOBSTORE_URL: http://toxiproxy:9081
+      METERING_URL: http://toxiproxy:9082
+    ports: ["18071:8070"]
+    volumes: [node-a-data:/data]
+
+  node-b:
+    <<: *node
+    environment:
+      NODE_NAME: node-b
+      NODE_URL: http://toxiproxy:9072
+      CONTROL_URL: http://control:8090
+      BLOBSTORE_URL: http://toxiproxy:9081
+      METERING_URL: http://toxiproxy:9082
+    ports: ["18072:8070"]
+    volumes: [node-b-data:/data]
+
+  gateway-a:
+    <<: *gateway
+    environment: { INSTANCE: gateway-a, CONTROL_URL: "http://toxiproxy:9090" }
+    ports: ["18001:8080"]
+
+  gateway-b:
+    <<: *gateway
+    environment: { INSTANCE: gateway-b, CONTROL_URL: "http://toxiproxy:9090" }
+    ports: ["18002:8080"]
+
+  gateway-c:
+    <<: *gateway
+    environment: { INSTANCE: gateway-c, CONTROL_URL: "http://toxiproxy:9090" }
+    ports: ["18003:8080"]
+
+  haproxy:
+    image: haproxy:3.2-alpine
+    volumes: ["${LF_CONF:-.}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"]
+    ports: ["18080:8080", "18404:8404"]
+    depends_on: [gateway-a, gateway-b, gateway-c]
+
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy:2.12.0
+    command: ["-host=0.0.0.0", "-config=/config/toxiproxy.json", "-proxy-metrics", "-runtime-metrics"]
+    volumes: ["./toxiproxy.json:/config/toxiproxy.json:ro"]
+    ports: ["18474:8474"]
+
+  blobstore:
+    image: litefleet/blobstore:cur
+    build:
+      <<: *go-build
+      args: { CMD: blobstore }
+    ports: ["18081:8081"]
+    volumes: [blobs:/blobs]
+
+  metering:
+    image: litefleet/metering:cur
+    build:
+      <<: *go-build
+      args: { CMD: metering }
+    ports: ["18082:8082"]
+
+  prometheus:
+    image: prom/prometheus:v3.7.0
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus", "--storage.tsdb.retention.time=2h", "--web.enable-lifecycle"]
+    volumes: ["./prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+    tmpfs: ["/prometheus:mode=1777"]
+    ports: ["19090:9090"]
+
+  # Lab tools, run with `docker compose run --rm <tool>`.
+  seedgen:
+    image: litefleet/seedgen:cur
+    build:
+      <<: *go-build
+      args: { CMD: seedgen }
+    profiles: [lab]
+    volumes: [node-a-data:/nodes/node-a, node-b-data:/nodes/node-b, ../results:/results]
+    depends_on: [control]
+
+  loadgen:
+    image: litefleet/loadgen:cur
+    build:
+      <<: *go-build
+      args: { CMD: loadgen }
+    profiles: [lab]
+    volumes: [../results:/results]
+
+  report:
+    image: litefleet/report:cur
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.report
+    profiles: [lab]
+    volumes: [../results:/results, ../lab:/lab:ro, node-a-data:/nodes/node-a:ro, node-b-data:/nodes/node-b:ro]
+
+volumes:
+  pgdata:
+  blobs:
+  node-a-data:
+  node-b-data:

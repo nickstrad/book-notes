@@ -1,8 +1,8 @@
 # Release It! (2nd ed.) — one flawed SQLite platform, improved lesson by lesson
 
-> **Plan phase (v3).** The project and lessons below are designed, not built. Plan:
-> [`PLAN.md`](PLAN.md). The tags and verify commands become real in the build phase; this page is
-> rewritten then with the final index.
+> **Build phase.** `release-it/v0-flawed` is built and tagged; the lessons are landing one tag at a
+> time. Plan: [`PLAN.md`](PLAN.md). Start with [`lessons/00-the-flawed-start.md`](lessons/00-the-flawed-start.md).
+> This page is rewritten with the final index when `release-it/v1-hardened` lands.
 
 *Release It! Design and Deploy Production-Ready Software*, 2nd edition, Michael T. Nygard (2018).
 
@@ -68,5 +68,5 @@ key for the hunt.
 ## Earlier plans
 
 `PLAN-v2-checkout.md` (same structure, a web-shop checkout service as the vehicle) and
-`PLAN-v1-per-topic-projects.md` (twelve standalone mini-programs; its `topics/` stubs are superseded
-and are removed in the build phase).
+`PLAN-v1-per-topic-projects.md` (twelve standalone mini-programs; its `topics/` stubs were removed
+when v0 was built).

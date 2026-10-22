@@ -1,0 +1,34 @@
+# Every service is listed; a target that does not expose /metrics shows as
+# up == 0.
+global:
+  scrape_interval: 1s
+  scrape_timeout: 900ms
+
+scrape_configs:
+  - job_name: gateway
+    static_configs: [{targets: ["gateway-a:8080", "gateway-b:8080", "gateway-c:8080"]}]
+    relabel_configs: &instance
+      - source_labels: [__address__]
+        regex: "([^:]+):.*"
+        target_label: instance
+  - job_name: control
+    static_configs: [{targets: ["control:8090"]}]
+    relabel_configs: *instance
+  - job_name: node
+    static_configs: [{targets: ["node-a:8070", "node-b:8070"]}]
+    relabel_configs: *instance
+  - job_name: haproxy
+    static_configs: [{targets: ["haproxy:8404"]}]
+    relabel_configs: *instance
+  - job_name: blobstore
+    static_configs: [{targets: ["blobstore:8081"]}]
+    relabel_configs: *instance
+  - job_name: metering
+    static_configs: [{targets: ["metering:8082"]}]
+    relabel_configs: *instance
+  - job_name: toxiproxy
+    static_configs: [{targets: ["toxiproxy:8474"]}]
+    relabel_configs: *instance
+  - job_name: postgres
+    static_configs: [{targets: ["postgres-exporter:9187"]}]
+    relabel_configs: *instance
