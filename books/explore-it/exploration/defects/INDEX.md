@@ -42,8 +42,8 @@ Original F reports preserve what the blind explorer wrote. Canonical D/U records
 
 ## Experiment 02 additions
 
-- U09: documented fail3/default-worker kind mismatch; open, assigned lesson 02.
-- U10: malformed destination blocks later notifications; open, assigned lesson 02.
-- E02-F03: delivery-timeout semantics, spec clarification; no extra bug counted.
+- [U09](U09-sample-worker-kind-registration.md): documented fail3/default-worker kind mismatch; fixed in lesson 02.
+- [U10](U10-malformed-webhook-blocks-independent-delivery.md): malformed destination blocks later notifications; fixed in lesson 02.
+- E02-F03: delivery-timeout semantics clarified in SPEC.md; retained snapshots and at-least-once duplicates; no extra bug counted.
 
 Original E02-F reports and raw scores are immutable. Canonical statuses are maintained separately.

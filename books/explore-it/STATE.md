@@ -1,78 +1,62 @@
 # Explore It! — project state
 
 Goal: turn Hendrickson's *Explore It!* into queuelet, nine honest exploration
-experiments and eight reusable skills about probing and learning a codebase.
-The approved scope omits the people/process material. Specification and order:
-[PLAN.md](PLAN.md), [AGENTS.md](../../AGENTS.md), and
+experiments and eight reusable procedures for probing and learning a codebase.
+Approved scope and order: [PLAN.md](PLAN.md), [AGENTS.md](../../AGENTS.md),
 [continuation brief](/root/booknotes-sol-exploreit2.md).
 
 ## Status
 
-2026-10-22 UTC: fresh E02 fixer active on existing plan/explore-it. Blind record
-is committed at e390c31 and preserved. T1–T3 hooks are implemented; validating
-schema-compatible replay before U09/U10 runtime repairs. No explorer/reviewer
-runs are active. Scratch: /tmp/explore-it-e02-fix; live test sessions belong to
-this fixer. Stop after lesson-02; coordinator owns E03 onward.
+2026-10-22 UTC: E02 complete. Hooks T1–T3 closed; U09/U10 repaired; timeout and
+snapshot semantics clarified. Current verification: five assigned items absent;
+lesson-01 replay: five present. All 46 integration checks and unit tests pass.
+Actual crash/500/slow-partner replay passes. Acceptance: register/runs/02-acceptance.json.
+No E03 work was performed by this fixer.
 
 ## Done
 
-- `78e56de`, `7dcfb05`: proposal and scoped plan revision.
-- `847f1b3`, `explore-it/v0-inherited`: inherited system, protocol and eight skill drafts.
-- `6e4dd4a`: E01 blind experiment and canonical reconciliation, original evidence preserved.
-- `b839fdf`: reviewed E01 SUT fix, prior target of `explore-it/lesson-01`.
-  Acceptance: `register/runs/01-acceptance.json`; 35 findings absent now/present at v0.
-- Commit containing this state: checkpoint A review evidence and nits 1/2 repair;
-  new `explore-it/lesson-01` target. No earlier commit rewritten.
+- Checkpoint A reviewed NITS and repaired: 99d42fc, explore-it/lesson-01.
+- E02 blind exploration and reconciliation: e390c31; raw 19 stated / 19 confirmed /
+  zero refuted, 46 model cells; two new bugs plus one spec clarification.
+- T1–T3 hooks checkpoint: 3287bd9.
+- Commit containing this state: final U09/U10 fix, checks, lesson and acceptance;
+  tag explore-it/lesson-02. No earlier commit or original report rewritten.
+- All 102 raw exploration artifacts unchanged; E01 repro instruments unchanged.
+  Detailed results, retained setup failures and measured dwell: register/BUILD-STATE.md.
 
 ## Next, in order
 
-1. Finish E02 hooks and U09/U10 fixes, paired verification, checks and lesson-02 tag.
-2. E02 closes T1–T3; then E03–E06 refine/probe the stronger model and remaining
-   spec silences, followed by checkpoint B review.
-3. E07–E09, structural transition guards, final skill revisions/index/landing,
-   checkpoint C review, and the requested final Astra review/report.
-4. Merge/push only under separate owner authorization. All edits stay in this book.
+1. Coordinator exports explore-it/lesson-02 and dispatches fresh blind E03.
+2. E03–E06 refine/probe the stronger existing models and remaining spec silences;
+   checkpoint B receives independent cross-family review afterward.
+3. E07–E09, structural transition guards, final skills/index/landing, checkpoint C
+   and requested final Astra review/report.
+4. Merge/push requires separate owner authorization. All work stays in this book.
 
-## Open work and owners
+## Open decisions and owners
 
-- Checkpoint A: complete, verdict NITS; notes 1/2 repaired. Direct Go invariant
-  assertions (note 3) assigned to E07/E09, final worked examples (note 4) to E09.
-  Canonical filenames remain stable (note 5).
-- A1–A4 policy decisions: coordinator after their actual later probes; not decided here.
-- T1–T3 visibility/clock instruments: next fresh E02 fixer after blind exploration.
-- Detailed source-text citation validation and final skills: later author/reviewer.
-- Predicted qctl/sample-worker numeric loss: later variation/data-journey explorer;
-  still unprobed and excluded from E01 find counts. API-side D08 repair is verified.
-- No active E01 blocker. Incomplete harness attempts remain in the evidence logs;
-  the frozen final current/historical runs both passed. Independent review is
-  complete with its initial startup failure retained.
+- A1–A4 remain assigned to E04–E07; coordinator decides after actual probes.
+- TR-E02-3 broader backlog/liveness metrics and TR-E02-4 eligibility explanation
+  are deferred proposals beyond minimal T1–T3; coordinator owns consideration.
+- E01 review note 3 direct lease/token/tenant invariants: E07/E09. Final worked
+  examples and detailed book-text citation validation: later author/reviewer.
+- qctl/sample-worker numeric precision remains an unprobed lead for later
+  variation/data-journey exploration; do not count it as an evidenced new defect.
+- No E02 blocker. Notification cap/dead-letter/timeout configuration is not
+  decided here. Existing snapshots survive configuration edits and job deletion.
 
 ## Resume
 
-Read this file, `register/BUILD-STATE.md`, the latest reconciliation/fixer brief and
-`git status --short`; inspect actual commits/tags before trusting prose. Do not
-amend original experiment/F-report records. Use the existing branch/worktree and
-only `books/explore-it/`; scratch goes under `/tmp`. Coordinator edits to
-`register/tools/` belong to a separate unit and must not enter the E01 fix commit.
+Branch plan/explore-it; worktree /root/Software/booknotes-work/explore-it.
+Read this state, register/BUILD-STATE.md and actual git status/tags. Git wins over
+stale prose. Only books/explore-it writes and /tmp scratch are authorized; no new
+branch/worktree, push, or raw-record rewrites. Stop this fixer after E02.
 
-Completed review evidence is committed under `register/reviews/A/`. There is no
-active reviewer. Prepared E02 export `/tmp/explore-it-experiment-02` and metadata
-`/tmp/explore-it-coordinator/current.json` are stale until the coordinator
-regenerates them from the repaired lesson tag. Repair simulations and helper:
-`/tmp/explore-it-a-nits/`; no E02 explorer launched in this repair unit.
-
-Before launching a duplicate worker, check the coordinator's active run and local
-process/log liveness. The continuation runner uses `/tmp/bn-sol-exploreit2.log`
-and `/tmp/bn-sol-exploreit2.exit`; an absent exit file alone does not prove it is
-still running. Check process state and recent log progress. Docker queuelet
-services can remain running after a completed unit; they are not an active agent.
-Use project Compose actions only; do not change the concurrent Release It! tree.
-
-Active E02 liveness: `/tmp/explore-it-experiment-02/run.jsonl`, `run.stderr`,
-`run-start.txt`, `run-end.txt`, `exit-status.txt`; launch wrapper
-`register/tools/run-explorer.sh`. Check matching `claude --model claude-opus-5-5`
-process and recent log progress before relaunching. Preserve an interrupted run;
-never create a duplicate or reuse a stalled agent. Metadata is
-`/tmp/explore-it-coordinator/current.json`; collector is `collect-record.py`.
-
-E02 explorer ended; do not relaunch. Fresh fixer brief: register/reconciliations/02-fixer-brief.md (to be dispatched after this experiment commit). Tools and current run metadata remain under /tmp/explore-it-coordinator.
+E02 explorer and fixer commands have ended; do not relaunch or reuse either.
+No E02 background verification is active. Completed command status and logs are
+register/runs/02-acceptance.json; native-agent lifecycle is 02-fixer-dispatch.json
+(process_exit_status intentionally null). Scratch runners remain under
+/tmp/explore-it-e02-fix for diagnosis only. The queuelet lab can remain running;
+that is not an active agent. Historical scratch stack was automatically removed.
+Coordinator owns future exports and must check process/log liveness before any
+fresh dispatch. Do not touch the concurrent Release It! tree.

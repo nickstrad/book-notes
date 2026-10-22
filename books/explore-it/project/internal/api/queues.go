@@ -3,8 +3,10 @@ package api
 import (
 	"database/sql"
 	"net/http"
+	"net/url"
 	"queuelet/internal/stats"
 	"regexp"
+	"strings"
 )
 
 type QueueInput struct {
@@ -35,6 +37,10 @@ func (s *Server) createQueue(w http.ResponseWriter, r *http.Request) {
 	}
 	if !regexp.MustCompile(`^[A-Za-z0-9_-]+$`).MatchString(in.Name) || in.LeaseSeconds < 1 || in.MaxAttempts < 1 || in.RetentionHours < 0 || in.Backoff.BaseSeconds < 0 || (in.Backoff.Kind != "linear" && in.Backoff.Kind != "exponential") {
 		fail(w, 400, "invalid_queue", "name and positive limits required")
+		return
+	}
+	if !validWebhook(in.Webhook.URL) {
+		fail(w, 400, "invalid_webhook", "absolute HTTP(S) URL required")
 		return
 	}
 	v, e := s.S.One(`INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`, ident(r).Namespace, in.Name, in.LeaseSeconds, in.MaxAttempts, in.RetentionHours, in.Backoff.Kind, in.Backoff.BaseSeconds, in.Backoff.MaxSeconds, in.Webhook.URL, in.Webhook.Secret)
@@ -77,6 +83,10 @@ func (s *Server) patchQueue(w http.ResponseWriter, r *http.Request) {
 	}
 	url, secret := q["webhook_url"], q["webhook_secret"]
 	if in.Webhook != nil {
+		if !validWebhook(in.Webhook.URL) {
+			fail(w, 400, "invalid_webhook", "absolute HTTP(S) URL required")
+			return
+		}
 		url = in.Webhook.URL
 		secret = in.Webhook.Secret
 	}
@@ -175,4 +185,16 @@ func (s *Server) namespaceStats(w http.ResponseWriter, r *http.Request) {
 	}
 	v, e := stats.Read(s.S, "namespace_id", id, s.Clock.Now())
 	output(w, v, e)
+}
+
+func validWebhook(raw string) bool {
+	if raw == "" {
+		return true
+	} // Empty disables notifications for future jobs.
+	u, e := url.Parse(raw)
+	if e != nil || u.Hostname() == "" || (u.Scheme != "http" && u.Scheme != "https") || strings.ContainsAny(raw, " \t\r\n") {
+		return false
+	}
+	_, e = http.NewRequest("POST", raw, nil)
+	return e == nil
 }

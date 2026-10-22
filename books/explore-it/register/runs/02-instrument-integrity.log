@@ -1,0 +1,10 @@
+lab/repro/probe.py: OK
+lab/repro/probe02.py: OK
+lab/repro/T01.sh: OK
+lab/repro/T02.sh: OK
+lab/repro/T03.sh: OK
+lab/repro/U09.sh: OK
+lab/repro/U10.sh: OK
+lab/repro/lesson-02.ids: OK
+test/checks/lesson02_direct_test.go: OK
+test/checks/lesson02_test.go: OK

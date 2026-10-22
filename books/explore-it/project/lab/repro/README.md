@@ -29,3 +29,21 @@ plan's estimate for a two-finding recon. Preserve logs and actual timings.
 The seeder's answer-key fixtures live outside this directory and are never
 substitutes for these black-box reproductions. Earlier exploratory records stay
 unchanged when repairs change the observed behavior.
+
+
+E02 adds `probe02.py`, wrappers T01/T02/T03/U09/U10 and `lesson-02.ids`.
+T01/T02/T03 are the machine names for plan T1/T2/T3; they count observation
+gaps, separately from the two new U bugs. The E02 decoder preserves plain-text
+historical 404 responses, so a missing clock/events endpoint is PRESENT for its
+own visibility gap. The crash fixture abandons a public one-second lease and
+uses identical real-time bounds on both versions. T01 inspects actual container
+JSON logs; T02 checks retained history and namespace boundaries; T03 advances
+semantic time and restores real time. U09 also runs the image's actual qctl
+worker defaults with an eight-second container timeout; no current-source CLI
+is substituted in historical runs. Run these instruments serially.
+
+`python3 lab/observe02.py` replays an actual crash-worker exit, 500 notification,
+slow-partner/sender deadline disagreement, recovery and container qctl
+`job events`, `watch QUEUE`, `clock set|advance|reset`. It is an observation replay,
+not a sixth counted bug. The direct legacy-row check uses a private database
+schema; it is intentionally separate from the public U10 repro.

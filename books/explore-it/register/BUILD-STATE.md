@@ -5,12 +5,49 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
-Fresh E02 fixer, hooks checkpoint: added T1 JSON lifecycle/worker events, T2
-namespace-owned retained event history and accurate new lease starts, T3 API
-semantic clock with authenticated lab-only controls. Schema-compatible reset
-works with old trees. Hook probe output is in runs/02-hooks-validation.log;
-unit output runs/02-hooks-test.log. U09/U10 remain for the next logical commit
-within this same authorized fixer unit. No later policy decisions changed.
+E02 complete, final lesson tag explore-it/lesson-02 (commit containing this state).
+Blind record e390c31; hooks checkpoint 3287bd9; final commit repairs U09/U10 and
+adds canonical records, checks, paired verification and lesson. Exact outcomes:
+
+- make up: exit 0, 78.833 s.
+- current verify: exit 0, 54.279 s; FIXED AND CHECKED: 5 absent; regression checks pass.
+- lesson-01 REF verify: exit 0, 61.646 s; DEFECTS REPRODUCED: 5 present.
+- make checks: exit 0, 226.464 s; all 46 named integration checks pass.
+- make test: exit 0, 1.223 s.
+- actual crash/500/slow/recovery and container qctl replay: exit 0, 14.860 s.
+
+Acceptance: runs/02-acceptance.json; logs runs/02-*.log. Measured dwell is only
+lesson-01 → E02, five PRESENT → ABSENT, derived from paired logs (02-dwell.tsv).
+T01/T02/T03 denote plan T1/T2/T3; two U bugs plus three observation gaps are not
+five new correctness findings. Raw score remains 19/19 confirmed, zero refuted,
+zero reading contradictions and 46 model cells. All 102 raw artifacts unchanged.
+
+Spec decisions: retained notification snapshots survive edits/deletion; delivered
+requires sender-received 2xx before its deadline; timed-out side effects may be
+duplicated. No cap/timeout/dead-letter policy added. A1–A4 remain later. TR-E02-3/4
+proposals deferred; TR-E02-1/2/5/6 covered. Structural guards remain E09.
+
+Retained failures: initial REF exits 2 with PROBE ERROR on historical GET events
+405 (old POST verb route). E02-only decoder/oracle now recognizes 404/405 as that
+instrument gap; it does not classify a lifecycle bug as absent. Both directions
+rerun with the same frozen instruments. Initial legacy direct-check exit 1 was a
+Go-nanosecond/PostgreSQL-microsecond fixture equality; corrected to microseconds.
+Original logs and REF Compose diagnostics remain. No required behavioral checks unrun/failing. Authored staged whitespace exits 0;
+full staged whitespace exits 2 for retained raw Compose/diagnostic trailing spaces,
+recorded non-gating rather than rewriting raw outputs.
+
+Reusable helpers: project/lab/repro/probe02.py and lab/observe02.py, indexed in
+lab/repro/README.md. E01 helpers remain unchanged. Process knowledge: missing-route
+status can be 405 when a different-method wildcard matches; fixture timestamp
+precision must match the storage boundary. Observation triggers take app time,
+retain namespace ownership, and never choose transition policy. Pre-hook lease
+starts stay unknown; old attempt histories are not reconstructed. API clock is
+semantic and resets on API restart; workers/network timers remain real.
+
+Resume: existing plan/explore-it, fresh E03 coordinator export from lesson-02.
+No active E02 agent/verification remains; lab containers may still run. Scratch
+/tmp/explore-it-e02-fix runners are completed diagnosis artifacts. Do not reuse
+this fixer. Coordinator's prepare-export.py change is outside this E02 commit.
 
 ## Prior checkpoint A acceptance
 

@@ -23,12 +23,13 @@ func Ship(s *store.Store, now time.Time) error {
 		mac := hmac.New(sha256.New, []byte(r["secret"].(string)))
 		mac.Write(body)
 		req, e := http.NewRequest("POST", r["url"].(string), bytes.NewReader(body))
-		if e != nil {
-			return e
+
+		var resp *http.Response
+		if e == nil {
+			req.Header.Set("Content-Type", "application/json")
+			req.Header.Set("X-Queuelet-Signature", hex.EncodeToString(mac.Sum(nil)))
+			resp, e = (&http.Client{Timeout: 2 * time.Second}).Do(req)
 		}
-		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("X-Queuelet-Signature", hex.EncodeToString(mac.Sum(nil)))
-		resp, e := (&http.Client{Timeout: 2 * time.Second}).Do(req)
 		status := 0
 		message := ""
 		if resp != nil {

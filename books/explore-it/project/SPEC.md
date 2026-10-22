@@ -128,3 +128,19 @@ The background loop promotes scheduled jobs, expires leases, fires cron schedule
 sweeps retention and delivers webhooks. It should recover after a database restart. Webhook latency must not block core
 lifecycle progress. Health reports database availability and loop degradation;
 an unavailable authentication store returns 503 rather than invalid credentials.
+
+
+### Notification destinations, snapshots and acknowledgement
+
+Queue create/PATCH rejects malformed or non-HTTP(S) webhook URLs with 400;
+an empty URL disables future notification snapshots. Each completed job's outbox
+row retains its destination, secret and body. Configuration edits apply to future
+snapshots; deleting a job does not erase pending deliveries. A malformed legacy
+row is counted as a failed attempt and rescheduled independently, so it does not
+stop later rows.
+
+"Delivered" means queuelet received a 2xx response before its two-second HTTP
+client deadline. A timeout does not reveal whether the receiver completed its
+side effect. Failed attempts retry after five seconds; duplicates are possible,
+including when the receiver processed a timed-out request. This lesson adds no
+attempt cap, dead-letter state, timeout knob or backoff policy for notifications.

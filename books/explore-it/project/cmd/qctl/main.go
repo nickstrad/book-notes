@@ -213,7 +213,7 @@ func run(args []string) error {
 		if p(1) == "run" {
 			kinds := opts["kinds"]
 			if kinds == "" {
-				kinds = "echo,sleep,fail,crash,http"
+				kinds = "echo,sleep,fail,fail3,crash,http"
 			}
 			return worker.Run(context.Background(), c, "qctl-worker", p(2), strings.Split(kinds, ","))
 		}

@@ -21,3 +21,5 @@ func l02Absent(t *testing.T, id string) {
 func TestL02T01(t *testing.T) { l02Absent(t, "T01") }
 func TestL02T02(t *testing.T) { l02Absent(t, "T02") }
 func TestL02T03(t *testing.T) { l02Absent(t, "T03") }
+func TestL02U09(t *testing.T) { l02Absent(t, "U09") }
+func TestL02U10(t *testing.T) { l02Absent(t, "U10") }

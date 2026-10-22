@@ -6,9 +6,27 @@ import json
 import sys
 import time
 import subprocess
+import urllib.request
+import urllib.error
 import probe as p
 
 ID=p.ID
+
+# Historical missing routes return plain text; preserve their actual HTTP status.
+# This decoder is E02-local: the E01 oracle stays byte-for-byte unchanged.
+def call(method,path,body=None,key='acme-key',base=p.BASE):
+    req=urllib.request.Request(base+path,None if body is None else json.dumps(body).encode(),
+        {'Authorization':'Bearer '+key,'Content-Type':'application/json'},method=method)
+    try:
+        response=urllib.request.urlopen(req,timeout=15)
+    except urllib.error.HTTPError as error:
+        response=error
+    with response:
+        raw=response.read().decode()
+        try: value=json.loads(raw) if raw else None
+        except json.JSONDecodeError: value=raw
+        return response.status,value
+p.call=call
 
 def complete(queue=None,key='acme-key'):
     queue=queue or p.QPATH
@@ -41,7 +59,16 @@ def run():
             if j['attempts']>0: break
             time.sleep(.2)
         p.require(j['state'] in ['queued','dead'],j)
-        return j['attempts']==0,f'echo {jobs[0]} succeeded; default-worker fail3 {jobs[1]} state={j["state"]} attempts={j["attempts"]}; bound=8s after control'
+        compose_missing=j['attempts']==0
+        queue()
+        cli=[]
+        for kind in ['echo','fail3']:
+            cli.append(p.ok('POST',p.QPATH+'/jobs',{'kind':kind,'max_attempts':1})['id'])
+        result=subprocess.run(p.COMPOSE+['exec','-T','-e','QUEUELET_URL=http://localhost:8200','api','timeout','8','qctl','worker','run',p.NAME],stdin=subprocess.DEVNULL,capture_output=True,text=True)
+        p.require(result.returncode in (124,143),('qctl worker setup failed',result.returncode,result.stderr,result.stdout))
+        control=p.ok('GET',f'/v1/jobs/{cli[0]}'); sample=p.ok('GET',f'/v1/jobs/{cli[1]}')
+        p.require(control['state']=='succeeded',('qctl echo control failed',control))
+        return compose_missing or sample['attempts']==0,f'Compose echo {jobs[0]} succeeded; fail3 {jobs[1]} state={j["state"]} attempts={j["attempts"]}; actual qctl default echo {cli[0]} succeeded, fail3 {cli[1]} attempts={sample["attempts"]}; 8s bounds'
     if ID=='U10':
         bad=p.NAME+'-bad'; statuses=[]
         for url in ['http://bad host/x','ftp://x/y','/relative']:
@@ -74,8 +101,8 @@ def run():
             time.sleep(.5) # allow console poll
             if ID=='T02':
                 st,a=events(j); st2,b=events(c)
-                p.require(st in (200,404) and st2==st,('events status',st,st2))
-                if st==404: return True,f'job {j}/{c} events HTTP 404; crash state and partner failure have no history'
+                p.require(st in (200,404,405) and st2==st,('events status',st,st2))
+                if st in (404,405): return True,f'job {j}/{c} GET events HTTP {st}; crash state and partner failure have no history'
                 a=a['events']; b=b['events']
                 p.require(a and b,('empty history',a,b))
                 failed=[r for r in a if r['event']=='notification_failed']

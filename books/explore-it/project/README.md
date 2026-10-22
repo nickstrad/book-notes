@@ -36,7 +36,7 @@ go run ./cmd/qctl stats imports
 ```
 
 Use the returned worker/job ids and lease token in those examples. Worker mode:
-`go run ./cmd/qctl worker run imports --kinds echo,sleep,fail,crash,http`.
+`go run ./cmd/qctl worker run imports --kinds echo,sleep,fail,fail3,crash,http`.
 Echo returns its payload; sleep reads payload.seconds; fail reads payload.n (or
 use kind fail3); crash exits the worker; http GETs payload.url with a timeout.
 
@@ -94,3 +94,7 @@ on the same stack. SQL receives application timestamps; observational triggers
 record them without choosing transitions. Event history is retained until lab
 reset, independently of job retention, for exploration (production retention
 policy for this diagnostic table is beyond this lab).
+
+The sample worker defaults advertise `fail` and the documented `fail3` example.
+Other numbered kinds, such as `fail7`, require explicit registration with
+`--kinds fail7` or `WORKER_KINDS=fail7`. Queue kind matching remains exact.

@@ -23,7 +23,7 @@ func main() {
 	}
 	kinds := os.Getenv("WORKER_KINDS")
 	if kinds == "" {
-		kinds = "echo,sleep,fail,crash,http"
+		kinds = "echo,sleep,fail,fail3,crash,http"
 	}
 	if e := worker.Run(ctx, client.Env(), name, q, strings.Split(kinds, ",")); e != nil {
 		log.Fatal(e)
