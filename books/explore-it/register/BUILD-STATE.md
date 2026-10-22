@@ -5,6 +5,23 @@ Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No p
 
 ## Current unit
 
+**Checkpoint B review complete.** Fresh Sol review assigned by
+`/root/booknotes-sol-ckptB.md`: [review](reviews/B/review-b.md),
+[acceptance](reviews/B/acceptance.json). E03–E06 pass at their own tags and HEAD;
+E02 also passes at HEAD. All E02–E06 previous-tag repros reproduce 5/8/6/4/8
+assigned items. Full 74-check suite, units and vet pass; A3 remains PRESENT.
+One initial reviewer environment failure (omitted direct database URL) is retained;
+corrected acceptance passes. Two documentation fixes: `d6c34d0` disambiguates the
+historical U09 copy; `b1aee49` documents isolated direct-check database configuration.
+Runtime source/instruments and all lesson tags are unchanged. Lab stopped.
+
+Next: fresh E07 from `explore-it/lesson-06`; not started. Open policies, testability
+requests and reviewer-family/citation limits remain explicit in the review and
+[book STATE](../STATE.md). The E06 repair history below is retained evidence,
+not the current unit or a pending checkpoint-B instruction.
+
+### E06 closure (historical)
+
 **E06 one-round review repair complete**, amended code fix `755d21c`, tagged
 `explore-it/lesson-06`, parent `b3b0559`; supersedes reviewed `7a38788`.
 Exploration `b3b0559`: fresh blind Claude Opus 5.5, exit 0, seven reports reconciled
@@ -26,7 +43,7 @@ no verdict. The fallback and lifecycle evidence are in `reviews/E06/revalidation
 `reviews/E06/revalidation-muse/`. Initial Muse Docker checks were sandbox-blocked;
 reviewers independently ran actual-code tests, vet, hash checks and actual CLI probes,
 while current/REF/74 integration verdicts rest on the builder's recorded acceptance.
-Next is full checkpoint B (E02–E06), then fresh E07 after that gate. All owned runs are
+At this historical handoff, next was full checkpoint B (E02–E06); it is now reviewed above. All owned runs are
 closed and the lab is stopped. Root book STATE.md is the current handoff.
 
 - Repair sequence, sequential and all exit 0: `make up` 50.593 s; current verify

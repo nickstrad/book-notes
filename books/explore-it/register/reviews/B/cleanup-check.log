@@ -1,0 +1,8 @@
+docker ps -a --filter label=com.docker.compose.project=queuelet-review-b --format {{.Names}}
+(empty; exit 0)
+
+docker ps -a --filter label=com.docker.compose.project=queuelet-ref --format {{.Names}}
+(empty; exit 0)
+
+docker volume ls -q --filter label=com.docker.compose.project=queuelet-review-b
+(empty; exit 0)

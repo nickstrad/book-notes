@@ -1,0 +1,25 @@
+REF='' bash lab/verify.sh 05
+ Container queuelet-review-b-worker-b-1 Stopping 
+ Container queuelet-review-b-worker-a-1 Stopping 
+ Container queuelet-review-b-worker-b-1 Stopped 
+ Container queuelet-review-b-worker-a-1 Stopped 
+ Container queuelet-review-b-api-1 Stopping 
+ Container queuelet-review-b-api-1 Stopped 
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-api-1 Starting 
+ Container queuelet-review-b-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-worker-b-1 Starting 
+ Container queuelet-review-b-worker-a-1 Starting 
+ Container queuelet-review-b-worker-a-1 Started 
+ Container queuelet-review-b-worker-b-1 Started 
+ABSENT: U24 — max_attempts 2, lease then delete the worker ×4: 2 deliveries, attempt [1, 2], history ['released', 'released'], now dead
+ABSENT: U25 — lease fields on terminal rows: succeeded 302 none; cancelled 303 none
+ABSENT: U26 — after one lease expiry, ack logged succeeded, cancel logged cancelled
+ABSENT: A2 — lease → purge (deleted 0) → nack leaves dead
+ok  	queuelet/test/checks	108.097s
+FIXED AND CHECKED: 4 absent; regression checks pass
