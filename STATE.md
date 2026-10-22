@@ -56,12 +56,17 @@ Repo-level status for `book-notes`. Update in the same commit as each phase deli
 - **Phase 3 (skills):** done 2026-10-22, Claude Opus 5.5, commit `f27e8aa`. Eight
   `books/release-it/skills/<name>/SKILL.md` per PLAN.md section 5, each with a litefleet worked
   example (files, tags, measured before/after numbers); skills index and landing page updated.
-- **Phase 4 (review):** not started. Next: Fable's final review of the build and the skills
-  (findings reported, not gating). AGENTS.md also asks for a reviewer from a different model
-  family than the builder (Claude); the per-checkpoint Codex reviews in PLAN.md section 6 are not
-  recorded in git. Whether Fable's review replaces them is Nick's call.
+- **Phase 4 (review):** Fable's final review done 2026-10-22: `books/release-it/REVIEW.md`.
+  Verdict PASS with fixes recommended. Full verify matrix run at `main` and at every parent tag:
+  every flaw reproduces on its parent tag; lessons 05–12 IMPROVED at `main`. Findings: 1 high
+  (lesson 04's verify crashes at `main` and any tree from lesson 06 on, a seed-placement parity
+  flip), 6 medium (lessons 01–03's verifies pass only at their own tags; lesson 12 mis-attributes
+  the lab's Godot mechanism to the book; two before-symptoms need a loaded host; a cold-start
+  Postgres race in `reset_stack`; no cross-family review; `v1-hardened` tag predates the skills),
+  10 low. Nothing was fixed; Nick decides. The cross-family review question (AGENTS.md phase 4;
+  PLAN.md section 6's Codex checkpoints) is still open.
 
 ## Next action
 
-Fable final review of release-it (`release-it/v0-flawed` … `release-it/v1-hardened` and the skills),
-then Twin verification and the report to Nick.
+Nick reads `books/release-it/REVIEW.md` and decides which findings to fix (H1 first) and whether a
+Codex/Muse review is added; then Twin verification and the report to Nick.

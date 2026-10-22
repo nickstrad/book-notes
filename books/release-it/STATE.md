@@ -5,8 +5,9 @@ flawed platform (`litefleet`, a baby multitenant SQLite database platform, Go) i
 lesson-by-lesson as patch commits, plus skills that codify the book. Spec:
 `books/release-it/PLAN.md` (v3) + repo `AGENTS.md`. Approved by Nick 2026-10-21.
 
-**Status (2026-10-22):** build and skills COMPLETE on `main`. Nothing is running. Next:
-Fable's final review.
+**Status (2026-10-22):** build and skills COMPLETE on `main`; Fable's final review DONE
+(`REVIEW.md`, verdict PASS with fixes recommended). Nothing is running. Next: Nick rules on the
+findings.
 
 ## Done
 - Plans: v1 `9b221c1` (superseded), v2 `a5b49d4` (superseded), v3 `d4382c0` (approved).
@@ -20,19 +21,22 @@ Fable's final review.
   (after the v1-hardened tag; tags were not moved).
 - Deviations from the plan are recorded per lesson in each note and summarised in the root
   `STATE.md`.
+- Final review: `REVIEW.md` (Fable, 2026-10-22). Full verify matrix at `main` and at every parent
+  tag; 1 high, 6 medium, 10 low findings; nothing fixed.
 
 ## In progress
 - Nothing.
 
 ## Next (in order — Twin drives; Nick: run straight through)
-1. Fable: one big final review of the build and the skills. Findings are reported, never gating.
+1. Nick rules on `REVIEW.md`: H1 (lesson 04's verify at `main`) first, then M1–M6; fixes fold
+   into the lessons they belong to and tags are re-pointed (history is still rewritable).
 2. Twin verification (history/tags spot-check, demo runs) and report to Nick.
 
 ## Open decisions / blockers
 - **Cross-family review (Nick).** AGENTS.md requires a reviewer from a different family than
   the builder (Claude Opus); PLAN.md section 6 asked for a Codex review per checkpoint, and none
   is recorded in git. Fable is also Claude. Nick decides whether Fable's review stands alone or a
-  Codex/Muse review is added.
+  Codex/Muse review is added (REVIEW.md M5).
 
 ## Resume instructions
 - Branch `main` in `/root/Software/book-notes`; no worktree or background run is in use.
