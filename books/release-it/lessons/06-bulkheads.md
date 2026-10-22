@@ -96,6 +96,11 @@ c.  writes to the database being backed up: 250, failed 250, p99 2015.0 ms
 FLAW REPRODUCED: noisy_other_p99_ms 534.0 (want <= 200); reports_control_pool_timeouts 264 (want == 0); reports_control_health_bad 13 (want == 0); backup_target_failures 250 (want == 0); backup_target_p99_ms 2015.0 (want <= 250); writer_lock_hold_s NaN (want <= 1)
 ```
 
+These before numbers came from a loaded host: another project was load-testing on the VM. On a
+quieter VM the final review's before run measured other tenants' p99 at 105 ms during the noisy
+tenant, 9.6× its 11 ms baseline: the ratio still shows the flaw, but the absolute number passes
+the 200 ms line, so (a) alone does not fail there. Phases (b) and (c) reproduced every time.
+
 After:
 
 ```

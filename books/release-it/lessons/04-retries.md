@@ -86,6 +86,12 @@ Before (`lesson-03`):
 FLAW REPRODUCED: recovery_s 19 (want <= 3); duplicate_rows 308 (want == 0); hot_db_load_ratio 1.45 (want <= 1.05); writes_failed_locked 240.9 (want == 0)
 ```
 
+These before numbers came from a loaded host: another project was load-testing on the VM. The
+duplicates reproduce every time; the rest needs contention. The 50-try busy loop only spins when
+bulk writes overlap, which at 10 writes/s needs a slow host. On quieter runs node-a recovered in
+1–2 s, and the hot database saw anywhere from zero to 59 `database is locked` failures (ratio
+1.00–1.09). "Try changing" has the knob that makes the spin show on an idle machine.
+
 After:
 
 ```
@@ -128,6 +134,9 @@ What changed:
 - Give `/execute` the read policy and run `make audit` after the verify: duplicates come back. Then
   change the loadgen's write to `INSERT ... ON CONFLICT(seq) DO NOTHING` on a table with a unique
   `seq`: retries become safe because the tenant made the write idempotent.
+- On an idle machine, raise the hot tenant's write rate or size (`-focus-rate` and `-focus-rows` in
+  `lab/verify/04-retries.sh`) until the before run (`REF=release-it/lesson-03`) shows `database is
+  locked` failures: bulk writes have to overlap for the 50-try busy loop to spin.
 
 ## Read more
 
