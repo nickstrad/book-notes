@@ -4,11 +4,15 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"strconv"
 	"strings"
+	"syscall"
+	"time"
 
 	"litefleet/internal/api"
 	"litefleet/internal/httpx"
@@ -24,6 +28,9 @@ func main() {
 	g := &api.Gateway{
 		Routes: routes.New(controlURL),
 		Nodes:  nodeclient.New(),
+	}
+	if ttl, err := time.ParseDuration(env("ROUTE_CACHE_TTL", "")); err == nil {
+		g.Routes.SetCacheTTL(ttl) // a config override for experiments (lesson 12's Godot run)
 	}
 	health := newProber(controlURL, env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"), g.Routes)
 	go health.run()
@@ -41,6 +48,7 @@ func main() {
 		"control": health.controlCheck,
 		"nodes":   health.nodesCheck,
 		"load":    limiter.Check,
+		"drain":   health.drainCheck,
 	}))
 	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
@@ -49,8 +57,30 @@ func main() {
 		mux.ServeHTTP(w, r)
 	})
 	addr := env("LISTEN", ":8080")
+	srv := httpx.NewServer(addr, httpx.Logged(limiter.Wrap(served)))
+	go drainOnSignal(srv, health)
 	log.Printf("%s listening on %s", instance, addr)
-	log.Fatal(httpx.NewServer(addr, httpx.Logged(limiter.Wrap(served))).ListenAndServe())
+	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+		log.Fatal(err)
+	}
+	select {} // drainOnSignal exits the process
+}
+
+// drainOnSignal takes the gateway out of rotation before it stops: on
+// SIGTERM its health check fails, HAProxy stops sending it requests within
+// two checks, and only then does it stop listening, after the requests it
+// has finish.
+func drainOnSignal(srv *http.Server, p *prober) {
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, syscall.SIGTERM, syscall.SIGINT)
+	<-sig
+	p.draining.Store(true)
+	time.Sleep(2500 * time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	srv.Shutdown(ctx)
+	log.Printf("drained")
+	os.Exit(0)
 }
 
 func env(k, def string) string {

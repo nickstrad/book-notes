@@ -6,6 +6,7 @@ import (
 	"sort"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"litefleet/internal/breaker"
@@ -16,6 +17,8 @@ import (
 // prober checks control and every node once a second, so /health answers
 // from fresh state without making the balancer wait on a dependency.
 type prober struct {
+	draining atomic.Bool
+
 	client  *http.Client
 	control string
 	nodes   map[string]string
@@ -54,6 +57,13 @@ func (p *prober) probe(name, base string) {
 	p.mu.Lock()
 	p.down[name] = !ok
 	p.mu.Unlock()
+}
+
+func (p *prober) drainCheck() (string, string) {
+	if p.draining.Load() {
+		return httpx.Failed, "draining"
+	}
+	return httpx.OK, ""
 }
 
 func (p *prober) isDown(name string) bool {

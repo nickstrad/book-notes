@@ -80,7 +80,7 @@ func (c *Client) Execute(ctx context.Context, rt wire.Route, req wire.ExecuteReq
 // payload will be bad again.
 func transient(err error) bool {
 	if re, ok := err.(*httpx.RemoteError); ok {
-		return re.Status >= 500 && re.Code != "statement_deadline"
+		return re.Status >= 500 && re.Code != "statement_deadline" && re.Code != "draining"
 	}
 	return !errors.Is(err, httpx.ErrBadPayload)
 }

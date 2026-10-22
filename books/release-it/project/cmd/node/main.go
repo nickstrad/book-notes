@@ -12,10 +12,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"syscall"
 	"time"
 
@@ -29,13 +29,14 @@ import (
 )
 
 type node struct {
-	name   string
-	url    string
-	data   string
-	eng    *engine.Engine
-	backup *backup.Job
-	usage  *metering.Queue
-	self   *sql.DB
+	draining atomic.Bool
+	name     string
+	url      string
+	data     string
+	eng      *engine.Engine
+	backup   *backup.Job
+	usage    *metering.Queue
+	self     *sql.DB
 }
 
 func main() {
@@ -74,15 +75,6 @@ func main() {
 	n.exportMetrics()
 	n.usage.Run()
 	go n.eng.Maintain()
-	// On SIGTERM, keep the usage events: everything queued in memory goes to
-	// the outbox before the process exits.
-	go func() {
-		sig := make(chan os.Signal, 1)
-		signal.Notify(sig, syscall.SIGTERM, syscall.SIGINT)
-		<-sig
-		n.usage.Spill(3 * time.Second)
-		os.Exit(0)
-	}()
 	go n.backup.Run()
 	go n.heartbeats(env("CONTROL_URL", "http://control:8090"))
 
@@ -99,12 +91,18 @@ func main() {
 	mux.HandleFunc("POST /internal/backup/{id}", n.backupNow)
 	mux.HandleFunc("GET /health", httpx.HealthHandler(map[string]httpx.Check{
 		"canary": n.canaryCheck, "fds": n.fdCheck, "disk": n.diskCheck, "wal": n.walCheck, "load": limiter.Check,
+		"drain": n.drainCheck,
 	}))
 	mux.Handle("GET /metrics", httpx.MetricsHandler())
 
 	addr := env("LISTEN", ":8070")
+	srv := httpx.NewServer(addr, httpx.Logged(n.admitting(limiter.Wrap(mux))))
+	go n.drainOnSignal(srv, limiter)
 	log.Printf("%s listening on %s", n.name, addr)
-	log.Fatal(httpx.NewServer(addr, httpx.Logged(limiter.Wrap(mux))).ListenAndServe())
+	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+		log.Fatal(err)
+	}
+	select {} // drainOnSignal exits the process
 }
 
 func env(k, def string) string {

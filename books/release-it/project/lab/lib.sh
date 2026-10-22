@@ -63,6 +63,9 @@ reset_stack() {
   else
     psql_ "CREATE DATABASE litefleet"
   fi
+  if migrations_job; then
+    compose --profile jobs run --rm --no-deps migrate >/dev/null 2>&1
+  fi
   compose "${extra[@]}" $(profiles) up -d --no-build >/dev/null 2>&1
   wait_http http://127.0.0.1:18090/health
   wait_http http://127.0.0.1:18071/health
@@ -104,10 +107,19 @@ warmup() {
   sleep 2
 }
 
+# migrations_job — whether the tree under test migrates with a job (lesson 12
+# on) rather than inside control's startup.
+migrations_job() { [[ -e $LF_TREE/cmd/control/jobs.go ]]; }
+
 # migrate_online — apply the tree under test's online migrations, if it has
-# any (migrations/online appears in lesson 08).
+# any (migrations/online appears in lesson 08; from lesson 12 the migrate job
+# applies them).
 migrate_online() {
   local f
+  if migrations_job; then
+    compose --profile jobs run --rm --no-deps migrate 2>&1 | grep -E 'applied|up to date' >&2 || true
+    return
+  fi
   for f in "$LF_TREE"/migrations/online/*.sql; do
     [[ -e $f ]] || continue
     log "migration $(basename "$f")"

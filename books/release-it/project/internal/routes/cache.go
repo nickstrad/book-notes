@@ -59,6 +59,13 @@ func cacheKey(apiKey, dbName string) string {
 	return hex.EncodeToString(sum[:]) + "/" + dbName
 }
 
+// SetCacheTTL changes how long a cached route serves (default TTL).
+func (c *Client) SetCacheTTL(ttl time.Duration) {
+	c.cache.mu.Lock()
+	c.cache.ttl = ttl
+	c.cache.mu.Unlock()
+}
+
 // get returns a live entry and whether the caller should refresh it (the
 // first caller to see it old enough gets true).
 func (c *cache) get(k string) (wire.Route, bool, bool) {

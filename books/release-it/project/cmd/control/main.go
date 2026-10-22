@@ -17,7 +17,6 @@ import (
 	"litefleet/internal/placement"
 	"litefleet/internal/registry"
 	"litefleet/internal/wire"
-	"litefleet/migrations"
 )
 
 type control struct {
@@ -31,19 +30,21 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Bring the schema up to date before serving.
-	for {
-		err := reg.Migrate(migrations.FS)
-		if err == nil {
-			break
+	// Jobs. The serving process never changes the schema: migrations are a
+	// job run before a rollout (make migrate), so DDL never ships inside a
+	// deploy of the code that needs it.
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "migrate":
+			migrate(reg, os.Args[2:])
+			return
+		case "backfill":
+			backfill(reg, os.Args[2:])
+			return
+		case "purge":
+			purge(reg, os.Args[2:])
+			return
 		}
-		log.Printf("migrate: %v; retrying", err)
-		time.Sleep(time.Second)
-	}
-
-	if len(os.Args) > 1 && os.Args[1] == "purge" {
-		purge(reg, os.Args[2:])
-		return
 	}
 
 	c := &control{reg: reg, nodes: newNodeCommands(env("NODES", "node-a=http://node-a:8070,node-b=http://node-b:8070"))}

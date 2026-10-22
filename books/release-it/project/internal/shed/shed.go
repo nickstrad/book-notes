@@ -71,6 +71,9 @@ func (l *Limiter) Wrap(h http.Handler) http.Handler {
 	})
 }
 
+// InFlight is the number of requests being served.
+func (l *Limiter) InFlight() int64 { return l.all.Load() }
+
 // Check reports degraded while the limiter has shed in the last 5 s.
 func (l *Limiter) Check() (string, string) {
 	if time.Since(time.Unix(0, l.lastShed.Load())) < 5*time.Second {

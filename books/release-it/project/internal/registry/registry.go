@@ -207,7 +207,8 @@ func (r *Registry) AbortCreate(ctx context.Context, dbID string) error {
 func (r *Registry) ListDatabases(ctx context.Context, tenantID string) (_ []wire.Database, err error) {
 	defer observe(time.Now(), &err)
 	rows, err := r.db.QueryContext(ctx, `
-		SELECT d.id::text, d.name, p.owner_node, d.state, d.bytes_total, d.rows_total, d.size_bytes,
+		SELECT d.id::text, d.name, p.owner_node, d.state,
+		       coalesce(d.bytes_total_v2, d.bytes_total), coalesce(d.rows_total_v2, d.rows_total), d.size_bytes,
 		       coalesce(to_char(d.last_backup_at, 'YYYY-MM-DD"T"HH24:MI:SSOF'), '')
 		FROM databases d JOIN placement p ON p.database_id = d.id
 		WHERE d.tenant_id = $1 AND d.state = 'active'
@@ -267,10 +268,10 @@ func (r *Registry) Heartbeat(ctx context.Context, hb wire.Heartbeat) (err error)
 	}
 	defer tx.Rollback()
 	if _, err := tx.ExecContext(ctx, `
-		INSERT INTO nodes (name, url, last_heartbeat_at, fds, disk_free_bytes)
-		VALUES ($1, $2, now(), $3, $4)
-		ON CONFLICT (name) DO UPDATE SET url = $2, last_heartbeat_at = now(), fds = $3, disk_free_bytes = $4`,
-		hb.Node, hb.URL, hb.FDs, hb.DiskFree); err != nil {
+		INSERT INTO nodes (name, url, last_heartbeat_at, fds, disk_free_bytes, wire_version)
+		VALUES ($1, $2, now(), $3, $4, $5)
+		ON CONFLICT (name) DO UPDATE SET url = $2, last_heartbeat_at = now(), fds = $3, disk_free_bytes = $4, wire_version = $5`,
+		hb.Node, hb.URL, hb.FDs, hb.DiskFree, max(hb.WireVersion, 1)); err != nil {
 		return fmt.Errorf("upsert node: %w", err)
 	}
 	for _, d := range hb.Databases {
@@ -282,7 +283,11 @@ func (r *Registry) Heartbeat(ctx context.Context, hb wire.Heartbeat) (err error)
 		}
 		if _, err := tx.ExecContext(ctx, `
 			UPDATE databases SET size_bytes = $2,
-			       bytes_total = bytes_total + $3, rows_total = rows_total + $4,
+			       bytes_total_v2 = coalesce(bytes_total_v2, bytes_total) + $3,
+			       rows_total_v2 = coalesce(rows_total_v2, rows_total) + $4,
+			       -- expand phase: the 32-bit columns are kept for older readers and saturate
+			       bytes_total = least(bytes_total::bigint + $3, 2147483647),
+			       rows_total = least(rows_total::bigint + $4, 2147483647),
 			       last_backup_at = coalesce($5, last_backup_at)
 			WHERE id = $1`,
 			d.ID, d.Bytes, d.ReadBytes+d.WriteBytes, d.ReadRows+d.WriteRows, lastBackup); err != nil {

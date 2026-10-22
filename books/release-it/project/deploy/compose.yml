@@ -74,6 +74,17 @@ services:
     depends_on:
       postgres: { condition: service_healthy }
 
+  # Schema changes are a job run before a rollout, never by control at
+  # startup: make migrate, make backfill, make contract.
+  migrate:
+    image: litefleet/control:${CONTROL_TAG:-cur}
+    command: ["migrate"]
+    profiles: [jobs]
+    environment:
+      DATABASE_URL: postgres://litefleet:litefleet@postgres:5432/litefleet
+    depends_on:
+      postgres: { condition: service_healthy }
+
   # The ledger purge, every minute in the lab (daily in production).
   purger:
     image: litefleet/control:${CONTROL_TAG:-cur}
@@ -108,17 +119,17 @@ services:
 
   gateway-a:
     <<: *gateway
-    environment: { INSTANCE: gateway-a, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
+    environment: { INSTANCE: gateway-a, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}", ROUTE_CACHE_TTL: "${ROUTE_CACHE_TTL:-}" }
     ports: ["18001:8080"]
 
   gateway-b:
     <<: *gateway
-    environment: { INSTANCE: gateway-b, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
+    environment: { INSTANCE: gateway-b, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}", ROUTE_CACHE_TTL: "${ROUTE_CACHE_TTL:-}" }
     ports: ["18002:8080"]
 
   gateway-c:
     <<: *gateway
-    environment: { INSTANCE: gateway-c, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}" }
+    environment: { INSTANCE: gateway-c, CONTROL_URL: "http://toxiproxy:9090", NODES: "node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072", SHED_LIMIT: "${GATEWAY_SHED_LIMIT:-24}", ROUTE_CACHE_TTL: "${ROUTE_CACHE_TTL:-}" }
     ports: ["18003:8080"]
 
   haproxy:

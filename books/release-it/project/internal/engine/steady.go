@@ -76,3 +76,17 @@ func (e *Engine) closeIdle() {
 		}
 	}
 }
+
+// Close checkpoints every open database's WAL into its file and closes the
+// handle: a node that stops this way leaves nothing for the next start to
+// recover.
+func (e *Engine) Close() {
+	for _, h := range e.Open() {
+		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+		h.db.ExecContext(ctx, "PRAGMA wal_checkpoint(TRUNCATE)")
+		cancel()
+	}
+	e.mu.Lock()
+	e.handles.Purge() // evicts and closes each handle
+	e.mu.Unlock()
+}

@@ -87,11 +87,12 @@ type ProvisionRequest struct {
 
 // Heartbeat is what a node reports to control every few seconds.
 type Heartbeat struct {
-	Node      string           `json:"node"`
-	URL       string           `json:"url"`
-	FDs       int              `json:"fds"`
-	DiskFree  int64            `json:"disk_free"`
-	Databases []DatabaseReport `json:"databases"`
+	Node        string           `json:"node"`
+	WireVersion int              `json:"wire_version,omitempty"` // absent from version-1 nodes
+	URL         string           `json:"url"`
+	FDs         int              `json:"fds"`
+	DiskFree    int64            `json:"disk_free"`
+	Databases   []DatabaseReport `json:"databases"`
 }
 
 // DatabaseReport is one database's size and its activity since the previous

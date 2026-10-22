@@ -238,7 +238,10 @@ func (g *Gateway) usage(w http.ResponseWriter, r *http.Request) {
 func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err error) {
 	var re *httpx.RemoteError
 	if errors.As(err, &re) {
-		if re.Status == http.StatusTooManyRequests || re.Status == http.StatusServiceUnavailable {
+		switch {
+		case re.Code == "draining":
+			w.Header().Set("Retry-After", "2") // the node is restarting
+		case re.Status == http.StatusTooManyRequests || re.Status == http.StatusServiceUnavailable:
 			w.Header().Set("Retry-After", "1") // refused, not failed: come back shortly
 		}
 		httpx.WriteError(w, r, re.Status, re.Code, re.Message)
@@ -247,6 +250,12 @@ func writeUpstreamError(w http.ResponseWriter, r *http.Request, dep string, err 
 	if errors.Is(err, breaker.ErrOpen) {
 		w.Header().Set("Retry-After", "5")
 		httpx.WriteError(w, r, http.StatusServiceUnavailable, "control_unavailable", "control plane unavailable; known databases keep working")
+		return
+	}
+	if errors.Is(err, httpx.ErrUnreachable) && dep != "control" {
+		// Nobody listening: a node restarting (after its drain) or down.
+		w.Header().Set("Retry-After", "1")
+		httpx.WriteError(w, r, http.StatusServiceUnavailable, "node_unavailable", dep+" unavailable; retry shortly")
 		return
 	}
 	if httpx.Outcome(0, err) == "timeout" {
