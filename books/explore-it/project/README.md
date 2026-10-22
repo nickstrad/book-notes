@@ -20,6 +20,14 @@ make down
 The API listens at `http://localhost:18200`, the webhook sink at port 18201 and
 PostgreSQL at port 15433. Seed keys are `acme-key`, `globex-key`, and `admin-key`.
 Set `QUEUELET_URL` and `QUEUELET_KEY` to select a service and namespace.
+For an isolated stack, also set `COMPOSE_PROJECT_NAME`, `QUEUELET_IMAGE_TAG`,
+`QUEUELET_API_PORT`, `QUEUELET_HOOK_PORT`, `QUEUELET_PG_PORT` and `QUEUELET_HOOK_URL`.
+Direct integration checks (`make checks`, also selected by `make verify LESSON=02`)
+connect through `QUEUELET_DATABASE_URL`; when changing the PostgreSQL host port, set
+it explicitly, for example
+`postgres://queuelet:queuelet@localhost:15493/queuelet?sslmode=disable`.
+The direct checks otherwise default to port 15433; `QUEUELET_PG_PORT` alone only
+changes the Compose port mapping.
 `make seed` / `make reset` discard this stack's data and restore 300 mixed-state
 jobs, queues emails/reports/imports, two schedules and two running workers.
 `results/manifest.json` contains the fixture ids and keys. Workers consume emails

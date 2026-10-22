@@ -44,12 +44,16 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 ## In progress
 
 Checkpoint B reviewer: fresh Codex Sol run authorized by `/root/booknotes-sol-ckptB.md`.
-Runtime clone `/tmp/explore-it-checkpoint-b/repo`; runner `run.py`, progress and acceptance
+Runtime clone `/tmp/explore-it-checkpoint-b/repo`; runners `run.py` / `resume.py`, progress and acceptance
 JSON in its parent; isolated Compose project `queuelet-review-b` (18260/18261/15493).
-The shell runner is active while `pgrep -af /tmp/explore-it-checkpoint-b/run.py` finds it.
+The corrected runner is active while `pgrep -af /tmp/explore-it-checkpoint-b/resume.py` finds it.
 Do not launch a second runner over this stack. Review evidence will be copied under
 `register/reviews/B/`. The stale historical U09 copy is now explicitly disambiguated in
 the canonical index without editing the original observation. No runtime fix so far.
+First HEAD E02 failed because this reviewer omitted `QUEUELET_DATABASE_URL` and the
+2 direct checks tried default port 15433; all five public repros passed. The failed
+log remains intact; corrected HEAD acceptance passed with the explicit port-15493
+URL. Project README now documents this requirement for isolated verification.
 
 Earlier E06 explorer, fixer, repair and reviewer runs are closed; their owned lab is stopped.
 The initial Muse NITS report is preserved. Its runtime was stopped after report/result
