@@ -4,7 +4,7 @@
 one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
 
-**Status (2026-10-22): E08 exploration complete (U36–U38, A5 assigned); E08 fix in progress. E07 independent review pending.**
+**Status (2026-10-22): E08 done (exploration `a2e7b01`, fix tagged `explore-it/lesson-08`). Independent non-Claude reviews of E07 and E08 pending; E09 next.**
 
 ## Done
 
@@ -46,6 +46,20 @@ Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md).
   REF probe fixture corrected (lease epochs after worker deletion), not an oracle; see the
   [lesson deviations](lessons/07-state-it.md#deviations).
 
+- E08: exploration `a2e7b01` (blind Opus, exit 0, 19:18–19:40Z), fix tagged
+  `explore-it/lesson-08`. Score: 21 stated / 20 confirmed / 1 refuted / 1 contradicted
+  reading prediction (`/health` under a frozen database) / 4 reports / 7 new ecosystem cells.
+  U36 (API start without database), U37 (slow destinations starve the webhook shipper),
+  U38 (frozen database hangs `/health` and auth) fixed; A5 (DST gap/overlap) decided:
+  classic cron (skipped time once at gap end, repeated time once). D21–D24 early-fixed
+  controls ABSENT at both tags; no planted miss to disclose.
+- Acceptance (`register/runs/08-opus-acceptance.json`): current `FIXED AND CHECKED: 4 absent`
+  (141 s), REF lesson-07 `DEFECTS REPRODUCED: 4 present` (135 s), `make checks` (85 check
+  functions, 574 s), `make test`, `go vet`, integrity all exit 0. Earlier attempts retained
+  (`08-opus-*-attempt1/2.log`): a cosmetic message fix, then U37's leftover rows broke U03's
+  drain control and the suite exceeded Go's 10-minute default; U37 now drains its rows and
+  `make checks` passes `-timeout 30m`. Paired dwell only. Fixer seat was Opus per the brief.
+
 All 27 planted defects were fixed in E01. Later experiments tested remaining questions
 and new faults, not fictional late discoveries. E06's original score remains
 20 stated / 18 confirmed / 2 refuted / 2 qualified reading contradictions / 30 cells.
@@ -54,11 +68,8 @@ Dwell remains paired evidence only; no full sweep was run.
 
 ## In progress
 
-E08 exploration closed (blind Opus, exit 0, 19:18–19:40Z): 21 stated / 20 confirmed /
-1 refuted / 1 contradicted reading prediction / 4 reports / 7 new ecosystem cells.
-E08-F01/F02/F04 → U36/U37/U38; E08-F03 → spec silence A5 (decision in
-[reconciliation](register/reconciliations/08.md)). Explorer stack removed. The fix step is next
-(Opus fixer seat, isolated project `queuelet-fix08`).
+Nothing is running; no stack is up for this book (`queuelet-e08`, `queuelet-fix08` and
+`queuelet-ref` are down with volumes removed).
 
 ## Decisions and open items
 
@@ -69,8 +80,14 @@ is the complete checkpoint disposition, alongside the original
 [defect index](exploration/defects/INDEX.md). Original “open” wording in raw records
 is historical, not an override of later documented decisions.
 
-- **E07 review seat:** this lesson's fixer was Claude (Opus) rather than the planned Codex
-  seeder family, so its independent review should be Codex or Muse, not Claude.
+- **E08 forward questions:** Q-E08-1 worker identity within a tenant (any key holder can
+  lease as any worker id), H-E08-22 redirects counted as delivered, H-E08-23 one schedule
+  that cannot advance stops later schedules (`Fire` returns on first error), H-E08-24 pool
+  exhaustion during a freeze, T-E08-1…3 (fault hook, shipper lag metric/health, partner
+  signature and redirect modes); handlers past auth and the loop are still unbounded
+  against a frozen database.
+- **E07/E08 review seat:** both fixers were Claude (Opus) rather than the planned Codex
+  seeder family, so their independent reviews should be Codex or Muse, not Claude.
 - E07 forward questions: Q-E07-1 heartbeat shortening, Q-E07-2 error message consistency,
   H-E07-17 large-sweep latency, T-E07-1/2 sweep duration and deterministic race
   instruments; unprobed cancel/retry/promote/retention interleavings.
@@ -108,9 +125,11 @@ resolved by these fixes are distinguished from the remaining questions in the re
 
 ## Next
 
-1. Independent review of E07 (`explore-it/lesson-07`) from a non-Claude family.
-2. E08 (Surround it) as a separate fresh explorer run, then E09; checkpoint C review,
-   final skills and landing page.
+1. Independent reviews of E07 (`explore-it/lesson-07`) and E08 (`explore-it/lesson-08`)
+   from a non-Claude family.
+2. E09 (Explain it) as a separate fresh explorer run from `explore-it/lesson-08`
+   (`prepare-export.py 9 explore-it/lesson-08`); then checkpoint C review, final skills
+   and landing page.
 3. Merge adds-only after Release It! lands; no push or merge was performed here.
 
 ## Resume
@@ -123,6 +142,9 @@ resolved by these fixes are distinguished from the remaining questions in the re
   Its first HEAD E02 attempt omitted that variable and failed against default port
   15433; retained logs show five public repros passed before two direct checks failed.
   Corrected acceptance reran with the explicit database URL. No SUT change was needed.
+- E08: explorer export `/tmp/explore-it-experiment-08` (coordinator metadata in
+  `/tmp/explore-it-coordinator/current.json`); fix acceptance `register/runs/08-opus-runner.py`,
+  project `queuelet-fix08` (ports 18390/18391/15623); REF `queuelet-ref`. All stacks down.
 - E07 acceptance: `register/runs/07-opus-runner.py` with project `queuelet-fix07` (ports
   18290/18291/15523); REF uses `queuelet-ref` (18210/18211/15443). Both stacks were taken
   down. Earlier Codex runs' logs (`07-*.log` without `opus`) are retained as history.

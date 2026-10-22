@@ -160,6 +160,9 @@ The API returns complete stored results and errors.
 Cron uses five fields: minute, hour, day of month, month and day of week.
 Time zones use IANA identifiers, defaulting to UTC.
 Schedule times follow the named zone's local civil time, including offset changes.
+A schedule with a fixed hour runs once per matching local time: a time skipped by a
+spring-forward transition runs once at the end of the gap, and a time that occurs twice
+runs at its first occurrence only. Wildcard-hour schedules follow elapsed time.
 The enabled flag defaults to true; disabled schedules do not enqueue jobs.
 Schedule creation follows enqueue's payload rule: omitted means `{}`, explicit null
 and non-object values are invalid. PATCH does not accept payload.
@@ -187,6 +190,9 @@ The background loop promotes scheduled jobs, expires leases, fires cron schedule
 sweeps retention and delivers webhooks. It should recover after a database restart. Webhook latency must not block core
 lifecycle progress. Health reports database availability and loop degradation;
 an unavailable authentication store returns 503 rather than invalid credentials.
+`/health` answers within one second, degraded while the database does not answer;
+authentication waits at most five seconds for the database before that 503.
+An API that starts while its database is unreachable waits for it and then serves.
 
 
 ### Notification destinations, snapshots and acknowledgement
@@ -201,5 +207,7 @@ stop later rows.
 "Delivered" means queuelet received a 2xx response before its two-second HTTP
 client deadline. A timeout does not reveal whether the receiver completed its
 side effect. Failed attempts retry after five seconds; duplicates are possible,
-including when the receiver processed a timed-out request. This lesson adds no
+including when the receiver processed a timed-out request. Each pass attempts up to
+20 due rows concurrently, least recently scheduled first, so slow or unreachable
+destinations cannot keep other rows from being attempted. This lesson adds no
 attempt cap, dead-letter state, timeout knob or backoff policy for notifications.

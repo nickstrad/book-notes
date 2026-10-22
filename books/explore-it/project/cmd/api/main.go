@@ -16,11 +16,23 @@ import (
 
 func main() {
 	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
 	s, e := store.Open(os.Getenv("DATABASE_URL"))
-	if e != nil {
+	if s == nil {
 		log.Fatal(e)
 	}
 	defer s.DB.Close()
+	// A database that is not reachable yet is an outage to wait out, not a fatal error.
+	for e != nil {
+		log.Printf("database unavailable at startup, retrying: %v", e)
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(time.Second):
+		}
+		e = s.DB.PingContext(ctx)
+	}
 	files, e := filepath.Glob("migrations/*.sql")
 	if e != nil {
 		log.Fatal(e)
@@ -34,8 +46,6 @@ func main() {
 			log.Fatal(e)
 		}
 	}
-	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	defer stop()
 	app := api.New(s)
 	go app.Loop(ctx)
 	server := &http.Server{Addr: ":8200", Handler: app.Handler(), ReadHeaderTimeout: 5 * time.Second}

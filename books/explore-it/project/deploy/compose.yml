@@ -2,6 +2,7 @@ name: queuelet
 services:
   postgres:
     image: postgres:17-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: queuelet
       POSTGRES_PASSWORD: queuelet
@@ -18,6 +19,7 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
     image: queuelet:${QUEUELET_IMAGE_TAG:-local}
+    restart: unless-stopped
     environment:
       DATABASE_URL: postgres://queuelet:queuelet@postgres:5432/queuelet?sslmode=disable
       QUEUELET_TEST_CLOCK: "1"

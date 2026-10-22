@@ -123,3 +123,22 @@ and NUL. Direct checks additionally cover transactional missing-worker identity 
 unrelated-queue progress while a purge waits. Checks may use internal database
 locks; the public reproductions do not. D18–D20 stay unchanged passing controls in
 both E07 verify directions and are excluded from its three-item verdict count.
+
+E08 adds `probe08.py`, U36/U37/U38/A5 and `lesson-08.ids`. Each probe changes a
+neighbour of the whole lab, so they run serially and restore it in `finally`.
+U36 stops PostgreSQL, restarts only the API, starts PostgreSQL and requires `/health`
+200 within 30 s with no operator start; on the current tree it then kills the API
+and PostgreSQL processes from the host (an unexpected exit, unlike `docker kill`,
+which Docker treats as an operator stop) and requires recovery again. U38 freezes
+PostgreSQL with `docker pause` for 12 s on a timer and requires `/health` 503 within
+3 s and an authenticated request 503 within 8 s, then healthy service after thaw.
+A5 walks the API test clock across 2027-03-14 and 2027-11-07 in America/New_York
+and requires 02:00/02:30 once on each civil day and 01:30 once in the repeated
+hour; the 09:00 and hourly schedules are controls that must hold at every tag.
+U37 starts a second hooksink container in `timeout` mode on the lab network, sends
+22 globex notifications to it, then requires one acme notification to the healthy
+hooksink within 20 s; the slow partner must have been attempted. Cleanup switches
+that partner to `ok` and waits for this probe's rows to deliver before removing it,
+because U03's control waits for the whole outbox to drain.
+D21–D24 (fixed in E01) run as unchanged early-fixed controls in both directions
+and are excluded from the four-item verdict count.

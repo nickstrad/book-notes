@@ -14,7 +14,7 @@ verify:
 dwell:
 	bash lab/dwell.sh $(LESSON)
 checks:
-	go test -tags checks ./test/checks -count=1
+	go test -tags checks ./test/checks -count=1 -timeout 30m
 test:
 	go test ./...
 logs:

@@ -1,0 +1,141 @@
+{"command": ["make", "verify", "LESSON=08", "REF=explore-it/lesson-07"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix08", "QUEUELET_IMAGE_TAG": "fix08", "QUEUELET_API_PORT": "18390", "QUEUELET_HOOK_PORT": "18391", "QUEUELET_PG_PORT": "15623", "QUEUELET_URL": "http://localhost:18390", "QUEUELET_HOOK_URL": "http://localhost:18391", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15623/queuelet?sslmode=disable"}, "start": "2026-10-22T19:54:37.307021+00:00"}
+REF='explore-it/lesson-07' bash lab/verify.sh 08
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 281.23kB 0.0s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#7 DONE 0.1s
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.2s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 36.9s
+
+#14 [stage-1 3/5] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 DONE 0.1s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 0.9s done
+#18 exporting manifest sha256:7485b4ce3db401e5b8d8279f9cfc8fc12080c219119dd355a9ac08d650dda516
+#18 exporting manifest sha256:7485b4ce3db401e5b8d8279f9cfc8fc12080c219119dd355a9ac08d650dda516 0.1s done
+#18 exporting config sha256:e327f3101c4556a465ac9e0a6c42f6ed0bb5123b0ff9634b682768ecf5442fc3 0.0s done
+#18 exporting attestation manifest sha256:fef5d1f33679825ec4a1a9ef5c6b69b62aef479b24d5011c159be53d68c215e6
+#18 exporting attestation manifest sha256:fef5d1f33679825ec4a1a9ef5c6b69b62aef479b24d5011c159be53d68c215e6 0.1s done
+#18 exporting manifest list sha256:2045a10b5f7a0575139fb6e2af0c382ccdd78c52f1e1c7b481242a6bbb9aa564 0.0s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref
+#18 unpacking to docker.io/library/queuelet:ref 0.1s done
+#18 DONE 1.3s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+{"after": "exited Exited (1) 35 seconds ago", "during": "exited Exited (1) 4 seconds ago", "elapsed": 30.2, "label": "api start without database", "probe": "U36", "recovered": false}
+PRESENT: U36 — api during outage='exited Exited (1) 4 seconds ago'; health 200 within 30 s of database start=False; api after='exited Exited (1) 35 seconds ago'
+{"auth": [200, 11.34], "freeze_seconds": 12, "health": [200, 11.32], "label": "frozen database", "probe": "U38"}
+PRESENT: U38 — during freeze /health=200 after 11.32s (bound 503 ≤3s); authenticated GET=200 after 11.34s (bound 503 ≤8s); recovered after unpause
+{"label": "dst runs", "probe": "A5", "runs": {"fb-0130": ["2027-11-07T05:30:00Z", "2027-11-07T06:30:00Z"], "gap-0200": ["2027-03-15T06:00:00Z"], "gap-0230": ["2027-03-15T06:30:00Z"], "hourly": ["2027-11-07T05:00:00Z", "2027-11-07T06:00:00Z", "2027-11-07T07:00:00Z"], "nine": ["2027-03-13T14:00:00Z", "2027-03-14T13:00:00Z"]}}
+PRESENT: A5 — spring gap days={'gap-0230': ['2027-03-15'], 'gap-0200': ['2027-03-15']}; fall-back 01:30 runs=['2027-11-07T05:30:00Z', '2027-11-07T06:30:00Z']; 09:00 and hourly controls hold
+{"acme_row": "0|f", "delivered_after": null, "label": "slow partner", "probe": "U37", "slow_requests": 11}
+PRESENT: U37 — acme notification delivered after=Nones (bound 20 s) behind 22 globex rows to a timing-out destination; slow destination requests=11; acme outbox attempts|delivered=0|f
+ABSENT: D21 — foreign namespace get/attempts/cancel/retry/ack/nack/heartbeat/delete=[404, 404, 404, 404, 404, 404, 404, 404]
+ABSENT: D22 — after DB recovery delayed job=queued; health HTTP 200 ok
+ABSENT: D23 — opposite-season cron requires 02:00 America/New_York; next local fire=2027-01-01T02:00:00-05:00
+ABSENT: D24 — signature_valid=True
+DEFECTS REPRODUCED: 4 present
+
+EXIT 0; ELAPSED 173.335s

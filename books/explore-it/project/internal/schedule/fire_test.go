@@ -24,3 +24,28 @@ func TestInvalidCron(t *testing.T) {
 		t.Fatal("invalid cron accepted")
 	}
 }
+func TestNextAcrossDST(t *testing.T) {
+	at := func(s string) time.Time { v, _ := time.Parse(time.RFC3339, s); return v }
+	for _, tc := range []struct{ cron, after, want string }{
+		// Spring forward 2027-03-14: 02:xx does not exist in New York; run at 03:00 EDT once.
+		{"30 2 * * *", "2027-03-13T12:00:00Z", "2027-03-14T07:00:00Z"},
+		{"0 2 * * *", "2027-03-13T12:00:00Z", "2027-03-14T07:00:00Z"},
+		{"30 2 * * *", "2027-03-14T07:00:00Z", "2027-03-15T06:30:00Z"},
+		{"* 2 * * *", "2027-03-14T07:00:00Z", "2027-03-15T06:00:00Z"},
+		// Fall back 2027-11-07: 01:xx occurs twice; run at the first occurrence only.
+		{"30 1 * * *", "2027-11-07T04:00:00Z", "2027-11-07T05:30:00Z"},
+		{"30 1 * * *", "2027-11-07T05:30:00Z", "2027-11-08T06:30:00Z"},
+		{"0 1 * * *", "2027-11-07T05:00:00Z", "2027-11-08T06:00:00Z"},
+		// Outside the transition hour the offset change is honoured.
+		{"0 9 * * *", "2027-03-13T14:00:00Z", "2027-03-14T13:00:00Z"},
+		{"0 2 * * *", "2027-03-15T06:00:00Z", "2027-03-16T06:00:00Z"},
+		// Wildcard hours follow elapsed time in both directions.
+		{"0 * * * *", "2027-03-14T06:00:00Z", "2027-03-14T07:00:00Z"},
+		{"0 * * * *", "2027-11-07T05:00:00Z", "2027-11-07T06:00:00Z"},
+	} {
+		got, e := Next(tc.cron, "America/New_York", 0, at(tc.after))
+		if e != nil || !got.Equal(at(tc.want)) {
+			t.Errorf("%s after %s = %v %v, want %s", tc.cron, tc.after, got, e, tc.want)
+		}
+	}
+}

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/robfig/cron/v3"
 	"queuelet/internal/store"
+	"strings"
 	"time"
 )
 
@@ -19,7 +20,41 @@ func Next(expression, zone string, offset int, after time.Time) (time.Time, erro
 	if e != nil {
 		return time.Time{}, e
 	}
-	return s.Next(after.In(loc)), nil
+	if strings.HasPrefix(strings.Fields(expression)[1], "*") {
+		// Wildcard hours follow elapsed time across offset changes.
+		return s.Next(after.In(loc)), nil
+	}
+	// Fixed hours match local civil times: a time skipped by a transition runs once
+	// at the end of the gap, and a repeated time runs at its first occurrence only.
+	l := after.In(loc)
+	wall := time.Date(l.Year(), l.Month(), l.Day(), l.Hour(), l.Minute(), l.Second(), l.Nanosecond(), time.UTC)
+	for range 1500 {
+		if wall = s.Next(wall); wall.IsZero() {
+			return wall, nil
+		}
+		if t := civil(wall, loc); t.After(after) {
+			return t, nil
+		}
+	}
+	return time.Time{}, fmt.Errorf("schedule cannot advance")
+}
+
+// civil returns the first instant at which loc shows the wall-clock time carried in
+// wall's UTC fields, or the end of the gap when a transition skips that time.
+func civil(wall time.Time, loc *time.Location) time.Time {
+	var first time.Time
+	for _, probe := range []time.Time{wall.Add(-48 * time.Hour), wall.Add(48 * time.Hour)} {
+		_, offset := probe.In(loc).Zone()
+		t := wall.Add(-time.Duration(offset) * time.Second)
+		if l := t.In(loc); l.Hour() == wall.Hour() && l.Minute() == wall.Minute() && l.Day() == wall.Day() && (first.IsZero() || t.Before(first)) {
+			first = t
+		}
+	}
+	if first.IsZero() {
+		_, offset := wall.Add(-48 * time.Hour).In(loc).Zone()
+		first, _ = wall.Add(-time.Duration(offset) * time.Second).In(loc).ZoneBounds()
+	}
+	return first
 }
 func Offset(zone string, now time.Time) (int, error) {
 	loc, e := time.LoadLocation(zone)

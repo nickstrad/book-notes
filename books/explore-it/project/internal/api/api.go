@@ -7,6 +7,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -125,7 +126,7 @@ func (s *Server) Handler() http.Handler {
 	m.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(r.Context(), time.Second)
 		defer cancel()
-		if s.S.DB.PingContext(ctx) != nil || s.coreFailed.Load() || s.shipFailed.Load() {
+		if bounded(time.Second, func() error { return s.S.DB.PingContext(ctx) }) != nil || s.coreFailed.Load() || s.shipFailed.Load() {
 			write(w, 503, map[string]any{"status": "degraded"})
 			return
 		}
@@ -160,7 +161,9 @@ func (s *Server) Handler() http.Handler {
 		}
 		h := sha256.Sum256([]byte(strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")))
 		var id identity
-		if e := s.S.DB.QueryRow(`SELECT namespace_id,admin FROM api_keys WHERE key_hash=$1`, hex.EncodeToString(h[:])).Scan(&id.Namespace, &id.Admin); e != nil {
+		if e := bounded(5*time.Second, func() error {
+			return s.S.DB.QueryRow(`SELECT namespace_id,admin FROM api_keys WHERE key_hash=$1`, hex.EncodeToString(h[:])).Scan(&id.Namespace, &id.Admin)
+		}); e != nil {
 			if e == sql.ErrNoRows {
 				fail(w, 401, "unauthorized", "invalid API key")
 			} else {
@@ -197,10 +200,26 @@ type statusOnly struct {
 
 func (c *statusOnly) WriteHeader(status int)      { c.status = status }
 func (c *statusOnly) Write(b []byte) (int, error) { return len(b), nil }
+
+var errDatabaseTimeout = errors.New("database did not answer in time")
+
+// bounded gives a database call a deadline the driver cannot extend: lib/pq keeps
+// waiting for an unresponsive server after its context is cancelled. An abandoned
+// call finishes in the background once the server answers.
+func bounded(limit time.Duration, call func() error) error {
+	done := make(chan error, 1)
+	go func() { done <- call() }()
+	select {
+	case e := <-done:
+		return e
+	case <-time.After(limit):
+		return errDatabaseTimeout
+	}
+}
 func (s *Server) Loop(ctx context.Context) {
 	// Event console reads committed history; it never controls transitions.
 	go s.logEvents(ctx)
-	// A single shipper preserves delivery ordering without blocking lifecycle sweeps.
+	// A separate shipper keeps partner latency off the lifecycle sweeps.
 	go func() {
 		t := time.NewTicker(time.Second)
 		defer t.Stop()

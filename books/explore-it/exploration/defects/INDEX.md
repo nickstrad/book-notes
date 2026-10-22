@@ -135,7 +135,14 @@ Original score: 13 stated / 12 confirmed / 1 refuted / 1 contradicted reading pr
 
 ## Experiment 08 additions
 
-- [U36](U36-api-start-without-database.md): E08-F01, API start without a database exits for good; open.
-- [U37](U37-webhook-shipper-starvation.md): E08-F02, slow destinations starve later notifications; open.
-- [U38](U38-frozen-database-hangs-requests.md): E08-F04, frozen database hangs requests and `/health`; open.
-- [A5](A5-dst-gap-and-overlap.md): E08-F03, spec silence on non-existent and repeated local times; coordinator decision.
+Four original reports remain immutable. D21–D24 were found and repaired in E01 and held
+here as controls; they are not E08 discoveries.
+
+| ID | Original | Current record |
+|---|---|---|
+| U36 | [E08-F01](E08-F01-api-does-not-recover-from-start-without-database.md) | [fixed in lesson 08](U36-api-start-without-database.md) |
+| U37 | [E08-F02](E08-F02-slow-destination-starves-all-later-notifications.md) | [fixed in lesson 08](U37-webhook-shipper-starvation.md) |
+| U38 | [E08-F04](E08-F04-frozen-database-hangs-health-and-api.md) | [fixed in lesson 08](U38-frozen-database-hangs-requests.md) |
+| A5 | [E08-F03](E08-F03-dst-gap-skips-and-overlap-double-fires.md) | [resolved in lesson 08](A5-dst-gap-and-overlap.md) (spec decision) |
+
+Original score: 21 stated / 20 confirmed / 1 refuted / 1 contradicted reading prediction / 4 reports / 7 new cells.
