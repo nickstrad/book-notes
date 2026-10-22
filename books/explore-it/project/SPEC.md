@@ -22,7 +22,7 @@ Unknown fields and invalid enum values should be rejected as invalid commands.
 Names use ASCII letters, digits, underscores and hyphens.
 Configuration defaults are `lease_seconds:30`, `max_attempts:3`,
 `backoff:{kind:"exponential",base_seconds:5}`, `retention_hours:24`.
-Lease duration and maximum attempts must be positive.
+Lease duration and maximum attempts must be positive; retention hours must be nonnegative.
 Backoff kind is `linear` or `exponential`; the base is a nonnegative number
 of seconds. Failed jobs retry with exponential backoff from `base_seconds`
 or linear backoff when configured.
@@ -37,7 +37,7 @@ become orphaned. Callers must handle a conflict for a nonempty queue.
 `POST /v1/queues/{name}/pause` prevents new leases and scheduled deliveries.
 `POST /v1/queues/{name}/resume` allows work again. Missed periodic ticks should
 not create an unbounded burst of catch-up jobs.
-`POST /v1/queues/{name}/purge` removes all pending jobs.
+`POST /v1/queues/{name}/purge` removes all pending jobs: scheduled, queued and retry_wait.
 
 ## Jobs
 
@@ -53,6 +53,7 @@ Repeated use of an idempotency key within a queue returns the original job.
 
 `POST /v1/queues/{name}/jobs:batch` accepts `{"jobs":[…]}` with 1–500 jobs.
 An empty or oversized batch is invalid and returns 400 without insertion.
+A batch is atomic: an invalid element leaves none of its new jobs stored.
 It returns `{"ids":[…]}` after accepted jobs are stored.
 `GET /v1/queues/{name}/jobs` supports state, kind, limit and cursor filters.
 The limit defaults to 100 and is at most 500. The returned next cursor can
@@ -114,13 +115,16 @@ must reflect the current configuration.
 
 Terminal transitions produce a webhook outbox entry when the queue has a URL.
 The entry includes job id, state, result and last error.
-Notification data must agree with the stored data or explicitly indicate truncation.
+Notification results preserve their JSON type; results and errors are complete.
 Each POST carries `X-Queuelet-Signature`, a hex HMAC-SHA256 over the body using
 the configured secret. Delivery is successful only on a 2xx response.
 Failed notifications are retried. Delivery is at least once.
 
 `GET /v1/queues/{name}/stats` and `GET /v1/namespaces/{name}/stats` expose counts
 by exact state, oldest queued age in seconds and completed jobs in the last hour.
+Queued age uses the later of creation and readiness, over queued rows only.
 `GET /health` returns service health; `GET /metrics` returns minimal text metrics.
 The background loop promotes scheduled jobs, expires leases, fires cron schedules,
-sweeps retention and delivers webhooks. It should recover after a database restart.
+sweeps retention and delivers webhooks. It should recover after a database restart. Webhook latency must not block core
+lifecycle progress. Health reports database availability and loop degradation;
+an unavailable authentication store returns 503 rather than invalid credentials.

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"bytes"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -10,16 +11,21 @@ import (
 )
 
 type JobInput struct {
-	Kind           string         `json:"kind"`
-	Payload        map[string]any `json:"payload"`
-	Priority       *int           `json:"priority"`
-	RunAt          *time.Time     `json:"run_at"`
-	DelaySeconds   *int           `json:"delay_seconds"`
-	MaxAttempts    *int           `json:"max_attempts"`
-	IdempotencyKey *string        `json:"idempotency_key"`
+	Kind           string          `json:"kind"`
+	Payload        json.RawMessage `json:"payload"`
+	Priority       *int            `json:"priority"`
+	RunAt          *time.Time      `json:"run_at"`
+	DelaySeconds   *int            `json:"delay_seconds"`
+	MaxAttempts    *int            `json:"max_attempts"`
+	IdempotencyKey *string         `json:"idempotency_key"`
 }
 
+type jobWriter interface{ QueryRow(string, ...any) *sql.Row }
+
 func (s *Server) insertJob(q map[string]any, in JobInput, now time.Time) (map[string]any, error) {
+	return insertJob(s.S.DB, q, in, now)
+}
+func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[string]any, error) {
 	if in.Kind == "" {
 		return nil, fmt.Errorf("kind required")
 	}
@@ -29,6 +35,9 @@ func (s *Server) insertJob(q map[string]any, in JobInput, now time.Time) (map[st
 	priority := 5
 	if in.Priority != nil {
 		priority = *in.Priority
+	}
+	if priority < 0 || priority > 9 {
+		return nil, fmt.Errorf("priority must be 0–9")
 	}
 	max := int(q["max_attempts"].(int64))
 	if in.MaxAttempts != nil {
@@ -49,14 +58,20 @@ func (s *Server) insertJob(q map[string]any, in JobInput, now time.Time) (map[st
 		state = "scheduled"
 	}
 	if in.Payload == nil {
-		in.Payload = map[string]any{}
+		in.Payload = json.RawMessage(`{}`)
 	}
-	b, _ := json.Marshal(in.Payload)
-	v, e := s.S.One(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now)
+	in.Payload = bytes.TrimSpace(in.Payload)
+	if len(in.Payload) == 0 || in.Payload[0] != '{' || !json.Valid(in.Payload) {
+		return nil, fmt.Errorf("payload must be a JSON object")
+	}
+	b := in.Payload
+	var id int64
+	var status string
+	e := db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
 	if e == sql.ErrNoRows && in.IdempotencyKey != nil {
-		return s.S.One(`SELECT id,state FROM jobs WHERE queue_id=$1 AND idempotency_key=$2`, q["id"], *in.IdempotencyKey)
+		e = db.QueryRow(`SELECT id,state FROM jobs WHERE queue_id=$1 AND idempotency_key=$2`, q["id"], *in.IdempotencyKey).Scan(&id, &status)
 	}
-	return v, e
+	return map[string]any{"id": id, "state": status}, e
 }
 func (s *Server) enqueue(w http.ResponseWriter, r *http.Request, q map[string]any) {
 	var in JobInput
@@ -77,18 +92,29 @@ func (s *Server) batch(w http.ResponseWriter, r *http.Request, q map[string]any)
 	if !decode(w, r, &in) {
 		return
 	}
-	if len(in.Jobs) > 500 {
-		in.Jobs = in.Jobs[:500]
+	if len(in.Jobs) < 1 || len(in.Jobs) > 500 {
+		fail(w, 400, "invalid_batch", "jobs must contain 1–500 elements")
+		return
 	}
+	tx, e := s.S.DB.Begin()
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	defer tx.Rollback()
 	ids := []any{}
 	now := time.Now()
 	for _, j := range in.Jobs {
-		v, e := s.insertJob(q, j, now)
+		v, e := insertJob(tx, q, j, now)
 		if e != nil {
 			fail(w, 400, "invalid_job", e)
 			return
 		}
 		ids = append(ids, v["id"])
+	}
+	if e = tx.Commit(); e != nil {
+		fail(w, 500, "database_error", e)
+		return
 	}
 	write(w, 201, map[string]any{"ids": ids})
 }
@@ -99,9 +125,10 @@ func (s *Server) listJobs(w http.ResponseWriter, r *http.Request) {
 	}
 	state := r.URL.Query().Get("state")
 	switch state {
-	case "queued", "scheduled", "leased", "retry_wait", "succeeded", "dead", "cancelled":
+	case "", "queued", "scheduled", "leased", "retry_wait", "succeeded", "dead", "cancelled":
 	default:
-		state = ""
+		fail(w, 400, "invalid_state", "unknown state filter")
+		return
 	}
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
 	if limit < 1 || limit > 500 {

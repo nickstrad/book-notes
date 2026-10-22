@@ -8,13 +8,13 @@ import (
 )
 
 type ScheduleInput struct {
-	Name     string         `json:"name"`
-	Queue    string         `json:"queue"`
-	Kind     string         `json:"kind"`
-	Payload  map[string]any `json:"payload"`
-	Cron     string         `json:"cron"`
-	Timezone string         `json:"timezone"`
-	Enabled  *bool          `json:"enabled"`
+	Name     string          `json:"name"`
+	Queue    string          `json:"queue"`
+	Kind     string          `json:"kind"`
+	Payload  json.RawMessage `json:"payload"`
+	Cron     string          `json:"cron"`
+	Timezone string          `json:"timezone"`
+	Enabled  *bool           `json:"enabled"`
 }
 
 func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
@@ -81,9 +81,55 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &in) {
 		return
 	}
-	v, e := s.S.One(`UPDATE schedules SET cron=COALESCE($3,cron),timezone=COALESCE($4,timezone),enabled=COALESCE($5,enabled) WHERE id=$1 AND namespace_id=$2 RETURNING *`, num(r, "id"), ident(r).Namespace, in.Cron, in.Timezone, in.Enabled)
+
+	tx, e := s.S.DB.Begin()
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	defer tx.Rollback()
+	var expression, zone string
+	var enabled bool
+	e = tx.QueryRow(`SELECT cron,timezone,enabled FROM schedules WHERE id=$1 AND namespace_id=$2 FOR UPDATE`, num(r, "id"), ident(r).Namespace).Scan(&expression, &zone, &enabled)
 	if e != nil {
 		fail(w, 404, "schedule_not_found", e)
+		return
+	}
+	if in.Cron != nil {
+		expression = *in.Cron
+	}
+	if in.Timezone != nil {
+		zone = *in.Timezone
+	}
+	if in.Enabled != nil {
+		enabled = *in.Enabled
+	}
+	now := time.Now()
+	off, e := schedule.Offset(zone, now)
+	if e != nil {
+		fail(w, 400, "invalid_timezone", e)
+		return
+	}
+	next, e := schedule.Next(expression, zone, off, now)
+	if e != nil {
+		fail(w, 400, "invalid_cron", e)
+		return
+	}
+	var nextValue any
+	if enabled {
+		nextValue = next
+	}
+	_, e = tx.Exec(`UPDATE schedules SET cron=$3,timezone=$4,enabled=$5,next_run_at=$6,zone_offset=$7 WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace, expression, zone, enabled, nextValue, off)
+	if e == nil {
+		e = tx.Commit()
+	}
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	v, e := s.S.One(`SELECT * FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
+	if e != nil {
+		fail(w, 500, "database_error", e)
 		return
 	}
 	write(w, 200, v)

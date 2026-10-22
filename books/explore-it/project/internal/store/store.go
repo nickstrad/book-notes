@@ -41,9 +41,8 @@ func (s *Store) Rows(query string, args ...any) ([]map[string]any, error) {
 			v := vals[i]
 			if b, ok := v.([]byte); ok {
 				if k == "payload" || k == "result" || k == "body" {
-					var j any
-					if json.Unmarshal(b, &j) == nil {
-						v = j
+					if json.Valid(b) {
+						v = json.RawMessage(b)
 					} else {
 						v = string(b)
 					}

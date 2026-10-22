@@ -1,0 +1,104 @@
+{
+  "recorded_at": "2026-10-22T02:46:33.022207+00:00",
+  "unit": "E01 fixer",
+  "assigned_ids": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "U01",
+    "U02",
+    "U03",
+    "U04",
+    "U05",
+    "U06",
+    "U07",
+    "U08"
+  ],
+  "commands": [
+    {
+      "command": "make up",
+      "exit_status": 0,
+      "log": "01-up.log"
+    },
+    {
+      "command": "make verify LESSON=01",
+      "exit_status": 0,
+      "verdict": "FIXED AND CHECKED: 35 absent; regression checks pass",
+      "log": "01-current.log"
+    },
+    {
+      "command": "make verify LESSON=01 REF=explore-it/v0-inherited",
+      "exit_status": 0,
+      "verdict": "DEFECTS REPRODUCED: 35 present",
+      "log": "01-historical.log"
+    },
+    {
+      "command": "make checks",
+      "exit_status": 0,
+      "named_checks": 39,
+      "package_seconds": 191.586,
+      "log": "01-checks.log"
+    },
+    {
+      "command": "make test",
+      "exit_status": 0,
+      "log": "01-test.log"
+    },
+    {
+      "command": "register/proof/A1.sh through A4.sh (seeder controls)",
+      "exit_status": 0,
+      "present": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "log": "01-unresolved-controls.log"
+    }
+  ],
+  "dwell": {
+    "source": "paired verification logs, not an extra dwell campaign",
+    "v0_present": 35,
+    "lesson01_absent": 35,
+    "per_id_file": "01-dwell.tsv"
+  },
+  "original_explorer_artifacts_unchanged": 57,
+  "instrument_hash_manifest": "01-instruments.sha256",
+  "hashes_verified": true,
+  "failed_attempts_retained": [
+    "01-current-attempt1.log",
+    "01-current-attempt2.log",
+    "01-historical-attempt1.log"
+  ],
+  "pending": [
+    "independent checkpoint review",
+    "T1-T3",
+    "A1-A4 decisions",
+    "unprobed qctl/worker numeric siblings",
+    "final skills and detailed source-text citation review"
+  ]
+}

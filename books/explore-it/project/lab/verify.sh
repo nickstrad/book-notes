@@ -31,13 +31,24 @@ idsfile="lab/repro/lesson-$lesson.ids"
 [[ -f $idsfile ]] || { echo "No reproductions registered for lesson $lesson" >&2; exit 2; }
 bash lab/reset.sh
 present=0; absent=0
-while read -r id; do
-  [[ -n $id ]] || continue
-  result=$(bash "lab/repro/$id.sh")
+mapfile -t ids < "$idsfile"
+expected=${#ids[@]}
+((expected > 0)) || { echo "PROBE ERROR: empty reproduction list" >&2; exit 2; }
+declare -A seen=()
+for id in "${ids[@]}"; do
+  [[ $id =~ ^([DU][0-9]{2}|[AT][0-9]+)$ ]] || { echo "PROBE ERROR: invalid reproduction ID $id" >&2; exit 2; }
+  [[ ! -v seen[$id] ]] || { echo "PROBE ERROR: duplicate reproduction ID $id" >&2; exit 2; }
+  seen[$id]=1
+  result=$(bash "lab/repro/$id.sh" </dev/null)
   printf '%s\n' "$result"
-  if [[ $result == PRESENT:* ]]; then ((present+=1)); elif [[ $result == ABSENT:* ]]; then ((absent+=1)); else exit 2; fi
-done < "$idsfile"
+  if [[ $result == "PRESENT: $id — "* ]]; then ((present+=1)); elif [[ $result == "ABSENT: $id — "* ]]; then ((absent+=1)); else echo "PROBE ERROR: invalid verdict for $id" >&2; exit 2; fi
+done
+[[ $((present+absent)) == "$expected" ]] || exit 2
 if [[ -n ${REF:-} ]]; then
+  if [[ ${QUEUELET_DWELL:-0} == 1 ]]; then
+    echo "DWELL: $present present; $absent absent"
+    exit 0
+  fi
   [[ $absent == 0 ]] || { echo 'Historical reproduction incomplete' >&2; exit 1; }
   echo "DEFECTS REPRODUCED: $present present"
 else

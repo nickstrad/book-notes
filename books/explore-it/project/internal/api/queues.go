@@ -1,8 +1,10 @@
 package api
 
 import (
+	"database/sql"
 	"net/http"
 	"queuelet/internal/stats"
+	"regexp"
 	"time"
 )
 
@@ -32,7 +34,7 @@ func (s *Server) createQueue(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &in) {
 		return
 	}
-	if in.Name == "" || in.LeaseSeconds < 1 || in.MaxAttempts < 1 || in.Backoff.BaseSeconds < 0 {
+	if !regexp.MustCompile(`^[A-Za-z0-9_-]+$`).MatchString(in.Name) || in.LeaseSeconds < 1 || in.MaxAttempts < 1 || in.RetentionHours < 0 || in.Backoff.BaseSeconds < 0 || (in.Backoff.Kind != "linear" && in.Backoff.Kind != "exponential") {
 		fail(w, 400, "invalid_queue", "name and positive limits required")
 		return
 	}
@@ -70,7 +72,7 @@ func (s *Server) patchQueue(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &in) {
 		return
 	}
-	if in.LeaseSeconds != nil && *in.LeaseSeconds < 1 {
+	if (in.LeaseSeconds != nil && *in.LeaseSeconds < 1) || (in.MaxAttempts != nil && *in.MaxAttempts < 1) || (in.RetentionHours != nil && *in.RetentionHours < 0) {
 		fail(w, 400, "invalid_queue", "lease_seconds must be positive")
 		return
 	}
@@ -83,13 +85,49 @@ func (s *Server) patchQueue(w http.ResponseWriter, r *http.Request) {
 	output(w, v, e)
 }
 func (s *Server) deleteQueue(w http.ResponseWriter, r *http.Request) {
-	_, e := s.S.DB.Exec(`DELETE FROM queues WHERE namespace_id=$1 AND name=$2`, ident(r).Namespace, r.PathValue("q"))
+
+	tx, e := s.S.DB.Begin()
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	defer tx.Rollback()
+	// Serialize owner deletion with inserts; refuse rather than orphan dependents.
+	if _, e = tx.Exec(`LOCK TABLE queues,jobs,schedules IN SHARE ROW EXCLUSIVE MODE`); e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	var id int64
+	e = tx.QueryRow(`SELECT id FROM queues WHERE namespace_id=$1 AND name=$2`, ident(r).Namespace, r.PathValue("q")).Scan(&id)
+	if e == sql.ErrNoRows {
+		fail(w, 404, "queue_not_found", "queue not found")
+		return
+	}
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	var nonempty bool
+	e = tx.QueryRow(`SELECT EXISTS(SELECT 1 FROM jobs WHERE queue_id=$1) OR EXISTS(SELECT 1 FROM schedules WHERE queue_id=$1)`, id).Scan(&nonempty)
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return
+	}
+	if nonempty {
+		fail(w, 409, "queue_not_empty", "queue owns jobs or schedules")
+		return
+	}
+	_, e = tx.Exec(`DELETE FROM queues WHERE id=$1`, id)
+	if e == nil {
+		e = tx.Commit()
+	}
 	if e != nil {
 		fail(w, 500, "database_error", e)
 		return
 	}
 	write(w, 204, nil)
 }
+
 func (s *Server) queueVerb(w http.ResponseWriter, r *http.Request) {
 	q, ok := s.queueOrError(w, r)
 	if !ok {
@@ -106,7 +144,7 @@ func (s *Server) queueVerb(w http.ResponseWriter, r *http.Request) {
 		_, e := s.S.DB.Exec(`UPDATE queues SET paused=$2 WHERE id=$1`, q["id"], r.PathValue("verb") == "pause")
 		output(w, map[string]any{"ok": true}, e)
 	case "purge":
-		res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE queue_id=$1 AND state='queued'`, q["id"])
+		res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE queue_id=$1 AND state IN ('queued','scheduled','retry_wait')`, q["id"])
 		if e != nil {
 			fail(w, 500, "database_error", e)
 			return

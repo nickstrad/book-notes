@@ -10,6 +10,6 @@ func (j *Service) Cancel(id int64, now time.Time) error {
 	return j.Notify(id, now)
 }
 func (j *Service) Retry(id int64, now time.Time) error {
-	r, e := j.S.DB.Exec(`UPDATE jobs SET state='queued',attempts=0,run_at=$2,finished_at=NULL WHERE id=$1`, id, now)
+	r, e := j.S.DB.Exec(`UPDATE jobs SET state='queued',attempts=0,run_at=$2,finished_at=NULL WHERE id=$1 AND state='dead'`, id, now)
 	return Changed(r, e)
 }

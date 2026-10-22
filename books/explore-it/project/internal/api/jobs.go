@@ -1,6 +1,7 @@
 package api
 
 import (
+	"database/sql"
 	"github.com/lib/pq"
 	"net/http"
 	"queuelet/internal/jobs"
@@ -8,6 +9,9 @@ import (
 )
 
 func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
+	if !s.ownJob(w, r) {
+		return
+	}
 	v, e := s.S.One(`SELECT * FROM jobs WHERE id=$1`, num(r, "id"))
 	if e != nil {
 		fail(w, 404, "job_not_found", e)
@@ -16,10 +20,16 @@ func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
 	write(w, 200, v)
 }
 func (s *Server) attempts(w http.ResponseWriter, r *http.Request) {
+	if !s.ownJob(w, r) {
+		return
+	}
 	v, e := s.S.Rows(`SELECT * FROM attempts WHERE job_id=$1 ORDER BY n`, num(r, "id"))
 	output(w, map[string]any{"attempts": v}, e)
 }
 func (s *Server) deleteJob(w http.ResponseWriter, r *http.Request) {
+	if !s.ownJob(w, r) {
+		return
+	}
 	res, e := s.S.DB.Exec(`DELETE FROM jobs WHERE id=$1 AND state IN ('succeeded','dead','cancelled')`, num(r, "id"))
 	if e = jobs.Changed(res, e); e != nil {
 		fail(w, 409, "state_conflict", e)
@@ -28,6 +38,9 @@ func (s *Server) deleteJob(w http.ResponseWriter, r *http.Request) {
 	write(w, 204, nil)
 }
 func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
+	if !s.ownJob(w, r) {
+		return
+	}
 	id := num(r, "id")
 	now := time.Now()
 	var e error
@@ -129,9 +142,23 @@ func (s *Server) lease(w http.ResponseWriter, r *http.Request, q map[string]any)
 	var exists bool
 	s.S.DB.QueryRow(`SELECT EXISTS(SELECT 1 FROM workers WHERE id=$1 AND namespace_id=$2)`, in.WorkerID, ident(r).Namespace).Scan(&exists)
 	if !exists {
-		fail(w, 200, "worker_not_found", "unknown worker")
+		fail(w, 404, "worker_not_found", "unknown worker")
 		return
 	}
 	v, e := s.Jobs.Lease(q["id"].(int64), in.WorkerID, in.MaxJobs, time.Now())
 	output(w, map[string]any{"jobs": v}, e)
+}
+
+func (s *Server) ownJob(w http.ResponseWriter, r *http.Request) bool {
+	var id int64
+	e := s.S.DB.QueryRow(`SELECT id FROM jobs WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace).Scan(&id)
+	if e == sql.ErrNoRows {
+		fail(w, 404, "job_not_found", "job not found")
+		return false
+	}
+	if e != nil {
+		fail(w, 500, "database_error", e)
+		return false
+	}
+	return true
 }

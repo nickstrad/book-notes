@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"queuelet/internal/api"
 	"queuelet/internal/store"
 	"syscall"
@@ -18,12 +19,18 @@ func main() {
 		log.Fatal(e)
 	}
 	defer s.DB.Close()
-	data, e := os.ReadFile("migrations/001.sql")
+	files, e := filepath.Glob("migrations/*.sql")
 	if e != nil {
 		log.Fatal(e)
 	}
-	if _, e = s.DB.Exec(string(data)); e != nil {
-		log.Fatal(e)
+	for _, file := range files {
+		data, e := os.ReadFile(file)
+		if e != nil {
+			log.Fatal(e)
+		}
+		if _, e = s.DB.Exec(string(data)); e != nil {
+			log.Fatal(e)
+		}
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()

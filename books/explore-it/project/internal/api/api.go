@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"crypto/sha256"
+	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -14,12 +15,15 @@ import (
 	"queuelet/internal/webhook"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
 type Server struct {
-	S    *store.Store
-	Jobs *jobs.Service
+	S          *store.Store
+	Jobs       *jobs.Service
+	coreFailed atomic.Bool
+	shipFailed atomic.Bool
 }
 type identity struct {
 	Namespace int64
@@ -27,7 +31,7 @@ type identity struct {
 }
 type authKey struct{}
 
-func New(s *store.Store) *Server     { return &Server{s, &jobs.Service{S: s}} }
+func New(s *store.Store) *Server     { return &Server{S: s, Jobs: &jobs.Service{S: s}} }
 func ident(r *http.Request) identity { return r.Context().Value(authKey{}).(identity) }
 func write(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
@@ -41,6 +45,8 @@ func fail(w http.ResponseWriter, status int, code string, e any) {
 }
 func decode(w http.ResponseWriter, r *http.Request, v any) bool {
 	d := json.NewDecoder(http.MaxBytesReader(w, r.Body, 2<<20))
+	d.DisallowUnknownFields()
+	d.UseNumber()
 	if e := d.Decode(v); e != nil {
 		fail(w, 400, "invalid_json", e)
 		return false
@@ -53,7 +59,15 @@ func num(r *http.Request, name string) int64 {
 }
 func (s *Server) Handler() http.Handler {
 	m := http.NewServeMux()
-	m.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) { write(w, 200, map[string]any{"status": "ok"}) })
+	m.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		ctx, cancel := context.WithTimeout(r.Context(), time.Second)
+		defer cancel()
+		if s.S.DB.PingContext(ctx) != nil || s.coreFailed.Load() || s.shipFailed.Load() {
+			write(w, 503, map[string]any{"status": "degraded"})
+			return
+		}
+		write(w, 200, map[string]any{"status": "ok"})
+	})
 	m.HandleFunc("GET /metrics", func(w http.ResponseWriter, r *http.Request) { fmt.Fprintln(w, "queuelet_up 1") })
 	m.HandleFunc("POST /v1/queues", s.createQueue)
 	m.HandleFunc("GET /v1/queues", s.listQueues)
@@ -84,13 +98,34 @@ func (s *Server) Handler() http.Handler {
 		h := sha256.Sum256([]byte(strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")))
 		var id identity
 		if e := s.S.DB.QueryRow(`SELECT namespace_id,admin FROM api_keys WHERE key_hash=$1`, hex.EncodeToString(h[:])).Scan(&id.Namespace, &id.Admin); e != nil {
-			fail(w, 401, "unauthorized", "invalid API key")
+			if e == sql.ErrNoRows {
+				fail(w, 401, "unauthorized", "invalid API key")
+			} else {
+				fail(w, 503, "auth_unavailable", "authentication store unavailable")
+			}
 			return
 		}
 		m.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), authKey{}, id)))
 	})
 }
 func (s *Server) Loop(ctx context.Context) {
+	// A single shipper preserves delivery ordering without blocking lifecycle sweeps.
+	go func() {
+		t := time.NewTicker(time.Second)
+		defer t.Stop()
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case now := <-t.C:
+				e := webhook.Ship(s.S, now)
+				s.shipFailed.Store(e != nil)
+				if e != nil {
+					log.Printf("webhook task: %v", e)
+				}
+			}
+		}
+	}()
 	t := time.NewTicker(time.Second)
 	defer t.Stop()
 	for {
@@ -98,12 +133,14 @@ func (s *Server) Loop(ctx context.Context) {
 		case <-ctx.Done():
 			return
 		case now := <-t.C:
-			for _, step := range []func(time.Time) error{s.Jobs.Promote, s.Jobs.Expire, func(t time.Time) error { return schedule.Fire(s.S, t) }, s.Jobs.Retain, func(t time.Time) error { return webhook.Ship(s.S, t) }} {
+			failed := false
+			for _, step := range []func(time.Time) error{s.Jobs.Promote, s.Jobs.Expire, func(t time.Time) error { return schedule.Fire(s.S, t) }, s.Jobs.Retain} {
 				if e := step(now); e != nil {
 					log.Printf("background task: %v", e)
-					return
+					failed = true
 				}
 			}
+			s.coreFailed.Store(failed)
 		}
 	}
 }

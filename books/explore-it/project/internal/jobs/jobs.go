@@ -21,7 +21,7 @@ func Backoff(kind string, base, attempt int) time.Duration {
 	return time.Duration(base) * time.Second * time.Duration(uint64(1)<<uint(attempt-1))
 }
 
-const LeaseOrder = "priority DESC, created_at"
+const LeaseOrder = "priority DESC, created_at, id"
 
 func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, error) {
 	tx, e := j.S.DB.Begin()
@@ -76,14 +76,7 @@ func (j *Service) Notify(id int64, now time.Time) error {
 	if url == "" {
 		return nil
 	}
-	r := string(result)
-	if len(r) > 1024 {
-		r = r[:1024]
-	}
-	if len(errtext) > 256 {
-		errtext = errtext[:256]
-	}
-	body, _ := json.Marshal(map[string]any{"job_id": id, "state": state, "result": r, "last_error": errtext})
+	body, _ := json.Marshal(map[string]any{"job_id": id, "state": state, "result": json.RawMessage(result), "last_error": errtext})
 	_, e = j.S.DB.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at) VALUES($1,$2,$3,$4,$5)`, id, url, secret, string(body), now)
 	return e
 }

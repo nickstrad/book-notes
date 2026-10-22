@@ -20,9 +20,8 @@ func Ship(s *store.Store, now time.Time) error {
 	}
 	for _, r := range rows {
 		body, _ := json.Marshal(r["body"])
-		pretty, _ := json.MarshalIndent(r["body"], "", "  ")
 		mac := hmac.New(sha256.New, []byte(r["secret"].(string)))
-		mac.Write(pretty)
+		mac.Write(body)
 		req, e := http.NewRequest("POST", r["url"].(string), bytes.NewReader(body))
 		if e != nil {
 			return e
@@ -30,7 +29,11 @@ func Ship(s *store.Store, now time.Time) error {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("X-Queuelet-Signature", hex.EncodeToString(mac.Sum(nil)))
 		resp, e := (&http.Client{Timeout: 2 * time.Second}).Do(req)
-		if e != nil {
+		if e != nil || resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			if resp != nil {
+				io.Copy(io.Discard, resp.Body)
+				resp.Body.Close()
+			}
 			_, e = s.DB.Exec(`UPDATE webhook_outbox SET attempts=attempts+1,next_at=$2 WHERE id=$1`, r["id"], now.Add(5*time.Second))
 			if e != nil {
 				return e
