@@ -13,3 +13,5 @@ Durable findings about building and verifying this repo's lab projects, cut from
   lesson sizes, for the next plan's estimates.
 - [verify-workarounds-hide-defects.md](verify-workarounds-hide-defects.md) — a script that routes
   around a missing signal can hide the defect; log in a `defer`.
+- [diagram-site-shell.md](diagram-site-shell.md) — preserve SDK catalog bounds and identity,
+  subscribe through the route port, and scope narrow-screen explanation checks.

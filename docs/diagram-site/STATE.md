@@ -9,7 +9,7 @@ Status: item 1 complete and verified; ready for Twin verification/push. Items 2â
 ## Done and in progress
 
 - Approved plan: `e147656`.
-- Shell build is in the item-1 commit on `main` (`git log -1 -- pages/src/App.tsx`): published SDK, JSON-only
+- Shell build: `45795e7` on `main`: published SDK, JSON-only
   invented catalog, props-only shell, hooks/pure functions, routing and test scaffolding.
 - Source revisions rechecked: ts-db `fac3e3e5a971dcc81e62f454bb10a7643968b91e`;
   c4-sdk `bb12c7b3eb4a70152ed5ee13094da4bf7fa985be`.
@@ -49,5 +49,7 @@ From `pages/`, with Node 22.23.2: `npm ci && npm run check`.
   screenshots are retained in `evidence/item-1/`.
 - No functional plan deviation. Workflow override: the explicit brief requests commits
   on `main`, so this fresh item run used the main checkout rather than a new worktree.
-- Knowledge/script assessment follows in a separate documentation commit. The tests
-  already provide reusable checks; no extra work script is needed.
+- Knowledge assessment complete: [diagram-site-shell.md](../knowledge/diagram-site-shell.md)
+  records catalog bounds/identity, route subscriptions and mobile document selection,
+  separately committed and indexed. Existing tests provide reusable checks; no extra
+  work script is needed.
