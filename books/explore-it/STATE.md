@@ -5,10 +5,11 @@ one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md). Landing page:
 [README.md](README.md).
 
-**Status (2026-10-23): build and designated end review complete. Astra reviewed
-`e750542`: PASS WITH FIXES (0 high, 4 medium, 2 low); see [REVIEW.md](REVIEW.md).
-`explore-it/v1-explored` still tags the landing commit. Findings await follow-up;
-no product fixes were made by the reviewer. Not merged; nothing pushed.**
+**Status (2026-10-23): build, end review and its fix pass complete. Astra reviewed
+`e750542`: PASS WITH FIXES (0 high, 4 medium, 2 low); see [REVIEW.md](REVIEW.md). The fix
+pass (fresh Opus) fixed R2–R6 and recorded R1, which needs the book's full text (Nick).
+No code changed, so `explore-it/v1-explored` stays on the landing commit `b6df7db`. Ready
+for Twin to merge; not merged, nothing pushed.**
 
 ## Done
 
@@ -47,25 +48,39 @@ no product fixes were made by the reviewer. Not merged; nothing pushed.**
   original-transcript audits are retained. The designated non-Claude end review of
   E07–E09 is complete; source-fidelity acceptance remains qualified by R1.
 
+- End-review fix pass (fresh Opus, one commit per finding; docs and records only, project
+  unchanged since `v1-explored`):
+
+  | Finding | Outcome | Commit |
+  |---|---|---|
+  | R1 citations | **recorded, open (Nick)**: [citation ledger](register/citations.md) checks every lesson and skill citation against the publisher's contents and three excerpts; unsupported attributions corrected (lesson 09's 13.3 reading, 10.3, the state skill's departure from Chapter 8's external view) | `8a5d3a4` |
+  | R2 blindness claims | fixed: landing and walkthrough name the boundary and its leaks; [exceptions table](register/blindness-exceptions.md) | `f378692` |
+  | R3 learning trend, E08 chronology | fixed: E09's measured prediction yield only; E08 extends E01's ecosystem model | `d078712` |
+  | R4 run recipe | fixed: final-tree commands stay on the final tree; own-tag check in a worktree with rebuilds; [rehearsed](register/runs/r4-recipe/README.md) | `1d6a64b`, `3a7f324` |
+  | R5 stop and audit records | fixed: one provider stop, one handoff stop (provider event unknown); E04 runtime-output reads added to its audit | `8317ebc` |
+  | R6 living backlog | fixed: eleven settled questions marked resolved with evidence; BUILD-STATE marked historical; walkthrough review status updated | `b91b531` |
+
+- Fix-pass verification, fresh clones on 2026-10-23:
+  - R4 recipe as written at `1d6a64b`, stack `queuelet-r4`, with source commit and image ID logged at every step ([ledger](register/runs/r4-recipe/acceptance.json)). Results: `BASELINE HOLDS`; REF06 3 present; verify 07 3 absent on the final build and again on lesson-07's own build (new image); final rebuilt, then `make checks` exit 0, all 94 in 716.7 s. The first `make checks`, run while another session held the host at load 12–14, failed two checks (U29, A3) on probe time limits. That run is retained as evidence and is not a product finding.
+  - Final suite at HEAD `3a7f324`, stack `queuelet-fixpass` ([ledger](register/runs/fixpass-final/acceptance.json)). Results: verify 00 `BASELINE HOLDS`; verify 01–09 `FIXED AND CHECKED` 35/5/8/6/4/8/3/4/7 absent; `make checks` exit 0 in 702.7 s; `go test -count=1 ./...` and `go vet ./...` exit 0. All stacks were taken down.
+
 ## In progress
 
-None. The review is complete; no review runner remains active. No findings were fixed.
-Prior state recorded a stale `queuelet-e01` stack (ports 18220/18221/15453); this review
-left it untouched. Its coordinator owns any cleanup.
+None. No runner is active; every fix-pass stack and worktree was removed.
 
 ## Next
 
-1. Fresh follow-up run: address review R1–R6, starting with R4's reader run recipe.
-   Preserve original records and tags; follow [REVIEW.md](REVIEW.md)'s fixes list.
-2. Nick's decisions on the spec and policy questions below.
-3. Merge adds-only after Release It! lands, applying PLAN section 10's notes outside `books/`.
+1. Twin: merge adds-only after Release It! lands, applying PLAN section 10's notes outside `books/`.
+2. Nick: R1 full-text citation check (below), and the spec and policy questions.
 
 ## Open items (owner)
 
-- **Review R1–R6 (coordinator / fresh follow-up author):** full-text citation validation,
-  qualified blindness claims, measured learning claims, correct tag/rebuild recipe,
-  interruption/audit precision, and living backlog status. See the review for evidence
-  and executable fixes.
+- **Review R1 (Nick): "book-source verification has never reached the required review bar."**
+  Review bar item 4 is met only at section-title level. Closing it needs an authorized full copy
+  of the P1.0 edition: work the [citation ledger](register/citations.md)'s **title** and
+  **unchecked** rows, adding page locations. Do 10.3, 13.3/13.5, 8.3–8.4 and A2.1 first.
+  Correct unsupported attributions in the notes and skills, and add errata to the ledger
+  rather than editing raw records. R2–R6 are fixed (table above).
 
 - **Spec questions (Nick):** Q-E09-1, whether `0 0-23 * * *` is a wildcard-hour schedule under A5
   (SPEC literally says no, and the code follows it); Q-E09-2, whether success or an operator retry
@@ -74,6 +89,7 @@ left it untouched. Its coordinator owns any cleanup.
   never advance keeps `/health` degraded until it is disabled or deleted. Legacy invalid payload
   templates (E06) are neither migrated nor revalidated. Same question: migrate, revalidate or
   leave.
+- **Probe time limits under host load (instrument, coordinator):** in the fix pass, U29's 10 s `docker stop` timeout and A3's 10 s worker-start wait both expired at load 12–14 ([R4 record](register/runs/r4-recipe/README.md)). They pass on a quiet host. Widening them is an instrument change, handled like U32 below.
 - **U32 sampler window (instrument, coordinator):** the batch-path control can miss its race
   window (one miss in review C). Widening it is an instrument change: re-freeze hashes, replay REF.
 - **Direct Go assertions for D18 and D21** (checkpoint A follow-up): D19 is now covered by the
@@ -88,8 +104,6 @@ left it untouched. Its coordinator owns any cleanup.
   http-worker float64 decoding path; E05's H-E05-20/21; E04's Q-E04-4, H-E04-09…11 and R42;
   earlier Q3–Q5 and H45. Detail: [hypotheses](exploration/hypotheses.md) and the review B and C
   tables.
-- **Book citations:** section numbers checked against the publisher's contents; full book-text
-  validation not done.
 
 Decided: A1 default retry cap 3600 s; A2 leased-at-purge jobs that fail become dead; A3
 cancellation immediate and terminal, cooperative worker stop, late ack/nack 409; A4 dead jobs
@@ -99,6 +113,9 @@ exempt from retention; A5 classic cron DST (gap time runs once at gap end, repea
 
 - Worktree `/root/Software/booknotes-work/explore-it`, branch `plan/explore-it`. Git wins over
   this file.
+- Fix-pass runners: `register/runs/r4-recipe/run.py` and `register/runs/fixpass-final/run.py`.
+  They use fixed paths under `/tmp/ei-fixes/` (a fresh clone at `repo/`) and their own stacks.
+  Scratch has been deleted; recreate it before rerunning.
 - End-review evidence: `register/reviews/end/`; runners and reconstruction commands
   are indexed in its README. No background run needs resuming. Scratch clone:
   `/tmp/explore-it-astra-review/repo`, reviewed HEAD `e750542`.

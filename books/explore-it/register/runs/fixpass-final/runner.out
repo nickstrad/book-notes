@@ -1,0 +1,17 @@
+final-up 0 8.756 
+final-seed 0 9.647 
+final00-verify 0 17.85 BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass
+final01-verify 0 346.781 FIXED AND CHECKED: 35 absent; regression checks pass
+final02-verify 0 46.005 FIXED AND CHECKED: 5 absent; regression checks pass
+final03-verify 0 24.216 FIXED AND CHECKED: 8 absent; regression checks pass
+final04-verify 0 42.751 FIXED AND CHECKED: 6 absent; regression checks pass
+final05-verify 0 102.766 FIXED AND CHECKED: 4 absent; regression checks pass
+final06-verify 0 133.143 FIXED AND CHECKED: 8 absent; regression checks pass
+final07-verify 0 249.833 FIXED AND CHECKED: 3 absent; regression checks pass
+final08-verify 0 147.339 FIXED AND CHECKED: 4 absent; regression checks pass
+final09-verify 0 295.119 FIXED AND CHECKED: 7 absent; regression checks pass
+final-checks 0 702.666 ok  	queuelet/test/checks	701.871s
+final-test 0 2.423 ok  	queuelet/internal/worker	0.035s
+final-vet 0 0.651 
+final-down 0 2.876 
+EXIT 0
