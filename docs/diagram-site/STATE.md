@@ -4,10 +4,11 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 4 complete. Production catalog contains Litefleet (default,
+Status (2026-10-23): item 5 in progress: workflow added; fresh-clone rehearsal and
+real Actions build/deploy verification underway. Production catalog contains Litefleet (default,
 seven views) and Queuelet (five views). Queuelet is reconciled against the merged
 Explore It! fix pass. Full local gate passes: 66 unit tests, 34 Chromium tests,
-TypeScript and production build. Items 5–8 remain separate runs.
+TypeScript and production build. Items 6–8 remain separate runs.
 
 ## Done and in progress
 
@@ -173,7 +174,7 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Next steps and owners
 
-1. Fresh Sol handles item 5 (CI and clean-checkout release rehearsal).
+1. Current Sol finishes item 5: push verified workflow and watch Actions.
 2. Fable reviews all twelve views in item 6; Opus handles fixes/recheck, then Sol
    publication/live verification in items 7–8.
 
@@ -181,8 +182,8 @@ Catalog/evidence commit: `6243bc3` on main.
 
 - Coordinator: resolve ts-db shell reuse terms before release; source checkout has
   no license file. Attribution remains in `pages/README.md`.
-- Item 5 coordinator: source fidelity tests require historical git objects,
-  including reconciled merge `7d26bb8`; preserve source history (`fetch-depth: 0`).
+- CI fetches full history, including reconciled merge `7d26bb8`. Origin has no
+  book tags; fidelity checks use immutable source SHAs rather than requiring a tag.
 - Queuelet merge prerequisite resolved; independent all-view fidelity review remains item 6.
 
 ## Resume
@@ -192,3 +193,36 @@ server to resume; scratch is `/tmp/booknotes-sol-diag4/`. Node 22.23.2:
 `cd pages && npm ci && npm run check`. Catalog and dataset slices now exercise real
 production data without overrides; only third-entry and error tests intercept loading.
 No worktree cleanup is required for this explicitly authorized main-checkout run.
+
+## Item 5 — CI/release rehearsal (Actions verification pending)
+
+- Explicit [brief](evidence/item-5/brief.md) authorizes main-checkout commits,
+  push and a real Pages deployment, superseding item 5's older no-deploy wording.
+- No workflow existed on main. Added `.github/workflows/pages.yml`: full-history
+  checkout, Node 22.23.2, `npm ci`, Chromium plus OS dependencies, `npm run check`,
+  identical 404 fallback, publication manifest validation, upload `pages/dist`.
+  PRs build only; main pushes/manual main runs deploy to `github-pages`.
+  Only deploy has Pages/OIDC write permissions. Existing Pages configuration uses
+  workflow builds; environment permits main. Current upstream action majors checked
+  via GitHub release metadata: checkout/setup-node 7, configure-pages 6,
+  upload-pages-artifact/deploy-pages 5. No dependency versions changed.
+- Fresh clone of origin/main `c9696eea92af8591573386d2661f89b623388763` at
+  `/tmp/booknotes-sol-diag5/rehearsal`, with only the candidate Queuelet test fix
+  and manifest script overlaid. Node 22.23.2: install, Chromium install with OS
+  dependencies and complete check exit 0: 66 unit/schema/source tests, production
+  build, 34 Chromium tests. Initial attempt used system Node 18 and stopped before
+  testing; rerun explicitly selected the pinned nvm toolchain.
+- Clean clone exposed the unpushed local `explore-it/v1-explored` tag assumption.
+  Reconciliation now verifies the immutable pinned commit object directly; the
+  exact SHA assertion, merged-project diff and all selector/line checks remain.
+  No book tags were published or changed. Initial failing check is retained.
+- Manifest passes: Litefleet seven and Queuelet five views; default Litefleet;
+  both JSONs, catalog, generated JS/CSS/worker and identical index/404 HTML only.
+  HTML and worker references resolve under `/book-notes/`. Browser checks exercise
+  that base, keyboard, narrow layouts and dataset routes. No live-site content
+  verification performed; item 8 remains responsible after review.
+- [Check](evidence/item-5/check.txt), [install](evidence/item-5/install.txt),
+  [manifest](evidence/item-5/manifest.txt), [initial missing-tag failure](evidence/item-5/initial-missing-tag-check.txt).
+  Deployment/rehearsal commands and rollback are in `pages/README.md`.
+- Current checkpoint: local gate green; push and record real Actions run next.
+  Scratch `/tmp/booknotes-sol-diag5/`; no local server or test run remains.

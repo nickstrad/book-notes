@@ -20,7 +20,42 @@ npm run check
 and Chromium Playwright checks against `/book-notes/`. If Chromium is absent,
 run `npx playwright install chromium`. `npm run dev` starts Vite at the development
 root; `npm run build && npm run preview` serves the production `/book-notes/` base.
-No deployment workflow is introduced by item 1.
+The [Pages workflow](../.github/workflows/pages.yml) uses the same `npm ci` and
+`npm run check`, after `npx playwright install --with-deps chromium` on Linux.
+Checkout must include full history (`fetch-depth: 0`): fidelity tests read pinned
+source objects and the reconciled Explore It! merge.
+
+## Deployment and rehearsal
+
+Pull requests run the build and browser gate without deploying. Main pushes and
+manual dispatches on main deploy only after that gate. Pages is configured with
+GitHub Actions as its source. The build job has read-only repository access;
+the deploy job alone has `pages: write` and `id-token: write`, targets the
+`github-pages` environment and reports its deployment URL. Runs are serialized
+per ref. Node is pinned to 22.23.2; npm uses the committed lockfile.
+
+Rehearse from a fresh, full clone of origin/main, in `pages/`:
+
+```sh
+npm ci
+npx playwright install --with-deps chromium
+npm run check
+cp dist/index.html dist/404.html
+node scripts/verify-dist.mjs
+```
+
+Only `pages/dist` is uploaded. Its manifest permits HTML (index plus identical
+404 fallback), catalog JSON, the two architecture JSON bundles and generated
+JavaScript/CSS assets including the layout worker. The manifest check rejects
+extra files and checks both datasets' view counts and `/book-notes/` asset and
+worker paths. No book source, inventories, test fixtures or test screenshots
+are uploaded. Playwright checks the built preview at that same base before upload.
+
+Watch a deployment with `gh run watch <run-id> --exit-status` and record its URL,
+result and source SHA in the site STATE. On failure, inspect `gh run view <run-id>
+--log-failed`, fix and push again. To roll back, rerun a known-good main deployment
+with `gh run rerun <run-id>`; book tags do not move. Live content checks belong to
+plan item 8, after independent review.
 
 Example deep link:
 `/book-notes/#/architectures/queuelet/diagrams/context`.

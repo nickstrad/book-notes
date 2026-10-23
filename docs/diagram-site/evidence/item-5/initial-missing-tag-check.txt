@@ -1,0 +1,50 @@
+
+> book-notes-architecture-pages@0.0.0 check
+> npm run typecheck && npm run test && npm run build && npm run test:browser
+
+
+> book-notes-architecture-pages@0.0.0 typecheck
+> tsc -b
+
+
+> book-notes-architecture-pages@0.0.0 test
+> vitest run
+
+
+ RUN  v5.0.4 /tmp/booknotes-sol-diag5/rehearsal/pages
+
+fatal: ambiguous argument 'explore-it/v1-explored': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+ ❯ tests/queuelet.test.ts (8 tests | 1 failed) 914ms
+   ❯ Queuelet explored slice (8)
+     × reconciles selectors against the accepted merged fix pass without changing the snapshot 28ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/queuelet.test.ts > Queuelet explored slice > reconciles selectors against the accepted merged fix pass without changing the snapshot
+Error: Command failed: git rev-parse explore-it/v1-explored
+fatal: ambiguous argument 'explore-it/v1-explored': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+
+ ❯ git tests/queuelet.test.ts:37:40
+     35|   it('reconciles selectors against the accepted merged fix pass withou…
+     36|     const merged = '7d26bb82db862b2fd483589f6b903d8dae26ae33';
+     37|     const git = (...args: string[]) => execFileSync('git', args, { cwd…
+       |                                        ^
+     38|     expect(git('rev-parse', 'explore-it/v1-explored').trim()).toBe(inv…
+     39|     expect(git('diff', inventory.revision, merged, '--', 'books/explor…
+ ❯ tests/queuelet.test.ts:38:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 6 passed (7)
+      Tests  1 failed | 65 passed (66)
+   Start at  01:56:17
+   Duration  3.31s (tests 43%, import 40%, transform 15%, worker 2%)
+
+    Isolate  7 workers spawned · ~368ms startup each (spawn + environment, per file)
+             at least ~491ms faster with isolate: false — reuses workers across files instead of one per file
+

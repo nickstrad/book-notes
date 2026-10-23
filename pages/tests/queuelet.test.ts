@@ -35,7 +35,8 @@ describe('Queuelet explored slice', () => {
   it('reconciles selectors against the accepted merged fix pass without changing the snapshot', () => {
     const merged = '7d26bb82db862b2fd483589f6b903d8dae26ae33';
     const git = (...args: string[]) => execFileSync('git', args, { cwd: repo, encoding: 'utf8' });
-    expect(git('rev-parse', 'explore-it/v1-explored').trim()).toBe(inventory.revision);
+    // Book tags may remain local; a fresh clone must verify the immutable source object.
+    expect(git('rev-parse', `${inventory.revision}^{commit}`).trim()).toBe(inventory.revision);
     expect(git('diff', inventory.revision, merged, '--', 'books/explore-it/project')).toBe('');
     for (const source of inventory.sources) {
       const text = git('show', `${merged}:${source.path}`);

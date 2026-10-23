@@ -1,0 +1,9 @@
+PASS: Litefleet 7 views, Queuelet 5 views; HTML/assets/worker under /book-notes/; dist-only publication manifest
+404.html
+architectures/litefleet.json
+architectures/queuelet.json
+assets/index-ChqLlcAG.css
+assets/index-DeMpY6Is.js
+assets/layout-worker-BeIcR9gj.js
+catalog.json
+index.html

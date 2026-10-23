@@ -1,0 +1,59 @@
+name: Deploy architecture diagrams to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: pages
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Dataset fidelity checks read pinned source commits and the reconciled merge.
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.23.2
+          cache: npm
+          cache-dependency-path: pages/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Typecheck, unit/schema/source checks, build and browser checks
+        run: npm run check
+      - name: SPA fallback
+        run: cp dist/index.html dist/404.html
+      - name: Verify publication manifest and base paths
+        run: node scripts/verify-dist.mjs
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: pages/dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v6
+      - id: deployment
+        uses: actions/deploy-pages@v5
