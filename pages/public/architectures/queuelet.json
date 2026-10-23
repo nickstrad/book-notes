@@ -964,7 +964,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1119,8 +1119,8 @@
           },
           {
             "id": "external",
-            "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "label": "Supporting element (grey)",
+            "description": "Inside the service box: PostgreSQL, the API's store. Outside it: Queuelet clients (worker, qctl) and the hooksink lab fake, which run outside the service, and the external webhook receiver.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1337,7 +1337,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1542,7 +1542,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1825,7 +1825,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1917,9 +1917,9 @@
     {
       "id": "doc-containers",
       "title": "Queuelet: containers explained",
-      "plain": "The Go API owns queue state in PostgreSQL. Workers are separate clients: the API grants leases, but does not execute job payloads. qctl is a CLI used by producers and operators; its worker-run mode uses the same worker implementation. It is not a Compose service. The webhook receiver is an external collaborator; hooksink is its concrete lab fake, not a second production destination. The two outgoing notification arrows distinguish the general contract from the lab realization. PostgreSQL holds jobs, attempts, schedules, retained event history and notification snapshots. Components tagged external are outside the focused API process, even when the database belongs to the Queuelet system. Open Queue API for its in-process responsibilities.",
+      "plain": "The Go API owns queue state in PostgreSQL. Workers are separate clients: the API grants leases, but does not execute job payloads. qctl is a CLI used by producers and operators; its worker-run mode uses the same worker implementation. It is not a Compose service. The webhook receiver is an external collaborator; hooksink is its concrete lab fake, not a second production destination. The two outgoing notification arrows distinguish the general contract from the lab realization. PostgreSQL holds jobs, attempts, schedules, retained event history and notification snapshots. The service box holds what runs as the Queuelet service: the API and its PostgreSQL database. Worker, qctl and hooksink are Queuelet containers drawn outside that box because they are clients and a lab fake that run outside the service. Grey marks supporting elements: PostgreSQL, worker and qctl are supporting context outside the focused process in the API component view, and hooksink is a lab fake. Open Queue API for its in-process responsibilities.",
       "ste": {
-        "text": "The API stores state in PostgreSQL. Workers and qctl use HTTP and bearer keys. Workers execute jobs outside the API. The API sends signed notifications. The lab uses hooksink as the receiver.",
+        "text": "The API stores state in PostgreSQL. Workers and qctl use HTTP and bearer keys. Workers execute jobs outside the API. The API sends signed notifications. The lab uses hooksink as the receiver. The service box contains the API and PostgreSQL. Workers, qctl and hooksink operate outside the service.",
         "issue": "ASD-STE100 Issue 9",
         "reviewStatus": "draft"
       },

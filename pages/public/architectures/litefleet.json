@@ -1621,7 +1621,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1801,8 +1801,8 @@
           },
           {
             "id": "external",
-            "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "label": "Supporting element (grey)",
+            "description": "Inside the Litefleet boundary: a Litefleet container drawn grey because it is supporting context in a component view (the tag is per element). Outside the boundary: a partner fake.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -1978,7 +1978,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -2164,7 +2164,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -2321,7 +2321,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -2525,7 +2525,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -2954,7 +2954,7 @@
           {
             "id": "external",
             "label": "Outside the focused process",
-            "description": "A collaborator, store or partner fake.",
+            "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
             "swatch": {
               "shape": "box",
               "tone": "external",
@@ -3034,9 +3034,9 @@
     {
       "id": "doc-containers",
       "title": "Litefleet: containers explained",
-      "plain": "HAProxy balances three gateways. Each gateway uses cached routes or asks control to authenticate the key and locate the owning node. Gateway-to-control and gateway-to-node traffic uses Toxiproxy in the lab. Control sends provision/drop commands directly to nodes; nodes send heartbeats directly to control every 5 seconds. Heartbeats populate the Postgres usage ledger independently of partner metering. Control uses distinct 8/2/1-connection OLTP/report/health pools. Each of two node agents owns tenant SQLite files and a separate _node.db outbox. Replicas are collapsed in this view; the deployment view names them. Open Gateway or Node agent for components.",
+      "plain": "HAProxy balances three gateways. Each gateway uses cached routes or asks control to authenticate the key and locate the owning node. Gateway-to-control and gateway-to-node traffic uses Toxiproxy in the lab. Control sends provision/drop commands directly to nodes; nodes send heartbeats directly to control every 5 seconds. Heartbeats populate the Postgres usage ledger independently of partner metering. Control uses distinct 8/2/1-connection OLTP/report/health pools. Each of two node agents owns tenant SQLite files and a separate _node.db outbox. Replicas are collapsed in this view; the deployment view names them. Grey containers inside the Litefleet boundary (control plane, node agent and the node's two stores) are part of Litefleet; the SDK's external tag is per element, and they need it as supporting context in the component views. Only the blob-store and metering partner fakes lie outside the boundary. Open Gateway or Node agent for components.",
       "ste": {
-        "text": "HAProxy sends each request to a gateway. The gateway finds the owning node. Control keeps routes in Postgres. Each node keeps tenant files and an outbox on its own volume. Open a gateway or node for more detail.",
+        "text": "HAProxy sends each request to a gateway. The gateway finds the owning node. Control keeps routes in Postgres. Each node keeps tenant files and an outbox on its own volume. Grey boxes inside the Litefleet box are Litefleet containers. Open a gateway or node for more detail.",
         "issue": "ASD-STE100 Issue 9",
         "reviewStatus": "draft"
       },
