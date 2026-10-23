@@ -1,0 +1,38 @@
+{"command": ["make", "checks"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T00:25:19.690125+00:00"}
+go test -tags checks ./test/checks -count=1 -timeout 30m
+--- FAIL: TestL06U29 (16.22s)
+    lesson06_test.go:10: U29 regression: exit status 2
+        PROBE ERROR: U29 — TimeoutExpired(['docker', 'stop', '-t', '2', 'queuelet-probe06-bdb1040f69'], 10)
+--- FAIL: TestL07A3 (42.09s)
+    lesson07_test.go:331: A3: exit status 1
+        
+        {"command": ["docker", "run", "--rm", "--network", "host", "--name", "queuelet-e07-b071efa8eddb", "-e", "QUEUELET_URL=http://localhost:18290", "-e", "QUEUELET_KEY=acme-key", "-e", "WORKER_QUEUE=repro-a3-a7f152f750-worker-sleep", "-e", "WORKER_NAME=queuelet-e07-b071efa8eddb", "queuelet:r4", "worker"], "completion": {"attempt": 1, "error": null, "event": "nack", "job_id": 18307, "level": "INFO", "msg": "completed", "queue": "repro-a3-a7f152f750-worker-sleep", "status": 409, "time": "2026-10-23T00:37:24.922573208Z", "worker": 619}, "heartbeat": {"cancel_requested": true, "error": {"code": "state_conflict", "message": "job cancelled"}}, "image": "queuelet:r4", "kind": "sleep", "label": "actual worker", "probe": "A3", "quiet_after_seconds": 1.204, "remote": null}
+        WORKER LOG sleep
+        {"time":"2026-10-23T00:37:23.732487694Z","level":"INFO","msg":"worker queuelet-e07-b071efa8eddb registered"}
+        {"time":"2026-10-23T00:37:23.86696172Z","level":"INFO","msg":"processing","event":"processing","job_id":18307,"queue":"repro-a3-a7f152f750-worker-sleep","worker":619,"attempt":1,"kind":"sleep"}
+        {"time":"2026-10-23T00:37:24.91373165Z","level":"INFO","msg":"cancellation observed","event":"cancel_requested","job_id":18307}
+        {"time":"2026-10-23T00:37:24.922573208Z","level":"INFO","msg":"completed","event":"nack","job_id":18307,"queue":"repro-a3-a7f152f750-worker-sleep","worker":619,"attempt":1,"status":409,"error":null}
+        {"time":"2026-10-23T00:37:25.180360548Z","level":"INFO","msg":"processing","event":"processing","job_id":18308,"queue":"repro-a3-a7f152f750-worker-sleep","worker":619,"attempt":1,"kind":"echo"}
+        {"time":"2026-10-23T00:37:25.232862578Z","level":"INFO","msg":"completed","event":"ack","job_id":18308,"queue":"repro-a3-a7f152f750-worker-sleep","worker":619,"attempt":1,"status":200,"error":null}
+        
+        WORKER LOG http
+        {"time":"2026-10-23T00:37:49.46914788Z","level":"INFO","msg":"worker queuelet-e07-a677f4498854 registered"}
+        {"time":"2026-10-23T00:37:49.506020169Z","level":"INFO","msg":"processing","event":"processing","job_id":18309,"queue":"repro-a3-a7f152f750-worker-http","worker":620,"attempt":1,"kind":"http"}
+        {"time":"2026-10-23T00:37:54.534821672Z","level":"INFO","msg":"completed","event":"nack","job_id":18309,"queue":"repro-a3-a7f152f750-worker-http","worker":620,"attempt":1,"status":200,"error":null}
+        
+        {"error": "RuntimeError('timed out waiting for required observation')", "label": "PROBE ERROR", "probe": "A3"}
+        Traceback (most recent call last):
+          File "/tmp/ei-fixes/r4/repo/books/explore-it/project/lab/repro/probe07.py", line 337, in <module>
+            present,detail={'U34':worker_delete,'U35':purge_races,'A3':cooperation}[p.ID]()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          File "/tmp/ei-fixes/r4/repo/books/explore-it/project/lab/repro/probe07.py", line 288, in cooperation
+            p.wait(lambda:any(e.get('event')=='processing' and e.get('job_id')==jid for e in events()),10)
+          File "/tmp/ei-fixes/r4/repo/books/explore-it/project/lab/repro/probe.py", line 75, in wait
+            raise RuntimeError('timed out waiting for required observation')
+        RuntimeError: timed out waiting for required observation
+FAIL
+FAIL	queuelet/test/checks	1064.307s
+FAIL
+make: *** [Makefile:17: checks] Error 1
+
+EXIT 2; ELAPSED 1065.666s

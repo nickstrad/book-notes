@@ -1,0 +1,18 @@
+01-final-up 0 11.549  {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+02-final-seed 0 9.712  {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+03-final-verify00 0 16.821 BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+04-final-verify07-ref06 0 79.889 DEFECTS REPRODUCED: 3 present {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+05-final-verify07 0 260.104 FIXED AND CHECKED: 3 absent; regression checks pass {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+06-final-checks 2 1065.666 FAIL {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': ''}
+07-final-down 0 13.514  {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+08-worktree-add 0 2.347  {'image_queuelet_r4': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f', 'api_container_image': 'sha256:41723dbe209604fc84a085175068980d5ab9af9650a42b98a556da86180d841f'}
+09-tag-up 0 69.018  {'image_queuelet_r4': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06', 'api_container_image': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06'}
+10-tag-seed 0 12.661  {'image_queuelet_r4': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06', 'api_container_image': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06'}
+11-tag-verify07 0 337.708 FIXED AND CHECKED: 3 absent; regression checks pass {'image_queuelet_r4': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06', 'api_container_image': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06'}
+12-tag-down 0 4.93  {'image_queuelet_r4': 'sha256:72a19547e8dc0813de7ae0d2a8baa1587dffba2bb5c051d918c411caace23b06', 'api_container_image': ''}
+13-final-up 0 45.361  {'image_queuelet_r4': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5', 'api_container_image': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5'}
+14-final-seed 0 10.147  {'image_queuelet_r4': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5', 'api_container_image': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5'}
+15-final-checks 0 716.739 ok  	queuelet/test/checks	715.576s {'image_queuelet_r4': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5', 'api_container_image': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5'}
+16-final-down 0 3.392  {'image_queuelet_r4': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5', 'api_container_image': ''}
+17-worktree-remove 0 0.324  {'image_queuelet_r4': 'sha256:2763222a7b31608fc1bfc6f42e8c84aa3601171949f4d18cd563dae13ae9eeb5', 'api_container_image': ''}
+EXIT 0
