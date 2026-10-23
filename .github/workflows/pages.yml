@@ -1,9 +1,13 @@
 name: Deploy architecture diagrams to GitHub Pages
 
+# Only site changes rebuild and redeploy. Fidelity tests read pinned source commits by SHA, not the
+# working-tree book files, so book-only commits cannot change the published output.
 on:
   push:
     branches: [main]
+    paths: [pages/**, .github/workflows/pages.yml]
   pull_request:
+    paths: [pages/**, .github/workflows/pages.yml]
   workflow_dispatch:
 
 permissions:

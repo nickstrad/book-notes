@@ -28,7 +28,10 @@ source objects and the reconciled Explore It! merge.
 ## Deployment and rehearsal
 
 Pull requests run the build and browser gate without deploying. Main pushes and
-manual dispatches on main deploy only after that gate. Pages is configured with
+manual dispatches on main deploy only after that gate. Pushes and pull requests
+trigger the workflow only when they touch `pages/**` or the workflow itself;
+book-only commits need no `[skip ci]`. Use a manual dispatch to redeploy unchanged
+site sources. Pages is configured with
 GitHub Actions as its source. The build job has read-only repository access;
 the deploy job alone has `pages: write` and `id-token: write`, targets the
 `github-pages` environment and reports its deployment URL. Runs are serialized
