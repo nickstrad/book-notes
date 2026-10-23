@@ -47,9 +47,12 @@ All source pointers refer to `explore-it/lesson-07`, relative to `project/`.
 
 ## Before and after the ecosystem model
 
-E01–E07 probed inside the queuelet box: its routes, inputs, rules, sequences, entities and
-states. E08's [context diagram](../exploration/models/ecosystem.md) is the first model that
-puts the neighbours on the page, and every finding sits on one of its lines:
+The [ecosystem model](../exploration/models/ecosystem.md) was not new in E08. E01 created it
+and already probed neighbours there: a PostgreSQL restart and stop, webhook partner failures,
+workers during an outage, another tenant's key, and the missing clock control; E02 revised it.
+E08 revisited that model and extended it with neighbour states the earlier runs had not tried:
+a database absent at startup, a frozen database, a shared shipper under one slow destination,
+and the DST transitions. Every E08 finding sits on one of its lines:
 
 | Boundary | What-if | Before (lesson-07) | After (lesson-08) |
 |---|---|---|---|

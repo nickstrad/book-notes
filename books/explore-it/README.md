@@ -54,8 +54,9 @@ something else, and the lessons say so instead of staging the plan.
   oracles, sequences and states, entities, neighbours, causes. The planted defects ran as
   early-fixed controls, ABSENT at every later tag.
 - **The stop signal did not fall.** New reports per experiment: 27 / 3 / 8 / 5 / 3 / 7 / 2 / 4 / 7.
-  What rose was the share found by a prediction written before the probe: in E09, six of nine
-  predicted sites produced reports.
+  What E09 measured was prediction yield: six of nine sites predicted before probing produced
+  reports, plus a sibling finding. No comparable series exists for E01–E08, so the record does not
+  show whether the predicted share of findings rose; E01 already wrote predictions before its probes.
 - **The structural fix landed.** The missing-guard habit that produced eight planted defects is now
   one transition table (`project/internal/jobs/transition.go`) that every state-changing statement
   takes its guard from, held by a contract test and a 1 000-step model-based walk.

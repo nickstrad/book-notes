@@ -224,10 +224,13 @@ two by the end. Raw blind reports per experiment:
 | 27 | 3 | 8 | 5 | 3 | 7 | 2 | 4 | 7 |
 
 The count did not fall. E09 found as many as E06, and in code the earlier experiments had
-all read. The explorer's conclusion stands: the habit-driven search is not exhausted. The
-difference is the route. E01's findings came from a recon, and most later ones from a
-probe family aimed at one surface. E09's came from a prediction written down before the
-probe, six times out of nine. That is the share the plan expected to rise, and it did.
+all read. The explorer's conclusion stands: the habit-driven search is not exhausted. What
+E09 adds is a measured prediction yield: of nine sites predicted in writing before any
+probe, six produced reports, and probing them turned up one sibling finding besides. The
+plan expected the share of findings that were predicted to rise across experiments. This
+record cannot say whether it did: there is no consistent numerator and denominator for
+E01–E08 (E01 itself logged predictions before its probes and built all eight models), so
+the comparison is left unmade rather than claimed.
 
 ## Dwell and what the earlier experiments walked past
 
