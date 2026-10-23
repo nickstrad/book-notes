@@ -87,9 +87,10 @@ at `dist/`. Test fixtures stay outside `public/`.
 Shell, styles, configuration, lockfile, SDK adapter, routing and test mechanisms were
 adapted from Nick Strad's `nickstrad/ts-db`, revision
 `fac3e3e5a971dcc81e62f454bb10a7643968b91e`, under `pages/`.
-No license file or explicit shell reuse notice was present in that source checkout.
-This records provenance without inventing a license grant; the coordinator must
-resolve reuse terms before the public release check in plan item 5.
+No license file or explicit shell reuse notice was present in that source checkout;
+ts-db and book-notes share one owner, so the reuse needs no third-party grant.
+Whether book-notes itself gets a license is an open decision for Nick (see the
+[site state](../docs/diagram-site/STATE.md)).
 
 The renderer is the published **c4-sdk 0.1.0**, with React/React DOM **19.3.0**;
 no SDK source is vendored. SDK reference checkout inspected at

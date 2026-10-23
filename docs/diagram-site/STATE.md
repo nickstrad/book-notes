@@ -4,12 +4,11 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 6 complete: independent review in [REVIEW.md](REVIEW.md),
-verdict **PASS WITH FIXES** (1 high, 4 medium, 7 low); gates re-run by the reviewer
-(66 unit tests, 34 Chromium tests, TypeScript, production build, all pass); sampled
-fidelity claims in both datasets hold. Next: item 7 (Opus) implements the review's
-fixes and records each finding's disposition, then a fresh Fable recheck, then item 8.
-Items 1–5 remain as recorded below.
+Status (2026-10-23): item 7 fix pass complete (see "Item 7" below): H1, M1–M3 and
+L1–L3, L6, L7 fixed; L4, L5 deliberately left with recorded reasons; M4 is Nick's
+LICENSE decision. Local gate green (66 unit, 35 Chromium, build, manifest with license
+notices). Next: a fresh Fable recheck of the fix pass, then item 8. Item 6's review is
+in [REVIEW.md](REVIEW.md); items 1–5 remain as recorded below.
 
 ## Done and in progress
 
@@ -62,7 +61,8 @@ Items 1–5 remain as recorded below.
   Node-local state holds `node_info`/`usage_outbox`; placement metadata is in tenant
   files. Registry pools are 8/2/1; handle LRU is 128. See inventory for source proof.
 - No functional scope deviation: exactly seven views. The displayed snapshot uses
-  tag + short SHA to fit narrow screens; all source references retain the full SHA.
+  short SHA + "local tag" label and a pinned-commit link (item 7, L2); all source
+  references retain the full SHA.
   STE metadata remains draft, with no certification claim.
 - Production catalog integration is item 4. The slice tests supply a test-only
   Litefleet catalog while loading the real built JSON and worker. Default shell
@@ -175,13 +175,18 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Next steps and owners
 
-1. Fable reviews all twelve views in item 6; Opus handles fixes/recheck, then Sol
-   publication/live verification in items 7–8.
+1. Fresh Fable recheck of the item 7 fix pass (diff `7f5d316..` the item 7 record).
+2. Sol: item 8 live verification, including the new `licenses/` files and Licenses link.
 
 ## Open decisions and blockers
 
-- Coordinator: resolve ts-db shell reuse terms before release; source checkout has
-  no license file. Attribution remains in `pages/README.md`.
+- **Nick (open):** whether `book-notes` gets a LICENSE (currently `license: null`, so
+  visitors have no reuse rights beyond viewing). No license file added (review M4).
+  The ts-db reuse question is closed on the facts: ts-db and book-notes share one owner
+  (nickstrad, public repo, sole author of ts-db `pages/`); attribution stays in
+  `pages/README.md`.
+- Upstream request (not filed; Nick/c4-sdk owner): a per-view `external` override in
+  c4-sdk, so a container can be grey only in the component views that need the tag (M2).
 - CI fetches full history, including reconciled merge `7d26bb8`. Origin has no
   book tags; fidelity checks use immutable source SHAs rather than requiring a tag.
 - Queuelet merge prerequisite resolved; independent all-view fidelity review remains item 6.
@@ -237,3 +242,33 @@ No worktree cleanup is required for this explicitly authorized main-checkout run
   is saved in a separate knowledge commit. Final evidence/knowledge commits are
   docs-only and use `[skip ci]` to avoid rebuilding identical site output.
   Scratch `/tmp/booknotes-sol-diag5/`; no local server or background run remains.
+
+## Item 7 — review fix pass (Opus)
+
+Main checkout per explicit [brief](evidence/item-7/brief.md); commit and push authorized.
+One commit per finding, base `7f5d316`:
+
+| Finding | Disposition | Commit |
+|---|---|---|
+| H1 license notices | **Fixed.** `pages/license-notices.ts` (Vite plugin) emits `licenses/c4-sdk-LICENSE.txt` and `licenses/c4-sdk-THIRD_PARTY_NOTICES.txt` verbatim from the installed package, plus `licenses/NOTICES.txt` (index + React, React DOM, scheduler 0.28.0 MIT texts, the only other bundled packages). Build fails if any other npm package enters the bundle. Header "Licenses" link; `verify-dist.mjs` requires the three files; README corrected; browser test fetches them. | `2d0437a` |
+| M1 stale Queuelet wording | **Fixed** with the review's sentence; inventory.md past tense. Also the same stale "Provisional … precede publication" note on all 67 Queuelet sources. | `9e6c058`, `12ed879` |
+| M2 external tag / boundary | **Fixed, wording route (no model change).** Container views get their own grey key entry; the shared key no longer calls in-system containers partner fakes; both `doc-containers` (plain + STE) explain grey and the boundary. Queuelet worker/qctl/hooksink stay parented to the system: they are Queuelet-built clients and a lab fake, so re-parenting would misstate the model, and the service box is an authored group of what runs as the service (API + PostgreSQL). Re-parenting would also change counts, audits and tests. SDK request recorded under Open decisions. | `6108988` |
+| M3 Pages path filter | **Fixed.** `paths: [pages/**, .github/workflows/pages.yml]` on push and pull_request; `workflow_dispatch` kept; README updated. | `a756e93` |
+| M4 ts-db / LICENSE | **Not this item** (brief). Recorded as Nick's open decision above; README's stale "resolve before item 5" sentence now points there. | item 7 record |
+| L1 dead exports/CSS | **Fixed.** Dropped `ArchitectureViewer` and unused type re-exports, `.dataset-note-planned` and its colour variable. | `2b694f8` |
+| L2 snapshot labels | **Fixed without publishing tags.** Revisions read "9367863 (local tag release-it/v1-hardened)" / "b6df7db (local tag explore-it/v1-explored)"; the shell links the full pinned commit derived from the bundle's own source URLs (`snapshotOf`, unit + browser tested). Pushing tags remains Nick's call. | `e471924` |
+| L3 heading structure | **Fixed.** Site title renders as `h1` when no diagram is shown; exactly one `h1` in every state (browser tested). | `2124211` |
+| L4 CI time | **Left, by evidence.** Run 39887098435's 6m18s was apt (`Fetched 25.9 MB in 5min 57s (72.7 kB/s)`, a slow mirror); browser downloads took ~6 s, so a browser cache saves almost nothing and `--with-deps` stays for a reliable fresh runner. Action SHA pinning (optional) not done. | — |
+| L5 deployment Fit readability | **Left.** Borderline; plan permits a split only if genuinely unreadable; native scale + physical tree carry the text. | — |
+| L6 tmpfs overlay | **Fixed.** One clause in Litefleet `doc-lab-deployment`, checked against `deploy/compose.tmpfs.yml` at `9367863`. | `415200f` |
+| L7 test special case | **Fixed.** Inventory carries `mergedRevision` and `mergedLine` (src-67 → 68); test reads them (verified it fails if the data is wrong). Stale `publicationStatus` updated. | `d7f006f` |
+
+Gate (Node 22.23.2, after all fixes): `npm ci` exit 0; `npm run check` exit 0: TypeScript,
+**66** Vitest, production build, **35** Chromium tests (34 + Licenses). Then
+`cp dist/index.html dist/404.html && node scripts/verify-dist.mjs` exit 0; dist contains
+`licenses/NOTICES.txt`, `licenses/c4-sdk-LICENSE.txt` and
+`licenses/c4-sdk-THIRD_PARTY_NOTICES.txt`, the SDK files byte-identical (`cmp`) to the
+package's. Inspected 1600 and 390 captures: header link, snapshot note and keys render
+without overflow. Evidence: [check](evidence/item-7/check.txt),
+[install](evidence/item-7/install.txt), [manifest](evidence/item-7/manifest.txt).
+Scratch `/tmp/booknotes-opus-diag7/`; no server or background run remains.

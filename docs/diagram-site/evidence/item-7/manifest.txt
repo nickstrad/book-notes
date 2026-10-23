@@ -1,0 +1,12 @@
+PASS: Litefleet 7 views, Queuelet 5 views; HTML/assets/worker under /book-notes/; license notices present; dist-only publication manifest
+404.html
+architectures/litefleet.json
+architectures/queuelet.json
+assets/index-B_L0nYzB.js
+assets/index-DqMESnE-.css
+assets/layout-worker-BeIcR9gj.js
+catalog.json
+index.html
+licenses/NOTICES.txt
+licenses/c4-sdk-LICENSE.txt
+licenses/c4-sdk-THIRD_PARTY_NOTICES.txt

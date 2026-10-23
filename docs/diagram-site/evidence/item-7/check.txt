@@ -1,0 +1,85 @@
+
+> book-notes-architecture-pages@0.0.0 check
+> npm run typecheck && npm run test && npm run build && npm run test:browser
+
+
+> book-notes-architecture-pages@0.0.0 typecheck
+> tsc -b
+
+
+> book-notes-architecture-pages@0.0.0 test
+> vitest run
+
+
+ RUN  v5.0.4 /root/Software/book-notes/pages
+
+
+ Test Files  7 passed (7)
+      Tests  66 passed (66)
+   Start at  02:29:23
+   Duration  2.64s (tests 51%, import 34%, transform 14%, worker 1%)
+
+    Isolate  7 workers spawned · ~243ms startup each (spawn + environment, per file)
+             at least ~324ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> book-notes-architecture-pages@0.0.0 build
+> vite build --base /book-notes/
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                   0.69 kB │ gzip:   0.39 kB
+dist/licenses/c4-sdk-LICENSE.txt                  1.06 kB │ gzip:   0.65 kB
+dist/licenses/NOTICES.txt                         3.80 kB │ gzip:   0.96 kB
+dist/licenses/c4-sdk-THIRD_PARTY_NOTICES.txt    108.20 kB │ gzip:  11.07 kB
+dist/assets/layout-worker-BeIcR9gj.js         2,107.55 kB
+dist/assets/index-DqMESnE-.css                   33.19 kB │ gzip:   6.29 kB
+dist/assets/index-B_L0nYzB.js                   801.49 kB │ gzip: 251.93 kB
+
+✓ built in 822ms
+
+> book-notes-architecture-pages@0.0.0 test:browser
+> playwright test
+
+
+Running 35 tests using 1 worker
+
+[1/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route context renders and reloads
+[2/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route containers renders and reloads
+[3/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route gateway-components renders and reloads
+[4/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route node-components renders and reloads
+[5/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route query-flow renders and reloads
+[6/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route usage-flow renders and reloads
+[7/35] [chromium] › tests/litefleet.spec.ts:20:3 › litefleet route lab-deployment renders and reloads
+[8/35] [chromium] › tests/litefleet.spec.ts:41:1 › litefleet actual element drill-down, Up and Back
+[9/35] [chromium] › tests/litefleet.spec.ts:67:3 › litefleet all view screenshots at 1600x1000
+[10/35] [chromium] › tests/litefleet.spec.ts:67:3 › litefleet all view screenshots at 390x844
+[11/35] [chromium] › tests/queuelet.spec.ts:20:3 › queuelet route context renders and reloads
+[12/35] [chromium] › tests/queuelet.spec.ts:20:3 › queuelet route containers renders and reloads
+[13/35] [chromium] › tests/queuelet.spec.ts:20:3 › queuelet route api-components renders and reloads
+[14/35] [chromium] › tests/queuelet.spec.ts:20:3 › queuelet route job-flow renders and reloads
+[15/35] [chromium] › tests/queuelet.spec.ts:20:3 › queuelet route lab-deployment renders and reloads
+[16/35] [chromium] › tests/queuelet.spec.ts:41:1 › queuelet actual element drill-down, Up and Back
+[17/35] [chromium] › tests/queuelet.spec.ts:63:3 › queuelet all view screenshots at 1600x1000
+[18/35] [chromium] › tests/queuelet.spec.ts:63:3 › queuelet all view screenshots at 390x844
+[19/35] [chromium] › tests/smoke.spec.ts:22:1 › default catalog renders with documentation at the selected base
+[20/35] [chromium] › tests/smoke.spec.ts:38:1 › dropdown switches in both directions and browser history returns
+[21/35] [chromium] › tests/smoke.spec.ts:52:1 › a non-default deep link reloads to the same diagram
+[22/35] [chromium] › tests/smoke.spec.ts:61:1 › unknown and malformed routes offer recovery without a fallback
+[23/35] [chromium] › tests/smoke.spec.ts:73:1 › a third catalog entry works with no application change
+[24/35] [chromium] › tests/smoke.spec.ts:91:3 › reports empty catalog
+[25/35] [chromium] › tests/smoke.spec.ts:91:3 › reports malformed JSON
+[26/35] [chromium] › tests/smoke.spec.ts:91:3 › reports missing defaultId
+[27/35] [chromium] › tests/smoke.spec.ts:99:1 › reports a failed catalog request
+[28/35] [chromium] › tests/smoke.spec.ts:107:1 › the skip link and architecture selector work by keyboard
+[29/35] [chromium] › tests/smoke.spec.ts:121:3 › shell layout and screenshot at 1600×1000
+[30/35] [chromium] › tests/smoke.spec.ts:121:3 › shell layout and screenshot at 390×844
+[31/35] [chromium] › tests/smoke.spec.ts:138:5 › reports litefleet malformed bundle
+[32/35] [chromium] › tests/smoke.spec.ts:138:5 › reports litefleet failed fetch
+[33/35] [chromium] › tests/smoke.spec.ts:138:5 › reports queuelet malformed bundle
+[34/35] [chromium] › tests/smoke.spec.ts:138:5 › reports queuelet failed fetch
+[35/35] [chromium] › tests/smoke.spec.ts:152:1 › the Licenses link serves the bundled packages' notices
+  35 passed (2.1m)
