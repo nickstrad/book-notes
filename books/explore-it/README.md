@@ -63,15 +63,34 @@ something else, and the lessons say so instead of staging the plan.
 
 ## Run it
 
+From a checkout at `explore-it/v1-explored` or later:
+
 ```
 cd books/explore-it/project
-make up && make seed
+make up && make seed                                     # build and start this checkout's stack
 make verify LESSON=00                                    # BASELINE HOLDS
-git checkout explore-it/lesson-07
-make verify LESSON=07 REF=explore-it/lesson-06           # DEFECTS REPRODUCED (historical binaries)
-make verify LESSON=07                                    # FIXED AND CHECKED
-make checks                                              # every regression check, about 12 minutes
+make verify LESSON=07 REF=explore-it/lesson-06           # DEFECTS REPRODUCED: 3 present (lesson-06 binaries)
+make verify LESSON=07                                    # FIXED AND CHECKED: 3 absent (this checkout's binaries)
+make checks                                              # all 94 regression checks, about 12–14 minutes
 make down
+```
+
+A verify without `REF=` probes whatever stack is running; it does not build one. Switching tags
+does not rebuild it either, so to check a lesson at its own tag, build that tag's stack in a
+separate worktree, then rebuild the final stack before running the final suite:
+
+```
+make down                                                # the final stack
+git worktree add --detach /tmp/ei-tag explore-it/lesson-07
+cd /tmp/ei-tag/books/explore-it/project
+make up && make seed                                     # lesson-07's binaries
+make verify LESSON=07                                    # FIXED AND CHECKED: 3 absent, with lesson-07's instruments
+make down
+cd -                                                     # back to the final checkout's project/
+make up && make seed                                     # rebuild the final binaries
+make checks                                              # the final 94
+make down
+git worktree remove /tmp/ei-tag
 ```
 
 A verify resets the fixtures, runs the lesson's black-box repro scripts (API, `qctl`, read-only
