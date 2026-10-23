@@ -180,8 +180,8 @@ compare with lesson 01 afterwards.
 ## 6. Where things stand
 
 - **`STATE.md`**: build complete, every commit and tag, and the open items with owners. Astra's
-  (Codex) cross-family end review has not run yet; lessons 07–09 were explored, fixed and reviewed
-  only by Claude seats. Also open: spec questions for Nick (Q-E09-1, Q-E09-2), upgrade policy for
+  (Codex) cross-family end review ran on 2026-10-23 ([REVIEW.md](REVIEW.md): PASS WITH FIXES);
+  STATE.md records its findings R1–R6 and what the fix pass did with each. Also open: spec questions for Nick (Q-E09-1, Q-E09-2), upgrade policy for
   legacy schedules and payloads, the U32 sampler flake, testability requests and forward hypotheses.
 - **`exploration/defects/INDEX.md`**: the status of every D, U, A and T finding.
 - **`register/reviews/`**: the three checkpoint reviews with their runners and logs; review C's

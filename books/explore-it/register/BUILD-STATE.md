@@ -3,7 +3,11 @@
 Authorized by `/root/booknotes-sol-exploreit2.md` and the E01 fixer assignment; the approved v2 plan governs disagreements.
 Scope: only `books/explore-it/` in the existing `plan/explore-it` worktree. No pushes.
 
-## Current unit
+> **Historical record.** This file stopped being the live status after checkpoint B. The current
+> unit, open items and next steps are in the [book STATE](../STATE.md); read that instead.
+> The text below is kept as it stood (E07–E09 have since run, been reviewed and landed).
+
+## Unit at checkpoint B (historical)
 
 **Checkpoint B review complete.** Fresh Sol review assigned by
 `/root/booknotes-sol-ckptB.md`: [review](reviews/B/review-b.md),

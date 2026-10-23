@@ -29,11 +29,11 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H19 | queue name a.b → 201; priority 42 → 201 | code queues.go:35, enqueue.go:29 | 400 | variation / E01 | experiment 01: confirmed | F19 |
 | H20 | lease unknown worker → HTTP 200 + error body | code internal/api/jobs.go:132 | 404 | oracle / E01 | experiment 01: confirmed | F21 |
 | H21 | qctl prints HTTP 404 and exits 0 | code cmd/qctl/main.go:16-18 | exit≠0 | console / E01 | experiment 01: confirmed | F22 |
-| H22 | same-second same-priority jobs may lease out of id order | code jobs.go:24 + timestamp(0) | (ties) — inversion not required | sequence / E01 | experiment 01: needs more | 40 untouched jobs leased in order (no inversion); see H22b |
+| H22 | same-second same-priority jobs may lease out of id order | code jobs.go:24 + timestamp(0) | (ties) — inversion not required | sequence / E01 | resolved (fix pass 2026-10-23; was: experiment 01: needs more) | 40 untouched jobs leased in order (no inversion); see H22b; H22b confirmed the tie inversion (F23 = D11); [D11](defects/D11-fifo-ties-within-a-second.md) fixed in lesson 01 |
 | H22b | after release of #1 among same-second ties, #2..#10 lease before #1 | surprise H22 + code | #1 leases first | sequence / E01 | experiment 01: confirmed | F23 (inversion even before release) |
 | H23 | pause, miss ≥2 ticks of * * * * *, resume → one job per missed tick at once | code fire.go:37-41 | exactly 1 job | sequence/clock / E01 | experiment 01: confirmed | F24 (4 jobs) |
 | H24 | purge leaves scheduled and retry_wait jobs | code queues.go:109; spec silence | scheduled deleted | variation / E01 | experiment 01: confirmed | F25 (spec) |
-| H25 | zone offset frozen at create; DST ignored — not probeable without clock | code fire.go:17 | — | testability / E01 | experiment 01: needs more | TR2; partial evidence H25b |
+| H25 | zone offset frozen at create; DST ignored — not probeable without clock | code fire.go:17 | — | testability / E01 | resolved (fix pass 2026-10-23; was: experiment 01: needs more) | TR2; partial evidence H25b; H25b confirmed (F27); offset now computed per request: [U42](defects/U42-schedule-zone-offset-frozen.md), lesson 09; DST policy [A5](defects/A5-dst-gap-and-overlap.md) |
 | H25b | schedule.Next with stored offset gives 13:00Z (08:00 EST) on 2026-11-02, not 14:00Z | code fire.go:17 + stored row | 14:00Z | harness (SUT function, not service) / E01 | experiment 01: confirmed | F27 |
 | H26 | postgres restart → loop dead; delayed job never promoted | code api.go:102-104; SPEC ops | promotion resumes within 10 s | ecosystem / E01 | experiment 01: confirmed | F08 |
 | H27 | nack on succeeded job → 200, retry_wait | surprise H03 + nack.go | 409 | state / E01 | experiment 01: confirmed | F02 |
@@ -53,11 +53,11 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H41 | qctl worker run: echo acked; fail2 fails 2× then succeeds at attempt 3 | recon README + worker.go | fail2 not succeeded by 22 s | sequence / E01 | experiment 01: confirmed | attempt rows n=1,2 failed, 3 succeeded |
 | H42 | postgres stopped → valid key gets 401; /health 200 | surprise worker logs + api.go:86-88 | 5xx | ecosystem / E01 | experiment 01: confirmed | F14 |
 | Q1 | attempts.started_at should be lease start, not finish | surprise 01:41:38Z | spec defines otherwise | oracle / spec decision | open |  |
-| Q2 | attempt numbering after operator retry should stay unique/monotonic | H35 | spec says numbering restarts | spec decision | open |  |
+| Q2 | attempt numbering after operator retry should stay unique/monotonic | H35 | spec says numbering restarts | spec decision | resolved (fix pass 2026-10-23; was: open) | numbering never reused across an operator retry: [U20](defects/U20-attempt-history-after-retry.md), lesson 04 |
 | Q3 | 404 error messages should not expose driver text ("sql: no rows in result set") | #obs H04 controls | spec permits any message | console / spec | open |  |
 | Q4 | admin key should be read-only beyond stats | spec silence | spec grants mutations | boundary / spec | open |  |
 | Q5 | GET queue should not return webhook_secret | #obs 01:5xZ (report-secret returned) | spec requires echo | boundary / spec | open |  |
-| H43 | worker deregistration release should count an attempt (like expiry) | code internal/api/jobs.go:110 | spec says release is free | state / next | open |  |
+| H43 | worker deregistration release should count an attempt (like expiry) | code internal/api/jobs.go:110 | spec says release is free | state / next | resolved (fix pass 2026-10-23; was: open) | E05 confirmed (E05-F01); release now counts an attempt: [U24](defects/U24-worker-delete-release-uncounted-attempt.md), lesson 05 |
 | H44 | webhook URL that fails http.NewRequest stops the loop | code ship.go:26-28 | loop continues | ecosystem / next | experiment 02: confirmed | at lesson-01 the shipper keeps ticking but delivers nothing after the bad row, all namespaces (E02-H11, E02-F02); core loop progress not observed during it |
 | H45 | schedule catch-up after loop outage bursts like F24 | code fire.go:41 | bounded | sequence / next | open |  |
 | H46 | negative retention_hours deletes terminal jobs on next tick | code expire.go:14 | jobs kept | variation / next | experiment 03: refuted | at lesson-02 `retention_hours:-1` create and `-5` PATCH → 400 (E03 notes 04:17:13Z), so the state cannot be reached; the v0 code it was read from changed in lesson 01. Large positive values break Retain instead (E03-F05) |
@@ -87,7 +87,7 @@ Experiment 01 (map-it) stated H00–H42 before their probes (see notes). Q*/H43+
 | H49 | ship.go UPDATE errors (:37-40, :46-49) abort the whole batch like the parse error | E02 C11 sibling, code | other rows still shipped | ecosystem / next | open |  |
 | H50 | a webhook body larger than the partner limit or a secret change with rows pending behaves per row (no global block) | E02 C11 sibling | global block | ecosystem / next | open |  |
 | H51 | `qctl worker run --kinds echo,sleep,fail,crash,http` (README) also never leases `fail3` | E02-F01 sibling, code (same worker.Run) | fail3 leased | variation / next | open |  |
-| H52 | after operator retry of a crash-dead job, attempts numbering restarts at 1 (duplicate n with expired rows) | E01 Q2 + E02 H01 | unique n | state / next | open |  |
+| H52 | after operator retry of a crash-dead job, attempts numbering restarts at 1 (duplicate n with expired rows) | E01 Q2 + E02 H01 | unique n | state / next | resolved (fix pass 2026-10-23; was: open) | numbering runs on across a retry: [U20](defects/U20-attempt-history-after-retry.md), lesson 04 |
 | E03-HC | Charter: every documented range is enforced and unknown fields are rejected | charter 03; validators internal/api | any 2xx where SPEC says 4xx | variation / E03 | experiment 03: refuted | E03-H01/H02 (malformed and case-variant bodies 201), E03-H07 (undocumented max_seconds 201) |
 | E03-H01 | trailing garbage / two concatenated objects → 201, one job | code api.go:53 | 400 | request shape / E03 | experiment 03: confirmed | E03-F01 |
 | E03-H02 | case-variant names bound to documented fields; last variant wins | code api.go:49-52 (Go json) | 400 unknown field | request shape / E03 | experiment 03: confirmed | E03-F02 |
@@ -150,9 +150,9 @@ Rules R31–R43 were stated as hypotheses with predictions and refutations at 12
 | H-E04-09 | Stats are three statements without a snapshot; under concurrent transitions sums can disagree with any single instant | code stats.go:9-23 | identical sums under load | approximation / later | open | not probed |
 | H-E04-10 | Ack is not transactional (UPDATE, then INSERT attempts, then Notify): a fault after the UPDATE reports 409 for a succeeded job | code ack.go:10-18; internal/api/jobs.go:87 | 5xx or atomic | ecosystem / later | open | needs DB fault injection |
 | H-E04-11 | `schedules.go:158 v["kind"].(string)` panics on a NULL kind | code read | no panic | #offcharter | open | |
-| Q-E04-1 | Default backoff has no cap: 30.34 d at attempt 20 (lesson-03 A1) — should a default cap exist? | P10 | spec decision | spec decision | open | |
-| Q-E04-2 | Does "readiness" in queued age mean the time a job last became queued? | E04-F05 | spec decision | spec decision | open | |
-| Q-E04-3 | Is there a lease grace window after `lease_expires_at`? | E04-F04 | spec decision | spec decision | open | |
+| Q-E04-1 | Default backoff has no cap: 30.34 d at attempt 20 (lesson-03 A1) — should a default cap exist? | P10 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | A1 decided: default retry cap 3600 s, [lesson 04](../lessons/04-judge-it.md) |
+| Q-E04-2 | Does "readiness" in queued age mean the time a job last became queued? | E04-F05 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | queued age counts from when the job last became queued: [U23](defects/U23-queued-age-counts-leased-time.md), lesson 04 |
+| Q-E04-3 | Is there a lease grace window after `lease_expires_at`? | E04-F04 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | no grace window; an expired lease is refused before the sweep: [U22](defects/U22-expired-lease-honoured-until-sweep.md), lesson 04 |
 | Q-E04-4 | Should `throughput_last_hour` ("completed jobs") include dead/cancelled? Code counts succeeded only | stats.go:21 | spec decision | spec decision | open | |
 
 ## Experiment 05 (sequence-it) — `explore-it/lesson-04`
@@ -184,8 +184,8 @@ Stated before their probes in [E05 notes](experiments/05-sequence-it/notes.md) (
 | H-E05-19 | holder-biased walks: ≥10 successful holder verbs/seed; violations only E05-F01/F02 classes | walk v2 | other invariant | walk / E05 | experiment 05: confirmed (on its refutation condition; coverage sub-prediction ≥10 missed for seed 31: 7) | walk-b31/b32.txt |
 | H-E05-20 | Worker nack with error text exactly `lease expired` is logged as an expiry | 002.sql | labelled by state | sibling / later | open | not probed |
 | H-E05-21 | A third-party worker that deregisters on SIGTERM while executing turns a crash-looping poison job into unbounded redelivery (E05-F01 in the field) | E05-F01 | job reaches dead | ecosystem / later | open | sample worker does not deregister (code) |
-| Q-E05-1 | Should worker deregistration count the released lease as an attempt (like expiry), or record a distinct non-counted "released" attempt with a cap? | E05-F01 | spec decision | spec decision | open | |
-| Q-E05-2 | Should terminal rows retain `leased_by` (who completed) while clearing token/expiry? | E05-F02 | spec decision | spec decision | open | |
+| Q-E05-1 | Should worker deregistration count the released lease as an attempt (like expiry), or record a distinct non-counted "released" attempt with a cap? | E05-F01 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | counted as an attempt: [U24](defects/U24-worker-delete-release-uncounted-attempt.md), lesson 05 |
+| Q-E05-2 | Should terminal rows retain `leased_by` (who completed) while clearing token/expiry? | E05-F02 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | terminal rows clear token, holder and expiry; attempt rows keep the worker: [U25](defects/U25-terminal-rows-keep-lease-fields.md), lesson 05 |
 | T-E05-1 | Testability: `/admin/clock` has no "offset, keep ticking" mode; advance/set freeze semantic time until reset, so real-time lease expiry and clock jumps cannot be combined | clock.go:182-191 | — | testability request | open | minimal hook: `{"action":"offset","seconds":n}`; validation: lease_seconds 2 expires 2 s after an offset jump |
 | #offcharter | `GET /v1/jobs/{id}` returns the live `lease_token` to any holder of the namespace key, so any client can ack another worker's lease | P5 GET output | token hidden | boundary / later | open | observed in output, not judged |
 
@@ -288,7 +288,7 @@ H-E08-21 ≈19:35:05Z). Regression holds are not discoveries.
 | H-E08-23 | One schedule that cannot advance starves later schedules every tick (Fire returns on first error) | fire.go:37-40 | later schedules fire | core loop / next | experiment 09: confirmed (trigger: a never-matching cron, E09-F01) | no external trigger found (E08); E09 H-E09-01/02 |
 | H-E08-24 | More than 16 concurrent requests during a DB freeze exhaust the pool; requests queue behind it after unfreeze | store.go:16 | no queueing | DB / next | open | not probed |
 | Q-E08-1 | What does the worker `token` (SPEC.md:91) authorise? Should lease/ack require it so attempt history attribution is trustworthy? | P7 | spec decision | spec decision | open | |
-| Q-E08-2 | DST rule for non-existent and repeated local times (skip/once-after/twice)? | E08-F03 | spec decision | spec decision | open | |
+| Q-E08-2 | DST rule for non-existent and repeated local times (skip/once-after/twice)? | E08-F03 | spec decision | spec decision | resolved (fix pass 2026-10-23; was: open) | A5 decided, classic cron DST rule: [A5](defects/A5-dst-gap-and-overlap.md), lesson 08 |
 | T-E08-1 | Testability: deterministic single-statement DB fault (for H-E04-10 / ack non-atomicity) | ack.go:13-26 | — | testability request | open | see notes "Not run / testability requests" |
 | T-E08-2 | Testability: shipper backlog/lag metric and health signal | P5c (/health 200 during permanent stall) | — | testability request | open | validation: P5b blackhole flips it |
 | T-E08-3 | Testability: hooksink records received signature (E01 TR1) and offers 302/307 modes | P4 needed a capture listener | — | testability request | open | |
