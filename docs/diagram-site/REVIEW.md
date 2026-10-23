@@ -277,3 +277,71 @@ reconciliation edits data, not the test.
 - Fidelity was sampled, not exhaustive: ~30 behavioral/numeric claims and the key edge
   directions across all twelve views, plus the test-enforced selector and coverage audits
   (102 + 67 selectors, 133 + 76 IDs) that I re-ran rather than re-derived.
+
+## Recheck of the item 7 fix pass
+
+Reviewer: Claude Fable 5.1. Date: 2026-10-23. Rechecked revision: `c4a023c` on `main`
+(fix commits `2d0437a`..`d7f006f`, records `f542c5f`..`c4a023c`). Brief:
+`/root/booknotes-fable-diag-recheck.md`. Method: each disposition in STATE's item 7
+table was checked against the diff, the current files, a fresh production build, the
+CI logs and the live site; nothing was fixed in this pass.
+
+### Verdict: PASS WITH NITS
+
+Every fixed finding is fixed as described; the two LEFT findings' reasons hold; M4's
+open record is accurate. No disposition is disputed. Two record nits, no code change
+needed (below).
+
+### Gates re-run (Node 22.23.2, `cd pages && npm ci && npm run check`, then
+`cp dist/index.html dist/404.html && node scripts/verify-dist.mjs`; output in
+`/tmp/fable-diag-recheck/`, not committed)
+
+| Gate | Result |
+|---|---|
+| `npm ci` | exit 0, 0 vulnerabilities |
+| `tsc -b` | pass |
+| Vitest unit/schema/source | 7 files, **66 passed** |
+| `vite build --base /book-notes/` | pass; `index-B_L0nYzB.js` 801.5 kB, `index-DqMESnE-.css` 33.2 kB, `layout-worker-BeIcR9gj.js` 2107.6 kB |
+| Playwright (Chromium, 1 worker) | **35 passed** in 2.1 min (34 + "the Licenses link serves the bundled packages' notices") |
+| `npm run check` | exit 0 |
+| `verify-dist.mjs` | PASS; 11 files, the three `licenses/` files required and present |
+
+Working tree clean before and after. Live `https://nickstrad.github.io/book-notes/`
+`index.html` references the same `index-B_L0nYzB.js` / `index-DqMESnE-.css` as this
+build, so the deployment (run 39890114511, `f542c5f`) is the rechecked source.
+
+### Per-finding verification
+
+| Finding | Claimed | Verified |
+|---|---|---|
+| H1 | Fixed, `2d0437a` | **Yes.** `pages/license-notices.ts` emits the three files at `generateBundle` and errors on any bundled `node_modules` package outside c4-sdk/react/react-dom/scheduler (build passed, so the coverage claim is enforced, not asserted). Fresh `dist/licenses/c4-sdk-LICENSE.txt` (1067 B) and `c4-sdk-THIRD_PARTY_NOTICES.txt` (108203 B) are `cmp`-identical to `node_modules/c4-sdk/LICENSE` and `THIRD_PARTY_NOTICES.md`; the notices list 76 packages with `elkjs@0.12.0 — EPL-2.0 OR GPL-3.0-or-later` at line 697. `NOTICES.txt` indexes c4-sdk and carries three `## <pkg>@<version>` MIT sections. The live site serves all three with HTTP 200, byte-identical to the package files / local build. Header "Licenses" link present (`Site.tsx`), `verify-dist.mjs` requires the files, README's "remain in the installed npm package" sentence is gone, and the Playwright test exists and passed. |
+| M1 | Fixed, `9e6c058` + `12ed879` | **Yes.** `doc-context.plain` carries the review's sentence; the inventory bullet is past tense with `1712ced`/`7d26bb8`; all 67 source notes now read "reconciled against the merged end-review fix pass 7d26bb8; public URL verified". `grep` for the old wording in the JSON, inventory.md and inventory.json returns 0. |
+| M2 | Fixed by wording, no model change, `6108988` | **Yes.** Both container views have their own grey key entry (Litefleet: "Supporting element (grey)" distinguishing inside/outside the boundary; Queuelet: naming PostgreSQL inside the service box and worker/qctl/hooksink outside it). The shared entry on the other 10 views no longer says "partner fake" for in-system containers. Litefleet `doc-containers` (plain + STE) and Queuelet `doc-containers` (plain + STE) explain grey and the box. The model confirms the explanation: Queuelet's box is an authored group `containers-boundary` with members `api`, `postgres` only, while `worker`, `qctl`, `hooksink` keep `parentId: queuelet`; Litefleet's group holds all seven containers, with `control`, `node`, `tenant-files`, `node-state` tagged `external`. Consistent across datasets. SDK per-view override request is under Open decisions. |
+| M3 | Fixed, `a756e93` | **Yes.** `paths: [pages/**, .github/workflows/pages.yml]` on both `push` and `pull_request`; `workflow_dispatch` kept; README explains. Consistent with the fidelity tests reading pinned SHAs. |
+| M4 | Not a fix; Nick's decision | **Accurate.** `gh api repos/nickstrad/book-notes` → `license: null`, `visibility: public`. STATE's open decision records the same-owner closure of the ts-db question and the one remaining decision; README's "before item 5" sentence is replaced with a pointer to STATE. No license file was added. |
+| L1 | Fixed, `2b694f8` | **Yes.** `ArchitectureViewer`, `CatalogEntry`, `Diagram`, `Route`, `RoutePort` re-exports and `.dataset-note-planned` / `--site-planned` removed; no remaining references in `src/`, `tests/` or `index.html`; typecheck and build pass. |
+| L2 | Fixed without tags, `e471924` | **Yes.** Both bundle revisions read `<short SHA> (local tag <tag>)`; `snapshotOf` derives the full-SHA commit link from the bundle's own GitHub source URLs; unit test (`views.test.ts`) and browser test (`smoke.spec.ts`) pin label and href. Origin still has no tags, as intended. |
+| L3 | Fixed, `2124211` | **Yes.** `Site.tsx` renders the title as `h1` when nothing is shown and `p` otherwise; browser tests assert exactly one `h1` in the diagram state and the title as the only `h1` in Not Found and failed-load states. |
+| L4 | Left, by evidence | **Reason holds.** Run 39887098435 log: apt `Fetched 25.9 MB in 5min 57s (72.7 kB/s)` (02:00:12→02:06:09); browser download+install 02:06:09→02:06:21. Run 39890114511 (same step, same packages): `Fetched 25.9 MB in 1s (37.8 MB/s)`, whole step 21 s. A browser cache would not have helped; the slow run was the mirror. Action SHA pinning remains optional and undone, as recorded. |
+| L5 | Left | **Reason holds.** PLAN.md line 274 permits a split "only [for] a genuinely unreadable lab view with a recorded plan deviation"; my review rated the view borderline and the split optional, and the view is readable at native scale with the physical tree. Leaving it is within the plan. |
+| L6 | Fixed, `415200f` | **Yes.** The clause names `deploy/compose.tmpfs.yml` and 48 MB; at `9367863` that file sets `node-a-data`/`node-b-data` to `type: tmpfs … size=48m` for lesson 10. |
+| L7 | Fixed, `d7f006f` | **Yes.** `inventory.json` carries `mergedRevision` and `mergedLine: 68` on `src-67`; the test reads both (`source.mergedLine ?? source.line`) and asserts the merge SHA; `publicationStatus` updated. The 66-test unit run includes it. |
+
+### Regression spot-check
+
+The fix commits touched both dataset JSONs (key text, three documents, 67 source
+notes), `Site.tsx`, `site-model.ts`, `sdk.ts`, `app.css`, the workflow and one test
+each for L2/L3/L7. All twelve routes, drill-down, Up/Back, documents, scenario controls,
+catalog errors and the third-entry fixture passed in the 35-test browser run; view
+counts (7 + 5), element/relationship audits and all 102 + 67 source selectors passed
+in the 66-test unit run; both datasets still carry exactly 7 and 5 `external` key
+entries. `catalog.json` was not touched. No regression found.
+
+### Nits (record only; no repair round needed)
+
+1. STATE's L4 row says browser downloads "took ~6 s" in run 39887098435; the log shows
+   the download-and-install phase after apt was about 12 s (02:06:09→02:06:21). The
+   conclusion (apt mirror, not browser download) is unaffected.
+2. The item 7 record says the three `licenses/` URLs return 200 but not that they are
+   byte-identical live; they are (checked here against the package and local build).
+   Worth stating in item 8's live verification.

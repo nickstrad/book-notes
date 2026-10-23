@@ -4,11 +4,12 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 7 fix pass complete (see "Item 7" below): H1, M1–M3 and
-L1–L3, L6, L7 fixed; L4, L5 deliberately left with recorded reasons; M4 is Nick's
-LICENSE decision. Local gate green (66 unit, 35 Chromium, build, manifest with license
-notices). Next: a fresh Fable recheck of the fix pass, then item 8. Item 6's review is
-in [REVIEW.md](REVIEW.md); items 1–5 remain as recorded below.
+Status (2026-10-23): item 7 fix pass complete and rechecked by Fable: **PASS WITH NITS**
+(see [REVIEW.md](REVIEW.md) "Recheck"); H1, M1–M3 and L1–L3, L6, L7 verified fixed;
+L4, L5 left with reasons that hold; M4 is Nick's LICENSE decision. Recheck gate green
+(66 unit, 35 Chromium, build, manifest; live licenses byte-identical). Next: item 8
+(Sol, live verification). Item 6's review and the recheck are in [REVIEW.md](REVIEW.md);
+items 1–5 remain as recorded below.
 
 ## Done and in progress
 
@@ -175,8 +176,8 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Next steps and owners
 
-1. Fresh Fable recheck of the item 7 fix pass (diff `7f5d316..` the item 7 record).
-2. Sol: item 8 live verification, including the new `licenses/` files and Licenses link.
+1. Sol: item 8 live verification, including the new `licenses/` files and Licenses link
+   (the recheck already confirmed the three files are byte-identical live).
 
 ## Open decisions and blockers
 
