@@ -1,0 +1,49 @@
+{
+  "run": {
+    "id": 39890114511,
+    "head_sha": "f542c5f29dd0a67a5d2a63a6ff3ce30e33900892",
+    "conclusion": "success",
+    "html_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511",
+    "created_at": "2026-10-23T02:32:20Z",
+    "updated_at": "2026-10-23T02:34:29Z"
+  },
+  "deploymentId": 7268736177,
+  "statuses": [
+    {
+      "state": "success",
+      "environment_url": "https://nickstrad.github.io/book-notes/",
+      "log_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511/job/120208017587",
+      "created_at": "2026-10-23T02:34:29Z",
+      "updated_at": "2026-10-23T02:34:29Z"
+    },
+    {
+      "state": "in_progress",
+      "environment_url": "",
+      "log_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511/job/120208017587",
+      "created_at": "2026-10-23T02:33:55Z",
+      "updated_at": "2026-10-23T02:33:55Z"
+    },
+    {
+      "state": "queued",
+      "environment_url": "",
+      "log_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511/job/120208017587",
+      "created_at": "2026-10-23T02:33:53Z",
+      "updated_at": "2026-10-23T02:33:53Z"
+    },
+    {
+      "state": "queued",
+      "environment_url": "",
+      "log_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511/job/120208017587",
+      "created_at": "2026-10-23T02:33:53Z",
+      "updated_at": "2026-10-23T02:33:53Z"
+    },
+    {
+      "state": "waiting",
+      "environment_url": "",
+      "log_url": "https://github.com/nickstrad/book-notes/actions/runs/39890114511/job/120208017587",
+      "created_at": "2026-10-23T02:33:52Z",
+      "updated_at": "2026-10-23T02:33:52Z"
+    }
+  ],
+  "siteSourceDiff": "git diff f542c5f29dd0a67a5d2a63a6ff3ce30e33900892 5cb140279c311f84bcc2a59998f90f8aacd96f63 -- pages .github/workflows/pages.yml: empty"
+}

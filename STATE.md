@@ -86,14 +86,16 @@ report to Nick.
 
 ## Diagram site
 
-- [Plan](docs/diagram-site/PLAN.md) approved for destination B: `pages/` in this repo,
-  base `/book-notes/`. Item 1 shell implemented; [site state](docs/diagram-site/STATE.md)
-  records acceptance, pinned reuse sources, evidence and handoff. Items 1–3 are complete.
-  Item 4 integrates both real datasets and reconciles Queuelet's pinned `b6df7db`
-  against merged end-review fix pass `7d26bb8` (record `1712ced`); 66 unit tests,
-  34 browser tests and production build pass.
-  Catalog/evidence commit: `6243bc3`. Item 5 CI/rehearsal local gate passes:
-  full-history Pages workflow, 66 unit tests, 34 browser tests and dist manifest.
-  Implementation `5cef3cf` pushed; [Actions run 39887098435](https://github.com/nickstrad/book-notes/actions/runs/39887098435)
-  completed build/upload/deploy successfully. Item 5 complete; items 6–8 remain
-  separate runs, with all-view fidelity review next and live content checks in item 8.
+- [Approved plan](docs/diagram-site/PLAN.md) **complete: items 1–8**, destination B,
+  `pages/` in this repo, base `/book-notes/`.
+- Item 6 independent fidelity review and item 7 fix pass/recheck complete:
+  [review](docs/diagram-site/REVIEW.md), Fable **PASS WITH NITS**, no repair round.
+- Item 8 live checks **PASS** (2026-10-23): Litefleet default + Queuelet, all 12
+  routes at desktop/mobile widths, rendered diagrams/keys, corrected wording,
+  zero browser/request errors and no horizontal overflow. All 11 live files,
+  including the three licenses, are byte-identical to a fresh build.
+- Deployed SHA `f542c5f29dd0a67a5d2a63a6ff3ce30e33900892`, successful
+  [Actions run 39890114511](https://github.com/nickstrad/book-notes/actions/runs/39890114511).
+  [Site state and evidence](docs/diagram-site/STATE.md) record the closeout.
+  No work remains under this plan; Nick's repository LICENSE decision (M4) and
+  optional upstream SDK request remain open. No background run or server remains.

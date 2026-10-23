@@ -1,0 +1,1572 @@
+{
+  "checkedAt": "2026-10-23T02:44:23.871Z",
+  "base": "https://nickstrad.github.io/book-notes/",
+  "localRevision": "5cb1402",
+  "deployment": {
+    "run": 39890114511,
+    "sha": "f542c5f29dd0a67a5d2a63a6ff3ce30e33900892"
+  },
+  "files": [
+    {
+      "path": "404.html",
+      "status": 200,
+      "bytes": 696,
+      "sha256": "e5cbf7599e44492f3573f7fd24ef36e85483500e213c9544fbb9432b28ad8345",
+      "localSha256": "e5cbf7599e44492f3573f7fd24ef36e85483500e213c9544fbb9432b28ad8345",
+      "identical": true
+    },
+    {
+      "path": "architectures/litefleet.json",
+      "status": 200,
+      "bytes": 139287,
+      "sha256": "18d6a3a68a37ec53c20c2f6c5e9fb62b103a191ae7aa9c7a52b279d1bec979d0",
+      "localSha256": "18d6a3a68a37ec53c20c2f6c5e9fb62b103a191ae7aa9c7a52b279d1bec979d0",
+      "identical": true
+    },
+    {
+      "path": "architectures/queuelet.json",
+      "status": 200,
+      "bytes": 92923,
+      "sha256": "eef5209b88577f2312b2372a2f1bfb32c13a721b0d9a7d6606caaea3cff2c065",
+      "localSha256": "eef5209b88577f2312b2372a2f1bfb32c13a721b0d9a7d6606caaea3cff2c065",
+      "identical": true
+    },
+    {
+      "path": "assets/index-B_L0nYzB.js",
+      "status": 200,
+      "bytes": 801496,
+      "sha256": "51499e2931424d6007de95e50969b833a7216b04c8ac91d1ebc6207630c87ff9",
+      "localSha256": "51499e2931424d6007de95e50969b833a7216b04c8ac91d1ebc6207630c87ff9",
+      "identical": true
+    },
+    {
+      "path": "assets/index-DqMESnE-.css",
+      "status": 200,
+      "bytes": 33196,
+      "sha256": "4a8f1b80f935acb1d3dfc4fd0c8ff3428c2121c50410358cb98eb474d228d223",
+      "localSha256": "4a8f1b80f935acb1d3dfc4fd0c8ff3428c2121c50410358cb98eb474d228d223",
+      "identical": true
+    },
+    {
+      "path": "assets/layout-worker-BeIcR9gj.js",
+      "status": 200,
+      "bytes": 2107559,
+      "sha256": "34020517e5f80f3a1559e04e19bb7c9a98a644ab2664af6cac35a3d5c8bbdedd",
+      "localSha256": "34020517e5f80f3a1559e04e19bb7c9a98a644ab2664af6cac35a3d5c8bbdedd",
+      "identical": true
+    },
+    {
+      "path": "catalog.json",
+      "status": 200,
+      "bytes": 327,
+      "sha256": "02e5eb07affa1501e0cd48c234f01fd32eecf7135b0569e7fc85683e5ea0da89",
+      "localSha256": "02e5eb07affa1501e0cd48c234f01fd32eecf7135b0569e7fc85683e5ea0da89",
+      "identical": true
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 696,
+      "sha256": "e5cbf7599e44492f3573f7fd24ef36e85483500e213c9544fbb9432b28ad8345",
+      "localSha256": "e5cbf7599e44492f3573f7fd24ef36e85483500e213c9544fbb9432b28ad8345",
+      "identical": true
+    },
+    {
+      "path": "licenses/NOTICES.txt",
+      "status": 200,
+      "bytes": 3806,
+      "sha256": "1cb8ed3c182e63b5f2e26c561abc7ceeb3fbb4714861d1929a04ae5130d37ba2",
+      "localSha256": "1cb8ed3c182e63b5f2e26c561abc7ceeb3fbb4714861d1929a04ae5130d37ba2",
+      "identical": true
+    },
+    {
+      "path": "licenses/c4-sdk-LICENSE.txt",
+      "status": 200,
+      "bytes": 1067,
+      "sha256": "265cec7609e4138f48b1f5c71f50b9b3d7d8ab824af7b5e7a2c181603675da77",
+      "localSha256": "265cec7609e4138f48b1f5c71f50b9b3d7d8ab824af7b5e7a2c181603675da77",
+      "identical": true
+    },
+    {
+      "path": "licenses/c4-sdk-THIRD_PARTY_NOTICES.txt",
+      "status": 200,
+      "bytes": 108203,
+      "sha256": "2f8b823863a23b4f694c6173710d7c2c8534451b3fdea963e0cfb54f49381750",
+      "localSha256": "2f8b823863a23b4f694c6173710d7c2c8534451b3fdea963e0cfb54f49381750",
+      "identical": true
+    }
+  ],
+  "routes": [
+    {
+      "dataset": "litefleet",
+      "diagram": "context",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/context",
+      "status": 200,
+      "rendered": {
+        "textLength": 776,
+        "nodes": 5,
+        "shapes": 9,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "containers",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/containers",
+      "status": 200,
+      "rendered": {
+        "textLength": 2144,
+        "nodes": 12,
+        "shapes": 17,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Supporting element (grey)",
+        "description": "Inside the Litefleet boundary: a Litefleet container drawn grey because it is supporting context in a component view (the tag is per element). Outside the boundary: a partner fake.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "gateway-components",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/gateway-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 1681,
+        "nodes": 10,
+        "shapes": 14,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "node-components",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/node-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 1964,
+        "nodes": 11,
+        "shapes": 16,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "query-flow",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/query-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 1197,
+        "nodes": 7,
+        "shapes": 11,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "usage-flow",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/usage-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 976,
+        "nodes": 5,
+        "shapes": 10,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "lab-deployment",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/lab-deployment",
+      "status": 200,
+      "rendered": {
+        "textLength": 5508,
+        "nodes": 26,
+        "shapes": 53,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "context",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/context",
+      "status": 200,
+      "rendered": {
+        "textLength": 795,
+        "nodes": 5,
+        "shapes": 9,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "containers",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/containers",
+      "status": 200,
+      "rendered": {
+        "textLength": 1620,
+        "nodes": 10,
+        "shapes": 13,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Supporting element (grey)",
+        "description": "Inside the service box: PostgreSQL, the API's store. Outside it: Queuelet clients (worker, qctl) and the hooksink lab fake, which run outside the service, and the external webhook receiver.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "api-components",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/api-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 2678,
+        "nodes": 13,
+        "shapes": 22,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "job-flow",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/job-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 1534,
+        "nodes": 6,
+        "shapes": 18,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "lab-deployment",
+      "width": 1600,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/lab-deployment",
+      "status": 200,
+      "rendered": {
+        "textLength": 1798,
+        "nodes": 11,
+        "shapes": 13,
+        "width": 1216,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 1600,
+      "clientWidth": 1600,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "context",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/context",
+      "status": 200,
+      "rendered": {
+        "textLength": 776,
+        "nodes": 5,
+        "shapes": 9,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "containers",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/containers",
+      "status": 200,
+      "rendered": {
+        "textLength": 2144,
+        "nodes": 12,
+        "shapes": 17,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Supporting element (grey)",
+        "description": "Inside the Litefleet boundary: a Litefleet container drawn grey because it is supporting context in a component view (the tag is per element). Outside the boundary: a partner fake.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "gateway-components",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/gateway-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 1681,
+        "nodes": 10,
+        "shapes": 14,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "node-components",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/node-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 1964,
+        "nodes": 11,
+        "shapes": 16,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "query-flow",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/query-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 1197,
+        "nodes": 7,
+        "shapes": 11,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "usage-flow",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/usage-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 976,
+        "nodes": 5,
+        "shapes": 10,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "litefleet",
+      "diagram": "lab-deployment",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/lab-deployment",
+      "status": 200,
+      "rendered": {
+        "textLength": 5508,
+        "nodes": 26,
+        "shapes": 53,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "context",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/context",
+      "status": 200,
+      "rendered": {
+        "textLength": 795,
+        "nodes": 5,
+        "shapes": 9,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "containers",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/containers",
+      "status": 200,
+      "rendered": {
+        "textLength": 1620,
+        "nodes": 10,
+        "shapes": 13,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Supporting element (grey)",
+        "description": "Inside the service box: PostgreSQL, the API's store. Outside it: Queuelet clients (worker, qctl) and the hooksink lab fake, which run outside the service, and the external webhook receiver.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "api-components",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/api-components",
+      "status": 200,
+      "rendered": {
+        "textLength": 2678,
+        "nodes": 13,
+        "shapes": 22,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "job-flow",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/job-flow",
+      "status": 200,
+      "rendered": {
+        "textLength": 1534,
+        "nodes": 6,
+        "shapes": 18,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    },
+    {
+      "dataset": "queuelet",
+      "diagram": "lab-deployment",
+      "width": 390,
+      "url": "https://nickstrad.github.io/book-notes/#/architectures/queuelet/diagrams/lab-deployment",
+      "status": 200,
+      "rendered": {
+        "textLength": 1798,
+        "nodes": 11,
+        "shapes": 13,
+        "width": 356,
+        "height": 620
+      },
+      "legendEntries": 5,
+      "key": {
+        "id": "external",
+        "label": "Outside the focused process",
+        "description": "A supporting element: another container or store of this system, a client, or a partner fake. The grey tag belongs to the element, so it stays grey in every view.",
+        "swatch": {
+          "shape": "box",
+          "tone": "external",
+          "stroke": "solid"
+        }
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "result": "PASS"
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "badResponses": [],
+  "workers": [
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+    "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js"
+  ],
+  "requests": [
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-B_L0nYzB.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/index-DqMESnE-.css",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/litefleet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/architectures/queuelet.json",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    },
+    {
+      "url": "https://nickstrad.github.io/book-notes/assets/layout-worker-BeIcR9gj.js",
+      "status": 200
+    }
+  ],
+  "catalog": {
+    "defaultId": "litefleet",
+    "entries": [
+      {
+        "id": "litefleet",
+        "title": "Litefleet — Release It! (v1-hardened)",
+        "url": "architectures/litefleet.json"
+      },
+      {
+        "id": "queuelet",
+        "title": "Queuelet — Explore It! (v1-explored)",
+        "url": "architectures/queuelet.json"
+      }
+    ]
+  },
+  "queueletContext": "Producers submit JSON jobs to named queues inside a namespace. Worker clients lease jobs, execute them outside Queuelet and report success or failure. Operators manage queues, jobs and schedules and inspect events and stats. Queuelet sends terminal-state notifications to a configured webhook receiver. In the lab that receiver is hooksink, a fault-controllable fake. Open Queuelet to see its containers. This is the explored and fixed b6df7db snapshot; its project tree is identical to the merged end-review fix pass (7d26bb8). It is not a claim of complete exploration or exactly-once execution.",
+  "defaultRoute": "https://nickstrad.github.io/book-notes/#/architectures/litefleet/diagrams/context",
+  "datasetSwitch": "PASS: Litefleet → Queuelet → Litefleet",
+  "licensesLink": "/book-notes/licenses/NOTICES.txt",
+  "nonDefaultReload": "PASS: Queuelet api-components",
+  "mobileExplanation": "PASS",
+  "result": "PASS",
+  "completedAt": "2026-10-23T02:45:25.087Z"
+}

@@ -1,0 +1,3 @@
+TypeError: Cannot read properties of null (reading 'status')
+    at file:///tmp/booknotes-sol-diag8/live-check.mjs:47:49
+RESULT FAIL files 11 route/viewport checks 0 errors 0

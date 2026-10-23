@@ -4,12 +4,13 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 7 fix pass complete and rechecked by Fable: **PASS WITH NITS**
-(see [REVIEW.md](REVIEW.md) "Recheck"); H1, M1–M3 and L1–L3, L6, L7 verified fixed;
-L4, L5 left with reasons that hold; M4 is Nick's LICENSE decision. Recheck gate green
-(66 unit, 35 Chromium, build, manifest; live licenses byte-identical). Next: item 8
-(Sol, live verification). Item 6's review and the recheck are in [REVIEW.md](REVIEW.md);
-items 1–5 remain as recorded below.
+Status (2026-10-23): **approved plan complete, items 1–8**. Item 7's fix pass
+was rechecked by Fable: **PASS WITH NITS**, no repair round. Item 8 live verification
+is **PASS**: all twelve routes render on the public host at desktop/mobile widths,
+all eleven deployed files match a fresh build, and the three licenses are
+byte-identical live. Deployed revision: `f542c5f29dd0a67a5d2a63a6ff3ce30e33900892`.
+See the item 8 closeout below. M4 remains Nick's repository LICENSE decision;
+it does not block completion of this approved site plan.
 
 ## Done and in progress
 
@@ -176,8 +177,8 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Next steps and owners
 
-1. Sol: item 8 live verification, including the new `licenses/` files and Licenses link
-   (the recheck already confirmed the three files are byte-identical live).
+No implementation or verification remains under this plan. Nick owns the optional
+repository LICENSE decision below; the upstream SDK request is also optional.
 
 ## Open decisions and blockers
 
@@ -190,15 +191,19 @@ Catalog/evidence commit: `6243bc3` on main.
   c4-sdk, so a container can be grey only in the component views that need the tag (M2).
 - CI fetches full history, including reconciled merge `7d26bb8`. Origin has no
   book tags; fidelity checks use immutable source SHAs rather than requiring a tag.
-- Queuelet merge prerequisite resolved; independent all-view fidelity review remains item 6.
+- Queuelet merge prerequisite resolved; item 6 review and the item 7 recheck are complete.
 
 ## Resume
 
-Checkout `/root/Software/book-notes`, branch `main`. Item 5 has no background run or
-server to resume; scratch is `/tmp/booknotes-sol-diag5/`. Node 22.23.2:
-`cd pages && npm ci && npm run check`. Catalog and dataset slices now exercise real
-production data without overrides; only third-entry and error tests intercept loading.
-No worktree cleanup is required for this explicitly authorized main-checkout run.
+Checkout `/root/Software/book-notes`, branch `main`. Plan complete; no background
+run, server or worktree to resume or clean up. Item 8 scratch and the live Playwright
+harness are in `/tmp/booknotes-sol-diag8/`; committed evidence is linked below.
+To repeat the same live probe on this VM, after a fresh `cd pages && npm run build`
+and `cp dist/index.html dist/404.html`, run with Node 22.23.2:
+`node /tmp/booknotes-sol-diag8/live-check.mjs`. It targets the public Pages URL,
+starts no local server and writes its result/screenshots to scratch. For future
+source changes use `cd pages && npm ci && npm run check`, the manifest check and
+the deployment runbook in `pages/README.md`, then repeat live checks.
 
 ## Item 5 — CI/release rehearsal complete
 
@@ -259,7 +264,7 @@ One commit per finding, base `7f5d316`:
 | L1 dead exports/CSS | **Fixed.** Dropped `ArchitectureViewer` and unused type re-exports, `.dataset-note-planned` and its colour variable. | `2b694f8` |
 | L2 snapshot labels | **Fixed without publishing tags.** Revisions read "9367863 (local tag release-it/v1-hardened)" / "b6df7db (local tag explore-it/v1-explored)"; the shell links the full pinned commit derived from the bundle's own source URLs (`snapshotOf`, unit + browser tested). Pushing tags remains Nick's call. | `e471924` |
 | L3 heading structure | **Fixed.** Site title renders as `h1` when no diagram is shown; exactly one `h1` in every state (browser tested). | `2124211` |
-| L4 CI time | **Left, by evidence.** Run 39887098435's 6m18s was apt (`Fetched 25.9 MB in 5min 57s (72.7 kB/s)`, a slow mirror); browser downloads took ~6 s, so a browser cache saves almost nothing and `--with-deps` stays for a reliable fresh runner. Action SHA pinning (optional) not done. | — |
+| L4 CI time | **Left, by evidence.** Run 39887098435's 6m18s was apt (`Fetched 25.9 MB in 5min 57s (72.7 kB/s)`, a slow mirror); browser download-and-install took ~12 s, so a browser cache saves almost nothing and `--with-deps` stays for a reliable fresh runner. Action SHA pinning (optional) not done. | — |
 | L5 deployment Fit readability | **Left.** Borderline; plan permits a split only if genuinely unreadable; native scale + physical tree carry the text. | — |
 | L6 tmpfs overlay | **Fixed.** One clause in Litefleet `doc-lab-deployment`, checked against `deploy/compose.tmpfs.yml` at `9367863`. | `415200f` |
 | L7 test special case | **Fixed.** Inventory carries `mergedRevision` and `mergedLine` (src-67 → 68); test reads them (verified it fails if the data is wrong). Stale `publicationStatus` updated. | `d7f006f` |
@@ -278,3 +283,91 @@ OS deps 21 s, supporting the L4 slow-mirror reading), deploy 34 s. The three `li
 URLs return HTTP 200 on the live site; fuller live checks remain item 8. This record
 commit is docs-only and, per M3, should not start a Pages run.
 Scratch `/tmp/booknotes-opus-diag7/`; no server or background run remains.
+
+## Item 8 — deployment and live verification complete
+
+Fresh Sol run on main, per explicit [brief](evidence/item-8/brief.md); commit and
+push authorized. Checked 2026-10-23 02:44:23–02:45:25 UTC against
+<https://nickstrad.github.io/book-notes/>. **PASS; approved plan complete.**
+
+### Deployed revision and artifact identity
+
+- Latest successful Pages [Actions run 39890114511](https://github.com/nickstrad/book-notes/actions/runs/39890114511)
+  and successful `github-pages` deployment `7268736177` both identify
+  **`f542c5f29dd0a67a5d2a63a6ff3ce30e33900892`**. Their metadata is in
+  [deployment evidence](evidence/item-8/deployment.json).
+- Fresh `npm run build` on Node 22.23.2 at local `5cb140279c311f84bcc2a59998f90f8aacd96f63`
+  passed. `git diff f542c5f HEAD -- pages .github/workflows/pages.yml` was empty:
+  later commits are docs only. Copied `dist/index.html` to `dist/404.html`;
+  `node scripts/verify-dist.mjs` passed its eleven-file manifest.
+- All **11** live files returned **HTTP 200** and were **byte-identical** to that
+  fresh build (SHA-256 and lengths in [live result](evidence/item-8/live-result.json)).
+  This includes both datasets, catalog, index/404, all three licenses and assets
+  `index-B_L0nYzB.js`, `index-DqMESnE-.css`, `layout-worker-BeIcR9gj.js`.
+  No new deployment was needed; the live source is the reviewed fix pass.
+
+### Live browser acceptance
+
+Playwright Chromium drove the **public URL**, without route interception or a
+localhost server. Each route was a fresh full navigation with HTTP 200. At both
+1600×1000 and 390×844, assertions checked the correct h1, layout-ready canvas with
+nonempty diagram text and rendered SVG shapes, every key entry's label/description,
+and document width ≤ viewport width. All 24 route/viewport combinations passed:
+
+| Dataset | Hash route suffix after `#/architectures/<dataset>/diagrams/` | Desktop | Mobile |
+|---|---|---|---|
+| Litefleet | `context` | PASS | PASS |
+| Litefleet | `containers` | PASS | PASS |
+| Litefleet | `gateway-components` | PASS | PASS |
+| Litefleet | `node-components` | PASS | PASS |
+| Litefleet | `query-flow` | PASS | PASS |
+| Litefleet | `usage-flow` | PASS | PASS |
+| Litefleet | `lab-deployment` | PASS | PASS |
+| Queuelet | `context` | PASS | PASS |
+| Queuelet | `containers` | PASS | PASS |
+| Queuelet | `api-components` | PASS | PASS |
+| Queuelet | `job-flow` | PASS | PASS |
+| Queuelet | `lab-deployment` | PASS | PASS |
+
+- Catalog: exactly Litefleet and Queuelet; Litefleet default route; real selector
+  switches Litefleet → Queuelet → Litefleet. Queuelet `api-components` reload passed.
+- Item 7 H1: live header Licenses link resolves to `/book-notes/licenses/NOTICES.txt`.
+  All three files returned **200 and are byte-identical to the repository's fresh
+  build copies**, explicitly closing the recheck's second record nit. The SDK
+  files also match `node_modules/c4-sdk/LICENSE` and `THIRD_PARTY_NOTICES.md` verbatim:
+
+  | Live file under `licenses/` | Bytes | Result |
+  |---|---:|---|
+  | `NOTICES.txt` | 3,806 | 200; byte-identical |
+  | `c4-sdk-LICENSE.txt` | 1,067 | 200; byte-identical |
+  | `c4-sdk-THIRD_PARTY_NOTICES.txt` | 108,203 | 200; byte-identical |
+
+- Item 7 M1: live Queuelet JSON and rendered context explanation contain:
+  “This is the explored and fixed b6df7db snapshot; its project tree is identical
+  to the merged end-review fix pass (7d26bb8).” Verified on desktop and in the
+  mobile explanation drawer.
+- Item 7 M2: all twelve live keys render their entries; both container views show
+  **Supporting element (grey)** with their dataset-specific inside/outside-boundary
+  descriptions. The other ten show **Outside the focused process** and the corrected
+  supporting-element explanation. Exact strings are retained per route in the result.
+- Basics: **zero console errors, page errors, failed requests or HTTP ≥400 responses**
+  during 185 browser responses. All observed requests and all 29 worker instances
+  resolve under `/book-notes/`; layout worker URLs use `/book-notes/assets/`.
+  Mobile widths equal 390 px without document overflow on every view; selector
+  remains in viewport and the explanation drawer renders the corrected content.
+- Captured all 24 views plus mobile explanation in scratch; visually inspected
+  the five retained [desktop/mobile captures](evidence/item-8/screenshots/).
+  Keys, explanations and text alternatives wrap within the page. Fit remains a
+  topology overview requiring pan/zoom for dense labels, as accepted in item 6/L5.
+- [Browser log](evidence/item-8/live-check.txt) and [machine result](evidence/item-8/live-result.json)
+  retain per-route counts, widths, keys, HTTP statuses, asset hashes and error lists.
+  An [initial harness failure](evidence/item-8/initial-harness.txt) was a same-document
+  `page.goto` returning null after a hash-only navigation; the final probe forces
+  fresh navigations. It was a probe issue, with no site change needed.
+- Closed the recheck's first record nit too: item 7 L4 now says ~12 s for browser
+  download-and-install (02:06:09→02:06:21); its apt-mirror conclusion is unchanged.
+- No live defect, deployment lag or pipeline issue found. No source/workflow/book
+  changes, delegated agents or background servers. No new durable environment fact
+  or reusable script needed: existing indexed release/dataset guidance and browser
+  checks cover the mechanisms used here. No additional review round is required
+  by the accepted recheck. Nick's optional M4 and the SDK request remain recorded above.
