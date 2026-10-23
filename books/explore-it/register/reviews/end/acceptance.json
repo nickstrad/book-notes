@@ -1,0 +1,109 @@
+{
+  "runs": [
+    {
+      "name": "head-up",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T23:44:39.104691+00:00",
+      "exit": 0,
+      "elapsed_seconds": 56.582,
+      "last_verdict_line": "",
+      "log": "logs/head-up.log"
+    },
+    {
+      "name": "head-checks",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T23:45:35.688791+00:00",
+      "exit": 2,
+      "elapsed_seconds": 689.183,
+      "last_verdict_line": "FAIL",
+      "log": "logs/head-checks.log"
+    },
+    {
+      "name": "head-test",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "start": "2026-10-22T23:57:04.873046+00:00",
+      "exit": 0,
+      "elapsed_seconds": 4.929,
+      "last_verdict_line": "ok  \tqueuelet/internal/worker\t0.025s",
+      "log": "logs/head-test.log"
+    },
+    {
+      "name": "head-vet",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T23:57:09.802517+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.953,
+      "last_verdict_line": "",
+      "log": "logs/head-vet.log"
+    },
+    {
+      "name": "ref08",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08",
+        "REF=explore-it/lesson-07"
+      ],
+      "start": "2026-10-22T23:57:10.757478+00:00",
+      "exit": 0,
+      "elapsed_seconds": 136.938,
+      "last_verdict_line": "DEFECTS REPRODUCED: 4 present",
+      "log": "logs/ref08.log"
+    },
+    {
+      "name": "ref09",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09",
+        "REF=explore-it/lesson-08"
+      ],
+      "start": "2026-10-22T23:59:27.696975+00:00",
+      "exit": 0,
+      "elapsed_seconds": 101.722,
+      "last_verdict_line": "DEFECTS REPRODUCED: 7 present",
+      "log": "logs/ref09.log"
+    },
+    {
+      "name": "head-down",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-23T00:01:09.420671+00:00",
+      "exit": 0,
+      "elapsed_seconds": 5.283,
+      "last_verdict_line": "",
+      "log": "logs/head-down.log"
+    }
+  ]
+}

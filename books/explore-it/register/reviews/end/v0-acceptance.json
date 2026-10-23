@@ -1,0 +1,75 @@
+{
+  "runs": [
+    {
+      "name": "v0-up",
+      "tree": "v0",
+      "commit": "847f1b3f40f8127a072dba9e349f04e3b99f1090",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T23:47:26.605290+00:00",
+      "exit": 0,
+      "elapsed_seconds": 7.25,
+      "last_verdict_line": "",
+      "log": "logs/v0-up.log"
+    },
+    {
+      "name": "v0-baseline",
+      "tree": "v0",
+      "commit": "847f1b3f40f8127a072dba9e349f04e3b99f1090",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=00"
+      ],
+      "start": "2026-10-22T23:47:33.855849+00:00",
+      "exit": 0,
+      "elapsed_seconds": 12.545,
+      "last_verdict_line": "BASELINE HOLDS: enqueue\u2192lease\u2192ack\u2192webhook; unit and happy-path checks pass",
+      "log": "logs/v0-baseline.log"
+    },
+    {
+      "name": "v0-D18",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "bash",
+        "lab/repro/D18.sh"
+      ],
+      "start": "2026-10-22T23:47:46.402166+00:00",
+      "exit": 0,
+      "elapsed_seconds": 1.981,
+      "last_verdict_line": "",
+      "log": "logs/v0-D18.log"
+    },
+    {
+      "name": "v0-D21",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "bash",
+        "lab/repro/D21.sh"
+      ],
+      "start": "2026-10-22T23:47:48.383630+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.316,
+      "last_verdict_line": "",
+      "log": "logs/v0-D21.log"
+    },
+    {
+      "name": "v0-down",
+      "tree": "v0",
+      "commit": "847f1b3f40f8127a072dba9e349f04e3b99f1090",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T23:47:48.700499+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.62,
+      "last_verdict_line": "",
+      "log": "logs/v0-down.log"
+    }
+  ]
+}

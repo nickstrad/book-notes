@@ -1,0 +1,60 @@
+{
+  "runs": [
+    {
+      "name": "seeded-up",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T23:57:45.498305+00:00",
+      "exit": 0,
+      "elapsed_seconds": 58.612,
+      "last_verdict_line": "",
+      "log": "logs/seeded-up.log"
+    },
+    {
+      "name": "seeded-seed",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "seed"
+      ],
+      "start": "2026-10-22T23:58:44.111559+00:00",
+      "exit": 0,
+      "elapsed_seconds": 11.201,
+      "last_verdict_line": "",
+      "log": "logs/seeded-seed.log"
+    },
+    {
+      "name": "seeded-checks",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T23:58:55.313539+00:00",
+      "exit": 0,
+      "elapsed_seconds": 813.92,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t812.687s",
+      "log": "logs/seeded-checks.log"
+    },
+    {
+      "name": "seeded-down",
+      "tree": "repo",
+      "commit": "e750542457e8b42fce28108714d72352ff19ae71",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-23T00:12:29.234298+00:00",
+      "exit": 0,
+      "elapsed_seconds": 7.044,
+      "last_verdict_line": "",
+      "log": "logs/seeded-down.log"
+    }
+  ]
+}

@@ -5,9 +5,10 @@ one inherited queuelet service, nine experiments and eight reusable skills.
 Spec: [PLAN.md](PLAN.md), [exploration/PROTOCOL.md](exploration/PROTOCOL.md). Landing page:
 [README.md](README.md).
 
-**Status (2026-10-22): build complete. `explore-it/v1-explored` tags the landing commit (final
-skills, landing page, lessons index). Checkpoint C reviewed (PASS with one instrument flake and
-nits). Next: Astra's (Codex) end review. Not merged; nothing pushed.**
+**Status (2026-10-23): build and designated end review complete. Astra reviewed
+`e750542`: PASS WITH FIXES (0 high, 4 medium, 2 low); see [REVIEW.md](REVIEW.md).
+`explore-it/v1-explored` still tags the landing commit. Findings await follow-up;
+no product fixes were made by the reviewer. Not merged; nothing pushed.**
 
 ## Done
 
@@ -37,24 +38,34 @@ nits). Next: Astra's (Codex) end review. Not merged; nothing pushed.**
 - Walkthrough: [WALKTHROUGH.md](WALKTHROUGH.md), a guided tour for a cold reader (reading order,
   lab commands, tag itinerary); its commands checked live on 2026-10-22 through lesson 07.
 
+- Independent end review (this review commit), target `e750542`: [REVIEW.md](REVIEW.md),
+  [evidence](register/reviews/end/README.md). Fresh-clone final suite passed all 94
+  checks after explicit seeding (813.920 s); uncached unit tests and vet passed.
+  The first run's missing-seed U09 failure is retained as reviewer setup error.
+  Historical REF08/09 reproduced 4/7 defects; v0 baseline passed and D18/D21
+  reproduced against v0 binaries. All review stacks were taken down. Manifest and
+  original-transcript audits are retained. The designated non-Claude end review of
+  E07–E09 is complete; source-fidelity acceptance remains qualified by R1.
+
 ## In progress
 
-Nothing. No stack for this book is up from this run (`queuelet-review-c`, `queuelet-final` and
-`queuelet-ref` are down with volumes removed). A stale `queuelet-e01` stack (ports 18220/18221/15453, up since early
-2026-10-22) belongs to the E01 era and was left untouched; the coordinator can remove it
-with `COMPOSE_PROJECT_NAME=queuelet-e01 docker compose -f deploy/compose.yml down -v` from
-`project/`.
+None. The review is complete; no review runner remains active. No findings were fixed.
+Prior state recorded a stale `queuelet-e01` stack (ports 18220/18221/15453); this review
+left it untouched. Its coordinator owns any cleanup.
 
 ## Next
 
-1. **Astra (Codex `gpt-6-astra`) end review** of the whole arc from a fresh clone, as the
-   cross-family review that lessons 07–09 lack (their explorers, fixers and the C reviewer were
-   all Claude). Brief: the AGENTS review bar plus PLAN 5.3, with this file and
-   [review C](register/reviews/C/review-c.md) as the starting point.
+1. Fresh follow-up run: address review R1–R6, starting with R4's reader run recipe.
+   Preserve original records and tags; follow [REVIEW.md](REVIEW.md)'s fixes list.
 2. Nick's decisions on the spec and policy questions below.
 3. Merge adds-only after Release It! lands, applying PLAN section 10's notes outside `books/`.
 
 ## Open items (owner)
+
+- **Review R1–R6 (coordinator / fresh follow-up author):** full-text citation validation,
+  qualified blindness claims, measured learning claims, correct tag/rebuild recipe,
+  interruption/audit precision, and living backlog status. See the review for evidence
+  and executable fixes.
 
 - **Spec questions (Nick):** Q-E09-1, whether `0 0-23 * * *` is a wildcard-hour schedule under A5
   (SPEC literally says no, and the code follows it); Q-E09-2, whether success or an operator retry
@@ -88,6 +99,9 @@ exempt from retention; A5 classic cron DST (gap time runs once at gap end, repea
 
 - Worktree `/root/Software/booknotes-work/explore-it`, branch `plan/explore-it`. Git wins over
   this file.
+- End-review evidence: `register/reviews/end/`; runners and reconstruction commands
+  are indexed in its README. No background run needs resuming. Scratch clone:
+  `/tmp/explore-it-astra-review/repo`, reviewed HEAD `e750542`.
 - Review C: runner `register/reviews/C/run.py` (fresh clone and tag worktrees under
   `/tmp/explore-it-checkpoint-c`, project `queuelet-review-c`, ports 18270/18271/15503, explicit
   `QUEUELET_DATABASE_URL`). Earlier acceptance runners: `register/runs/0N-opus-runner.py`.
