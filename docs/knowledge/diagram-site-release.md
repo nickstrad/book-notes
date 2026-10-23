@@ -27,3 +27,14 @@ needs Pages/OIDC write access and the `github-pages` environment. A successful
 pipeline proves build/upload/deploy integration; live content and independent
 diagram fidelity remain separate acceptance items. See
 [item 5 evidence](../diagram-site/STATE.md) and [runbook](../../pages/README.md).
+
+Vite/esbuild strip legal comments, so a bundled dependency's license never
+reaches `dist` by accident. `pages/license-notices.ts` emits the notices under
+`licenses/` and fails the build when a bundled npm package has none; extend its
+`DIRECT` list (or the SDK's notices) before adding a runtime dependency. The
+manifest requires those files, so the allowlist and the claim stay in step.
+
+The workflow runs only for `pages/**` and itself; book-only commits need no
+`[skip ci]`, and `workflow_dispatch` redeploys unchanged sources. Slow
+`playwright install --with-deps` runs are usually the apt mirror, not the
+browser download, so a browser cache rarely helps (item 7: 6 min vs 21 s).
