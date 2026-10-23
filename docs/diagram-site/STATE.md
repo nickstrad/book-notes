@@ -271,4 +271,9 @@ Gate (Node 22.23.2, after all fixes): `npm ci` exit 0; `npm run check` exit 0: T
 package's. Inspected 1600 and 390 captures: header link, snapshot note and keys render
 without overflow. Evidence: [check](evidence/item-7/check.txt),
 [install](evidence/item-7/install.txt), [manifest](evidence/item-7/manifest.txt).
+Pushed `f542c5f`. [Actions run 39890114511](https://github.com/nickstrad/book-notes/actions/runs/39890114511)
+**SUCCESS** (`gh run watch --exit-status` exit 0): build 1m27s (Playwright install with
+OS deps 21 s, supporting the L4 slow-mirror reading), deploy 34 s. The three `licenses/`
+URLs return HTTP 200 on the live site; fuller live checks remain item 8. This record
+commit is docs-only and, per M3, should not start a Pages run.
 Scratch `/tmp/booknotes-opus-diag7/`; no server or background run remains.
