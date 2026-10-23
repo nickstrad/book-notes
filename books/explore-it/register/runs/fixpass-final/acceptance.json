@@ -1,0 +1,241 @@
+{
+  "runs": [
+    {
+      "name": "final-up",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-23T01:03:58.088513+00:00",
+      "exit": 0,
+      "elapsed_seconds": 8.756,
+      "last_verdict_line": "",
+      "log": "logs/final-up.log"
+    },
+    {
+      "name": "final-seed",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "seed"
+      ],
+      "start": "2026-10-23T01:04:06.845674+00:00",
+      "exit": 0,
+      "elapsed_seconds": 9.647,
+      "last_verdict_line": "",
+      "log": "logs/final-seed.log"
+    },
+    {
+      "name": "final00-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=00"
+      ],
+      "start": "2026-10-23T01:04:16.493121+00:00",
+      "exit": 0,
+      "elapsed_seconds": 17.85,
+      "last_verdict_line": "BASELINE HOLDS: enqueue\u2192lease\u2192ack\u2192webhook; unit and happy-path checks pass",
+      "log": "logs/final00-verify.log"
+    },
+    {
+      "name": "final01-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=01"
+      ],
+      "start": "2026-10-23T01:04:34.344011+00:00",
+      "exit": 0,
+      "elapsed_seconds": 346.781,
+      "last_verdict_line": "FIXED AND CHECKED: 35 absent; regression checks pass",
+      "log": "logs/final01-verify.log"
+    },
+    {
+      "name": "final02-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=02"
+      ],
+      "start": "2026-10-23T01:10:21.125943+00:00",
+      "exit": 0,
+      "elapsed_seconds": 46.005,
+      "last_verdict_line": "FIXED AND CHECKED: 5 absent; regression checks pass",
+      "log": "logs/final02-verify.log"
+    },
+    {
+      "name": "final03-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=03"
+      ],
+      "start": "2026-10-23T01:11:07.131697+00:00",
+      "exit": 0,
+      "elapsed_seconds": 24.216,
+      "last_verdict_line": "FIXED AND CHECKED: 8 absent; regression checks pass",
+      "log": "logs/final03-verify.log"
+    },
+    {
+      "name": "final04-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=04"
+      ],
+      "start": "2026-10-23T01:11:31.348497+00:00",
+      "exit": 0,
+      "elapsed_seconds": 42.751,
+      "last_verdict_line": "FIXED AND CHECKED: 6 absent; regression checks pass",
+      "log": "logs/final04-verify.log"
+    },
+    {
+      "name": "final05-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=05"
+      ],
+      "start": "2026-10-23T01:12:14.100849+00:00",
+      "exit": 0,
+      "elapsed_seconds": 102.766,
+      "last_verdict_line": "FIXED AND CHECKED: 4 absent; regression checks pass",
+      "log": "logs/final05-verify.log"
+    },
+    {
+      "name": "final06-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=06"
+      ],
+      "start": "2026-10-23T01:13:56.867502+00:00",
+      "exit": 0,
+      "elapsed_seconds": 133.143,
+      "last_verdict_line": "FIXED AND CHECKED: 8 absent; regression checks pass",
+      "log": "logs/final06-verify.log"
+    },
+    {
+      "name": "final07-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=07"
+      ],
+      "start": "2026-10-23T01:16:10.011850+00:00",
+      "exit": 0,
+      "elapsed_seconds": 249.833,
+      "last_verdict_line": "FIXED AND CHECKED: 3 absent; regression checks pass",
+      "log": "logs/final07-verify.log"
+    },
+    {
+      "name": "final08-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-23T01:20:19.853216+00:00",
+      "exit": 0,
+      "elapsed_seconds": 147.339,
+      "last_verdict_line": "FIXED AND CHECKED: 4 absent; regression checks pass",
+      "log": "logs/final08-verify.log"
+    },
+    {
+      "name": "final09-verify",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=09"
+      ],
+      "start": "2026-10-23T01:22:47.194475+00:00",
+      "exit": 0,
+      "elapsed_seconds": 295.119,
+      "last_verdict_line": "FIXED AND CHECKED: 7 absent; regression checks pass",
+      "log": "logs/final09-verify.log"
+    },
+    {
+      "name": "final-checks",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-23T01:27:42.314569+00:00",
+      "exit": 0,
+      "elapsed_seconds": 702.666,
+      "last_verdict_line": "ok  \tqueuelet/test/checks\t701.871s",
+      "log": "logs/final-checks.log"
+    },
+    {
+      "name": "final-test",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "start": "2026-10-23T01:39:24.982015+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.423,
+      "last_verdict_line": "ok  \tqueuelet/internal/worker\t0.035s",
+      "log": "logs/final-test.log"
+    },
+    {
+      "name": "final-vet",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-23T01:39:27.406472+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.651,
+      "last_verdict_line": "",
+      "log": "logs/final-vet.log"
+    },
+    {
+      "name": "final-down",
+      "tree": "repo",
+      "commit": "3a7f3240cda9140c6e6e5f9edf37ed8f7b877ffc",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-23T01:39:28.058337+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.876,
+      "last_verdict_line": "",
+      "log": "logs/final-down.log"
+    }
+  ]
+}
