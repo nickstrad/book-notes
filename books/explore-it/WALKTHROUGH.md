@@ -14,9 +14,12 @@ HTTP API and a CLI, `qctl`, all in Docker Compose.
 
 The project is a deliberately defect-seeded system, explored blind. `explore-it/v0-inherited` passes
 its own baseline but carries 27 planted defects (D01–D27), four spec silences (A1–A4) and three
-testability gaps (T1–T3). Nine experiments were each run by a fresh agent that saw only an export of
-the previous tag (source, exploration record, skills, lessons) and never the plan, the register or
-git history. Each experiment is two commits: the explorer's record, then a fixer's patch with
+testability gaps (T1–T3). Nine experiments were each run by a fresh agent from an export of the
+previous tag (source, exploration record, skills, lessons) without the plan, the register or git
+history. The boundary was the prompt and the export, not OS isolation, and it has documented
+exceptions: A1 reached E04 through an exported lesson note, E09's charter supplied the expected
+cause groups, and three runs read their own runtime output outside the export. See the
+[exceptions table](register/blindness-exceptions.md); E01's result precedes all of them. Each experiment is two commits: the explorer's record, then a fixer's patch with
 repro scripts and checks, tagged `explore-it/lesson-NN`. `explore-it/v1-explored` adds the final
 skills and landing page.
 

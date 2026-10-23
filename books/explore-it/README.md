@@ -33,8 +33,12 @@ carries 27 planted defects, four spec silences and three testability gaps that n
 Beside it grows the **exploration record** ([`exploration/`](exploration/)): the protocol, the
 hypothesis backlog, eight living models (map, nouns and verbs, variables, rules, entities, states,
 ecosystem, causes) and every defect report as the explorer wrote it. Each experiment was run by a
-fresh agent working blind: from a plain export of the tree with the source but without the plan,
-the register or git history.
+fresh agent from a plain export of the tree with the source but without the plan, the register or
+git history. That boundary was a prompt and export boundary, not OS isolation, and it leaked in
+documented places: an exported lesson note named A1 to E04, E09's charter supplied the expected
+cause groups, and E04, E07 and E09 read their own runtime output outside the export. The
+[exceptions table](register/blindness-exceptions.md) lists each and what it does and does not
+change; E01's 26/27 below precedes all of them.
 
 ## What happened
 
