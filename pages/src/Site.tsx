@@ -16,12 +16,14 @@ interface SiteProps {
 
 /** Props-only shell. Catalog loading, routes, selection and status text live outside this view. */
 export function Site({ loaded, selection, choose, skipToMain }: SiteProps) {
+  // The SDK diagram supplies the page's h1; without one (loading, failure, Not Found) the site title is the h1.
+  const Title = selection?.shown ? "p" : "h1";
   return <>
     <a className="skip-link" href="#site-main" onClick={skipToMain}>Skip to the diagrams</a>
     <header className="site-header">
       <div className="site-heading">
         <p className="site-eyebrow">C4 model</p>
-        <p className="site-title">Book-notes architecture</p>
+        <Title className="site-title">Book-notes architecture</Title>
         <p className="site-purpose">
           Choose an architecture, then explore its diagrams and explanations.
           Each dataset identifies the snapshot it describes.

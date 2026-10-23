@@ -23,6 +23,7 @@ test("default catalog renders with documentation at the selected base", async ({
   await page.goto("./");
   await expect(page).toHaveURL(/\/book-notes\/#\/architectures\/litefleet\/diagrams\/context$/);
   await expect(page.getByRole("heading", { level: 1, name: "Litefleet: system context" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await expect(page.locator(canvas)).toHaveCount(1);
   await expect(picker(page).getByRole("option")).toHaveText([
     "Litefleet — Release It! (v1-hardened)", "Queuelet — Explore It! (v1-explored)",
@@ -61,6 +62,7 @@ test("unknown and malformed routes offer recovery without a fallback", async ({ 
   for (const hash of ["#/architectures/nope/diagrams/context", "#/somewhere"]) {
     await page.goto(`./${hash}`);
     await expect(page.getByRole("heading", { name: "Not Found", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(["Book-notes architecture"]);
     await expect(picker(page)).toHaveValue("");
     await expect(page.getByRole("link", { name: "Open Litefleet — Release It! (v1-hardened)" })).toBeVisible();
   }
@@ -140,6 +142,7 @@ for (const id of ["litefleet", "queuelet"]) {
       }));
       await page.goto("./");
       await expect(page.getByRole("heading", { name: "The diagrams could not be loaded" })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1 })).toHaveText(["Book-notes architecture"]);
       await expect(page.getByRole("alert")).toContainText(status === 503 ? "HTTP 503" : id);
       await expect(page.locator(canvas)).toHaveCount(0);
     });
