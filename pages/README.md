@@ -45,8 +45,9 @@ node scripts/verify-dist.mjs
 ```
 
 Only `pages/dist` is uploaded. Its manifest permits HTML (index plus identical
-404 fallback), catalog JSON, the two architecture JSON bundles and generated
-JavaScript/CSS assets including the layout worker. The manifest check rejects
+404 fallback), catalog JSON, the two architecture JSON bundles, generated
+JavaScript/CSS assets including the layout worker, and the three license notice
+files under `licenses/`, which it requires. The manifest check rejects
 extra files and checks both datasets' view counts and `/book-notes/` asset and
 worker paths. No book source, inventories, test fixtures or test screenshots
 are uploaded. Playwright checks the built preview at that same base before upload.
@@ -89,6 +90,13 @@ resolve reuse terms before the public release check in plan item 5.
 
 The renderer is the published **c4-sdk 0.1.0**, with React/React DOM **19.3.0**;
 no SDK source is vendored. SDK reference checkout inspected at
-`bb12c7b3eb4a70152ed5ee13094da4bf7fa985be`. Its MIT license and third-party notices
-remain in the installed npm package and bundled dependency notices. Tool versions
-are inherited from the precursor lockfile without a dependency upgrade.
+`bb12c7b3eb4a70152ed5ee13094da4bf7fa985be`. Tool versions are inherited from the
+precursor lockfile without a dependency upgrade.
+
+The build publishes license notices with the site, linked as "Licenses" in the
+header: `licenses/c4-sdk-LICENSE.txt` and `licenses/c4-sdk-THIRD_PARTY_NOTICES.txt`
+are c4-sdk's own MIT license and notices for the 76 packages in its bundles and
+worker (including elkjs, EPL-2.0 OR GPL-3.0-or-later), copied verbatim from the
+installed package; `licenses/NOTICES.txt` indexes them and reproduces the React,
+React DOM and scheduler licenses. `license-notices.ts` emits them and fails the
+build if any other npm package enters the bundle without a notice.

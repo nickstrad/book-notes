@@ -143,3 +143,16 @@ for (const id of ["litefleet", "queuelet"]) {
     });
   }
 }
+
+test("the Licenses link serves the bundled packages' notices", async ({ page, request }) => {
+  await page.goto("./");
+  const href = await page.getByRole("link", { name: "Licenses", exact: true }).getAttribute("href");
+  expect(href).toBe("/book-notes/licenses/NOTICES.txt");
+  const notices = await (await request.get(href!)).text();
+  for (const name of ["c4-sdk@0.1.0", "react@19.3.0", "react-dom@19.3.0", "scheduler@"]) expect(notices).toContain(name);
+  expect(notices).toContain("Copyright (c) Meta Platforms, Inc. and affiliates.");
+  const sdk = await request.get("licenses/c4-sdk-THIRD_PARTY_NOTICES.txt");
+  expect(sdk.ok()).toBe(true);
+  expect(await sdk.text()).toContain("elkjs@0.12.0");
+  expect((await request.get("licenses/c4-sdk-LICENSE.txt")).ok()).toBe(true);
+});

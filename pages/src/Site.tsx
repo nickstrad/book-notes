@@ -6,6 +6,7 @@ import {
 import type { Choice, Loaded, Selection } from "./site-model.ts";
 
 const REPO = "https://github.com/nickstrad/book-notes";
+const NOTICES = `${import.meta.env.BASE_URL}licenses/NOTICES.txt`;
 interface SiteProps {
   readonly loaded: Loaded;
   readonly selection?: Selection;
@@ -29,6 +30,8 @@ export function Site({ loaded, selection, choose, skipToMain }: SiteProps) {
           <a href={REPO}>Source and lesson notes</a>
           <span aria-hidden="true">·</span>
           <a href={`${REPO}/blob/main/docs/diagram-site/PLAN.md`}>Diagram site plan</a>
+          <span aria-hidden="true">·</span>
+          <a href={NOTICES}>Licenses</a>
         </p>
       </div>
     </header>
