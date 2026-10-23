@@ -6,7 +6,6 @@ import "c4-sdk/styles.css";
 import layoutWorkerUrl from "c4-sdk/layout-worker.js?url";
 import {
   ArchitectureProvider,
-  ArchitectureViewer,
   createElkLayoutPort,
   createFetchLoader,
   createHashRoutePort,
@@ -18,23 +17,20 @@ import { formatRoute, parseRoute } from "c4-sdk/core";
 import type {
   CatalogEntry,
   Diagnostic,
-  Diagram,
   Result,
-  Route,
   RoutePort,
   ValidatedArchitecture,
 } from "c4-sdk/core";
 
 export {
   ArchitectureProvider,
-  ArchitectureViewer,
   DiagramDocumentation,
   DiagramNavigation,
   DiagramView,
   formatRoute,
   parseRoute,
 };
-export type { CatalogEntry, Diagnostic, Diagram, Route, RoutePort, ValidatedArchitecture };
+export type { Diagnostic, ValidatedArchitecture };
 
 /**
  * One layout port for every viewer on the page. The package ships its ELK worker as a separate file; Vite

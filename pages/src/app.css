@@ -7,7 +7,6 @@
   --site-page: #f5f7f8;
   --site-border: #c8d6df;
   --site-accent: #124e69;
-  --site-planned: #8a4b08;
   --site-focus: #d5680c;
 }
 * {
@@ -176,9 +175,6 @@ code {
   border-left: 4px solid var(--site-accent);
   background: var(--site-surface);
   border-radius: 4px;
-}
-.dataset-note-planned {
-  border-left-color: var(--site-planned);
 }
 /* Keep a whole diagram visible under the sticky bar; the SDK's fixed 620px canvas is the upper bound. */
 .c4-sdk .site-main .c4-flow-canvas {
