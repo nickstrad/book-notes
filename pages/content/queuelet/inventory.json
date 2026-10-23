@@ -1,7 +1,8 @@
 {
   "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
   "tag": "explore-it/v1-explored",
-  "publicationStatus": "Provisional until end review, merge and delta reconciliation",
+  "mergedRevision": "7d26bb82db862b2fd483589f6b903d8dae26ae33",
+  "publicationStatus": "Published; reconciled against merged end-review fix pass 7d26bb8 (project tree identical)",
   "records": [
     {
       "id": "producer",
@@ -2102,7 +2103,8 @@
       "symbol": "## The structural fix",
       "line": 65,
       "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
-      "evidence": "## The structural fix: the state table as code"
+      "evidence": "## The structural fix: the state table as code",
+      "mergedLine": 68
     }
   ],
   "lessons": [

@@ -9,8 +9,10 @@ const decoded = decodeArchitecture(raw);
 const bundle = decoded.ok ? decoded.value.bundle : raw;
 const inventory = readJson('content/queuelet/inventory.json') as {
   revision: string;
+  mergedRevision: string;
   records: { id: string; type: string; boundary: string; protocol: string; sourceIds: string[]; revision: string; views: string[] }[];
-  sources: { id: string; path: string; symbol: string; line: number; revision: string; evidence: string }[];
+  // mergedLine: where a selector sits at the merged revision when edits there moved it.
+  sources: { id: string; path: string; symbol: string; line: number; mergedLine?: number; revision: string; evidence: string }[];
   lessons: { lesson: string; views: string[]; note: string; paths: string[]; revision: string }[];
 };
 const repo = new URL('../../', import.meta.url);
@@ -33,14 +35,15 @@ describe('Queuelet explored slice', () => {
   });
 
   it('reconciles selectors against the accepted merged fix pass without changing the snapshot', () => {
-    const merged = '7d26bb82db862b2fd483589f6b903d8dae26ae33';
+    const merged = inventory.mergedRevision;
+    expect(merged).toBe('7d26bb82db862b2fd483589f6b903d8dae26ae33');
     const git = (...args: string[]) => execFileSync('git', args, { cwd: repo, encoding: 'utf8' });
     // Book tags may remain local; a fresh clone must verify the immutable source object.
     expect(git('rev-parse', `${inventory.revision}^{commit}`).trim()).toBe(inventory.revision);
     expect(git('diff', inventory.revision, merged, '--', 'books/explore-it/project')).toBe('');
     for (const source of inventory.sources) {
       const text = git('show', `${merged}:${source.path}`);
-      const line = source.id === 'src-67' ? 68 : source.line;
+      const line = source.mergedLine ?? source.line;
       expect(text.split('\n')[line - 1].trim(), source.id).toBe(source.evidence);
     }
     const path = 'books/explore-it/lessons/09-explain-it.md';
