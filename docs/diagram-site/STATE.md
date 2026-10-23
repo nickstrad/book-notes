@@ -4,11 +4,12 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 5 complete: fresh-clone rehearsal and real Actions
-build/upload/deploy all pass. Production catalog contains Litefleet (default,
-seven views) and Queuelet (five views). Queuelet is reconciled against the merged
-Explore It! fix pass. Full local gate passes: 66 unit tests, 34 Chromium tests,
-TypeScript and production build. Items 6–8 remain separate runs.
+Status (2026-10-23): item 6 complete: independent review in [REVIEW.md](REVIEW.md),
+verdict **PASS WITH FIXES** (1 high, 4 medium, 7 low); gates re-run by the reviewer
+(66 unit tests, 34 Chromium tests, TypeScript, production build, all pass); sampled
+fidelity claims in both datasets hold. Next: item 7 (Opus) implements the review's
+fixes and records each finding's disposition, then a fresh Fable recheck, then item 8.
+Items 1–5 remain as recorded below.
 
 ## Done and in progress
 
