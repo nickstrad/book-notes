@@ -4,8 +4,10 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 2 complete, verified locally and committed on main for Twin
-verification/push. Items 3–8 remain separate runs; none was started here.
+Status (2026-10-23): item 3 authoring complete against the frozen v1-explored
+snapshot; local validation recorded below. Final Queuelet fidelity acceptance and
+publication wait for Explore It! end review, fixes, merge and delta reconciliation.
+Items 4–8 remain separate fresh runs; none was started here.
 
 ## Done and in progress
 
@@ -72,13 +74,65 @@ verification/push. Items 3–8 remain separate runs; none was started here.
   indexed knowledge commit. Existing slice tests supply reusable checks; no extra
   work script is needed.
 
+## Item 3 — Queuelet authored snapshot
+
+- Five views in `pages/public/architectures/queuelet.json`: context L1 (5 elements /
+  4 relationships), containers L2 (9/8), API components L3 (12/17), job-flow dynamic
+  (6/13, 16 conditional/success scenario steps), lab deployment (9/8).
+  Model totals: **27 unique elements, 49 unique relationships**.
+- Pinned tag `explore-it/v1-explored` resolves to
+  `b6df7db044782dd3517d041a8aad95308a3a80c9`. Its 76-row ID audit, 67 exact
+  source selectors and E01–E09 mapping are in the [inventory](../../pages/content/queuelet/inventory.md)
+  and [machine audit](../../pages/content/queuelet/inventory.json).
+- Read committed objects only from Explore It!. Later committed walkthrough at
+  `e750542457e8b42fce28108714d72352ff19ae71` supplies orientation; no project-code
+  delta from the pinned tag. WALKTHROUGH does not exist at the tag and is not
+  presented as tag evidence. The active review worktree was not modified.
+- Source truth: lifecycle sweep, scheduler, shipper, clock and observations live
+  inside API; worker execution is outside it. Terminal changes and notification
+  snapshots share a SQL transaction. Delivery can repeat; health/auth bounds do
+  not cover every database operation. Historical models are not final-code claims.
+  Open hypotheses, legacy policy questions and review limits remain in inventory.
+- Scope/workflow: explicit `/root/booknotes-sol-diag3.md` requests main and a commit
+  without push; this fresh run uses the main checkout. Catalog and shared shell
+  remain for item 4. Browser tests override only catalog loading and exercise the
+  real JSON, production assets and worker. No book content, book tags, remote or
+  hosting changes. No delegation or book chaos suites.
+- Sequencing: local authoring and checks do not close the plan's reviewed-merged
+  snapshot gate. The Explore It! coordinator must provide the accepted merged SHA;
+  reconcile its delta before final fidelity acceptance/publication. Public source
+  URL verification is deferred until that prerequisite and item 4. No push or deploy.
+
+## Item 3 local acceptance
+
+- Node 22.23.2: `cd pages && npm ci` exit 0; `npm run check` exit 0.
+  TypeScript, all 65 unit tests, production build at `/book-notes/`, and all 30
+  Chromium tests pass (8 Queuelet browser cases). SDK decoding: zero diagnostics.
+- All 76 modeled IDs are drawn and audited; all 67 source selectors/lines match
+  pinned git objects. Nine experiment notes, mapped paths and view IDs resolve.
+- Five routes render and reload. Context → containers → API components drill-down,
+  Up, Back, plain/STE documents and dynamic Next/Previous controls work. Tests
+  reject page/console errors, failed requests and wrong-base worker URLs.
+- Inspected desktop 1600×1000 and narrow 390×844 screenshots for all five views,
+  with native-scale, Fit overview and narrow explanation captures. No horizontal
+  page overflow. Large views require pan/zoom for readable labels; Fit is a
+  topology overview. Keys, text alternatives and deployment physical tree remain
+  available. No new rendering exception or functional plan deviation.
+- Evidence: [result](evidence/item-3/result.json), [full check](evidence/item-3/check.txt),
+  [install](evidence/item-3/install.txt), [source audit](evidence/item-3/source-audit.json),
+  [inspection](evidence/item-3/inspection.md), [brief](evidence/item-3/brief.md), and
+  35 captures under `evidence/item-3/screenshots/`.
+- No live background run/server remains. Reusable slice tests supply verification;
+  no new work script is needed. A separate knowledge checkpoint records the
+  provisional-snapshot handoff finding after the dataset commit.
+
 ## Next steps and owners
 
-1. Twin verifies item 2 and pushes the local commits.
-2. Fresh Sol run: item 3, Queuelet slice, with acceptance against its reviewed merged
-   snapshot. Its coordinator owns that source prerequisite; leave the worktree alone.
-3. Follow items 4–8 in order: catalog integration, CI/rehearsal, Fable review,
-   Opus fixes/recheck, publication. No publication was performed by this run.
+1. Twin verifies item 3's local commits and pushes when source sequencing allows.
+2. Explore It! coordinator completes end review, fixes and merge; site coordinator
+   reconciles the accepted source delta against Queuelet's frozen snapshot.
+3. Fresh Sol runs handle items 4 and 5 (catalog integration, CI/rehearsal), followed
+   by Fable review, Opus fixes/recheck and publication in items 6–8.
 
 ## Open decisions and blockers
 
@@ -88,7 +142,7 @@ verification/push. Items 3–8 remain separate runs; none was started here.
 - Item 5 coordinator: local fidelity tests use the pinned source git objects. Preserve
   source history in the rehearsal checkout (for example `fetch-depth: 0`).
 
-## Resume
+## Previous item resume
 
 Checkout `/root/Software/book-notes`, branch `main`. No live run to resume. Retained
 run evidence is above; scratch authoring files are in `/tmp/booknotes-sol-diag2/`.
@@ -96,3 +150,11 @@ Use Node 22.23.2 and `cd pages && npm ci && npm run check`. Item 2's Playwright
 catalog override is in `tests/litefleet.spec.ts`; do not mistake the unchanged shell
 catalog for missing dataset work. No worktree cleanup is required for this explicit
 main-checkout run.
+
+## Item 3 resume
+
+Checkout `/root/Software/book-notes`, branch `main`. Scratch source export and
+one-off authoring scripts: `/tmp/booknotes-sol-diag3/`. No review worktree needs
+cleanup. Use Node 22.23.2 (put its bin directory first on PATH for npm scripts),
+then `cd pages && npm ci && npm run check`. Queuelet's catalog override is in
+`tests/queuelet.spec.ts`. Do not add it to the production catalog until item 4.

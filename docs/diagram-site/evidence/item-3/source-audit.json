@@ -1,0 +1,46 @@
+{
+  "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+  "tag": "explore-it/v1-explored",
+  "projectTree": "7a4cdfadf9a13a5fa11dddae96ba32819b2ea3d0",
+  "worktreeReadMode": "git show / git archive committed objects only; no writes",
+  "orientationRevision": "e750542457e8b42fce28108714d72352ff19ae71",
+  "projectDeltaFromTag": "",
+  "sourceSelectors": 67,
+  "uniqueSourcePaths": 33,
+  "auditRecords": 76,
+  "elements": 27,
+  "relationships": 49,
+  "views": [
+    {
+      "id": "context",
+      "kind": "context",
+      "elements": 5,
+      "relationships": 4
+    },
+    {
+      "id": "containers",
+      "kind": "container",
+      "elements": 9,
+      "relationships": 8
+    },
+    {
+      "id": "api-components",
+      "kind": "component",
+      "elements": 12,
+      "relationships": 17
+    },
+    {
+      "id": "job-flow",
+      "kind": "dynamic",
+      "elements": 6,
+      "relationships": 13
+    },
+    {
+      "id": "lab-deployment",
+      "kind": "deployment",
+      "elements": 9,
+      "relationships": 8
+    }
+  ],
+  "publication": "Deferred: reviewed merged snapshot + delta reconciliation + public source URL checks required. No push or deployment."
+}

@@ -1,0 +1,2239 @@
+{
+  "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+  "tag": "explore-it/v1-explored",
+  "publicationStatus": "Provisional until end review, merge and delta reconciliation",
+  "records": [
+    {
+      "id": "producer",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-1"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context",
+        "containers",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "worker-role",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context",
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06",
+        "E08"
+      ]
+    },
+    {
+      "id": "operator",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-3"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context",
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06",
+        "E08"
+      ]
+    },
+    {
+      "id": "queuelet",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "Go / PostgreSQL",
+      "sourceIds": [
+        "src-4"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "E01",
+        "E08"
+      ]
+    },
+    {
+      "id": "receiver",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "HTTP",
+      "sourceIds": [
+        "src-5"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context",
+        "containers",
+        "api-components",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "api",
+      "type": "element",
+      "boundary": "queuelet",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-6"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "postgres",
+      "type": "element",
+      "boundary": "queuelet",
+      "protocol": "PostgreSQL 17",
+      "sourceIds": [
+        "src-7"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers",
+        "api-components",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "worker",
+      "type": "element",
+      "boundary": "queuelet",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers",
+        "api-components",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "qctl",
+      "type": "element",
+      "boundary": "queuelet",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-3"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers",
+        "api-components",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "handlers",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-14"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "jobs",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-15"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "scheduler",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-16"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "sweep",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-17"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "shipper",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-18"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "store",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-7"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "clock",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-19"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "observation",
+      "type": "element",
+      "boundary": "api",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-20"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "host",
+      "type": "element",
+      "boundary": "external role or system",
+      "protocol": "Local shell / Docker",
+      "sourceIds": [
+        "src-48"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab",
+      "type": "element",
+      "boundary": "host",
+      "protocol": "Docker Compose",
+      "sourceIds": [
+        "src-49"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "api-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-50"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "pg-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-51"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "worker-a",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-52"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "worker-b",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-53"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "hooksink",
+      "type": "element",
+      "boundary": "queuelet",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-5"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "hook-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "human role / instance",
+      "sourceIds": [
+        "src-54"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "data",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Docker named volume",
+      "sourceIds": [
+        "src-55"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "host-tools",
+      "type": "element",
+      "boundary": "host",
+      "protocol": "CLI / Python / curl",
+      "sourceIds": [
+        "src-56"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "ctx-enqueue",
+      "type": "relationship",
+      "boundary": "client \u2192 system",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-1"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "E01",
+        "E08"
+      ]
+    },
+    {
+      "id": "ctx-work",
+      "type": "relationship",
+      "boundary": "client \u2192 system",
+      "protocol": "HTTP/JSON + lease token",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "E01",
+        "E08"
+      ]
+    },
+    {
+      "id": "ctx-operate",
+      "type": "relationship",
+      "boundary": "operator \u2192 system",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-3"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "E01",
+        "E08"
+      ]
+    },
+    {
+      "id": "ctx-webhook",
+      "type": "relationship",
+      "boundary": "system \u2192 receiver",
+      "protocol": "HTTP POST / HMAC-SHA256",
+      "sourceIds": [
+        "src-8"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "E01",
+        "E08"
+      ]
+    },
+    {
+      "id": "producer-api",
+      "type": "relationship",
+      "boundary": "client \u2192 API",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-9"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "operator-cli",
+      "type": "relationship",
+      "boundary": "operator \u2192 CLI",
+      "protocol": "CLI arguments / JSON",
+      "sourceIds": [
+        "src-10"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "developer-worker",
+      "type": "relationship",
+      "boundary": "role \u2192 client",
+      "protocol": "process invocation",
+      "sourceIds": [
+        "src-11"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "cli-api",
+      "type": "relationship",
+      "boundary": "CLI \u2192 API",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-12"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "worker-api",
+      "type": "relationship",
+      "boundary": "worker \u2192 API",
+      "protocol": "HTTP/JSON + bearer key / lease token",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "api-db",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "PostgreSQL wire / SQL",
+      "sourceIds": [
+        "src-13"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "api-hook",
+      "type": "relationship",
+      "boundary": "API \u2192 external receiver",
+      "protocol": "HTTP/JSON + HMAC-SHA256",
+      "sourceIds": [
+        "src-8"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers",
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-worker",
+      "type": "relationship",
+      "boundary": "client \u2192 API",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-31"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-cli",
+      "type": "relationship",
+      "boundary": "CLI \u2192 API",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-14"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-auth",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-32"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-jobs",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-33"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-handler-clock",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-34"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-handler-observe",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-29"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-handler-schedule",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-35"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-sweep-clock",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-36"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-sweep-jobs",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-37"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-sweep-schedule",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-38"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-schedule-store",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-39"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-jobs-store",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-26"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-ship-store",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-40"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-ship-clock",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-41"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-ship-hook",
+      "type": "relationship",
+      "boundary": "API \u2192 receiver",
+      "protocol": "HTTP POST / HMAC-SHA256",
+      "sourceIds": [
+        "src-42"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-observe-store",
+      "type": "relationship",
+      "boundary": "API process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-43"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "c-store-db",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "PostgreSQL wire / SQL",
+      "sourceIds": [
+        "src-13"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "api-components"
+      ],
+      "lessonIds": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-enqueue",
+      "type": "relationship",
+      "boundary": "producer \u2192 API",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-1"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-insert",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL",
+      "sourceIds": [
+        "src-44"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-lease",
+      "type": "relationship",
+      "boundary": "worker \u2192 API",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-27"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-claim",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL transaction",
+      "sourceIds": [
+        "src-45"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-heartbeat",
+      "type": "relationship",
+      "boundary": "worker \u2192 API",
+      "protocol": "HTTP/JSON + lease token",
+      "sourceIds": [
+        "src-46"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-ack",
+      "type": "relationship",
+      "boundary": "worker \u2192 API",
+      "protocol": "HTTP/JSON + lease token",
+      "sourceIds": [
+        "src-21"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-nack",
+      "type": "relationship",
+      "boundary": "worker \u2192 API",
+      "protocol": "HTTP/JSON + lease token",
+      "sourceIds": [
+        "src-22"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-expire",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL transaction",
+      "sourceIds": [
+        "src-23"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-operator",
+      "type": "relationship",
+      "boundary": "CLI \u2192 API",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-24"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-terminal",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL transaction",
+      "sourceIds": [
+        "src-26"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-promote",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL",
+      "sourceIds": [
+        "src-47"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "f-outbox",
+      "type": "relationship",
+      "boundary": "API \u2192 database",
+      "protocol": "SQL",
+      "sourceIds": [
+        "src-18"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "job-flow"
+      ],
+      "lessonIds": [
+        "E01",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E09"
+      ]
+    },
+    {
+      "id": "lab-api-db",
+      "type": "relationship",
+      "boundary": "lab network",
+      "protocol": "SQL / PostgreSQL",
+      "sourceIds": [
+        "src-57"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-pg-data",
+      "type": "relationship",
+      "boundary": "container \u2192 volume",
+      "protocol": "filesystem mount",
+      "sourceIds": [
+        "src-55"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-worker-a",
+      "type": "relationship",
+      "boundary": "lab network",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-58"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-worker-b",
+      "type": "relationship",
+      "boundary": "lab network",
+      "protocol": "HTTP/JSON + bearer key",
+      "sourceIds": [
+        "src-58"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-hook",
+      "type": "relationship",
+      "boundary": "lab network",
+      "protocol": "HTTP POST / HMAC-SHA256",
+      "sourceIds": [
+        "src-59"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-tools-api",
+      "type": "relationship",
+      "boundary": "host \u2192 lab",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-60"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-tools-hook",
+      "type": "relationship",
+      "boundary": "host \u2192 lab fake",
+      "protocol": "HTTP/JSON (lab admin)",
+      "sourceIds": [
+        "src-61"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "lab-tools-db",
+      "type": "relationship",
+      "boundary": "host \u2192 database",
+      "protocol": "psql / PostgreSQL",
+      "sourceIds": [
+        "src-62"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "E02",
+        "E08"
+      ]
+    },
+    {
+      "id": "receiver-fake",
+      "type": "relationship",
+      "boundary": "API \u2192 lab fake",
+      "protocol": "HTTP POST / HMAC-SHA256",
+      "sourceIds": [
+        "src-59"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "E01",
+        "E06"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-1",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "symbol": "func (s *Server) enqueue",
+      "line": 78,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) enqueue(w http.ResponseWriter, r *http.Request, q map[string]any) {"
+    },
+    {
+      "id": "src-2",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "symbol": "func Run(",
+      "line": 26,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func Run(ctx context.Context, c *client.Client, name, queue string, kinds []string) error {"
+    },
+    {
+      "id": "src-3",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "symbol": "func run(",
+      "line": 24,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func run(args []string) error {"
+    },
+    {
+      "id": "src-4",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "symbol": "func main()",
+      "line": 17,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-5",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "symbol": "func main()",
+      "line": 16,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-6",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "symbol": "app := api.New(s)",
+      "line": 49,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "app := api.New(s)"
+    },
+    {
+      "id": "src-7",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "symbol": "func Open(",
+      "line": 11,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func Open(url string) (*Store, error) {"
+    },
+    {
+      "id": "src-8",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "symbol": "func deliver(",
+      "line": 38,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func deliver(s *store.Store, r map[string]any, now time.Time) error {"
+    },
+    {
+      "id": "src-9",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "symbol": "func (s *Server) batch",
+      "line": 90,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) batch(w http.ResponseWriter, r *http.Request, q map[string]any) {"
+    },
+    {
+      "id": "src-10",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "symbol": "func main()",
+      "line": 17,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-11",
+      "path": "books/explore-it/project/cmd/worker/main.go",
+      "symbol": "worker.Run",
+      "line": 28,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "if e := worker.Run(ctx, client.Env(), name, q, strings.Split(kinds, \",\")); e != nil {"
+    },
+    {
+      "id": "src-12",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "symbol": "func (c *Client) Do",
+      "line": 26,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (c *Client) Do(method, path string, data any) ([]byte, int, error) {"
+    },
+    {
+      "id": "src-13",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "symbol": "sql.Open",
+      "line": 12,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "d, e := sql.Open(\"postgres\", url)"
+    },
+    {
+      "id": "src-14",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "func (s *Server) Handler()",
+      "line": 120,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) Handler() http.Handler {"
+    },
+    {
+      "id": "src-15",
+      "path": "books/explore-it/project/internal/jobs/transition.go",
+      "symbol": "var table =",
+      "line": 46,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "var table = map[Event][]arrow{"
+    },
+    {
+      "id": "src-16",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "symbol": "func Fire(",
+      "line": 91,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func Fire(s *store.Store, now time.Time) error {"
+    },
+    {
+      "id": "src-17",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "func (s *Server) Loop(",
+      "line": 219,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) Loop(ctx context.Context) {"
+    },
+    {
+      "id": "src-18",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "symbol": "func Ship(",
+      "line": 21,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func Ship(s *store.Store, now time.Time) error {"
+    },
+    {
+      "id": "src-19",
+      "path": "books/explore-it/project/internal/clock/clock.go",
+      "symbol": "func (c *Clock) Now()",
+      "line": 15,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (c *Clock) Now() time.Time {"
+    },
+    {
+      "id": "src-20",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "symbol": "func (s *Server) logEvents(",
+      "line": 35,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) logEvents(ctx context.Context) {"
+    },
+    {
+      "id": "src-21",
+      "path": "books/explore-it/project/internal/jobs/ack.go",
+      "symbol": "func (j *Service) Ack(",
+      "line": 10,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Ack(id int64, token string, result any, now time.Time) error {"
+    },
+    {
+      "id": "src-22",
+      "path": "books/explore-it/project/internal/jobs/nack.go",
+      "symbol": "func (j *Service) Nack(",
+      "line": 5,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Nack(id int64, token, message string, retry bool, delay *int, now time.Time) error {"
+    },
+    {
+      "id": "src-23",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "symbol": "func (j *Service) Expire(",
+      "line": 8,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Expire(now time.Time) error {"
+    },
+    {
+      "id": "src-24",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "symbol": "func (j *Service) Cancel(",
+      "line": 11,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Cancel(id int64, now time.Time) error {"
+    },
+    {
+      "id": "src-25",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "symbol": "func (j *Service) Retry(",
+      "line": 49,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Retry(id int64, now time.Time) error {"
+    },
+    {
+      "id": "src-26",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "symbol": "func notify(",
+      "line": 95,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func notify(tx *sql.Tx, id int64, now time.Time) error {"
+    },
+    {
+      "id": "src-27",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "symbol": "func (j *Service) Lease(",
+      "line": 45,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, error) {"
+    },
+    {
+      "id": "src-28",
+      "path": "books/explore-it/project/internal/stats/stats.go",
+      "symbol": "func Read(",
+      "line": 8,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func Read(s *store.Store, where string, arg any, now time.Time) (map[string]any, error) {"
+    },
+    {
+      "id": "src-29",
+      "path": "books/explore-it/project/internal/api/queues.go",
+      "symbol": "stats.Read",
+      "line": 184,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "v, e := stats.Read(s.S, \"queue_id\", q[\"id\"], s.Clock.Now())"
+    },
+    {
+      "id": "src-30",
+      "path": "books/explore-it/project/migrations/003.sql",
+      "symbol": "CREATE",
+      "line": 4,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "CREATE TABLE IF NOT EXISTS job_events("
+    },
+    {
+      "id": "src-31",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "symbol": "func (s *Server) jobVerb",
+      "line": 40,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {"
+    },
+    {
+      "id": "src-32",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "SELECT namespace_id,admin",
+      "line": 165,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "return s.S.DB.QueryRow(`SELECT namespace_id,admin FROM api_keys WHERE key_hash=$1`, hex.EncodeToString(h[:])).Scan(&id.Namespace, &id.Admin)"
+    },
+    {
+      "id": "src-33",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "symbol": "s.Jobs.Ack",
+      "line": 70,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)"
+    },
+    {
+      "id": "src-34",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "symbol": "s.Clock.Change",
+      "line": 28,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "_, e := s.Clock.Change(in.Action, in.At, in.Seconds)"
+    },
+    {
+      "id": "src-35",
+      "path": "books/explore-it/project/internal/api/schedules.go",
+      "symbol": "schedule.Next",
+      "line": 53,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "next, e := schedule.Next(in.Cron, in.Timezone, off, now)"
+    },
+    {
+      "id": "src-36",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "now := s.Clock.Now()",
+      "line": 231,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "now := s.Clock.Now()"
+    },
+    {
+      "id": "src-37",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "s.Jobs.Promote, s.Jobs.Expire",
+      "line": 249,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "for _, step := range []func(time.Time) error{s.Jobs.Promote, s.Jobs.Expire, func(t time.Time) error { return schedule.Fire(s.S, t) }, s.Jobs.Retain} {"
+    },
+    {
+      "id": "src-38",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "return schedule.Fire",
+      "line": 249,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "for _, step := range []func(time.Time) error{s.Jobs.Promote, s.Jobs.Expire, func(t time.Time) error { return schedule.Fire(s.S, t) }, s.Jobs.Retain} {"
+    },
+    {
+      "id": "src-39",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "symbol": "func fireOne(",
+      "line": 104,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func fireOne(s *store.Store, id any, now time.Time) error {"
+    },
+    {
+      "id": "src-40",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "symbol": "SELECT * FROM webhook_outbox",
+      "line": 22,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "rows, e := s.Rows(`SELECT * FROM webhook_outbox WHERE delivered_at IS NULL AND next_at <= $1 ORDER BY next_at, id LIMIT 20`, now)"
+    },
+    {
+      "id": "src-41",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "symbol": "e := webhook.Ship(s.S, now)",
+      "line": 232,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "e := webhook.Ship(s.S, now)"
+    },
+    {
+      "id": "src-42",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "symbol": "mac.Write(body)",
+      "line": 41,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "mac.Write(body)"
+    },
+    {
+      "id": "src-43",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "symbol": "SELECT * FROM job_events",
+      "line": 12,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "v, e := s.S.Rows(`SELECT * FROM job_events WHERE job_id=$1 AND namespace_id=$2 ORDER BY id`, num(r, \"id\"), ident(r).Namespace)"
+    },
+    {
+      "id": "src-44",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "symbol": "INSERT INTO jobs",
+      "line": 72,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "e = db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q[\"id\"], q[\"namespace_id\"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)"
+    },
+    {
+      "id": "src-45",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "symbol": "FOR UPDATE SKIP LOCKED",
+      "line": 66,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "rows, e := tx.Query(`SELECT id FROM jobs WHERE queue_id=$1 AND `+Guard(\"state\", EvLease)+` AND kind=ANY($2) ORDER BY `+LeaseOrder+` LIMIT $3 FOR UPDATE SKIP LOCKED`, q, kinds, max)"
+    },
+    {
+      "id": "src-46",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "symbol": "CancelRequested bool",
+      "line": 64,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "CancelRequested bool `json:\"cancel_requested\"`"
+    },
+    {
+      "id": "src-47",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "symbol": "func (j *Service) Promote(",
+      "line": 80,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "func (j *Service) Promote(now time.Time) error {"
+    },
+    {
+      "id": "src-48",
+      "path": "books/explore-it/project/Makefile",
+      "symbol": "COMPOSE =",
+      "line": 2,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "COMPOSE = docker compose -f deploy/compose.yml"
+    },
+    {
+      "id": "src-49",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "name: queuelet",
+      "line": 1,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "name: queuelet"
+    },
+    {
+      "id": "src-50",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "  api:",
+      "line": 17,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "api:"
+    },
+    {
+      "id": "src-51",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "  postgres:",
+      "line": 3,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "postgres:"
+    },
+    {
+      "id": "src-52",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "  worker-a:",
+      "line": 34,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "worker-a:"
+    },
+    {
+      "id": "src-53",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "  worker-b:",
+      "line": 44,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "worker-b:"
+    },
+    {
+      "id": "src-54",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "  hooksink:",
+      "line": 29,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "hooksink:"
+    },
+    {
+      "id": "src-55",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "volumes: [\"data:",
+      "line": 16,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "volumes: [\"data:/var/lib/postgresql/data\"]"
+    },
+    {
+      "id": "src-56",
+      "path": "books/explore-it/project/Makefile",
+      "symbol": "qctl:",
+      "line": 22,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "qctl:"
+    },
+    {
+      "id": "src-57",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "DATABASE_URL:",
+      "line": 24,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "DATABASE_URL: postgres://queuelet:queuelet@postgres:5432/queuelet?sslmode=disable"
+    },
+    {
+      "id": "src-58",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "symbol": "QUEUELET_URL:",
+      "line": 39,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "QUEUELET_URL: http://api:8200"
+    },
+    {
+      "id": "src-59",
+      "path": "books/explore-it/project/lab/seed/seed.py",
+      "symbol": "hooksink:8201",
+      "line": 10,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "if name=='reports':body['webhook']={'url':'http://hooksink:8201/hook','secret':'report-secret'}"
+    },
+    {
+      "id": "src-60",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "symbol": "http://localhost:18200",
+      "line": 18,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "url = \"http://localhost:18200\""
+    },
+    {
+      "id": "src-61",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "symbol": "/admin/mode",
+      "line": 25,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "m.HandleFunc(\"/admin/mode\", func(w http.ResponseWriter, r *http.Request) {"
+    },
+    {
+      "id": "src-62",
+      "path": "books/explore-it/project/lab/reset.sh",
+      "symbol": "psql",
+      "line": 8,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "\"${compose[@]}\" exec -T postgres psql -U queuelet -d queuelet -v ON_ERROR_STOP=1 -c \"DO \\$\\$ BEGIN IF to_regclass('job_events') IS NOT NULL THEN TRUNCATE job_events RESTART IDENTITY; END IF; END \\$\\$; TRUNCATE queues,jobs,attempts,workers,schedules,webhook_outbox RESTART IDENTITY;\" >/dev/null"
+    },
+    {
+      "id": "src-63",
+      "path": "books/explore-it/exploration/models/map.md",
+      "symbol": "#",
+      "line": 1,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "# Map \u2014 entry points, packages, verbs, background work"
+    },
+    {
+      "id": "src-64",
+      "path": "books/explore-it/exploration/models/ecosystem.md",
+      "symbol": "#",
+      "line": 1,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "# Ecosystem"
+    },
+    {
+      "id": "src-65",
+      "path": "books/explore-it/exploration/models/rules.md",
+      "symbol": "#",
+      "line": 1,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "# Rules (named oracles)"
+    },
+    {
+      "id": "src-66",
+      "path": "books/explore-it/exploration/models/states.md",
+      "symbol": "#",
+      "line": 1,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "# Job lifecycle"
+    },
+    {
+      "id": "src-67",
+      "path": "books/explore-it/lessons/09-explain-it.md",
+      "symbol": "## The structural fix",
+      "line": 65,
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "evidence": "## The structural fix: the state table as code"
+    }
+  ],
+  "lessons": [
+    {
+      "lesson": "E01",
+      "views": [
+        "context",
+        "containers",
+        "api-components",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/01-map-it.md",
+      "paths": [
+        "books/explore-it/project/internal/api/api.go",
+        "books/explore-it/project/internal/jobs/jobs.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Recon, namespace/auth and early fixes (all 27 planted defects found in E01; D07 initially partial)."
+    },
+    {
+      "lesson": "E02",
+      "views": [
+        "api-components",
+        "lab-deployment"
+      ],
+      "note": "books/explore-it/lessons/02-make-it-visible.md",
+      "paths": [
+        "books/explore-it/project/internal/api/observe.go",
+        "books/explore-it/project/internal/clock/clock.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Committed observation and semantic clock; independent webhook loop."
+    },
+    {
+      "lesson": "E03",
+      "views": [
+        "api-components",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/03-vary-it.md",
+      "paths": [
+        "books/explore-it/project/internal/api/enqueue.go",
+        "books/explore-it/project/internal/jobs/jobs.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Strict input and JSON variation; bounds and bounded backoff."
+    },
+    {
+      "lesson": "E04",
+      "views": [
+        "api-components",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/04-judge-it.md",
+      "paths": [
+        "books/explore-it/project/internal/jobs/ack.go",
+        "books/explore-it/project/internal/jobs/expire.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "State/expiry invariants, attempt history and default backoff cap."
+    },
+    {
+      "lesson": "E05",
+      "views": [
+        "job-flow",
+        "api-components"
+      ],
+      "note": "books/explore-it/lessons/05-sequence-it.md",
+      "paths": [
+        "books/explore-it/project/internal/jobs/expire.go",
+        "books/explore-it/project/internal/jobs/purge.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Unusual sequences, release counting, purge and terminal cleanup."
+    },
+    {
+      "lesson": "E06",
+      "views": [
+        "containers",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/06-relate-it.md",
+      "paths": [
+        "books/explore-it/project/internal/client/client.go",
+        "books/explore-it/project/internal/store/store.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Entity lifetimes and exact numeric data across CLI, worker and webhook."
+    },
+    {
+      "lesson": "E07",
+      "views": [
+        "api-components",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/07-state-it.md",
+      "paths": [
+        "books/explore-it/project/internal/jobs/operator.go",
+        "books/explore-it/project/internal/jobs/purge.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "State table, concurrent worker deletion/purge and immediate cancellation."
+    },
+    {
+      "lesson": "E08",
+      "views": [
+        "context",
+        "api-components",
+        "lab-deployment"
+      ],
+      "note": "books/explore-it/lessons/08-surround-it.md",
+      "paths": [
+        "books/explore-it/project/internal/webhook/ship.go",
+        "books/explore-it/project/internal/schedule/fire.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Neighbour faults, fair concurrent webhook attempts and civil-time schedules."
+    },
+    {
+      "lesson": "E09",
+      "views": [
+        "api-components",
+        "job-flow"
+      ],
+      "note": "books/explore-it/lessons/09-explain-it.md",
+      "paths": [
+        "books/explore-it/project/internal/jobs/transition.go",
+        "books/explore-it/project/internal/jobs/jobs.go"
+      ],
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "theme": "Structural transition guards, isolated schedule errors and transactional outbox."
+    }
+  ]
+}

@@ -1,0 +1,2587 @@
+{
+  "schemaVersion": 1,
+  "id": "queuelet",
+  "title": "Queuelet \u2014 Explore It! (v1-explored)",
+  "revision": "explore-it/v1-explored \u00b7 b6df7db",
+  "defaultDiagramId": "context",
+  "model": {
+    "elements": [
+      {
+        "id": "producer",
+        "kind": "person",
+        "name": "Producer",
+        "description": "Submits jobs into a namespace queue.",
+        "status": "existing",
+        "sourceIds": [
+          "src-1"
+        ]
+      },
+      {
+        "id": "worker-role",
+        "kind": "person",
+        "name": "Worker client developer",
+        "description": "Runs clients that register, lease, heartbeat and complete work.",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ]
+      },
+      {
+        "id": "operator",
+        "kind": "person",
+        "name": "Operator",
+        "description": "Manages queues, jobs and schedules; reads stats and events.",
+        "status": "existing",
+        "sourceIds": [
+          "src-3"
+        ]
+      },
+      {
+        "id": "queuelet",
+        "kind": "softwareSystem",
+        "name": "Queuelet",
+        "description": "Durable job queue API; explored and fixed snapshot, with open hypotheses.",
+        "status": "existing",
+        "sourceIds": [
+          "src-4"
+        ],
+        "tags": [],
+        "technology": "Go / PostgreSQL"
+      },
+      {
+        "id": "receiver",
+        "kind": "softwareSystem",
+        "name": "Webhook receiver",
+        "description": "External terminal-event consumer; represented by hooksink in the lab.",
+        "status": "existing",
+        "sourceIds": [
+          "src-5"
+        ],
+        "tags": [
+          "external"
+        ],
+        "technology": "HTTP"
+      },
+      {
+        "id": "api",
+        "kind": "container",
+        "name": "Queue API",
+        "description": "HTTP :8200, background lifecycle and independent webhook loops.",
+        "status": "existing",
+        "sourceIds": [
+          "src-6"
+        ],
+        "parentId": "queuelet",
+        "containerType": "application",
+        "technology": "Go",
+        "tags": []
+      },
+      {
+        "id": "postgres",
+        "kind": "container",
+        "name": "PostgreSQL",
+        "description": "Queues, jobs, workers, schedules, attempts, job_events and webhook_outbox.",
+        "status": "existing",
+        "sourceIds": [
+          "src-7"
+        ],
+        "parentId": "queuelet",
+        "containerType": "datastore",
+        "technology": "PostgreSQL 17",
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "worker",
+        "kind": "container",
+        "name": "Worker client",
+        "description": "Registers and polls a queue; executes jobs outside the API process.",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ],
+        "parentId": "queuelet",
+        "containerType": "application",
+        "technology": "Go",
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "qctl",
+        "kind": "container",
+        "name": "qctl CLI",
+        "description": "Operator and producer client; can also run a worker. Not a Compose service.",
+        "status": "existing",
+        "sourceIds": [
+          "src-3"
+        ],
+        "parentId": "queuelet",
+        "containerType": "application",
+        "technology": "Go",
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "handlers",
+        "kind": "component",
+        "name": "HTTP / auth handlers",
+        "description": "Validate requests; key hash resolves namespace. Clock route requires admin.",
+        "status": "existing",
+        "sourceIds": [
+          "src-14"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "jobs",
+        "kind": "component",
+        "name": "Jobs and transition rules",
+        "description": "Lease-holder checks and table-driven state guards; terminal changes and outbox insert share a transaction.",
+        "status": "existing",
+        "sourceIds": [
+          "src-15"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "scheduler",
+        "kind": "component",
+        "name": "Schedule firing",
+        "description": "One due execution per schedule pass; cron/IANA rules; per-schedule error isolation.",
+        "status": "existing",
+        "sourceIds": [
+          "src-16"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "sweep",
+        "kind": "component",
+        "name": "Lifecycle sweep",
+        "description": "Each real one-second tick promotes, expires, fires schedules and retains finished work.",
+        "status": "existing",
+        "sourceIds": [
+          "src-17"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "shipper",
+        "kind": "component",
+        "name": "Webhook shipper",
+        "description": "Separate goroutine; selects up to 20 due outbox rows concurrently; 2 s HTTP deadline.",
+        "status": "existing",
+        "sourceIds": [
+          "src-18"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "store",
+        "kind": "component",
+        "name": "SQL store",
+        "description": "database/sql pool, max 16 connections; direct DB access is also used by jobs and handlers.",
+        "status": "existing",
+        "sourceIds": [
+          "src-7"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "clock",
+        "kind": "component",
+        "name": "Semantic clock",
+        "description": "Real UTC by default; controllable in lab. Network timers and loop ticks remain real.",
+        "status": "existing",
+        "sourceIds": [
+          "src-19"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "observation",
+        "kind": "component",
+        "name": "Events and stats",
+        "description": "Reads committed event history, logs and checkpoints events; SQL stats by state. Not a transition controller.",
+        "status": "existing",
+        "sourceIds": [
+          "src-20"
+        ],
+        "parentId": "api",
+        "technology": "Go"
+      },
+      {
+        "id": "host",
+        "kind": "deploymentNode",
+        "name": "Local lab host",
+        "description": "Docker host plus externally invoked qctl and probes; not a production machine specification.",
+        "status": "existing",
+        "sourceIds": [
+          "src-48"
+        ],
+        "environment": "lab",
+        "technology": "Local shell / Docker"
+      },
+      {
+        "id": "lab",
+        "kind": "deploymentNode",
+        "name": "Compose lab",
+        "description": "Single local Docker Compose project; not a production deployment proposal.",
+        "status": "existing",
+        "sourceIds": [
+          "src-49"
+        ],
+        "environment": "lab",
+        "technology": "Docker Compose",
+        "parentId": "host"
+      },
+      {
+        "id": "api-run",
+        "kind": "instance",
+        "name": "api :8200",
+        "description": "Host :18200 by default; test clock enabled; restart unless-stopped.",
+        "status": "existing",
+        "sourceIds": [
+          "src-50"
+        ],
+        "instanceOf": "api",
+        "parentId": "lab",
+        "environment": "lab"
+      },
+      {
+        "id": "pg-run",
+        "kind": "instance",
+        "name": "postgres :5432",
+        "description": "Postgres 17-alpine, host :15433; health-gates API startup.",
+        "status": "existing",
+        "sourceIds": [
+          "src-51"
+        ],
+        "instanceOf": "postgres",
+        "parentId": "lab",
+        "environment": "lab"
+      },
+      {
+        "id": "worker-a",
+        "kind": "instance",
+        "name": "worker-a / emails",
+        "description": "acme-key; on-failure restart; registers a new worker on process start.",
+        "status": "existing",
+        "sourceIds": [
+          "src-52"
+        ],
+        "instanceOf": "worker",
+        "parentId": "lab",
+        "environment": "lab"
+      },
+      {
+        "id": "worker-b",
+        "kind": "instance",
+        "name": "worker-b / reports",
+        "description": "acme-key; on-failure restart; registers a new worker on process start.",
+        "status": "existing",
+        "sourceIds": [
+          "src-53"
+        ],
+        "instanceOf": "worker",
+        "parentId": "lab",
+        "environment": "lab"
+      },
+      {
+        "id": "hooksink",
+        "kind": "container",
+        "name": "hooksink fake",
+        "description": "Lab receiver :8201; records raw bodies/signatures; configurable ok/500/slow/timeout.",
+        "status": "existing",
+        "sourceIds": [
+          "src-5"
+        ],
+        "parentId": "queuelet",
+        "containerType": "application",
+        "technology": "Go",
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "hook-run",
+        "kind": "instance",
+        "name": "hooksink :8201",
+        "description": "Host :18201; WEBHOOK_SECRET configured in Compose. No restart policy specified.",
+        "status": "existing",
+        "sourceIds": [
+          "src-54"
+        ],
+        "instanceOf": "hooksink",
+        "parentId": "lab",
+        "environment": "lab"
+      },
+      {
+        "id": "data",
+        "kind": "infrastructureNode",
+        "name": "data volume",
+        "description": "Persistent PostgreSQL data, mounted /var/lib/postgresql/data.",
+        "status": "existing",
+        "sourceIds": [
+          "src-55"
+        ],
+        "parentId": "lab",
+        "technology": "Docker named volume"
+      },
+      {
+        "id": "host-tools",
+        "kind": "infrastructureNode",
+        "name": "Host qctl / probes",
+        "description": "External clients and lab scripts; no qctl/probe service in Compose.",
+        "status": "existing",
+        "sourceIds": [
+          "src-56"
+        ],
+        "technology": "CLI / Python / curl",
+        "parentId": "host"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "ctx-enqueue",
+        "sourceId": "producer",
+        "targetId": "queuelet",
+        "label": "Enqueues JSON jobs",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-1"
+        ]
+      },
+      {
+        "id": "ctx-work",
+        "sourceId": "worker-role",
+        "targetId": "queuelet",
+        "label": "Leases, heartbeats, ack/nack",
+        "technology": "HTTP/JSON + lease token",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ]
+      },
+      {
+        "id": "ctx-operate",
+        "sourceId": "operator",
+        "targetId": "queuelet",
+        "label": "Manages queues and jobs; observes events",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-3"
+        ]
+      },
+      {
+        "id": "ctx-webhook",
+        "sourceId": "queuelet",
+        "targetId": "receiver",
+        "label": "Notifies terminal state; delivery can repeat",
+        "technology": "HTTP POST / HMAC-SHA256",
+        "status": "existing",
+        "sourceIds": [
+          "src-8"
+        ]
+      },
+      {
+        "id": "producer-api",
+        "sourceId": "producer",
+        "targetId": "api",
+        "label": "Enqueue single or atomic batch",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-9"
+        ]
+      },
+      {
+        "id": "operator-cli",
+        "sourceId": "operator",
+        "targetId": "qctl",
+        "label": "Runs commands",
+        "technology": "CLI arguments / JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-10"
+        ]
+      },
+      {
+        "id": "developer-worker",
+        "sourceId": "worker-role",
+        "targetId": "worker",
+        "label": "Runs a worker client",
+        "technology": "process invocation",
+        "status": "existing",
+        "sourceIds": [
+          "src-11"
+        ]
+      },
+      {
+        "id": "cli-api",
+        "sourceId": "qctl",
+        "targetId": "api",
+        "label": "Queue/job/schedule commands; stats; lab clock",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-12"
+        ]
+      },
+      {
+        "id": "worker-api",
+        "sourceId": "worker",
+        "targetId": "api",
+        "label": "Register, lease, heartbeat, ack/nack",
+        "technology": "HTTP/JSON + bearer key / lease token",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ]
+      },
+      {
+        "id": "api-db",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Persists queue state and notification snapshots",
+        "technology": "PostgreSQL wire / SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-13"
+        ]
+      },
+      {
+        "id": "api-hook",
+        "sourceId": "api",
+        "targetId": "receiver",
+        "label": "Signed terminal notifications; retry on failure",
+        "technology": "HTTP/JSON + HMAC-SHA256",
+        "status": "existing",
+        "sourceIds": [
+          "src-8"
+        ]
+      },
+      {
+        "id": "c-worker",
+        "sourceId": "worker",
+        "targetId": "handlers",
+        "label": "Lease and completion requests",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-31"
+        ]
+      },
+      {
+        "id": "c-cli",
+        "sourceId": "qctl",
+        "targetId": "handlers",
+        "label": "Commands, observations and lab clock",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-14"
+        ]
+      },
+      {
+        "id": "c-auth",
+        "sourceId": "handlers",
+        "targetId": "store",
+        "label": "Looks up key hash; handlers also execute SQL",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-32"
+        ]
+      },
+      {
+        "id": "c-jobs",
+        "sourceId": "handlers",
+        "targetId": "jobs",
+        "label": "Lease, ack/nack, cancel, retry with semantic now",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-33"
+        ]
+      },
+      {
+        "id": "c-handler-clock",
+        "sourceId": "handlers",
+        "targetId": "clock",
+        "label": "Gets semantic time; admin can change lab clock",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-34"
+        ]
+      },
+      {
+        "id": "c-handler-observe",
+        "sourceId": "handlers",
+        "targetId": "observation",
+        "label": "Returns events and computed stats",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-29"
+        ]
+      },
+      {
+        "id": "c-handler-schedule",
+        "sourceId": "handlers",
+        "targetId": "scheduler",
+        "label": "Validates cron and computes next fire",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-35"
+        ]
+      },
+      {
+        "id": "c-sweep-clock",
+        "sourceId": "sweep",
+        "targetId": "clock",
+        "label": "Samples semantic time each real tick",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-36"
+        ]
+      },
+      {
+        "id": "c-sweep-jobs",
+        "sourceId": "sweep",
+        "targetId": "jobs",
+        "label": "Promote, expire, retain; continues after errors",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-37"
+        ]
+      },
+      {
+        "id": "c-sweep-schedule",
+        "sourceId": "sweep",
+        "targetId": "scheduler",
+        "label": "Fires schedules in core loop",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-38"
+        ]
+      },
+      {
+        "id": "c-schedule-store",
+        "sourceId": "scheduler",
+        "targetId": "store",
+        "label": "Locks schedule; inserts job and advances next time",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-39"
+        ]
+      },
+      {
+        "id": "c-jobs-store",
+        "sourceId": "jobs",
+        "targetId": "store",
+        "label": "Transactions include terminal notification outbox",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-26"
+        ]
+      },
+      {
+        "id": "c-ship-store",
+        "sourceId": "shipper",
+        "targetId": "store",
+        "label": "Reads due rows; records delivery or schedules retry",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-40"
+        ]
+      },
+      {
+        "id": "c-ship-clock",
+        "sourceId": "shipper",
+        "targetId": "clock",
+        "label": "Gets due-row time in separate real-tick loop",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-41"
+        ]
+      },
+      {
+        "id": "c-ship-hook",
+        "sourceId": "shipper",
+        "targetId": "receiver",
+        "label": "Signs actual bytes; sends with 2 s timeout",
+        "technology": "HTTP POST / HMAC-SHA256",
+        "status": "existing",
+        "sourceIds": [
+          "src-42"
+        ]
+      },
+      {
+        "id": "c-observe-store",
+        "sourceId": "observation",
+        "targetId": "store",
+        "label": "Reads committed events and state counts",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-43"
+        ]
+      },
+      {
+        "id": "c-store-db",
+        "sourceId": "store",
+        "targetId": "postgres",
+        "label": "SQL pool / transactions",
+        "technology": "PostgreSQL wire / SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-13"
+        ]
+      },
+      {
+        "id": "f-enqueue",
+        "sourceId": "producer",
+        "targetId": "api",
+        "label": "Enqueue JSON object",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-1"
+        ]
+      },
+      {
+        "id": "f-insert",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Insert queued or scheduled job",
+        "technology": "SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-44"
+        ]
+      },
+      {
+        "id": "f-lease",
+        "sourceId": "worker",
+        "targetId": "api",
+        "label": "Register then lease matching queued work",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-27"
+        ]
+      },
+      {
+        "id": "f-claim",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Lock and issue lease token",
+        "technology": "SQL transaction",
+        "status": "existing",
+        "sourceIds": [
+          "src-45"
+        ]
+      },
+      {
+        "id": "f-heartbeat",
+        "sourceId": "worker",
+        "targetId": "api",
+        "label": "Extend current lease; observe cancellation",
+        "technology": "HTTP/JSON + lease token",
+        "status": "existing",
+        "sourceIds": [
+          "src-46"
+        ]
+      },
+      {
+        "id": "f-ack",
+        "sourceId": "worker",
+        "targetId": "api",
+        "label": "Success: ack result with current token",
+        "technology": "HTTP/JSON + lease token",
+        "status": "existing",
+        "sourceIds": [
+          "src-21"
+        ]
+      },
+      {
+        "id": "f-nack",
+        "sourceId": "worker",
+        "targetId": "api",
+        "label": "Alternative: nack failure; retry or dead",
+        "technology": "HTTP/JSON + lease token",
+        "status": "existing",
+        "sourceIds": [
+          "src-22"
+        ]
+      },
+      {
+        "id": "f-expire",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Alternative: expire lease; queued or dead",
+        "technology": "SQL transaction",
+        "status": "existing",
+        "sourceIds": [
+          "src-23"
+        ]
+      },
+      {
+        "id": "f-operator",
+        "sourceId": "qctl",
+        "targetId": "api",
+        "label": "Alternative: cancel active job or retry dead job",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-24"
+        ]
+      },
+      {
+        "id": "f-terminal",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Commit terminal state + attempt + outbox snapshot",
+        "technology": "SQL transaction",
+        "status": "existing",
+        "sourceIds": [
+          "src-26"
+        ]
+      },
+      {
+        "id": "f-promote",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "When due: scheduled / retry_wait \u2192 queued",
+        "technology": "SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-47"
+        ]
+      },
+      {
+        "id": "f-outbox",
+        "sourceId": "api",
+        "targetId": "postgres",
+        "label": "Shipper reads due snapshots; records outcome",
+        "technology": "SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-18"
+        ]
+      },
+      {
+        "id": "lab-api-db",
+        "sourceId": "api-run",
+        "targetId": "pg-run",
+        "label": "DATABASE_URL \u2192 postgres:5432",
+        "technology": "SQL / PostgreSQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-57"
+        ]
+      },
+      {
+        "id": "lab-pg-data",
+        "sourceId": "pg-run",
+        "targetId": "data",
+        "label": "Persists database files",
+        "technology": "filesystem mount",
+        "status": "existing",
+        "sourceIds": [
+          "src-55"
+        ]
+      },
+      {
+        "id": "lab-worker-a",
+        "sourceId": "worker-a",
+        "targetId": "api-run",
+        "label": "QUEUELET_URL \u2192 api:8200",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-58"
+        ]
+      },
+      {
+        "id": "lab-worker-b",
+        "sourceId": "worker-b",
+        "targetId": "api-run",
+        "label": "QUEUELET_URL \u2192 api:8200",
+        "technology": "HTTP/JSON + bearer key",
+        "status": "existing",
+        "sourceIds": [
+          "src-58"
+        ]
+      },
+      {
+        "id": "lab-hook",
+        "sourceId": "api-run",
+        "targetId": "hook-run",
+        "label": "Configured webhook destination in seeded lab",
+        "technology": "HTTP POST / HMAC-SHA256",
+        "status": "existing",
+        "sourceIds": [
+          "src-59"
+        ]
+      },
+      {
+        "id": "lab-tools-api",
+        "sourceId": "host-tools",
+        "targetId": "api-run",
+        "label": "Commands, probes and admin clock via published port",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-60"
+        ]
+      },
+      {
+        "id": "lab-tools-hook",
+        "sourceId": "host-tools",
+        "targetId": "hook-run",
+        "label": "Fault modes and received records",
+        "technology": "HTTP/JSON (lab admin)",
+        "status": "existing",
+        "sourceIds": [
+          "src-61"
+        ]
+      },
+      {
+        "id": "lab-tools-db",
+        "sourceId": "host-tools",
+        "targetId": "pg-run",
+        "label": "Seed/reset and state inspection by lab tools",
+        "technology": "psql / PostgreSQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-62"
+        ]
+      },
+      {
+        "id": "receiver-fake",
+        "sourceId": "api",
+        "targetId": "hooksink",
+        "label": "Lab realization of receiver; chosen by queue webhook URL",
+        "technology": "HTTP POST / HMAC-SHA256",
+        "status": "existing",
+        "sourceIds": [
+          "src-59"
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "id": "context",
+      "kind": "context",
+      "title": "Queuelet: system context",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "producer"
+        },
+        {
+          "elementId": "worker-role"
+        },
+        {
+          "elementId": "operator"
+        },
+        {
+          "elementId": "queuelet",
+          "detail": {
+            "diagramId": "containers"
+          }
+        },
+        {
+          "elementId": "receiver"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "ctx-enqueue",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "ctx-work",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "ctx-operate",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "ctx-webhook",
+          "displayNumber": 4
+        }
+      ],
+      "scopeId": "queuelet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-context"
+      ],
+      "sourceIds": [
+        "src-1",
+        "src-2",
+        "src-3",
+        "src-4",
+        "src-5",
+        "src-8",
+        "src-63",
+        "src-64"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "job-flow",
+          "label": "Queuelet: job lifecycle and notification flow"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Queuelet: Compose lab deployment"
+        }
+      ]
+    },
+    {
+      "id": "containers",
+      "kind": "container",
+      "title": "Queuelet: containers",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "producer"
+        },
+        {
+          "elementId": "worker-role"
+        },
+        {
+          "elementId": "operator"
+        },
+        {
+          "elementId": "api",
+          "detail": {
+            "diagramId": "api-components"
+          }
+        },
+        {
+          "elementId": "postgres"
+        },
+        {
+          "elementId": "worker"
+        },
+        {
+          "elementId": "qctl"
+        },
+        {
+          "elementId": "receiver"
+        },
+        {
+          "elementId": "hooksink"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "producer-api",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "developer-worker",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "operator-cli",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "cli-api",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "worker-api",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "api-db",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "api-hook",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "receiver-fake",
+          "displayNumber": 8
+        }
+      ],
+      "scopeId": "queuelet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-containers"
+      ],
+      "sourceIds": [
+        "src-1",
+        "src-2",
+        "src-3",
+        "src-5",
+        "src-6",
+        "src-7",
+        "src-9",
+        "src-10",
+        "src-11",
+        "src-12",
+        "src-13",
+        "src-8",
+        "src-59"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "parent": {
+        "diagramId": "context"
+      },
+      "groups": [
+        {
+          "id": "containers-boundary",
+          "label": "Queuelet service boundary",
+          "memberIds": [
+            "api",
+            "postgres"
+          ],
+          "status": "existing"
+        }
+      ],
+      "related": [
+        {
+          "diagramId": "job-flow",
+          "label": "Queuelet: job lifecycle and notification flow"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Queuelet: Compose lab deployment"
+        }
+      ]
+    },
+    {
+      "id": "api-components",
+      "kind": "component",
+      "title": "Queuelet: API components",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "worker"
+        },
+        {
+          "elementId": "qctl"
+        },
+        {
+          "elementId": "handlers"
+        },
+        {
+          "elementId": "jobs"
+        },
+        {
+          "elementId": "scheduler"
+        },
+        {
+          "elementId": "sweep"
+        },
+        {
+          "elementId": "shipper"
+        },
+        {
+          "elementId": "store"
+        },
+        {
+          "elementId": "clock"
+        },
+        {
+          "elementId": "observation"
+        },
+        {
+          "elementId": "postgres"
+        },
+        {
+          "elementId": "receiver"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "c-worker",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "c-cli",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "c-auth",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "c-jobs",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "c-handler-clock",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "c-handler-observe",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "c-handler-schedule",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "c-sweep-clock",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "c-sweep-jobs",
+          "displayNumber": 9
+        },
+        {
+          "relationshipId": "c-sweep-schedule",
+          "displayNumber": 10
+        },
+        {
+          "relationshipId": "c-schedule-store",
+          "displayNumber": 11
+        },
+        {
+          "relationshipId": "c-jobs-store",
+          "displayNumber": 12
+        },
+        {
+          "relationshipId": "c-ship-store",
+          "displayNumber": 13
+        },
+        {
+          "relationshipId": "c-ship-clock",
+          "displayNumber": 14
+        },
+        {
+          "relationshipId": "c-ship-hook",
+          "displayNumber": 15
+        },
+        {
+          "relationshipId": "c-observe-store",
+          "displayNumber": 16
+        },
+        {
+          "relationshipId": "c-store-db",
+          "displayNumber": 17
+        }
+      ],
+      "scopeId": "api",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-api-components"
+      ],
+      "sourceIds": [
+        "src-5",
+        "src-7",
+        "src-2",
+        "src-3",
+        "src-14",
+        "src-15",
+        "src-16",
+        "src-17",
+        "src-18",
+        "src-19",
+        "src-20",
+        "src-31",
+        "src-32",
+        "src-33",
+        "src-34",
+        "src-29",
+        "src-35",
+        "src-36",
+        "src-37",
+        "src-38",
+        "src-39",
+        "src-26",
+        "src-40",
+        "src-41",
+        "src-42",
+        "src-43",
+        "src-13",
+        "src-63",
+        "src-65"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "parent": {
+        "diagramId": "containers"
+      },
+      "groups": [
+        {
+          "id": "api-components-boundary",
+          "label": "Queuelet API process",
+          "memberIds": [
+            "handlers",
+            "jobs",
+            "scheduler",
+            "sweep",
+            "shipper",
+            "store",
+            "clock",
+            "observation"
+          ],
+          "status": "existing"
+        }
+      ],
+      "related": [
+        {
+          "diagramId": "job-flow",
+          "label": "Queuelet: job lifecycle and notification flow"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Queuelet: Compose lab deployment"
+        }
+      ]
+    },
+    {
+      "id": "job-flow",
+      "kind": "dynamic",
+      "title": "Queuelet: job lifecycle and notification flow",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "producer"
+        },
+        {
+          "elementId": "worker"
+        },
+        {
+          "elementId": "qctl"
+        },
+        {
+          "elementId": "api"
+        },
+        {
+          "elementId": "postgres"
+        },
+        {
+          "elementId": "receiver"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "f-enqueue",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "f-insert",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "f-lease",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "f-claim",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "f-heartbeat",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "f-ack",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "f-nack",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "f-expire",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "f-operator",
+          "displayNumber": 9
+        },
+        {
+          "relationshipId": "f-terminal",
+          "displayNumber": 10
+        },
+        {
+          "relationshipId": "f-promote",
+          "displayNumber": 11
+        },
+        {
+          "relationshipId": "f-outbox",
+          "displayNumber": 12
+        },
+        {
+          "relationshipId": "api-hook",
+          "displayNumber": 13
+        }
+      ],
+      "scopeId": "queuelet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-job-flow"
+      ],
+      "sourceIds": [
+        "src-1",
+        "src-5",
+        "src-6",
+        "src-7",
+        "src-2",
+        "src-3",
+        "src-8",
+        "src-44",
+        "src-27",
+        "src-45",
+        "src-46",
+        "src-21",
+        "src-22",
+        "src-23",
+        "src-24",
+        "src-26",
+        "src-47",
+        "src-18",
+        "src-66",
+        "src-65",
+        "src-67"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "parent": {
+        "diagramId": "containers"
+      },
+      "scenario": {
+        "id": "job-flow-scenario",
+        "kind": "sequence",
+        "children": [
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-1",
+            "relationshipId": "f-enqueue",
+            "direction": "forward",
+            "label": "Producer submits JSON job."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-2",
+            "relationshipId": "f-insert",
+            "direction": "forward",
+            "label": "API persists queued or future scheduled job."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-3",
+            "relationshipId": "f-lease",
+            "direction": "forward",
+            "label": "Registered worker requests matching queued work."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-4",
+            "relationshipId": "f-claim",
+            "direction": "forward",
+            "label": "API locks job; persists fresh lease token and expiry."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-5",
+            "relationshipId": "f-lease",
+            "direction": "reverse",
+            "label": "Worker receives payload and token; executes work locally."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-6",
+            "relationshipId": "f-heartbeat",
+            "direction": "forward",
+            "label": "While executing, heartbeat extends a current lease."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-7",
+            "relationshipId": "f-ack",
+            "direction": "forward",
+            "label": "Success path: worker acks with token and result."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-8",
+            "relationshipId": "f-terminal",
+            "direction": "forward",
+            "label": "Success path: commit succeeded + attempt + notification snapshot."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-9",
+            "relationshipId": "f-nack",
+            "direction": "forward",
+            "label": "Alternative to ack: nack \u2192 retry_wait or dead."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-10",
+            "relationshipId": "f-promote",
+            "direction": "forward",
+            "label": "Retry alternative: when run_at is due, retry_wait \u2192 queued."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-11",
+            "relationshipId": "f-expire",
+            "direction": "forward",
+            "label": "Alternative to completion: expired lease \u2192 queued or dead, counting an attempt."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-12",
+            "relationshipId": "f-operator",
+            "direction": "forward",
+            "label": "Independent alternative: cancel active work, or retry a dead letter."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-13",
+            "relationshipId": "f-outbox",
+            "direction": "reverse",
+            "label": "After a terminal commit, shipper reads a due notification snapshot."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-14",
+            "relationshipId": "api-hook",
+            "direction": "forward",
+            "label": "Shipper posts actual signed bytes; failures are rescheduled."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-15",
+            "relationshipId": "api-hook",
+            "direction": "reverse",
+            "label": "On observed 2xx, shipper marks delivered; lost reply can cause duplicates."
+          },
+          {
+            "kind": "interaction",
+            "id": "job-flow-step-16",
+            "relationshipId": "f-outbox",
+            "direction": "forward",
+            "label": "Store delivery or next-at/attempt status."
+          }
+        ]
+      },
+      "related": [
+        {
+          "diagramId": "lab-deployment",
+          "label": "Queuelet: Compose lab deployment"
+        }
+      ]
+    },
+    {
+      "id": "lab-deployment",
+      "kind": "deployment",
+      "title": "Queuelet: Compose lab deployment",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "host"
+        },
+        {
+          "elementId": "lab"
+        },
+        {
+          "elementId": "api-run"
+        },
+        {
+          "elementId": "pg-run"
+        },
+        {
+          "elementId": "worker-a"
+        },
+        {
+          "elementId": "worker-b"
+        },
+        {
+          "elementId": "hook-run"
+        },
+        {
+          "elementId": "data"
+        },
+        {
+          "elementId": "host-tools"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "lab-api-db",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "lab-pg-data",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "lab-worker-a",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "lab-worker-b",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "lab-hook",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "lab-tools-api",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "lab-tools-hook",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "lab-tools-db",
+          "displayNumber": 8
+        }
+      ],
+      "scopeId": "queuelet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-lab-deployment"
+      ],
+      "sourceIds": [
+        "src-48",
+        "src-49",
+        "src-50",
+        "src-51",
+        "src-52",
+        "src-53",
+        "src-54",
+        "src-55",
+        "src-56",
+        "src-57",
+        "src-58",
+        "src-59",
+        "src-60",
+        "src-61",
+        "src-62",
+        "src-64"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "parent": {
+        "diagramId": "containers"
+      },
+      "environment": "lab",
+      "related": [
+        {
+          "diagramId": "job-flow",
+          "label": "Queuelet: job lifecycle and notification flow"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-context",
+      "title": "Queuelet: system context explained",
+      "plain": "Producers submit JSON jobs to named queues inside a namespace. Worker clients lease jobs, execute them outside Queuelet and report success or failure. Operators manage queues, jobs and schedules and inspect events and stats. Queuelet sends terminal-state notifications to a configured webhook receiver. In the lab that receiver is hooksink, a fault-controllable fake. Open Queuelet to see its containers. This is the explored and fixed b6df7db snapshot, still awaiting the book end review and merge; it is not a claim of complete exploration or exactly-once execution.",
+      "ste": {
+        "text": "The producer sends jobs to Queuelet. A worker leases and executes jobs. The operator manages queues and jobs. Queuelet sends terminal notifications to a receiver. Delivery can repeat. Open Queuelet to see the containers.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-1",
+        "src-2",
+        "src-3",
+        "src-4",
+        "src-5",
+        "src-8",
+        "src-63",
+        "src-64"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-containers",
+      "title": "Queuelet: containers explained",
+      "plain": "The Go API owns queue state in PostgreSQL. Workers are separate clients: the API grants leases, but does not execute job payloads. qctl is a CLI used by producers and operators; its worker-run mode uses the same worker implementation. It is not a Compose service. The webhook receiver is an external collaborator; hooksink is its concrete lab fake, not a second production destination. The two outgoing notification arrows distinguish the general contract from the lab realization. PostgreSQL holds jobs, attempts, schedules, retained event history and notification snapshots. Components tagged external are outside the focused API process, even when the database belongs to the Queuelet system. Open Queue API for its in-process responsibilities.",
+      "ste": {
+        "text": "The API stores state in PostgreSQL. Workers and qctl use HTTP and bearer keys. Workers execute jobs outside the API. The API sends signed notifications. The lab uses hooksink as the receiver.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-1",
+        "src-2",
+        "src-3",
+        "src-5",
+        "src-6",
+        "src-7",
+        "src-9",
+        "src-10",
+        "src-11",
+        "src-12",
+        "src-13",
+        "src-8",
+        "src-59"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-api-components",
+      "title": "Queuelet: API components explained",
+      "plain": "All eight components run inside the Go API process. The core lifecycle goroutine promotes due work, expires leases, fires schedules and applies retention on a real one-second tick. Schedule firing is a function in that loop, not another service. A separate shipper goroutine processes at most 20 due outbox rows concurrently, with two-second HTTP timeouts; it does not block the core sweep on a slow receiver. The semantic clock supplies job and schedule times; only lab configuration exposes admin clock control. Real tickers and network deadlines do not freeze with it. The store component denotes the shared SQL pool and helpers; packages also use Store.DB directly. Events come from committed database history; logging and stats observe transitions rather than drive them. Auth checks hashed bearer keys and scopes handlers to namespaces. Admin is not universal job access: it has cross-namespace stats and lab clock privileges.",
+      "ste": {
+        "text": "These components run in one API process. The core loop runs lifecycle tasks. A separate loop sends notifications. The clock supplies semantic time. Real timers continue. SQL stores state. Events and stats observe committed changes.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-5",
+        "src-7",
+        "src-2",
+        "src-3",
+        "src-14",
+        "src-15",
+        "src-16",
+        "src-17",
+        "src-18",
+        "src-19",
+        "src-20",
+        "src-31",
+        "src-32",
+        "src-33",
+        "src-34",
+        "src-29",
+        "src-35",
+        "src-36",
+        "src-37",
+        "src-38",
+        "src-39",
+        "src-26",
+        "src-40",
+        "src-41",
+        "src-42",
+        "src-43",
+        "src-13",
+        "src-63",
+        "src-65"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-job-flow",
+      "title": "Queuelet: job lifecycle and notification flow explained",
+      "plain": "Read the numbered scenario as a successful enqueue \u2192 lease \u2192 execute \u2192 ack path followed by explicitly labelled alternatives. It is not a trace in which ack, nack, expiry and cancel all happen. Execution occurs in the worker between the lease reply and completion request. Heartbeats can extend an unexpired current lease; a matching cancelled lease reports cancellation and the sample worker stops cooperatively. Cancellation is immediately terminal, with late ack/nack rejected. Nack leads to retry_wait or dead when retries are refused, exhausted or the leased job was purged. Expiry or worker deletion consumes an attempt and returns work to queued or dead. Only dead work accepts operator retry; it resets attempts. scheduled and retry_wait promote when due. Terminal success/death/cancel records its notification in the same transaction as the transition, using a snapshot of destination, secret and body. A separate shipper reads it, signs the actual transmitted bytes and retries failures after five semantic seconds. The real one-second shipper ticker and two-second HTTP deadline still apply. A receiver can act and lose its reply, causing duplicate delivery. Execution and notification are not exactly-once. The state table is documentation/code, not another C4 view: scheduled/retry_wait \u2192 queued \u2192 leased; leased \u2192 succeeded/retry_wait/dead; active states \u2192 cancelled; dead \u2192 queued by operator retry. Retention deletes succeeded/cancelled, while dead letters persist.",
+      "ste": {
+        "text": "Enqueue a job, then lease it. The worker executes the job and sends ack or nack. Expiry, cancellation and retry are alternative paths. A terminal change and its notification commit together. A separate loop sends the notification. Delivery and execution can repeat.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-1",
+        "src-5",
+        "src-6",
+        "src-7",
+        "src-2",
+        "src-3",
+        "src-8",
+        "src-44",
+        "src-27",
+        "src-45",
+        "src-46",
+        "src-21",
+        "src-22",
+        "src-23",
+        "src-24",
+        "src-26",
+        "src-47",
+        "src-18",
+        "src-66",
+        "src-65",
+        "src-67"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-lab-deployment",
+      "title": "Queuelet: Compose lab deployment explained",
+      "plain": "Compose starts api, postgres, worker-a on emails, worker-b on reports, and hooksink. PostgreSQL data lives in a named volume. API :8200, sink :8201 and database :5432 publish to host defaults 18200, 18201 and 15433; ports can be overridden. Workers use api:8200 on the Compose network. The seeded reports queue points to hooksink:8201; webhook destination is per-queue configuration, not a fixed API deployment address. qctl and probe scripts are host clients or commands run with docker compose exec, not declared services. They inspect state, change sink modes and control semantic time. QUEUELET_TEST_CLOCK=1 is lab configuration: there is no clock container. Scheduler, sweeper, shipper and event logger all remain inside api. API and Postgres use unless-stopped restart; workers use on-failure; hooksink has no restart policy specified. This local teaching lab does not define production hosting or security.",
+      "ste": {
+        "text": "The lab runs API, PostgreSQL, two workers and a fake receiver. PostgreSQL uses a persistent volume. qctl and probes run outside the service list. The API test clock is enabled. The scheduler and shipper run inside API.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-48",
+        "src-49",
+        "src-50",
+        "src-51",
+        "src-52",
+        "src-53",
+        "src-54",
+        "src-55",
+        "src-56",
+        "src-57",
+        "src-58",
+        "src-59",
+        "src-60",
+        "src-61",
+        "src-62",
+        "src-64"
+      ],
+      "termIds": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-1",
+      "title": "project/internal/api/enqueue.go \u00b7 func (s *Server) enqueue",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/enqueue.go#L78",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-2",
+      "title": "project/internal/worker/worker.go \u00b7 func Run(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/worker/worker.go#L26",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-3",
+      "title": "project/cmd/qctl/main.go \u00b7 func run(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/qctl/main.go#L24",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-4",
+      "title": "project/cmd/api/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/api/main.go#L17",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-5",
+      "title": "project/cmd/hooksink/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/hooksink/main.go#L16",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-6",
+      "title": "project/cmd/api/main.go \u00b7 app := api.New(s)",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/api/main.go#L49",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-7",
+      "title": "project/internal/store/store.go \u00b7 func Open(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/store/store.go#L11",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-8",
+      "title": "project/internal/webhook/ship.go \u00b7 func deliver(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/webhook/ship.go#L38",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-9",
+      "title": "project/internal/api/enqueue.go \u00b7 func (s *Server) batch",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/enqueue.go#L90",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-10",
+      "title": "project/cmd/qctl/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/qctl/main.go#L17",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-11",
+      "title": "project/cmd/worker/main.go \u00b7 worker.Run",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/worker/main.go#L28",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/worker/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-12",
+      "title": "project/internal/client/client.go \u00b7 func (c *Client) Do",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/client/client.go#L26",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-13",
+      "title": "project/internal/store/store.go \u00b7 sql.Open",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/store/store.go#L12",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-14",
+      "title": "project/internal/api/api.go \u00b7 func (s *Server) Handler()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L120",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-15",
+      "title": "project/internal/jobs/transition.go \u00b7 var table =",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/transition.go#L46",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/transition.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-16",
+      "title": "project/internal/schedule/fire.go \u00b7 func Fire(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/schedule/fire.go#L91",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-17",
+      "title": "project/internal/api/api.go \u00b7 func (s *Server) Loop(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L219",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-18",
+      "title": "project/internal/webhook/ship.go \u00b7 func Ship(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/webhook/ship.go#L21",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-19",
+      "title": "project/internal/clock/clock.go \u00b7 func (c *Clock) Now()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/clock/clock.go#L15",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/clock/clock.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-20",
+      "title": "project/internal/api/observe.go \u00b7 func (s *Server) logEvents(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/observe.go#L35",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-21",
+      "title": "project/internal/jobs/ack.go \u00b7 func (j *Service) Ack(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/ack.go#L10",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/ack.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-22",
+      "title": "project/internal/jobs/nack.go \u00b7 func (j *Service) Nack(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/nack.go#L5",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/nack.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-23",
+      "title": "project/internal/jobs/expire.go \u00b7 func (j *Service) Expire(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/expire.go#L8",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-24",
+      "title": "project/internal/jobs/operator.go \u00b7 func (j *Service) Cancel(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/operator.go#L11",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-25",
+      "title": "project/internal/jobs/operator.go \u00b7 func (j *Service) Retry(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/operator.go#L49",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-26",
+      "title": "project/internal/jobs/jobs.go \u00b7 func notify(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/jobs.go#L95",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-27",
+      "title": "project/internal/jobs/jobs.go \u00b7 func (j *Service) Lease(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/jobs.go#L45",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-28",
+      "title": "project/internal/stats/stats.go \u00b7 func Read(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/stats/stats.go#L8",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/stats/stats.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-29",
+      "title": "project/internal/api/queues.go \u00b7 stats.Read",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/queues.go#L184",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/queues.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-30",
+      "title": "project/migrations/003.sql \u00b7 CREATE",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/migrations/003.sql#L4",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/migrations/003.sql",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-31",
+      "title": "project/internal/api/jobs.go \u00b7 func (s *Server) jobVerb",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/jobs.go#L40",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-32",
+      "title": "project/internal/api/api.go \u00b7 SELECT namespace_id,admin",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L165",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-33",
+      "title": "project/internal/api/jobs.go \u00b7 s.Jobs.Ack",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/jobs.go#L70",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-34",
+      "title": "project/internal/api/observe.go \u00b7 s.Clock.Change",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/observe.go#L28",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-35",
+      "title": "project/internal/api/schedules.go \u00b7 schedule.Next",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/schedules.go#L53",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/schedules.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-36",
+      "title": "project/internal/api/api.go \u00b7 now := s.Clock.Now()",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L231",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-37",
+      "title": "project/internal/api/api.go \u00b7 s.Jobs.Promote, s.Jobs.Expire",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L249",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-38",
+      "title": "project/internal/api/api.go \u00b7 return schedule.Fire",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L249",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-39",
+      "title": "project/internal/schedule/fire.go \u00b7 func fireOne(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/schedule/fire.go#L104",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-40",
+      "title": "project/internal/webhook/ship.go \u00b7 SELECT * FROM webhook_outbox",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/webhook/ship.go#L22",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-41",
+      "title": "project/internal/api/api.go \u00b7 e := webhook.Ship(s.S, now)",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/api.go#L232",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-42",
+      "title": "project/internal/webhook/ship.go \u00b7 mac.Write(body)",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/webhook/ship.go#L41",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-43",
+      "title": "project/internal/api/observe.go \u00b7 SELECT * FROM job_events",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/observe.go#L12",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-44",
+      "title": "project/internal/api/enqueue.go \u00b7 INSERT INTO jobs",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/api/enqueue.go#L72",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-45",
+      "title": "project/internal/jobs/jobs.go \u00b7 FOR UPDATE SKIP LOCKED",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/jobs.go#L66",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-46",
+      "title": "project/internal/worker/worker.go \u00b7 CancelRequested bool",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/worker/worker.go#L64",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-47",
+      "title": "project/internal/jobs/expire.go \u00b7 func (j *Service) Promote(",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/jobs/expire.go#L80",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-48",
+      "title": "project/Makefile \u00b7 COMPOSE =",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/Makefile#L2",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/Makefile",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-49",
+      "title": "project/deploy/compose.yml \u00b7 name: queuelet",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L1",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-50",
+      "title": "project/deploy/compose.yml \u00b7   api:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L17",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-51",
+      "title": "project/deploy/compose.yml \u00b7   postgres:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L3",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-52",
+      "title": "project/deploy/compose.yml \u00b7   worker-a:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L34",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-53",
+      "title": "project/deploy/compose.yml \u00b7   worker-b:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L44",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-54",
+      "title": "project/deploy/compose.yml \u00b7   hooksink:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L29",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-55",
+      "title": "project/deploy/compose.yml \u00b7 volumes: [\"data:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L16",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-56",
+      "title": "project/Makefile \u00b7 qctl:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/Makefile#L22",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/Makefile",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-57",
+      "title": "project/deploy/compose.yml \u00b7 DATABASE_URL:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L24",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-58",
+      "title": "project/deploy/compose.yml \u00b7 QUEUELET_URL:",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/deploy/compose.yml#L39",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-59",
+      "title": "project/lab/seed/seed.py \u00b7 hooksink:8201",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/lab/seed/seed.py#L10",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/lab/seed/seed.py",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-60",
+      "title": "project/internal/client/client.go \u00b7 http://localhost:18200",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/internal/client/client.go#L18",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-61",
+      "title": "project/cmd/hooksink/main.go \u00b7 /admin/mode",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/cmd/hooksink/main.go#L25",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-62",
+      "title": "project/lab/reset.sh \u00b7 psql",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/project/lab/reset.sh#L8",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/project/lab/reset.sh",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-63",
+      "title": "exploration/models/map.md \u00b7 #",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/exploration/models/map.md#L1",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/exploration/models/map.md",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-64",
+      "title": "exploration/models/ecosystem.md \u00b7 #",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/exploration/models/ecosystem.md#L1",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/exploration/models/ecosystem.md",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-65",
+      "title": "exploration/models/rules.md \u00b7 #",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/exploration/models/rules.md#L1",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/exploration/models/rules.md",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-66",
+      "title": "exploration/models/states.md \u00b7 #",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/exploration/models/states.md#L1",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/exploration/models/states.md",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    },
+    {
+      "id": "src-67",
+      "title": "lessons/09-explain-it.md \u00b7 ## The structural fix",
+      "url": "https://github.com/nickstrad/book-notes/blob/b6df7db044782dd3517d041a8aad95308a3a80c9/books/explore-it/lessons/09-explain-it.md#L65",
+      "revision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+      "path": "books/explore-it/lessons/09-explain-it.md",
+      "notes": "Pinned v1-explored source. Provisional: final review, merge, delta reconciliation and public URL verification precede publication."
+    }
+  ]
+}
