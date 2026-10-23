@@ -76,6 +76,8 @@ Items 4–8 remain separate fresh runs; none was started here.
 
 ## Item 3 — Queuelet authored snapshot
 
+Dataset/evidence commit: `4765098` on main (not pushed by this run).
+
 - Five views in `pages/public/architectures/queuelet.json`: context L1 (5 elements /
   4 relationships), containers L2 (9/8), API components L3 (12/17), job-flow dynamic
   (6/13, 16 conditional/success scenario steps), lab deployment (9/8).
@@ -123,8 +125,9 @@ Items 4–8 remain separate fresh runs; none was started here.
   [inspection](evidence/item-3/inspection.md), [brief](evidence/item-3/brief.md), and
   35 captures under `evidence/item-3/screenshots/`.
 - No live background run/server remains. Reusable slice tests supply verification;
-  no new work script is needed. A separate knowledge checkpoint records the
-  provisional-snapshot handoff finding after the dataset commit.
+  no new work script is needed. The separate knowledge checkpoint updates indexed
+  [dataset fidelity guidance](../knowledge/diagram-dataset-fidelity.md) with the
+  provisional-snapshot handoff finding.
 
 ## Next steps and owners
 
