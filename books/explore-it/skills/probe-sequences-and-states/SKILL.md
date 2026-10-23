@@ -117,7 +117,18 @@ Navigation", 8.1 "Recognizing States and Events", 8.2 "Diagramming a State Model
 Models", 8.4 "Changing the Representation: State Tables"; step 5 borrows 10.4, isolating a surprise to its
 minimal reproduction. Section numbers and titles follow this repo's chapter map, checked against the
 publisher's table of contents; full validation against the book text has not been done. The procedure, walker
-and table columns are this repo's wording, not the book's. Lessons: [05](../../lessons/05-sequence-it.md),
+and table columns are this repo's wording, not the book's.
+
+**Where this departs from the book.** The publisher's excerpt of Chapter 8 asks the explorer to model
+from observable behavior and set knowledge of the internals aside, so the model shows states the whole
+stack produces. Step 1 instead starts from the code's state writers and the store's constraints. That is
+this repo's adaptation for an inherited service whose source the explorer holds: reading the writers is
+the fastest way to list exits, and it is how U24–U26 were found. It carries the risk the book warns
+about: a model built from the code inherits the code's idea of its states. Steps 2–4 compensate by
+checking every cell through the API and a second actor, never through the source alone. See the
+[citation ledger](../../register/citations.md).
+
+Lessons: [05](../../lessons/05-sequence-it.md),
 [07](../../lessons/07-state-it.md), and the structural fix in [09](../../lessons/09-explain-it.md).
 
 ## Worked example

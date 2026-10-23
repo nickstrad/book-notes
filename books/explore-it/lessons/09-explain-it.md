@@ -1,18 +1,21 @@
 # 09 — Explain it: the findings reduce to habits, and the habits predict
 
 Eight experiments left a long defect list. Read one at a time, each report is a separate
-mistake. Read together, they show how the code was written. Hendrickson calls this looking
-for the systemic source of problems: a defect list is evidence about habits, and a habit
-that put a bug in one place probably put one somewhere else. The experiment turns that into
-a test. Group the findings by cause, list the places each habit could still live, write the
+mistake. Read together, they show how the code was written. Hendrickson's 13.3 is titled
+"Discovering Systemic Sources of Problems"; this project reads that as: a defect list is
+evidence about habits, and a habit that put a bug in one place probably put one somewhere
+else. That reading, and the predictions below, are this repo's adaptation, not checked
+against the book's text ([citation ledger](../register/citations.md)). The experiment turns
+it into a test. Group the findings by cause, list the places each habit could still live, write the
 predictions down, and only then probe them. If the predictions find nothing, the model is
 wrong.
 
 The sources are Hendrickson, *Explore It!* (2013), Chapter 13.3 “Discovering Systemic Sources
 of Problems”, with 8.4 for the state table written as code and 13.5 for the stop signal.
 These are **approved-plan references**
-([E09](../PLAN.md#e09--explain-it-the-pattern-the-prediction-and-the-cause)); full
-book-text validation is still pending.
+([E09](../PLAN.md#e09--explain-it-the-pattern-the-prediction-and-the-cause)), checked
+against the publisher's contents; full book-text validation is still pending (see the
+[citation ledger](../register/citations.md)).
 
 The blind [exploration record](../exploration/experiments/09-explain-it/revealed.md),
 committed in the exploration commit before this one, is unchanged. It contains

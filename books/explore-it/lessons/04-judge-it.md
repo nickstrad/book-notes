@@ -7,9 +7,11 @@ Then it tried to break each one. Eight held. Five broke, and none of the five wa
 put here.
 
 The source is Hendrickson, *Explore It!* (2013), Chapter 5: 5.1 "Never and Always", 5.2 "Alternative
-Resources", 5.3 "Approximations"; and 10.3 on status codes versus bodies. These citations follow the
-approved [chapter map](../PLAN.md#22-chapter-map-kept-sections-only); the builder did not check them
-against the book text.
+Resources", 5.3 "Approximations"; and 10.3 "Exploring a Web Service", which the plan maps to status
+codes versus bodies. These citations follow the approved
+[chapter map](../PLAN.md#22-chapter-map-kept-sections-only) and match the publisher's contents; the
+book text was not checked, and the 10.3 status-code attribution is unverified
+([citation ledger](../register/citations.md)).
 
 ## What the blind experiment learned
 

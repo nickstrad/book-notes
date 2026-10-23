@@ -96,9 +96,10 @@ Not for: choosing what to explore first (`charter-as-probe`), or enumerating inp
 ## Source
 
 Elisabeth Hendrickson, *Explore It!* (Pragmatic Bookshelf, 2013): Chapter 5 "Evaluate Results" — 5.1
-"Never and Always", 5.2 "Alternative Resources", 5.3 "Approximations"; and 10.3 (status codes versus
-bodies). Section numbers follow the plan's chapter map, checked against the publisher's table of
-contents; full book-text validation has not been done. Procedure wording, table format and checks are
+"Never and Always", 5.2 "Alternative Resources", 5.3 "Approximations"; and 10.3 "Exploring a Web
+Service", which the plan maps to status codes versus bodies (unverified). Section numbers follow the
+plan's chapter map, checked against the publisher's table of contents; full book-text validation has
+not been done ([citation ledger](../../register/citations.md)). Procedure wording, table format and checks are
 this repo's, not quotations. Lessons: [04](../../lessons/04-judge-it.md) (rules → repros → invariant
 walk), [05](../../lessons/05-sequence-it.md) (rules as walk invariants), [09](../../lessons/09-explain-it.md)
 (rules as a transition table and model walk).

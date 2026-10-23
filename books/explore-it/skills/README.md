@@ -48,7 +48,9 @@ found after the planted ones were gone, each by the probe family its skill teach
 - The worked examples name queuelet's findings. To explore queuelet blind, export the tree at
   `explore-it/v0-inherited`, where these skills are the pre-experiment drafts.
 - Book citations are by chapter and section number, checked against the publisher's table of
-  contents; full book-text validation has not been done. Procedure wording is this repo's.
+  contents and three publisher excerpts; full book-text validation has not been done. The
+  [citation ledger](../register/citations.md) records each citation's status. Procedure wording
+  is this repo's.
 
 ## Second targets and companions
 

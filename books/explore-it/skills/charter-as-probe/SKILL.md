@@ -116,8 +116,11 @@ Elisabeth Hendrickson, *Explore It!* (Pragmatic Bookshelf, 2013): Chapter 2 "Cha
 2.1–2.3 (the *Explore … with … to discover …* template; charters neither too broad nor too narrow) and 2.5
 (here only a source of risk hypotheses); Chapter 1 "On Testing and Exploration", 1.3 (the time box as a
 budget); Chapter 11 "Explore an Existing System", 11.4 "Selecting Techniques". Numbers follow
-[PLAN 2.2](../../PLAN.md), checked against the publisher's contents; this repo records no titles for 1.3 and
-2.1–2.5, and full book-text validation has not been done. The prediction/refutation lines, scoring and
+[PLAN 2.2](../../PLAN.md), checked against the publisher's contents (1.3 "Working in Time-Boxed Sessions",
+2.1 "Chartering the Expedition", 2.2 "A Simple Charter Template", 2.3 "Good Charters", 2.4 "Generating
+Charters", 2.5 "The Nightmare Headline Game"). The publisher's excerpt of 2.3–2.4 supports the
+too-broad/too-narrow point and charters from new discoveries; the rest is unchecked against the book
+text ([citation ledger](../../register/citations.md)). The prediction/refutation lines, scoring and
 procedure wording are this repo's. Demonstrated by every charter, e.g.
 [E01](../../exploration/experiments/01-map-it/charter.md),
 [E05](../../exploration/experiments/05-sequence-it/charter.md),
