@@ -1,0 +1,79 @@
+
+> book-notes-architecture-pages@0.0.0 check
+> npm run typecheck && npm run test && npm run build && npm run test:browser
+
+
+> book-notes-architecture-pages@0.0.0 typecheck
+> tsc -b
+
+
+> book-notes-architecture-pages@0.0.0 test
+> vitest run
+
+
+ RUN  v5.0.4 /root/Software/book-notes/pages
+
+
+ Test Files  6 passed (6)
+      Tests  58 passed (58)
+   Start at  23:58:04
+   Duration  3.66s (import 57%, tests 36%, transform 5%, worker 2%)
+
+    Isolate  6 workers spawned · ~637ms startup each (spawn + environment, per file)
+             at least ~637ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> book-notes-architecture-pages@0.0.0 build
+> vite build --base /book-notes/
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 29 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                            0.69 kB │ gzip:   0.39 kB
+dist/assets/layout-worker-BeIcR9gj.js  2,107.55 kB
+dist/assets/index-ChqLlcAG.css            33.27 kB │ gzip:   6.31 kB
+dist/assets/index-DeMpY6Is.js            800.91 kB │ gzip: 251.70 kB
+
+✓ built in 1.48s
+
+> book-notes-architecture-pages@0.0.0 test:browser
+> playwright test
+
+[WebServer] (node:4069994) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:4070032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 22 tests using 1 worker
+
+(node:4070215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route context renders and reloads
+[2/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route containers renders and reloads
+[3/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route gateway-components renders and reloads
+[4/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route node-components renders and reloads
+[5/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route query-flow renders and reloads
+[6/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route usage-flow renders and reloads
+[7/22] [chromium] › tests/litefleet.spec.ts:22:3 › litefleet route lab-deployment renders and reloads
+[8/22] [chromium] › tests/litefleet.spec.ts:43:1 › litefleet actual element drill-down, Up and Back
+[9/22] [chromium] › tests/litefleet.spec.ts:69:3 › litefleet all view screenshots at 1600x1000
+[10/22] [chromium] › tests/litefleet.spec.ts:69:3 › litefleet all view screenshots at 390x844
+[11/22] [chromium] › tests/smoke.spec.ts:22:1 › default catalog renders with documentation at the selected base
+[12/22] [chromium] › tests/smoke.spec.ts:35:1 › dropdown switches in both directions and browser history returns
+[13/22] [chromium] › tests/smoke.spec.ts:49:1 › a non-default deep link reloads to the same diagram
+[14/22] [chromium] › tests/smoke.spec.ts:58:1 › unknown and malformed routes offer recovery without a fallback
+[15/22] [chromium] › tests/smoke.spec.ts:69:1 › a third catalog entry works with no application change
+[16/22] [chromium] › tests/smoke.spec.ts:87:3 › reports empty catalog
+[17/22] [chromium] › tests/smoke.spec.ts:87:3 › reports malformed JSON
+[18/22] [chromium] › tests/smoke.spec.ts:87:3 › reports missing defaultId
+[19/22] [chromium] › tests/smoke.spec.ts:95:1 › reports a failed catalog request
+[20/22] [chromium] › tests/smoke.spec.ts:103:1 › the skip link and architecture selector work by keyboard
+[21/22] [chromium] › tests/smoke.spec.ts:117:3 › shell layout and screenshot at 1600×1000
+[22/22] [chromium] › tests/smoke.spec.ts:117:3 › shell layout and screenshot at 390×844
+  22 passed (1.4m)

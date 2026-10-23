@@ -1,0 +1,3955 @@
+{
+  "schemaVersion": 1,
+  "id": "litefleet",
+  "title": "Litefleet \u2014 Release It! (v1-hardened)",
+  "revision": "release-it/v1-hardened \u00b7 9367863",
+  "defaultDiagramId": "context",
+  "model": {
+    "elements": [
+      {
+        "id": "tenant",
+        "kind": "person",
+        "name": "Tenant developer / application",
+        "description": "Creates databases and sends SQL with a bearer API key.",
+        "status": "existing",
+        "sourceIds": [
+          "src-1"
+        ]
+      },
+      {
+        "id": "operator",
+        "kind": "person",
+        "name": "Operator",
+        "description": "Reads fleet usage and operates the external lab harness.",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ]
+      },
+      {
+        "id": "litefleet",
+        "kind": "softwareSystem",
+        "name": "Litefleet",
+        "description": "A small multitenant SQLite platform; one owning node per database.",
+        "status": "existing",
+        "sourceIds": [
+          "src-3"
+        ]
+      },
+      {
+        "id": "blob",
+        "kind": "softwareSystem",
+        "name": "Blob-store partner (lab fake)",
+        "description": "Stores backup generations. The Compose service is a Go fake.",
+        "status": "existing",
+        "sourceIds": [
+          "src-4"
+        ],
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "meter",
+        "kind": "softwareSystem",
+        "name": "Metering partner (lab fake)",
+        "description": "Accepts usage batches; deduplicates event IDs in memory.",
+        "status": "existing",
+        "sourceIds": [
+          "src-5"
+        ],
+        "tags": [
+          "external"
+        ]
+      },
+      {
+        "id": "ingress",
+        "kind": "container",
+        "name": "HAProxy ingress",
+        "description": "Balances gateways only; checks health and limits queues.",
+        "status": "existing",
+        "sourceIds": [
+          "src-9"
+        ],
+        "containerType": "application",
+        "tags": [],
+        "parentId": "litefleet",
+        "technology": "HAProxy 3.2"
+      },
+      {
+        "id": "gateway",
+        "kind": "container",
+        "name": "Gateway",
+        "description": "Three stateless copies, collapsed here.",
+        "status": "existing",
+        "sourceIds": [
+          "src-10"
+        ],
+        "containerType": "application",
+        "tags": [],
+        "parentId": "litefleet",
+        "technology": "Go / net/http"
+      },
+      {
+        "id": "control",
+        "kind": "container",
+        "name": "Control plane",
+        "description": "Authenticates keys, resolves placement, provisions and receives heartbeats.",
+        "status": "existing",
+        "sourceIds": [
+          "src-11"
+        ],
+        "containerType": "application",
+        "tags": [
+          "external"
+        ],
+        "parentId": "litefleet",
+        "technology": "Go / net/http"
+      },
+      {
+        "id": "registry",
+        "kind": "container",
+        "name": "Registry",
+        "description": "Tenants, hashed keys, placement, activity ledger and daily rollups.",
+        "status": "existing",
+        "sourceIds": [
+          "src-12"
+        ],
+        "containerType": "datastore",
+        "tags": [],
+        "parentId": "litefleet",
+        "technology": "PostgreSQL 17"
+      },
+      {
+        "id": "node",
+        "kind": "container",
+        "name": "Node agent",
+        "description": "Two stateful copies, collapsed here. Files do not fail over to another node.",
+        "status": "existing",
+        "sourceIds": [
+          "src-13"
+        ],
+        "containerType": "application",
+        "tags": [
+          "external"
+        ],
+        "parentId": "litefleet",
+        "technology": "Go / net/http"
+      },
+      {
+        "id": "tenant-files",
+        "kind": "container",
+        "name": "Tenant SQLite files",
+        "description": "One WAL-mode database per tenant database in /data/tenants.",
+        "status": "existing",
+        "sourceIds": [
+          "src-14"
+        ],
+        "containerType": "datastore",
+        "tags": [
+          "external"
+        ],
+        "parentId": "litefleet",
+        "technology": "SQLite / filesystem"
+      },
+      {
+        "id": "node-state",
+        "kind": "container",
+        "name": "Node-local outbox storage",
+        "description": "/data/_node.db: node_info and usage_outbox. Separate from tenant files.",
+        "status": "existing",
+        "sourceIds": [
+          "src-15"
+        ],
+        "containerType": "datastore",
+        "tags": [
+          "external"
+        ],
+        "parentId": "litefleet",
+        "technology": "SQLite / filesystem"
+      },
+      {
+        "id": "gw-api",
+        "kind": "component",
+        "name": "API handlers",
+        "description": "Validate input, extract bearer key; bound query/execute to 2.9 seconds.",
+        "status": "existing",
+        "sourceIds": [
+          "src-25"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "gw-routes",
+        "kind": "component",
+        "name": "Route client + cache",
+        "description": "Caches grants for 60 seconds; refresh after 10 seconds; evicts stale epochs.",
+        "status": "existing",
+        "sourceIds": [
+          "src-17"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "gw-breaker",
+        "kind": "component",
+        "name": "Control circuit breaker",
+        "description": "Stops failing control calls; usage report bypasses this breaker.",
+        "status": "existing",
+        "sourceIds": [
+          "src-26"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "gw-node",
+        "kind": "component",
+        "name": "Node client + row stream",
+        "description": "2.5 second attempts; transcodes row streams; tolerant response reader.",
+        "status": "existing",
+        "sourceIds": [
+          "src-27"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "gw-retry",
+        "kind": "component",
+        "name": "Read retry policy",
+        "description": "Jitter, two retries, deadline and token budget; never retries uncertain writes.",
+        "status": "existing",
+        "sourceIds": [
+          "src-28"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "gw-shed",
+        "kind": "component",
+        "name": "Request shedding + HTTP boundary",
+        "description": "24 concurrent requests by default; noncritical share 6 slots; health/metrics bypass; logs.",
+        "status": "existing",
+        "sourceIds": [
+          "src-29"
+        ],
+        "parentId": "gateway",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-engine",
+        "kind": "component",
+        "name": "Admission + SQL engine",
+        "description": "Epoch check, per-database lanes, tenant/node limits; 2 second statement deadline.",
+        "status": "existing",
+        "sourceIds": [
+          "src-37"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-handles",
+        "kind": "component",
+        "name": "Handle manager",
+        "description": "Bounded pools and LRU; singleflight open; close releases resources.",
+        "status": "existing",
+        "sourceIds": [
+          "src-38"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-backup",
+        "kind": "component",
+        "name": "Backup job + blob client",
+        "description": "Snapshots under writer lock; uploads after releasing lock.",
+        "status": "existing",
+        "sourceIds": [
+          "src-21"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-usage",
+        "kind": "component",
+        "name": "Bounded usage queue + shippers",
+        "description": "1024 queued events; four shippers; batches up to 100; overflow after 20 ms.",
+        "status": "existing",
+        "sourceIds": [
+          "src-39"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-outbox",
+        "kind": "component",
+        "name": "Outbox access + sweeper",
+        "description": "Reads at most 500 rows every 5 seconds; deletes only after delivery.",
+        "status": "existing",
+        "sourceIds": [
+          "src-40"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "nd-maintain",
+        "kind": "component",
+        "name": "Maintenance + drain",
+        "description": "Checkpoints WALs; evicts idle handles; SIGTERM stops admission and spills usage.",
+        "status": "existing",
+        "sourceIds": [
+          "src-41"
+        ],
+        "parentId": "node",
+        "technology": "Go"
+      },
+      {
+        "id": "lab",
+        "kind": "deploymentNode",
+        "name": "Compose lab",
+        "description": "Single Docker Compose project litefleet; this is a lab, not a production hosting design.",
+        "status": "existing",
+        "sourceIds": [
+          "src-51"
+        ],
+        "environment": "lab",
+        "technology": "Docker Compose"
+      },
+      {
+        "id": "gateway-a",
+        "kind": "instance",
+        "name": "gateway-a :8080",
+        "description": "Host :18001; SHED_LIMIT defaults to 24.",
+        "status": "existing",
+        "sourceIds": [
+          "src-52"
+        ],
+        "instanceOf": "gateway",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "gateway-b",
+        "kind": "instance",
+        "name": "gateway-b :8080",
+        "description": "Host :18002.",
+        "status": "existing",
+        "sourceIds": [
+          "src-53"
+        ],
+        "instanceOf": "gateway",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "gateway-c",
+        "kind": "instance",
+        "name": "gateway-c :8080",
+        "description": "Host :18003.",
+        "status": "existing",
+        "sourceIds": [
+          "src-54"
+        ],
+        "instanceOf": "gateway",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "node-a",
+        "kind": "instance",
+        "name": "node-a :8070",
+        "description": "Host :18071; owns node-a-data.",
+        "status": "existing",
+        "sourceIds": [
+          "src-55"
+        ],
+        "instanceOf": "node",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "node-b",
+        "kind": "instance",
+        "name": "node-b :8070",
+        "description": "Host :18072; owns node-b-data.",
+        "status": "existing",
+        "sourceIds": [
+          "src-56"
+        ],
+        "instanceOf": "node",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "control-run",
+        "kind": "instance",
+        "name": "control :8090",
+        "description": "Host :18090; direct provision and heartbeats.",
+        "status": "existing",
+        "sourceIds": [
+          "src-57"
+        ],
+        "instanceOf": "control",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "postgres-run",
+        "kind": "instance",
+        "name": "postgres :5432",
+        "description": "Host :15432; persistent pgdata.",
+        "status": "existing",
+        "sourceIds": [
+          "src-58"
+        ],
+        "instanceOf": "registry",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "haproxy-run",
+        "kind": "instance",
+        "name": "haproxy :8080",
+        "description": "Host tenant :18080; stats :18404.",
+        "status": "existing",
+        "sourceIds": [
+          "src-59"
+        ],
+        "instanceOf": "ingress",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "blob-run",
+        "kind": "instance",
+        "name": "blobstore :8081 (fake)",
+        "description": "Host :18081; persistent blobs volume.",
+        "status": "existing",
+        "sourceIds": [
+          "src-60"
+        ],
+        "instanceOf": "blob",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "meter-run",
+        "kind": "instance",
+        "name": "metering :8082 (fake)",
+        "description": "Host :18082; dedup map is process memory.",
+        "status": "existing",
+        "sourceIds": [
+          "src-61"
+        ],
+        "instanceOf": "meter",
+        "environment": "lab",
+        "parentId": "lab"
+      },
+      {
+        "id": "toxiproxy",
+        "kind": "infrastructureNode",
+        "name": "Toxiproxy",
+        "description": "HTTP data-plane links: control 9090, node-a 9071, node-b 9072, blob 9081, meter 9082. API host :18474.",
+        "status": "existing",
+        "sourceIds": [
+          "src-62"
+        ],
+        "parentId": "lab",
+        "technology": "Toxiproxy 2.12"
+      },
+      {
+        "id": "prometheus",
+        "kind": "infrastructureNode",
+        "name": "Prometheus",
+        "description": "Host :19090; HTTP scrape; ephemeral /prometheus tmpfs, 2h retention.",
+        "status": "existing",
+        "sourceIds": [
+          "src-63"
+        ],
+        "parentId": "lab",
+        "technology": "Prometheus 3.7"
+      },
+      {
+        "id": "exporter",
+        "kind": "infrastructureNode",
+        "name": "postgres-exporter",
+        "description": "SQL observation exported on :9187; no host port.",
+        "status": "existing",
+        "sourceIds": [
+          "src-64"
+        ],
+        "parentId": "lab",
+        "technology": "postgres-exporter 0.18.1"
+      },
+      {
+        "id": "pgdata",
+        "kind": "infrastructureNode",
+        "name": "pgdata volume",
+        "description": "Persistent PostgreSQL registry.",
+        "status": "existing",
+        "sourceIds": [
+          "src-65"
+        ],
+        "parentId": "lab",
+        "technology": "Docker named volume"
+      },
+      {
+        "id": "node-a-data",
+        "kind": "infrastructureNode",
+        "name": "node-a-data volume",
+        "description": "/data/tenants/*.db and /data/_node.db; only node-a owns these files.",
+        "status": "existing",
+        "sourceIds": [
+          "src-66"
+        ],
+        "parentId": "lab",
+        "technology": "Docker named volume"
+      },
+      {
+        "id": "node-b-data",
+        "kind": "infrastructureNode",
+        "name": "node-b-data volume",
+        "description": "/data/tenants/*.db and /data/_node.db; only node-b owns these files.",
+        "status": "existing",
+        "sourceIds": [
+          "src-67"
+        ],
+        "parentId": "lab",
+        "technology": "Docker named volume"
+      },
+      {
+        "id": "blobs",
+        "kind": "infrastructureNode",
+        "name": "blobs volume",
+        "description": "Backup objects under /blobs.",
+        "status": "existing",
+        "sourceIds": [
+          "src-68"
+        ],
+        "parentId": "lab",
+        "technology": "Docker named volume"
+      },
+      {
+        "id": "migrate",
+        "kind": "infrastructureNode",
+        "name": "migrate (jobs profile)",
+        "description": "One-shot control binary: migrate, backfill, guarded contract; not control startup.",
+        "status": "existing",
+        "sourceIds": [
+          "src-69"
+        ],
+        "parentId": "lab",
+        "technology": "Go / optional job"
+      },
+      {
+        "id": "purger",
+        "kind": "infrastructureNode",
+        "name": "purger (maintenance profile)",
+        "description": "Control purge -every 60s; lab/up.sh enables this profile at hardened tag.",
+        "status": "existing",
+        "sourceIds": [
+          "src-70"
+        ],
+        "parentId": "lab",
+        "technology": "Go / optional sidecar"
+      },
+      {
+        "id": "seedgen",
+        "kind": "infrastructureNode",
+        "name": "seedgen (lab profile)",
+        "description": "Initializes Postgres and tenant files; writes results manifest.",
+        "status": "existing",
+        "sourceIds": [
+          "src-71"
+        ],
+        "parentId": "lab",
+        "technology": "Go / one-shot lab tool"
+      },
+      {
+        "id": "loadgen",
+        "kind": "infrastructureNode",
+        "name": "loadgen (lab profile)",
+        "description": "Sends tenant API requests; writes CSV results.",
+        "status": "existing",
+        "sourceIds": [
+          "src-72"
+        ],
+        "parentId": "lab",
+        "technology": "Go / one-shot lab tool"
+      },
+      {
+        "id": "report",
+        "kind": "infrastructureNode",
+        "name": "report (lab profile)",
+        "description": "DuckDB reports and SQLite audit with read-only node mounts.",
+        "status": "existing",
+        "sourceIds": [
+          "src-73"
+        ],
+        "parentId": "lab",
+        "technology": "DuckDB / lab tool"
+      },
+      {
+        "id": "harness",
+        "kind": "infrastructureNode",
+        "name": "Host verify / chaos harness",
+        "description": "Make targets and shell/Go tests drive external faults, Compose restarts and reports.",
+        "status": "existing",
+        "sourceIds": [
+          "src-2"
+        ],
+        "parentId": "lab",
+        "technology": "Shell / Go / Docker CLI"
+      },
+      {
+        "id": "results",
+        "kind": "infrastructureNode",
+        "name": "results/ bind mount",
+        "description": "CSV reports and seed manifests shared by lab tools; gitignored.",
+        "status": "existing",
+        "sourceIds": [
+          "src-74"
+        ],
+        "parentId": "lab",
+        "technology": "Host filesystem"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "ctx-tenant",
+        "sourceId": "tenant",
+        "targetId": "litefleet",
+        "label": "Creates databases; queries and writes SQL",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-1"
+        ]
+      },
+      {
+        "id": "ctx-ops",
+        "sourceId": "operator",
+        "targetId": "litefleet",
+        "label": "Reads usage; operates fleet",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-6"
+        ]
+      },
+      {
+        "id": "ctx-backup",
+        "sourceId": "litefleet",
+        "targetId": "blob",
+        "label": "Uploads database snapshots",
+        "technology": "HTTP PUT",
+        "status": "existing",
+        "sourceIds": [
+          "src-7"
+        ]
+      },
+      {
+        "id": "ctx-usage",
+        "sourceId": "litefleet",
+        "targetId": "meter",
+        "label": "Delivers usage batches",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-8"
+        ]
+      },
+      {
+        "id": "tenant-edge",
+        "sourceId": "tenant",
+        "targetId": "ingress",
+        "label": "Sends authenticated API calls",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-16"
+        ]
+      },
+      {
+        "id": "ops-edge",
+        "sourceId": "operator",
+        "targetId": "ingress",
+        "label": "Requests admin usage report",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-6"
+        ]
+      },
+      {
+        "id": "balance",
+        "sourceId": "ingress",
+        "targetId": "gateway",
+        "label": "Balances requests; checks /health",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-9"
+        ]
+      },
+      {
+        "id": "resolve",
+        "sourceId": "gateway",
+        "targetId": "control",
+        "label": "Resolves on cache miss; lifecycle / reports",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-17"
+        ]
+      },
+      {
+        "id": "forward",
+        "sourceId": "gateway",
+        "targetId": "node",
+        "label": "Forwards query / execute with X-Epoch",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-18"
+        ]
+      },
+      {
+        "id": "provision",
+        "sourceId": "control",
+        "targetId": "node",
+        "label": "Provisions / drops directly",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-19"
+        ]
+      },
+      {
+        "id": "heartbeat",
+        "sourceId": "node",
+        "targetId": "control",
+        "label": "Reports activity every 5 seconds (direct)",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-20"
+        ]
+      },
+      {
+        "id": "node-backup",
+        "sourceId": "node",
+        "targetId": "blob",
+        "label": "Uploads backup generations",
+        "technology": "HTTP PUT / SQLite snapshot",
+        "status": "existing",
+        "sourceIds": [
+          "src-21"
+        ]
+      },
+      {
+        "id": "node-meter",
+        "sourceId": "node",
+        "targetId": "meter",
+        "label": "Sends usage batches via Toxiproxy",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-8"
+        ]
+      },
+      {
+        "id": "sql-registry",
+        "sourceId": "control",
+        "targetId": "registry",
+        "label": "Reads / writes via separate OLTP, report, health pools",
+        "technology": "PostgreSQL wire / SQL",
+        "status": "existing",
+        "sourceIds": [
+          "src-22"
+        ]
+      },
+      {
+        "id": "sql-tenant",
+        "sourceId": "node",
+        "targetId": "tenant-files",
+        "label": "Executes SQL; snapshots; checkpoints",
+        "technology": "SQLite / local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-23"
+        ]
+      },
+      {
+        "id": "sql-state",
+        "sourceId": "node",
+        "targetId": "node-state",
+        "label": "Persists overflow, failed sends and shutdown spill",
+        "technology": "SQLite / local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-24"
+        ]
+      },
+      {
+        "id": "g-tenant-shed",
+        "sourceId": "tenant",
+        "targetId": "gw-shed",
+        "label": "Sends tenant API requests",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-30"
+        ]
+      },
+      {
+        "id": "g-shed-api",
+        "sourceId": "gw-shed",
+        "targetId": "gw-api",
+        "label": "Admits selected routes; rejects overload",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-30"
+        ]
+      },
+      {
+        "id": "g-api-route",
+        "sourceId": "gw-api",
+        "targetId": "gw-routes",
+        "label": "Authenticates / resolves database route",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-31"
+        ]
+      },
+      {
+        "id": "g-route-breaker",
+        "sourceId": "gw-routes",
+        "targetId": "gw-breaker",
+        "label": "Guards control calls except usage report",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-32"
+        ]
+      },
+      {
+        "id": "g-breaker-control",
+        "sourceId": "gw-breaker",
+        "targetId": "control",
+        "label": "Calls control through Toxiproxy",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-33"
+        ]
+      },
+      {
+        "id": "g-route-retry",
+        "sourceId": "gw-routes",
+        "targetId": "gw-retry",
+        "label": "Applies retry policy to remote resolve",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-34"
+        ]
+      },
+      {
+        "id": "g-api-node",
+        "sourceId": "gw-api",
+        "targetId": "gw-node",
+        "label": "Forwards statements; streams rows back",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-35"
+        ]
+      },
+      {
+        "id": "g-node-retry",
+        "sourceId": "gw-node",
+        "targetId": "gw-retry",
+        "label": "Applies retries only before read answer starts",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-36"
+        ]
+      },
+      {
+        "id": "g-client-node",
+        "sourceId": "gw-node",
+        "targetId": "node",
+        "label": "Posts SQL with epoch; reads bounded answer",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-18"
+        ]
+      },
+      {
+        "id": "n-engine-handles",
+        "sourceId": "nd-engine",
+        "targetId": "nd-handles",
+        "label": "Acquires / releases database handle",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-42"
+        ]
+      },
+      {
+        "id": "n-handles-files",
+        "sourceId": "nd-handles",
+        "targetId": "tenant-files",
+        "label": "Opens per-database pools",
+        "technology": "SQLite / file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-43"
+        ]
+      },
+      {
+        "id": "n-backup-handles",
+        "sourceId": "nd-backup",
+        "targetId": "nd-handles",
+        "label": "Obtains handle; snapshots under lock",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-44"
+        ]
+      },
+      {
+        "id": "n-backup-blob",
+        "sourceId": "nd-backup",
+        "targetId": "blob",
+        "label": "Uploads snapshot after lock release",
+        "technology": "HTTP PUT / SQLite snapshot",
+        "status": "existing",
+        "sourceIds": [
+          "src-45"
+        ]
+      },
+      {
+        "id": "n-engine-usage",
+        "sourceId": "nd-engine",
+        "targetId": "nd-usage",
+        "label": "Records completed read / committed write usage",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-46"
+        ]
+      },
+      {
+        "id": "n-usage-outbox",
+        "sourceId": "nd-usage",
+        "targetId": "nd-outbox",
+        "label": "Persists overflow / failed batches / spill",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-47"
+        ]
+      },
+      {
+        "id": "n-outbox-state",
+        "sourceId": "nd-outbox",
+        "targetId": "node-state",
+        "label": "Inserts, selects and deletes usage_outbox rows",
+        "technology": "SQLite / file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-24"
+        ]
+      },
+      {
+        "id": "n-queue-meter",
+        "sourceId": "nd-usage",
+        "targetId": "meter",
+        "label": "Sends queued batches, 2 second budget",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-48"
+        ]
+      },
+      {
+        "id": "n-sweep-meter",
+        "sourceId": "nd-outbox",
+        "targetId": "meter",
+        "label": "Redelivers; deletes after success",
+        "technology": "HTTP/JSON",
+        "status": "existing",
+        "sourceIds": [
+          "src-40"
+        ]
+      },
+      {
+        "id": "n-maintain-handles",
+        "sourceId": "nd-maintain",
+        "targetId": "nd-handles",
+        "label": "Checkpoints and closes handles",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-49"
+        ]
+      },
+      {
+        "id": "n-drain-queue",
+        "sourceId": "nd-maintain",
+        "targetId": "nd-usage",
+        "label": "Spills pending and stuck in-flight events",
+        "technology": "Go call",
+        "status": "existing",
+        "sourceIds": [
+          "src-50"
+        ]
+      },
+      {
+        "id": "d-lb-gateway-a",
+        "sourceId": "haproxy-run",
+        "targetId": "gateway-a",
+        "label": "Balances / health-checks",
+        "technology": "HTTP :8080",
+        "status": "existing",
+        "sourceIds": [
+          "src-75"
+        ]
+      },
+      {
+        "id": "d-gateway-a-proxy",
+        "sourceId": "gateway-a",
+        "targetId": "toxiproxy",
+        "label": "Resolve :9090 / SQL :9071\u20139072",
+        "technology": "HTTP over TCP proxies",
+        "status": "existing",
+        "sourceIds": [
+          "src-76"
+        ]
+      },
+      {
+        "id": "d-lb-gateway-b",
+        "sourceId": "haproxy-run",
+        "targetId": "gateway-b",
+        "label": "Balances / health-checks",
+        "technology": "HTTP :8080",
+        "status": "existing",
+        "sourceIds": [
+          "src-77"
+        ]
+      },
+      {
+        "id": "d-gateway-b-proxy",
+        "sourceId": "gateway-b",
+        "targetId": "toxiproxy",
+        "label": "Resolve :9090 / SQL :9071\u20139072",
+        "technology": "HTTP over TCP proxies",
+        "status": "existing",
+        "sourceIds": [
+          "src-78"
+        ]
+      },
+      {
+        "id": "d-lb-gateway-c",
+        "sourceId": "haproxy-run",
+        "targetId": "gateway-c",
+        "label": "Balances / health-checks",
+        "technology": "HTTP :8080",
+        "status": "existing",
+        "sourceIds": [
+          "src-79"
+        ]
+      },
+      {
+        "id": "d-gateway-c-proxy",
+        "sourceId": "gateway-c",
+        "targetId": "toxiproxy",
+        "label": "Resolve :9090 / SQL :9071\u20139072",
+        "technology": "HTTP over TCP proxies",
+        "status": "existing",
+        "sourceIds": [
+          "src-80"
+        ]
+      },
+      {
+        "id": "d-proxy-control",
+        "sourceId": "toxiproxy",
+        "targetId": "control-run",
+        "label": "Forwards control :9090",
+        "technology": "TCP / HTTP",
+        "status": "existing",
+        "sourceIds": [
+          "src-81"
+        ]
+      },
+      {
+        "id": "d-proxy-node-a",
+        "sourceId": "toxiproxy",
+        "targetId": "node-a",
+        "label": "Forwards node-a :9071",
+        "technology": "TCP / HTTP",
+        "status": "existing",
+        "sourceIds": [
+          "src-82"
+        ]
+      },
+      {
+        "id": "d-proxy-node-b",
+        "sourceId": "toxiproxy",
+        "targetId": "node-b",
+        "label": "Forwards node-b :9072",
+        "technology": "TCP / HTTP",
+        "status": "existing",
+        "sourceIds": [
+          "src-83"
+        ]
+      },
+      {
+        "id": "d-proxy-blobstore",
+        "sourceId": "toxiproxy",
+        "targetId": "blob-run",
+        "label": "Forwards blobstore :9081",
+        "technology": "TCP / HTTP",
+        "status": "existing",
+        "sourceIds": [
+          "src-84"
+        ]
+      },
+      {
+        "id": "d-proxy-metering",
+        "sourceId": "toxiproxy",
+        "targetId": "meter-run",
+        "label": "Forwards metering :9082",
+        "technology": "TCP / HTTP",
+        "status": "existing",
+        "sourceIds": [
+          "src-85"
+        ]
+      },
+      {
+        "id": "d-node-a-partners",
+        "sourceId": "node-a",
+        "targetId": "toxiproxy",
+        "label": "Backup :9081 / usage :9082",
+        "technology": "HTTP over TCP proxies",
+        "status": "existing",
+        "sourceIds": [
+          "src-86"
+        ]
+      },
+      {
+        "id": "d-control-node-a",
+        "sourceId": "control-run",
+        "targetId": "node-a",
+        "label": "Direct provision / drop",
+        "technology": "HTTP :8070",
+        "status": "existing",
+        "sourceIds": [
+          "src-19"
+        ]
+      },
+      {
+        "id": "d-node-a-hb",
+        "sourceId": "node-a",
+        "targetId": "control-run",
+        "label": "Direct heartbeat",
+        "technology": "HTTP :8090",
+        "status": "existing",
+        "sourceIds": [
+          "src-20"
+        ]
+      },
+      {
+        "id": "d-node-a-disk",
+        "sourceId": "node-a",
+        "targetId": "node-a-data",
+        "label": "Owns /data",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-66"
+        ]
+      },
+      {
+        "id": "d-node-b-partners",
+        "sourceId": "node-b",
+        "targetId": "toxiproxy",
+        "label": "Backup :9081 / usage :9082",
+        "technology": "HTTP over TCP proxies",
+        "status": "existing",
+        "sourceIds": [
+          "src-86"
+        ]
+      },
+      {
+        "id": "d-control-node-b",
+        "sourceId": "control-run",
+        "targetId": "node-b",
+        "label": "Direct provision / drop",
+        "technology": "HTTP :8070",
+        "status": "existing",
+        "sourceIds": [
+          "src-19"
+        ]
+      },
+      {
+        "id": "d-node-b-hb",
+        "sourceId": "node-b",
+        "targetId": "control-run",
+        "label": "Direct heartbeat",
+        "technology": "HTTP :8090",
+        "status": "existing",
+        "sourceIds": [
+          "src-20"
+        ]
+      },
+      {
+        "id": "d-node-b-disk",
+        "sourceId": "node-b",
+        "targetId": "node-b-data",
+        "label": "Owns /data",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-67"
+        ]
+      },
+      {
+        "id": "d-control-pg",
+        "sourceId": "control-run",
+        "targetId": "postgres-run",
+        "label": "Registry SQL",
+        "technology": "PostgreSQL :5432",
+        "status": "existing",
+        "sourceIds": [
+          "src-22"
+        ]
+      },
+      {
+        "id": "d-pg-volume",
+        "sourceId": "postgres-run",
+        "targetId": "pgdata",
+        "label": "Persists registry",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-65"
+        ]
+      },
+      {
+        "id": "d-blob-volume",
+        "sourceId": "blob-run",
+        "targetId": "blobs",
+        "label": "Persists backups",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-87"
+        ]
+      },
+      {
+        "id": "d-exporter-pg",
+        "sourceId": "exporter",
+        "targetId": "postgres-run",
+        "label": "Collects database statistics",
+        "technology": "PostgreSQL :5432",
+        "status": "existing",
+        "sourceIds": [
+          "src-88"
+        ]
+      },
+      {
+        "id": "d-scrape-gateway-a",
+        "sourceId": "prometheus",
+        "targetId": "gateway-a",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-89"
+        ]
+      },
+      {
+        "id": "d-scrape-gateway-b",
+        "sourceId": "prometheus",
+        "targetId": "gateway-b",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-89"
+        ]
+      },
+      {
+        "id": "d-scrape-gateway-c",
+        "sourceId": "prometheus",
+        "targetId": "gateway-c",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-89"
+        ]
+      },
+      {
+        "id": "d-scrape-control-run",
+        "sourceId": "prometheus",
+        "targetId": "control-run",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-90"
+        ]
+      },
+      {
+        "id": "d-scrape-node-a",
+        "sourceId": "prometheus",
+        "targetId": "node-a",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-91"
+        ]
+      },
+      {
+        "id": "d-scrape-node-b",
+        "sourceId": "prometheus",
+        "targetId": "node-b",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-91"
+        ]
+      },
+      {
+        "id": "d-scrape-haproxy-run",
+        "sourceId": "prometheus",
+        "targetId": "haproxy-run",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-92"
+        ]
+      },
+      {
+        "id": "d-scrape-blob-run",
+        "sourceId": "prometheus",
+        "targetId": "blob-run",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-93"
+        ]
+      },
+      {
+        "id": "d-scrape-meter-run",
+        "sourceId": "prometheus",
+        "targetId": "meter-run",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-94"
+        ]
+      },
+      {
+        "id": "d-scrape-toxiproxy",
+        "sourceId": "prometheus",
+        "targetId": "toxiproxy",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-95"
+        ]
+      },
+      {
+        "id": "d-scrape-exporter",
+        "sourceId": "prometheus",
+        "targetId": "exporter",
+        "label": "Scrapes /metrics",
+        "technology": "HTTP / Prometheus text",
+        "status": "existing",
+        "sourceIds": [
+          "src-96"
+        ]
+      },
+      {
+        "id": "d-migrate-pg",
+        "sourceId": "migrate",
+        "targetId": "postgres-run",
+        "label": "Expand / backfill / guarded contract",
+        "technology": "PostgreSQL :5432",
+        "status": "existing",
+        "sourceIds": [
+          "src-69"
+        ]
+      },
+      {
+        "id": "d-purger-pg",
+        "sourceId": "purger",
+        "targetId": "postgres-run",
+        "label": "Rolls up and purges ledger",
+        "technology": "PostgreSQL :5432",
+        "status": "existing",
+        "sourceIds": [
+          "src-70"
+        ]
+      },
+      {
+        "id": "d-seedgen-pg",
+        "sourceId": "seedgen",
+        "targetId": "postgres-run",
+        "label": "Seeds registry",
+        "technology": "PostgreSQL :5432",
+        "status": "existing",
+        "sourceIds": [
+          "src-71"
+        ]
+      },
+      {
+        "id": "d-seed-node-a",
+        "sourceId": "seedgen",
+        "targetId": "node-a-data",
+        "label": "Initializes tenant files",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-97"
+        ]
+      },
+      {
+        "id": "d-report-node-a",
+        "sourceId": "report",
+        "targetId": "node-a-data",
+        "label": "Audits read-only tenant files",
+        "technology": "DuckDB SQLite scanner",
+        "status": "existing",
+        "sourceIds": [
+          "src-98"
+        ]
+      },
+      {
+        "id": "d-seed-node-b",
+        "sourceId": "seedgen",
+        "targetId": "node-b-data",
+        "label": "Initializes tenant files",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-97"
+        ]
+      },
+      {
+        "id": "d-report-node-b",
+        "sourceId": "report",
+        "targetId": "node-b-data",
+        "label": "Audits read-only tenant files",
+        "technology": "DuckDB SQLite scanner",
+        "status": "existing",
+        "sourceIds": [
+          "src-98"
+        ]
+      },
+      {
+        "id": "d-load-edge",
+        "sourceId": "loadgen",
+        "targetId": "haproxy-run",
+        "label": "Applies tenant load",
+        "technology": "HTTP :8080",
+        "status": "existing",
+        "sourceIds": [
+          "src-99"
+        ]
+      },
+      {
+        "id": "d-seedgen-results",
+        "sourceId": "seedgen",
+        "targetId": "results",
+        "label": "Writes manifest / CSV",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-71"
+        ]
+      },
+      {
+        "id": "d-loadgen-results",
+        "sourceId": "loadgen",
+        "targetId": "results",
+        "label": "Writes manifest / CSV",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-72"
+        ]
+      },
+      {
+        "id": "d-report-results",
+        "sourceId": "report",
+        "targetId": "results",
+        "label": "Reads CSV; produces reports",
+        "technology": "Local file I/O",
+        "status": "existing",
+        "sourceIds": [
+          "src-73"
+        ]
+      },
+      {
+        "id": "d-harness-tox",
+        "sourceId": "harness",
+        "targetId": "toxiproxy",
+        "label": "Adds / removes faults",
+        "technology": "HTTP admin :8474",
+        "status": "existing",
+        "sourceIds": [
+          "src-100"
+        ]
+      },
+      {
+        "id": "d-harness-load",
+        "sourceId": "harness",
+        "targetId": "loadgen",
+        "label": "Runs scenarios; controls Compose services",
+        "technology": "Docker Compose CLI",
+        "status": "existing",
+        "sourceIds": [
+          "src-101"
+        ]
+      },
+      {
+        "id": "d-harness-blob",
+        "sourceId": "harness",
+        "targetId": "blob-run",
+        "label": "Selects fake partner admin modes",
+        "technology": "HTTP admin",
+        "status": "existing",
+        "sourceIds": [
+          "src-102"
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "id": "context",
+      "kind": "context",
+      "title": "Litefleet: system context",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "tenant"
+        },
+        {
+          "elementId": "operator"
+        },
+        {
+          "elementId": "litefleet",
+          "detail": {
+            "diagramId": "containers"
+          }
+        },
+        {
+          "elementId": "blob"
+        },
+        {
+          "elementId": "meter"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "ctx-tenant",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "ctx-ops",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "ctx-backup",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "ctx-usage",
+          "displayNumber": 4
+        }
+      ],
+      "scopeId": "litefleet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-context"
+      ],
+      "sourceIds": [
+        "src-6",
+        "src-2",
+        "src-3",
+        "src-4"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ]
+    },
+    {
+      "id": "containers",
+      "kind": "container",
+      "title": "Litefleet: containers",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "tenant"
+        },
+        {
+          "elementId": "operator"
+        },
+        {
+          "elementId": "ingress"
+        },
+        {
+          "elementId": "gateway",
+          "detail": {
+            "diagramId": "gateway-components"
+          }
+        },
+        {
+          "elementId": "control"
+        },
+        {
+          "elementId": "registry"
+        },
+        {
+          "elementId": "node",
+          "detail": {
+            "diagramId": "node-components"
+          }
+        },
+        {
+          "elementId": "tenant-files"
+        },
+        {
+          "elementId": "node-state"
+        },
+        {
+          "elementId": "blob"
+        },
+        {
+          "elementId": "meter"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "tenant-edge",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "ops-edge",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "balance",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "resolve",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "forward",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "provision",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "heartbeat",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "sql-registry",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "sql-tenant",
+          "displayNumber": 9
+        },
+        {
+          "relationshipId": "sql-state",
+          "displayNumber": 10
+        },
+        {
+          "relationshipId": "node-backup",
+          "displayNumber": 11
+        },
+        {
+          "relationshipId": "node-meter",
+          "displayNumber": 12
+        }
+      ],
+      "scopeId": "litefleet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-containers"
+      ],
+      "sourceIds": [
+        "src-6",
+        "src-10",
+        "src-11",
+        "src-22"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ],
+      "parent": {
+        "diagramId": "context"
+      },
+      "groups": [
+        {
+          "id": "containers-group-0",
+          "label": "Litefleet logical boundary",
+          "memberIds": [
+            "ingress",
+            "gateway",
+            "control",
+            "registry",
+            "node",
+            "tenant-files",
+            "node-state"
+          ],
+          "status": "existing"
+        }
+      ]
+    },
+    {
+      "id": "gateway-components",
+      "kind": "component",
+      "title": "Litefleet: gateway components",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "tenant"
+        },
+        {
+          "elementId": "gw-shed"
+        },
+        {
+          "elementId": "gw-api"
+        },
+        {
+          "elementId": "gw-routes"
+        },
+        {
+          "elementId": "gw-breaker"
+        },
+        {
+          "elementId": "gw-node"
+        },
+        {
+          "elementId": "gw-retry"
+        },
+        {
+          "elementId": "control"
+        },
+        {
+          "elementId": "node"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "g-tenant-shed",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "g-shed-api",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "g-api-route",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "g-route-breaker",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "g-breaker-control",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "g-route-retry",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "g-api-node",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "g-node-retry",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "g-client-node",
+          "displayNumber": 9
+        }
+      ],
+      "scopeId": "gateway",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-gateway-components"
+      ],
+      "sourceIds": [
+        "src-35",
+        "src-11",
+        "src-13",
+        "src-34"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ],
+      "parent": {
+        "diagramId": "containers"
+      },
+      "groups": [
+        {
+          "id": "gateway-components-group-0",
+          "label": "Gateway process",
+          "memberIds": [
+            "gw-shed",
+            "gw-api",
+            "gw-routes",
+            "gw-breaker",
+            "gw-node",
+            "gw-retry"
+          ],
+          "status": "existing"
+        }
+      ]
+    },
+    {
+      "id": "node-components",
+      "kind": "component",
+      "title": "Litefleet: node components",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "nd-engine"
+        },
+        {
+          "elementId": "nd-handles"
+        },
+        {
+          "elementId": "tenant-files"
+        },
+        {
+          "elementId": "nd-backup"
+        },
+        {
+          "elementId": "blob"
+        },
+        {
+          "elementId": "nd-usage"
+        },
+        {
+          "elementId": "nd-outbox"
+        },
+        {
+          "elementId": "node-state"
+        },
+        {
+          "elementId": "meter"
+        },
+        {
+          "elementId": "nd-maintain"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "n-engine-handles",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "n-handles-files",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "n-backup-handles",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "n-backup-blob",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "n-engine-usage",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "n-usage-outbox",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "n-outbox-state",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "n-queue-meter",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "n-sweep-meter",
+          "displayNumber": 9
+        },
+        {
+          "relationshipId": "n-maintain-handles",
+          "displayNumber": 10
+        },
+        {
+          "relationshipId": "n-drain-queue",
+          "displayNumber": 11
+        }
+      ],
+      "scopeId": "node",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-node-components"
+      ],
+      "sourceIds": [
+        "src-43",
+        "src-15",
+        "src-45",
+        "src-24"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ],
+      "parent": {
+        "diagramId": "containers"
+      },
+      "groups": [
+        {
+          "id": "node-components-group-0",
+          "label": "Node process",
+          "memberIds": [
+            "nd-engine",
+            "nd-handles",
+            "nd-backup",
+            "nd-usage",
+            "nd-outbox",
+            "nd-maintain"
+          ],
+          "status": "existing"
+        }
+      ]
+    },
+    {
+      "id": "query-flow",
+      "kind": "dynamic",
+      "title": "Litefleet: bounded query flow",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "tenant"
+        },
+        {
+          "elementId": "ingress"
+        },
+        {
+          "elementId": "gateway"
+        },
+        {
+          "elementId": "control"
+        },
+        {
+          "elementId": "registry"
+        },
+        {
+          "elementId": "node"
+        },
+        {
+          "elementId": "tenant-files"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "tenant-edge",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "balance",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "resolve",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "sql-registry",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "forward",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "sql-tenant",
+          "displayNumber": 6
+        }
+      ],
+      "scopeId": "litefleet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-query-flow"
+      ],
+      "sourceIds": [
+        "src-16",
+        "src-10",
+        "src-11",
+        "src-22"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ],
+      "parent": {
+        "diagramId": "containers"
+      },
+      "scenario": {
+        "id": "query-flow-scenario",
+        "kind": "sequence",
+        "children": [
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-1",
+            "relationshipId": "tenant-edge",
+            "direction": "forward",
+            "label": "Tenant sends a read (bearer API key)."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-2",
+            "relationshipId": "balance",
+            "direction": "forward",
+            "label": "HAProxy selects a healthy gateway."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-3",
+            "relationshipId": "resolve",
+            "direction": "forward",
+            "label": "Cache miss only: resolve key and database; a live cache hit skips this exchange."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-4",
+            "relationshipId": "sql-registry",
+            "direction": "forward",
+            "label": "On remote lookup, control reads indexed registry."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-5",
+            "relationshipId": "resolve",
+            "direction": "reverse",
+            "label": "Control returns route; gateway caches it."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-6",
+            "relationshipId": "forward",
+            "direction": "forward",
+            "label": "Gateway posts query and epoch to owning node."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-7",
+            "relationshipId": "sql-tenant",
+            "direction": "forward",
+            "label": "Node checks epoch, admits work and runs bounded read."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-8",
+            "relationshipId": "forward",
+            "direction": "reverse",
+            "label": "Node streams capped rows; errors after start abort the stream."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-9",
+            "relationshipId": "balance",
+            "direction": "reverse",
+            "label": "Gateway transcodes rows through HAProxy."
+          },
+          {
+            "kind": "interaction",
+            "id": "query-flow-step-10",
+            "relationshipId": "tenant-edge",
+            "direction": "reverse",
+            "label": "Tenant receives rows and truncated flag, or an error / incomplete stream."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usage-flow",
+      "kind": "dynamic",
+      "title": "Litefleet: usage delivery and spill",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "nd-engine"
+        },
+        {
+          "elementId": "nd-usage"
+        },
+        {
+          "elementId": "nd-outbox"
+        },
+        {
+          "elementId": "node-state"
+        },
+        {
+          "elementId": "meter"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "n-engine-usage",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "n-queue-meter",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "n-usage-outbox",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "n-outbox-state",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "n-sweep-meter",
+          "displayNumber": 5
+        }
+      ],
+      "scopeId": "node",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-usage-flow"
+      ],
+      "sourceIds": [
+        "src-15",
+        "src-24",
+        "src-37",
+        "src-48"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "lab-deployment",
+          "label": "Litefleet: Compose lab deployment"
+        }
+      ],
+      "parent": {
+        "diagramId": "node-components"
+      },
+      "scenario": {
+        "id": "usage-flow-scenario",
+        "kind": "sequence",
+        "children": [
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-1",
+            "relationshipId": "n-engine-usage",
+            "direction": "forward",
+            "label": "Completed read / committed write produces usage event(s)."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-2",
+            "relationshipId": "n-queue-meter",
+            "direction": "forward",
+            "label": "Normal path: shippers send queued batches, up to 100."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-3",
+            "relationshipId": "n-queue-meter",
+            "direction": "reverse",
+            "label": "Partner accepts; duplicate event IDs are ignored in its process memory."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-4",
+            "relationshipId": "n-usage-outbox",
+            "direction": "forward",
+            "label": "Alternative: queue full after 20 ms, send failure, or shutdown spill."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-5",
+            "relationshipId": "n-outbox-state",
+            "direction": "forward",
+            "label": "Store events with INSERT OR IGNORE."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-6",
+            "relationshipId": "n-outbox-state",
+            "direction": "reverse",
+            "label": "Every 5 seconds, sweeper reads up to 500 stored events."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-7",
+            "relationshipId": "n-sweep-meter",
+            "direction": "forward",
+            "label": "Sweeper sends batches; failure leaves rows for next sweep."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-8",
+            "relationshipId": "n-sweep-meter",
+            "direction": "reverse",
+            "label": "On success, partner replies."
+          },
+          {
+            "kind": "interaction",
+            "id": "usage-flow-step-9",
+            "relationshipId": "n-outbox-state",
+            "direction": "forward",
+            "label": "Delete only the delivered outbox rows."
+          }
+        ]
+      }
+    },
+    {
+      "id": "lab-deployment",
+      "kind": "deployment",
+      "title": "Litefleet: Compose lab deployment",
+      "status": "existing",
+      "nodes": [
+        {
+          "elementId": "lab"
+        },
+        {
+          "elementId": "gateway-a"
+        },
+        {
+          "elementId": "gateway-b"
+        },
+        {
+          "elementId": "gateway-c"
+        },
+        {
+          "elementId": "node-a"
+        },
+        {
+          "elementId": "node-b"
+        },
+        {
+          "elementId": "control-run"
+        },
+        {
+          "elementId": "postgres-run"
+        },
+        {
+          "elementId": "haproxy-run"
+        },
+        {
+          "elementId": "blob-run"
+        },
+        {
+          "elementId": "meter-run"
+        },
+        {
+          "elementId": "toxiproxy"
+        },
+        {
+          "elementId": "prometheus"
+        },
+        {
+          "elementId": "exporter"
+        },
+        {
+          "elementId": "pgdata"
+        },
+        {
+          "elementId": "node-a-data"
+        },
+        {
+          "elementId": "node-b-data"
+        },
+        {
+          "elementId": "blobs"
+        },
+        {
+          "elementId": "migrate"
+        },
+        {
+          "elementId": "purger"
+        },
+        {
+          "elementId": "seedgen"
+        },
+        {
+          "elementId": "loadgen"
+        },
+        {
+          "elementId": "report"
+        },
+        {
+          "elementId": "harness"
+        },
+        {
+          "elementId": "results"
+        }
+      ],
+      "edges": [
+        {
+          "relationshipId": "d-lb-gateway-a",
+          "displayNumber": 1
+        },
+        {
+          "relationshipId": "d-gateway-a-proxy",
+          "displayNumber": 2
+        },
+        {
+          "relationshipId": "d-lb-gateway-b",
+          "displayNumber": 3
+        },
+        {
+          "relationshipId": "d-gateway-b-proxy",
+          "displayNumber": 4
+        },
+        {
+          "relationshipId": "d-lb-gateway-c",
+          "displayNumber": 5
+        },
+        {
+          "relationshipId": "d-gateway-c-proxy",
+          "displayNumber": 6
+        },
+        {
+          "relationshipId": "d-proxy-control",
+          "displayNumber": 7
+        },
+        {
+          "relationshipId": "d-proxy-node-a",
+          "displayNumber": 8
+        },
+        {
+          "relationshipId": "d-proxy-node-b",
+          "displayNumber": 9
+        },
+        {
+          "relationshipId": "d-proxy-blobstore",
+          "displayNumber": 10
+        },
+        {
+          "relationshipId": "d-proxy-metering",
+          "displayNumber": 11
+        },
+        {
+          "relationshipId": "d-node-a-partners",
+          "displayNumber": 12
+        },
+        {
+          "relationshipId": "d-control-node-a",
+          "displayNumber": 13
+        },
+        {
+          "relationshipId": "d-node-a-hb",
+          "displayNumber": 14
+        },
+        {
+          "relationshipId": "d-node-a-disk",
+          "displayNumber": 15
+        },
+        {
+          "relationshipId": "d-node-b-partners",
+          "displayNumber": 16
+        },
+        {
+          "relationshipId": "d-control-node-b",
+          "displayNumber": 17
+        },
+        {
+          "relationshipId": "d-node-b-hb",
+          "displayNumber": 18
+        },
+        {
+          "relationshipId": "d-node-b-disk",
+          "displayNumber": 19
+        },
+        {
+          "relationshipId": "d-control-pg",
+          "displayNumber": 20
+        },
+        {
+          "relationshipId": "d-pg-volume",
+          "displayNumber": 21
+        },
+        {
+          "relationshipId": "d-blob-volume",
+          "displayNumber": 22
+        },
+        {
+          "relationshipId": "d-exporter-pg",
+          "displayNumber": 23
+        },
+        {
+          "relationshipId": "d-scrape-gateway-a",
+          "displayNumber": 24
+        },
+        {
+          "relationshipId": "d-scrape-gateway-b",
+          "displayNumber": 25
+        },
+        {
+          "relationshipId": "d-scrape-gateway-c",
+          "displayNumber": 26
+        },
+        {
+          "relationshipId": "d-scrape-control-run",
+          "displayNumber": 27
+        },
+        {
+          "relationshipId": "d-scrape-node-a",
+          "displayNumber": 28
+        },
+        {
+          "relationshipId": "d-scrape-node-b",
+          "displayNumber": 29
+        },
+        {
+          "relationshipId": "d-scrape-haproxy-run",
+          "displayNumber": 30
+        },
+        {
+          "relationshipId": "d-scrape-blob-run",
+          "displayNumber": 31
+        },
+        {
+          "relationshipId": "d-scrape-meter-run",
+          "displayNumber": 32
+        },
+        {
+          "relationshipId": "d-scrape-toxiproxy",
+          "displayNumber": 33
+        },
+        {
+          "relationshipId": "d-scrape-exporter",
+          "displayNumber": 34
+        },
+        {
+          "relationshipId": "d-migrate-pg",
+          "displayNumber": 35
+        },
+        {
+          "relationshipId": "d-purger-pg",
+          "displayNumber": 36
+        },
+        {
+          "relationshipId": "d-seedgen-pg",
+          "displayNumber": 37
+        },
+        {
+          "relationshipId": "d-seed-node-a",
+          "displayNumber": 38
+        },
+        {
+          "relationshipId": "d-report-node-a",
+          "displayNumber": 39
+        },
+        {
+          "relationshipId": "d-seed-node-b",
+          "displayNumber": 40
+        },
+        {
+          "relationshipId": "d-report-node-b",
+          "displayNumber": 41
+        },
+        {
+          "relationshipId": "d-load-edge",
+          "displayNumber": 42
+        },
+        {
+          "relationshipId": "d-seedgen-results",
+          "displayNumber": 43
+        },
+        {
+          "relationshipId": "d-loadgen-results",
+          "displayNumber": 44
+        },
+        {
+          "relationshipId": "d-report-results",
+          "displayNumber": 45
+        },
+        {
+          "relationshipId": "d-harness-tox",
+          "displayNumber": 46
+        },
+        {
+          "relationshipId": "d-harness-load",
+          "displayNumber": 47
+        },
+        {
+          "relationshipId": "d-harness-blob",
+          "displayNumber": 48
+        }
+      ],
+      "scopeId": "litefleet",
+      "legend": {
+        "title": "Key",
+        "entries": [
+          {
+            "id": "person",
+            "label": "Role",
+            "description": "A user or operator role.",
+            "swatch": {
+              "shape": "person",
+              "tone": "default",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "box",
+            "label": "Implemented element",
+            "description": "A logical responsibility or running lab resource.",
+            "swatch": {
+              "shape": "box",
+              "tone": "accent",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "external",
+            "label": "Outside the focused process",
+            "description": "A collaborator, store or partner fake.",
+            "swatch": {
+              "shape": "box",
+              "tone": "external",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "boundary",
+            "label": "Boundary",
+            "description": "System, process or lab grouping.",
+            "swatch": {
+              "shape": "boundary",
+              "tone": "muted",
+              "stroke": "solid"
+            }
+          },
+          {
+            "id": "edge",
+            "label": "Directed interaction",
+            "description": "Arrow points from caller/producer to dependency; reverse scenario steps are replies.",
+            "swatch": {
+              "shape": "line",
+              "tone": "default",
+              "stroke": "solid",
+              "arrow": "forward"
+            }
+          }
+        ]
+      },
+      "docIds": [
+        "doc-lab-deployment"
+      ],
+      "sourceIds": [
+        "src-100",
+        "src-101",
+        "src-102",
+        "src-19"
+      ],
+      "layout": {
+        "mode": "auto",
+        "direction": "LR"
+      },
+      "related": [
+        {
+          "diagramId": "query-flow",
+          "label": "Litefleet: bounded query flow"
+        },
+        {
+          "diagramId": "usage-flow",
+          "label": "Litefleet: usage delivery and spill"
+        }
+      ],
+      "parent": {
+        "diagramId": "containers"
+      },
+      "environment": "lab"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-context",
+      "title": "Litefleet: system context explained",
+      "plain": "Litefleet gives tenants named SQLite databases. A tenant application sends a bearer API key and SQL. The operator reads fleet usage and runs the lab. Backups go to a blob-store partner; usage batches go to a metering partner. Both partners are Go fakes in this Compose lab. This describes the hardened code, not a production service. Open Litefleet to see its containers. Each database has one owning node; there is no replication, move protocol or automatic failover.",
+      "ste": {
+        "text": "The tenant sends SQL to Litefleet. The operator reads usage. Litefleet sends backups and usage to two test partners. Each database stays on one node. Open Litefleet to see the containers.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-6",
+        "src-2",
+        "src-3",
+        "src-4"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-containers",
+      "title": "Litefleet: containers explained",
+      "plain": "HAProxy balances three gateways. Each gateway uses cached routes or asks control to authenticate the key and locate the owning node. Gateway-to-control and gateway-to-node traffic uses Toxiproxy in the lab. Control sends provision/drop commands directly to nodes; nodes send heartbeats directly to control every 5 seconds. Heartbeats populate the Postgres usage ledger independently of partner metering. Control uses distinct 8/2/1-connection OLTP/report/health pools. Each of two node agents owns tenant SQLite files and a separate _node.db outbox. Replicas are collapsed in this view; the deployment view names them. Open Gateway or Node agent for components.",
+      "ste": {
+        "text": "HAProxy sends each request to a gateway. The gateway finds the owning node. Control keeps routes in Postgres. Each node keeps tenant files and an outbox on its own volume. Open a gateway or node for more detail.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-6",
+        "src-10",
+        "src-11",
+        "src-22"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-gateway-components",
+      "title": "Litefleet: gateway components explained",
+      "plain": "All six responsibilities run in each gateway process. All requests except health and metrics pass through a 24-request shed limit; noncritical routes share 6 slots. Query and execute share a 2.9 second request deadline. The route cache serves entries for 60 seconds, refreshes after 10 seconds, and evicts stale epochs. Remote resolve uses the control breaker and bounded read retries; the usage-report client bypasses the breaker. The node client gets 2.5 seconds per attempt, retries reads only before a response begins, and streams rows by decoding and re-encoding them. It never repeats an uncertain write. A stale_epoch refusal can trigger re-resolve and resubmission because no SQL ran. A draining response is passed back with Retry-After, without retry. Streaming errors after headers abort the answer rather than report false success.",
+      "ste": {
+        "text": "These components run in one gateway process. The gateway limits load and request time. It can use a saved route. It retries some reads before the answer starts. It does not retry a write with an unknown result. A partial stream is an error.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-35",
+        "src-11",
+        "src-13",
+        "src-34"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-node-components",
+      "title": "Litefleet: node components explained",
+      "plain": "All six responsibilities run inside each node process. Admission checks epochs and limits work to two reads and one writer per database, four statements per tenant and sixteen per node. The engine uses a 2 second statement deadline and 250 ms pool wait. Queries stream with a 1000-row / approximately 1 MiB JSON cap and a truncated flag. Statements return connections on every path; the handle LRU has 128 entries and idle eviction. Backup takes a snapshot under a writer lock and uploads after releasing it. The usage queue has 1024 slots; overflow after 20 ms and failed sends go to usage_outbox in _node.db. The sweeper redelivers stored rows. Maintenance checkpoints WALs above 64 KiB or after idle time. SIGTERM rejects new work, waits for admitted work, closes handles and spills queued/stuck events. These measures do not make arbitrary crashes or disk failures lossless.",
+      "ste": {
+        "text": "Each node owns its database files. It limits concurrent statements and statement time. It releases the backup lock before upload. The queue stores overflow on disk. On a normal stop, the node saves pending usage. A crash can still lose events in memory.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-43",
+        "src-15",
+        "src-45",
+        "src-24"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-query-flow",
+      "title": "Litefleet: bounded query flow explained",
+      "plain": "The steps show a successful read with a conditional cache-miss lookup. A valid route cache hit skips steps 3\u20135; an older live entry may also start a background refresh. Reverse steps are replies on the same relationship, not additional API calls. Query/execute get 2.9 seconds overall, node attempts 2.5 seconds and node statements 2 seconds. Overload is refused with 429/503 and timeouts before streaming can return 504; failures after stream start cut the connection. Reads may retry transient failures only before answer start and within retry/deadline budgets. No uncertain write retry is shown. A stale_epoch refusal permits one re-resolve; draining is returned to the tenant.",
+      "ste": {
+        "text": "The gateway can use a saved route. Otherwise, it asks control. The node runs the read with a time limit. It sends a limited set of rows. If the stream fails, the tenant must treat the answer as incomplete.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-16",
+        "src-10",
+        "src-11",
+        "src-22"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-usage-flow",
+      "title": "Litefleet: usage delivery and spill explained",
+      "plain": "This walkthrough shows the normal path, then the alternative durable path, not two mandatory sends for each event. Completed reads emit an event; a committed execute emits one per statement. Four shippers deliver queued batches with a 2 second HTTP budget. Queue capacity is 1024 and enqueue wait is 20 ms; overflow and failed batches are stored. Every 5 seconds the sweeper reads at most 500 outbox rows, sends batches and deletes each batch only after success. SIGTERM spills pending events and waits up to 3 seconds for in-flight sends, saving stuck batches too. Redelivery can occur; the fake deduplicates by ID in memory. Abrupt process death can lose queued events, and disk write errors are logged, so this is not an exactly-once or crash-lossless guarantee. The independent heartbeat-to-registry ledger is shown in Containers.",
+      "ste": {
+        "text": "The node first tries to queue usage in memory. It stores overflow and failed sends in the outbox. A worker sends stored rows again. It deletes rows after success. A normal stop saves pending events. A sudden crash can lose events that are still in memory.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-15",
+        "src-24",
+        "src-37",
+        "src-48"
+      ],
+      "termIds": []
+    },
+    {
+      "id": "doc-lab-deployment",
+      "title": "Litefleet: Compose lab deployment explained",
+      "plain": "This is the actual Compose lab, not a production deployment recommendation. Three gateways share HAProxy; two nodes have distinct persistent volumes and cannot substitute for one another. The five Toxiproxy listeners forward gateway/control, gateway/node and node/partner traffic. Control-to-node lifecycle calls and node heartbeats bypass those listeners. Prometheus scrapes each configured target; postgres-exporter queries Postgres. pgdata and blobs persist; Prometheus uses ephemeral tmpfs. The jobs profile supplies a one-shot migrate/backfill/contract command. The maintenance profile runs the purger (enabled by lab/up.sh at this tag); lab tools seed files, apply load and use DuckDB over results and read-only node mounts. The host harness injects faults through Toxiproxy, fake admin modes and Docker, outside application code. Runtime instance nodes refer to the logical containers; volumes and tools are lab infrastructure, not new production services.",
+      "ste": {
+        "text": "The lab runs three gateways and two nodes. Each node has its own volume. The proxy adds network faults. Control sends lifecycle commands directly to nodes. Prometheus reads metrics. Optional jobs change the schema and purge old usage. Lab tools create load and read reports.",
+        "issue": "ASD-STE100 Issue 9",
+        "reviewStatus": "draft"
+      },
+      "sourceIds": [
+        "src-100",
+        "src-101",
+        "src-102",
+        "src-19"
+      ],
+      "termIds": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-1",
+      "title": "internal/api/handlers.go \u00b7 func (g *Gateway) Register",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L40",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: func (g *Gateway) Register; line 40. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-2",
+      "title": "Makefile \u00b7 verify:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/Makefile#L35",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/Makefile",
+      "notes": "Symbol/config selector: verify:; line 35. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-3",
+      "title": "cmd/node/main.go \u00b7 // Command node",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/main.go#L1",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "notes": "Symbol/config selector: // Command node; line 1. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-4",
+      "title": "cmd/blobstore/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/blobstore/main.go#L45",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/blobstore/main.go",
+      "notes": "Symbol/config selector: func main(); line 45. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-5",
+      "title": "cmd/metering/main.go \u00b7 func post",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/metering/main.go#L49",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/metering/main.go",
+      "notes": "Symbol/config selector: func post; line 49. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-6",
+      "title": "internal/api/handlers.go \u00b7 func (g *Gateway) usage",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L226",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: func (g *Gateway) usage; line 226. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-7",
+      "title": "internal/blob/client.go \u00b7 func (c *Client) Put",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/blob/client.go#L37",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/blob/client.go",
+      "notes": "Symbol/config selector: func (c *Client) Put; line 37. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-8",
+      "title": "internal/metering/client.go \u00b7 func (c *Client) Send",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/client.go#L33",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/client.go",
+      "notes": "Symbol/config selector: func (c *Client) Send; line 33. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-9",
+      "title": "deploy/haproxy.cfg \u00b7 backend gateways",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/haproxy.cfg#L18",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "notes": "Symbol/config selector: backend gateways; line 18. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-10",
+      "title": "cmd/gateway/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/gateway/main.go#L24",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "notes": "Symbol/config selector: func main(); line 24. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-11",
+      "title": "cmd/control/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/control/main.go#L27",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/control/main.go",
+      "notes": "Symbol/config selector: func main(); line 27. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-12",
+      "title": "internal/registry/registry.go \u00b7 type Registry struct",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/registry/registry.go#L34",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/registry/registry.go",
+      "notes": "Symbol/config selector: type Registry struct; line 34. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-13",
+      "title": "cmd/node/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/main.go#L42",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "notes": "Symbol/config selector: func main(); line 42. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-14",
+      "title": "internal/engine/handles.go \u00b7 func New(",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/handles.go#L100",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "notes": "Symbol/config selector: func New(; line 100. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-15",
+      "title": "cmd/node/main.go \u00b7 self, err := sql.Open",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/main.go#L49",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "notes": "Symbol/config selector: self, err := sql.Open; line 49. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-16",
+      "title": "internal/api/handlers.go \u00b7 func (g *Gateway) key",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L50",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: func (g *Gateway) key; line 50. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-17",
+      "title": "internal/routes/client.go \u00b7 func (c *Client) Resolve",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/routes/client.go#L70",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "notes": "Symbol/config selector: func (c *Client) Resolve; line 70. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-18",
+      "title": "internal/nodeclient/client.go \u00b7 func (c *Client) send",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/nodeclient/client.go#L110",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "notes": "Symbol/config selector: func (c *Client) send; line 110. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-19",
+      "title": "cmd/control/nodes.go \u00b7 func (n *nodeCommands) send",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/control/nodes.go#L43",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/control/nodes.go",
+      "notes": "Symbol/config selector: func (n *nodeCommands) send; line 43. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-20",
+      "title": "cmd/node/main.go \u00b7 func (n *node) heartbeats",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/main.go#L224",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "notes": "Symbol/config selector: func (n *node) heartbeats; line 224. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-21",
+      "title": "internal/backup/job.go \u00b7 func (j *Job) Backup",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/backup/job.go#L70",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "notes": "Symbol/config selector: func (j *Job) Backup; line 70. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-22",
+      "title": "internal/registry/registry.go \u00b7 func Open(",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/registry/registry.go#L48",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/registry/registry.go",
+      "notes": "Symbol/config selector: func Open(; line 48. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-23",
+      "title": "internal/engine/exec.go \u00b7 func (e *Engine) Query",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/exec.go#L130",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "notes": "Symbol/config selector: func (e *Engine) Query; line 130. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-24",
+      "title": "internal/metering/outbox.go \u00b7 func (o *Outbox) Add",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/outbox.go#L25",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/outbox.go",
+      "notes": "Symbol/config selector: func (o *Outbox) Add; line 25. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-25",
+      "title": "internal/api/handlers.go \u00b7 func (g *Gateway) query",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L89",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: func (g *Gateway) query; line 89. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-26",
+      "title": "internal/breaker/breaker.go \u00b7 type Breaker struct",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/breaker/breaker.go#L49",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/breaker/breaker.go",
+      "notes": "Symbol/config selector: type Breaker struct; line 49. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-27",
+      "title": "internal/nodeclient/client.go \u00b7 func (c *Client) Query",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/nodeclient/client.go#L48",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "notes": "Symbol/config selector: func (c *Client) Query; line 48. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-28",
+      "title": "internal/retry/retry.go \u00b7 func (p Policy) Do",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/retry/retry.go#L75",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/retry/retry.go",
+      "notes": "Symbol/config selector: func (p Policy) Do; line 75. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-29",
+      "title": "cmd/gateway/main.go \u00b7 limiter := shed.New",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/gateway/main.go#L40",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "notes": "Symbol/config selector: limiter := shed.New; line 40. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-30",
+      "title": "cmd/gateway/main.go \u00b7 limiter.Wrap(served)",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/gateway/main.go#L60",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "notes": "Symbol/config selector: limiter.Wrap(served); line 60. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-31",
+      "title": "internal/api/handlers.go \u00b7 g.Routes.Resolve",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L65",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: g.Routes.Resolve; line 65. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-32",
+      "title": "internal/routes/client.go \u00b7 func (c *Client) do(",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/routes/client.go#L164",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "notes": "Symbol/config selector: func (c *Client) do(; line 164. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-33",
+      "title": "internal/routes/client.go \u00b7 func (c *Client) doWith(",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/routes/client.go#L170",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "notes": "Symbol/config selector: func (c *Client) doWith(; line 170. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-34",
+      "title": "internal/routes/client.go \u00b7 c.resolve.Do",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/routes/client.go#L88",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "notes": "Symbol/config selector: c.resolve.Do; line 88. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-35",
+      "title": "internal/api/handlers.go \u00b7 rows.WriteTo(w)",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go#L120",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "notes": "Symbol/config selector: rows.WriteTo(w); line 120. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-36",
+      "title": "internal/nodeclient/client.go \u00b7 p.Do(ctx",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/nodeclient/client.go#L56",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "notes": "Symbol/config selector: p.Do(ctx; line 56. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-37",
+      "title": "internal/engine/admission.go \u00b7 func (e *Engine) acquire",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/admission.go#L67",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/admission.go",
+      "notes": "Symbol/config selector: func (e *Engine) acquire; line 67. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-38",
+      "title": "internal/engine/handles.go \u00b7 func (e *Engine) Handle",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/handles.go#L128",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "notes": "Symbol/config selector: func (e *Engine) Handle; line 128. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-39",
+      "title": "internal/metering/queue.go \u00b7 type Queue struct",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/queue.go#L40",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "notes": "Symbol/config selector: type Queue struct; line 40. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-40",
+      "title": "internal/metering/queue.go \u00b7 func (q *Queue) sweep",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/queue.go#L155",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "notes": "Symbol/config selector: func (q *Queue) sweep; line 155. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-41",
+      "title": "cmd/node/drain.go \u00b7 func (n *node) drainOnSignal",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/drain.go#L22",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/drain.go",
+      "notes": "Symbol/config selector: func (n *node) drainOnSignal; line 22. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-42",
+      "title": "internal/engine/exec.go \u00b7 h, err := e.Handle",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/exec.go#L137",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "notes": "Symbol/config selector: h, err := e.Handle; line 137. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-43",
+      "title": "internal/engine/handles.go \u00b7 func (e *Engine) open",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/handles.go#L170",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "notes": "Symbol/config selector: func (e *Engine) open; line 170. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-44",
+      "title": "internal/backup/job.go \u00b7 j.eng.Handle",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/backup/job.go#L72",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "notes": "Symbol/config selector: j.eng.Handle; line 72. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-45",
+      "title": "internal/backup/job.go \u00b7 j.blob.Put",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/backup/job.go#L85",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "notes": "Symbol/config selector: j.blob.Put; line 85. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-46",
+      "title": "internal/engine/exec.go \u00b7 func (e *Engine) emit",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/exec.go#L309",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "notes": "Symbol/config selector: func (e *Engine) emit; line 309. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-47",
+      "title": "internal/metering/queue.go \u00b7 q.outbox.Add",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/queue.go#L70",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "notes": "Symbol/config selector: q.outbox.Add; line 70. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-48",
+      "title": "internal/metering/queue.go \u00b7 err := q.client.Send(batch)",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/queue.go#L142",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "notes": "Symbol/config selector: err := q.client.Send(batch); line 142. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-49",
+      "title": "internal/engine/steady.go \u00b7 func (e *Engine) Maintain",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/steady.go#L34",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/internal/engine/steady.go",
+      "notes": "Symbol/config selector: func (e *Engine) Maintain; line 34. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-50",
+      "title": "cmd/node/drain.go \u00b7 n.usage.Spill",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/drain.go#L34",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/node/drain.go",
+      "notes": "Symbol/config selector: n.usage.Spill; line 34. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-51",
+      "title": "deploy/compose.yml \u00b7 name: litefleet",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L4",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector: name: litefleet; line 4. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-52",
+      "title": "deploy/compose.yml \u00b7   gateway-a:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L122",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   gateway-a:; line 122. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-53",
+      "title": "deploy/compose.yml \u00b7   gateway-b:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L127",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   gateway-b:; line 127. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-54",
+      "title": "deploy/compose.yml \u00b7   gateway-c:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L132",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   gateway-c:; line 132. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-55",
+      "title": "deploy/compose.yml \u00b7   node-a:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L98",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   node-a:; line 98. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-56",
+      "title": "deploy/compose.yml \u00b7   node-b:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L110",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   node-b:; line 110. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-57",
+      "title": "deploy/compose.yml \u00b7   control:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L63",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   control:; line 63. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-58",
+      "title": "deploy/compose.yml \u00b7   postgres:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L37",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   postgres:; line 37. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-59",
+      "title": "deploy/compose.yml \u00b7   haproxy:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L137",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   haproxy:; line 137. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-60",
+      "title": "deploy/compose.yml \u00b7   blobstore:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L150",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   blobstore:; line 150. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-61",
+      "title": "deploy/compose.yml \u00b7   metering:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L158",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   metering:; line 158. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-62",
+      "title": "deploy/compose.yml \u00b7   toxiproxy:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L143",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   toxiproxy:; line 143. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-63",
+      "title": "deploy/compose.yml \u00b7   prometheus:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L165",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   prometheus:; line 165. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-64",
+      "title": "deploy/compose.yml \u00b7   postgres-exporter:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L57",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   postgres-exporter:; line 57. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-65",
+      "title": "deploy/compose.yml \u00b7     volumes: [pgdata:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L50",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [pgdata:; line 50. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-66",
+      "title": "deploy/compose.yml \u00b7     volumes: [node-a-data:/data]",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L108",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [node-a-data:/data]; line 108. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-67",
+      "title": "deploy/compose.yml \u00b7     volumes: [node-b-data:/data]",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L120",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [node-b-data:/data]; line 120. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-68",
+      "title": "deploy/compose.yml \u00b7     volumes: [blobs:/blobs]",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L156",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [blobs:/blobs]; line 156. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-69",
+      "title": "deploy/compose.yml \u00b7   migrate:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L79",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   migrate:; line 79. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-70",
+      "title": "deploy/compose.yml \u00b7   purger:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L89",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   purger:; line 89. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-71",
+      "title": "deploy/compose.yml \u00b7   seedgen:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L173",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   seedgen:; line 173. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-72",
+      "title": "deploy/compose.yml \u00b7   loadgen:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L182",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   loadgen:; line 182. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-73",
+      "title": "deploy/compose.yml \u00b7   report:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L191",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:   report:; line 191. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-74",
+      "title": "deploy/compose.yml \u00b7     volumes: [../results:/results]",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L189",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [../results:/results]; line 189. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-75",
+      "title": "deploy/haproxy.cfg \u00b7     server gateway-a",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/haproxy.cfg#L41",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "notes": "Symbol/config selector:     server gateway-a; line 41. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-76",
+      "title": "deploy/compose.yml \u00b7     environment: { INSTANCE: gateway-a",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L124",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     environment: { INSTANCE: gateway-a; line 124. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-77",
+      "title": "deploy/haproxy.cfg \u00b7     server gateway-b",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/haproxy.cfg#L42",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "notes": "Symbol/config selector:     server gateway-b; line 42. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-78",
+      "title": "deploy/compose.yml \u00b7     environment: { INSTANCE: gateway-b",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L129",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     environment: { INSTANCE: gateway-b; line 129. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-79",
+      "title": "deploy/haproxy.cfg \u00b7     server gateway-c",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/haproxy.cfg#L43",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "notes": "Symbol/config selector:     server gateway-c; line 43. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-80",
+      "title": "deploy/compose.yml \u00b7     environment: { INSTANCE: gateway-c",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L134",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     environment: { INSTANCE: gateway-c; line 134. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-81",
+      "title": "deploy/toxiproxy.json \u00b7 \"name\": \"control\"",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json#L2",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "notes": "Symbol/config selector: \"name\": \"control\"; line 2. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-82",
+      "title": "deploy/toxiproxy.json \u00b7 \"name\": \"node-a\"",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json#L3",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "notes": "Symbol/config selector: \"name\": \"node-a\"; line 3. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-83",
+      "title": "deploy/toxiproxy.json \u00b7 \"name\": \"node-b\"",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json#L4",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "notes": "Symbol/config selector: \"name\": \"node-b\"; line 4. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-84",
+      "title": "deploy/toxiproxy.json \u00b7 \"name\": \"blobstore\"",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json#L5",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "notes": "Symbol/config selector: \"name\": \"blobstore\"; line 5. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-85",
+      "title": "deploy/toxiproxy.json \u00b7 \"name\": \"metering\"",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json#L6",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "notes": "Symbol/config selector: \"name\": \"metering\"; line 6. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-86",
+      "title": "deploy/compose.yml \u00b7       BLOBSTORE_URL:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L105",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:       BLOBSTORE_URL:; line 105. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-87",
+      "title": "deploy/compose.yml \u00b7     volumes: [blobs:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L156",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [blobs:; line 156. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-88",
+      "title": "deploy/compose.yml \u00b7       DATA_SOURCE_NAME:",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L60",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:       DATA_SOURCE_NAME:; line 60. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-89",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: gateway",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L8",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: gateway; line 8. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-90",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: control",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L14",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: control; line 14. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-91",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: node",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L17",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: node; line 17. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-92",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: haproxy",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L20",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: haproxy; line 20. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-93",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: blobstore",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L23",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: blobstore; line 23. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-94",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: metering",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L26",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: metering; line 26. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-95",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: toxiproxy",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L29",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: toxiproxy; line 29. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-96",
+      "title": "deploy/prometheus.yml \u00b7   - job_name: postgres",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml#L32",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "notes": "Symbol/config selector:   - job_name: postgres; line 32. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-97",
+      "title": "deploy/compose.yml \u00b7     volumes: [node-a-data:/nodes/node-a",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L179",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [node-a-data:/nodes/node-a; line 179. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-98",
+      "title": "deploy/compose.yml \u00b7     volumes: [../results:/results, ../lab:/lab:ro",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml#L197",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "notes": "Symbol/config selector:     volumes: [../results:/results, ../lab:/lab:ro; line 197. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-99",
+      "title": "cmd/loadgen/main.go \u00b7 func main()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/loadgen/main.go#L125",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/cmd/loadgen/main.go",
+      "notes": "Symbol/config selector: func main(); line 125. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-100",
+      "title": "lab/toxics.sh \u00b7 curl",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/lab/toxics.sh#L14",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/lab/toxics.sh",
+      "notes": "Symbol/config selector: curl; line 14. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-101",
+      "title": "lab/lib.sh \u00b7 compose()",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/lab/lib.sh#L18",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/lab/lib.sh",
+      "notes": "Symbol/config selector: compose(); line 18. Pinned as built, not the proposed plan."
+    },
+    {
+      "id": "src-102",
+      "title": "test/chaos/chaos_test.go \u00b7 /admin/mode",
+      "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/test/chaos/chaos_test.go#L224",
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "path": "books/release-it/project/test/chaos/chaos_test.go",
+      "notes": "Symbol/config selector: /admin/mode; line 224. Pinned as built, not the proposed plan."
+    }
+  ]
+}

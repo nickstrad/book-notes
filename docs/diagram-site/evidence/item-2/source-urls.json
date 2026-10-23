@@ -1,0 +1,126 @@
+[
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/Makefile",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/blobstore/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/control/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/control/nodes.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/gateway/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/loadgen/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/metering/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/drain.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/cmd/node/main.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/compose.yml",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/haproxy.cfg",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/prometheus.yml",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/deploy/toxiproxy.json",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/api/handlers.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/backup/job.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/blob/client.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/breaker/breaker.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/admission.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/exec.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/handles.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/engine/steady.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/client.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/outbox.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/metering/queue.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/nodeclient/client.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/registry/registry.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/retry/retry.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/internal/routes/client.go",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/lab/lib.sh",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/lab/toxics.sh",
+    "status": 200
+  },
+  {
+    "url": "https://github.com/nickstrad/book-notes/blob/936786399d7bab3ebbfa845b9a07df02b41ed363/books/release-it/project/test/chaos/chaos_test.go",
+    "status": 200
+  }
+]

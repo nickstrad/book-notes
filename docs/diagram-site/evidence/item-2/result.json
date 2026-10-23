@@ -1,0 +1,108 @@
+{
+  "item": 2,
+  "date": "2026-10-23",
+  "status": "complete",
+  "permissionProfile": "local build/checks; commit main; do not push",
+  "sourceRevision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+  "sourceTag": "release-it/v1-hardened",
+  "uniqueElements": 49,
+  "uniqueRelationships": 84,
+  "auditRecords": 133,
+  "sourceSelectors": 102,
+  "publicSourcePathsChecked": 31,
+  "sdkDiagnostics": [],
+  "lessonMapping": [
+    "L01",
+    "L02",
+    "L03",
+    "L04",
+    "L05",
+    "L06",
+    "L07",
+    "L08",
+    "L09",
+    "L10",
+    "L11",
+    "L12"
+  ],
+  "views": [
+    {
+      "id": "context",
+      "kind": "context",
+      "elements": 5,
+      "relationships": 4
+    },
+    {
+      "id": "containers",
+      "kind": "container",
+      "elements": 11,
+      "relationships": 12
+    },
+    {
+      "id": "gateway-components",
+      "kind": "component",
+      "elements": 9,
+      "relationships": 9
+    },
+    {
+      "id": "node-components",
+      "kind": "component",
+      "elements": 10,
+      "relationships": 11
+    },
+    {
+      "id": "query-flow",
+      "kind": "dynamic",
+      "elements": 7,
+      "relationships": 6
+    },
+    {
+      "id": "usage-flow",
+      "kind": "dynamic",
+      "elements": 5,
+      "relationships": 5
+    },
+    {
+      "id": "lab-deployment",
+      "kind": "deployment",
+      "elements": 25,
+      "relationships": 48
+    }
+  ],
+  "commands": [
+    {
+      "command": "cd pages && npm ci",
+      "runtime": "Node 22.23.2",
+      "exitCode": 0
+    },
+    {
+      "command": "cd pages && npm run check",
+      "exitCode": 0,
+      "unitTestsPassed": 58,
+      "chromiumTestsPassed": 22
+    },
+    {
+      "command": "cd pages && npx playwright test tests/litefleet.spec.ts -g 'all view screenshots'",
+      "exitCode": 0,
+      "chromiumTestsPassed": 2,
+      "reason": "refined captures after full check to reset page scroll and capture canvas separately"
+    }
+  ],
+  "screenshots": 49,
+  "viewports": [
+    [
+      1600,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "deviations": [
+    "Explicit brief uses main checkout instead of a new worktree."
+  ],
+  "catalogIntegration": "Item 4; item 2 uses a test-only catalog override.",
+  "independentReview": "Item 6; not performed here.",
+  "pushed": false
+}

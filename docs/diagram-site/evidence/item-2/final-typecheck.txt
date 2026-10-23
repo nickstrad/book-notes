@@ -1,0 +1,4 @@
+
+> book-notes-architecture-pages@0.0.0 typecheck
+> tsc -b
+

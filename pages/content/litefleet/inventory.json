@@ -1,0 +1,3068 @@
+{
+  "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+  "tag": "release-it/v1-hardened",
+  "records": [
+    {
+      "id": "tenant",
+      "type": "element",
+      "boundary": "system/role",
+      "protocol": "human role",
+      "sourceIds": [
+        "src-1"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context",
+        "containers",
+        "gateway-components",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "operator",
+      "type": "element",
+      "boundary": "system/role",
+      "protocol": "human role",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context",
+        "containers"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "litefleet",
+      "type": "element",
+      "boundary": "system/role",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-3"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "blob",
+      "type": "element",
+      "boundary": "external",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-4"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context",
+        "containers",
+        "node-components"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "meter",
+      "type": "element",
+      "boundary": "external",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-5"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context",
+        "containers",
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "ctx-tenant",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-1"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "ctx-ops",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-6"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "ctx-backup",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP PUT",
+      "sourceIds": [
+        "src-7"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "ctx-usage",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-8"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "context"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "ingress",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "HAProxy 3.2",
+      "sourceIds": [
+        "src-9"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "gateway",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "Go / net/http",
+      "sourceIds": [
+        "src-10"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L01",
+        "L07"
+      ]
+    },
+    {
+      "id": "control",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "Go / net/http",
+      "sourceIds": [
+        "src-11"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "gateway-components",
+        "query-flow"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "registry",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "PostgreSQL 17",
+      "sourceIds": [
+        "src-12"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L03",
+        "L06"
+      ]
+    },
+    {
+      "id": "node",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "Go / net/http",
+      "sourceIds": [
+        "src-13"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "gateway-components",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "tenant-files",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "SQLite / filesystem",
+      "sourceIds": [
+        "src-14"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "node-components",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L03"
+      ]
+    },
+    {
+      "id": "node-state",
+      "type": "element",
+      "boundary": "litefleet",
+      "protocol": "SQLite / filesystem",
+      "sourceIds": [
+        "src-15"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "tenant-edge",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-16"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "ops-edge",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-6"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "balance",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-9"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "resolve",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-17"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "forward",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-18"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L02",
+        "L04",
+        "L12"
+      ]
+    },
+    {
+      "id": "provision",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-19"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "heartbeat",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-20"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "node-backup",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP PUT / SQLite snapshot",
+      "sourceIds": [
+        "src-21"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "L06"
+      ]
+    },
+    {
+      "id": "node-meter",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-8"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "sql-registry",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL wire / SQL",
+      "sourceIds": [
+        "src-22"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L03",
+        "L06"
+      ]
+    },
+    {
+      "id": "sql-tenant",
+      "type": "relationship",
+      "boundary": "node-local storage",
+      "protocol": "SQLite / local file I/O",
+      "sourceIds": [
+        "src-23"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers",
+        "query-flow"
+      ],
+      "lessonIds": [
+        "L02",
+        "L03",
+        "L08"
+      ]
+    },
+    {
+      "id": "sql-state",
+      "type": "relationship",
+      "boundary": "node-local storage",
+      "protocol": "SQLite / local file I/O",
+      "sourceIds": [
+        "src-24"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "containers"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "gw-api",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-25"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "gw-routes",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-17"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "gw-breaker",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-26"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "gw-node",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-27"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02",
+        "L04",
+        "L12"
+      ]
+    },
+    {
+      "id": "gw-retry",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-28"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L04"
+      ]
+    },
+    {
+      "id": "gw-shed",
+      "type": "element",
+      "boundary": "gateway",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-29"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L01",
+        "L07"
+      ]
+    },
+    {
+      "id": "g-tenant-shed",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-30"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L01",
+        "L07"
+      ]
+    },
+    {
+      "id": "g-shed-api",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-30"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L01",
+        "L07"
+      ]
+    },
+    {
+      "id": "g-api-route",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-31"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "g-route-breaker",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-32"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "g-breaker-control",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-33"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "g-route-retry",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-34"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L05"
+      ]
+    },
+    {
+      "id": "g-api-node",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-35"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02"
+      ]
+    },
+    {
+      "id": "g-node-retry",
+      "type": "relationship",
+      "boundary": "gateway process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-36"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02",
+        "L04",
+        "L12"
+      ]
+    },
+    {
+      "id": "g-client-node",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-18"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "gateway-components"
+      ],
+      "lessonIds": [
+        "L02",
+        "L04",
+        "L12"
+      ]
+    },
+    {
+      "id": "nd-engine",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-37"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L06"
+      ]
+    },
+    {
+      "id": "nd-handles",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-38"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L03"
+      ]
+    },
+    {
+      "id": "nd-backup",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-21"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L06"
+      ]
+    },
+    {
+      "id": "nd-usage",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-39"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "nd-outbox",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-40"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "nd-maintain",
+      "type": "element",
+      "boundary": "node",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-41"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L09",
+        "L12"
+      ]
+    },
+    {
+      "id": "n-engine-handles",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-42"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L02",
+        "L03",
+        "L08"
+      ]
+    },
+    {
+      "id": "n-handles-files",
+      "type": "relationship",
+      "boundary": "node process / dependency",
+      "protocol": "SQLite / file I/O",
+      "sourceIds": [
+        "src-43"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L03"
+      ]
+    },
+    {
+      "id": "n-backup-handles",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-44"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L06"
+      ]
+    },
+    {
+      "id": "n-backup-blob",
+      "type": "relationship",
+      "boundary": "node process / dependency",
+      "protocol": "HTTP PUT / SQLite snapshot",
+      "sourceIds": [
+        "src-45"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L06"
+      ]
+    },
+    {
+      "id": "n-engine-usage",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-46"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L02",
+        "L03",
+        "L08"
+      ]
+    },
+    {
+      "id": "n-usage-outbox",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-47"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "n-outbox-state",
+      "type": "relationship",
+      "boundary": "node process / dependency",
+      "protocol": "SQLite / file I/O",
+      "sourceIds": [
+        "src-24"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "n-queue-meter",
+      "type": "relationship",
+      "boundary": "node process / dependency",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-48"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "n-sweep-meter",
+      "type": "relationship",
+      "boundary": "node process / dependency",
+      "protocol": "HTTP/JSON",
+      "sourceIds": [
+        "src-40"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "lessonIds": [
+        "L09"
+      ]
+    },
+    {
+      "id": "n-maintain-handles",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-49"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L10"
+      ]
+    },
+    {
+      "id": "n-drain-queue",
+      "type": "relationship",
+      "boundary": "node process",
+      "protocol": "Go call",
+      "sourceIds": [
+        "src-50"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "node-components"
+      ],
+      "lessonIds": [
+        "L09",
+        "L12"
+      ]
+    },
+    {
+      "id": "lab",
+      "type": "element",
+      "boundary": "system/role",
+      "protocol": "Docker Compose",
+      "sourceIds": [
+        "src-51"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "gateway-a",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-52"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "gateway-b",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-53"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "gateway-c",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-54"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "node-a",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-55"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "node-b",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-56"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "control-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-57"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "postgres-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-58"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "haproxy-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-59"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "blob-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-60"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "meter-run",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go",
+      "sourceIds": [
+        "src-61"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "toxiproxy",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Toxiproxy 2.12",
+      "sourceIds": [
+        "src-62"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "prometheus",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Prometheus 3.7",
+      "sourceIds": [
+        "src-63"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "exporter",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "postgres-exporter 0.18.1",
+      "sourceIds": [
+        "src-64"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "pgdata",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Docker named volume",
+      "sourceIds": [
+        "src-65"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "node-a-data",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Docker named volume",
+      "sourceIds": [
+        "src-66"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "node-b-data",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Docker named volume",
+      "sourceIds": [
+        "src-67"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "blobs",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Docker named volume",
+      "sourceIds": [
+        "src-68"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "migrate",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go / optional job",
+      "sourceIds": [
+        "src-69"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "purger",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go / optional sidecar",
+      "sourceIds": [
+        "src-70"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "seedgen",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go / one-shot lab tool",
+      "sourceIds": [
+        "src-71"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "loadgen",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Go / one-shot lab tool",
+      "sourceIds": [
+        "src-72"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "report",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "DuckDB / lab tool",
+      "sourceIds": [
+        "src-73"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "harness",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Shell / Go / Docker CLI",
+      "sourceIds": [
+        "src-2"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "results",
+      "type": "element",
+      "boundary": "lab",
+      "protocol": "Host filesystem",
+      "sourceIds": [
+        "src-74"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-lb-gateway-a",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8080",
+      "sourceIds": [
+        "src-75"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "d-gateway-a-proxy",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP over TCP proxies",
+      "sourceIds": [
+        "src-76"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-lb-gateway-b",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8080",
+      "sourceIds": [
+        "src-77"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "d-gateway-b-proxy",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP over TCP proxies",
+      "sourceIds": [
+        "src-78"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-lb-gateway-c",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8080",
+      "sourceIds": [
+        "src-79"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "d-gateway-c-proxy",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP over TCP proxies",
+      "sourceIds": [
+        "src-80"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-proxy-control",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "TCP / HTTP",
+      "sourceIds": [
+        "src-81"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-proxy-node-a",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "TCP / HTTP",
+      "sourceIds": [
+        "src-82"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-proxy-node-b",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "TCP / HTTP",
+      "sourceIds": [
+        "src-83"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-proxy-blobstore",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "TCP / HTTP",
+      "sourceIds": [
+        "src-84"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-proxy-metering",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "TCP / HTTP",
+      "sourceIds": [
+        "src-85"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-node-a-partners",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP over TCP proxies",
+      "sourceIds": [
+        "src-86"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-control-node-a",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8070",
+      "sourceIds": [
+        "src-19"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-node-a-hb",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8090",
+      "sourceIds": [
+        "src-20"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "d-node-a-disk",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-66"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-node-b-partners",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP over TCP proxies",
+      "sourceIds": [
+        "src-86"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-control-node-b",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8070",
+      "sourceIds": [
+        "src-19"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-node-b-hb",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8090",
+      "sourceIds": [
+        "src-20"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L07"
+      ]
+    },
+    {
+      "id": "d-node-b-disk",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-67"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-control-pg",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL :5432",
+      "sourceIds": [
+        "src-22"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L03",
+        "L06"
+      ]
+    },
+    {
+      "id": "d-pg-volume",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-65"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-blob-volume",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-87"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-exporter-pg",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL :5432",
+      "sourceIds": [
+        "src-88"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-scrape-gateway-a",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-89"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-gateway-b",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-89"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-gateway-c",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-89"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-control-run",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-90"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-node-a",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-91"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-node-b",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-91"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-haproxy-run",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-92"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-blob-run",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-93"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-meter-run",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-94"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-toxiproxy",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-95"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-scrape-exporter",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP / Prometheus text",
+      "sourceIds": [
+        "src-96"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L01"
+      ]
+    },
+    {
+      "id": "d-migrate-pg",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL :5432",
+      "sourceIds": [
+        "src-69"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-purger-pg",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL :5432",
+      "sourceIds": [
+        "src-70"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-seedgen-pg",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "PostgreSQL :5432",
+      "sourceIds": [
+        "src-71"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-seed-node-a",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-97"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-report-node-a",
+      "type": "relationship",
+      "boundary": "read-only volume mount",
+      "protocol": "DuckDB SQLite scanner",
+      "sourceIds": [
+        "src-98"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-seed-node-b",
+      "type": "relationship",
+      "boundary": "volume mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-97"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-report-node-b",
+      "type": "relationship",
+      "boundary": "read-only volume mount",
+      "protocol": "DuckDB SQLite scanner",
+      "sourceIds": [
+        "src-98"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-load-edge",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP :8080",
+      "sourceIds": [
+        "src-99"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-seedgen-results",
+      "type": "relationship",
+      "boundary": "bind mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-71"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-loadgen-results",
+      "type": "relationship",
+      "boundary": "bind mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-72"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-report-results",
+      "type": "relationship",
+      "boundary": "bind mount",
+      "protocol": "Local file I/O",
+      "sourceIds": [
+        "src-73"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-harness-tox",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP admin :8474",
+      "sourceIds": [
+        "src-100"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L11"
+      ]
+    },
+    {
+      "id": "d-harness-load",
+      "type": "relationship",
+      "boundary": "host / Docker",
+      "protocol": "Docker Compose CLI",
+      "sourceIds": [
+        "src-101"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "d-harness-blob",
+      "type": "relationship",
+      "boundary": "process",
+      "protocol": "HTTP admin",
+      "sourceIds": [
+        "src-102"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "views": [
+        "lab-deployment"
+      ],
+      "lessonIds": [
+        "L11"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "src-1",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "func (g *Gateway) Register",
+      "line": 40,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (g *Gateway) Register(mux *http.ServeMux) {"
+    },
+    {
+      "id": "src-2",
+      "path": "books/release-it/project/Makefile",
+      "symbol": "verify:",
+      "line": 35,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "verify:"
+    },
+    {
+      "id": "src-3",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "symbol": "// Command node",
+      "line": 1,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "// Command node is a litefleet node agent: it owns a set of tenant SQLite"
+    },
+    {
+      "id": "src-4",
+      "path": "books/release-it/project/cmd/blobstore/main.go",
+      "symbol": "func main()",
+      "line": 45,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-5",
+      "path": "books/release-it/project/cmd/metering/main.go",
+      "symbol": "func post",
+      "line": 49,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func post(w http.ResponseWriter, r *http.Request) {"
+    },
+    {
+      "id": "src-6",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "func (g *Gateway) usage",
+      "line": 226,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (g *Gateway) usage(w http.ResponseWriter, r *http.Request) {"
+    },
+    {
+      "id": "src-7",
+      "path": "books/release-it/project/internal/blob/client.go",
+      "symbol": "func (c *Client) Put",
+      "line": 37,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) Put(dbID string, gen int, path string) (_ *PutResult, err error) {"
+    },
+    {
+      "id": "src-8",
+      "path": "books/release-it/project/internal/metering/client.go",
+      "symbol": "func (c *Client) Send",
+      "line": 33,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) Send(events []wire.UsageEvent) (err error) {"
+    },
+    {
+      "id": "src-9",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "symbol": "backend gateways",
+      "line": 18,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "default_backend gateways"
+    },
+    {
+      "id": "src-10",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "symbol": "func main()",
+      "line": 24,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-11",
+      "path": "books/release-it/project/cmd/control/main.go",
+      "symbol": "func main()",
+      "line": 27,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-12",
+      "path": "books/release-it/project/internal/registry/registry.go",
+      "symbol": "type Registry struct",
+      "line": 34,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "type Registry struct {"
+    },
+    {
+      "id": "src-13",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "symbol": "func main()",
+      "line": 42,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-14",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "symbol": "func New(",
+      "line": 100,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func New(dir string, usage Recorder) (*Engine, error) {"
+    },
+    {
+      "id": "src-15",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "symbol": "self, err := sql.Open",
+      "line": 49,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "self, err := sql.Open(\"sqlite3\", \"file:\"+filepath.Join(n.data, \"_node.db\")+\"?_pragma=busy_timeout(5000)&_pragma=journal_mode(wal)\")"
+    },
+    {
+      "id": "src-16",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "func (g *Gateway) key",
+      "line": 50,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (g *Gateway) key(w http.ResponseWriter, r *http.Request) (string, bool) {"
+    },
+    {
+      "id": "src-17",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "symbol": "func (c *Client) Resolve",
+      "line": 70,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) Resolve(ctx context.Context, apiKey, dbName string) (wire.Route, error) {"
+    },
+    {
+      "id": "src-18",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "symbol": "func (c *Client) send",
+      "line": 110,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) send(ctx context.Context, rt wire.Route, op string, body []byte) (_ *http.Response, err error) {"
+    },
+    {
+      "id": "src-19",
+      "path": "books/release-it/project/cmd/control/nodes.go",
+      "symbol": "func (n *nodeCommands) send",
+      "line": 43,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (n *nodeCommands) send(node, method, path string, body []byte) (err error) {"
+    },
+    {
+      "id": "src-20",
+      "path": "books/release-it/project/cmd/node/main.go",
+      "symbol": "func (n *node) heartbeats",
+      "line": 224,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (n *node) heartbeats(controlURL string) {"
+    },
+    {
+      "id": "src-21",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "symbol": "func (j *Job) Backup",
+      "line": 70,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (j *Job) Backup(id string) (int, error) {"
+    },
+    {
+      "id": "src-22",
+      "path": "books/release-it/project/internal/registry/registry.go",
+      "symbol": "func Open(",
+      "line": 48,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func Open(dsn string) (*Registry, error) {"
+    },
+    {
+      "id": "src-23",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "symbol": "func (e *Engine) Query",
+      "line": 130,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) Query(ctx context.Context, id string, epoch int, req wire.QueryRequest, start func() io.Writer) (started bool, err error) {"
+    },
+    {
+      "id": "src-24",
+      "path": "books/release-it/project/internal/metering/outbox.go",
+      "symbol": "func (o *Outbox) Add",
+      "line": 25,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (o *Outbox) Add(events []wire.UsageEvent) error {"
+    },
+    {
+      "id": "src-25",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "func (g *Gateway) query",
+      "line": 89,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (g *Gateway) query(w http.ResponseWriter, r *http.Request) {"
+    },
+    {
+      "id": "src-26",
+      "path": "books/release-it/project/internal/breaker/breaker.go",
+      "symbol": "type Breaker struct",
+      "line": 49,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "type Breaker struct {"
+    },
+    {
+      "id": "src-27",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "symbol": "func (c *Client) Query",
+      "line": 48,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) Query(ctx context.Context, rt wire.Route, req wire.QueryRequest) (*Rows, error) {"
+    },
+    {
+      "id": "src-28",
+      "path": "books/release-it/project/internal/retry/retry.go",
+      "symbol": "func (p Policy) Do",
+      "line": 75,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (p Policy) Do(ctx context.Context, retryable func(error) bool, fn func(context.Context) error) error {"
+    },
+    {
+      "id": "src-29",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "symbol": "limiter := shed.New",
+      "line": 40,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "limiter := shed.New(limit, func(r *http.Request) bool {"
+    },
+    {
+      "id": "src-30",
+      "path": "books/release-it/project/cmd/gateway/main.go",
+      "symbol": "limiter.Wrap(served)",
+      "line": 60,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "srv := httpx.NewServer(addr, httpx.Logged(limiter.Wrap(served)))"
+    },
+    {
+      "id": "src-31",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "g.Routes.Resolve",
+      "line": 65,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "rt, err := g.Routes.Resolve(r.Context(), key, r.PathValue(\"name\"))"
+    },
+    {
+      "id": "src-32",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "symbol": "func (c *Client) do(",
+      "line": 164,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) do(ctx context.Context, method, path, apiKey string, body []byte, out any) error {"
+    },
+    {
+      "id": "src-33",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "symbol": "func (c *Client) doWith(",
+      "line": 170,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (c *Client) doWith(ctx context.Context, client *http.Client, method, path, apiKey string, body []byte, out any) (err error) {"
+    },
+    {
+      "id": "src-34",
+      "path": "books/release-it/project/internal/routes/client.go",
+      "symbol": "c.resolve.Do",
+      "line": 88,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "err := c.resolve.Do(ctx, retryable, func(ctx context.Context) error {"
+    },
+    {
+      "id": "src-35",
+      "path": "books/release-it/project/internal/api/handlers.go",
+      "symbol": "rows.WriteTo(w)",
+      "line": 120,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "if _, err := rows.WriteTo(w); err != nil {"
+    },
+    {
+      "id": "src-36",
+      "path": "books/release-it/project/internal/nodeclient/client.go",
+      "symbol": "p.Do(ctx",
+      "line": 56,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "err = p.Do(ctx, transient, func(ctx context.Context) error {"
+    },
+    {
+      "id": "src-37",
+      "path": "books/release-it/project/internal/engine/admission.go",
+      "symbol": "func (e *Engine) acquire",
+      "line": 67,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) acquire(ctx context.Context, h *Handle, write bool) (func(), error) {"
+    },
+    {
+      "id": "src-38",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "symbol": "func (e *Engine) Handle",
+      "line": 128,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) Handle(id string) (*Handle, error) {"
+    },
+    {
+      "id": "src-39",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "symbol": "type Queue struct",
+      "line": 40,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "type Queue struct {"
+    },
+    {
+      "id": "src-40",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "symbol": "func (q *Queue) sweep",
+      "line": 155,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (q *Queue) sweep() {"
+    },
+    {
+      "id": "src-41",
+      "path": "books/release-it/project/cmd/node/drain.go",
+      "symbol": "func (n *node) drainOnSignal",
+      "line": 22,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (n *node) drainOnSignal(srv *http.Server, limiter *shed.Limiter) {"
+    },
+    {
+      "id": "src-42",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "symbol": "h, err := e.Handle",
+      "line": 137,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "h, err := e.Handle(id)"
+    },
+    {
+      "id": "src-43",
+      "path": "books/release-it/project/internal/engine/handles.go",
+      "symbol": "func (e *Engine) open",
+      "line": 170,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) openHandle(id string) (*Handle, error) {"
+    },
+    {
+      "id": "src-44",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "symbol": "j.eng.Handle",
+      "line": 72,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "h, err := j.eng.Handle(id)"
+    },
+    {
+      "id": "src-45",
+      "path": "books/release-it/project/internal/backup/job.go",
+      "symbol": "j.blob.Put",
+      "line": 85,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "if _, err := j.blob.Put(id, gen, tmp); err != nil {"
+    },
+    {
+      "id": "src-46",
+      "path": "books/release-it/project/internal/engine/exec.go",
+      "symbol": "func (e *Engine) emit",
+      "line": 309,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) emit(h *Handle, kind string, rows, bytes int64) {"
+    },
+    {
+      "id": "src-47",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "symbol": "q.outbox.Add",
+      "line": 70,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "if err := q.outbox.Add([]wire.UsageEvent{ev}); err != nil {"
+    },
+    {
+      "id": "src-48",
+      "path": "books/release-it/project/internal/metering/queue.go",
+      "symbol": "err := q.client.Send(batch)",
+      "line": 142,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "err := q.client.Send(batch)"
+    },
+    {
+      "id": "src-49",
+      "path": "books/release-it/project/internal/engine/steady.go",
+      "symbol": "func (e *Engine) Maintain",
+      "line": 34,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func (e *Engine) Maintain() {"
+    },
+    {
+      "id": "src-50",
+      "path": "books/release-it/project/cmd/node/drain.go",
+      "symbol": "n.usage.Spill",
+      "line": 34,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "n.usage.Spill(3 * time.Second)"
+    },
+    {
+      "id": "src-51",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "name: litefleet",
+      "line": 4,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "name: litefleet"
+    },
+    {
+      "id": "src-52",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  gateway-a:",
+      "line": 122,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "gateway-a:"
+    },
+    {
+      "id": "src-53",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  gateway-b:",
+      "line": 127,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "gateway-b:"
+    },
+    {
+      "id": "src-54",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  gateway-c:",
+      "line": 132,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "gateway-c:"
+    },
+    {
+      "id": "src-55",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  node-a:",
+      "line": 98,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "node-a:"
+    },
+    {
+      "id": "src-56",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  node-b:",
+      "line": 110,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "node-b:"
+    },
+    {
+      "id": "src-57",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  control:",
+      "line": 63,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "control:"
+    },
+    {
+      "id": "src-58",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  postgres:",
+      "line": 37,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "postgres:"
+    },
+    {
+      "id": "src-59",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  haproxy:",
+      "line": 137,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "haproxy:"
+    },
+    {
+      "id": "src-60",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  blobstore:",
+      "line": 150,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "blobstore:"
+    },
+    {
+      "id": "src-61",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  metering:",
+      "line": 158,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "metering:"
+    },
+    {
+      "id": "src-62",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  toxiproxy:",
+      "line": 143,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "toxiproxy:"
+    },
+    {
+      "id": "src-63",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  prometheus:",
+      "line": 165,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "prometheus:"
+    },
+    {
+      "id": "src-64",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  postgres-exporter:",
+      "line": 57,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "postgres-exporter:"
+    },
+    {
+      "id": "src-65",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [pgdata:",
+      "line": 50,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [pgdata:/var/lib/postgresql/data]"
+    },
+    {
+      "id": "src-66",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [node-a-data:/data]",
+      "line": 108,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [node-a-data:/data]"
+    },
+    {
+      "id": "src-67",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [node-b-data:/data]",
+      "line": 120,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [node-b-data:/data]"
+    },
+    {
+      "id": "src-68",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [blobs:/blobs]",
+      "line": 156,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [blobs:/blobs]"
+    },
+    {
+      "id": "src-69",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  migrate:",
+      "line": 79,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "migrate:"
+    },
+    {
+      "id": "src-70",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  purger:",
+      "line": 89,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "purger:"
+    },
+    {
+      "id": "src-71",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  seedgen:",
+      "line": 173,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "seedgen:"
+    },
+    {
+      "id": "src-72",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  loadgen:",
+      "line": 182,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "loadgen:"
+    },
+    {
+      "id": "src-73",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "  report:",
+      "line": 191,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "report:"
+    },
+    {
+      "id": "src-74",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [../results:/results]",
+      "line": 189,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [../results:/results]"
+    },
+    {
+      "id": "src-75",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "symbol": "    server gateway-a",
+      "line": 41,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "server gateway-a gateway-a:8080"
+    },
+    {
+      "id": "src-76",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    environment: { INSTANCE: gateway-a",
+      "line": 124,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "environment: { INSTANCE: gateway-a, CONTROL_URL: \"http://toxiproxy:9090\", NODES: \"node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072\", SHED_LIMIT: \"${GATEWAY_SHED_LIMIT:-24}\", ROUTE_CACHE_TTL: \"${ROUTE_CACHE_TTL:-}\" }"
+    },
+    {
+      "id": "src-77",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "symbol": "    server gateway-b",
+      "line": 42,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "server gateway-b gateway-b:8080"
+    },
+    {
+      "id": "src-78",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    environment: { INSTANCE: gateway-b",
+      "line": 129,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "environment: { INSTANCE: gateway-b, CONTROL_URL: \"http://toxiproxy:9090\", NODES: \"node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072\", SHED_LIMIT: \"${GATEWAY_SHED_LIMIT:-24}\", ROUTE_CACHE_TTL: \"${ROUTE_CACHE_TTL:-}\" }"
+    },
+    {
+      "id": "src-79",
+      "path": "books/release-it/project/deploy/haproxy.cfg",
+      "symbol": "    server gateway-c",
+      "line": 43,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "server gateway-c gateway-c:8080"
+    },
+    {
+      "id": "src-80",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    environment: { INSTANCE: gateway-c",
+      "line": 134,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "environment: { INSTANCE: gateway-c, CONTROL_URL: \"http://toxiproxy:9090\", NODES: \"node-a=http://toxiproxy:9071,node-b=http://toxiproxy:9072\", SHED_LIMIT: \"${GATEWAY_SHED_LIMIT:-24}\", ROUTE_CACHE_TTL: \"${ROUTE_CACHE_TTL:-}\" }"
+    },
+    {
+      "id": "src-81",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "symbol": "\"name\": \"control\"",
+      "line": 2,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "{\"name\": \"control\",   \"listen\": \"0.0.0.0:9090\", \"upstream\": \"control:8090\",   \"enabled\": true},"
+    },
+    {
+      "id": "src-82",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "symbol": "\"name\": \"node-a\"",
+      "line": 3,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "{\"name\": \"node-a\",    \"listen\": \"0.0.0.0:9071\", \"upstream\": \"node-a:8070\",    \"enabled\": true},"
+    },
+    {
+      "id": "src-83",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "symbol": "\"name\": \"node-b\"",
+      "line": 4,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "{\"name\": \"node-b\",    \"listen\": \"0.0.0.0:9072\", \"upstream\": \"node-b:8070\",    \"enabled\": true},"
+    },
+    {
+      "id": "src-84",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "symbol": "\"name\": \"blobstore\"",
+      "line": 5,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "{\"name\": \"blobstore\", \"listen\": \"0.0.0.0:9081\", \"upstream\": \"blobstore:8081\", \"enabled\": true},"
+    },
+    {
+      "id": "src-85",
+      "path": "books/release-it/project/deploy/toxiproxy.json",
+      "symbol": "\"name\": \"metering\"",
+      "line": 6,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "{\"name\": \"metering\",  \"listen\": \"0.0.0.0:9082\", \"upstream\": \"metering:8082\",  \"enabled\": true}"
+    },
+    {
+      "id": "src-86",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "      BLOBSTORE_URL:",
+      "line": 105,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "BLOBSTORE_URL: http://toxiproxy:9081"
+    },
+    {
+      "id": "src-87",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [blobs:",
+      "line": 156,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [blobs:/blobs]"
+    },
+    {
+      "id": "src-88",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "      DATA_SOURCE_NAME:",
+      "line": 60,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "DATA_SOURCE_NAME: postgresql://litefleet:litefleet@postgres:5432/litefleet?sslmode=disable"
+    },
+    {
+      "id": "src-89",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: gateway",
+      "line": 8,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: gateway"
+    },
+    {
+      "id": "src-90",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: control",
+      "line": 14,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: control"
+    },
+    {
+      "id": "src-91",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: node",
+      "line": 17,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: node"
+    },
+    {
+      "id": "src-92",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: haproxy",
+      "line": 20,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: haproxy"
+    },
+    {
+      "id": "src-93",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: blobstore",
+      "line": 23,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: blobstore"
+    },
+    {
+      "id": "src-94",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: metering",
+      "line": 26,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: metering"
+    },
+    {
+      "id": "src-95",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: toxiproxy",
+      "line": 29,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: toxiproxy"
+    },
+    {
+      "id": "src-96",
+      "path": "books/release-it/project/deploy/prometheus.yml",
+      "symbol": "  - job_name: postgres",
+      "line": 32,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "- job_name: postgres"
+    },
+    {
+      "id": "src-97",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [node-a-data:/nodes/node-a",
+      "line": 179,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [node-a-data:/nodes/node-a, node-b-data:/nodes/node-b, ../results:/results]"
+    },
+    {
+      "id": "src-98",
+      "path": "books/release-it/project/deploy/compose.yml",
+      "symbol": "    volumes: [../results:/results, ../lab:/lab:ro",
+      "line": 197,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "volumes: [../results:/results, ../lab:/lab:ro, node-a-data:/nodes/node-a:ro, node-b-data:/nodes/node-b:ro]"
+    },
+    {
+      "id": "src-99",
+      "path": "books/release-it/project/cmd/loadgen/main.go",
+      "symbol": "func main()",
+      "line": 125,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "func main() {"
+    },
+    {
+      "id": "src-100",
+      "path": "books/release-it/project/lab/toxics.sh",
+      "symbol": "curl",
+      "line": 14,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "list) curl -fs \"$TOXI/proxies\" | jq -r 'to_entries[] | \"\\(.key)\\tenabled=\\(.value.enabled)\\ttoxics=\\([.value.toxics[] | \"\\(.name)(\\(.type) \\(.attributes|tostring))\"] | join(\",\"))\"' ;;"
+    },
+    {
+      "id": "src-101",
+      "path": "books/release-it/project/lab/lib.sh",
+      "symbol": "compose()",
+      "line": 18,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "compose() { docker compose -f \"$PROJECT_DIR/deploy/compose.yml\" ${LF_COMPOSE_EXTRA:-} \"$@\"; }"
+    },
+    {
+      "id": "src-102",
+      "path": "books/release-it/project/test/chaos/chaos_test.go",
+      "symbol": "/admin/mode",
+      "line": 224,
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "evidence": "api(t, \"POST\", blobAdmin+\"/admin/mode\", map[string]string{\"mode\": mode})"
+    }
+  ],
+  "lessons": [
+    {
+      "lesson": "L01",
+      "topic": "Metrics, health, structured logs",
+      "views": [
+        "gateway-components",
+        "lab-deployment"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/01-transparency.md",
+      "paths": [
+        "books/release-it/project/cmd/gateway/main.go",
+        "books/release-it/project/deploy/prometheus.yml"
+      ]
+    },
+    {
+      "lesson": "L02",
+      "topic": "Request, dependency and statement deadlines",
+      "views": [
+        "gateway-components",
+        "node-components",
+        "query-flow"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/02-timeouts.md",
+      "paths": [
+        "books/release-it/project/internal/api/handlers.go",
+        "books/release-it/project/internal/nodeclient/client.go",
+        "books/release-it/project/internal/engine/exec.go"
+      ]
+    },
+    {
+      "lesson": "L03",
+      "topic": "Rollback and resource bounds",
+      "views": [
+        "containers",
+        "node-components"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/03-blocked-threads.md",
+      "paths": [
+        "books/release-it/project/internal/engine/exec.go",
+        "books/release-it/project/internal/engine/handles.go",
+        "books/release-it/project/internal/registry/registry.go"
+      ]
+    },
+    {
+      "lesson": "L04",
+      "topic": "Read retry policy; no uncertain write retry",
+      "views": [
+        "gateway-components",
+        "query-flow"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/04-retries.md",
+      "paths": [
+        "books/release-it/project/internal/retry/retry.go",
+        "books/release-it/project/internal/nodeclient/client.go"
+      ]
+    },
+    {
+      "lesson": "L05",
+      "topic": "Route cache and circuit breaker",
+      "views": [
+        "gateway-components",
+        "query-flow"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/05-circuit-breaker.md",
+      "paths": [
+        "books/release-it/project/internal/routes/client.go",
+        "books/release-it/project/internal/routes/cache.go",
+        "books/release-it/project/internal/breaker/breaker.go"
+      ]
+    },
+    {
+      "lesson": "L06",
+      "topic": "Admission isolation, pool isolation, backup lock",
+      "views": [
+        "containers",
+        "node-components"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/06-bulkheads.md",
+      "paths": [
+        "books/release-it/project/internal/engine/admission.go",
+        "books/release-it/project/internal/backup/job.go",
+        "books/release-it/project/internal/registry/registry.go"
+      ]
+    },
+    {
+      "lesson": "L07",
+      "topic": "Shedding at gateway, node and balancer",
+      "views": [
+        "gateway-components",
+        "node-components",
+        "lab-deployment"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/07-shed-load.md",
+      "paths": [
+        "books/release-it/project/cmd/gateway/main.go",
+        "books/release-it/project/cmd/node/main.go",
+        "books/release-it/project/deploy/haproxy.cfg"
+      ]
+    },
+    {
+      "lesson": "L08",
+      "topic": "Capped streaming and SQL aggregation",
+      "views": [
+        "node-components",
+        "query-flow",
+        "containers"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/08-unbounded-results.md",
+      "paths": [
+        "books/release-it/project/internal/engine/exec.go",
+        "books/release-it/project/internal/nodeclient/rows.go",
+        "books/release-it/project/internal/registry/usage.go"
+      ]
+    },
+    {
+      "lesson": "L09",
+      "topic": "Bounded queue, durable overflow and graceful spill",
+      "views": [
+        "node-components",
+        "usage-flow"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/09-back-pressure.md",
+      "paths": [
+        "books/release-it/project/internal/metering/queue.go",
+        "books/release-it/project/internal/metering/outbox.go",
+        "books/release-it/project/cmd/node/drain.go"
+      ]
+    },
+    {
+      "lesson": "L10",
+      "topic": "Checkpoint, idle eviction, ledger rollup/purge",
+      "views": [
+        "node-components",
+        "lab-deployment"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/10-steady-state.md",
+      "paths": [
+        "books/release-it/project/internal/engine/steady.go",
+        "books/release-it/project/internal/registry/usage.go",
+        "books/release-it/project/cmd/control/purge.go"
+      ]
+    },
+    {
+      "lesson": "L11",
+      "topic": "External fault harness",
+      "views": [
+        "lab-deployment"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/11-test-harness.md",
+      "paths": [
+        "books/release-it/project/test/chaos/chaos_test.go",
+        "books/release-it/project/lab/toxics.sh"
+      ]
+    },
+    {
+      "lesson": "L12",
+      "topic": "Migrations, tolerant readers and drain (no draining retry)",
+      "views": [
+        "gateway-components",
+        "node-components",
+        "lab-deployment"
+      ],
+      "revision": "936786399d7bab3ebbfa845b9a07df02b41ed363",
+      "note": "books/release-it/lessons/12-handling-versions.md",
+      "paths": [
+        "books/release-it/project/cmd/control/jobs.go",
+        "books/release-it/project/internal/registry/migrate.go",
+        "books/release-it/project/internal/nodeclient/client.go",
+        "books/release-it/project/cmd/node/drain.go"
+      ]
+    }
+  ]
+}
