@@ -237,8 +237,9 @@ E08 and E09 are outside this fix. Independent review is pending.
   Sol coordinator) ended with exit 1 at 18:46:54Z on the provider's `possible cybersecurity
   risk` error ([run record](../register/runs/07-fixer-initial-run.jsonl)). A second Astra
   repair run started at 18:48:06Z. It passed a current verify and reached REF before Twin
-  stopped the Codex run under Nick's rule: when that filter fires, Codex stops and Opus
-  takes over, with no retry around the filter. `07-ref-repair.log` keeps its verdict
+  stopped it for the handoff under Nick's rule: when that filter fires, Codex stops and Opus
+  takes over, with no retry around the filter. No terminal provider event was retained for
+  this second run, so whether the filter fired on it is unknown. `07-ref-repair.log` keeps its verdict
   lines but has no exit record, so it is not counted as acceptance. Claude Opus 5.5 then
   reviewed the uncommitted work as another author's diff, finished it and committed it.
   Its run is the `07-opus-*` acceptance set above. The fixer seat therefore moved from
