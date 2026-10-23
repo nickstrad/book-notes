@@ -4,10 +4,10 @@ import type { ArchitectureBundle } from "c4-sdk/core";
 import { bundles, catalog } from "./fixtures.ts";
 
 describe("catalog", () => {
-  it("contains only explicitly labeled shell test data", () => {
-    expect(catalog.entries.map((entry) => entry.id)).toEqual(["shell-example", "shell-alternate"]);
-    expect(catalog.defaultId).toBe("shell-example");
-    expect(catalog.entries.every((entry) => entry.title.startsWith("Shell test:"))).toBe(true);
+  it("contains exactly the two real book datasets", () => {
+    expect(catalog.entries.map((entry) => entry.id)).toEqual(["litefleet", "queuelet"]);
+    expect(catalog.defaultId).toBe("litefleet");
+    expect(catalog.entries.map(entry => entry.title)).toEqual(bundles.map(({ json }) => (json as ArchitectureBundle).title));
   });
 });
 

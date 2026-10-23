@@ -1,0 +1,81 @@
+[WebServer] (node:410558) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:410571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 4 tests using 1 worker
+
+(node:410594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] [chromium] › tests/smoke.spec.ts:134:5 › reports litefleet malformed bundle
+[2/4] [chromium] › tests/smoke.spec.ts:134:5 › reports litefleet failed fetch
+  1) [chromium] › tests/smoke.spec.ts:134:5 › reports litefleet failed fetch ───────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "litefleet"
+    Received string:    "The diagrams could not be loadedResource request failed (HTTP 503)."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('alert')
+        14 × locator resolved to <section role="alert" class="site-panel">…</section>
+           - unexpected value "The diagrams could not be loadedResource request failed (HTTP 503)."
+
+
+      139 |       await page.goto("./");
+      140 |       await expect(page.getByRole("heading", { name: "The diagrams could not be loaded" })).toBeVisible();
+    > 141 |       await expect(page.getByRole("alert")).toContainText(id);
+          |                                             ^
+      142 |       await expect(page.locator(canvas)).toHaveCount(0);
+      143 |     });
+      144 |   }
+        at /root/Software/book-notes/pages/tests/smoke.spec.ts:141:45
+
+    Error Context: node_modules/.cache/playwright-results/smoke-reports-litefleet-failed-fetch-chromium/error-context.md
+
+
+(node:410809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/4] [chromium] › tests/smoke.spec.ts:134:5 › reports queuelet malformed bundle
+[4/4] [chromium] › tests/smoke.spec.ts:134:5 › reports queuelet failed fetch
+  2) [chromium] › tests/smoke.spec.ts:134:5 › reports queuelet failed fetch ────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "queuelet"
+    Received string:    "The diagrams could not be loadedResource request failed (HTTP 503)."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('alert')
+        14 × locator resolved to <section role="alert" class="site-panel">…</section>
+           - unexpected value "The diagrams could not be loadedResource request failed (HTTP 503)."
+
+
+      139 |       await page.goto("./");
+      140 |       await expect(page.getByRole("heading", { name: "The diagrams could not be loaded" })).toBeVisible();
+    > 141 |       await expect(page.getByRole("alert")).toContainText(id);
+          |                                             ^
+      142 |       await expect(page.locator(canvas)).toHaveCount(0);
+      143 |     });
+      144 |   }
+        at /root/Software/book-notes/pages/tests/smoke.spec.ts:141:45
+
+    Error Context: node_modules/.cache/playwright-results/smoke-reports-queuelet-failed-fetch-chromium/error-context.md
+
+
+  2 failed
+    [chromium] › tests/smoke.spec.ts:134:5 › reports litefleet failed fetch ────────────────────────
+    [chromium] › tests/smoke.spec.ts:134:5 › reports queuelet failed fetch ─────────────────────────
+  2 passed (17.9s)

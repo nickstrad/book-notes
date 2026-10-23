@@ -4,10 +4,10 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 3 authoring complete against the frozen v1-explored
-snapshot; local validation recorded below. Final Queuelet fidelity acceptance and
-publication wait for Explore It! end review, fixes, merge and delta reconciliation.
-Items 4–8 remain separate fresh runs; none was started here.
+Status (2026-10-23): item 4 complete. Production catalog contains Litefleet (default,
+seven views) and Queuelet (five views). Queuelet is reconciled against the merged
+Explore It! fix pass. Full local gate passes: 66 unit tests, 34 Chromium tests,
+TypeScript and production build. Items 5–8 remain separate runs.
 
 ## Done and in progress
 
@@ -129,35 +129,64 @@ Dataset/evidence commit: `4765098` on main (not pushed by this run).
   [dataset fidelity guidance](../knowledge/diagram-dataset-fidelity.md) with the
   provisional-snapshot handoff finding.
 
+## Item 4 — production catalog and source reconciliation
+
+- Main checkout, per explicit [brief](evidence/item-4/brief.md); commit and push authorized.
+  `pages/public/catalog.json` now contains exactly Litefleet and Queuelet, default
+  Litefleet. Removed invented shell datasets from production assets; third-entry
+  fixture stays test-only. No changes to `pages/src/`, either real dataset JSON or books.
+- Queuelet provisional → reconciled: reviewed fix-pass record `1712ced` is merged
+  at `7d26bb82db862b2fd483589f6b903d8dae26ae33`. Tag `explore-it/v1-explored`
+  still resolves to `b6df7db044782dd3517d041a8aad95308a3a80c9`.
+  The entire project tree is identical. All 67 original pinned selectors pass;
+  66 remain at their original lines in the merge. `src-67` in lesson 09 moved
+  from line 65 to 68 after citation edits; its structural-fix section is identical.
+  The valid old-SHA URL retains line 65. No pin/content changes or fidelity problem.
+  Inventory records the reconciliation; tests cover merged selectors and section.
+- All 64 unique commit-pinned source page URLs across both datasets returned HTTP 200.
+  Every source fragment is checked against its pinned git object by dataset tests.
+- Node 22.23.2: `npm ci` and final `npm run check` exit 0: TypeScript, 66 unit/schema
+  tests, production build at `/book-notes/`, 34 Chromium tests. Slice browser tests
+  now use the unmodified production catalog for all twelve view/reload pairs,
+  drill-down, Up/Back, documentation and scenario controls. Shared checks cover
+  exactly two dropdown entries, default, switches both ways, Forward, keyboard,
+  unknown/malformed routes, catalog errors, each bundle's malformed/failed fetch,
+  and a third-entry fixture proving catalog extensibility. Base-relative assets
+  and worker paths are checked, with runtime/request errors rejected.
+- Inspected desktop 1600×1000 and narrow 390×844 context captures for both datasets.
+  No page overflow/new overlap. Long select text truncates at narrow width while
+  the complete dataset title wraps below; existing pan/zoom behavior remains.
+- Evidence: [result](evidence/item-4/result.json), [final check](evidence/item-4/check.txt),
+  [install](evidence/item-4/install.txt), [reconciliation](evidence/item-4/reconciliation.json),
+  [public URL checks](evidence/item-4/source-urls.json), [inspection](evidence/item-4/inspection.md),
+  four screenshots in `evidence/item-4/screenshots/`. Initial check passed 30 browser
+  tests; two new HTTP-error assertions were corrected to the SDK's generic HTTP 503
+  contract before the final 34-test gate (initial output retained).
+- Authored JSON explanation text keeps its snapshot-era review wording under the
+  explicit content boundary. Current inventory/STATE records the resolved merge gate;
+  independent all-view fidelity review remains item 6.
+- Knowledge assessment: extend indexed [dataset-fidelity guidance](../knowledge/diagram-dataset-fidelity.md)
+  separately with merge/line reconciliation and production-catalog test guidance.
+  Existing tests are reusable; no additional work script needed.
+
 ## Next steps and owners
 
-1. Twin verifies item 3's local commits and pushes when source sequencing allows.
-2. Explore It! coordinator completes end review, fixes and merge; site coordinator
-   reconciles the accepted source delta against Queuelet's frozen snapshot.
-3. Fresh Sol runs handle items 4 and 5 (catalog integration, CI/rehearsal), followed
-   by Fable review, Opus fixes/recheck and publication in items 6–8.
+1. Fresh Sol handles item 5 (CI and clean-checkout release rehearsal).
+2. Fable reviews all twelve views in item 6; Opus handles fixes/recheck, then Sol
+   publication/live verification in items 7–8.
 
 ## Open decisions and blockers
 
 - Coordinator: resolve ts-db shell reuse terms before release; source checkout has
   no license file. Attribution remains in `pages/README.md`.
-- Explore It! coordinator: provide reviewed merged snapshot for Queuelet acceptance.
-- Item 5 coordinator: local fidelity tests use the pinned source git objects. Preserve
-  source history in the rehearsal checkout (for example `fetch-depth: 0`).
+- Item 5 coordinator: source fidelity tests require historical git objects,
+  including reconciled merge `7d26bb8`; preserve source history (`fetch-depth: 0`).
+- Queuelet merge prerequisite resolved; independent all-view fidelity review remains item 6.
 
-## Previous item resume
+## Resume
 
-Checkout `/root/Software/book-notes`, branch `main`. No live run to resume. Retained
-run evidence is above; scratch authoring files are in `/tmp/booknotes-sol-diag2/`.
-Use Node 22.23.2 and `cd pages && npm ci && npm run check`. Item 2's Playwright
-catalog override is in `tests/litefleet.spec.ts`; do not mistake the unchanged shell
-catalog for missing dataset work. No worktree cleanup is required for this explicit
-main-checkout run.
-
-## Item 3 resume
-
-Checkout `/root/Software/book-notes`, branch `main`. Scratch source export and
-one-off authoring scripts: `/tmp/booknotes-sol-diag3/`. No review worktree needs
-cleanup. Use Node 22.23.2 (put its bin directory first on PATH for npm scripts),
-then `cd pages && npm ci && npm run check`. Queuelet's catalog override is in
-`tests/queuelet.spec.ts`. Do not add it to the production catalog until item 4.
+Checkout `/root/Software/book-notes`, branch `main`. Item 4 has no background run or
+server to resume; scratch is `/tmp/booknotes-sol-diag4/`. Node 22.23.2:
+`cd pages && npm ci && npm run check`. Catalog and dataset slices now exercise real
+production data without overrides; only third-entry and error tests intercept loading.
+No worktree cleanup is required for this explicitly authorized main-checkout run.

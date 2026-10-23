@@ -36,19 +36,19 @@ async function load(catalog: string) {
 }
 
 describe("catalog loading", () => {
-  it("loads the site catalog and opens shell-example by default", async () => {
+  it("loads the site catalog and opens litefleet by default", async () => {
     expect(await load(readText("public/catalog.json"))).toEqual({
-      ids: ["shell-example", "shell-alternate"],
+      ids: ["litefleet", "queuelet"],
       ok: [true, true],
-      defaultId: "shell-example",
-      choice: { ok: true, id: "shell-example" },
+      defaultId: "litefleet",
+      choice: { ok: true, id: "litefleet" },
     });
   });
 
   it("loads a three-entry catalog with no code change, defaulting to its defaultId", async () => {
     // The fixture's defaultId is its LAST entry, so the default is not merely the first entry.
     expect(await load(readText("tests/fixtures/catalog-three.json"))).toEqual({
-      ids: ["shell-example", "shell-alternate", "fixture-third"],
+      ids: ["litefleet", "queuelet", "fixture-third"],
       ok: [true, true, true],
       defaultId: "fixture-third",
       choice: { ok: true, id: "fixture-third" },
@@ -59,7 +59,7 @@ describe("catalog loading", () => {
     const { entries } = readJson("tests/fixtures/catalog-three.json") as { entries: unknown[] };
     const catalog = JSON.stringify({ entries: [entries[2], entries[0]] });
     expect(await load(catalog)).toEqual({
-      ids: ["fixture-third", "shell-example"],
+      ids: ["fixture-third", "litefleet"],
       ok: [true, true],
       defaultId: undefined,
       choice: { ok: true, id: "fixture-third" },
@@ -74,7 +74,7 @@ describe("catalog loading", () => {
   it("passes every other request through untouched", async () => {
     const response = new Response("{}");
     const lifted = liftDefaultId(CATALOG_URL, () => Promise.resolve(response));
-    expect(await lifted.fetch(`${SITE}architectures/shell-example.json`)).toBe(response);
+    expect(await lifted.fetch(`${SITE}architectures/litefleet.json`)).toBe(response);
     expect(lifted.defaultId()).toBeUndefined();
   });
 });
@@ -157,15 +157,15 @@ describe("the catalog fetch keeps the SDK's size bound while streaming", () => {
   it("lifts defaultId from a catalog of exactly LIMIT bytes; one byte more is the SDK size error", async () => {
     const json = JSON.stringify({
       ...readJson("public/catalog.json") as object,
-      defaultId: "shell-alternate",
+      defaultId: "queuelet",
     });
     const padded = (bytes: number) => json + " ".repeat(bytes - new TextEncoder().encode(json).byteLength);
     expect(new TextEncoder().encode(padded(LIMIT)).byteLength).toBe(LIMIT);
     expect(await load(padded(LIMIT))).toEqual({
-      ids: ["shell-example", "shell-alternate"],
+      ids: ["litefleet", "queuelet"],
       ok: [true, true],
-      defaultId: "shell-alternate",
-      choice: { ok: true, id: "shell-alternate" },
+      defaultId: "queuelet",
+      choice: { ok: true, id: "queuelet" },
     });
     await expect(load(padded(LIMIT + 1))).rejects.toThrow(SIZE_ERROR);
   });

@@ -1,0 +1,480 @@
+{
+  "pinnedRevision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+  "mergedRevision": "7d26bb82db862b2fd483589f6b903d8dae26ae33",
+  "tagRevision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+  "sources": [
+    {
+      "id": "src-1",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "line": 78,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-2",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "line": 26,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-3",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "line": 24,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-4",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "line": 17,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-5",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "line": 16,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-6",
+      "path": "books/explore-it/project/cmd/api/main.go",
+      "line": 49,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-7",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "line": 11,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-8",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "line": 38,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-9",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "line": 90,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-10",
+      "path": "books/explore-it/project/cmd/qctl/main.go",
+      "line": 17,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-11",
+      "path": "books/explore-it/project/cmd/worker/main.go",
+      "line": 28,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-12",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "line": 26,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-13",
+      "path": "books/explore-it/project/internal/store/store.go",
+      "line": 12,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-14",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 120,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-15",
+      "path": "books/explore-it/project/internal/jobs/transition.go",
+      "line": 46,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-16",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "line": 91,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-17",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 219,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-18",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "line": 21,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-19",
+      "path": "books/explore-it/project/internal/clock/clock.go",
+      "line": 15,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-20",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "line": 35,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-21",
+      "path": "books/explore-it/project/internal/jobs/ack.go",
+      "line": 10,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-22",
+      "path": "books/explore-it/project/internal/jobs/nack.go",
+      "line": 5,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-23",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "line": 8,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-24",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "line": 11,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-25",
+      "path": "books/explore-it/project/internal/jobs/operator.go",
+      "line": 49,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-26",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "line": 95,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-27",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "line": 45,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-28",
+      "path": "books/explore-it/project/internal/stats/stats.go",
+      "line": 8,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-29",
+      "path": "books/explore-it/project/internal/api/queues.go",
+      "line": 184,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-30",
+      "path": "books/explore-it/project/migrations/003.sql",
+      "line": 4,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-31",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "line": 40,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-32",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 165,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-33",
+      "path": "books/explore-it/project/internal/api/jobs.go",
+      "line": 70,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-34",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "line": 28,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-35",
+      "path": "books/explore-it/project/internal/api/schedules.go",
+      "line": 53,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-36",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 231,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-37",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 249,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-38",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 249,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-39",
+      "path": "books/explore-it/project/internal/schedule/fire.go",
+      "line": 104,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-40",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "line": 22,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-41",
+      "path": "books/explore-it/project/internal/api/api.go",
+      "line": 232,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-42",
+      "path": "books/explore-it/project/internal/webhook/ship.go",
+      "line": 41,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-43",
+      "path": "books/explore-it/project/internal/api/observe.go",
+      "line": 12,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-44",
+      "path": "books/explore-it/project/internal/api/enqueue.go",
+      "line": 72,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-45",
+      "path": "books/explore-it/project/internal/jobs/jobs.go",
+      "line": 66,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-46",
+      "path": "books/explore-it/project/internal/worker/worker.go",
+      "line": 64,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-47",
+      "path": "books/explore-it/project/internal/jobs/expire.go",
+      "line": 80,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-48",
+      "path": "books/explore-it/project/Makefile",
+      "line": 2,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-49",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 1,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-50",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 17,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-51",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 3,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-52",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 34,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-53",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 44,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-54",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 29,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-55",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 16,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-56",
+      "path": "books/explore-it/project/Makefile",
+      "line": 22,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-57",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 24,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-58",
+      "path": "books/explore-it/project/deploy/compose.yml",
+      "line": 39,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-59",
+      "path": "books/explore-it/project/lab/seed/seed.py",
+      "line": 10,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-60",
+      "path": "books/explore-it/project/internal/client/client.go",
+      "line": 18,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-61",
+      "path": "books/explore-it/project/cmd/hooksink/main.go",
+      "line": 25,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-62",
+      "path": "books/explore-it/project/lab/reset.sh",
+      "line": 8,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-63",
+      "path": "books/explore-it/exploration/models/map.md",
+      "line": 1,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-64",
+      "path": "books/explore-it/exploration/models/ecosystem.md",
+      "line": 1,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-65",
+      "path": "books/explore-it/exploration/models/rules.md",
+      "line": 1,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-66",
+      "path": "books/explore-it/exploration/models/states.md",
+      "line": 1,
+      "fileUnchanged": true,
+      "selectorMatches": true
+    },
+    {
+      "id": "src-67",
+      "path": "books/explore-it/lessons/09-explain-it.md",
+      "line": 65,
+      "fileUnchanged": false,
+      "selectorMatches": false,
+      "mergedLine": 68
+    }
+  ],
+  "changedSourceFiles": [
+    "books/explore-it/lessons/09-explain-it.md"
+  ]
+}

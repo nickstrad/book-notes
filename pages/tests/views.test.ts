@@ -16,12 +16,12 @@ describe("catalog settlement and view selection", () => {
     expect(settle([broken, entries[1]], undefined).state).toBe("failed");
   });
   it("derives snapshot and recovery links, and does not silently replace invalid routes", () => {
-    const loaded = settle(entries, "shell-alternate");
+    const loaded = settle(entries, "queuelet");
     if (loaded.state !== "ready") throw new Error("Fixture failed to load");
     const selected = selectArchitecture(loaded, { kind: "home" });
-    expect(selected.shown?.id).toBe("shell-alternate");
-    expect(selected.snapshot).toBe("Snapshot shell-fixture-1");
-    expect(selected.choices[0].href).toBe("#/architectures/shell-example/diagrams/context");
+    expect(selected.shown?.id).toBe("queuelet");
+    expect(selected.snapshot).toBe("Snapshot explore-it/v1-explored · b6df7db");
+    expect(selected.choices[0].href).toBe("#/architectures/litefleet/diagrams/context");
     expect(selectArchitecture(loaded, { kind: "not-found", message: "Bad hash" }))
       .toMatchObject({ shown: undefined, message: "Bad hash" });
     expect(selectArchitecture(loaded, { kind: "single", architectureId: "missing", diagramId: "context" }))

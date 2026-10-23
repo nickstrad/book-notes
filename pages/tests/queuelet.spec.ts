@@ -8,10 +8,8 @@ const bundle = JSON.parse(readFileSync(new URL('../public/architectures/queuelet
 const ready = (page: Page) => expect(page.locator('[data-layout-ready]')).toHaveCount(1);
 const nav = (page: Page) => page.getByRole('navigation', { name: 'Diagram navigation' });
 
-// Item 3 owns a slice, not the production catalog (integration is item 4).
-// Only catalog loading is replaced; the bundle/assets/worker come from the production build.
+// Exercise the real production catalog, assets and worker.
 test.beforeEach(async ({ page }) => {
-  await page.route('**/catalog.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ defaultId: 'queuelet', entries: [{ id: 'queuelet', title: bundle.title, url: 'architectures/queuelet.json' }] }) }));
   page.on('pageerror', error => { throw error; });
   page.on('console', message => { if (message.type() === 'error') throw new Error(message.text()); });
   page.on('requestfailed', request => { if (request.failure()?.errorText !== 'net::ERR_ABORTED') throw new Error(request.url()); });
@@ -41,7 +39,7 @@ for (const diagram of bundle.diagrams) {
 }
 
 test('queuelet actual element drill-down, Up and Back', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('./#/architectures/queuelet/diagrams/context');
   await ready(page);
   await page.getByRole('button', { name: 'STE100 text', exact: true }).click();
   await expect(page.getByText('ASD-STE100 Issue 9 · draft', { exact: true })).toBeVisible();

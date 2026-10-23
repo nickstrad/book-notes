@@ -8,10 +8,8 @@ const bundle = JSON.parse(readFileSync(new URL('../public/architectures/liteflee
 const ready = (page: Page) => expect(page.locator('[data-layout-ready]')).toHaveCount(1);
 const nav = (page: Page) => page.getByRole('navigation', { name: 'Diagram navigation' });
 
-// Item 2 owns a slice, not the production catalog (integration is item 4).
-// Only catalog loading is replaced; the bundle/assets/worker come from the production build.
+// Exercise the real production catalog, assets and worker.
 test.beforeEach(async ({ page }) => {
-  await page.route('**/catalog.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ defaultId: 'litefleet', entries: [{ id: 'litefleet', title: bundle.title, url: 'architectures/litefleet.json' }] }) }));
   page.on('pageerror', error => { throw error; });
   page.on('console', message => { if (message.type() === 'error') throw new Error(message.text()); });
   page.on('requestfailed', request => { if (request.failure()?.errorText !== 'net::ERR_ABORTED') throw new Error(request.url()); });

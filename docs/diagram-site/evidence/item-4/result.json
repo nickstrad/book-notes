@@ -1,0 +1,57 @@
+{
+  "item": 4,
+  "status": "Catalog integrated; Queuelet source reconciled; full local gate passed",
+  "base": "/book-notes/",
+  "node": "22.23.2",
+  "catalog": {
+    "defaultId": "litefleet",
+    "entries": {
+      "litefleet": 7,
+      "queuelet": 5
+    }
+  },
+  "commands": [
+    {
+      "command": "npm ci",
+      "exit": 0,
+      "log": "install.txt"
+    },
+    {
+      "command": "npm run check",
+      "exit": 0,
+      "log": "check.txt"
+    }
+  ],
+  "checks": {
+    "typescript": "pass",
+    "unitTests": 66,
+    "browserTests": 34,
+    "productionBuild": "pass",
+    "sdkDiagnostics": 0,
+    "publicSourceUrls": 64,
+    "publicSourceUrlsHTTP200": 64,
+    "queueletSelectors": 67,
+    "mergedSelectorsAtOriginalLine": 66,
+    "selectorDrifts": [
+      {
+        "id": "src-67",
+        "pinnedLine": 65,
+        "mergedLine": 68,
+        "sectionUnchanged": true
+      }
+    ]
+  },
+  "queuelet": {
+    "pinnedRevision": "b6df7db044782dd3517d041a8aad95308a3a80c9",
+    "mergedRevision": "7d26bb82db862b2fd483589f6b903d8dae26ae33",
+    "projectTreeUnchanged": true,
+    "status": "reconciled; independent all-view review remains item 6"
+  },
+  "screenshotsRetained": 4,
+  "scope": {
+    "bookFilesChanged": false,
+    "realDatasetJSONChanged": false,
+    "appSourceChanged": false
+  },
+  "knowledgeAssessment": "Existing indexed dataset-fidelity note updated separately; tests supply reusable checks, no additional work script needed."
+}

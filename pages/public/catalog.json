@@ -1,15 +1,15 @@
 {
-  "defaultId": "shell-example",
+  "defaultId": "litefleet",
   "entries": [
     {
-      "id": "shell-example",
-      "title": "Shell test: example architecture",
-      "url": "architectures/shell-example.json"
+      "id": "litefleet",
+      "title": "Litefleet — Release It! (v1-hardened)",
+      "url": "architectures/litefleet.json"
     },
     {
-      "id": "shell-alternate",
-      "title": "Shell test: alternate architecture",
-      "url": "architectures/shell-alternate.json"
+      "id": "queuelet",
+      "title": "Queuelet — Explore It! (v1-explored)",
+      "url": "architectures/queuelet.json"
     }
   ]
 }

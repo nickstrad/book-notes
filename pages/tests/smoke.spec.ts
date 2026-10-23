@@ -21,37 +21,37 @@ test.beforeEach(async ({ page }) => {
 
 test("default catalog renders with documentation at the selected base", async ({ page }) => {
   await page.goto("./");
-  await expect(page).toHaveURL(/\/book-notes\/#\/architectures\/shell-example\/diagrams\/context$/);
-  await expect(page.getByRole("heading", { level: 1, name: "System context: example shell test" })).toBeVisible();
+  await expect(page).toHaveURL(/\/book-notes\/#\/architectures\/litefleet\/diagrams\/context$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Litefleet: system context" })).toBeVisible();
   await expect(page.locator(canvas)).toHaveCount(1);
   await expect(picker(page).getByRole("option")).toHaveText([
-    "Shell test: example architecture", "Shell test: alternate architecture",
+    "Litefleet — Release It! (v1-hardened)", "Queuelet — Explore It! (v1-explored)",
   ]);
-  await expect(page.getByText("Snapshot shell-fixture-1", { exact: false })).toBeVisible();
-  await expect(page.getByText(/This invented example verifies/)).toBeVisible();
+  await expect(page.getByText("Snapshot release-it/v1-hardened", { exact: false })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Litefleet: system context explained", exact: true })).toBeVisible();
   await expect(page.locator("body")).not.toContainText("ts-db");
 });
 
 test("dropdown switches in both directions and browser history returns", async ({ page }) => {
   await page.goto("./");
   await expect(page.locator(canvas)).toHaveCount(1);
-  await picker(page).selectOption("shell-alternate");
-  await expect(page.getByRole("heading", { level: 1, name: "System context: alternate shell test" })).toBeVisible();
+  await picker(page).selectOption("queuelet");
+  await expect(page.getByRole("heading", { level: 1, name: "Queuelet: system context" })).toBeVisible();
   await expect(page.locator(canvas)).toHaveCount(1);
   await back(page).click();
-  await expect(picker(page)).toHaveValue("shell-example");
+  await expect(picker(page)).toHaveValue("litefleet");
   await page.goForward();
-  await expect(picker(page)).toHaveValue("shell-alternate");
-  await picker(page).selectOption("shell-example");
+  await expect(picker(page)).toHaveValue("queuelet");
+  await picker(page).selectOption("litefleet");
   await expect(page.locator(canvas)).toHaveCount(1);
 });
 
 test("a non-default deep link reloads to the same diagram", async ({ page }) => {
-  await page.goto("./#/architectures/shell-alternate/diagrams/context");
+  await page.goto("./#/architectures/queuelet/diagrams/context");
   await expect(page.locator(canvas)).toHaveCount(1);
   await page.reload();
-  await expect(page.getByRole("heading", { level: 1, name: "System context: alternate shell test" })).toBeVisible();
-  await expect(picker(page)).toHaveValue("shell-alternate");
+  await expect(page.getByRole("heading", { level: 1, name: "Queuelet: system context" })).toBeVisible();
+  await expect(picker(page)).toHaveValue("queuelet");
   await expect(page.locator(canvas)).toHaveCount(1);
 });
 
@@ -60,9 +60,9 @@ test("unknown and malformed routes offer recovery without a fallback", async ({ 
     await page.goto(`./${hash}`);
     await expect(page.getByRole("heading", { name: "Not Found", exact: true })).toBeVisible();
     await expect(picker(page)).toHaveValue("");
-    await expect(page.getByRole("link", { name: "Open Shell test: example architecture" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open Litefleet — Release It! (v1-hardened)" })).toBeVisible();
   }
-  await page.goto("./#/architectures/shell-example/diagrams/missing");
+  await page.goto("./#/architectures/litefleet/diagrams/missing");
   await expect(page.getByText(/Not Found: unknown diagram/)).toBeVisible();
 });
 
@@ -73,7 +73,7 @@ test("a third catalog entry works with no application change", async ({ page }) 
   await expect(picker(page)).toHaveValue("fixture-third");
   await expect(page.locator(canvas)).toHaveCount(1);
   await expect(picker(page).getByRole("option")).toHaveCount(3);
-  await picker(page).selectOption("shell-example");
+  await picker(page).selectOption("litefleet");
   await expect(page.locator(canvas)).toHaveCount(1);
   await back(page).click();
   await expect(picker(page)).toHaveValue("fixture-third");
@@ -82,7 +82,7 @@ test("a third catalog entry works with no application change", async ({ page }) 
 for (const [name, body, expected] of [
   ["empty catalog", '{"entries":[]}', "The diagrams could not be loaded"],
   ["malformed JSON", '{"entries":', "The diagrams could not be loaded"],
-  ["missing defaultId", '{"defaultId":"missing","entries":[{"id":"shell-example","title":"Example","url":"architectures/shell-example.json"}]}', "The diagrams could not be loaded"],
+  ["missing defaultId", '{"defaultId":"missing","entries":[{"id":"litefleet","title":"Example","url":"architectures/litefleet.json"}]}', "The diagrams could not be loaded"],
 ] as const) {
   test(`reports ${name}`, async ({ page }) => {
     await page.route("**/catalog.json", (route) => route.fulfill({ contentType: "application/json", body }));
@@ -109,7 +109,7 @@ test("the skip link and architecture selector work by keyboard", async ({ page }
   await expect(page.getByRole("main")).toBeFocused();
   await picker(page).focus();
   await page.keyboard.press("ArrowDown");
-  await expect(picker(page)).toHaveValue("shell-alternate");
+  await expect(picker(page)).toHaveValue("queuelet");
   await expect(page.locator(canvas)).toHaveCount(1);
 });
 
@@ -123,8 +123,23 @@ for (const [width, height] of [[1600, 1000], [390, 844]]) {
     await page.screenshot({ path: testInfo.outputPath(`shell-${width}.png`), fullPage: true });
     if (width < 600) {
       await page.getByRole("button", { name: "Open explanation", exact: true }).click();
-      await expect(page.getByRole("region", { name: "Explanation", exact: true }).getByText(/This invented example verifies/)).toBeVisible();
+      await expect(page.getByRole("region", { name: "Explanation", exact: true }).getByRole("heading", { name: "Litefleet: system context explained", exact: true })).toBeVisible();
       await page.screenshot({ path: testInfo.outputPath(`shell-${width}-explanation.png`), fullPage: true });
     }
   });
+}
+
+for (const id of ["litefleet", "queuelet"]) {
+  for (const status of [200, 503]) {
+    test(`reports ${id} ${status === 200 ? "malformed bundle" : "failed fetch"}`, async ({ page }) => {
+      if (status === 503) page.removeAllListeners("console");
+      await page.route(`**/architectures/${id}.json`, route => route.fulfill({
+        status, contentType: "application/json", body: status === 200 ? "{}" : "Unavailable",
+      }));
+      await page.goto("./");
+      await expect(page.getByRole("heading", { name: "The diagrams could not be loaded" })).toBeVisible();
+      await expect(page.getByRole("alert")).toContainText(status === 503 ? "HTTP 503" : id);
+      await expect(page.locator(canvas)).toHaveCount(0);
+    });
+  }
 }

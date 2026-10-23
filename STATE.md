@@ -88,7 +88,8 @@ report to Nick.
 
 - [Plan](docs/diagram-site/PLAN.md) approved for destination B: `pages/` in this repo,
   base `/book-notes/`. Item 1 shell implemented; [site state](docs/diagram-site/STATE.md)
-  records acceptance, pinned reuse sources, evidence and handoff. Items 1–2 are complete;
-  item 3 authors the provisional Queuelet slice against `explore-it/v1-explored`
-  (`b6df7db`). Publication follows its end review and merge. Items 4–8 remain
-  separate runs.
+  records acceptance, pinned reuse sources, evidence and handoff. Items 1–3 are complete.
+  Item 4 integrates both real datasets and reconciles Queuelet's pinned `b6df7db`
+  against merged end-review fix pass `7d26bb8` (record `1712ced`); 66 unit tests,
+  34 browser tests and production build pass.
+  Items 5–8 remain separate runs.

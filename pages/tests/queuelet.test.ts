@@ -32,6 +32,21 @@ describe('Queuelet explored slice', () => {
     expect(bundle.revision).toContain(inventory.revision.slice(0, 7));
   });
 
+  it('reconciles selectors against the accepted merged fix pass without changing the snapshot', () => {
+    const merged = '7d26bb82db862b2fd483589f6b903d8dae26ae33';
+    const git = (...args: string[]) => execFileSync('git', args, { cwd: repo, encoding: 'utf8' });
+    expect(git('rev-parse', 'explore-it/v1-explored').trim()).toBe(inventory.revision);
+    expect(git('diff', inventory.revision, merged, '--', 'books/explore-it/project')).toBe('');
+    for (const source of inventory.sources) {
+      const text = git('show', `${merged}:${source.path}`);
+      const line = source.id === 'src-67' ? 68 : source.line;
+      expect(text.split('\n')[line - 1].trim(), source.id).toBe(source.evidence);
+    }
+    const path = 'books/explore-it/lessons/09-explain-it.md';
+    const section = (text: string) => text.split('## The structural fix')[1].split('\n## ')[0];
+    expect(section(git('show', `${merged}:${path}`))).toBe(section(pinnedText(path)));
+  });
+
   it('covers every model ID exactly once in the audit and draws every ID', () => {
     const items = [...bundle.model.elements, ...bundle.model.relationships];
     expect(inventory.records.map(r => r.id).sort()).toEqual(items.map(i => i.id).sort());

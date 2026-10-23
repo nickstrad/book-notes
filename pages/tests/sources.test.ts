@@ -1,18 +1,18 @@
 import { describe, expect, it } from "vitest";
 import type { ArchitectureBundle } from "c4-sdk/core";
-import { bundles } from "./fixtures.ts";
+import { bundles, readJson } from "./fixtures.ts";
 
-describe.each(bundles)("shell provenance: $entry.id", ({ json }) => {
+describe.each(bundles)("catalog provenance: $entry.id", ({ entry, json }) => {
   const bundle = json as ArchitectureBundle;
-  it("identifies invented data and pins its spec rather than asserting book fidelity", () => {
-    expect(bundle.revision).toBe("shell-fixture-1");
+  const inventory = readJson(`content/${entry.id}/inventory.json`) as { revision: string };
+  it("keeps commit-pinned public source links for every reference", () => {
+    expect(bundle.revision).toContain(inventory.revision.slice(0, 7));
     expect(bundle.sources.length).toBeGreaterThan(0);
     for (const source of bundle.sources) {
-      expect(source.revision).toMatch(/^[0-9a-f]{40}$/);
-      expect(source.path).toBe("docs/diagram-site/PLAN.md");
-      expect(source.url).toBe(`https://github.com/nickstrad/book-notes/blob/${source.revision}/${source.path}`);
-      expect(source.notes).toContain("not architecture evidence");
+      expect(source.revision).toBe(inventory.revision);
+      expect(source.path).toMatch(/^books\//);
+      expect(source.url).toMatch(new RegExp(`^https://github.com/nickstrad/book-notes/blob/${inventory.revision}/`));
+      expect(source.url).toContain(`${source.path}#L`);
     }
-    expect(bundle.documents[0].plain).toContain("invented example");
   });
 });

@@ -1,9 +1,12 @@
 # Book-notes architecture site
 
-Static React/Vite shell for the [approved plan](../docs/diagram-site/PLAN.md), item 1.
-The catalog currently contains two **invented shell tests**, not book architectures.
-Litefleet and Queuelet datasets belong to separate items; replace these fixtures during
-catalog integration. The third-entry fixture is test-only and is not copied to dist.
+Static React/Vite catalog for the [approved plan](../docs/diagram-site/PLAN.md).
+The production dropdown contains **Litefleet — Release It!** (seven views, default)
+and **Queuelet — Explore It!** (five views). Data and explanations live in JSON,
+loaded through the SDK module boundary; adding a dataset requires no view code.
+Queuelet remains pinned to `b6df7db`, reconciled against merged `7d26bb8`:
+project code is identical; one supporting lesson heading moved by three lines.
+See the [site state](../docs/diagram-site/STATE.md) for evidence and review status.
 
 Use Node **22.23.2** and the committed lockfile:
 
@@ -20,7 +23,7 @@ root; `npm run build && npm run preview` serves the production `/book-notes/` ba
 No deployment workflow is introduced by item 1.
 
 Example deep link:
-`/book-notes/#/architectures/shell-alternate/diagrams/context`.
+`/book-notes/#/architectures/queuelet/diagrams/context`.
 Architecture switches use the SDK route port, so Back/Forward and reload preserve
 selection. Unknown IDs and malformed routes show errors rather than a default fallback.
 An empty, invalid or unavailable catalog shows a loading error.
@@ -33,7 +36,7 @@ An empty, invalid or unavailable catalog shows a loading error.
 - `src/catalog.ts`, `src/routes.ts`, `src/site-model.ts`: bounded catalog adapter and pure decisions.
 - `src/useSite.ts`: loading, cancellation, hash subscription, selection and focus callbacks.
 - `src/Site.tsx`: props-only shell and SDK composition; `src/App.tsx` connects the hook.
-- `tests/`: adapted upstream mechanisms and shell-specific browser/schema/source checks.
+- `tests/`: adapted upstream mechanisms and catalog and dataset browser/schema/source checks.
 
 Playwright uses port 4327 and one worker. Run browser suites serially on the shared VM.
 Screenshots are written beneath `node_modules/.cache/playwright-results/`; inspect

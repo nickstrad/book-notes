@@ -2,7 +2,14 @@
 
 Pinned source: `explore-it/v1-explored` → `b6df7db044782dd3517d041a8aad95308a3a80c9`. Machine audit: [inventory.json](inventory.json). Bundle: [queuelet.json](../../public/architectures/queuelet.json).
 
-This is provisional authoring for diagram-site item 3. Publication and final fidelity acceptance follow Explore It! end review, repair, merge to main and delta reconciliation. Source links identify real local committed objects; this run does not assert they are already public. Item 4 must verify/pin public provenance before release. The production catalog remains unchanged.
+Item 4 reconciliation: the accepted Explore It! fix-pass record is `1712ced`, merged
+on main at `7d26bb82db862b2fd483589f6b903d8dae26ae33`. The complete project tree is
+identical to this pinned snapshot. All 67 selectors remain valid at the pinned SHA;
+66 retain their merged line positions. `src-67` (`09-explain-it.md`, structural-fix
+heading) moved from line 65 to 68 after citation edits; the section is unchanged.
+Pinned links deliberately retain line 65 at `b6df7db`. No diagram rewrite or repin
+is needed. See [reconciliation evidence](../../../docs/diagram-site/evidence/item-4/reconciliation.json).
+The production catalog now includes Queuelet; independent all-view review remains item 6.
 
 ## Method and boundaries
 
