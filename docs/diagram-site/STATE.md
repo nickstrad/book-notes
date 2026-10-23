@@ -131,6 +131,8 @@ Dataset/evidence commit: `4765098` on main (not pushed by this run).
 
 ## Item 4 — production catalog and source reconciliation
 
+Catalog/evidence commit: `6243bc3` on main.
+
 - Main checkout, per explicit [brief](evidence/item-4/brief.md); commit and push authorized.
   `pages/public/catalog.json` now contains exactly Litefleet and Queuelet, default
   Litefleet. Removed invented shell datasets from production assets; third-entry
@@ -165,8 +167,8 @@ Dataset/evidence commit: `4765098` on main (not pushed by this run).
 - Authored JSON explanation text keeps its snapshot-era review wording under the
   explicit content boundary. Current inventory/STATE records the resolved merge gate;
   independent all-view fidelity review remains item 6.
-- Knowledge assessment: extend indexed [dataset-fidelity guidance](../knowledge/diagram-dataset-fidelity.md)
-  separately with merge/line reconciliation and production-catalog test guidance.
+- Knowledge assessment complete: updated indexed [dataset-fidelity guidance](../knowledge/diagram-dataset-fidelity.md)
+  in the separate knowledge checkpoint with merge/line reconciliation and production-catalog test guidance.
   Existing tests are reusable; no additional work script needed.
 
 ## Next steps and owners

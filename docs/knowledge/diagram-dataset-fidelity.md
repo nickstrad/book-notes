@@ -58,3 +58,17 @@ publishing. Local `git show` checks establish source existence, not public URL
 availability. Queuelet's inventory carries the pending review/merge and URL-check
 gates explicitly. Its historical exploration models retain old faults; final code
 and the lesson fix sections determine the architecture drawn.
+
+Item 4 integrated both real datasets without changing the shell or JSON model.
+Use the real production catalog in slice browser tests once integration lands;
+keep the third-entry catalog override only for the extensibility check. Remove
+invented bundles from `public/` so they do not ship in the production artifact.
+The shared catalog tests must exercise real bundles, not just decode fixtures.
+
+Reconcile an accepted merge at two levels: compare the full project tree, then
+check every source selector and its surrounding changed section. Queuelet's merged
+`7d26bb8` has identical project code to pinned `b6df7db`; citation edits moved the
+supporting structural-fix heading from line 65 to 68 without changing that section.
+A pinned URL at the old SHA must retain its original line. Record the merged line
+separately rather than replacing a valid pin with a line from a different revision.
+Keep the reconciled merge object available in CI as well as the original source pin.

@@ -92,4 +92,4 @@ report to Nick.
   Item 4 integrates both real datasets and reconciles Queuelet's pinned `b6df7db`
   against merged end-review fix pass `7d26bb8` (record `1712ced`); 66 unit tests,
   34 browser tests and production build pass.
-  Items 5–8 remain separate runs.
+  Catalog/evidence commit: `6243bc3`. Items 5–8 remain separate runs.
