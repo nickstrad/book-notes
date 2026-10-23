@@ -4,8 +4,8 @@ Goal: static C4 catalog for the book projects, per [PLAN.md](PLAN.md).
 Nick approved destination B (`pages/` in book-notes, `/book-notes/`) and the plan.
 The explicit item briefs supersede the proposal's pending gate and worktree default.
 
-Status (2026-10-23): item 5 in progress: workflow added; fresh-clone rehearsal and
-real Actions build/deploy verification underway. Production catalog contains Litefleet (default,
+Status (2026-10-23): item 5 complete: fresh-clone rehearsal and real Actions
+build/upload/deploy all pass. Production catalog contains Litefleet (default,
 seven views) and Queuelet (five views). Queuelet is reconciled against the merged
 Explore It! fix pass. Full local gate passes: 66 unit tests, 34 Chromium tests,
 TypeScript and production build. Items 6–8 remain separate runs.
@@ -174,8 +174,7 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Next steps and owners
 
-1. Current Sol finishes item 5: push verified workflow and watch Actions.
-2. Fable reviews all twelve views in item 6; Opus handles fixes/recheck, then Sol
+1. Fable reviews all twelve views in item 6; Opus handles fixes/recheck, then Sol
    publication/live verification in items 7–8.
 
 ## Open decisions and blockers
@@ -188,13 +187,13 @@ Catalog/evidence commit: `6243bc3` on main.
 
 ## Resume
 
-Checkout `/root/Software/book-notes`, branch `main`. Item 4 has no background run or
-server to resume; scratch is `/tmp/booknotes-sol-diag4/`. Node 22.23.2:
+Checkout `/root/Software/book-notes`, branch `main`. Item 5 has no background run or
+server to resume; scratch is `/tmp/booknotes-sol-diag5/`. Node 22.23.2:
 `cd pages && npm ci && npm run check`. Catalog and dataset slices now exercise real
 production data without overrides; only third-entry and error tests intercept loading.
 No worktree cleanup is required for this explicitly authorized main-checkout run.
 
-## Item 5 — CI/release rehearsal (Actions verification pending)
+## Item 5 — CI/release rehearsal complete
 
 - Explicit [brief](evidence/item-5/brief.md) authorizes main-checkout commits,
   push and a real Pages deployment, superseding item 5's older no-deploy wording.
@@ -224,5 +223,16 @@ No worktree cleanup is required for this explicitly authorized main-checkout run
 - [Check](evidence/item-5/check.txt), [install](evidence/item-5/install.txt),
   [manifest](evidence/item-5/manifest.txt), [initial missing-tag failure](evidence/item-5/initial-missing-tag-check.txt).
   Deployment/rehearsal commands and rollback are in `pages/README.md`.
-- Current checkpoint: local gate green; push and record real Actions run next.
-  Scratch `/tmp/booknotes-sol-diag5/`; no local server or test run remains.
+- Implementation pushed: `5cef3cfead2c8c1c0463196860f72cb94950cef0`.
+  Real [Actions run 39887098435](https://github.com/nickstrad/book-notes/actions/runs/39887098435)
+  **SUCCESS**; watched with `gh run watch 39887098435 --exit-status` (exit 0).
+  Hosted fresh checkout passed install, Chromium, full check, fallback, manifest,
+  artifact upload, configure-pages and deploy-pages. Deploy completed in 14 seconds.
+  [Run/job/step result](evidence/item-5/actions-run.json) and
+  [log excerpt](evidence/item-5/actions-summary.txt) retain evidence. No site URLs
+  were fetched for live content verification. Items 6–8 remain outstanding.
+- Knowledge/script assessment: reusable `pages/scripts/verify-dist.mjs` is part of
+  the workflow/runbook. Indexed [release guidance](../knowledge/diagram-site-release.md)
+  is saved in a separate knowledge commit. Final evidence/knowledge commits are
+  docs-only and use `[skip ci]` to avoid rebuilding identical site output.
+  Scratch `/tmp/booknotes-sol-diag5/`; no local server or background run remains.

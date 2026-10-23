@@ -1,0 +1,8 @@
+build	Set up job	﻿2026-10-23T01:59:45.3657777Z Current runner version: '2.338.0'
+build	Set up job	2026-10-23T01:59:45.3684740Z ##[group]Operating System
+build	Typecheck, unit/schema/source checks, build and browser checks	2026-10-23T02:06:25.2498167Z [2m Test Files [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+build	Typecheck, unit/schema/source checks, build and browser checks	2026-10-23T02:06:25.2498762Z [2m      Tests [22m [1m[32m66 passed[39m[22m[90m (66)[39m
+build	Typecheck, unit/schema/source checks, build and browser checks	2026-10-23T02:07:00.6316403Z   34 passed (34.3s)
+build	Verify publication manifest and base paths	2026-10-23T02:07:00.7119195Z PASS: Litefleet 7 views, Queuelet 5 views; HTML/assets/worker under /book-notes/; dist-only publication manifest
+deploy	Set up job	﻿2026-10-23T02:07:11.4510538Z Current runner version: '2.338.0'
+deploy	Set up job	2026-10-23T02:07:11.4543500Z ##[group]Operating System

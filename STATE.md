@@ -94,4 +94,6 @@ report to Nick.
   34 browser tests and production build pass.
   Catalog/evidence commit: `6243bc3`. Item 5 CI/rehearsal local gate passes:
   full-history Pages workflow, 66 unit tests, 34 browser tests and dist manifest.
-  Push and hosted Actions verification pending; items 6–8 remain separate runs.
+  Implementation `5cef3cf` pushed; [Actions run 39887098435](https://github.com/nickstrad/book-notes/actions/runs/39887098435)
+  completed build/upload/deploy successfully. Item 5 complete; items 6–8 remain
+  separate runs, with all-view fidelity review next and live content checks in item 8.
