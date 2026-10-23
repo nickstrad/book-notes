@@ -27,7 +27,9 @@ test("default catalog renders with documentation at the selected base", async ({
   await expect(picker(page).getByRole("option")).toHaveText([
     "Litefleet — Release It! (v1-hardened)", "Queuelet — Explore It! (v1-explored)",
   ]);
-  await expect(page.getByText("Snapshot release-it/v1-hardened", { exact: false })).toBeVisible();
+  await expect(page.getByText("Snapshot 9367863 (local tag release-it/v1-hardened)", { exact: false })).toBeVisible();
+  await expect(page.getByRole("link", { name: "pinned commit" }))
+    .toHaveAttribute("href", "https://github.com/nickstrad/book-notes/commit/936786399d7bab3ebbfa845b9a07df02b41ed363");
   await expect(page.getByRole("heading", { name: "Litefleet: system context explained", exact: true })).toBeVisible();
   await expect(page.locator("body")).not.toContainText("ts-db");
 });

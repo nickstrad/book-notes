@@ -49,7 +49,10 @@ export function Site({ loaded, selection, choose, skipToMain }: SiteProps) {
         </SiteBar>
         <SiteMain>
           <section aria-label={selection.shown.title}>
-            <p className="dataset-note"><strong>{selection.shown.title}.</strong> {selection.snapshot}</p>
+            <p className="dataset-note">
+              <strong>{selection.shown.title}.</strong> Snapshot {selection.snapshot?.label}
+              {selection.snapshot?.commitUrl && <> · <a href={selection.snapshot.commitUrl}>pinned commit</a></>}
+            </p>
             <div className="c4-viewer-grid"><div><DiagramView /></div><DiagramDocumentation /></div>
           </section>
         </SiteMain>

@@ -40,7 +40,21 @@ export interface Selection {
   readonly choices: readonly Choice[];
   readonly shown?: Architecture;
   readonly message?: string;
-  readonly snapshot?: string;
+  readonly snapshot?: Snapshot;
+}
+/** The dataset's revision label, plus a link to the pinned commit when its sources name one on GitHub. */
+export interface Snapshot {
+  readonly label: string;
+  readonly commitUrl?: string;
+}
+
+export function snapshotOf({ bundle }: ValidatedArchitecture): Snapshot {
+  const short = bundle.revision.match(/\b[0-9a-f]{7,40}\b/)?.[0];
+  for (const source of bundle.sources) {
+    const pinned = source.url.match(/^(https:\/\/github\.com\/[^/]+\/[^/]+)\/blob\/([0-9a-f]{40})\//);
+    if (short && pinned?.[2].startsWith(short)) return { label: bundle.revision, commitUrl: `${pinned[1]}/commit/${pinned[2]}` };
+  }
+  return { label: bundle.revision };
 }
 
 export function selectArchitecture(loaded: Extract<Loaded, { state: "ready" }>, route: SiteRoute): Selection {
@@ -52,6 +66,6 @@ export function selectArchitecture(loaded: Extract<Loaded, { state: "ready" }>, 
     })),
     shown,
     message: shown ? undefined : route.kind === "not-found" ? route.message : `Unknown architecture "${shownId}".`,
-    snapshot: shown ? `Snapshot ${shown.validated.bundle.revision}` : undefined,
+    snapshot: shown ? snapshotOf(shown.validated) : undefined,
   };
 }

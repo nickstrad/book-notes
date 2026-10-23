@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "queuelet",
   "title": "Queuelet \u2014 Explore It! (v1-explored)",
-  "revision": "explore-it/v1-explored \u00b7 b6df7db",
+  "revision": "b6df7db (local tag explore-it/v1-explored)",
   "defaultDiagramId": "context",
   "model": {
     "elements": [

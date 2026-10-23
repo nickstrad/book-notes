@@ -20,7 +20,10 @@ describe("catalog settlement and view selection", () => {
     if (loaded.state !== "ready") throw new Error("Fixture failed to load");
     const selected = selectArchitecture(loaded, { kind: "home" });
     expect(selected.shown?.id).toBe("queuelet");
-    expect(selected.snapshot).toBe("Snapshot explore-it/v1-explored · b6df7db");
+    expect(selected.snapshot).toEqual({
+      label: "b6df7db (local tag explore-it/v1-explored)",
+      commitUrl: "https://github.com/nickstrad/book-notes/commit/b6df7db044782dd3517d041a8aad95308a3a80c9",
+    });
     expect(selected.choices[0].href).toBe("#/architectures/litefleet/diagrams/context");
     expect(selectArchitecture(loaded, { kind: "not-found", message: "Bad hash" }))
       .toMatchObject({ shown: undefined, message: "Bad hash" });

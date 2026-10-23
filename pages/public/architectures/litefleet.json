@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "litefleet",
   "title": "Litefleet \u2014 Release It! (v1-hardened)",
-  "revision": "release-it/v1-hardened \u00b7 9367863",
+  "revision": "9367863 (local tag release-it/v1-hardened)",
   "defaultDiagramId": "context",
   "model": {
     "elements": [
