@@ -1,0 +1,8 @@
+PRESENT: A1 — attempt 20 schedules retry in 30.34 days with base 5 seconds
+CONTROL EXIT: A1 0
+PRESENT: A2 — lease → purge → nack leaves retry_wait
+CONTROL EXIT: A2 0
+PRESENT: A3 — cancelled running work; completion ack=409, no cancellation signal in worker protocol
+CONTROL EXIT: A3 0
+PRESENT: A4 — dead job deleted by retention sweep at zero-hour retention
+CONTROL EXIT: A4 0

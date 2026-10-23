@@ -1,0 +1,235 @@
+{
+  "experiment": 1,
+  "source_tag": "explore-it/v0-inherited",
+  "export_path": "/tmp/explore-it-experiment-01",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "e5594528934f7832ba937047f617d915c88ec2f37791a16568731b642b1989ce"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "03a7dfae613d8b8095b41b8b0a70f7009c167243e7cc503ebe97eaa501227b11"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "19116a6a9010055e9e967da68d64e7ed045783408d26b850c5dcb9d52b8575c7"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "c6ac1e91318a74b34a3ec98336d6ea6e6aa0197add22d38fe1fe0c24af0f3312"
+    },
+    {
+      "file": "exploration/models/ecosystem.md",
+      "sha256": "d445cbbb84e00ab326d8cfac934479084b2300265ad3a9fb0c66d4c4771bba54"
+    },
+    {
+      "file": "exploration/models/entities.md",
+      "sha256": "aa0444bec9729d8b6103c4cc0d6485a544ff9036f340c46eb907ec4c231640d6"
+    },
+    {
+      "file": "exploration/models/nouns-verbs.md",
+      "sha256": "2cc661a8b3655afee3e661e314c310292ae3d835d8eda7216e2a73f8f29ed395"
+    },
+    {
+      "file": "exploration/models/variables.md",
+      "sha256": "c0ea8c177187a36c3e2194975ed5d04aca5a1eaafa2c4b61b1faa7d4ebdb3aae"
+    },
+    {
+      "file": "exploration/models/map.md",
+      "sha256": "ab4c8ce0c5fe380763cffa69686234feed19b73cf3595fa0769f2266b9a98f79"
+    },
+    {
+      "file": "exploration/defects/F21-lease-unknown-worker-200.md",
+      "sha256": "57cd96d6ccb7b642c5bd607e380211d07c8b0b513c6559d310aa52f49e2c6fdd"
+    },
+    {
+      "file": "exploration/defects/F06-retry-accepts-non-dead-jobs.md",
+      "sha256": "9640ffb9c6b98fa89f5ef2f7da08109e114d8ec12bbbd6164a6bef443919ce83"
+    },
+    {
+      "file": "exploration/defects/F02-nack-ignores-token-and-state.md",
+      "sha256": "0495de04a2e923cefbfd321e6ba32cb71444af63612f9ccfba96b6af8123a14f"
+    },
+    {
+      "file": "exploration/defects/F27-schedule-zone-offset-frozen.md",
+      "sha256": "22176b5a1c1ad62a9ca29b212393ff2e24b751ea01797dd5674ef3eb24b92432"
+    },
+    {
+      "file": "exploration/defects/F20-unknown-fields-and-enums-accepted.md",
+      "sha256": "11eb9e5006e3e845e992337416c1acdaf4b39280cadd31d2ca5b1251d8a4af71"
+    },
+    {
+      "file": "exploration/defects/F04-max-attempts-off-by-one.md",
+      "sha256": "02278d73ad8633e53c2a37e0797cb28c6cc444ced018580cc5ce095e7cd7463b"
+    },
+    {
+      "file": "exploration/defects/F22-qctl-exit-status-zero-on-error.md",
+      "sha256": "e6751731b82162d0bfb8e8e39de3a4d6f2be4333b09f19adda4cf2e476066992"
+    },
+    {
+      "file": "exploration/defects/F13-slow-webhook-stalls-background-loop.md",
+      "sha256": "51f8d0ee6097ffae29ef53f8864c519d588585635a28ea6b5c1e7c31f7d90ffb"
+    },
+    {
+      "file": "exploration/defects/F08-background-loop-stops-on-error.md",
+      "sha256": "07f22acf900805de8e24bccb5d87ed44bced52899831ddedd94f9370779557cb"
+    },
+    {
+      "file": "exploration/defects/F25-purge-leaves-scheduled-and-retry.md",
+      "sha256": "a4cc58c4c6dfaba67f2c493a1d942b443a4056f8a302a147852339d1b7849a32"
+    },
+    {
+      "file": "exploration/defects/F03-job-endpoints-cross-namespace.md",
+      "sha256": "26ae6f276757d7f41d14ccb19ed0c7167d9228e169418fc2e6ba9624146c9db5"
+    },
+    {
+      "file": "exploration/defects/F05-expired-lease-not-counted.md",
+      "sha256": "8d07aaace1a4a5c01132316ead27e6a039deb3f48f2ed50b973e40a563b2547e"
+    },
+    {
+      "file": "exploration/defects/F17-payload-numeric-precision.md",
+      "sha256": "9caa474a42b527db3c56415d424b70443f328ddc32810b432883874b3792ce70"
+    },
+    {
+      "file": "exploration/defects/F11-webhook-non-2xx-marked-delivered.md",
+      "sha256": "06e1515eae041111d986263a30595640c8a0b277d17952ac3ac97883c18aed39"
+    },
+    {
+      "file": "exploration/defects/F12-webhook-result-stringified-truncated.md",
+      "sha256": "5da226b7f5e34d97497129a1767ed9de42a51d5440d675fcbbcdfeb28496b10f"
+    },
+    {
+      "file": "exploration/defects/README.md",
+      "sha256": "b2ff934485dd4bc14ef5bc6c69d3204a30db97e17f81f66dc489de27281e7cfe"
+    },
+    {
+      "file": "exploration/defects/F18-stats-queued-includes-other-states.md",
+      "sha256": "d05dec4c61c70359dcae65a16e2bde26650bcf045af98cc7cc6bcf862c74a1dc"
+    },
+    {
+      "file": "exploration/defects/F09-schedule-patch-accepts-invalid-cron.md",
+      "sha256": "1b27df10cfe5a82cb6e656b063a827be642193808a55b7625e934f06adb6648a"
+    },
+    {
+      "file": "exploration/defects/F15-queue-delete-orphans.md",
+      "sha256": "88b4cec232e65d70c07d62d7a57e1ace5b2c646fff0871f8cb00365931326c3d"
+    },
+    {
+      "file": "exploration/defects/F19-range-and-charset-validation.md",
+      "sha256": "e26fadc63873d42f9ded4e70fb21d179a15d543996ca68f5456c1d486ffbd6f0"
+    },
+    {
+      "file": "exploration/defects/F26-stats-age-from-run-at.md",
+      "sha256": "07982efc742ac54d53ac83edbad4d7018e17888899af3a54e49fb87a00920537"
+    },
+    {
+      "file": "exploration/defects/F23-fifo-ties-within-a-second.md",
+      "sha256": "c06fbe45adcac449a646ddbcaaa0227eba765e2306d9f8f7bed134da3adb1b06"
+    },
+    {
+      "file": "exploration/defects/F07-schedule-patch-not-reflected.md",
+      "sha256": "9d9ff56ff2e82259a389de172972d4b1463e92ae7e8a5cc34ef4b64d7e64e618"
+    },
+    {
+      "file": "exploration/defects/F16-batch-bounds-and-atomicity.md",
+      "sha256": "4282f5f174012bb9cf3a569310f01a180da28c3f9afdffa686908975daef67e6"
+    },
+    {
+      "file": "exploration/defects/F24-resume-catch-up-burst.md",
+      "sha256": "955c12e2d92ac3578a40e3df3899c25bdfce794b772d3112ee6dfa058b987039"
+    },
+    {
+      "file": "exploration/defects/F01-ack-ignores-lease-token.md",
+      "sha256": "5f3dc5c5132da5186ab1fc363172d635aa091732759fd824650e133c0cc12c80"
+    },
+    {
+      "file": "exploration/defects/F10-webhook-signature-wrong-bytes.md",
+      "sha256": "8fd7a03ceaa845c27facf49b2b17ce3f30b11a44593deacb31f5e3d6f92c612a"
+    },
+    {
+      "file": "exploration/defects/F14-db-outage-reported-as-invalid-key.md",
+      "sha256": "2d8a2c7ce51ab50791a6494375c821cd18ff907cac3dfbc19b4796f9726f3e9f"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/revealed.md",
+      "sha256": "761bfc42f907cfc572bbc80ba8fe1ec98eb5eac4cbc5b5643211975367a01621"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/charter.md",
+      "sha256": "b842d8bd0f20ccc764589958f53362a4dbfc1f9929cc12652c66cd62d9ca0089"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/brief.md",
+      "sha256": "0dfcaa373b6f9f0a1e7f86392ba0d2f1a5d5848e2aefe7a0162d56ea3e6dcbab"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/notes.md",
+      "sha256": "956cd3a6056355ebdd7f09ea7826ea82371881492211f4593fa86be34a25a04d"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/manifest.json",
+      "sha256": "8ac8d85153ee0cacf5913bff34ccf740c74d441d6a61e162a8c1eded9de06c1a"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h09c.sid",
+      "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h15-501.json",
+      "sha256": "3b1481daf01bba89fde7d7e7b419bb780424f7f79ab43e47dd44f65c8247d127"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h40-sweep.txt",
+      "sha256": "ff09fc603d1b5d4797e99bb84d40bcf1a211ec5554becdb8f69676d08801ba14"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h01-lease2.json",
+      "sha256": "c4c45a38732c9f3d52604a932c5d34ac8861773271c98975661979acd2b3cd21"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h09b.sid",
+      "sha256": "06e9d52c1720fca412803e3b07c4b228ff113e303f4c7ab94665319d832bbfb7"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/gw.txt",
+      "sha256": "b7101f2080d5c54943d9fb965ac88e207d077b9f3dfa5e23a5abe08b80f64741"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/h09.sid",
+      "sha256": "f0b5c2c2211c8d67ed15e75e656c7862d086e9245420892a7de62cd9ec582a06"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/sigcap.jsonl",
+      "sha256": "259d9d2e908ea55cb5a9b9e5f0b6fecc16267798f7ebf01a98f16f00ee055230"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/e01-up.log",
+      "sha256": "970f8ad6a2c618970f42a42c28674c3dc4a05b31e9547a4f8a46d1043e7dfef1"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/sigcap.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/e01.env",
+      "sha256": "5d48d5ea3b06ccb05e129a6f83c038fde23e5ff78768953a5d645625ee9e2e7b"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/tools/fixcites.sed",
+      "sha256": "9a4a43888002f1e9366c4a36422d3cc208bc1a725fc65a0437323da0533c8dc6"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/tools/sigcap.py",
+      "sha256": "478f1e4c30bffae4937b26287d24dc8c6162c4d644093f8d8606d9c8e1d3998a"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/tools/sigcheck.py",
+      "sha256": "17bfff0d5aea91d7567aafcd5f29e71c82f319b8f8192c2d200b71a40badddd3"
+    },
+    {
+      "file": "exploration/experiments/01-map-it/evidence/project-results/dst/main.go",
+      "sha256": "4015f15ab6f73005f06f9f53dd636e9f8ce171765f0d4cc972135deea12d766e"
+    }
+  ]
+}

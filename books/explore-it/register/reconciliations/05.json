@@ -1,0 +1,23 @@
+{
+  "experiment": 5,
+  "raw_reports": 3,
+  "new_catalogue_defects": 0,
+  "catalogue_expected": ["D12", "D13", "D14", "A2"],
+  "catalogue_expected_found_early_in": {"D12": 1, "D13": 1, "D14": 1},
+  "silence_resolved_here": {"A2": "probed as chartered (P3), judged consistent with SPEC, not filed; resolved by decision"},
+  "new_unplanned_bugs": 3,
+  "raw_hypotheses": {
+    "stated": 22,
+    "confirmed": 18,
+    "refuted": 2,
+    "reading_contradictions": 2,
+    "model_cells": 16
+  },
+  "crosswalk": [
+    {"original": "E05-F01", "canonical": "U24", "classification": "bug plus spec line"},
+    {"original": "E05-F02", "canonical": "U25", "classification": "bug plus spec line; cancelled in-flight attempt row left with A3"},
+    {"original": "E05-F03", "canonical": "U26", "classification": "bug"},
+    {"original": "H-E05-03 (P3)", "canonical": "A2", "classification": "spec silence, decided"}
+  ],
+  "silences_left_for_later": ["A3", "A4"]
+}

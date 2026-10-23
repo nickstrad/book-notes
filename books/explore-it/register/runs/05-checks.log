@@ -1,0 +1,195 @@
+=== RUN   TestL00QueueCRUD
+--- PASS: TestL00QueueCRUD (0.02s)
+=== RUN   TestL00HappyPath
+--- PASS: TestL00HappyPath (0.14s)
+=== RUN   TestL00Auth
+--- PASS: TestL00Auth (0.00s)
+=== RUN   TestL00ConcurrentLeases
+--- PASS: TestL00ConcurrentLeases (0.05s)
+=== RUN   TestL01D01
+    lesson01_test.go:25: ABSENT: D01 — CLI missing-job exit=1; stderr=HTTP 404: {"error":{"code":"job_not_found","message":"job not found"}}
+--- PASS: TestL01D01 (0.44s)
+=== RUN   TestL01D02
+    lesson01_test.go:26: ABSENT: D02 — delete absent queue HTTP 404
+--- PASS: TestL01D02 (0.25s)
+=== RUN   TestL01D03
+    lesson01_test.go:27: ABSENT: D03 — expired lease counted=1; attempt rows=1
+--- PASS: TestL01D03 (2.31s)
+=== RUN   TestL01D04
+    lesson01_test.go:28: ABSENT: D04 — partner HTTP 500; marked delivered=f
+--- PASS: TestL01D04 (1.59s)
+=== RUN   TestL01D05
+    lesson01_test.go:29: ABSENT: D05 — priority -1/10 statuses=[400, 400]
+--- PASS: TestL01D05 (0.23s)
+=== RUN   TestL01D06
+    lesson01_test.go:30: ABSENT: D06 — batch zero=400, 501=400, persisted=0
+--- PASS: TestL01D06 (0.25s)
+=== RUN   TestL01D07
+    lesson01_test.go:31: ABSENT: D07 — slash/space queue create statuses=[400, 400]; contract requires rejection
+--- PASS: TestL01D07 (0.21s)
+=== RUN   TestL01D08
+    lesson01_test.go:32: ABSENT: D08 — input=9007199254740993; stored=9007199254740993; leased=9007199254740993
+--- PASS: TestL01D08 (0.23s)
+=== RUN   TestL01D09
+    lesson01_test.go:33: ABSENT: D09 — first nack max_attempts=1 leaves dead
+--- PASS: TestL01D09 (0.25s)
+=== RUN   TestL01D10
+    lesson01_test.go:34: ABSENT: D10 — stats queued=0; read-only SQL queued=0
+--- PASS: TestL01D10 (0.48s)
+=== RUN   TestL01D11
+    lesson01_test.go:35: ABSENT: D11 — oldest=340, first=340, next after public nack/promote=340
+--- PASS: TestL01D11 (0.79s)
+=== RUN   TestL01D12
+    lesson01_test.go:36: ABSENT: D12 — purged scheduled/retry_wait/queued GET statuses=[404, 404, 404]
+--- PASS: TestL01D12 (0.36s)
+=== RUN   TestL01D13
+    lesson01_test.go:37: ABSENT: D13 — resume after two missed minute ticks produced=0; elapsed=105.4s; maximum allowed=1
+--- PASS: TestL01D13 (105.65s)
+=== RUN   TestL01D14
+    lesson01_test.go:38: ABSENT: D14 — non-dead retry outcomes=[('cancelled', 409, 'cancelled'), ('succeeded', 409, 'succeeded')]
+--- PASS: TestL01D14 (0.37s)
+=== RUN   TestL01D15
+    lesson01_test.go:39: ABSENT: D15 — nonempty owner DELETE=409; dependent job/schedule=200/200
+--- PASS: TestL01D15 (0.25s)
+=== RUN   TestL01D16
+    lesson01_test.go:40: ABSENT: D16 — cron/zone recomputed=True; enabling sets next_run_at=2026-10-22T15:22:00Z
+--- PASS: TestL01D16 (0.28s)
+=== RUN   TestL01D17
+    lesson01_test.go:41: ABSENT: D17 — result complete=True; error chars=408/408
+--- PASS: TestL01D17 (2.02s)
+=== RUN   TestL01D18
+    lesson01_test.go:42: ABSENT: D18 — expired A ack=409; current B ack=200; stored result={'owner': 'B'}
+--- PASS: TestL01D18 (2.07s)
+=== RUN   TestL01D19
+    lesson01_test.go:43: ABSENT: D19 — nack incompatible outcomes=[('wrong-token', 409, 'leased'), ('cancelled', 409, 'cancelled'), ('queued', 409, 'queued')]
+--- PASS: TestL01D19 (0.36s)
+=== RUN   TestL01D20
+    lesson01_test.go:44: ABSENT: D20 — first crash max_attempts=1 leaves dead; completed attempts=1
+--- PASS: TestL01D20 (1.59s)
+=== RUN   TestL01D21
+    lesson01_test.go:45: ABSENT: D21 — foreign namespace get/attempts/cancel/retry/ack/nack/heartbeat/delete=[404, 404, 404, 404, 404, 404, 404, 404]
+--- PASS: TestL01D21 (0.31s)
+=== RUN   TestL01D22
+    lesson01_test.go:46: ABSENT: D22 — after DB recovery delayed job=queued; health HTTP 200 ok
+--- PASS: TestL01D22 (8.99s)
+=== RUN   TestL01D23
+    lesson01_test.go:47: ABSENT: D23 — opposite-season cron requires 02:00 America/New_York; next local fire=2027-01-01T02:00:00-05:00
+--- PASS: TestL01D23 (0.26s)
+=== RUN   TestL01D24
+    lesson01_test.go:48: ABSENT: D24 — signature_valid=True
+--- PASS: TestL01D24 (0.83s)
+=== RUN   TestL01D25
+    lesson01_test.go:49: ABSENT: D25 — unknown-worker error HTTP 404
+--- PASS: TestL01D25 (0.26s)
+=== RUN   TestL01D26
+    lesson01_test.go:50: ABSENT: D26 — typo field PATCH=400; unknown state GET=400
+--- PASS: TestL01D26 (0.26s)
+=== RUN   TestL01D27
+    lesson01_test.go:51: ABSENT: D27 — disabled schedule after real minute boundary produced=0; enabled control fired
+--- PASS: TestL01D27 (40.14s)
+=== RUN   TestL01U01
+    lesson01_test.go:52: ABSENT: U01 — invalid cron/zone PATCH statuses=[400, 400]
+--- PASS: TestL01U01 (0.31s)
+=== RUN   TestL01U02
+    lesson01_test.go:53: ABSENT: U02 — result type=dict; expected object
+--- PASS: TestL01U02 (0.96s)
+=== RUN   TestL01U03
+    lesson01_test.go:54: ABSENT: U03 — six-timeout-row promotion=1.96s; ok-partner control=1.89s; warm-lab bound=5s
+--- PASS: TestL01U03 (9.01s)
+=== RUN   TestL01U04
+    lesson01_test.go:55: ABSENT: U04 — during DB outage auth=503; health=503
+--- PASS: TestL01U04 (4.77s)
+=== RUN   TestL01U05
+    lesson01_test.go:56: ABSENT: U05 — invalid trailing element HTTP 400; persisted=1 expected=1; duplicate ids preserved
+--- PASS: TestL01U05 (0.28s)
+=== RUN   TestL01U06
+    lesson01_test.go:57: ABSENT: U06 — invalid max/retention/lease PATCH/create statuses=[400, 400, 400, 400, 400, 400]
+--- PASS: TestL01U06 (0.26s)
+=== RUN   TestL01U07
+    lesson01_test.go:58: ABSENT: U07 — unknown backoff kind create HTTP 400
+--- PASS: TestL01U07 (0.25s)
+=== RUN   TestL01U08
+    lesson01_test.go:59: ABSENT: U08 — new backdated job queued age=0.016s; elapsed+rounding bound=2.031s
+--- PASS: TestL01U08 (0.30s)
+=== RUN   TestL02ProductionClockDisabled
+--- PASS: TestL02ProductionClockDisabled (0.02s)
+=== RUN   TestL02LegacyMalformedOutboxIsolation
+--- PASS: TestL02LegacyMalformedOutboxIsolation (0.05s)
+=== RUN   TestL02T01
+    lesson02_test.go:21: ABSENT: T01 — jobs 387/388 JSON lifecycle events=['created', 'lease_expired', 'leased', 'notification_failed', 'notification_queued', 'succeeded']; correlated_fields=True; 500 and crash consoles compared
+--- PASS: TestL02T01 (2.56s)
+=== RUN   TestL02T02
+    lesson02_test.go:22: ABSENT: T02 — job 389: ['created', 'leased', 'succeeded', 'notification_queued', 'notification_failed']; abandoned 390: ['created', 'leased', 'lease_expired', 'notification_queued']; 500/outbox/error and true lease start retained; cross-tenant empty
+--- PASS: TestL02T02 (2.88s)
+=== RUN   TestL02T03
+    lesson02_test.go:23: ABSENT: T03 — job 391 scheduled→queued→leased→dead; advanced 3662 semantic seconds in 1.17s real time; non-admin 403
+--- PASS: TestL02T03 (1.42s)
+=== RUN   TestL02U09
+    lesson02_test.go:24: ABSENT: U09 — Compose echo 397 succeeded; fail3 398 state=dead attempts=1; actual qctl default echo 399 succeeded, fail3 400 attempts=1; 8s bounds
+--- PASS: TestL02U09 (8.89s)
+=== RUN   TestL02U10
+    lesson02_test.go:25: ABSENT: U10 — create/PATCH statuses=[400, 400, 400, 400, 400, 400]; independent job 401 partner_received=True; 8s bound
+--- PASS: TestL02U10 (1.16s)
+=== RUN   TestL03U11
+    lesson03_test.go:21: ABSENT: U11 — statuses {'trailing text': 400, 'second object': 400, 'invalid UTF-8': 400}; well-formed control 201
+--- PASS: TestL03U11 (0.25s)
+=== RUN   TestL03U12
+    lesson03_test.go:22: ABSENT: U12 — {'KIND/PAYLOAD': 400, 'priority then PRIORITY': 400}; exact unknown name 400
+--- PASS: TestL03U12 (0.22s)
+=== RUN   TestL03U13
+    lesson03_test.go:23: ABSENT: U13 — delay/extension 9223372037s: wrapped into the past {'enqueue': False, 'heartbeat': False, 'nack': False}
+--- PASS: TestL03U13 (0.29s)
+=== RUN   TestL03U14
+    lesson03_test.go:24: ABSENT: U14 — statuses {'create lease 2^31': 400, 'PATCH lease 2^31': 400, 'name 2800 random': 400}; duplicate name 409
+--- PASS: TestL03U14 (0.24s)
+=== RUN   TestL03U15
+    lesson03_test.go:25: ABSENT: U15 — create retention 1e8 → 400; zero-retention control 406 still present after 6 s=False; health 200
+--- PASS: TestL03U15 (0.94s)
+=== RUN   TestL03U16
+    lesson03_test.go:26: ABSENT: U16 — attempt 4 at base 2147483647 s: state retry_wait, run_at 2094-11-09T18:36:47.297526Z
+--- PASS: TestL03U16 (3.00s)
+=== RUN   TestL03U17
+    lesson03_test.go:27: ABSENT: U17 — max_seconds -7 → 400; attempt 2 at base 4, cap 5 waits 5.0 s
+--- PASS: TestL03U17 (1.04s)
+=== RUN   TestL03U18
+    lesson03_test.go:28: ABSENT: U18 — secret-only PATCH → url 'http://hooksink:8201/hook'; url-only PATCH → secret 'rotated'
+--- PASS: TestL03U18 (0.23s)
+=== RUN   TestL04U19
+    lesson04_test.go:21: ABSENT: U19 — PUT /v1/queues → 405 application/json envelope=True; GET /v1/nope → 404 application/json envelope=True; PATCH /v1/jobs/1 → 405 application/json envelope=True
+--- PASS: TestL04U19 (0.23s)
+=== RUN   TestL04U20
+    lesson04_test.go:22: ABSENT: U20 — attempts after dead → retry → ack: n=[1, 2] outcomes=['failed', 'succeeded']
+--- PASS: TestL04U20 (0.31s)
+=== RUN   TestL04U21
+    lesson04_test.go:23: ABSENT: U21 — delay_seconds -5: enqueue → 400, nack → 400
+--- PASS: TestL04U21 (0.24s)
+=== RUN   TestL04U22
+    lesson04_test.go:24: ABSENT: U22 — heartbeat 1 s after lease_expires_at (before or after the sweep): [409, 409, 409]
+--- PASS: TestL04U22 (0.33s)
+=== RUN   TestL04U23
+    lesson04_test.go:25: ABSENT: U23 — oldest_queued_age just after release: expiry 0 s, worker deletion 0 s
+--- PASS: TestL04U23 (0.71s)
+=== RUN   TestL04A1
+    lesson04_test.go:26: ABSENT: A1 — attempt 2 at base 3000 s, no max_seconds: waits 3600 s
+--- PASS: TestL04A1 (0.92s)
+=== RUN   TestL04Invariants
+    lesson04_test.go:36: INVARIANTS HOLD: I1–I7 over 200 jobs, 12 rounds, seed 4; actions {'lapse': 38, 'cancel': 49, 'nack': 87, 'ack': 83, 'dead': 49}
+--- PASS: TestL04Invariants (22.37s)
+=== RUN   TestL05U24
+    lesson05_test.go:21: ABSENT: U24 — max_attempts 2, lease then delete the worker ×4: 2 deliveries, attempt [1, 2], history ['released', 'released'], now dead
+--- PASS: TestL05U24 (0.36s)
+=== RUN   TestL05U25
+    lesson05_test.go:22: ABSENT: U25 — lease fields on terminal rows: succeeded 648 none; cancelled 649 none
+--- PASS: TestL05U25 (0.37s)
+=== RUN   TestL05U26
+    lesson05_test.go:23: ABSENT: U26 — after one lease expiry, ack logged succeeded, cancel logged cancelled
+--- PASS: TestL05U26 (1.00s)
+=== RUN   TestL05A2
+    lesson05_test.go:24: ABSENT: A2 — lease → purge (deleted 0) → nack leaves dead
+--- PASS: TestL05A2 (0.36s)
+=== RUN   TestL05Walk
+    lesson05_test.go:34: WALK HOLDS: 100/100 steps, W1–W7 after each, seed 5; verbs {'ack': 1, 'advance': 12, 'cancel': 5, 'delete_worker': 11, 'enqueue': 12, 'enqueue_delay': 2, 'lease': 27, 'nack': 1, 'nack_dead': 2, 'pause': 4, 'purge': 5, 'resume': 3, 'retry': 3, 'worker': 12}
+--- PASS: TestL05Walk (96.94s)
+PASS
+ok  	queuelet/test/checks	334.747s
+checks exit=0 335s

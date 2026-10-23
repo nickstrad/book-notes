@@ -1,0 +1,143 @@
+{"command": ["make", "verify", "LESSON=07", "REF=explore-it/lesson-06"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix07", "QUEUELET_IMAGE_TAG": "fix07", "QUEUELET_API_PORT": "18290", "QUEUELET_HOOK_PORT": "18291", "QUEUELET_PG_PORT": "15523", "QUEUELET_URL": "http://localhost:18290", "QUEUELET_HOOK_URL": "http://localhost:18291", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15523/queuelet?sslmode=disable"}, "start": "2026-10-22T18:42:52.633406+00:00"}
+REF='explore-it/lesson-06' bash lab/verify.sh 07
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 599B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.3s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 236.42kB 0.1s done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.2s done
+#7 DONE 0.2s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#8 DONE 0.2s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.2s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 39.9s
+
+#14 [stage-1 3/5] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 DONE 0.1s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 0.2s done
+#18 exporting manifest sha256:bbd9179c016da7b4060431b391baf7e9a722a37c351edf11686fe8d30b3d27d0 0.0s done
+#18 exporting config sha256:37a5758f8704576110df4af4db7ce36d250eb592d34bbb74de978788205e8a72 0.0s done
+#18 exporting attestation manifest sha256:f2551091cecff67e3c0d209bb17534eeeae79c6c60a2b6234df1f3b4760f23b7
+#18 exporting attestation manifest sha256:f2551091cecff67e3c0d209bb17534eeeae79c6c60a2b6234df1f3b4760f23b7 0.1s done
+#18 exporting manifest list sha256:b5dc4d7291fa5ab104702a354994c89005d5b5f1d15d09353435574d62e6c65c 0.1s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref 0.1s done
+#18 DONE 0.6s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Started 
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 0, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 1, "zombie_ids": [342, 343, 344, 345, 346, 347, 348, 349, 350, 351]}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 2, "zombie_ids": [392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421]}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 3, "zombie_ids": [432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461]}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 4, "zombie_ids": [482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501]}
+{"error": "RuntimeError(('duplicate lease', {'attempt': 2, 'id': 502, 'kind': 'manual', 'lease_expires_at': '2026-10-22T18:49:01.498678146Z', 'lease_token': 'bba30889d02f73b24033beb5faa37a41', 'payload': {}}))", "label": "PROBE ERROR", "probe": "U34"}
+Traceback (most recent call last):
+  File "/tmp/explore-it-coordinator/e07/fixer/ref.LOlHwD/books/explore-it/project/lab/repro/probe07.py", line 311, in <module>
+    present,detail={'U34':worker_delete,'U35':purge_races,'A3':cooperation}[p.ID]()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/explore-it-coordinator/e07/fixer/ref.LOlHwD/books/explore-it/project/lab/repro/probe07.py", line 110, in worker_delete
+    p.require(item['id'] not in got, ('duplicate lease', item))
+  File "/tmp/explore-it-coordinator/e07/fixer/ref.LOlHwD/books/explore-it/project/lab/repro/probe.py", line 54, in require
+    raise RuntimeError(detail)
+RuntimeError: ('duplicate lease', {'attempt': 2, 'id': 502, 'kind': 'manual', 'lease_expires_at': '2026-10-22T18:49:01.498678146Z', 'lease_token': 'bba30889d02f73b24033beb5faa37a41', 'payload': {}})
+REF verification failed (exit 1); diagnostics: /root/Software/booknotes-work/explore-it/books/explore-it/project/results/ref-failure.CCotQc
+make: *** [Makefile:13: verify] Error 1
+
+EXIT 2; ELAPSED 73.427s

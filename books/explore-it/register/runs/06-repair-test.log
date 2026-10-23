@@ -1,0 +1,21 @@
+command: make test
+cwd: books/explore-it/project
+start: 2026-10-22T17:06:13.245283+00:00
+
+go test ./...
+?   	queuelet/cmd/api	[no test files]
+?   	queuelet/cmd/hooksink	[no test files]
+ok  	queuelet/cmd/qctl	2.628s
+?   	queuelet/cmd/worker	[no test files]
+?   	queuelet/internal/api	[no test files]
+ok  	queuelet/internal/client	0.100s
+ok  	queuelet/internal/clock	(cached)
+ok  	queuelet/internal/jobs	(cached)
+ok  	queuelet/internal/schedule	(cached)
+?   	queuelet/internal/stats	[no test files]
+?   	queuelet/internal/store	[no test files]
+?   	queuelet/internal/webhook	[no test files]
+ok  	queuelet/internal/worker	0.087s
+
+exit: 0
+elapsed_seconds: 5.668

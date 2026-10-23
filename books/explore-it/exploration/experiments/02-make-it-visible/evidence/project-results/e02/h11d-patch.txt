@@ -1,0 +1,2 @@
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":6,"lease_seconds":30,"max_attempts":3,"name":"e02patch","namespace_id":2,"paused":false,"retention_hours":24,"webhook_secret":"s","webhook_url":"http://bad host/x"}
+ [200]

@@ -1,0 +1,219 @@
+{
+  "experiment": 2,
+  "source_tag": "explore-it/lesson-01",
+  "export_path": "/tmp/explore-it-experiment-02",
+  "artifacts_copied_without_rewriting": [
+    {
+      "file": "exploration/hypotheses.md",
+      "sha256": "7c9656a19a42d7b4120a7b498f80fb00ad550e8b2cd3a92bb3ff6bc9af30822b"
+    },
+    {
+      "file": "exploration/models/causes.md",
+      "sha256": "ec2adc496ca980eb699f55a5f51b8ccf003d3bd4e28dfcff0aac0511e702e755"
+    },
+    {
+      "file": "exploration/models/rules.md",
+      "sha256": "01835b440499fb3c918908a6e2e7632ff9cbcffa83d097c7c0769ff17e07c38a"
+    },
+    {
+      "file": "exploration/models/states.md",
+      "sha256": "c46b76f03f31a71ad61c632d6871ac3f5bacb4b4c1ad8faecf73b34865f5f70e"
+    },
+    {
+      "file": "exploration/models/ecosystem.md",
+      "sha256": "8a2b179ae5204f783110a66c9eca615892a4ced9e8c9039f9a9461897ee1c63a"
+    },
+    {
+      "file": "exploration/models/entities.md",
+      "sha256": "ed805da6418f26caef8cdd99f633e7a864a2472564ecd9e9df33179a04d1736b"
+    },
+    {
+      "file": "exploration/models/nouns-verbs.md",
+      "sha256": "89d926289bd5ba1fb267e5e9cfff47d91f751395cc1f8cb66fd54d941161fb01"
+    },
+    {
+      "file": "exploration/models/variables.md",
+      "sha256": "afa368f135e53e1bd924bde31423eb1e14bb52745d3cb1cdd3c0bb9595cf4841"
+    },
+    {
+      "file": "exploration/models/map.md",
+      "sha256": "f6dc02dadfda8fb7ad294f8b7b2d5fc051321acc819270872e58765339e4eda8"
+    },
+    {
+      "file": "exploration/defects/E02-F02-unparsable-webhook-url-blocks-all-notifications.md",
+      "sha256": "f0858aa491062b71225768e62469f9ba77f69fdd8ae5972a78df4b92a5d863e0"
+    },
+    {
+      "file": "exploration/defects/README.md",
+      "sha256": "20e4cd0a2038c59f86b5b5603f33c92c31b0200d0509fccc4faec5fb9808fdce"
+    },
+    {
+      "file": "exploration/defects/E02-F03-timeout-shorter-than-partner-unbounded-duplicates.md",
+      "sha256": "cd4cfd989505fdcb7b303c3b9edd9fc041630396f356834a67440f5f06f1d640"
+    },
+    {
+      "file": "exploration/defects/E02-F01-sample-worker-ignores-failN-kinds.md",
+      "sha256": "564b5d0157c31be84aac693dc42cd7c16084c6a1f4ca3183aa057293d5a5b17a"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/revealed.md",
+      "sha256": "177202d4f9d5ac058f444474db75dbf382ff8ce2be28dbf2fd47d9c4567617fd"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/notes.md",
+      "sha256": "7884bf6cee43cc8ecd6d54ed967edc0dffe385e685658722964e94797760077a"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/tools/e02env.sh",
+      "sha256": "a75b961a2e0c6d6c3d4aa7f6351fbe8cf66998aaae98636fefb13064c0c5fea0"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/tools/watch-job.sh",
+      "sha256": "5d1ca73eecff230ad6c554981dd79289ae5e1b69aab949970d456ead22217092"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/tools/watch-outbox.sh",
+      "sha256": "97a0bce1bf9ca98cc55f2da53b68df86d0003a87cafba79e0dd27d760f7dd387"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/export-state.md",
+      "sha256": "64b0663aa896151fd1e4b30c895abdab67be8d45ad7b457991d6ffdcdf124ae5"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/manifest.json",
+      "sha256": "4a14ae9a4529b67da3e77a192afcf796f298f37cdc7f01350727696bc274a453"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-job.txt",
+      "sha256": "a0376b18f1fd492f1a25c1bd557381676bbbc6a55a78f802546a6bc13b36268b"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/hook-enqueue.json",
+      "sha256": "65db419bf9a5c390d54ab3f0c3710f8f39b2ebd0b9bb00389cbd998d3caae699"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h12-watch.txt",
+      "sha256": "8175b9e480529bb69c2f018678dc09d09c11b00187aba5db250bef96bde1c14e"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-acme-watch.txt",
+      "sha256": "cd948f23a205649b97ddd902d4bdcb3373636e5d54836c462141d1800549abea"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h12-job.json",
+      "sha256": "7f32051796290c323f2fcb4ec1bd0a741eaa6d02993d03a533fa74d0c15d9b51"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/hookok-watch.txt",
+      "sha256": "89c03daf7629626eec6cc3075fd4d0a07a7a77c261cc5d3affb4fe99828844ff"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-lease.json",
+      "sha256": "e2b18ddbcfd8d15e434dd8096f09f6d072387329328e25a9b2cd48036c164ddd"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/crash-enqueue.json",
+      "sha256": "4f60cbfd9db07644d0e99e6648871fcc56344d75deb091a37e8eed66b16e1b45"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h12-records.jsonl",
+      "sha256": "0bb38020e7664e1a4e7b42230330c5f98195e76e7ae92a4032fcd69cab83e134"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h13-watch.txt",
+      "sha256": "7715fb5f451bc99e13e1b9db3d07fa75a4d7216881396fc96671030ed35a583f"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/hook-ok-t.txt",
+      "sha256": "6378d47069004b3f58bff340f8bbe013eeaece5c41bc21bc91a8db915f6960e8"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/hook-302-records.jsonl",
+      "sha256": "2cb4b0bdbf6b3803148a06f08ea6d07a781338b9c46b7a2fa62c62f2b00414ad"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11c-acme.json",
+      "sha256": "65db419bf9a5c390d54ab3f0c3710f8f39b2ebd0b9bb00389cbd998d3caae699"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/up.log",
+      "sha256": "5b1acdb9ad7a108fa56a326b4ec31a150927be3ff72a2ae9336f96868038209c"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/crash-t0.txt",
+      "sha256": "5383c0c02e22e0d65b3c44fc1b16c517fd09b80aa59b6a851f54739e477f13f5"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/crash-watch.txt",
+      "sha256": "4a6b01dd4dcbd3c88f4dd7e43ef1b2cf6b7e1c4016146fe1fa851022191ad8dc"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/crash-id.txt",
+      "sha256": "7969ea6a6b4beec579e78b1e0fceed16290e7f2c47af20c710fbb31459b0d714"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h13-job.json",
+      "sha256": "448a7861bc660d007419601319354889b601a5d17532e9a9909e73c4aa93f8a9"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/fail-enqueue.json",
+      "sha256": "7f32051796290c323f2fcb4ec1bd0a741eaa6d02993d03a533fa74d0c15d9b51"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h15-job.json",
+      "sha256": "a40da82d81563694ead83169ce4c1b80c2a187434d9fabebe8c5e278a2a31c04"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-api.log",
+      "sha256": "df202908c6a41b960a4a104115405a502f2985545d52ba849463c2949c0caaf7"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h15-api.log",
+      "sha256": "fa7be20aafba324320f8856077bf9b6fcd8609021a353ec1cefcd2177dcc7840"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-acme-job.json",
+      "sha256": "8460d24b7e3193806dea2eb04df61c760b3177f11aeeaaaf19a022d6f33eab9c"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/final-snapshot.txt",
+      "sha256": "22accb6c713726b8438707de23813df5ec90965d6910e35687439d6dbc57e652"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h13-t0.txt",
+      "sha256": "3cb2b9eeb99289c35e3846141b3a7194ef496023608a59f4c0957713830b8c21"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11d-patch.txt",
+      "sha256": "5db0c95283675a10e450e19a51ad11319186b643ece44c27f1bc46d78c7a9aa3"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/fail3-enqueue.json",
+      "sha256": "448a7861bc660d007419601319354889b601a5d17532e9a9909e73c4aa93f8a9"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/all-logs-at-stop.txt",
+      "sha256": "6e0cf2cea8965c29cd5c51e0b282f9cc27e5e71decfe8e36167c1c515cc9feb6"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h14-job.json",
+      "sha256": "068866fc13380318fde3af2a136d49857117122235e19f493775b9ac28428ceb"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-worker.txt",
+      "sha256": "10e44dc6ef2954dd09be84db82c10b985235919c244c172ebd7e1b595db2e078"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/hook500-watch.txt",
+      "sha256": "589346e9b7d8e5a7ab4e667d3a7cc70890033221d0a3bbc3e4158b5015cb7d7a"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h11-queue.txt",
+      "sha256": "6a5f805326f988c6f5418735feaaa5b88645f8452769e5ad3a2001d5d2470c54"
+    },
+    {
+      "file": "exploration/experiments/02-make-it-visible/evidence/project-results/e02/h15-watch.txt",
+      "sha256": "71357b54d40e684fdd84109f7f67fdf6b9af05e75d96f9bf4df99a272445a55d"
+    }
+  ]
+}

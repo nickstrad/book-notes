@@ -1,0 +1,42 @@
+REF='' bash lab/verify.sh 00
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-b-1 Started 
+ Container queuelet-worker-a-1 Started 
+?   	queuelet/cmd/api	[no test files]
+?   	queuelet/cmd/hooksink	[no test files]
+?   	queuelet/cmd/qctl	[no test files]
+?   	queuelet/cmd/worker	[no test files]
+?   	queuelet/internal/api	[no test files]
+?   	queuelet/internal/client	[no test files]
+ok  	queuelet/internal/jobs	(cached)
+ok  	queuelet/internal/schedule	(cached)
+?   	queuelet/internal/stats	[no test files]
+?   	queuelet/internal/store	[no test files]
+?   	queuelet/internal/webhook	[no test files]
+?   	queuelet/internal/worker	[no test files]
+ok  	queuelet/test/checks	1.236s
+BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass
+=== RUN   TestL00QueueCRUD
+--- PASS: TestL00QueueCRUD (0.03s)
+=== RUN   TestL00HappyPath
+--- PASS: TestL00HappyPath (0.94s)
+=== RUN   TestL00Auth
+--- PASS: TestL00Auth (0.01s)
+=== RUN   TestL00ConcurrentLeases
+--- PASS: TestL00ConcurrentLeases (0.09s)
+PASS
+ok  	queuelet/test/checks	1.078s

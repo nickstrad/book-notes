@@ -1,0 +1,26 @@
+REF='' bash lab/verify.sh 02
+ Container queuelet-review-b-worker-b-1 Stopping 
+ Container queuelet-review-b-worker-a-1 Stopping 
+ Container queuelet-review-b-worker-a-1 Stopped 
+ Container queuelet-review-b-worker-b-1 Stopped 
+ Container queuelet-review-b-api-1 Stopping 
+ Container queuelet-review-b-api-1 Stopped 
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-api-1 Starting 
+ Container queuelet-review-b-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-worker-b-1 Starting 
+ Container queuelet-review-b-worker-a-1 Starting 
+ Container queuelet-review-b-worker-b-1 Started 
+ Container queuelet-review-b-worker-a-1 Started 
+ABSENT: T01 — jobs 301/302 JSON lifecycle events=['created', 'lease_expired', 'leased', 'notification_failed', 'notification_queued', 'succeeded']; correlated_fields=True; 500 and crash consoles compared
+ABSENT: T02 — job 303: ['created', 'leased', 'succeeded', 'notification_queued', 'notification_failed']; abandoned 304: ['created', 'leased', 'lease_expired', 'notification_queued', 'notification_failed']; 500/outbox/error and true lease start retained; cross-tenant empty
+ABSENT: T03 — job 305 scheduled→queued→leased→dead; advanced 3662 semantic seconds in 1.15s real time; non-admin 403
+ABSENT: U09 — Compose echo 308 succeeded; fail3 309 state=dead attempts=1; actual qctl default echo 310 succeeded, fail3 311 attempts=1; 8s bounds
+ABSENT: U10 — create/PATCH statuses=[400, 400, 400, 400, 400, 400]; independent job 312 partner_received=True; 8s bound
+ok  	queuelet/test/checks	17.276s
+FIXED AND CHECKED: 5 absent; regression checks pass

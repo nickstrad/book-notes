@@ -1,0 +1,30 @@
+REF='' bash lab/verify.sh 01
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-b-1 Started 
+ Container queuelet-worker-a-1 Started 
+ABSENT: D01 — CLI missing-job exit=1; stderr=HTTP 404: {"error":{"code":"job_not_found","message":"job not found"}}
+--- FAIL: TestL01D22 (10.43s)
+    lesson01_test.go:46: D22 regression: exit status 2
+        PROBE ERROR: D22 — ConnectionResetError(104, 'Connection reset by peer')
+--- FAIL: TestL01U04 (6.22s)
+    lesson01_test.go:55: U04 regression: exit status 2
+        PROBE ERROR: U04 — ConnectionResetError(104, 'Connection reset by peer')
+FAIL
+FAIL	queuelet/test/checks	169.711s
+FAIL
+make: *** [Makefile:13: verify] Error 1

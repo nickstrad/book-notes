@@ -1,0 +1,58 @@
+2026-10-22T12:46:50.463Z
+{"now":"2031-01-01T00:00:00Z"}
+ [200]
+{"id":48,"state":"queued"} [201]
+{"id":49,"state":"queued"} [201]
+{"id":50,"state":"queued"} [201]
+{"id":51,"state":"queued"} [201]
+{"id":52,"state":"queued"} [201]
+{"id":53,"state":"queued"} [201]
+{"id":54,"state":"scheduled"}
+ [201]
+lease 48
+{"ok":true}
+ [200]
+lease 49
+{"ok":true}
+ [200]
+lease 50
+--- R37 cancel leased, then holder verbs
+{"ok":true}
+ [200]
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+{"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+ [409]
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+--- R37 cancel queued (next in FIFO), then lease
+cancel 51
+{"ok":true}
+ [200]
+lease after cancel -> 52 (must not be 51)
+--- R34 stats vs direct count
+{"cancelled":2,"dead":0,"leased":1,"oldest_queued_age":0,"queued":1,"retry_wait":1,"scheduled":1,"succeeded":1,"throughput_last_hour":1}
+ [200]
+state | count
+cancelled | 2
+leased | 1
+queued | 1
+retry_wait | 1
+scheduled | 1
+succeeded | 1
+(6 rows)
+{"cancelled":2,"dead":0,"leased":1,"oldest_queued_age":31536000,"queued":45,"retry_wait":2,"scheduled":2,"succeeded":1,"throughput_last_hour":1}
+ [200]
+state | count
+cancelled | 2
+leased | 1
+queued | 45
+retry_wait | 2
+scheduled | 2
+succeeded | 1
+(6 rows)
+succ_last_hour
+1
+(1 row)

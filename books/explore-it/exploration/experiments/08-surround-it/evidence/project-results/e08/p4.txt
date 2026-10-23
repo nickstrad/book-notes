@@ -1,0 +1,18 @@
+e08cap ack 200 job 306 2026-10-22T19:25:48Z
+e08hs ack 200 job 307 2026-10-22T19:25:48Z
+-- e08cap job 306
+job.result (API): {"f": 1.1, "n": 12345678901234567890, "z": [], "trace": "E08-ü- -<&>", "nested": {"a": 2, "b": 1}}
+outbox row (SQL): 70|1|200|t|{"state": "succeeded", "job_id": 306, "result": {"f": 1.10, "n": 12345678901234567890, "z": [], "trace": "E08-ü- -<&>", "nested": {"a": 2, "b": 1}}, "last_error": ""}
+-- e08hs job 307
+job.result (API): {"f": 1.1, "n": 12345678901234567890, "z": [], "trace": "E08-ü- -<&>", "nested": {"a": 2, "b": 1}}
+outbox row (SQL): 71|1|200|t|{"state": "succeeded", "job_id": 307, "result": {"f": 1.10, "n": 12345678901234567890, "z": [], "trace": "E08-ü- -<&>", "nested": {"a": 2, "b": 1}}, "last_error": ""}
+== capture listener: path /cap content-type application/json
+raw bytes: {"state":"succeeded","job_id":306,"result":{"f":1.10,"n":12345678901234567890,"z":[],"trace":"E08-ü-\u2028-\u003c\u0026\u003e","nested":{"a":2,"b":1}},"last_error":""}
+received signature: c3678dd229ee1d7f57c18cfa7f14fc35502268111918336eddc80bb50a76dcc6
+hand HMAC-SHA256(e08-secret, raw): c3678dd229ee1d7f57c18cfa7f14fc35502268111918336eddc80bb50a76dcc6 equal: True
+wrong-secret check: False
+== hooksink record: status 200 signature_valid True
+raw_body: {"state":"succeeded","job_id":307,"result":{"f":1.10,"n":12345678901234567890,"z":[],"trace":"E08-ü-\u2028-\u003c\u0026\u003e","nested":{"a":2,"b":1}},"last_error":""}
+semantic equal (hooksink body == outbox body): True
+semantic equal (capture raw == outbox e08cap): True
+result n preserved: True f text in raw: True

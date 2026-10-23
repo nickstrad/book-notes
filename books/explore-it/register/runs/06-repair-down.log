@@ -1,0 +1,32 @@
+command: make down
+cwd: books/explore-it/project
+start: 2026-10-22T17:06:23.046193+00:00
+
+docker compose -f deploy/compose.yml down -v --remove-orphans
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-hooksink-1 Stopping 
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-hooksink-1 Stopped 
+ Container queuelet-hooksink-1 Removing 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-a-1 Removing 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-worker-b-1 Removing 
+ Container queuelet-hooksink-1 Removed 
+ Container queuelet-worker-b-1 Removed 
+ Container queuelet-worker-a-1 Removed 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-api-1 Removing 
+ Container queuelet-api-1 Removed 
+ Container queuelet-postgres-1 Stopping 
+ Container queuelet-postgres-1 Stopped 
+ Container queuelet-postgres-1 Removing 
+ Container queuelet-postgres-1 Removed 
+ Network queuelet_default Removing 
+ Volume queuelet_data Removing 
+ Volume queuelet_data Removed 
+ Network queuelet_default Removed 
+
+exit: 0
+elapsed_seconds: 3.124

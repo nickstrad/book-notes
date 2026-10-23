@@ -1,0 +1,15 @@
+{
+  "unit": "E02 fixer",
+  "agent": "/root/fix_e02",
+  "dispatched_at_utc": "2026-10-22T03:48:35.528910+00:00",
+  "mode": "fresh Codex collaboration agent; file-backed brief",
+  "process_exit_status": null,
+  "brief": "register/reconciliations/02-fixer-brief.md",
+  "source_record_commit": "e390c31",
+  "lifecycle": "completed",
+  "acceptance": "register/runs/02-acceptance.json",
+  "completed_at_utc": "2026-10-22T04:09:44.286042+00:00",
+  "hooks_commit": "3287bd9",
+  "final_commit": "commit containing this record",
+  "tag": "explore-it/lesson-02"
+}

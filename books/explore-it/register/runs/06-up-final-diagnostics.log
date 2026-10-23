@@ -1,0 +1,149 @@
+command: docker compose -f deploy/compose.yml ps -a
+NAME                  IMAGE                COMMAND                  SERVICE    CREATED              STATUS                          PORTS
+queuelet-api-1        queuelet:local       "api"                    api        About a minute ago   Exited (1) About a minute ago   
+queuelet-hooksink-1   queuelet:local       "hooksink"               hooksink   About a minute ago   Up About a minute               0.0.0.0:18201->8201/tcp, [::]:18201->8201/tcp
+queuelet-postgres-1   postgres:17-alpine   "docker-entrypoint.s…"   postgres   14 hours ago         Up 36 minutes (healthy)         0.0.0.0:15433->5432/tcp, [::]:15433->5432/tcp
+queuelet-worker-a-1   queuelet:local       "worker"                 worker-a   About a minute ago   Restarting (1) 5 seconds ago    
+queuelet-worker-b-1   queuelet:local       "worker"                 worker-b   About a minute ago   Restarting (1) 5 seconds ago    
+command: docker compose -f deploy/compose.yml logs --no-color --tail=120
+api-1  | {"time":"2026-10-22T15:57:47.248848282Z","level":"INFO","msg":"pq: constraint \"attempts_job_owner\" for relation \"attempts\" already exists"}
+worker-a-1  | {"time":"2026-10-22T15:57:47.685047321Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:48.386161987Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:49.135244275Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:50.031036916Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:51.298112145Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:53.422070006Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:57:57.113938253Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:58:04.166577301Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:58:17.448127937Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-a-1  | {"time":"2026-10-22T15:58:43.419867819Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:47.647121114Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:48.454104335Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:49.252543396Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:50.101606076Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:51.414214019Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:53.53342911Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:57:57.449878166Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:58:04.516123591Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:58:17.847317081Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+worker-b-1  | {"time":"2026-10-22T15:58:43.865175045Z","level":"INFO","msg":"Post \"http://api:8200/v1/workers\": dial tcp: lookup api on 127.0.0.11:53: server misbehaving"}
+postgres-1  | 2026-10-22 13:09:14.039 UTC [15831] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:09:14.050 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 13:09:14.055 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 13:09:14.060 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 13:09:14.093 UTC [15858] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:09:14.115 UTC [27] LOG:  checkpoint complete: wrote 194 buffers (1.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.017 s, total=0.061 s; sync files=65, longest=0.006 s, average=0.001 s; distance=2470 kB, estimate=4094 kB; lsn=0/342E420, redo lsn=0/342E420
+postgres-1  | 2026-10-22 13:09:14.128 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 13:09:17.617 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 13:09:17.617 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 13:09:17.618 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 13:09:17.628 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 13:09:17.641 UTC [29] LOG:  database system was shut down at 2026-10-22 13:09:14 UTC
+postgres-1  | 2026-10-22 13:09:17.658 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 13:10:17.985 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 13:10:17.990 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 13:10:17.991 UTC [459] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:10:17.992 UTC [372] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 13:10:18.002 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 13:10:18.050 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 13:10:18.055 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 13:10:18.118 UTC [471] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:10:18.121 UTC [27] LOG:  checkpoint complete: wrote 68 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.021 s, sync=0.019 s, total=0.071 s; sync files=40, longest=0.007 s, average=0.001 s; distance=309 kB, estimate=309 kB; lsn=0/347B850, redo lsn=0/347B850
+postgres-1  | 2026-10-22 13:10:18.134 UTC [472] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 13:10:18.160 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 13:10:22.876 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 13:10:22.876 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 13:10:22.877 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 13:10:22.894 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 13:10:22.928 UTC [29] FATAL:  the database system is starting up
+postgres-1  | 2026-10-22 13:10:22.935 UTC [28] LOG:  database system was shut down at 2026-10-22 13:10:18 UTC
+postgres-1  | 2026-10-22 13:10:22.987 UTC [30] FATAL:  the database system is starting up
+postgres-1  | 2026-10-22 13:10:22.990 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] ERROR:  duplicate key value violates unique constraint "queues_namespace_id_name_key"
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] DETAIL:  Key (namespace_id, name)=(1, repro-u14-ba69631eef) already exists.
+postgres-1  | 2026-10-22 13:10:48.448 UTC [151] STATEMENT:  INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
+postgres-1  | 2026-10-22 13:15:23.009 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:15:46.093 UTC [26] LOG:  checkpoint complete: wrote 226 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=22.966 s, sync=0.051 s, total=23.084 s; sync files=70, longest=0.014 s, average=0.001 s; distance=1947 kB, estimate=1947 kB; lsn=0/3662738, redo lsn=0/36626A8
+postgres-1  | 2026-10-22 13:50:23.710 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:50:41.790 UTC [26] LOG:  checkpoint complete: wrote 180 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.005 s, sync=0.026 s, total=18.080 s; sync files=47, longest=0.014 s, average=0.001 s; distance=1313 kB, estimate=1884 kB; lsn=0/37ACCF0, redo lsn=0/37AAE60
+postgres-1  | 2026-10-22 13:55:23.890 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 13:55:30.675 UTC [26] LOG:  checkpoint complete: wrote 68 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.754 s, sync=0.008 s, total=6.785 s; sync files=26, longest=0.006 s, average=0.001 s; distance=329 kB, estimate=1728 kB; lsn=0/3808E80, redo lsn=0/37FD650
+postgres-1  | 2026-10-22 14:00:23.763 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:00:30.960 UTC [26] LOG:  checkpoint complete: wrote 71 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.123 s, sync=0.022 s, total=7.197 s; sync files=26, longest=0.016 s, average=0.001 s; distance=350 kB, estimate=1590 kB; lsn=0/385E380, redo lsn=0/3854FA0
+postgres-1  | 2026-10-22 14:05:24.055 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:05:30.426 UTC [26] LOG:  checkpoint complete: wrote 63 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.328 s, sync=0.013 s, total=6.371 s; sync files=24, longest=0.008 s, average=0.001 s; distance=299 kB, estimate=1461 kB; lsn=0/38A7120, redo lsn=0/389FE60
+postgres-1  | 2026-10-22 14:10:24.529 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:10:32.156 UTC [26] LOG:  checkpoint complete: wrote 76 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.556 s, sync=0.037 s, total=7.628 s; sync files=28, longest=0.035 s, average=0.002 s; distance=361 kB, estimate=1351 kB; lsn=0/3907110, redo lsn=0/38FA2D8
+postgres-1  | 2026-10-22 14:15:24.255 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:15:29.992 UTC [26] LOG:  checkpoint complete: wrote 57 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.681 s, sync=0.033 s, total=5.738 s; sync files=22, longest=0.025 s, average=0.002 s; distance=320 kB, estimate=1248 kB; lsn=0/3956AD0, redo lsn=0/394A2E8
+postgres-1  | 2026-10-22 14:20:25.094 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:20:34.945 UTC [26] LOG:  checkpoint complete: wrote 93 buffers (0.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=9.300 s, sync=0.500 s, total=9.852 s; sync files=28, longest=0.445 s, average=0.018 s; distance=486 kB, estimate=1172 kB; lsn=0/39CEFF0, redo lsn=0/39C3D30
+postgres-1  | 2026-10-22 14:25:26.032 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:25:30.568 UTC [26] LOG:  checkpoint complete: wrote 45 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.468 s, sync=0.029 s, total=4.537 s; sync files=19, longest=0.019 s, average=0.002 s; distance=231 kB, estimate=1078 kB; lsn=0/39FDC50, redo lsn=0/39FDBF8
+postgres-1  | 2026-10-22 14:55:27.174 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 14:55:33.670 UTC [26] LOG:  checkpoint complete: wrote 65 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.464 s, sync=0.008 s, total=6.497 s; sync files=26, longest=0.004 s, average=0.001 s; distance=317 kB, estimate=1002 kB; lsn=0/3A57868, redo lsn=0/3A4D320
+postgres-1  | 2026-10-22 15:00:27.770 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:00:33.673 UTC [26] LOG:  checkpoint complete: wrote 59 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.858 s, sync=0.018 s, total=5.903 s; sync files=22, longest=0.014 s, average=0.001 s; distance=281 kB, estimate=930 kB; lsn=0/3A9EF68, redo lsn=0/3A939B0
+postgres-1  | 2026-10-22 15:05:27.773 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:05:32.563 UTC [26] LOG:  checkpoint complete: wrote 48 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.744 s, sync=0.016 s, total=4.790 s; sync files=21, longest=0.008 s, average=0.001 s; distance=251 kB, estimate=862 kB; lsn=0/3AD2930, redo lsn=0/3AD28A0
+postgres-1  | 2026-10-22 15:20:27.840 UTC [26] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:20:42.485 UTC [26] LOG:  checkpoint complete: wrote 147 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=14.589 s, sync=0.019 s, total=14.645 s; sync files=66, longest=0.008 s, average=0.001 s; distance=1514 kB, estimate=1514 kB; lsn=0/3C4D320, redo lsn=0/3C4D290
+postgres-1  | 2026-10-22 15:21:11.988 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 15:21:11.998 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 15:21:11.998 UTC [104135] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:21:11.998 UTC [103914] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:21:12.014 UTC [1] LOG:  background worker "logical replication launcher" (PID 33) exited with exit code 1
+postgres-1  | 2026-10-22 15:21:12.015 UTC [26] LOG:  shutting down
+postgres-1  | 2026-10-22 15:21:12.022 UTC [26] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 15:21:12.076 UTC [26] LOG:  checkpoint complete: wrote 33 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.016 s, total=0.062 s; sync files=27, longest=0.010 s, average=0.001 s; distance=117 kB, estimate=1374 kB; lsn=0/3C6A850, redo lsn=0/3C6A850
+postgres-1  | 2026-10-22 15:21:12.080 UTC [104216] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 15:21:12.094 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 15:21:15.209 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 15:21:15.217 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 15:21:15.228 UTC [29] LOG:  database system was shut down at 2026-10-22 15:21:12 UTC
+postgres-1  | 2026-10-22 15:21:15.244 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 15:22:12.986 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 15:22:12.992 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 15:22:12.992 UTC [127] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:22:12.992 UTC [397] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22 15:22:12.997 UTC [1] LOG:  background worker "logical replication launcher" (PID 32) exited with exit code 1
+postgres-1  | 2026-10-22 15:22:13.002 UTC [27] LOG:  shutting down
+postgres-1  | 2026-10-22 15:22:13.008 UTC [27] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 15:22:13.048 UTC [502] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22 15:22:13.052 UTC [27] LOG:  checkpoint complete: wrote 61 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.021 s, total=0.051 s; sync files=41, longest=0.009 s, average=0.001 s; distance=274 kB, estimate=274 kB; lsn=0/3CAF298, redo lsn=0/3CAF298
+postgres-1  | 2026-10-22 15:22:13.064 UTC [1] LOG:  database system is shut down
+postgres-1  | 
+postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 15:22:16.249 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 15:22:16.257 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 15:22:16.268 UTC [29] LOG:  database system was shut down at 2026-10-22 15:22:13 UTC
+postgres-1  | 2026-10-22 15:22:16.270 UTC [30] FATAL:  the database system is starting up
+postgres-1  | 2026-10-22 15:22:16.286 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] ERROR:  duplicate key value violates unique constraint "queues_namespace_id_name_key"
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] DETAIL:  Key (namespace_id, name)=(1, repro-u14-84c44b5265) already exists.
+postgres-1  | 2026-10-22 15:22:36.360 UTC [98] STATEMENT:  INSERT INTO queues(namespace_id,name,lease_seconds,max_attempts,retention_hours,backoff_kind,backoff_base,backoff_max,webhook_url,webhook_secret) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
+postgres-1  | 2026-10-22 15:27:16.365 UTC [27] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:27:35.175 UTC [27] LOG:  checkpoint complete: wrote 189 buffers (1.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.782 s, sync=0.010 s, total=18.811 s; sync files=68, longest=0.004 s, average=0.001 s; distance=1855 kB, estimate=1855 kB; lsn=0/3E7F228, redo lsn=0/3E7F198
+postgres-1  | 2026-10-22 15:57:16.769 UTC [27] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 15:57:20.995 UTC [27] LOG:  checkpoint complete: wrote 42 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.154 s, sync=0.014 s, total=4.226 s; sync files=34, longest=0.010 s, average=0.001 s; distance=187 kB, estimate=1688 kB; lsn=0/3EAE1A8, redo lsn=0/3EAE150
+postgres-1  | 2026-10-22 15:57:47.248 UTC [18400] ERROR:  constraint "attempts_job_owner" for relation "attempts" already exists
+postgres-1  | 2026-10-22 15:57:47.248 UTC [18400] STATEMENT:  -- Attempts share the lifetime of their job. Legacy orphans remain inspectable;
+postgres-1  | 	-- NOT VALID still enforces new writes and cascades all subsequent job deletions.
+postgres-1  | 	ALTER TABLE attempts ADD CONSTRAINT attempts_job_owner
+postgres-1  | 	 FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE NOT VALID;
+postgres-1  | 	CREATE INDEX IF NOT EXISTS attempts_job ON attempts(job_id);
+postgres-1  | 	

@@ -1,0 +1,20 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: python3 /tmp/explore-it-fix06/record-integrity.py
+start: 2026-10-22T16:20:55.520773+00:00
+{
+  "original_explorer_manifest": 3447,
+  "mismatches": [],
+  "allowed_canonical_status_index_changes_only": [
+    "books/explore-it/exploration/defects/INDEX.md",
+    "books/explore-it/exploration/defects/U27-schedule-delete-missing-204.md",
+    "books/explore-it/exploration/defects/U28-schedule-payload-not-validated.md",
+    "books/explore-it/exploration/defects/U29-sample-worker-echo-loses-precision.md",
+    "books/explore-it/exploration/defects/U30-qctl-rounds-payload-numbers.md",
+    "books/explore-it/exploration/defects/U31-nul-in-result-or-error-409-conflict.md",
+    "books/explore-it/exploration/defects/U32-enqueue-racing-queue-delete-400-fk-text.md",
+    "books/explore-it/exploration/defects/U33-attempts-outlive-their-job.md"
+  ]
+}
+
+exit: 0
+elapsed_seconds: 0.505

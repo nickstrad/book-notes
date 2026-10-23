@@ -1,0 +1,111 @@
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:e09 Pulling 
+ Image queuelet:e09 Pulling 
+ Image queuelet:e09 Pulling 
+ Image queuelet:e09 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e09 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e09 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e09 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 561B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 300.20kB 0.1s done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.3s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 35.3s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:2c74b5f5a03e7eaedd5dae88a68bf147f57fa2c6a3b20910cd5d1527705c7c37 0.0s done
+#18 exporting config sha256:a472d292cd02545155449a9f65db4a68262ac87282c02299cc5c6f41f75600f9 0.1s done
+#18 exporting attestation manifest sha256:873e3847b609806423c0ea904151e5b05dea401eae34c4559fa863752df018c1 0.1s done
+#18 exporting manifest list sha256:7bc567b1d27a8587a81d16949093f0ab783cccbccda04c2e7db70c71792fc269
+#18 exporting manifest list sha256:7bc567b1d27a8587a81d16949093f0ab783cccbccda04c2e7db70c71792fc269 0.1s done
+#18 naming to docker.io/library/queuelet:e09 done
+#18 unpacking to docker.io/library/queuelet:e09 0.0s done
+#18 DONE 0.4s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:e09 Built 
+ Network queuelet-e09_default Creating 
+ Network queuelet-e09_default Creating 
+ Volume queuelet-e09_data Creating 
+ Volume queuelet-e09_data Creating 
+ Volume queuelet-e09_data Created 
+ Volume queuelet-e09_data Created 
+ Network queuelet-e09_default Created 
+ Network queuelet-e09_default Created 
+ Container queuelet-e09-hooksink-1 Creating 
+ Container queuelet-e09-postgres-1 Creating 
+ Container queuelet-e09-hooksink-1 Created 
+ Container queuelet-e09-postgres-1 Created 
+ Container queuelet-e09-api-1 Creating 
+ Container queuelet-e09-api-1 Created 
+ Container queuelet-e09-worker-b-1 Creating 
+ Container queuelet-e09-worker-a-1 Creating 
+ Container queuelet-e09-worker-a-1 Created 
+ Container queuelet-e09-worker-b-1 Created 
+ Container queuelet-e09-postgres-1 Starting 
+ Container queuelet-e09-hooksink-1 Starting 
+ Container queuelet-e09-hooksink-1 Started 
+ Container queuelet-e09-postgres-1 Started 
+ Container queuelet-e09-postgres-1 Waiting 
+ Container queuelet-e09-postgres-1 Healthy 
+ Container queuelet-e09-api-1 Starting 
+ Container queuelet-e09-api-1 Started 
+ Container queuelet-e09-worker-b-1 Starting 
+ Container queuelet-e09-worker-a-1 Starting 
+ Container queuelet-e09-worker-a-1 Started 
+ Container queuelet-e09-worker-b-1 Started 
+exit 0

@@ -1,0 +1,24 @@
+2026-10-22T03:35:53.330250497Z 2026/10/22 03:35:53 background task: pq: terminating connection due to administrator command
+2026-10-22T03:35:53.396727419Z 2026/10/22 03:35:53 background task: read tcp 172.23.0.4:35308->172.23.0.3:5432: read: connection reset by peer
+2026-10-22T03:35:53.418457289Z 2026/10/22 03:35:53 background task: pq: the database system is shutting down
+2026-10-22T03:35:53.434251629Z 2026/10/22 03:35:53 background task: pq: the database system is shutting down
+2026-10-22T03:35:54.273098721Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:54.273135830Z 2026/10/22 03:35:54 webhook task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:54.277142916Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:54.284545946Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:54.288379485Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:55.306683016Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:55.306720741Z 2026/10/22 03:35:55 webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:55.326258101Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:55.339487347Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:55.374338456Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:56.301227032Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:56.301272881Z 2026/10/22 03:35:56 webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:56.341436235Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:56.422165053Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:56.466888574Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+2026-10-22T03:35:57.275686453Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:57.275753475Z 2026/10/22 03:35:57 webhook task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:57.276545321Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:57.283110956Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+2026-10-22T03:35:57.291223647Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused

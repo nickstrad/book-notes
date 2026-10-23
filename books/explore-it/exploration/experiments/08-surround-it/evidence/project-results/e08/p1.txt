@@ -1,0 +1,33 @@
+start 2026-10-22T19:22:08Z
+GET 301 → 404
+attempts 301 → 404
+events 301 → [200, {"events": []}]
+GET 302 → 404
+attempts 302 → 404
+events 302 → [200, {"events": []}]
+GET 303 → 404
+attempts 303 → 404
+events 303 → [200, {"events": []}]
+cancel jq → 404
+retry jd → 404
+delete jd → 404
+ack jl (right token) → 404
+nack jl → 404
+heartbeat jl → 404
+globex lease own emails w/ acme worker → [404, {"error": {"code": "worker_not_found", "message": "unknown worker"}}]
+globex DELETE acme worker → [404, {"error": {"code": "worker_not_found", "message": "state conflict"}}]
+globex schedule GET 1 → 404
+globex schedule PATCH 1 → 404
+globex schedule run 1 → 404
+globex schedule DELETE 1 → 404
+acme ns stats globex → [403, {"error": {"code": "forbidden", "message": "namespace mismatch"}}]
+globex ns stats acme → 403
+globex list queues → ["emails"]
+admin GET acme job → 200
+admin GET globex job → 404
+admin globex ns stats → 200
+admin cancel acme job → "skipped (would mutate)"
+no key → 401
+admin clock with acme-key → [403, {"error": {"code": "forbidden", "message": "admin key required"}}]
+acme jobs unchanged: True {301: 'leased', 302: 'dead', 303: 'queued'}
+end 2026-10-22T19:22:09Z

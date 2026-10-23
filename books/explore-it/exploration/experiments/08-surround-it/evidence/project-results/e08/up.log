@@ -1,0 +1,18 @@
+2026-10-22T19:18:47Z
+ Container queuelet-e08-worker-a-1 Creating 
+ Container queuelet-e08-worker-b-1 Created 
+ Container queuelet-e08-worker-a-1 Created 
+ Container queuelet-e08-hooksink-1 Starting 
+ Container queuelet-e08-postgres-1 Starting 
+ Container queuelet-e08-hooksink-1 Started 
+ Container queuelet-e08-postgres-1 Started 
+ Container queuelet-e08-postgres-1 Waiting 
+ Container queuelet-e08-postgres-1 Healthy 
+ Container queuelet-e08-api-1 Starting 
+ Container queuelet-e08-api-1 Started 
+ Container queuelet-e08-worker-b-1 Starting 
+ Container queuelet-e08-worker-a-1 Starting 
+ Container queuelet-e08-worker-a-1 Started 
+ Container queuelet-e08-worker-b-1 Started 
+HEALTHY
+2026-10-22T19:19:33Z

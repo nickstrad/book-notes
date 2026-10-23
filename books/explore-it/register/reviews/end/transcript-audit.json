@@ -1,0 +1,81 @@
+[
+  {
+    "experiment": 1,
+    "flagged": []
+  },
+  {
+    "experiment": 2,
+    "flagged": []
+  },
+  {
+    "experiment": 3,
+    "flagged": []
+  },
+  {
+    "experiment": 4,
+    "flagged": [
+      {
+        "line": 9,
+        "tool": "Bash",
+        "input": "cat exploration/PROTOCOL.md; cat exploration/experiments/04-judge-it/brief.md; ls skills 2>&1; find / -path /proc -prune -o -type d -name derive-oracles -print 2>/dev/null | head"
+      },
+      {
+        "line": 174,
+        "tool": "Bash",
+        "input": "date -u +%FT%TZ; cat /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output"
+      },
+      {
+        "line": 179,
+        "tool": "Bash",
+        "input": "date -u +%FT%TZ; cat /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output; tail -5 /tmp/explore-it-experiment-04/books/explore-it/project/results/e04/up.log"
+      },
+      {
+        "line": 185,
+        "tool": "Bash",
+        "input": "cat > /tmp/explore-it-experiment-04/books/explore-it/exploration/experiments/04-judge-it/tools/lease1.sh <<'EOF'\n# lease1.sh QUEUE WORKER_ID [MAX] \u2014 lease and print compact job tuples (id attempt token)\nsource /tmp/explore-it-experiment-04/books/explore-it/exploration/experiments/04-judge-it/tools/e04env.sh\ncurl -sS -X POST -H 'Authorization: Bearer acme-key' -H 'Content-Type: application/json' \\\n  -d \"{\\\"worker_id\\\":$2,\\\"max_jobs\\\":${3:-1}}\" \"$QUEUELET_URL/v1/queues/$1/lease\" |\n  python3 -I -c 'import json,sys; d=json.load(sys.stdin); [print(j[\"id\"],j[\"attempt\"],j[\"lease_token\"]) for j in d.get(\"jobs\",[])] or print(\"NONE\", d)'\nEOF\nsleep 20; cat /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output | tail -3"
+      },
+      {
+        "line": 189,
+        "tool": "Bash",
+        "input": "sleep 25; date -u +%FT%TZ; cat /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output | tail -3; tail -3 /tmp/explore-it-experiment-04/books/explore-it/project/results/e04/up.log"
+      },
+      {
+        "line": 191,
+        "tool": "Bash",
+        "input": "until grep -q \"wait\" /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output; do sleep 2; done; cat /tmp/claude-0/-tmp-explore-it-experiment-04/3e672308-c694-400b-a4c1-27400fda25f0/tasks/bgj7rfldt.output; tail -4 /tmp/explore-it-experiment-04/books/explore-it/project/results/e04/up.log"
+      }
+    ]
+  },
+  {
+    "experiment": 5,
+    "flagged": []
+  },
+  {
+    "experiment": 6,
+    "flagged": []
+  },
+  {
+    "experiment": 7,
+    "flagged": [
+      {
+        "line": 105,
+        "tool": "Bash",
+        "input": "cd /tmp/explore-it-experiment-07/books/explore-it && sed -n 1,200p exploration/defects/U20-attempt-history-after-retry.md | head -40; sed -n 36,70p project/migrations/005.sql 2>/dev/null | head -5; grep -n \"observe_job\" -A 16 project/migrations/*.sql | sed -n 1,40p; cat /tmp/claude-0/-tmp-explore-it-experiment-07/*/tasks/bjlx9wbwp.output 2>/dev/null | tail -3; tail -3 project/results/e07/up.log"
+      }
+    ]
+  },
+  {
+    "experiment": 8,
+    "flagged": []
+  },
+  {
+    "experiment": 9,
+    "flagged": [
+      {
+        "line": 13,
+        "tool": "Read",
+        "input": "/root/.claude/projects/-tmp-explore-it-experiment-09/5f9b221c-1eb4-4284-aa08-27f42b7f42cb/tool-results/bib7tjcq3.txt"
+      }
+    ]
+  }
+]

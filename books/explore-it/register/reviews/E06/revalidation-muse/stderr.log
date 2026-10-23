@@ -1,0 +1,3 @@
+muse: workspace root: /tmp/explore-it-revalidate06/source (explicit)
+muse: workspace trust: trusted source=run-flag
+received SIGTERM; flushed session logs

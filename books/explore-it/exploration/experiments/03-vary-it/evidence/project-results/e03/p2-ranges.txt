@@ -1,0 +1,96 @@
+2026-10-22T04:17:13.040Z
+== H03 regressions
+{"error":{"code":"invalid_json","message":"json: unknown field \"x\""}}
+ [400]
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+priority=-1
+{"error":{"code":"invalid_job","message":"priority must be 0–9"}}
+ [400]
+priority=0
+{"id":308,"state":"queued"}
+ [201]
+priority=9
+{"id":309,"state":"queued"}
+ [201]
+priority=10
+{"error":{"code":"invalid_job","message":"priority must be 0–9"}}
+ [400]
+priority=5.0
+{"error":{"code":"invalid_json","message":"json: cannot unmarshal number 5.0 into Go struct field JobInput.priority of type int"}}
+ [400]
+priority="5"
+{"error":{"code":"invalid_json","message":"json: cannot unmarshal string into Go struct field JobInput.priority of type int"}}
+ [400]
+priority=null
+{"id":310,"state":"queued"}
+ [201]
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+lease_seconds=0
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+lease_seconds=-1
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+max_attempts=0
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+max_attempts=-1
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+retention -1
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+base -1
+{"error":{"code":"invalid_queue","message":"name and positive limits required"}}
+ [400]
+patch neg
+{"error":{"code":"invalid_queue","message":"lease_seconds must be positive"}}
+ [400]
+{"error":{"code":"invalid_queue","message":"lease_seconds must be positive"}}
+ [400]
+{"error":{"code":"invalid_queue","message":"lease_seconds must be positive"}}
+ [400]
+patch backoff (not patchable per spec)
+{"error":{"code":"invalid_json","message":"json: unknown field \"backoff\""}}
+ [400]
+state filter bogus
+{"error":{"code":"invalid_state","message":"unknown state filter"}}
+ [400]
+
+batch 0
+{"error":{"code":"invalid_batch","message":"jobs must contain 1–500 elements"}}
+ [400]
+batch missing
+{"error":{"code":"invalid_batch","message":"jobs must contain 1–500 elements"}}
+ [400]
+batch 501
+{"error":{"code":"invalid_batch","message":"jobs must contain 1–500 elements"}}
+ [400]
+batch 500
+{"ids":[311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,
+ [201]
+batch invalid first
+{"error":{"code":"invalid_job","message":"priority must be 0–9"}}
+ [400]
+batch invalid middle
+{"error":{"code":"invalid_job","message":"priority must be 0–9"}}
+ [400]
+batch invalid last
+{"error":{"code":"invalid_job","message":"priority must be 0–9"}}
+ [400]
+t | count
+b500 | 500
+h03p | 3
+(2 rows)
+name
+(0 rows)
+max_attempts | retention_hours | lease_seconds | backoff_kind
+2 | 24 | 30 | exponential
+(1 row)
+2026-10-22T04:17:16.725Z

@@ -1,0 +1,343 @@
+{"command": ["make", "verify", "LESSON=07"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix07", "QUEUELET_IMAGE_TAG": "fix07", "QUEUELET_API_PORT": "18290", "QUEUELET_HOOK_PORT": "18291", "QUEUELET_PG_PORT": "15523", "QUEUELET_URL": "http://localhost:18290", "QUEUELET_HOOK_URL": "http://localhost:18291", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15523/queuelet?sslmode=disable"}, "start": "2026-10-22T18:29:49.862966+00:00"}
+REF='' bash lab/verify.sh 07
+ Container queuelet-fix07-worker-b-1 Stopping 
+ Container queuelet-fix07-worker-a-1 Stopping 
+ Container queuelet-fix07-worker-a-1 Stopped 
+ Container queuelet-fix07-worker-b-1 Stopped 
+ Container queuelet-fix07-api-1 Stopping 
+ Container queuelet-fix07-api-1 Stopped 
+ Container queuelet-fix07-postgres-1 Waiting 
+ Container queuelet-fix07-postgres-1 Healthy 
+ Container queuelet-fix07-api-1 Starting 
+ Container queuelet-fix07-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-fix07-postgres-1 Waiting 
+ Container queuelet-fix07-postgres-1 Healthy 
+ Container queuelet-fix07-worker-b-1 Starting 
+ Container queuelet-fix07-worker-a-1 Starting 
+ Container queuelet-fix07-worker-b-1 Started 
+ Container queuelet-fix07-worker-a-1 Started 
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 0, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 1, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 2, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 3, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 4, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 5, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 6, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 7, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 8, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 9, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 10, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 11, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 12, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 13, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 14, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 15, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 16, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 17, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 18, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 19, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 20, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 21, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 22, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 23, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 24, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 25, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 26, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 27, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 28, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 29, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 30, "zombie_ids": []}
+{"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 31, "zombie_ids": []}
+ABSENT: U34 — zombie leases=0; worker-disappearance 500=0; statuses={200: 324, 404: 60}; sequential release/404/next-attempt controls hold
+{"expired": 1, "failed": 1, "label": "purge sequential controls", "pending_deleted": 2, "probe": "U35", "released": 2, "success": 1}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 0}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 60}, "survivors": 60, "trial": 1}
+{"bad_ids": [], "deleted": 10, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 110}, "survivors": 110, "trial": 2}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 3}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 4}
+{"bad_ids": [], "deleted": 70, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 50}, "survivors": 50, "trial": 5}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 6}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 7}
+{"bad_ids": [], "deleted": 59, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 1}, "survivors": 1, "trial": 0}
+{"bad_ids": [], "deleted": 58, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 2}, "survivors": 2, "trial": 1}
+{"bad_ids": [], "deleted": 58, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 2}, "survivors": 2, "trial": 2}
+{"bad_ids": [], "deleted": 58, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 2}, "survivors": 2, "trial": 3}
+{"bad_ids": [], "deleted": 59, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 1}, "survivors": 1, "trial": 4}
+{"bad_ids": [], "deleted": 59, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 1}, "survivors": 1, "trial": 5}
+{"bad_ids": [], "deleted": 41, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 19}, "survivors": 19, "trial": 6}
+{"bad_ids": [], "deleted": 59, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 1}, "survivors": 1, "trial": 7}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "release", "probe": "U35", "states": {"dead": 60}, "survivors": 60, "trial": 0}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 1}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 2}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 3}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "release", "probe": "U35", "states": {"dead": 60}, "survivors": 60, "trial": 4}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 5}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 6}
+{"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 7}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 0}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 1}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 2}
+{"bad_ids": [], "deleted": 300, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {}, "survivors": 0, "trial": 3}
+{"bad_ids": [], "deleted": 300, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {}, "survivors": 0, "trial": 4}
+{"bad_ids": [], "deleted": 300, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {}, "survivors": 0, "trial": 5}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 6}
+{"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 7}
+ABSENT: U35 — purge race hits={'lease': 0, 'nack': 0, 'release': 0, 'expiry': 0}; all four paths sampled; deletion counts, attempt attribution, state/lease effects and sequential success/failure/expiry controls hold
+{"command": ["docker", "run", "--rm", "--network", "host", "--name", "queuelet-e07-22dcebc47b4c", "-e", "QUEUELET_URL=http://localhost:18290", "-e", "QUEUELET_KEY=acme-key", "-e", "WORKER_QUEUE=repro-a3-6a94ba56eb-worker-sleep", "-e", "WORKER_NAME=queuelet-e07-22dcebc47b4c", "queuelet:fix07", "worker"], "completion": {"attempt": 1, "error": null, "event": "nack", "job_id": 5910, "level": "INFO", "msg": "completed", "queue": "repro-a3-6a94ba56eb-worker-sleep", "status": 409, "time": "2026-10-22T18:32:47.410572654Z", "worker": 96}, "heartbeat": {"cancel_requested": true, "error": {"code": "state_conflict", "message": "job cancelled"}}, "image": "queuelet:fix07", "kind": "sleep", "label": "actual worker", "probe": "A3", "quiet_after_seconds": 1.151, "remote": null}
+WORKER LOG sleep
+{"time":"2026-10-22T18:32:46.378658382Z","level":"INFO","msg":"worker queuelet-e07-22dcebc47b4c registered"}
+{"time":"2026-10-22T18:32:46.393991714Z","level":"INFO","msg":"processing","event":"processing","job_id":5910,"queue":"repro-a3-6a94ba56eb-worker-sleep","worker":96,"attempt":1,"kind":"sleep"}
+{"time":"2026-10-22T18:32:47.400985974Z","level":"INFO","msg":"cancellation observed","event":"cancel_requested","job_id":5910}
+{"time":"2026-10-22T18:32:47.410572654Z","level":"INFO","msg":"completed","event":"nack","job_id":5910,"queue":"repro-a3-6a94ba56eb-worker-sleep","worker":96,"attempt":1,"status":409,"error":null}
+{"time":"2026-10-22T18:32:47.630360204Z","level":"INFO","msg":"processing","event":"processing","job_id":5911,"queue":"repro-a3-6a94ba56eb-worker-sleep","worker":96,"attempt":1,"kind":"echo"}
+{"time":"2026-10-22T18:32:47.646305304Z","level":"INFO","msg":"completed","event":"ack","job_id":5911,"queue":"repro-a3-6a94ba56eb-worker-sleep","worker":96,"attempt":1,"status":200,"error":null}
+
+{"command": ["docker", "run", "--rm", "--network", "host", "--name", "queuelet-e07-b59a0a9feea5", "-e", "QUEUELET_URL=http://localhost:18290", "-e", "QUEUELET_KEY=acme-key", "-e", "WORKER_QUEUE=repro-a3-6a94ba56eb-worker-http", "-e", "WORKER_NAME=queuelet-e07-b59a0a9feea5", "queuelet:fix07", "worker"], "completion": {"attempt": 1, "error": null, "event": "nack", "job_id": 5912, "level": "INFO", "msg": "completed", "queue": "repro-a3-6a94ba56eb-worker-http", "status": 409, "time": "2026-10-22T18:32:50.423985201Z", "worker": 97}, "heartbeat": {"cancel_requested": true, "error": {"code": "state_conflict", "message": "job cancelled"}}, "image": "queuelet:fix07", "kind": "http", "label": "actual worker", "probe": "A3", "quiet_after_seconds": 1.158, "remote": {"end_after_cancel": 0.988, "ticks": 11, "ticks_after_cancel_2_5s": 0}}
+WORKER LOG http
+{"time":"2026-10-22T18:32:49.395653416Z","level":"INFO","msg":"worker queuelet-e07-b59a0a9feea5 registered"}
+{"time":"2026-10-22T18:32:49.407992352Z","level":"INFO","msg":"processing","event":"processing","job_id":5912,"queue":"repro-a3-6a94ba56eb-worker-http","worker":97,"attempt":1,"kind":"http"}
+{"time":"2026-10-22T18:32:50.417941293Z","level":"INFO","msg":"cancellation observed","event":"cancel_requested","job_id":5912}
+{"time":"2026-10-22T18:32:50.423985201Z","level":"INFO","msg":"completed","event":"nack","job_id":5912,"queue":"repro-a3-6a94ba56eb-worker-http","worker":97,"attempt":1,"status":409,"error":null}
+{"time":"2026-10-22T18:32:50.636780995Z","level":"INFO","msg":"processing","event":"processing","job_id":5913,"queue":"repro-a3-6a94ba56eb-worker-http","worker":97,"attempt":1,"kind":"echo"}
+{"time":"2026-10-22T18:32:50.653375454Z","level":"INFO","msg":"completed","event":"ack","job_id":5913,"queue":"repro-a3-6a94ba56eb-worker-http","worker":97,"attempt":1,"status":200,"error":null}
+
+ABSENT: A3 — actual image=queuelet:fix07; cooperative sleep/HTTP={'sleep': True, 'http': True}; revoked heartbeat/late completion 409; remote tick/worker completion evidence retained; unrelated echo jobs completed
+ABSENT: D18 — expired A ack=409; current B ack=200; stored result={'owner': 'B'}
+ABSENT: D19 — nack incompatible outcomes=[('wrong-token', 409, 'leased'), ('cancelled', 409, 'cancelled'), ('queued', 409, 'queued')]
+ABSENT: D20 — first crash max_attempts=1 leaves dead; completed attempts=1
+=== RUN   TestL07StateMatrix
+=== RUN   TestL07StateMatrix/scheduled/lease_B
+=== RUN   TestL07StateMatrix/scheduled/heartbeat_wrong
+=== RUN   TestL07StateMatrix/scheduled/ack_wrong
+=== RUN   TestL07StateMatrix/scheduled/nack_wrong
+=== RUN   TestL07StateMatrix/scheduled/cancel
+=== RUN   TestL07StateMatrix/scheduled/retry
+=== RUN   TestL07StateMatrix/scheduled/delete
+=== RUN   TestL07StateMatrix/queued/lease_B
+=== RUN   TestL07StateMatrix/queued/heartbeat_wrong
+=== RUN   TestL07StateMatrix/queued/ack_wrong
+=== RUN   TestL07StateMatrix/queued/nack_wrong
+=== RUN   TestL07StateMatrix/queued/cancel
+=== RUN   TestL07StateMatrix/queued/retry
+=== RUN   TestL07StateMatrix/queued/delete
+=== RUN   TestL07StateMatrix/leased/lease_B
+=== RUN   TestL07StateMatrix/leased/heartbeat_wrong
+=== RUN   TestL07StateMatrix/leased/ack_wrong
+=== RUN   TestL07StateMatrix/leased/nack_wrong
+=== RUN   TestL07StateMatrix/leased/cancel
+=== RUN   TestL07StateMatrix/leased/retry
+=== RUN   TestL07StateMatrix/leased/delete
+=== RUN   TestL07StateMatrix/retry_wait/lease_B
+=== RUN   TestL07StateMatrix/retry_wait/heartbeat_wrong
+=== RUN   TestL07StateMatrix/retry_wait/ack_wrong
+=== RUN   TestL07StateMatrix/retry_wait/nack_wrong
+=== RUN   TestL07StateMatrix/retry_wait/cancel
+=== RUN   TestL07StateMatrix/retry_wait/retry
+=== RUN   TestL07StateMatrix/retry_wait/delete
+=== RUN   TestL07StateMatrix/succeeded/lease_B
+=== RUN   TestL07StateMatrix/succeeded/heartbeat_wrong
+=== RUN   TestL07StateMatrix/succeeded/ack_wrong
+=== RUN   TestL07StateMatrix/succeeded/nack_wrong
+=== RUN   TestL07StateMatrix/succeeded/cancel
+=== RUN   TestL07StateMatrix/succeeded/retry
+=== RUN   TestL07StateMatrix/succeeded/delete
+=== RUN   TestL07StateMatrix/dead/lease_B
+=== RUN   TestL07StateMatrix/dead/heartbeat_wrong
+=== RUN   TestL07StateMatrix/dead/ack_wrong
+=== RUN   TestL07StateMatrix/dead/nack_wrong
+=== RUN   TestL07StateMatrix/dead/cancel
+=== RUN   TestL07StateMatrix/dead/retry
+=== RUN   TestL07StateMatrix/dead/delete
+=== RUN   TestL07StateMatrix/cancelled/lease_B
+=== RUN   TestL07StateMatrix/cancelled/heartbeat_wrong
+=== RUN   TestL07StateMatrix/cancelled/ack_wrong
+=== RUN   TestL07StateMatrix/cancelled/nack_wrong
+=== RUN   TestL07StateMatrix/cancelled/cancel
+=== RUN   TestL07StateMatrix/cancelled/retry
+=== RUN   TestL07StateMatrix/cancelled/delete
+=== NAME  TestL07StateMatrix
+    lesson07_test.go:218: 49 cells: 34 rejected, 6 empty leases, 9 accepted transitions
+--- PASS: TestL07StateMatrix (5.10s)
+    --- PASS: TestL07StateMatrix/scheduled/lease_B (0.08s)
+    --- PASS: TestL07StateMatrix/scheduled/heartbeat_wrong (0.06s)
+    --- PASS: TestL07StateMatrix/scheduled/ack_wrong (0.06s)
+    --- PASS: TestL07StateMatrix/scheduled/nack_wrong (0.06s)
+    --- PASS: TestL07StateMatrix/scheduled/cancel (0.07s)
+    --- PASS: TestL07StateMatrix/scheduled/retry (0.06s)
+    --- PASS: TestL07StateMatrix/scheduled/delete (0.06s)
+    --- PASS: TestL07StateMatrix/queued/lease_B (0.07s)
+    --- PASS: TestL07StateMatrix/queued/heartbeat_wrong (0.09s)
+    --- PASS: TestL07StateMatrix/queued/ack_wrong (0.11s)
+    --- PASS: TestL07StateMatrix/queued/nack_wrong (0.08s)
+    --- PASS: TestL07StateMatrix/queued/cancel (0.05s)
+    --- PASS: TestL07StateMatrix/queued/retry (0.05s)
+    --- PASS: TestL07StateMatrix/queued/delete (0.05s)
+    --- PASS: TestL07StateMatrix/leased/lease_B (0.08s)
+    --- PASS: TestL07StateMatrix/leased/heartbeat_wrong (0.07s)
+    --- PASS: TestL07StateMatrix/leased/ack_wrong (0.06s)
+    --- PASS: TestL07StateMatrix/leased/nack_wrong (0.10s)
+    --- PASS: TestL07StateMatrix/leased/cancel (0.08s)
+    --- PASS: TestL07StateMatrix/leased/retry (0.08s)
+    --- PASS: TestL07StateMatrix/leased/delete (0.07s)
+    --- PASS: TestL07StateMatrix/retry_wait/lease_B (0.09s)
+    --- PASS: TestL07StateMatrix/retry_wait/heartbeat_wrong (0.12s)
+    --- PASS: TestL07StateMatrix/retry_wait/ack_wrong (0.11s)
+    --- PASS: TestL07StateMatrix/retry_wait/nack_wrong (0.12s)
+    --- PASS: TestL07StateMatrix/retry_wait/cancel (0.08s)
+    --- PASS: TestL07StateMatrix/retry_wait/retry (0.10s)
+    --- PASS: TestL07StateMatrix/retry_wait/delete (0.07s)
+    --- PASS: TestL07StateMatrix/succeeded/lease_B (0.13s)
+    --- PASS: TestL07StateMatrix/succeeded/heartbeat_wrong (0.09s)
+    --- PASS: TestL07StateMatrix/succeeded/ack_wrong (0.10s)
+    --- PASS: TestL07StateMatrix/succeeded/nack_wrong (0.08s)
+    --- PASS: TestL07StateMatrix/succeeded/cancel (0.11s)
+    --- PASS: TestL07StateMatrix/succeeded/retry (0.09s)
+    --- PASS: TestL07StateMatrix/succeeded/delete (0.08s)
+    --- PASS: TestL07StateMatrix/dead/lease_B (0.11s)
+    --- PASS: TestL07StateMatrix/dead/heartbeat_wrong (0.12s)
+    --- PASS: TestL07StateMatrix/dead/ack_wrong (0.16s)
+    --- PASS: TestL07StateMatrix/dead/nack_wrong (0.15s)
+    --- PASS: TestL07StateMatrix/dead/cancel (0.23s)
+    --- PASS: TestL07StateMatrix/dead/retry (0.23s)
+    --- PASS: TestL07StateMatrix/dead/delete (0.13s)
+    --- PASS: TestL07StateMatrix/cancelled/lease_B (0.17s)
+    --- PASS: TestL07StateMatrix/cancelled/heartbeat_wrong (0.13s)
+    --- PASS: TestL07StateMatrix/cancelled/ack_wrong (0.12s)
+    --- PASS: TestL07StateMatrix/cancelled/nack_wrong (0.23s)
+    --- PASS: TestL07StateMatrix/cancelled/cancel (0.13s)
+    --- PASS: TestL07StateMatrix/cancelled/retry (0.16s)
+    --- PASS: TestL07StateMatrix/cancelled/delete (0.15s)
+=== RUN   TestL07ExtraActors
+=== RUN   TestL07ExtraActors/holder/heartbeat
+=== RUN   TestL07ExtraActors/expired/heartbeat
+=== RUN   TestL07ExtraActors/holder/ack
+=== RUN   TestL07ExtraActors/expired/ack
+=== RUN   TestL07ExtraActors/holder/nack
+=== RUN   TestL07ExtraActors/expired/nack
+=== RUN   TestL07ExtraActors/cancel-token
+=== RUN   TestL07ExtraActors/cancel-wrong-token
+=== RUN   TestL07ExtraActors/cancel-empty-token
+=== RUN   TestL07ExtraActors/cancel-queued
+=== RUN   TestL07ExtraActors/cancel-repeat
+=== RUN   TestL07ExtraActors/cancel-late-ack
+=== RUN   TestL07ExtraActors/cancel-late-nack
+=== NAME  TestL07ExtraActors
+    lesson07_test.go:307: 13 additional cells: 3 holder, 3 expired, 7 cancel-request/late-completion
+--- PASS: TestL07ExtraActors (1.80s)
+    --- PASS: TestL07ExtraActors/holder/heartbeat (0.19s)
+    --- PASS: TestL07ExtraActors/expired/heartbeat (0.26s)
+    --- PASS: TestL07ExtraActors/holder/ack (0.18s)
+    --- PASS: TestL07ExtraActors/expired/ack (0.19s)
+    --- PASS: TestL07ExtraActors/holder/nack (0.08s)
+    --- PASS: TestL07ExtraActors/expired/nack (0.11s)
+    --- PASS: TestL07ExtraActors/cancel-token (0.17s)
+    --- PASS: TestL07ExtraActors/cancel-wrong-token (0.10s)
+    --- PASS: TestL07ExtraActors/cancel-empty-token (0.10s)
+    --- PASS: TestL07ExtraActors/cancel-queued (0.07s)
+    --- PASS: TestL07ExtraActors/cancel-repeat (0.13s)
+    --- PASS: TestL07ExtraActors/cancel-late-ack (0.12s)
+    --- PASS: TestL07ExtraActors/cancel-late-nack (0.09s)
+=== RUN   TestL07WorkerMissingInsideLease
+--- PASS: TestL07WorkerMissingInsideLease (0.11s)
+=== RUN   TestL07U34
+    lesson07_test.go:321: ABSENT: U34 — zombie leases=0; worker-disappearance 500=0; statuses={200: 360, 404: 24}; sequential release/404/next-attempt controls hold
+    lesson07_test.go:321: {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 0, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 1, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 2, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 3, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 4, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 5, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 6, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 7, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 8, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 9, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 10, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 11, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 12, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 13, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 14, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 15, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 16, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 17, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 18, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 19, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 404, 200], "trial": 20, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 21, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 22, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 23, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 24, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 25, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 26, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 27, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 28, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 29, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 30, "zombie_ids": []}
+        {"errors": 0, "label": "worker-delete", "probe": "U34", "statuses": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200], "trial": 31, "zombie_ids": []}
+        
+--- PASS: TestL07U34 (41.93s)
+=== RUN   TestL07U35
+    lesson07_test.go:322: ABSENT: U35 — purge race hits={'lease': 0, 'nack': 0, 'release': 0, 'expiry': 0}; all four paths sampled; deletion counts, attempt attribution, state/lease effects and sequential success/failure/expiry controls hold
+    lesson07_test.go:322: {"expired": 1, "failed": 1, "label": "purge sequential controls", "pending_deleted": 2, "probe": "U35", "released": 2, "success": 1}
+        {"bad_ids": [], "deleted": 50, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 70}, "survivors": 70, "trial": 0}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 60}, "survivors": 60, "trial": 1}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 2}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 60}, "survivors": 60, "trial": 3}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 4}
+        {"bad_ids": [], "deleted": 100, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 20}, "survivors": 20, "trial": 5}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 6}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "lease", "probe": "U35", "states": {"leased": 120}, "survivors": 120, "trial": 7}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "nack", "probe": "U35", "states": {}, "survivors": 0, "trial": 0}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "nack", "probe": "U35", "states": {}, "survivors": 0, "trial": 1}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "nack", "probe": "U35", "states": {}, "survivors": 0, "trial": 2}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "nack", "probe": "U35", "states": {}, "survivors": 0, "trial": 3}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "nack", "probe": "U35", "states": {}, "survivors": 0, "trial": 4}
+        {"bad_ids": [], "deleted": 14, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 46}, "survivors": 46, "trial": 5}
+        {"bad_ids": [], "deleted": 57, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 3}, "survivors": 3, "trial": 6}
+        {"bad_ids": [], "deleted": 52, "label": "purge race", "mode": "nack", "probe": "U35", "states": {"dead": 8}, "survivors": 8, "trial": 7}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "release", "probe": "U35", "states": {"dead": 60}, "survivors": 60, "trial": 0}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 1}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 2}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 3}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "release", "probe": "U35", "states": {"dead": 60}, "survivors": 60, "trial": 4}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 5}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 6}
+        {"bad_ids": [], "deleted": 60, "label": "purge race", "mode": "release", "probe": "U35", "states": {}, "survivors": 0, "trial": 7}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 0}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 1}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 2}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 3}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 4}
+        {"bad_ids": [], "deleted": 300, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {}, "survivors": 0, "trial": 5}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 6}
+        {"bad_ids": [], "deleted": 0, "label": "purge race", "mode": "expiry", "probe": "U35", "states": {"dead": 300}, "survivors": 300, "trial": 7}
+        
+--- PASS: TestL07U35 (98.27s)
+=== RUN   TestL07A3
+    lesson07_test.go:323: ABSENT: A3 — actual image=queuelet:fix07; cooperative sleep/HTTP={'sleep': True, 'http': True}; revoked heartbeat/late completion 409; remote tick/worker completion evidence retained; unrelated echo jobs completed
+    lesson07_test.go:323: {"command": ["docker", "run", "--rm", "--network", "host", "--name", "queuelet-e07-42f0b7961d10", "-e", "QUEUELET_URL=http://localhost:18290", "-e", "QUEUELET_KEY=acme-key", "-e", "WORKER_QUEUE=repro-a3-b32052ee51-worker-sleep", "-e", "WORKER_NAME=queuelet-e07-42f0b7961d10", "queuelet:fix07", "worker"], "completion": {"attempt": 1, "error": null, "event": "nack", "job_id": 11589, "level": "INFO", "msg": "completed", "queue": "repro-a3-b32052ee51-worker-sleep", "status": 409, "time": "2026-10-22T18:35:26.197585536Z", "worker": 320}, "heartbeat": {"cancel_requested": true, "error": {"code": "state_conflict", "message": "job cancelled"}}, "image": "queuelet:fix07", "kind": "sleep", "label": "actual worker", "probe": "A3", "quiet_after_seconds": 1.298, "remote": null}
+        WORKER LOG sleep
+        {"time":"2026-10-22T18:35:25.158327864Z","level":"INFO","msg":"worker queuelet-e07-42f0b7961d10 registered"}
+        {"time":"2026-10-22T18:35:25.185489011Z","level":"INFO","msg":"processing","event":"processing","job_id":11589,"queue":"repro-a3-b32052ee51-worker-sleep","worker":320,"attempt":1,"kind":"sleep"}
+        {"time":"2026-10-22T18:35:26.191730885Z","level":"INFO","msg":"cancellation observed","event":"cancel_requested","job_id":11589}
+        {"time":"2026-10-22T18:35:26.197585536Z","level":"INFO","msg":"completed","event":"nack","job_id":11589,"queue":"repro-a3-b32052ee51-worker-sleep","worker":320,"attempt":1,"status":409,"error":null}
+        {"time":"2026-10-22T18:35:26.414450733Z","level":"INFO","msg":"processing","event":"processing","job_id":11590,"queue":"repro-a3-b32052ee51-worker-sleep","worker":320,"attempt":1,"kind":"echo"}
+        {"time":"2026-10-22T18:35:26.431262817Z","level":"INFO","msg":"completed","event":"ack","job_id":11590,"queue":"repro-a3-b32052ee51-worker-sleep","worker":320,"attempt":1,"status":200,"error":null}
+        
+        {"command": ["docker", "run", "--rm", "--network", "host", "--name", "queuelet-e07-edeb5e81f257", "-e", "QUEUELET_URL=http://localhost:18290", "-e", "QUEUELET_KEY=acme-key", "-e", "WORKER_QUEUE=repro-a3-b32052ee51-worker-http", "-e", "WORKER_NAME=queuelet-e07-edeb5e81f257", "queuelet:fix07", "worker"], "completion": {"attempt": 1, "error": null, "event": "nack", "job_id": 11591, "level": "INFO", "msg": "completed", "queue": "repro-a3-b32052ee51-worker-http", "status": 409, "time": "2026-10-22T18:35:29.928241389Z", "worker": 321}, "heartbeat": {"cancel_requested": true, "error": {"code": "state_conflict", "message": "job cancelled"}}, "image": "queuelet:fix07", "kind": "http", "label": "actual worker", "probe": "A3", "quiet_after_seconds": 1.21, "remote": {"end_after_cancel": 0.985, "ticks": 11, "ticks_after_cancel_2_5s": 0}}
+        WORKER LOG http
+        {"time":"2026-10-22T18:35:28.894416152Z","level":"INFO","msg":"worker queuelet-e07-edeb5e81f257 registered"}
+        {"time":"2026-10-22T18:35:28.916581472Z","level":"INFO","msg":"processing","event":"processing","job_id":11591,"queue":"repro-a3-b32052ee51-worker-http","worker":321,"attempt":1,"kind":"http"}
+        {"time":"2026-10-22T18:35:29.923423716Z","level":"INFO","msg":"cancellation observed","event":"cancel_requested","job_id":11591}
+        {"time":"2026-10-22T18:35:29.928241389Z","level":"INFO","msg":"completed","event":"nack","job_id":11591,"queue":"repro-a3-b32052ee51-worker-http","worker":321,"attempt":1,"status":409,"error":null}
+        {"time":"2026-10-22T18:35:30.152123282Z","level":"INFO","msg":"processing","event":"processing","job_id":11592,"queue":"repro-a3-b32052ee51-worker-http","worker":321,"attempt":1,"kind":"echo"}
+        {"time":"2026-10-22T18:35:30.166434448Z","level":"INFO","msg":"completed","event":"ack","job_id":11592,"queue":"repro-a3-b32052ee51-worker-http","worker":321,"attempt":1,"status":200,"error":null}
+        
+        
+--- PASS: TestL07A3 (7.41s)
+PASS
+ok  	queuelet/test/checks	154.637s
+FIXED AND CHECKED: 3 absent; regression checks pass
+
+EXIT 0; ELAPSED 341.631s

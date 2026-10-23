@@ -1,0 +1,36 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: make verify LESSON=06
+start: 2026-10-22T16:00:24.167956+00:00
+REF='' bash lab/verify.sh 06
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-a-1 Started 
+ Container queuelet-worker-b-1 Started 
+ABSENT: U27 — foreign/repeated/missing DELETE=404/404/404; owner delete=204, foreign untouched, deleted GET=404
+ABSENT: U28 — null/array/string/number/bool create=[400, 400, 400, 400, 400]; omitted payload={}, run=201; cron fired 2 templates; object run/cron and PATCH controls hold
+worker diagnostics:
+ Container queuelet-probe06-f73cf2a372 Creating 
+ Container queuelet-probe06-f73cf2a372 Created 
+{"time":"2026-10-22T16:00:44.71458968Z","level":"INFO","msg":"worker queuelet-probe06-f73cf2a372 registered"}
+{"time":"2026-10-22T16:00:44.731635944Z","level":"INFO","msg":"processing","event":"processing","job_id":307,"queue":"repro-u29-2593a5047f","worker":4,"attempt":1,"kind":"echo"}
+{"time":"2026-10-22T16:00:44.755257117Z","level":"INFO","msg":"completed","event":"ack","job_id":307,"queue":"repro-u29-2593a5047f","worker":4,"attempt":1,"status":200,"error":null}
+
+PROBE ERROR: U29 — RuntimeError('webhook differs from stored result')
+make: *** [Makefile:13: verify] Error 2
+
+exit: 2
+elapsed_seconds: 22.283

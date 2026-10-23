@@ -1,0 +1,35 @@
+2026-10-22T04:25:00.444Z
+{"error":{"code":"invalid_webhook","message":"absolute HTTP(S) URL required"}}
+ [400]
+{"error":{"code":"invalid_webhook","message":"absolute HTTP(S) URL required"}}
+ [400]
+{"error":{"code":"invalid_webhook","message":"absolute HTTP(S) URL required"}}
+ [400]
+{"backoff_base":5,"backoff_kind":"expone
+ [201]
+== final snapshot
+{"status":"ok"}
+ [200]
+state | count
+cancelled | 21
+dead | 18
+leased | 1
+queued | 1093
+retry_wait | 19
+scheduled | 79
+succeeded | 123
+(7 rows)
+2587 /tmp/explore-it-experiment-03/books/explore-it/project/results/e03/all-logs-at-stop.txt
+40
+ Container queuelet-e03-hooksink-1 Stopped 
+ Container queuelet-e03-worker-b-1 Stopped 
+ Container queuelet-e03-api-1 Stopping 
+ Container queuelet-e03-api-1 Stopped 
+ Container queuelet-e03-postgres-1 Stopping 
+ Container queuelet-e03-postgres-1 Stopped 
+queuelet-e03-api-1 Exited (0) 1 second ago
+queuelet-e03-hooksink-1 Exited (2) 3 seconds ago
+queuelet-e03-postgres-1 Exited (0) Less than a second ago
+queuelet-e03-worker-a-1 Exited (0) 3 seconds ago
+queuelet-e03-worker-b-1 Exited (0) 3 seconds ago
+2026-10-22T04:25:04.766Z

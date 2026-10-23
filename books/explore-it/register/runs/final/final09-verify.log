@@ -1,0 +1,42 @@
+{"command": ["make", "verify", "LESSON=09"], "tree": "repo", "commit": "b6df7db044782dd3517d041a8aad95308a3a80c9", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-final", "QUEUELET_IMAGE_TAG": "final", "QUEUELET_API_PORT": "18270", "QUEUELET_HOOK_PORT": "18271", "QUEUELET_PG_PORT": "15503", "QUEUELET_URL": "http://localhost:18270", "QUEUELET_HOOK_URL": "http://localhost:18271", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15503/queuelet?sslmode=disable"}, "start": "2026-10-22T23:12:08.567049+00:00"}
+REF='' bash lab/verify.sh 09
+ Container queuelet-final-worker-b-1 Stopping 
+ Container queuelet-final-worker-a-1 Stopping 
+ Container queuelet-final-worker-a-1 Stopped 
+ Container queuelet-final-worker-b-1 Stopped 
+ Container queuelet-final-api-1 Stopping 
+ Container queuelet-final-api-1 Stopped 
+ Container queuelet-final-postgres-1 Waiting 
+ Container queuelet-final-postgres-1 Healthy 
+ Container queuelet-final-api-1 Starting 
+ Container queuelet-final-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-final-postgres-1 Waiting 
+ Container queuelet-final-postgres-1 Healthy 
+ Container queuelet-final-worker-b-1 Starting 
+ Container queuelet-final-worker-a-1 Starting 
+ Container queuelet-final-worker-b-1 Started 
+ Container queuelet-final-worker-a-1 Started 
+{"jobs": 1, "label": "victim", "probe": "U39", "unadvanceable_accepted": false}
+ABSENT: U39 — unadvanceable schedule stored=False; later globex every-minute schedule fired jobs=1 over two minute ticks
+ABSENT: U40 — accepted={'create 0 0 30 2 *': False, 'create * * 30 2 *': False, 'patch 0 0 31 4 *': False}; valid control 201
+ABSENT: U41 — accepted={'CRON_TZ=Asia/Tokyo 0 9 * * * in UTC': False, 'TZ=Asia/Tokyo 0 9 * * * in UTC': False, 'CRON_TZ=Asia/Tokyo 0 9 * * * in America/New_York': False}; plain 0 9 * * * UTC next=09:00Z
+ABSENT: U42 — created at EDT offset -14400; at 07:10Z (EST, -18000) GET zone_offset=-18000, list=-18000
+{"defects": [], "label": "ack", "probe": "U43", "statuses": {"200": 150}, "trials": 150}
+{"defects": [], "label": "cancel", "probe": "U43", "statuses": {"200": 150}, "trials": 150}
+ABSENT: U43 — committed transitions answered non-2xx or never notified: {'ack': 0, 'cancel': 0} (ack 150, cancel 150 trials max; delete spinner per job)
+{"label": "expire", "probe": "U44", "problems": [], "trials": 20}
+{"label": "worker delete", "probe": "U44", "problems": [], "trials": 20}
+ABSENT: U44 — dead jobs without notification or 500 for a committed delete: expire 0 trial(s) [], worker delete 0 trial(s) [] (20 trials × 8 jobs max)
+ABSENT: U45 — accepted={'create Local': False, "patch 'Local'": False, "patch ''": False}; America/New_York control 201
+ABSENT: D12 — purged scheduled/retry_wait/queued GET statuses=[404, 404, 404]
+ABSENT: D14 — non-dead retry outcomes=[('cancelled', 409, 'cancelled'), ('succeeded', 409, 'succeeded')]
+ABSENT: D18 — expired A ack=409; current B ack=200; stored result={'owner': 'B'}
+ABSENT: D19 — nack incompatible outcomes=[('wrong-token', 409, 'leased'), ('cancelled', 409, 'cancelled'), ('queued', 409, 'queued')]
+ABSENT: D20 — first crash max_attempts=1 leaves dead; completed attempts=1
+ABSENT: D27 — disabled schedule after real minute boundary produced=0; enabled control fired
+ok  	queuelet/test/checks	163.970s
+FIXED AND CHECKED: 7 absent; regression checks pass
+
+EXIT 0; ELAPSED 278.647s

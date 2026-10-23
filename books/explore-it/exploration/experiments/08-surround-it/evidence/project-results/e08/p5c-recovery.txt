@@ -1,0 +1,13 @@
+2026-10-22T19:30:57Z full error: Post "http://172.28.0.250/x": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+Post "http://172.28.0.250/x": dial tcp 172.28.0.250:80: connect: no route to host
+PATCH webhook url '' 200
+DELETE jobs {204}
+DELETE queue (204, None)
+2026-10-22T19:31:03Z acme 146|0|f | globex pending 20 max attempts 4 | health 200
+2026-10-22T19:31:09Z acme 146|0|f | globex pending 20 max attempts 4 | health 200
+2026-10-22T19:31:15Z acme 146|0|f | globex pending 20 max attempts 4 | health 200
+2026-10-22T19:31:20Z acme 146|0|f | globex pending 20 max attempts 4 | health 200
+2026-10-22T19:31:26Z acme 146|0|f | globex pending 20 max attempts 4 | health 200
+2026-10-22T19:31:31Z acme 146|0|f | globex pending 20 max attempts 5 | health 200
+2026-10-22T19:31:37Z acme 146|0|f | globex pending 20 max attempts 5 | health 200
+2026-10-22T19:31:43Z acme 146|0|f | globex pending 20 max attempts 5 | health 200

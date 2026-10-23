@@ -1,0 +1,19 @@
+# walk05.py at explore-it/lesson-04 binaries (scratch stack queuelet-w05), all rules
+WALK BROKEN: W3 at step 82 (delete_worker): lease_expired events without an expiry on jobs ['231', '232'] (seed 5)
+WALK BROKEN: W2 at step 28 (ack): job 235 succeeded with token/holder/expiry ['t', 't', 't'] (seed 6)
+WALK BROKEN: W2 at step 6 (ack): job 236 succeeded with token/holder/expiry ['t', 't', 't'] (seed 7)
+WALK BROKEN: W2 at step 24 (ack): job 240 succeeded with token/holder/expiry ['t', 't', 't'] (seed 8)
+WALK BROKEN: W2 at step 18 (ack): job 242 succeeded with token/holder/expiry ['t', 't', 't'] (seed 9)
+# same seeds with W2 and W4 masked (scratch copy walk05_w13.py), to show W3 is reachable
+WALK BROKEN: W3 at step 82 (delete_worker): lease_expired events without an expiry on jobs ['252', '251'] (seed 5)
+WALK BROKEN: W3 at step 33 (ack): lease_expired events without an expiry on jobs ['256'] (seed 6)
+WALK HOLDS: 100/100 steps, W1–W7 after each, seed 7; verbs {'ack': 2, 'advance': 10, 'cancel': 7, 'delete_worker': 3, 'enqueue': 5, 'enqueue_delay': 7, 'lease': 36, 'nack_dead': 1, 'pause': 3, 'purge': 7, 'resume': 2, 'retry': 7, 'worker': 10}
+WALK HOLDS: 100/100 steps, W1–W7 after each, seed 8; verbs {'ack': 2, 'advance': 12, 'cancel': 8, 'delete_worker': 4, 'enqueue': 6, 'enqueue_delay': 8, 'lease': 29, 'nack': 1, 'pause': 3, 'purge': 7, 'resume': 3, 'retry': 4, 'worker': 13}
+WALK BROKEN: W3 at step 49 (ack): lease_expired events without an expiry on jobs ['289'] (seed 9)
+# earlier weights, W2 masked (walk05_nw2.py), seeds 5-10
+WALK HOLDS: 100/100 steps, W1–W7 after each, seed 5; verbs {'ack': 5, 'advance': 9, 'cancel': 3, 'delete_worker': 2, 'enqueue': 10, 'enqueue_delay': 5, 'lease': 31, 'nack': 2, 'nack_dead': 2, 'pause': 4, 'purge': 5, 'resume': 3, 'retry': 5, 'worker': 14}
+WALK BROKEN: W4 at step 61 (delete_worker): job 43, leased at a purge, is queued again (seed 6)
+WALK BROKEN: W4 at step 55 (delete_worker): job 61, leased at a purge, is queued again (seed 7)
+WALK BROKEN: W4 at step 92 (nack): job 75, leased at a purge, is retry_wait again (seed 8)
+WALK BROKEN: W4 at step 9 (nack): job 79, leased at a purge, is retry_wait again (seed 9)
+WALK HOLDS: 100/100 steps, W1–W7 after each, seed 10; verbs {'ack': 1, 'advance': 6, 'cancel': 7, 'delete_worker': 7, 'enqueue': 15, 'enqueue_delay': 5, 'lease': 22, 'nack_dead': 1, 'pause': 4, 'purge': 6, 'resume': 4, 'retry': 10, 'worker': 12}

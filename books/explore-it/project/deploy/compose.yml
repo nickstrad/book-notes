@@ -1,0 +1,55 @@
+name: queuelet
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: queuelet
+      POSTGRES_PASSWORD: queuelet
+      POSTGRES_DB: queuelet
+    ports: ["${QUEUELET_PG_PORT:-15433}:5432"]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U queuelet"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    volumes: ["data:/var/lib/postgresql/data"]
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: queuelet:${QUEUELET_IMAGE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://queuelet:queuelet@postgres:5432/queuelet?sslmode=disable
+      QUEUELET_TEST_CLOCK: "1"
+    ports: ["${QUEUELET_API_PORT:-18200}:8200"]
+    depends_on:
+      postgres: {condition: service_healthy}
+  hooksink:
+    image: queuelet:${QUEUELET_IMAGE_TAG:-local}
+    command: hooksink
+    ports: ["${QUEUELET_HOOK_PORT:-18201}:8201"]
+    environment: {WEBHOOK_SECRET: report-secret}
+  worker-a:
+    image: queuelet:${QUEUELET_IMAGE_TAG:-local}
+    command: worker
+    restart: on-failure
+    environment:
+      QUEUELET_URL: http://api:8200
+      QUEUELET_KEY: acme-key
+      WORKER_NAME: worker-a
+      WORKER_QUEUE: emails
+    depends_on: [api]
+  worker-b:
+    image: queuelet:${QUEUELET_IMAGE_TAG:-local}
+    command: worker
+    restart: on-failure
+    environment:
+      QUEUELET_URL: http://api:8200
+      QUEUELET_KEY: acme-key
+      WORKER_NAME: worker-b
+      WORKER_QUEUE: reports
+    depends_on: [api]
+volumes:
+  data:

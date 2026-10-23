@@ -1,0 +1,82 @@
+{
+  "unit": "E06 review-repair revalidation",
+  "verdict": "PASS",
+  "findings_count": 0,
+  "reviewer": {
+    "seat": "Claude Opus 5.5 (claude-opus-5-5), fresh agent",
+    "family": "Anthropic",
+    "builder_family": "OpenAI (Codex Sol)",
+    "seat_deviation": "Fresh Muse Wonder Full revalidation hit repeated provider stream failures before running tests; not counted as a verdict. This is the fresh cross-company fallback."
+  },
+  "targets": {
+    "clone": "/tmp/explore-it-revalidate06-claude/source",
+    "lesson_tag": "explore-it/lesson-06",
+    "fix_commit": "755d21c",
+    "fix_parent": "b3b0559",
+    "knowledge_head": "7148dee",
+    "superseded_reviewed_fix": "7a38788",
+    "repair_diff_matches_saved": true,
+    "project_files_changed": [
+      "cmd/qctl/main.go",
+      "cmd/qctl/main_test.go",
+      "internal/client/client.go",
+      "internal/client/client_test.go",
+      "internal/worker/worker_test.go"
+    ],
+    "lab_and_checks_unchanged_since_7a38788": true
+  },
+  "prior_findings": {
+    "1_trailing_data_prefix_acceptance": {
+      "status": "resolved",
+      "evidence": [
+        "client.DecodeJSON = json.Valid + UseNumber Decode; used by qctl options, qctl printer, Client.JSON",
+        "TestQctlJSON (actual binary + httptest): 6 invalid inputs x 4 option sites -> exit 1, '--opt: invalid JSON', zero requests",
+        "exact numbers on wire and display; whitespace and scalar/array result controls accepted; omitted-option defaults unchanged",
+        "printer prints trailing/second-value/malformed responses raw (prior fallback preserved)",
+        "TestJSONResponseCompleteness: malformed/garbage/second object/second scalar/empty -> error, no prefix decoded",
+        "TestDecodedWorkerDefaults: sleep/fail3/fail defaults and exact echo via real Client.JSON + perform"
+      ]
+    },
+    "2_worker_http_precision_sibling": {
+      "status": "resolved_by_explicit_deferral",
+      "evidence": [
+        "worker.go:111 unchanged",
+        "deferral recorded in STATE.md open questions, U29 canonical record, lessons/06-relate-it.md",
+        "lesson journey table narrowed to 'worker echo values'"
+      ]
+    }
+  },
+  "legacy_invalid_schedule_policy": "explicitly open for coordinator/Nick at checkpoint B (STATE.md, U28 record, lesson note)",
+  "integrity": {
+    "raw_artifacts": {"entries": 3447, "missing": 0, "mismatch": 0},
+    "exploration_outside_defects_changed_b3b0559_to_7148dee": false,
+    "frozen_instruments": {"ok": 95, "failed": 0, "manifest_sha256_prefix": "379fef80486e0a18"},
+    "acceptance_code_hashes_match_clone": true,
+    "review_report_sha256_matches_prior_review": true
+  },
+  "builder_evidence_inspected": {
+    "make_up": {"exit": 0, "seconds": 50.593},
+    "verify_current": {"exit": 0, "seconds": 121.898, "verdict": "FIXED AND CHECKED: 8 absent; regression checks pass"},
+    "verify_ref_lesson_05": {"exit": 0, "seconds": 49.876, "verdict": "DEFECTS REPRODUCED: 8 present"},
+    "make_checks": {"exit": 0, "seconds": 399.806, "checks_in_source": 74},
+    "make_test": {"exit": 0, "seconds": 5.668, "includes": ["cmd/qctl", "internal/client", "internal/worker"]},
+    "make_down": {"exit": 0},
+    "truthful": true
+  },
+  "checks_run": [
+    {"command": "go test ./cmd/qctl ./internal/client ./internal/worker -count=1 -v", "env": "temp GOCACHE/GOPATH, GOFLAGS=-buildvcs=false", "exit": 0, "passes": 34, "fails": 0, "log": "go-test.log"},
+    {"command": "go vet ./...", "exit": 0, "log": "go-vet.log"},
+    {"command": "gofmt -l cmd internal", "result": "clean"},
+    {"command": "cmp git diff 7a38788..explore-it/lesson-06 -- project vs repair.diff", "result": "identical"},
+    {"command": "recompute 06-artifact-manifest.json hashes", "result": "3447/3447 match"},
+    {"command": "sha256sum -c ../register/runs/06-instruments.sha256", "result": "95/95 OK"}
+  ],
+  "observations_not_findings": [
+    "Empty-string --payload/--json/--result now exits 1 (previously treated as omitted); deliberate, tested, consistent with requested parse-error surfacing.",
+    "Links to register/reviews/E06/review.md dangle in this clone at 7148dee until the coordinator copies review artifacts in."
+  ],
+  "material_limits": [
+    "Docker lab not re-run by this reviewer (not required); current/REF/74-check verdicts rest on inspected builder logs.",
+    "Bounded repair validation only; not a full E06 or checkpoint B review."
+  ]
+}

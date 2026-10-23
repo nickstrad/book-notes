@@ -1,0 +1,57 @@
+{
+  "E02": {
+    "experiment_commit": "e390c31",
+    "manifest_entries": 53,
+    "manifest_mismatches_at_experiment": [],
+    "stable_entries_checked_at_HEAD": 43,
+    "stable_HEAD_mismatches": []
+  },
+  "E03": {
+    "experiment_commit": "09dd0a9",
+    "manifest_entries": 50,
+    "manifest_mismatches_at_experiment": [],
+    "stable_entries_checked_at_HEAD": 45,
+    "stable_HEAD_mismatches": []
+  },
+  "E04": {
+    "experiment_commit": "dffb1ec",
+    "manifest_entries": 67,
+    "manifest_mismatches_at_experiment": [],
+    "stable_entries_checked_at_HEAD": 62,
+    "stable_HEAD_mismatches": []
+  },
+  "E05": {
+    "experiment_commit": "01137b6",
+    "manifest_entries": 40,
+    "manifest_mismatches_at_experiment": [],
+    "stable_entries_checked_at_HEAD": 35,
+    "stable_HEAD_mismatches": []
+  },
+  "E06": {
+    "experiment_commit": "b3b0559",
+    "manifest_entries": 3447,
+    "manifest_mismatches_at_experiment": [],
+    "stable_entries_checked_at_HEAD": 3441,
+    "stable_HEAD_mismatches": []
+  },
+  "public_instruments_01": {
+    "checked": 37,
+    "mismatches": []
+  },
+  "public_instruments_02": {
+    "checked": 8,
+    "mismatches": []
+  },
+  "public_instruments_04": {
+    "checked": 9,
+    "mismatches": []
+  },
+  "public_instruments_05": {
+    "checked": 9,
+    "mismatches": []
+  },
+  "public_instruments_06": {
+    "checked": 81,
+    "mismatches": []
+  }
+}

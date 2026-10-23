@@ -1,0 +1,815 @@
+api-1  | 2026-10-22T03:23:05.829683273Z 2026/10/22 03:23:05 queuelet listening on :8200
+api-1  | 2026-10-22T03:23:17.507517305Z 2026/10/22 03:23:17 queuelet listening on :8200
+api-1  | 2026-10-22T03:23:25.559935486Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.579783032Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.586548097Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.594380239Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.599434398Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.607085943Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.615332955Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.621231112Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.625955054Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.634780628Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.641434669Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.647464899Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.670684579Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.676831236Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.693204523Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.703752032Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:25.710484017Z 2026/10/22 03:23:25 webhook delivered status=200
+api-1  | 2026-10-22T03:23:26.520766418Z 2026/10/22 03:23:26 webhook delivered status=200
+api-1  | 2026-10-22T03:23:26.536940874Z 2026/10/22 03:23:26 webhook delivered status=200
+api-1  | 2026-10-22T03:23:28.511555392Z 2026/10/22 03:23:28 webhook delivered status=200
+api-1  | 2026-10-22T03:23:29.511708525Z 2026/10/22 03:23:29 webhook delivered status=200
+api-1  | 2026-10-22T03:23:29.517578125Z 2026/10/22 03:23:29 webhook delivered status=200
+api-1  | 2026-10-22T03:23:29.531187414Z 2026/10/22 03:23:29 webhook delivered status=200
+api-1  | 2026-10-22T03:23:29.538237221Z 2026/10/22 03:23:29 webhook delivered status=200
+api-1  | 2026-10-22T03:23:30.517399149Z 2026/10/22 03:23:30 webhook delivered status=200
+api-1  | 2026-10-22T03:23:30.538576475Z 2026/10/22 03:23:30 webhook delivered status=200
+api-1  | 2026-10-22T03:23:30.550675125Z 2026/10/22 03:23:30 webhook delivered status=200
+api-1  | 2026-10-22T03:23:30.563962700Z 2026/10/22 03:23:30 webhook delivered status=200
+api-1  | 2026-10-22T03:23:31.509815792Z 2026/10/22 03:23:31 webhook delivered status=200
+api-1  | 2026-10-22T03:23:31.516715804Z 2026/10/22 03:23:31 webhook delivered status=200
+api-1  | 2026-10-22T03:23:31.524156436Z 2026/10/22 03:23:31 webhook delivered status=200
+api-1  | 2026-10-22T03:23:31.528057268Z 2026/10/22 03:23:31 webhook delivered status=200
+api-1  | 2026-10-22T03:23:32.509920607Z 2026/10/22 03:23:32 webhook delivered status=200
+api-1  | 2026-10-22T03:23:32.585027912Z 2026/10/22 03:23:32 webhook delivered status=200
+api-1  | 2026-10-22T03:23:32.686989937Z 2026/10/22 03:23:32 webhook delivered status=200
+api-1  | 2026-10-22T03:23:33.510240843Z 2026/10/22 03:23:33 webhook delivered status=200
+api-1  | 2026-10-22T03:23:33.515897129Z 2026/10/22 03:23:33 webhook delivered status=200
+api-1  | 2026-10-22T03:23:33.519963065Z 2026/10/22 03:23:33 webhook delivered status=200
+api-1  | 2026-10-22T03:23:33.524721176Z 2026/10/22 03:23:33 webhook delivered status=200
+api-1  | 2026-10-22T03:23:34.511074133Z 2026/10/22 03:23:34 webhook delivered status=200
+api-1  | 2026-10-22T03:23:34.518840904Z 2026/10/22 03:23:34 webhook delivered status=200
+api-1  | 2026-10-22T03:23:34.524750482Z 2026/10/22 03:23:34 webhook delivered status=200
+api-1  | 2026-10-22T03:23:34.529121788Z 2026/10/22 03:23:34 webhook delivered status=200
+api-1  | 2026-10-22T03:23:35.514660809Z 2026/10/22 03:23:35 webhook delivered status=200
+api-1  | 2026-10-22T03:23:35.521563773Z 2026/10/22 03:23:35 webhook delivered status=200
+api-1  | 2026-10-22T03:23:35.526038727Z 2026/10/22 03:23:35 webhook delivered status=200
+api-1  | 2026-10-22T03:23:35.533554427Z 2026/10/22 03:23:35 webhook delivered status=200
+api-1  | 2026-10-22T03:23:36.541336861Z 2026/10/22 03:23:36 webhook delivered status=200
+api-1  | 2026-10-22T03:23:36.553825764Z 2026/10/22 03:23:36 webhook delivered status=200
+api-1  | 2026-10-22T03:23:36.566062867Z 2026/10/22 03:23:36 webhook delivered status=200
+api-1  | 2026-10-22T03:23:36.575504543Z 2026/10/22 03:23:36 webhook delivered status=200
+api-1  | 2026-10-22T03:23:36.599446839Z 2026/10/22 03:23:36 webhook delivered status=200
+api-1  | 2026-10-22T03:23:37.511824386Z 2026/10/22 03:23:37 webhook delivered status=200
+api-1  | 2026-10-22T03:23:37.535230657Z 2026/10/22 03:23:37 webhook delivered status=200
+api-1  | 2026-10-22T03:23:37.540845179Z 2026/10/22 03:23:37 webhook delivered status=200
+api-1  | 2026-10-22T03:23:37.543364557Z 2026/10/22 03:23:37 webhook delivered status=200
+api-1  | 2026-10-22T03:23:38.510429569Z 2026/10/22 03:23:38 webhook delivered status=200
+api-1  | 2026-10-22T03:23:38.515868991Z 2026/10/22 03:23:38 webhook delivered status=200
+api-1  | 2026-10-22T03:23:38.545454522Z 2026/10/22 03:23:38 webhook delivered status=200
+api-1  | 2026-10-22T03:23:38.555277558Z 2026/10/22 03:23:38 webhook delivered status=200
+api-1  | 2026-10-22T03:23:39.510085990Z 2026/10/22 03:23:39 webhook delivered status=200
+api-1  | 2026-10-22T03:23:39.513425285Z 2026/10/22 03:23:39 webhook delivered status=200
+api-1  | 2026-10-22T03:23:39.517324842Z 2026/10/22 03:23:39 webhook delivered status=200
+api-1  | 2026-10-22T03:23:39.522544988Z 2026/10/22 03:23:39 webhook delivered status=200
+api-1  | 2026-10-22T03:23:40.510933071Z 2026/10/22 03:23:40 webhook delivered status=200
+api-1  | 2026-10-22T03:23:40.523275735Z 2026/10/22 03:23:40 webhook delivered status=200
+api-1  | 2026-10-22T03:23:40.583117037Z 2026/10/22 03:23:40 webhook delivered status=200
+api-1  | 2026-10-22T03:23:40.594909922Z 2026/10/22 03:23:40 webhook delivered status=200
+api-1  | 2026-10-22T03:23:41.510475080Z 2026/10/22 03:23:41 webhook delivered status=200
+api-1  | 2026-10-22T03:27:09.510298476Z 2026/10/22 03:27:09 webhook delivered status=200
+api-1  | 2026-10-22T03:28:40.513361281Z 2026/10/22 03:28:40 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:41.509994745Z 2026/10/22 03:28:41 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:42.508825444Z 2026/10/22 03:28:42 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:43.514649411Z 2026/10/22 03:28:43 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:44.514740429Z 2026/10/22 03:28:44 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:45.509315003Z 2026/10/22 03:28:45 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:46.511735307Z 2026/10/22 03:28:46 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:47.509346035Z 2026/10/22 03:28:47 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:48.511680553Z 2026/10/22 03:28:48 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:49.512299305Z 2026/10/22 03:28:49 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:50.589245069Z 2026/10/22 03:28:50 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:51.517797996Z 2026/10/22 03:28:51 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:52.509985474Z 2026/10/22 03:28:52 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:53.518666650Z 2026/10/22 03:28:53 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:54.512413514Z 2026/10/22 03:28:54 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:55.511498077Z 2026/10/22 03:28:55 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:56.510605581Z 2026/10/22 03:28:56 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:57.512646722Z 2026/10/22 03:28:57 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:58.512346489Z 2026/10/22 03:28:58 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:28:59.511413242Z 2026/10/22 03:28:59 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:00.513447473Z 2026/10/22 03:29:00 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:01.545396195Z 2026/10/22 03:29:01 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:02.549874288Z 2026/10/22 03:29:02 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:03.509498172Z 2026/10/22 03:29:03 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:04.564417639Z 2026/10/22 03:29:04 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:05.602549425Z 2026/10/22 03:29:05 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:06.512918353Z 2026/10/22 03:29:06 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:07.515309013Z 2026/10/22 03:29:07 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:08.514510458Z 2026/10/22 03:29:08 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:09.512881277Z 2026/10/22 03:29:09 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:10.544470597Z 2026/10/22 03:29:10 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:11.515960735Z 2026/10/22 03:29:11 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:12.509530134Z 2026/10/22 03:29:12 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:13.509147470Z 2026/10/22 03:29:13 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:14.509467004Z 2026/10/22 03:29:14 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:15.509888968Z 2026/10/22 03:29:15 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:16.510721473Z 2026/10/22 03:29:16 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:17.509002791Z 2026/10/22 03:29:17 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:18.509795729Z 2026/10/22 03:29:18 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:19.511732271Z 2026/10/22 03:29:19 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:20.511734572Z 2026/10/22 03:29:20 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:21.509564631Z 2026/10/22 03:29:21 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:22.509979238Z 2026/10/22 03:29:22 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:23.556763213Z 2026/10/22 03:29:23 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:24.511834466Z 2026/10/22 03:29:24 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:25.511323044Z 2026/10/22 03:29:25 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:26.518492137Z 2026/10/22 03:29:26 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:27.511678815Z 2026/10/22 03:29:27 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:28.705360636Z 2026/10/22 03:29:28 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:29.547270576Z 2026/10/22 03:29:29 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:30.530412542Z 2026/10/22 03:29:30 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:31.527422828Z 2026/10/22 03:29:31 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:32.523341772Z 2026/10/22 03:29:32 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:33.518555554Z 2026/10/22 03:29:33 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:34.518371138Z 2026/10/22 03:29:34 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:35.511758544Z 2026/10/22 03:29:35 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:36.528790329Z 2026/10/22 03:29:36 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:37.511711820Z 2026/10/22 03:29:37 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:38.562880837Z 2026/10/22 03:29:38 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:39.519006655Z 2026/10/22 03:29:39 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:40.516964585Z 2026/10/22 03:29:40 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:41.512556104Z 2026/10/22 03:29:41 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:42.512847999Z 2026/10/22 03:29:42 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:43.511808482Z 2026/10/22 03:29:43 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:44.516272722Z 2026/10/22 03:29:44 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:45.516055891Z 2026/10/22 03:29:45 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:46.521811896Z 2026/10/22 03:29:46 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:47.632066508Z 2026/10/22 03:29:47 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:48.514138235Z 2026/10/22 03:29:48 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:49.512219508Z 2026/10/22 03:29:49 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:50.521863731Z 2026/10/22 03:29:50 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:51.514177290Z 2026/10/22 03:29:51 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:52.516406087Z 2026/10/22 03:29:52 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:53.520086866Z 2026/10/22 03:29:53 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:54.516208127Z 2026/10/22 03:29:54 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:55.512638866Z 2026/10/22 03:29:55 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:56.548347649Z 2026/10/22 03:29:56 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:57.520836389Z 2026/10/22 03:29:57 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:58.525755600Z 2026/10/22 03:29:58 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:29:59.518256980Z 2026/10/22 03:29:59 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:00.512252123Z 2026/10/22 03:30:00 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:01.519747866Z 2026/10/22 03:30:01 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:02.548133164Z 2026/10/22 03:30:02 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:03.539055386Z 2026/10/22 03:30:03 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:04.518704447Z 2026/10/22 03:30:04 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:05.522535820Z 2026/10/22 03:30:05 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:06.545723804Z 2026/10/22 03:30:06 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:07.544951748Z 2026/10/22 03:30:07 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:08.519278820Z 2026/10/22 03:30:08 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:09.530189617Z 2026/10/22 03:30:09 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:10.514139390Z 2026/10/22 03:30:10 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:11.516321036Z 2026/10/22 03:30:11 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:12.534236637Z 2026/10/22 03:30:12 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:13.526266489Z 2026/10/22 03:30:13 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:14.522200235Z 2026/10/22 03:30:14 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:15.512575721Z 2026/10/22 03:30:15 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:16.522067249Z 2026/10/22 03:30:16 webhook task: parse "http://bad host/x": invalid character " " in host name
+api-1  | 2026-10-22T03:30:20.270481299Z 2026/10/22 03:30:20 queuelet listening on :8200
+api-1  | 2026-10-22T03:30:30.314650445Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.463313382Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.473496189Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.481382070Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.492662193Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.492675282Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.495354593Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.502972597Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.654364741Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.677561081Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.685572357Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.693439749Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.705497811Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.719339873Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.728443581Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.751269378Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.757024611Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.766868689Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:30.772518442Z 2026/10/22 03:30:30 webhook delivered status=200
+api-1  | 2026-10-22T03:30:34.275667800Z 2026/10/22 03:30:34 webhook delivered status=200
+api-1  | 2026-10-22T03:30:34.282997401Z 2026/10/22 03:30:34 webhook delivered status=200
+api-1  | 2026-10-22T03:30:35.372431028Z 2026/10/22 03:30:35 webhook delivered status=200
+api-1  | 2026-10-22T03:30:35.389493392Z 2026/10/22 03:30:35 webhook delivered status=200
+api-1  | 2026-10-22T03:30:35.396907959Z 2026/10/22 03:30:35 webhook delivered status=200
+api-1  | 2026-10-22T03:30:36.288767063Z 2026/10/22 03:30:36 webhook delivered status=200
+api-1  | 2026-10-22T03:30:36.300689509Z 2026/10/22 03:30:36 webhook delivered status=200
+api-1  | 2026-10-22T03:30:36.319216935Z 2026/10/22 03:30:36 webhook delivered status=200
+api-1  | 2026-10-22T03:30:36.333515934Z 2026/10/22 03:30:36 webhook delivered status=200
+api-1  | 2026-10-22T03:30:37.280158543Z 2026/10/22 03:30:37 webhook delivered status=200
+api-1  | 2026-10-22T03:30:37.282752057Z 2026/10/22 03:30:37 webhook delivered status=200
+api-1  | 2026-10-22T03:30:37.287711889Z 2026/10/22 03:30:37 webhook delivered status=200
+api-1  | 2026-10-22T03:30:38.341499261Z 2026/10/22 03:30:38 webhook delivered status=200
+api-1  | 2026-10-22T03:30:38.352521905Z 2026/10/22 03:30:38 webhook delivered status=200
+api-1  | 2026-10-22T03:30:38.370657661Z 2026/10/22 03:30:38 webhook delivered status=200
+api-1  | 2026-10-22T03:30:38.381644533Z 2026/10/22 03:30:38 webhook delivered status=200
+api-1  | 2026-10-22T03:30:39.275466172Z 2026/10/22 03:30:39 webhook delivered status=200
+api-1  | 2026-10-22T03:30:39.289250224Z 2026/10/22 03:30:39 webhook delivered status=200
+api-1  | 2026-10-22T03:30:39.311463823Z 2026/10/22 03:30:39 webhook delivered status=200
+api-1  | 2026-10-22T03:30:39.324861264Z 2026/10/22 03:30:39 webhook delivered status=200
+api-1  | 2026-10-22T03:30:40.284295798Z 2026/10/22 03:30:40 webhook delivered status=200
+api-1  | 2026-10-22T03:30:40.286676163Z 2026/10/22 03:30:40 webhook delivered status=200
+api-1  | 2026-10-22T03:30:40.295683256Z 2026/10/22 03:30:40 webhook delivered status=200
+api-1  | 2026-10-22T03:30:40.302923524Z 2026/10/22 03:30:40 webhook delivered status=200
+api-1  | 2026-10-22T03:30:41.275017546Z 2026/10/22 03:30:41 webhook delivered status=200
+api-1  | 2026-10-22T03:30:41.283432568Z 2026/10/22 03:30:41 webhook delivered status=200
+api-1  | 2026-10-22T03:30:41.291890334Z 2026/10/22 03:30:41 webhook delivered status=200
+api-1  | 2026-10-22T03:30:41.299739376Z 2026/10/22 03:30:41 webhook delivered status=200
+api-1  | 2026-10-22T03:30:42.377564603Z 2026/10/22 03:30:42 webhook delivered status=200
+api-1  | 2026-10-22T03:30:42.384544609Z 2026/10/22 03:30:42 webhook delivered status=200
+api-1  | 2026-10-22T03:30:43.326718386Z 2026/10/22 03:30:43 webhook delivered status=200
+api-1  | 2026-10-22T03:30:43.347987047Z 2026/10/22 03:30:43 webhook delivered status=200
+api-1  | 2026-10-22T03:30:43.358054487Z 2026/10/22 03:30:43 webhook delivered status=200
+api-1  | 2026-10-22T03:30:43.366411795Z 2026/10/22 03:30:43 webhook delivered status=200
+api-1  | 2026-10-22T03:30:44.285095669Z 2026/10/22 03:30:44 webhook delivered status=200
+api-1  | 2026-10-22T03:30:44.285142987Z 2026/10/22 03:30:44 webhook delivered status=200
+api-1  | 2026-10-22T03:30:44.285148209Z 2026/10/22 03:30:44 webhook delivered status=200
+api-1  | 2026-10-22T03:30:44.289479838Z 2026/10/22 03:30:44 webhook delivered status=200
+api-1  | 2026-10-22T03:30:45.349238243Z 2026/10/22 03:30:45 webhook delivered status=200
+api-1  | 2026-10-22T03:30:45.357076096Z 2026/10/22 03:30:45 webhook delivered status=200
+api-1  | 2026-10-22T03:30:45.369800502Z 2026/10/22 03:30:45 webhook delivered status=200
+api-1  | 2026-10-22T03:30:45.380232275Z 2026/10/22 03:30:45 webhook delivered status=200
+api-1  | 2026-10-22T03:30:46.355489022Z 2026/10/22 03:30:46 webhook delivered status=200
+api-1  | 2026-10-22T03:30:46.362405053Z 2026/10/22 03:30:46 webhook delivered status=200
+api-1  | 2026-10-22T03:30:46.368331385Z 2026/10/22 03:30:46 webhook delivered status=200
+api-1  | 2026-10-22T03:30:46.375251234Z 2026/10/22 03:30:46 webhook delivered status=200
+api-1  | 2026-10-22T03:30:47.280575456Z 2026/10/22 03:30:47 webhook delivered status=200
+api-1  | 2026-10-22T03:30:47.297252135Z 2026/10/22 03:30:47 webhook delivered status=200
+api-1       | 2026-10-22T03:30:47.304568494Z 2026/10/22 03:30:47 webhook delivered status=200
+api-1       | 2026-10-22T03:30:48.279266034Z 2026/10/22 03:30:48 webhook delivered status=200
+api-1       | 2026-10-22T03:30:48.282396444Z 2026/10/22 03:30:48 webhook delivered status=200
+api-1       | 2026-10-22T03:31:51.282485257Z 2026/10/22 03:31:51 webhook delivered status=200
+api-1       | 2026-10-22T03:33:29.281889112Z 2026/10/22 03:33:29 webhook delivered status=200
+worker-a-1  | 2026-10-22T03:23:06.427763987Z 2026/10/22 03:23:06 worker worker-a registered
+api-1       | 2026-10-22T03:35:53.330250497Z 2026/10/22 03:35:53 background task: pq: terminating connection due to administrator command
+api-1       | 2026-10-22T03:35:53.396727419Z 2026/10/22 03:35:53 background task: read tcp 172.23.0.4:35308->172.23.0.3:5432: read: connection reset by peer
+api-1       | 2026-10-22T03:35:53.418457289Z 2026/10/22 03:35:53 background task: pq: the database system is shutting down
+api-1       | 2026-10-22T03:35:53.434251629Z 2026/10/22 03:35:53 background task: pq: the database system is shutting down
+api-1       | 2026-10-22T03:35:54.273098721Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:54.273135830Z 2026/10/22 03:35:54 webhook task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:54.277142916Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:54.284545946Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:54.288379485Z 2026/10/22 03:35:54 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:55.306683016Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:55.306720741Z 2026/10/22 03:35:55 webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:55.326258101Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:55.339487347Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:55.374338456Z 2026/10/22 03:35:55 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:56.301227032Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:56.301272881Z 2026/10/22 03:35:56 webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:56.341436235Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:56.422165053Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+api-1       | 2026-10-22T03:35:56.466888574Z 2026/10/22 03:35:56 background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving
+worker-a-1  | 2026-10-22T03:23:06.431502932Z 2026/10/22 03:23:06 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+api-1       | 2026-10-22T03:35:57.275686453Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:57.275753475Z 2026/10/22 03:35:57 webhook task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:57.276545321Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:57.283110956Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+api-1       | 2026-10-22T03:35:57.291223647Z 2026/10/22 03:35:57 background task: dial tcp 172.23.0.3:5432: connect: connection refused
+worker-a-1  | 2026-10-22T03:23:07.434549226Z 2026/10/22 03:23:07 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:08.446012431Z 2026/10/22 03:23:08 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:09.464677242Z 2026/10/22 03:23:09 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:10.461904017Z 2026/10/22 03:23:10 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:11.471564465Z 2026/10/22 03:23:11 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:12.482775350Z 2026/10/22 03:23:12 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-a-1  | 2026-10-22T03:23:28.375666266Z 2026/10/22 03:23:28 worker worker-a registered
+worker-a-1  | 2026-10-22T03:23:28.414861115Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:28.457468428Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:28.688273530Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:28.717113115Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:28.943772913Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:28.980349907Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:29.191487002Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:29.203348668Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:29.424303434Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:29.438911034Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:06.358482156Z 2026/10/22 03:23:06 worker worker-b registered
+worker-b-1  | 2026-10-22T03:23:06.364460513Z 2026/10/22 03:23:06 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:07.370071577Z 2026/10/22 03:23:07 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:08.380840649Z 2026/10/22 03:23:08 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:09.384366879Z 2026/10/22 03:23:09 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:10.388587348Z 2026/10/22 03:23:10 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:11.390924655Z 2026/10/22 03:23:11 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:12.398857690Z 2026/10/22 03:23:12 HTTP 404: {"error":{"code":"queue_not_found","message":"sql: no rows in result set"}}
+worker-b-1  | 2026-10-22T03:23:28.337448596Z 2026/10/22 03:23:28 worker worker-b registered
+worker-b-1  | 2026-10-22T03:23:28.370346569Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:28.447203471Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:28.667611995Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:28.686593172Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:28.903334333Z 2026/10/22 03:23:28 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:28.921086701Z 2026/10/22 03:23:28 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:29.133629470Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:29.151764072Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:29.364579094Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:29.396324899Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:29.606252780Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:29.623769305Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:29.837356898Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:29.876469554Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:30.122754695Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:30.178494148Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:30.405267907Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:30.439811651Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:30.686710773Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:30.703738348Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:30.931156569Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:31.008825929Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:31.227014478Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:31.256511824Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:31.466834679Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:31.488678321Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:31.741239827Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:31.877464954Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:32.105815153Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:32.139674139Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:32.417564850Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:32.447507550Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:32.706458492Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:32.780342626Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:32.989980223Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:33.015203322Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:33.226736539Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:33.252118084Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:33.465333350Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:33.488792897Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:33.696954767Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:33.709730855Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:33.927160550Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:33.943493508Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:34.160832329Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:34.191969619Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:34.399808098Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:34.412838583Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:34.628584827Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:34.644419279Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:34.854304795Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:34.867775834Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:35.082245530Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:35.100797991Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:35.324444171Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:35.345825317Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:35.561353728Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:35.579247282Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:35.790866100Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:35.809730821Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:36.018120142Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:36.033727535Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:36.244758490Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:36.273360661Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:36.495557808Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:36.518956782Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:36.731256040Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:36.752548585Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:36.970101018Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:36.985073185Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:37.205910389Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:37.234963624Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:37.459600348Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:37.475857018Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:37.689156670Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:37.709343574Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:37.940241534Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:37.963133514Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:38.171866899Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:38.185048392Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:38.400263045Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:38.437736627Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:38.657277605Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:38.671972098Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:38.882392868Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:38.894976970Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:39.112689888Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:39.132332725Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:39.345416464Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:39.361779267Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:39.572218328Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:39.582740505Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:39.793973160Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:39.830426476Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:40.039135632Z 2026/10/22 03:23:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:40.053880860Z 2026/10/22 03:23:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:40.262286261Z 2026/10/22 03:23:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:40.275792901Z 2026/10/22 03:23:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:23:40.504182001Z 2026/10/22 03:23:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:23:40.579294928Z 2026/10/22 03:23:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:26:10.704762726Z 2026/10/22 03:26:10 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:26:10.771828923Z 2026/10/22 03:26:10 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:28:51.051777360Z 2026/10/22 03:28:51 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:28:51.090585153Z 2026/10/22 03:28:51 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:33.835891250Z 2026/10/22 03:30:33 worker worker-b registered
+worker-b-1  | 2026-10-22T03:30:33.878082013Z 2026/10/22 03:30:33 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:33.916055566Z 2026/10/22 03:30:33 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:34.157846744Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:34.183747208Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:34.433682471Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:34.460725473Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:34.712720374Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:34.798193476Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:35.044266415Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:35.084994354Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:35.397391776Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:35.436553439Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:35.664438012Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:35.689009962Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:35.955447960Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:36.003257680Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:36.223022809Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:36.272990741Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:36.494886862Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:36.523531635Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:36.759289887Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:36.780099145Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:37.011747819Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:37.035784325Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:37.264406282Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:37.292235941Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:37.504114695Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:37.524822276Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:37.758589261Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:37.798508716Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:38.016314340Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:38.042832730Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:38.296401801Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:38.370555372Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:38.590098584Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:38.626700130Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:38.850377644Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:38.883715431Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:39.119985031Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:39.143718466Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:39.367752355Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:39.399527805Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:39.617632034Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:39.656344569Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:39.876745434Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:39.902356968Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:40.126532704Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:40.160900204Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:40.422655175Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:40.447776074Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:40.679741177Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:40.717975329Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:40.961067386Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:40.983311683Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:41.222974151Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:41.247210044Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:41.488893034Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:41.531932539Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:41.807487267Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:41.860207851Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:42.300178429Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:42.391645316Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:42.619736874Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:42.661240123Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:42.874350670Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:42.899998239Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:43.139970805Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:43.183229727Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:43.403688585Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:43.435780160Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:43.663934430Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:43.715342369Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:43.923033641Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:43.944725059Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:44.192510989Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:44.215448110Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:44.441740855Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:44.471717335Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:44.708340078Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:44.733538832Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:45.004316702Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:45.037355791Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:45.259575442Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:45.280668767Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:45.504884855Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:45.547718352Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:45.764771019Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:45.785030747Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:46.009168590Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:46.033339870Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:46.255281351Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:46.283453493Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:46.527070383Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:46.560332956Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:46.804612998Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:46.857072294Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:47.071464515Z 2026/10/22 03:30:47 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:47.107674542Z 2026/10/22 03:30:47 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:47.377045105Z 2026/10/22 03:30:47 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:47.407324203Z 2026/10/22 03:30:47 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:30:47.626027489Z 2026/10/22 03:30:47 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:30:47.689295528Z 2026/10/22 03:30:47 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:31:23.368930741Z 2026/10/22 03:31:23 processing kind=echo attempt=1
+worker-b-1  | 2026-10-22T03:31:23.384752233Z 2026/10/22 03:31:23 completed status=200 error=<nil>
+worker-b-1  | 2026-10-22T03:32:05.105275170Z 2026/10/22 03:32:05 processing kind=crash attempt=1
+worker-b-1  | 2026-10-22T03:32:06.136026468Z 2026/10/22 03:32:06 worker worker-b registered
+worker-b-1  | 2026-10-22T03:32:25.433158651Z 2026/10/22 03:32:25 processing kind=crash attempt=2
+worker-b-1  | 2026-10-22T03:32:27.393585749Z 2026/10/22 03:32:27 worker worker-b registered
+worker-b-1  | 2026-10-22T03:32:46.472417542Z 2026/10/22 03:32:46 processing kind=crash attempt=3
+worker-b-1  | 2026-10-22T03:32:47.666828044Z 2026/10/22 03:32:47 worker worker-b registered
+worker-b-1  | 2026-10-22T03:33:07.343244006Z 2026/10/22 03:33:07 processing kind=crash attempt=4
+worker-b-1  | 2026-10-22T03:33:08.221358650Z 2026/10/22 03:33:08 worker worker-b registered
+worker-b-1  | 2026-10-22T03:35:53.408858258Z 2026/10/22 03:35:53 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-b-1  | 2026-10-22T03:35:54.415598337Z 2026/10/22 03:35:54 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-b-1  | 2026-10-22T03:35:55.480575867Z 2026/10/22 03:35:55 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-b-1  | 2026-10-22T03:35:56.527507397Z 2026/10/22 03:35:56 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-b-1  | 2026-10-22T03:35:57.545693527Z 2026/10/22 03:35:57 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:23:29.648951540Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:29.658650021Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:29.881680411Z 2026/10/22 03:23:29 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:29.903349065Z 2026/10/22 03:23:29 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:30.159079854Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:30.209019568Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:30.435494223Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:30.512900022Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:30.758960577Z 2026/10/22 03:23:30 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:30.795896968Z 2026/10/22 03:23:30 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:31.010238575Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:31.023460823Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:31.244149924Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:31.262985622Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:31.477861672Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:31.495295033Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:31.821819102Z 2026/10/22 03:23:31 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:31.877892751Z 2026/10/22 03:23:31 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:32.095540313Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:32.121076894Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:32.347271284Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:32.428477183Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:32.694711309Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:32.722030778Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:32.935183290Z 2026/10/22 03:23:32 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:32.953849102Z 2026/10/22 03:23:32 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:33.163293773Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:33.173414112Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:33.401741609Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:33.412709802Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:33.623604391Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:33.638021051Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:33.853993625Z 2026/10/22 03:23:33 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:33.876456949Z 2026/10/22 03:23:33 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:34.083675577Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:34.103962344Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:34.313171668Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:34.326762960Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:34.538343637Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:34.547505489Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:34.760886962Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:34.770612913Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:34.981139059Z 2026/10/22 03:23:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:34.994113776Z 2026/10/22 03:23:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:35.214909724Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:35.226014336Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:35.434657227Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:35.447821016Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:35.667467117Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:35.684834545Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:35.896682555Z 2026/10/22 03:23:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:35.905365734Z 2026/10/22 03:23:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:36.116631227Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:36.126505615Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:36.335358863Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:36.345121186Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:36.574319570Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:36.612309386Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:36.828529958Z 2026/10/22 03:23:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:36.851824081Z 2026/10/22 03:23:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:37.064955002Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:37.084698747Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:37.300214158Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:37.327330364Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:37.561314470Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:37.579424918Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:37.794747720Z 2026/10/22 03:23:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:37.812310670Z 2026/10/22 03:23:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:38.026922957Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:38.038387070Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:38.259915493Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:38.271846136Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:38.479655372Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:38.494862209Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:38.710896975Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:38.721260133Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:38.933454191Z 2026/10/22 03:23:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:38.942552475Z 2026/10/22 03:23:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:39.152997249Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:39.174897289Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:39.385506649Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:39.396500230Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:39.606806576Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:39.620151084Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:39.848800114Z 2026/10/22 03:23:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:39.870248560Z 2026/10/22 03:23:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:40.085379550Z 2026/10/22 03:23:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:40.100707214Z 2026/10/22 03:23:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:23:40.309799966Z 2026/10/22 03:23:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:23:40.319184027Z 2026/10/22 03:23:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:24:03.186477921Z 2026/10/22 03:24:03 processing kind=crash attempt=1
+worker-a-1  | 2026-10-22T03:24:04.174192495Z 2026/10/22 03:24:04 worker worker-a registered
+worker-a-1  | 2026-10-22T03:24:13.551493262Z 2026/10/22 03:24:13 processing kind=crash attempt=2
+worker-a-1  | 2026-10-22T03:24:14.593839010Z 2026/10/22 03:24:14 worker worker-a registered
+worker-a-1  | 2026-10-22T03:24:24.538744903Z 2026/10/22 03:24:24 processing kind=crash attempt=3
+worker-a-1  | 2026-10-22T03:24:25.528503317Z 2026/10/22 03:24:25 worker worker-a registered
+worker-a-1  | 2026-10-22T03:26:10.702861251Z 2026/10/22 03:26:10 processing kind=fail attempt=1
+worker-a-1  | 2026-10-22T03:26:10.831795850Z 2026/10/22 03:26:10 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:26:13.837540222Z 2026/10/22 03:26:13 processing kind=fail attempt=2
+worker-a-1  | 2026-10-22T03:26:13.925178480Z 2026/10/22 03:26:13 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:26:18.779807326Z 2026/10/22 03:26:18 processing kind=fail attempt=3
+worker-a-1  | 2026-10-22T03:26:18.899977529Z 2026/10/22 03:26:18 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:33.783254254Z 2026/10/22 03:30:33 worker worker-a registered
+worker-a-1  | 2026-10-22T03:30:33.820212516Z 2026/10/22 03:30:33 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:33.855091444Z 2026/10/22 03:30:33 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:34.137189242Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+postgres-1  | 2026-10-22T03:22:59.169057630Z The files belonging to this database system will be owned by user "postgres".
+postgres-1  | 2026-10-22T03:22:59.169146904Z This user must also own the server process.
+postgres-1  | 2026-10-22T03:22:59.169164554Z 
+postgres-1  | 2026-10-22T03:22:59.169168112Z The database cluster will be initialized with locale "en_US.utf8".
+postgres-1  | 2026-10-22T03:22:59.169176404Z The default database encoding has accordingly been set to "UTF8".
+postgres-1  | 2026-10-22T03:22:59.169180518Z The default text search configuration will be set to "english".
+postgres-1  | 2026-10-22T03:22:59.169184293Z 
+postgres-1  | 2026-10-22T03:22:59.169187541Z Data page checksums are disabled.
+postgres-1  | 2026-10-22T03:22:59.169191463Z 
+postgres-1  | 2026-10-22T03:22:59.169194801Z fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres-1  | 2026-10-22T03:22:59.169922244Z creating subdirectories ... ok
+postgres-1  | 2026-10-22T03:22:59.170050181Z selecting dynamic shared memory implementation ... posix
+postgres-1  | 2026-10-22T03:22:59.208602939Z selecting default "max_connections" ... 100
+postgres-1  | 2026-10-22T03:22:59.265735168Z selecting default "shared_buffers" ... 128MB
+postgres-1  | 2026-10-22T03:22:59.637479746Z selecting default time zone ... UTC
+postgres-1  | 2026-10-22T03:22:59.642058688Z creating configuration files ... ok
+postgres-1  | 2026-10-22T03:22:59.982315435Z running bootstrap script ... ok
+postgres-1  | 2026-10-22T03:23:00.782958506Z sh: locale: not found
+postgres-1  | 2026-10-22T03:23:00.784687717Z 2026-10-22 03:23:00.783 UTC [34] WARNING:  no usable system locales were found
+postgres-1  | 2026-10-22T03:23:02.335953012Z performing post-bootstrap initialization ... ok
+postgres-1  | 2026-10-22T03:23:03.025993154Z initdb: warning: enabling "trust" authentication for local connections
+postgres-1  | 2026-10-22T03:23:03.026086599Z initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1  | 2026-10-22T03:23:03.026109984Z syncing data to disk ... ok
+postgres-1  | 2026-10-22T03:23:03.026115110Z 
+postgres-1  | 2026-10-22T03:23:03.026118654Z 
+postgres-1  | 2026-10-22T03:23:03.026121828Z Success. You can now start the database server using:
+postgres-1  | 2026-10-22T03:23:03.026125575Z 
+postgres-1  | 2026-10-22T03:23:03.026128799Z     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres-1  | 2026-10-22T03:23:03.026132550Z 
+postgres-1  | 2026-10-22T03:23:03.172296090Z waiting for server to start....2026-10-22 03:23:03.166 UTC [57] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22T03:23:03.179505861Z 2026-10-22 03:23:03.179 UTC [57] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22T03:23:03.203442875Z 2026-10-22 03:23:03.203 UTC [60] LOG:  database system was shut down at 2026-10-22 03:23:02 UTC
+postgres-1  | 2026-10-22T03:23:03.224877241Z 2026-10-22 03:23:03.223 UTC [57] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22T03:23:03.309067223Z  done
+postgres-1  | 2026-10-22T03:23:03.309129459Z server started
+postgres-1  | 2026-10-22T03:23:03.627585206Z CREATE DATABASE
+postgres-1  | 2026-10-22T03:23:03.635052508Z 
+postgres-1  | 2026-10-22T03:23:03.635089394Z 
+postgres-1  | 2026-10-22T03:23:03.635094364Z /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres-1  | 2026-10-22T03:23:03.635098412Z 
+postgres-1  | 2026-10-22T03:23:03.635110219Z waiting for server to shut down....2026-10-22 03:23:03.634 UTC [57] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22T03:23:03.654922483Z 2026-10-22 03:23:03.653 UTC [57] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22T03:23:03.670914422Z 2026-10-22 03:23:03.670 UTC [75] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22T03:23:03.672224257Z 2026-10-22 03:23:03.671 UTC [57] LOG:  background worker "logical replication launcher" (PID 63) exited with exit code 1
+postgres-1  | 2026-10-22T03:23:03.674491143Z 2026-10-22 03:23:03.674 UTC [58] LOG:  shutting down
+postgres-1  | 2026-10-22T03:23:03.683185309Z 2026-10-22 03:23:03.682 UTC [58] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22T03:23:03.859927056Z 2026-10-22 03:23:03.859 UTC [58] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.043 s, sync=0.089 s, total=0.185 s; sync files=301, longest=0.018 s, average=0.001 s; distance=4266 kB, estimate=4266 kB; lsn=0/191E820, redo lsn=0/191E820
+postgres-1  | 2026-10-22T03:23:03.888316707Z 2026-10-22 03:23:03.886 UTC [57] LOG:  database system is shut down
+postgres-1  | 2026-10-22T03:23:03.933825006Z  done
+postgres-1  | 2026-10-22T03:23:03.933871834Z server stopped
+postgres-1  | 2026-10-22T03:23:03.935867458Z 
+postgres-1  | 2026-10-22T03:23:03.935910541Z PostgreSQL init process complete; ready for start up.
+postgres-1  | 2026-10-22T03:23:03.935915010Z 
+postgres-1  | 2026-10-22T03:23:04.028697131Z 2026-10-22 03:23:04.027 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22T03:23:04.028740810Z 2026-10-22 03:23:04.027 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22T03:23:04.028746200Z 2026-10-22 03:23:04.028 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22T03:23:04.079354363Z 2026-10-22 03:23:04.079 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22T03:23:04.273844144Z 2026-10-22 03:23:04.273 UTC [79] LOG:  database system was shut down at 2026-10-22 03:23:03 UTC
+postgres-1  | 2026-10-22T03:23:04.336254578Z 2026-10-22 03:23:04.335 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22T03:28:04.347786636Z 2026-10-22 03:28:04.347 UTC [77] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22T03:28:25.911711369Z 2026-10-22 03:28:25.910 UTC [77] LOG:  checkpoint complete: wrote 216 buffers (1.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=21.503 s, sync=0.015 s, total=21.564 s; sync files=153, longest=0.003 s, average=0.001 s; distance=1274 kB, estimate=1274 kB; lsn=0/1A5D168, redo lsn=0/1A5D0D8
+postgres-1  | 2026-10-22T03:33:05.017429849Z 2026-10-22 03:33:05.011 UTC [77] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22T03:33:12.958521829Z 2026-10-22 03:33:12.957 UTC [77] LOG:  checkpoint complete: wrote 80 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.883 s, sync=0.030 s, total=7.947 s; sync files=48, longest=0.005 s, average=0.001 s; distance=637 kB, estimate=1210 kB; lsn=0/1B03AD8, redo lsn=0/1AFC558
+postgres-1  | 2026-10-22T03:35:53.293281443Z 2026-10-22 03:35:53.291 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22T03:35:53.309488894Z 2026-10-22 03:35:53.303 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22T03:35:53.309538496Z 2026-10-22 03:35:53.304 UTC [3764] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22T03:35:53.309544214Z 2026-10-22 03:35:53.305 UTC [5158] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22T03:35:53.330188464Z 2026-10-22 03:35:53.306 UTC [5233] FATAL:  terminating connection due to administrator command
+postgres-1  | 2026-10-22T03:35:53.337197133Z 2026-10-22 03:35:53.320 UTC [1] LOG:  background worker "logical replication launcher" (PID 82) exited with exit code 1
+postgres-1  | 2026-10-22T03:35:53.418535846Z 2026-10-22 03:35:53.409 UTC [77] LOG:  shutting down
+postgres-1  | 2026-10-22T03:35:53.418551934Z 2026-10-22 03:35:53.411 UTC [5234] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22T03:35:53.434364726Z 2026-10-22 03:35:53.428 UTC [5235] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22T03:35:53.462930843Z 2026-10-22 03:35:53.459 UTC [77] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22T03:35:53.485848530Z 2026-10-22 03:35:53.476 UTC [5236] FATAL:  the database system is shutting down
+postgres-1  | 2026-10-22T03:35:53.697707792Z 2026-10-22 03:35:53.697 UTC [77] LOG:  checkpoint complete: wrote 17 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.037 s, sync=0.046 s, total=0.289 s; sync files=13, longest=0.029 s, average=0.004 s; distance=66 kB, estimate=1096 kB; lsn=0/1B0CE58, redo lsn=0/1B0CE58
+postgres-1  | 2026-10-22T03:35:53.782337769Z 2026-10-22 03:35:53.781 UTC [1] LOG:  database system is shut down
+postgres-1  | 2026-10-22T03:35:57.545732358Z 
+postgres-1  | 2026-10-22T03:35:57.545773962Z PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-1  | 2026-10-22T03:35:57.545788363Z 
+postgres-1  | 2026-10-22T03:35:57.657556799Z 2026-10-22 03:35:57.657 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+worker-a-1  | 2026-10-22T03:30:34.198568210Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:34.429837289Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:34.446603573Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:34.697736820Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:34.755746558Z 2026/10/22 03:30:34 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:34.991930849Z 2026/10/22 03:30:34 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:35.018663366Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:35.285723424Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:35.333965665Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:35.584198902Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:35.621189067Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:35.943913817Z 2026/10/22 03:30:35 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:35.986803881Z 2026/10/22 03:30:35 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:36.205981245Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:36.228865313Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:36.459221651Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:36.476510357Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:36.722509034Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:36.754835094Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:36.971520106Z 2026/10/22 03:30:36 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:36.989654951Z 2026/10/22 03:30:36 completed status=200 error=<nil>
+postgres-1  | 2026-10-22T03:35:57.664792783Z 2026-10-22 03:35:57.657 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22T03:35:57.664832592Z 2026-10-22 03:35:57.657 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22T03:35:57.669897087Z 2026-10-22 03:35:57.669 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22T03:35:57.711272415Z 2026-10-22 03:35:57.710 UTC [29] LOG:  database system was shut down at 2026-10-22 03:35:53 UTC
+postgres-1  | 2026-10-22T03:35:57.769933950Z 2026-10-22 03:35:57.768 UTC [1] LOG:  database system is ready to accept connections
+worker-a-1  | 2026-10-22T03:30:37.230590116Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:37.248800543Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:37.481364683Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:37.491523521Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:37.716440380Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:37.731223682Z 2026/10/22 03:30:37 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:37.979028313Z 2026/10/22 03:30:37 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:38.002754241Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:38.226166290Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:38.283211263Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:38.535327555Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:38.551580367Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:38.767937311Z 2026/10/22 03:30:38 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:38.792403356Z 2026/10/22 03:30:38 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:39.035293887Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:39.055278046Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:39.292158193Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:39.326209263Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:39.560983063Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:39.589073425Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:39.814345704Z 2026/10/22 03:30:39 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:39.869454771Z 2026/10/22 03:30:39 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:40.096428419Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:40.126606950Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:40.373762690Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:40.402694300Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:40.629297603Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:40.664662413Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:40.918864260Z 2026/10/22 03:30:40 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:40.961226691Z 2026/10/22 03:30:40 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:41.174801171Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:41.197308840Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:41.439637093Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:41.480060625Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:41.734811617Z 2026/10/22 03:30:41 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:41.775170131Z 2026/10/22 03:30:41 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:42.008869835Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:42.348674360Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:42.584778598Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:42.606929270Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:42.836020107Z 2026/10/22 03:30:42 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:42.855405136Z 2026/10/22 03:30:42 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:43.092091310Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:43.110212045Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:43.413488777Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:43.432680730Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:43.662567772Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:43.715508470Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:43.918502843Z 2026/10/22 03:30:43 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:43.932103076Z 2026/10/22 03:30:43 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:44.173240284Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:44.195187547Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:44.422017885Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:44.443671081Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:44.667749565Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:44.697746354Z 2026/10/22 03:30:44 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:44.994962607Z 2026/10/22 03:30:44 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:45.036005140Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:45.265262771Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:45.295607000Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:45.526782460Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:45.547770026Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:45.776479785Z 2026/10/22 03:30:45 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:45.808013745Z 2026/10/22 03:30:45 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:46.026215939Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:46.052600970Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:46.296395207Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:46.338978841Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:46.573776552Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:46.597965602Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:46.834096840Z 2026/10/22 03:30:46 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:46.915608266Z 2026/10/22 03:30:46 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:47.144671199Z 2026/10/22 03:30:47 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:47.180081960Z 2026/10/22 03:30:47 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:30:47.436817920Z 2026/10/22 03:30:47 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:30:47.483563242Z 2026/10/22 03:30:47 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:34:54.992792181Z 2026/10/22 03:34:54 processing kind=sleep attempt=1
+worker-a-1  | 2026-10-22T03:35:10.653900733Z 2026/10/22 03:35:10 completed status=409 error=<nil>
+worker-a-1  | 2026-10-22T03:35:10.987287852Z 2026/10/22 03:35:10 processing kind=sleep attempt=2
+worker-a-1  | 2026-10-22T03:35:15.021965827Z 2026/10/22 03:35:15 completed status=200 error=<nil>
+worker-a-1  | 2026-10-22T03:35:53.485917248Z 2026/10/22 03:35:53 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:35:54.492507492Z 2026/10/22 03:35:54 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:35:55.562834849Z 2026/10/22 03:35:55 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:35:56.585520736Z 2026/10/22 03:35:56 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:35:57.585992091Z 2026/10/22 03:35:57 HTTP 503: {"error":{"code":"auth_unavailable","message":"authentication store unavailable"}}
+worker-a-1  | 2026-10-22T03:36:00.349504272Z 2026/10/22 03:36:00 processing kind=echo attempt=1
+worker-a-1  | 2026-10-22T03:36:00.404806416Z 2026/10/22 03:36:00 completed status=200 error=<nil>

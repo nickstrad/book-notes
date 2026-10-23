@@ -1,0 +1,125 @@
+package jobs
+
+import (
+	"crypto/rand"
+	"database/sql"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/lib/pq"
+	"math"
+	"queuelet/internal/store"
+	"time"
+)
+
+type Service struct{ S *store.Store }
+
+func Token() string { b := make([]byte, 16); rand.Read(b); return hex.EncodeToString(b) }
+
+// MaxSeconds bounds every seconds-valued input so that now+seconds never
+// leaves time.Duration's range (about 292 years).
+const MaxSeconds = math.MaxInt32
+
+// DefaultMaxSeconds caps each retry wait of a queue without backoff.max_seconds.
+const DefaultMaxSeconds = 3600
+
+// Backoff is the wait before retry attempt+1. It saturates at the queue's cap
+// (maxSeconds > 0), or at DefaultMaxSeconds or the base if that is larger.
+func Backoff(kind string, base, attempt, maxSeconds int) time.Duration {
+	limit := float64(max(DefaultMaxSeconds, base))
+	if maxSeconds > 0 {
+		limit = float64(maxSeconds)
+	}
+	steps := float64(attempt)
+	if kind != "linear" {
+		steps = math.Exp2(float64(attempt - 1))
+	}
+	return time.Duration(min(float64(base)*steps, limit) * float64(time.Second))
+}
+
+var ErrWorkerNotFound = errors.New("worker not found")
+
+const LeaseOrder = "priority DESC, created_at, id"
+
+func (j *Service) Lease(q, w int64, max int, now time.Time) ([]map[string]any, error) {
+	tx, e := j.S.DB.Begin()
+	if e != nil {
+		return nil, e
+	}
+	defer tx.Rollback()
+	var sec int
+	var paused bool
+	if e = tx.QueryRow(`SELECT lease_seconds,paused FROM queues WHERE id=$1`, q).Scan(&sec, &paused); e != nil {
+		return nil, e
+	}
+	var kinds pq.StringArray
+	if e = tx.QueryRow(`SELECT kinds FROM workers WHERE id=$1 FOR SHARE`, w).Scan(&kinds); e != nil {
+		if e == sql.ErrNoRows {
+			return nil, ErrWorkerNotFound
+		}
+		return nil, e
+	}
+	if paused {
+		return []map[string]any{}, nil
+	}
+	rows, e := tx.Query(`SELECT id FROM jobs WHERE queue_id=$1 AND `+Guard("state", EvLease)+` AND kind=ANY($2) ORDER BY `+LeaseOrder+` LIMIT $3 FOR UPDATE SKIP LOCKED`, q, kinds, max)
+	if e != nil {
+		return nil, e
+	}
+	ids := []int64{}
+	for rows.Next() {
+		var id int64
+		rows.Scan(&id)
+		ids = append(ids, id)
+	}
+	rows.Close()
+	out := []map[string]any{}
+	for _, id := range ids {
+		token := Token()
+		var payload []byte
+		var kind string
+		var attempt int
+		e = tx.QueryRow(`UPDATE jobs SET state='leased',leased_at=$5,event_at=$5,leased_by=$2,lease_token=$3,lease_expires_at=$4 WHERE id=$1 RETURNING kind,payload,attempts+1`, id, w, token, now.Add(time.Duration(sec)*time.Second), now).Scan(&kind, &payload, &attempt)
+		if e != nil {
+			return nil, e
+		}
+		out = append(out, map[string]any{"id": id, "kind": kind, "payload": json.RawMessage(payload), "attempt": attempt, "lease_token": token, "lease_expires_at": now.Add(time.Duration(sec) * time.Second)})
+	}
+	return out, tx.Commit()
+}
+
+// notify queues the terminal notification in the transaction that made the job
+// terminal, so a commit always carries its outbox row and a concurrent delete
+// waits for both.
+func notify(tx *sql.Tx, id int64, now time.Time) error {
+	var url, secret, state, errtext string
+	var result []byte
+	e := tx.QueryRow(`SELECT q.webhook_url,q.webhook_secret,j.state,COALESCE(j.result,'null'),j.last_error FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id).Scan(&url, &secret, &state, &result, &errtext)
+	if e != nil {
+		return e
+	}
+	if url == "" {
+		return nil
+	}
+	body, _ := json.Marshal(map[string]any{"job_id": id, "state": state, "result": json.RawMessage(result), "last_error": errtext})
+	_, e = tx.Exec(`INSERT INTO webhook_outbox(job_id,url,secret,body,next_at,event_at,namespace_id,queue) SELECT $1,$2,$3,$4,$5,$5,j.namespace_id,q.name FROM jobs j JOIN queues q ON q.id=j.queue_id WHERE j.id=$1`, id, url, secret, string(body), now)
+	return e
+}
+func (j *Service) Heartbeat(id int64, token string, seconds int, now time.Time) error {
+	r, e := j.S.DB.Exec(`UPDATE jobs SET lease_expires_at=$3,event_at=$4 WHERE id=$1 AND lease_token=$2 AND `+Guard("state", EvHeartbeat)+` AND lease_expires_at > $4`, id, token, now.Add(time.Duration(seconds)*time.Second), now)
+	return Changed(r, e)
+}
+func Changed(r sql.Result, e error) error {
+	if e != nil {
+		return e
+	}
+	n, e := r.RowsAffected()
+	if e != nil {
+		return e
+	}
+	if n == 0 {
+		return fmt.Errorf("state conflict")
+	}
+	return nil
+}

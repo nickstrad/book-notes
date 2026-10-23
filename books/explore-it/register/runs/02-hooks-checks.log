@@ -1,0 +1,11 @@
+=== RUN   TestL02T01
+    lesson02_test.go:21: ABSENT: T01 — jobs 308/309 JSON lifecycle events=['created', 'lease_expired', 'leased', 'notification_failed', 'notification_queued', 'succeeded']; correlated_fields=True; 500 and crash consoles compared
+--- PASS: TestL02T01 (2.98s)
+=== RUN   TestL02T02
+    lesson02_test.go:22: ABSENT: T02 — job 310: ['created', 'leased', 'succeeded', 'notification_queued', 'notification_failed']; abandoned 311: ['created', 'leased', 'lease_expired', 'notification_queued']; 500/outbox/error and true lease start retained; cross-tenant empty
+--- PASS: TestL02T02 (2.76s)
+=== RUN   TestL02T03
+    lesson02_test.go:23: ABSENT: T03 — job 312 scheduled→queued→leased→dead; advanced 3662 semantic seconds in 1.17s real time; non-admin 403
+--- PASS: TestL02T03 (1.44s)
+PASS
+ok  	queuelet/test/checks	7.188s

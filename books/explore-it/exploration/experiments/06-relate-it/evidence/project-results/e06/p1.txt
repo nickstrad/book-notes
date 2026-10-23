@@ -1,0 +1,40 @@
+15:32:06
+# empty queue → 204
+ [204]
+# missing queue → 404?
+{"error":{"code":"queue_not_found","message":"queue not found"}}
+ [404]
+# globex deletes acme-only name e6-own
+{"error":{"code":"queue_not_found","message":"queue not found"}}
+ [404]
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":6,"lease_
+ [200]
+# queue with one queued job
+{"id":301,"state":"queued"}
+ [201]
+{"error":{"code":"queue_not_empty","message":"queue owns jobs or schedules"}}
+ [409]
+# cancel it (terminal) then delete queue
+{"ok":true}
+ [200]
+{"error":{"code":"queue_not_empty","message":"queue owns jobs or schedules"}}
+ [409]
+# delete the terminal job, then queue
+ [204]
+ [204]
+# queue with only a schedule
+schedule 3
+{"error":{"code":"queue_not_empty","message":"queue owns jobs or schedules"}}
+ [409]
+# delete schedule then queue
+ [204]
+ [204]
+# psql orphan check
+orphan_jobs | orphan_schedules | orphan_attempts
+0 | 0 | 0
+# events for job 301
+["created","e6-q1"]
+["cancelled","e6-q1"]
+["deleted","e6-q1"]
+{"events":[{"at":"2026-10-22T15:32:06.328063Z","attempt":0,"error":"","event":"created","id":789,"job_id":301,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"e6-q1","status":null,"worker":null},{"at":"2026-10-22T15:32:06.420512Z","attempt":0,"error":"","event":"cancelled","id":790,"job_id":301,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"e6-q1","status":null,"worker":null},{"at":"2026-10-22T15:32:06.472175Z","attempt":0,"error":"","event":"deleted","id":791,"job_id":301,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"e6-q1","status":null,"worker":null}]}
+ [200]

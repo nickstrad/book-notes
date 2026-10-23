@@ -1,0 +1,34 @@
+15:35:24
+# A: echo via worker-b, payload {"big":9007199254740993,"dec":1.10,"exp":1e2,"html":"<&>","z":{"b":1,"a":2}}
+job 309
+# B: duplicate key payload via worker-b
+job 310
+# C: manual kind, my worker, ack with exact big result
+worker 4
+job 311
+lease raw: {"jobs":[{"attempt":1,"id":311,"kind":"manual","lease_expires_at":"2026-10-22T15:35:44.907949463Z","lease_token":"50682773cc57b0ba274b5b5560d04d02","payload":{"z":{"a":2,"b":1},"big":9007199254740993,"dec":1.10,"exp":100,"html":"\u003c\u0026\u003e"}}]}
+{"ok":true}
+ [200]
+# GET job 309 (raw bytes)
+{"state":"succeeded","payload":{"z":{"a":2,"b":1},"big":9007199254740993,"dec":1.10,"exp":100,"html":"<&>"},"result":{"z":{"a":2,"b":1},"big":9007199254740992,"dec":1.1,"exp":100,"html":"<&>"},"last_error":""}
+"payload":{"z":{"a":2,"b":1}
+# GET job 310 (raw bytes)
+{"state":"succeeded","payload":{"d":2},"result":{"d":2},"last_error":""}
+"payload":{"d":2}
+# GET job 311 (raw bytes)
+{"state":"succeeded","payload":{"z":{"a":2,"b":1},"big":9007199254740993,"dec":1.10,"exp":100,"html":"<&>"},"result":{"big":9007199254740993,"dec":1.10},"last_error":""}
+"payload":{"z":{"a":2,"b":1}
+# psql
+id | payload | result
+309 | {"z": {"a": 2, "b": 1}, "big": 9007199254740993, "dec": 1.10, "exp": 100, "html": "<&>"} | {"z": {"a": 2, "b": 1}, "big": 9007199254740992, "dec": 1.1, "exp": 100, "html": "<&>"}
+310 | {"d": 2} | {"d": 2}
+311 | {"z": {"a": 2, "b": 1}, "big": 9007199254740993, "dec": 1.10, "exp": 100, "html": "<&>"} | {"big": 9007199254740993, "dec": 1.10}
+# hooksink raw bodies
+true 200 {"state":"succeeded","job_id":311,"result":{"big":9007199254740993,"dec":1.10},"last_error":""}
+true 200 {"state":"succeeded","job_id":309,"result":{"z":{"a":2,"b":1},"big":9007199254740992,"dec":1.1,"exp":100,"html":"\u003c\u0026\u003e"},"last_error":""}
+true 200 {"state":"succeeded","job_id":310,"result":{"d":2},"last_error":""}
+# outbox
+id | job_id | attempts | status | delivered | body
+70 | 311 | 1 | 200 | t | {"state": "succeeded", "job_id": 311, "result": {"big": 9007199254740993, "dec": 1.10}, "last_error": ""}
+71 | 309 | 1 | 200 | t | {"state": "succeeded", "job_id": 309, "result": {"z": {"a": 2, "b": 1}, "big": 9007199254740992, "dec": 1.1, "exp": 100, "html": "<&>"}, "last_error": ""}
+72 | 310 | 1 | 200 | t | {"state": "succeeded", "job_id": 310, "result": {"d": 2}, "last_error": ""}

@@ -1,0 +1,115 @@
+actual crash worker exit=3
+{"time":"2026-10-22T04:08:10.433425171Z","level":"INFO","msg":"worker e02-crash registered"}
+{"time":"2026-10-22T04:08:10.471838113Z","level":"INFO","msg":"processing","event":"processing","job_id":395,"queue":"repro-t02-60e45a7d91","worker":49,"attempt":1,"kind":"crash"}
+
+crash/500 history {"events": [{"at": "2026-10-22T04:08:08.56081Z", "attempt": 0, "error": "", "event": "created", "id": 1613, "job_id": 395, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:10.438206Z", "attempt": 1, "error": "", "event": "leased", "id": 1614, "job_id": 395, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 49}, {"at": "2026-10-22T04:08:12.100716Z", "attempt": 1, "error": "lease expired", "event": "lease_expired", "id": 1615, "job_id": 395, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 49}, {"at": "2026-10-22T04:08:12.100716Z", "attempt": 0, "error": "", "event": "notification_queued", "id": 1616, "job_id": 395, "logged": true, "namespace_id": 1, "outbox_id": 128, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:13.101032Z", "attempt": 1, "error": "HTTP 500", "event": "notification_failed", "id": 1617, "job_id": 395, "logged": false, "namespace_id": 1, "outbox_id": 128, "queue": "repro-t02-60e45a7d91", "status": 500, "worker": null}]}
+slow partner records [{"at": "2026-10-22T04:08:14.104535369Z", "body": {"job_id": 396, "last_error": "", "result": {"ok": true}, "state": "succeeded"}, "raw_body": "{\"state\":\"succeeded\",\"job_id\":396,\"result\":{\"ok\":true},\"last_error\":\"\"}", "signature_valid": true, "status": 200}]
+sender timeout history [{"at": "2026-10-22T04:08:13.163742Z", "attempt": 0, "error": "", "event": "created", "id": 1618, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:13.186723Z", "attempt": 1, "error": "", "event": "leased", "id": 1619, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 50}, {"at": "2026-10-22T04:08:13.203668Z", "attempt": 1, "error": "", "event": "succeeded", "id": 1620, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 50}, {"at": "2026-10-22T04:08:13.203668Z", "attempt": 0, "error": "", "event": "notification_queued", "id": 1621, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": 129, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:14.100993Z", "attempt": 1, "error": "Post \"http://hooksink:8201/hook\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)", "event": "notification_failed", "id": 1622, "job_id": 396, "logged": false, "namespace_id": 1, "outbox_id": 129, "queue": "repro-t02-60e45a7d91", "status": 0, "worker": null}]
+recovery history {"events": [{"at": "2026-10-22T04:08:13.163742Z", "attempt": 0, "error": "", "event": "created", "id": 1618, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:13.186723Z", "attempt": 1, "error": "", "event": "leased", "id": 1619, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 50}, {"at": "2026-10-22T04:08:13.203668Z", "attempt": 1, "error": "", "event": "succeeded", "id": 1620, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": null, "queue": "repro-t02-60e45a7d91", "status": null, "worker": 50}, {"at": "2026-10-22T04:08:13.203668Z", "attempt": 0, "error": "", "event": "notification_queued", "id": 1621, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": 129, "queue": "repro-t02-60e45a7d91", "status": null, "worker": null}, {"at": "2026-10-22T04:08:14.100993Z", "attempt": 1, "error": "Post \"http://hooksink:8201/hook\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)", "event": "notification_failed", "id": 1622, "job_id": 396, "logged": true, "namespace_id": 1, "outbox_id": 129, "queue": "repro-t02-60e45a7d91", "status": 0, "worker": null}, {"at": "2026-10-22T04:08:19.101356Z", "attempt": 2, "error": "", "event": "notification_delivered", "id": 1624, "job_id": 396, "logged": false, "namespace_id": 1, "outbox_id": 129, "queue": "repro-t02-60e45a7d91", "status": 200, "worker": null}]}
+qctl watch repro-t02-60e45a7d91 {"events":[{"at":"2026-10-22T04:08:08.56081Z","attempt":0,"error":"","event":"created","id":1613,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:10.438206Z","attempt":1,"error":"","event":"leased","id":1614,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":49},{"at":"2026-10-22T04:08:12.100716Z","attempt":1,"error":"lease expired","event":"lease_expired","id":1615,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":49},{"at":"2026-10-22T04:08:12.100716Z","attempt":0,"error":"","event":"notification_queued","id":1616,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:13.101032Z","attempt":1,"error":"HTTP 500","event":"notification_failed","id":1617,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":500,"worker":null},{"at":"2026-10-22T04:08:18.101116Z","attempt":2,"error":"","event":"notification_delivered","id":1623,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":200,"worker":null}]}
+
+{"events":[{"at":"2026-10-22T04:08:13.163742Z","attempt":0,"error":"","event":"created","id":1618,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:13.186723Z","attempt":1,"error":"","event":"leased","id":1619,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":50},{"at":"2026-10-22T04:08:13.203668Z","attempt":1,"error":"","event":"succeeded","id":1620,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":50},{"at":"2026-10-22T04:08:13.203668Z","attempt":0,"error":"","event":"notification_queued","id":1621,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:14.100993Z","attempt":1,"error":"Post \"http://hooksink:8201/hook\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)","event":"notification_failed","id":1622,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":0,"worker":null},{"at":"2026-10-22T04:08:19.101356Z","attempt":2,"error":"","event":"notification_delivered","id":1624,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":200,"worker":null}]}
+
+{"events":[{"at":"2026-10-22T04:08:08.56081Z","attempt":0,"error":"","event":"created","id":1613,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:10.438206Z","attempt":1,"error":"","event":"leased","id":1614,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":49},{"at":"2026-10-22T04:08:12.100716Z","attempt":1,"error":"lease expired","event":"lease_expired","id":1615,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":49},{"at":"2026-10-22T04:08:12.100716Z","attempt":0,"error":"","event":"notification_queued","id":1616,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:13.101032Z","attempt":1,"error":"HTTP 500","event":"notification_failed","id":1617,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":500,"worker":null},{"at":"2026-10-22T04:08:18.101116Z","attempt":2,"error":"","event":"notification_delivered","id":1623,"job_id":395,"logged":true,"namespace_id":1,"outbox_id":128,"queue":"repro-t02-60e45a7d91","status":200,"worker":null}]}
+
+{"events":[{"at":"2026-10-22T04:08:13.163742Z","attempt":0,"error":"","event":"created","id":1618,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:13.186723Z","attempt":1,"error":"","event":"leased","id":1619,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":50},{"at":"2026-10-22T04:08:13.203668Z","attempt":1,"error":"","event":"succeeded","id":1620,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":null,"queue":"repro-t02-60e45a7d91","status":null,"worker":50},{"at":"2026-10-22T04:08:13.203668Z","attempt":0,"error":"","event":"notification_queued","id":1621,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":null,"worker":null},{"at":"2026-10-22T04:08:14.100993Z","attempt":1,"error":"Post \"http://hooksink:8201/hook\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)","event":"notification_failed","id":1622,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":0,"worker":null},{"at":"2026-10-22T04:08:19.101356Z","attempt":2,"error":"","event":"notification_delivered","id":1624,"job_id":396,"logged":true,"namespace_id":1,"outbox_id":129,"queue":"repro-t02-60e45a7d91","status":200,"worker":null}]}
+
+
+qctl job events 395 {
+  "events": [
+    {
+      "at": "2026-10-22T04:08:08.56081Z",
+      "attempt": 0,
+      "error": "",
+      "event": "created",
+      "id": 1613,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": null,
+      "queue": "repro-t02-60e45a7d91",
+      "status": null,
+      "worker": null
+    },
+    {
+      "at": "2026-10-22T04:08:10.438206Z",
+      "attempt": 1,
+      "error": "",
+      "event": "leased",
+      "id": 1614,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": null,
+      "queue": "repro-t02-60e45a7d91",
+      "status": null,
+      "worker": 49
+    },
+    {
+      "at": "2026-10-22T04:08:12.100716Z",
+      "attempt": 1,
+      "error": "lease expired",
+      "event": "lease_expired",
+      "id": 1615,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": null,
+      "queue": "repro-t02-60e45a7d91",
+      "status": null,
+      "worker": 49
+    },
+    {
+      "at": "2026-10-22T04:08:12.100716Z",
+      "attempt": 0,
+      "error": "",
+      "event": "notification_queued",
+      "id": 1616,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": 128,
+      "queue": "repro-t02-60e45a7d91",
+      "status": null,
+      "worker": null
+    },
+    {
+      "at": "2026-10-22T04:08:13.101032Z",
+      "attempt": 1,
+      "error": "HTTP 500",
+      "event": "notification_failed",
+      "id": 1617,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": 128,
+      "queue": "repro-t02-60e45a7d91",
+      "status": 500,
+      "worker": null
+    },
+    {
+      "at": "2026-10-22T04:08:18.101116Z",
+      "attempt": 2,
+      "error": "",
+      "event": "notification_delivered",
+      "id": 1623,
+      "job_id": 395,
+      "logged": true,
+      "namespace_id": 1,
+      "outbox_id": 128,
+      "queue": "repro-t02-60e45a7d91",
+      "status": 200,
+      "worker": null
+    }
+  ]
+}
+qctl clock set 2030-01-01T00:00:00Z {
+  "now": "2030-01-01T00:00:00Z"
+}
+qctl clock advance 5 {
+  "now": "2030-01-01T00:00:05Z"
+}
+qctl clock reset {
+  "now": "2026-10-22T04:08:23.07291142Z"
+}
+OBSERVATION REPLAY HOLDS: actual worker exit 3; crash expiry; HTTP 500 failure; partner 200 with sender deadline error; recovery 2xx; qctl events/clock commands

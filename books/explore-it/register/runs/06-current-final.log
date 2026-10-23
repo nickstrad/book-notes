@@ -1,0 +1,35 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: make verify LESSON=06
+start: 2026-10-22T16:01:15.323988+00:00
+REF='' bash lab/verify.sh 06
+ Container queuelet-worker-b-1 Stopping 
+ Container queuelet-worker-a-1 Stopping 
+ Container queuelet-worker-a-1 Stopped 
+ Container queuelet-worker-b-1 Stopped 
+ Container queuelet-api-1 Stopping 
+ Container queuelet-api-1 Stopped 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-a-1 Started 
+ Container queuelet-worker-b-1 Started 
+ABSENT: U27 — foreign/repeated/missing DELETE=404/404/404; owner delete=204, foreign untouched, deleted GET=404
+ABSENT: U28 — null/array/string/number/bool create=[400, 400, 400, 400, 400]; omitted payload={}, run=201; cron fired 2 templates; object run/cron and PATCH controls hold
+ABSENT: U29 — raw payload exact; worker echo big=9007199254740993, fraction=0.12345678901234567890123456789; stored result=valid signed webhook; sleep/fail numeric controls hold
+ABSENT: U30 — exact numeric value by path={'enqueue-input': True, 'job-get-payload': True, 'job-get-result': True, 'ack-result': True, 'batch-json': True, 'schedule-json': True}; direct API input/result controls exact
+ABSENT: U31 — ack string/nested/key and nack NUL statuses=[400, 400, 400, 400]; valid lease unchanged, clean retry stored exact value and one attempt each
+ABSENT: U32 — concurrent statuses={'enqueue': {201: 448, 404: 352}, 'schedule': {404: 512, 201: 288}, 'batch': {404: 64, 201: 64}}; FK errors={'enqueue': 0, 'schedule': 0, 'batch': 0}; accepted writes equal stored rows, no orphans; positive/missing-owner controls hold; historical examples={}
+ABSENT: U33 — attempt rows after purge/delete/retention={'purge': 0, 'delete': 0, 'retention': 0}; removed jobs absent in API+storage; live attempt retained; durable events and pending deliveries survive
+ABSENT: A4 — API clock ages 3599/3602/7202s: all remain below cutoff; succeeded/cancelled API=404 storage=0; dead API=200 storage=1; retained dead retry control holds when present
+ok  	queuelet/test/checks	56.422s
+FIXED AND CHECKED: 8 absent; regression checks pass
+
+exit: 0
+elapsed_seconds: 144.842

@@ -1,0 +1,56 @@
+REF='' bash lab/verify.sh 01
+ Container queuelet-review-a-worker-a-1 Stopping 
+ Container queuelet-review-a-worker-b-1 Stopping 
+ Container queuelet-review-a-worker-a-1 Stopped 
+ Container queuelet-review-a-worker-b-1 Stopped 
+ Container queuelet-review-a-api-1 Stopping 
+ Container queuelet-review-a-api-1 Stopped 
+ Container queuelet-review-a-postgres-1 Waiting 
+ Container queuelet-review-a-postgres-1 Healthy 
+ Container queuelet-review-a-api-1 Starting 
+ Container queuelet-review-a-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-a-postgres-1 Waiting 
+ Container queuelet-review-a-postgres-1 Healthy 
+ Container queuelet-review-a-worker-b-1 Starting 
+ Container queuelet-review-a-worker-a-1 Starting 
+ Container queuelet-review-a-worker-b-1 Started 
+ Container queuelet-review-a-worker-a-1 Started 
+ABSENT: D01 — CLI missing-job exit=1; stderr=HTTP 404: {"error":{"code":"job_not_found","message":"job not found"}}
+ABSENT: D02 — delete absent queue HTTP 404
+ABSENT: D03 — expired lease counted=1; attempt rows=1
+ABSENT: D04 — partner HTTP 500; marked delivered=f
+ABSENT: D05 — priority -1/10 statuses=[400, 400]
+ABSENT: D06 — batch zero=400, 501=400, persisted=0
+ABSENT: D07 — slash/space queue create statuses=[400, 400]; contract requires rejection
+ABSENT: D08 — input=9007199254740993; stored=9007199254740993; leased=9007199254740993
+ABSENT: D09 — first nack max_attempts=1 leaves dead
+ABSENT: D10 — stats queued=0; read-only SQL queued=0
+ABSENT: D11 — oldest=306, first=306, next after public nack/promote=306
+ABSENT: D12 — purged scheduled/retry_wait/queued GET statuses=[404, 404, 404]
+ABSENT: D13 — resume after two missed minute ticks produced=0; elapsed=88.9s; maximum allowed=1
+ABSENT: D14 — non-dead retry outcomes=[('cancelled', 409, 'cancelled'), ('succeeded', 409, 'succeeded')]
+ABSENT: D15 — nonempty owner DELETE=409; dependent job/schedule=200/200
+ABSENT: D16 — cron/zone recomputed=True; enabling sets next_run_at=2026-10-22T02:59:00Z
+ABSENT: D17 — result complete=True; error chars=408/408
+ABSENT: D18 — expired A ack=409; current B ack=200; stored result={'owner': 'B'}
+ABSENT: D19 — nack incompatible outcomes=[('wrong-token', 409, 'leased'), ('cancelled', 409, 'cancelled'), ('queued', 409, 'queued')]
+ABSENT: D20 — first crash max_attempts=1 leaves dead; completed attempts=1
+ABSENT: D21 — foreign namespace get/attempts/cancel/retry/ack/nack/heartbeat/delete=[404, 404, 404, 404, 404, 404, 404, 404]
+ABSENT: D22 — after DB recovery delayed job=queued; health HTTP 200 ok
+ABSENT: D23 — opposite-season cron requires 02:00 America/New_York; next local fire=2027-01-01T02:00:00-05:00
+ABSENT: D24 — signature_valid=True
+ABSENT: D25 — unknown-worker error HTTP 404
+ABSENT: D26 — typo field PATCH=400; unknown state GET=400
+ABSENT: D27 — disabled schedule after real minute boundary produced=0; enabled control fired
+ABSENT: U01 — invalid cron/zone PATCH statuses=[400, 400]
+ABSENT: U02 — result type=dict; expected object
+ABSENT: U03 — six-timeout-row promotion=1.56s; ok-partner control=1.70s; warm-lab bound=5s
+ABSENT: U04 — during DB outage auth=503; health=503
+ABSENT: U05 — invalid trailing element HTTP 400; persisted=1 expected=1; duplicate ids preserved
+ABSENT: U06 — invalid max/retention/lease PATCH/create statuses=[400, 400, 400, 400, 400, 400]
+ABSENT: U07 — unknown backoff kind create HTTP 400
+ABSENT: U08 — new backdated job queued age=0.010s; elapsed+rounding bound=2.029s
+ok  	queuelet/test/checks	179.287s
+FIXED AND CHECKED: 35 absent; regression checks pass

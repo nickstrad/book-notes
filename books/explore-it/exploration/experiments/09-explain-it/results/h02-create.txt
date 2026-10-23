@@ -1,0 +1,3 @@
+{"cron":"* * * * *","enabled":true,"id":4,"kind":"echo","last_run_at":null,"name":"victim","namespace_id":2,"next_run_at":"2026-10-22T21:01:00Z","payload":{"v":1},"queue_id":4,"timezone":"UTC","zone_offset":0}
+
+HTTP 201

@@ -1,0 +1,5 @@
+{"command": ["make", "checks"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T00:51:24.573838+00:00"}
+go test -tags checks ./test/checks -count=1 -timeout 30m
+ok  	queuelet/test/checks	715.576s
+
+EXIT 0; ELAPSED 716.739s

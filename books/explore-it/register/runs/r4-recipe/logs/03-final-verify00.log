@@ -1,0 +1,37 @@
+{"command": ["make", "verify", "LESSON=00"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T00:19:22.296387+00:00"}
+REF='' bash lab/verify.sh 00
+ Container queuelet-r4-worker-b-1 Stopping 
+ Container queuelet-r4-worker-a-1 Stopping 
+ Container queuelet-r4-worker-a-1 Stopped 
+ Container queuelet-r4-worker-b-1 Stopped 
+ Container queuelet-r4-api-1 Stopping 
+ Container queuelet-r4-api-1 Stopped 
+ Container queuelet-r4-postgres-1 Waiting 
+ Container queuelet-r4-postgres-1 Healthy 
+ Container queuelet-r4-api-1 Starting 
+ Container queuelet-r4-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-r4-postgres-1 Waiting 
+ Container queuelet-r4-postgres-1 Healthy 
+ Container queuelet-r4-worker-b-1 Starting 
+ Container queuelet-r4-worker-a-1 Starting 
+ Container queuelet-r4-worker-a-1 Started 
+ Container queuelet-r4-worker-b-1 Started 
+?   	queuelet/cmd/api	[no test files]
+?   	queuelet/cmd/hooksink	[no test files]
+ok  	queuelet/cmd/qctl	1.987s
+?   	queuelet/cmd/worker	[no test files]
+?   	queuelet/internal/api	[no test files]
+ok  	queuelet/internal/client	0.020s
+ok  	queuelet/internal/clock	0.011s
+ok  	queuelet/internal/jobs	0.014s
+ok  	queuelet/internal/schedule	0.008s
+?   	queuelet/internal/stats	[no test files]
+?   	queuelet/internal/store	[no test files]
+?   	queuelet/internal/webhook	[no test files]
+ok  	queuelet/internal/worker	0.017s
+ok  	queuelet/test/checks	0.651s
+BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass
+
+EXIT 0; ELAPSED 16.821s

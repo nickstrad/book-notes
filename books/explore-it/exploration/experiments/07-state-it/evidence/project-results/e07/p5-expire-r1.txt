@@ -1,0 +1,11 @@
+2026-10-22T18:08:42Z expire r1 8
+trial 0 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 1 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 2 purge (200, {'deleted': 300}) -> []
+trial 3 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 4 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 5 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 6 purge (200, {'deleted': 0}) -> ['queued:false:300']
+trial 7 purge (200, {'deleted': 0}) -> ['queued:false:300']
+clock reset {'now': '2026-10-22T18:09:15.025817115Z'}
+2026-10-22T18:09:15Z hits 7 of 8

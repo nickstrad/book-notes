@@ -1,0 +1,110 @@
+ Image queuelet:e02 Pulling 
+ Image queuelet:e02 Pulling 
+ Image queuelet:e02 Pulling 
+ Image queuelet:e02 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e02 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e02 Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:e02 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 561B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.3s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 116.08kB 0.1s done
+#6 DONE 0.2s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.2s done
+#7 DONE 0.2s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.2s done
+#8 DONE 0.3s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.5s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 103.4s
+
+#14 [stage-1 3/5] WORKDIR /app
+#14 CACHED
+
+#15 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#15 CACHED
+
+#16 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers 0.0s done
+#18 exporting manifest sha256:3bf2c95406ab9f2dd084a18cdf9e62b2307c0ae967a1b911c4e82ecc95b74ddf 0.1s done
+#18 exporting config sha256:a44042b54b5daadcf19f4a886f3439ea230808b942f55df2d0bd326c805b9d12
+#18 exporting config sha256:a44042b54b5daadcf19f4a886f3439ea230808b942f55df2d0bd326c805b9d12 0.1s done
+#18 exporting attestation manifest sha256:f070e3309c5ae6fb86a923b7d4e01097cd9cbfb00bbbc4028a062784b67dc741
+#18 exporting attestation manifest sha256:f070e3309c5ae6fb86a923b7d4e01097cd9cbfb00bbbc4028a062784b67dc741 0.1s done
+#18 exporting manifest list sha256:09df36a0dfdcc4681dd9ef94a8e5d38beda41df0af90d4d8ca8fed272f7354b7 0.1s done
+#18 naming to docker.io/library/queuelet:e02 done
+#18 unpacking to docker.io/library/queuelet:e02 0.1s done
+#18 DONE 0.7s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.3s
+ Image queuelet:e02 Built 
+ Network queuelet-e02_default Creating 
+ Volume queuelet-e02_data Creating 
+ Volume queuelet-e02_data Creating 
+ Network queuelet-e02_default Creating 
+ Volume queuelet-e02_data Created 
+ Volume queuelet-e02_data Created 
+ Network queuelet-e02_default Created 
+ Network queuelet-e02_default Created 
+ Container queuelet-e02-postgres-1 Creating 
+ Container queuelet-e02-hooksink-1 Creating 
+ Container queuelet-e02-hooksink-1 Created 
+ Container queuelet-e02-postgres-1 Created 
+ Container queuelet-e02-api-1 Creating 
+ Container queuelet-e02-api-1 Created 
+ Container queuelet-e02-worker-b-1 Creating 
+ Container queuelet-e02-worker-a-1 Creating 
+ Container queuelet-e02-worker-a-1 Created 
+ Container queuelet-e02-worker-b-1 Created 
+ Container queuelet-e02-hooksink-1 Starting 
+ Container queuelet-e02-postgres-1 Starting 
+ Container queuelet-e02-hooksink-1 Started 
+ Container queuelet-e02-postgres-1 Started 
+ Container queuelet-e02-postgres-1 Waiting 
+ Container queuelet-e02-postgres-1 Healthy 
+ Container queuelet-e02-api-1 Starting 
+ Container queuelet-e02-api-1 Started 
+ Container queuelet-e02-worker-b-1 Starting 
+ Container queuelet-e02-worker-a-1 Starting 
+ Container queuelet-e02-worker-b-1 Started 
+ Container queuelet-e02-worker-a-1 Started 

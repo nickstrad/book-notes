@@ -1,0 +1,85 @@
+== P6 lease, delete worker, lease ... (max_attempts 2) 2026-10-22T13:23:10.519Z
+$ mkq p6 "max_attempts":2
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":5,"lease_seconds":30,"max_attempts":2,"name":"p6","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+job 8
+lease by 6: {"jobs":[{"attempt":1,"id":8,"kind":"k","lease_expires_at":"2026-10-22T13:23:40.663446905Z","lease_token":"02c66eae98e3f217002abc257832b0a0","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/6
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/8/heartbeat -d {"lease_token":"02c66eae98e3f217002abc257832b0a0","extend_seconds":30}
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ jget 8
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+8 | queued | 0 | 2 | 2026-10-22 13:23:10.71054+00 | 2026-10-22 13:23:10.574683+00 |  |  | f |  | 
+(1 row)
+lease by 7: {"jobs":[{"attempt":1,"id":8,"kind":"k","lease_expires_at":"2026-10-22T13:23:40.964017708Z","lease_token":"1ebbcd8af134e1a388ab828fbb0e6a1a","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/7
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/8/heartbeat -d {"lease_token":"1ebbcd8af134e1a388ab828fbb0e6a1a","extend_seconds":30}
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ jget 8
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+8 | queued | 0 | 2 | 2026-10-22 13:23:11.020412+00 | 2026-10-22 13:23:10.574683+00 |  |  | f |  | 
+(1 row)
+lease by 8: {"jobs":[{"attempt":1,"id":8,"kind":"k","lease_expires_at":"2026-10-22T13:23:41.287277813Z","lease_token":"07d9b77efd689c78e5c7d6a8ba98d8c2","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/8
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/8/heartbeat -d {"lease_token":"07d9b77efd689c78e5c7d6a8ba98d8c2","extend_seconds":30}
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ jget 8
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+8 | queued | 0 | 2 | 2026-10-22 13:23:11.334274+00 | 2026-10-22 13:23:10.574683+00 |  |  | f |  | 
+(1 row)
+lease by 9: {"jobs":[{"attempt":1,"id":8,"kind":"k","lease_expires_at":"2026-10-22T13:23:41.542033688Z","lease_token":"14465f492bd7d9cc10a959f1436628de","payload":{}}]}
+ [200]
+$ api DELETE /v1/workers/9
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/8/heartbeat -d {"lease_token":"14465f492bd7d9cc10a959f1436628de","extend_seconds":30}
+{"error":{"code":"state_conflict","message":"state conflict"}}
+ [409]
+$ jget 8
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+8 | queued | 0 | 2 | 2026-10-22 13:23:11.621471+00 | 2026-10-22 13:23:10.574683+00 |  |  | f |  | 
+(1 row)
+$ api GET /v1/jobs/8/attempts
+{"attempts":[]}
+ [200]
+$ sql select event,worker,attempt from job_events where job_id=8 order by id
+event | worker | attempt
+created |  | 0
+leased | 6 | 1
+queued | 6 | 0
+leased | 7 | 1
+queued | 7 | 0
+leased | 8 | 1
+queued | 8 | 0
+leased | 9 | 1
+queued | 9 | 0
+(9 rows)
+== P7 lease (lease_seconds 2, max 1), pause, expiry while paused 2026-10-22T13:23:11.959Z
+$ mkq p7 "lease_seconds":2,"max_attempts":1
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":6,"lease_seconds":2,"max_attempts":1,"name":"p7","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+$ lease1 p7 10
+{"jobs":[{"attempt":1,"id":9,"kind":"k","lease_expires_at":"2026-10-22T13:23:14.108257131Z","lease_token":"0b3c8611bdc97d323168d02cdf152f97","payload":{}}]}
+ [200]
+$ api POST /v1/queues/p7/pause
+{"ok":true}
+ [200]
+$ jget 9
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+9 | dead | 1 | 1 | 2026-10-22 13:23:15.053669+00 | 2026-10-22 13:23:12.062904+00 | 2026-10-22 13:23:15.053669+00 |  | f |  | lease expired
+(1 row)
+$ api GET /v1/jobs/9/attempts
+{"attempts":[{"error":"lease expired","finished_at":"2026-10-22T13:23:15.053669Z","job_id":9,"n":1,"outcome":"expired","started_at":"2026-10-22T13:23:12.108257Z","worker_id":10}]}
+ [200]

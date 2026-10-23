@@ -1,0 +1,326 @@
+books/explore-it/register/runs/02-current-attempt1.log:2: trailing whitespace.
++ Container queuelet-worker-b-1 Stopping 
+books/explore-it/register/runs/02-current-attempt1.log:3: trailing whitespace.
++ Container queuelet-worker-a-1 Stopping 
+books/explore-it/register/runs/02-current-attempt1.log:4: trailing whitespace.
++ Container queuelet-worker-a-1 Stopped 
+books/explore-it/register/runs/02-current-attempt1.log:5: trailing whitespace.
++ Container queuelet-worker-b-1 Stopped 
+books/explore-it/register/runs/02-current-attempt1.log:6: trailing whitespace.
++ Container queuelet-api-1 Stopping 
+books/explore-it/register/runs/02-current-attempt1.log:7: trailing whitespace.
++ Container queuelet-api-1 Stopped 
+books/explore-it/register/runs/02-current-attempt1.log:8: trailing whitespace.
++ Container queuelet-postgres-1 Waiting 
+books/explore-it/register/runs/02-current-attempt1.log:9: trailing whitespace.
++ Container queuelet-postgres-1 Healthy 
+books/explore-it/register/runs/02-current-attempt1.log:10: trailing whitespace.
++ Container queuelet-api-1 Starting 
+books/explore-it/register/runs/02-current-attempt1.log:11: trailing whitespace.
++ Container queuelet-api-1 Started 
+books/explore-it/register/runs/02-current-attempt1.log:14: trailing whitespace.
++ Container queuelet-postgres-1 Waiting 
+books/explore-it/register/runs/02-current-attempt1.log:15: trailing whitespace.
++ Container queuelet-postgres-1 Healthy 
+books/explore-it/register/runs/02-current-attempt1.log:16: trailing whitespace.
++ Container queuelet-worker-b-1 Starting 
+books/explore-it/register/runs/02-current-attempt1.log:17: trailing whitespace.
++ Container queuelet-worker-a-1 Starting 
+books/explore-it/register/runs/02-current-attempt1.log:18: trailing whitespace.
++ Container queuelet-worker-b-1 Started 
+books/explore-it/register/runs/02-current-attempt1.log:19: trailing whitespace.
++ Container queuelet-worker-a-1 Started 
+books/explore-it/register/runs/02-current.log:2: trailing whitespace.
++ Container queuelet-worker-b-1 Stopping 
+books/explore-it/register/runs/02-current.log:3: trailing whitespace.
++ Container queuelet-worker-a-1 Stopping 
+books/explore-it/register/runs/02-current.log:4: trailing whitespace.
++ Container queuelet-worker-a-1 Stopped 
+books/explore-it/register/runs/02-current.log:5: trailing whitespace.
++ Container queuelet-worker-b-1 Stopped 
+books/explore-it/register/runs/02-current.log:6: trailing whitespace.
++ Container queuelet-api-1 Stopping 
+books/explore-it/register/runs/02-current.log:7: trailing whitespace.
++ Container queuelet-api-1 Stopped 
+books/explore-it/register/runs/02-current.log:8: trailing whitespace.
++ Container queuelet-postgres-1 Waiting 
+books/explore-it/register/runs/02-current.log:9: trailing whitespace.
++ Container queuelet-postgres-1 Healthy 
+books/explore-it/register/runs/02-current.log:10: trailing whitespace.
++ Container queuelet-api-1 Starting 
+books/explore-it/register/runs/02-current.log:11: trailing whitespace.
++ Container queuelet-api-1 Started 
+books/explore-it/register/runs/02-current.log:14: trailing whitespace.
++ Container queuelet-postgres-1 Waiting 
+books/explore-it/register/runs/02-current.log:15: trailing whitespace.
++ Container queuelet-postgres-1 Healthy 
+books/explore-it/register/runs/02-current.log:16: trailing whitespace.
++ Container queuelet-worker-a-1 Starting 
+books/explore-it/register/runs/02-current.log:17: trailing whitespace.
++ Container queuelet-worker-b-1 Starting 
+books/explore-it/register/runs/02-current.log:18: trailing whitespace.
++ Container queuelet-worker-b-1 Started 
+books/explore-it/register/runs/02-current.log:19: trailing whitespace.
++ Container queuelet-worker-a-1 Started 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose-ps.log:5: trailing whitespace.
++queuelet-ref-worker-a-1   queuelet:ref         "worker"                 worker-a   27 seconds ago   Up 6 seconds              
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose-ps.log:6: trailing whitespace.
++queuelet-ref-worker-b-1   queuelet:ref         "worker"                 worker-b   27 seconds ago   Up 6 seconds              
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:120: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:124: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:126: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:141: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:142: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:144: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:146: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:154: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:155: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:157: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:167: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1-diagnostics/compose.log:169: trailing whitespace.
++postgres-1  | 
+books/explore-it/register/runs/02-historical-attempt1.log:2: trailing whitespace.
++ Image queuelet:ref Building 
+books/explore-it/register/runs/02-historical-attempt1.log:76: trailing whitespace.
++ Image queuelet:ref Built 
+books/explore-it/register/runs/02-historical-attempt1.log:77: trailing whitespace.
++ Network queuelet-ref_default Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:78: trailing whitespace.
++ Network queuelet-ref_default Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:79: trailing whitespace.
++ Volume queuelet-ref_data Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:80: trailing whitespace.
++ Volume queuelet-ref_data Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:81: trailing whitespace.
++ Volume queuelet-ref_data Created 
+books/explore-it/register/runs/02-historical-attempt1.log:82: trailing whitespace.
++ Volume queuelet-ref_data Created 
+books/explore-it/register/runs/02-historical-attempt1.log:83: trailing whitespace.
++ Network queuelet-ref_default Created 
+books/explore-it/register/runs/02-historical-attempt1.log:84: trailing whitespace.
++ Network queuelet-ref_default Created 
+books/explore-it/register/runs/02-historical-attempt1.log:85: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:86: trailing whitespace.
++ Container queuelet-ref-postgres-1 Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:87: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Created 
+books/explore-it/register/runs/02-historical-attempt1.log:88: trailing whitespace.
++ Container queuelet-ref-postgres-1 Created 
+books/explore-it/register/runs/02-historical-attempt1.log:89: trailing whitespace.
++ Container queuelet-ref-api-1 Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:90: trailing whitespace.
++ Container queuelet-ref-api-1 Created 
+books/explore-it/register/runs/02-historical-attempt1.log:91: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:92: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Creating 
+books/explore-it/register/runs/02-historical-attempt1.log:93: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Created 
+books/explore-it/register/runs/02-historical-attempt1.log:94: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Created 
+books/explore-it/register/runs/02-historical-attempt1.log:95: trailing whitespace.
++ Container queuelet-ref-postgres-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:96: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:97: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:98: trailing whitespace.
++ Container queuelet-ref-postgres-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:99: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical-attempt1.log:100: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical-attempt1.log:101: trailing whitespace.
++ Container queuelet-ref-api-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:102: trailing whitespace.
++ Container queuelet-ref-api-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:103: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:104: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:105: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:106: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:107: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Stopping 
+books/explore-it/register/runs/02-historical-attempt1.log:108: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Stopping 
+books/explore-it/register/runs/02-historical-attempt1.log:109: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Stopped 
+books/explore-it/register/runs/02-historical-attempt1.log:110: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Stopped 
+books/explore-it/register/runs/02-historical-attempt1.log:111: trailing whitespace.
++ Container queuelet-ref-api-1 Stopping 
+books/explore-it/register/runs/02-historical-attempt1.log:112: trailing whitespace.
++ Container queuelet-ref-api-1 Stopped 
+books/explore-it/register/runs/02-historical-attempt1.log:113: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical-attempt1.log:114: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical-attempt1.log:115: trailing whitespace.
++ Container queuelet-ref-api-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:116: trailing whitespace.
++ Container queuelet-ref-api-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:119: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical-attempt1.log:120: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical-attempt1.log:121: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:122: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Starting 
+books/explore-it/register/runs/02-historical-attempt1.log:123: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Started 
+books/explore-it/register/runs/02-historical-attempt1.log:124: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Started 
+books/explore-it/register/runs/02-historical.log:2: trailing whitespace.
++ Image queuelet:ref Building 
+books/explore-it/register/runs/02-historical.log:78: trailing whitespace.
++ Image queuelet:ref Built 
+books/explore-it/register/runs/02-historical.log:79: trailing whitespace.
++ Network queuelet-ref_default Creating 
+books/explore-it/register/runs/02-historical.log:80: trailing whitespace.
++ Network queuelet-ref_default Creating 
+books/explore-it/register/runs/02-historical.log:81: trailing whitespace.
++ Volume queuelet-ref_data Creating 
+books/explore-it/register/runs/02-historical.log:82: trailing whitespace.
++ Volume queuelet-ref_data Creating 
+books/explore-it/register/runs/02-historical.log:83: trailing whitespace.
++ Volume queuelet-ref_data Created 
+books/explore-it/register/runs/02-historical.log:84: trailing whitespace.
++ Volume queuelet-ref_data Created 
+books/explore-it/register/runs/02-historical.log:85: trailing whitespace.
++ Network queuelet-ref_default Created 
+books/explore-it/register/runs/02-historical.log:86: trailing whitespace.
++ Network queuelet-ref_default Created 
+books/explore-it/register/runs/02-historical.log:87: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Creating 
+books/explore-it/register/runs/02-historical.log:88: trailing whitespace.
++ Container queuelet-ref-postgres-1 Creating 
+books/explore-it/register/runs/02-historical.log:89: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Created 
+books/explore-it/register/runs/02-historical.log:90: trailing whitespace.
++ Container queuelet-ref-postgres-1 Created 
+books/explore-it/register/runs/02-historical.log:91: trailing whitespace.
++ Container queuelet-ref-api-1 Creating 
+books/explore-it/register/runs/02-historical.log:92: trailing whitespace.
++ Container queuelet-ref-api-1 Created 
+books/explore-it/register/runs/02-historical.log:93: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Creating 
+books/explore-it/register/runs/02-historical.log:94: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Creating 
+books/explore-it/register/runs/02-historical.log:95: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Created 
+books/explore-it/register/runs/02-historical.log:96: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Created 
+books/explore-it/register/runs/02-historical.log:97: trailing whitespace.
++ Container queuelet-ref-postgres-1 Starting 
+books/explore-it/register/runs/02-historical.log:98: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Starting 
+books/explore-it/register/runs/02-historical.log:99: trailing whitespace.
++ Container queuelet-ref-hooksink-1 Started 
+books/explore-it/register/runs/02-historical.log:100: trailing whitespace.
++ Container queuelet-ref-postgres-1 Started 
+books/explore-it/register/runs/02-historical.log:101: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical.log:102: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical.log:103: trailing whitespace.
++ Container queuelet-ref-api-1 Starting 
+books/explore-it/register/runs/02-historical.log:104: trailing whitespace.
++ Container queuelet-ref-api-1 Started 
+books/explore-it/register/runs/02-historical.log:105: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Starting 
+books/explore-it/register/runs/02-historical.log:106: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Starting 
+books/explore-it/register/runs/02-historical.log:107: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Started 
+books/explore-it/register/runs/02-historical.log:108: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Started 
+books/explore-it/register/runs/02-historical.log:109: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Stopping 
+books/explore-it/register/runs/02-historical.log:110: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Stopping 
+books/explore-it/register/runs/02-historical.log:111: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Stopped 
+books/explore-it/register/runs/02-historical.log:112: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Stopped 
+books/explore-it/register/runs/02-historical.log:113: trailing whitespace.
++ Container queuelet-ref-api-1 Stopping 
+books/explore-it/register/runs/02-historical.log:114: trailing whitespace.
++ Container queuelet-ref-api-1 Stopped 
+books/explore-it/register/runs/02-historical.log:115: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical.log:116: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical.log:117: trailing whitespace.
++ Container queuelet-ref-api-1 Starting 
+books/explore-it/register/runs/02-historical.log:118: trailing whitespace.
++ Container queuelet-ref-api-1 Started 
+books/explore-it/register/runs/02-historical.log:121: trailing whitespace.
++ Container queuelet-ref-postgres-1 Waiting 
+books/explore-it/register/runs/02-historical.log:122: trailing whitespace.
++ Container queuelet-ref-postgres-1 Healthy 
+books/explore-it/register/runs/02-historical.log:123: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Starting 
+books/explore-it/register/runs/02-historical.log:124: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Starting 
+books/explore-it/register/runs/02-historical.log:125: trailing whitespace.
++ Container queuelet-ref-worker-b-1 Started 
+books/explore-it/register/runs/02-historical.log:126: trailing whitespace.
++ Container queuelet-ref-worker-a-1 Started 
+books/explore-it/register/runs/02-up.log:2: trailing whitespace.
++ Image queuelet:local Building 
+books/explore-it/register/runs/02-up.log:77: trailing whitespace.
++ Image queuelet:local Built 
+books/explore-it/register/runs/02-up.log:78: trailing whitespace.
++ Container queuelet-postgres-1 Running 
+books/explore-it/register/runs/02-up.log:79: trailing whitespace.
++ Container queuelet-hooksink-1 Recreate 
+books/explore-it/register/runs/02-up.log:80: trailing whitespace.
++ Container queuelet-api-1 Recreate 
+books/explore-it/register/runs/02-up.log:81: trailing whitespace.
++ Container queuelet-api-1 Recreated 
+books/explore-it/register/runs/02-up.log:82: trailing whitespace.
++ Container queuelet-worker-a-1 Recreate 
+books/explore-it/register/runs/02-up.log:83: trailing whitespace.
++ Container queuelet-worker-b-1 Recreate 
+books/explore-it/register/runs/02-up.log:84: trailing whitespace.
++ Container queuelet-hooksink-1 Recreated 
+books/explore-it/register/runs/02-up.log:85: trailing whitespace.
++ Container queuelet-worker-a-1 Recreated 
+books/explore-it/register/runs/02-up.log:86: trailing whitespace.
++ Container queuelet-worker-b-1 Recreated 
+books/explore-it/register/runs/02-up.log:87: trailing whitespace.
++ Container queuelet-hooksink-1 Starting 
+books/explore-it/register/runs/02-up.log:88: trailing whitespace.
++ Container queuelet-postgres-1 Waiting 
+books/explore-it/register/runs/02-up.log:89: trailing whitespace.
++ Container queuelet-hooksink-1 Started 
+books/explore-it/register/runs/02-up.log:90: trailing whitespace.
++ Container queuelet-postgres-1 Healthy 
+books/explore-it/register/runs/02-up.log:91: trailing whitespace.
++ Container queuelet-api-1 Starting 
+books/explore-it/register/runs/02-up.log:92: trailing whitespace.
++ Container queuelet-api-1 Started 
+books/explore-it/register/runs/02-up.log:93: trailing whitespace.
++ Container queuelet-worker-b-1 Starting 
+books/explore-it/register/runs/02-up.log:94: trailing whitespace.
++ Container queuelet-worker-a-1 Starting 
+books/explore-it/register/runs/02-up.log:95: trailing whitespace.
++ Container queuelet-worker-a-1 Started 
+books/explore-it/register/runs/02-up.log:96: trailing whitespace.
++ Container queuelet-worker-b-1 Started 

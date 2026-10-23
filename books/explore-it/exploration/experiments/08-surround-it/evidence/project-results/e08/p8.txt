@@ -1,0 +1,11 @@
+19:34:38.5 pause postgres
+ Container queuelet-e08-postgres-1 Paused 
+19:34:50.8 unpause postgres
+19:34:51.0 req health → 200 after 11.79s
+19:34:51.0 req auth1 → 200 after 11.80s
+19:34:51.0 req auth2 → 404 after 11.80s
+19:34:51.0 req badkey → 401 after 11.79s
+ Container queuelet-e08-postgres-1 Unpaused 
+19:34:51.1 req health-after → 200 after .0263s
+auth1 body: {"queues":[{"backoff_base":2,"backoff_kind":"exponential","backoff_max":null,"id
+badkey body: {"error":{"code":"unauthorized","message":"invalid API key"}}

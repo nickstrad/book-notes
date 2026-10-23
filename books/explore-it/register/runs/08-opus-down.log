@@ -1,0 +1,28 @@
+{"command": ["make", "down"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix08", "QUEUELET_IMAGE_TAG": "fix08", "QUEUELET_API_PORT": "18390", "QUEUELET_HOOK_PORT": "18391", "QUEUELET_PG_PORT": "15623", "QUEUELET_URL": "http://localhost:18390", "QUEUELET_HOOK_URL": "http://localhost:18391", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15623/queuelet?sslmode=disable"}, "start": "2026-10-22T20:28:20.376032+00:00"}
+docker compose -f deploy/compose.yml down -v --remove-orphans
+ Container queuelet-fix08-worker-b-1 Stopping 
+ Container queuelet-fix08-hooksink-1 Stopping 
+ Container queuelet-fix08-worker-a-1 Stopping 
+ Container queuelet-fix08-hooksink-1 Stopped 
+ Container queuelet-fix08-hooksink-1 Removing 
+ Container queuelet-fix08-worker-a-1 Stopped 
+ Container queuelet-fix08-worker-a-1 Removing 
+ Container queuelet-fix08-worker-b-1 Stopped 
+ Container queuelet-fix08-worker-b-1 Removing 
+ Container queuelet-fix08-hooksink-1 Removed 
+ Container queuelet-fix08-worker-b-1 Removed 
+ Container queuelet-fix08-worker-a-1 Removed 
+ Container queuelet-fix08-api-1 Stopping 
+ Container queuelet-fix08-api-1 Stopped 
+ Container queuelet-fix08-api-1 Removing 
+ Container queuelet-fix08-api-1 Removed 
+ Container queuelet-fix08-postgres-1 Stopping 
+ Container queuelet-fix08-postgres-1 Stopped 
+ Container queuelet-fix08-postgres-1 Removing 
+ Container queuelet-fix08-postgres-1 Removed 
+ Network queuelet-fix08_default Removing 
+ Volume queuelet-fix08_data Removing 
+ Volume queuelet-fix08_data Removed 
+ Network queuelet-fix08_default Removed 
+
+EXIT 0; ELAPSED 2.689s

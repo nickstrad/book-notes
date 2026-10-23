@@ -1,0 +1,2 @@
+go test -tags checks ./test/checks -count=1
+ok  	queuelet/test/checks	225.161s

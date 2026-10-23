@@ -1,0 +1,27 @@
+REF='' bash lab/verify.sh 04
+ Container queuelet-review-b-worker-b-1 Stopping 
+ Container queuelet-review-b-worker-a-1 Stopping 
+ Container queuelet-review-b-worker-a-1 Stopped 
+ Container queuelet-review-b-worker-b-1 Stopped 
+ Container queuelet-review-b-api-1 Stopping 
+ Container queuelet-review-b-api-1 Stopped 
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-api-1 Starting 
+ Container queuelet-review-b-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-b-postgres-1 Waiting 
+ Container queuelet-review-b-postgres-1 Healthy 
+ Container queuelet-review-b-worker-b-1 Starting 
+ Container queuelet-review-b-worker-a-1 Starting 
+ Container queuelet-review-b-worker-b-1 Started 
+ Container queuelet-review-b-worker-a-1 Started 
+ABSENT: U19 — PUT /v1/queues → 405 application/json envelope=True; GET /v1/nope → 404 application/json envelope=True; PATCH /v1/jobs/1 → 405 application/json envelope=True
+ABSENT: U20 — attempts after dead → retry → ack: n=[1, 2] outcomes=['failed', 'succeeded']
+ABSENT: U21 — delay_seconds -5: enqueue → 400, nack → 400
+ABSENT: U22 — heartbeat 1 s after lease_expires_at (before or after the sweep): [409, 409, 409]
+ABSENT: U23 — oldest_queued_age just after release: expiry 0 s, worker deletion 0 s
+ABSENT: A1 — attempt 2 at base 3000 s, no max_seconds: waits 3600 s
+ok  	queuelet/test/checks	24.319s
+FIXED AND CHECKED: 6 absent; regression checks pass

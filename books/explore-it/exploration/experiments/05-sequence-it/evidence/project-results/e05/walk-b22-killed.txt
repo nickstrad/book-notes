@@ -1,0 +1,9 @@
+0|setup|queue w22|201|{"backoff_base":5,"backoff_kind":"linear","backoff_max":null,"id":20,"lease_seconds":20,"max_attempts":2,"name":"w22","namespace_id":1,"paused":false,"retention
+0|setup|worker|201|{"token":"93dc0463601d2dcb6380831a4b86fe51","worker_id":62}
+0|setup|worker|201|{"token":"d6c5914ab19f7a99bee1c6787e927395","worker_id":63}
+1|job.enqueue|now|201|{"id":155,"state":"queued"}
+2|clock.advance|+25|200|{"now":"2026-10-22T14:41:09.414039622Z"}
+3|job.ack|j=155|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+4|job.enqueue|delay15|201|{"id":157,"state":"scheduled"}
+5|job.ack|j=155|409|{"error":{"code":"state_conflict","message":"state conflict"}}
+6|lease.lease|w=63 n=1|200|{"jobs":[{"attempt":1,"id":155,"kind":"k","lease_expires_at":"2026-10-22T14:41:29.414039622Z","lease_token":"63e04e61fa2e0776269f99794c655db9","payload":{}}]}

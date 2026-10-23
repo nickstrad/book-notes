@@ -1,0 +1,28 @@
+{"command": ["make", "down"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T00:43:06.604374+00:00"}
+docker compose -f deploy/compose.yml down -v --remove-orphans
+ Container queuelet-r4-hooksink-1 Stopping 
+ Container queuelet-r4-worker-a-1 Stopping 
+ Container queuelet-r4-worker-b-1 Stopping 
+ Container queuelet-r4-hooksink-1 Stopped 
+ Container queuelet-r4-hooksink-1 Removing 
+ Container queuelet-r4-worker-a-1 Stopped 
+ Container queuelet-r4-worker-a-1 Removing 
+ Container queuelet-r4-worker-b-1 Stopped 
+ Container queuelet-r4-worker-b-1 Removing 
+ Container queuelet-r4-hooksink-1 Removed 
+ Container queuelet-r4-worker-b-1 Removed 
+ Container queuelet-r4-worker-a-1 Removed 
+ Container queuelet-r4-api-1 Stopping 
+ Container queuelet-r4-api-1 Stopped 
+ Container queuelet-r4-api-1 Removing 
+ Container queuelet-r4-api-1 Removed 
+ Container queuelet-r4-postgres-1 Stopping 
+ Container queuelet-r4-postgres-1 Stopped 
+ Container queuelet-r4-postgres-1 Removing 
+ Container queuelet-r4-postgres-1 Removed 
+ Volume queuelet-r4_data Removing 
+ Network queuelet-r4_default Removing 
+ Network queuelet-r4_default Removed 
+ Volume queuelet-r4_data Removed 
+
+EXIT 0; ELAPSED 13.514s

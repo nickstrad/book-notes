@@ -1,0 +1,25 @@
+{
+  "experiment": 4,
+  "source_tag": "explore-it/lesson-03",
+  "source_commit": "8ed91776c888489a7a9ca13ef6292e31e7c6afe0",
+  "created_before_run_utc": "2026-10-22T12:39:37.463780+00:00",
+  "tracked_source_files": 104,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "bf54fa9a777ecbc8acee7eadf9fb8073d18fd1dc044c5f93188169d8c98862ac",
+  "brief_sha256": "cc05dee234907853a80110efdb02f04be8bf97714eb0efaca9a66a036a8bac68",
+  "start": "2026-10-22T12:39:44Z",
+  "end": "2026-10-22T12:54:50Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 50,
+    "Write": 8
+  },
+  "flagged_inputs": [],
+  "inherited_source_and_raw_records": "unchanged (collector check passed); append-only defect index preserved",
+  "register_exposure": "lessons/03-vary-it.md (exported) names A1 as a default-backoff-cap spec silence; the explorer read it and cited it (notes lines 28, 239). The A1 observation is therefore not a blind find.",
+  "boundary": "Prompt boundary and exported file tree; no OS isolation",
+  "boundary_probe": "Correction after commit dffb1ec: the audit pattern did not match a bare `find /`. The explorer's third Bash call ran `find / -path /proc -prune -o -type d -name derive-oracles -print | head`, which listed six skill directory names: four other /tmp exports, its own export, and this worktree's skills/derive-oracles. No later tool input names any of those paths (pattern check over every input), and the explorer self-reported the listing in notes.md. Directory names only; no answer-key content.",
+  "runtime_output_reads": "Correction from the end review (R5): this audit omitted the explorer's reads of its own background task output outside the export, /tmp/claude-0/-tmp-explore-it-experiment-04/<session>/tasks/bgj7rfldt.output, at original transcript lines 174, 179, 185, 189 and 191 of 04-explorer-run.jsonl (transcript unchanged). Own runtime output, analogous to the disclosed E07 and E09 exceptions; no answer-key content. See ../blindness-exceptions.md."
+}

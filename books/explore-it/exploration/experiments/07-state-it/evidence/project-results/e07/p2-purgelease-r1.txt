@@ -1,0 +1,22 @@
+2026-10-22T18:06:43Z probe purgelease tag r1 trials 10
+trial 0 queue e07plr1-0 purge (200, {'deleted': 54}) leased_total=146 leased_flagged=50 leased_unflagged=96 ids=['1975', '1976', '1977', '1978', '1979']
+   nack(retry) on unflagged 1975 (200, {'ok': True}) retry_wait
+trial 1 queue e07plr1-1 purge (200, {'deleted': 103}) leased_total=97 leased_flagged=20 leased_unflagged=77 ids=['2145', '2146', '2147', '2148', '2149']
+   nack(retry) on unflagged 2145 (200, {'ok': True}) retry_wait
+trial 2 queue e07plr1-2 purge (200, {'deleted': 91}) leased_total=109 leased_flagged=10 leased_unflagged=99 ids=['2335', '2336', '2337', '2338', '2339']
+   nack(retry) on unflagged 2335 (200, {'ok': True}) retry_wait
+trial 3 queue e07plr1-3 purge (200, {'deleted': 50}) leased_total=150 leased_flagged=40 leased_unflagged=110 ids=['2565', '2566', '2567', '2568', '2569']
+   nack(retry) on unflagged 2565 (200, {'ok': True}) retry_wait
+trial 4 queue e07plr1-4 purge (200, {'deleted': 90}) leased_total=110 leased_flagged=10 leased_unflagged=100 ids=['2735', '2736', '2737', '2738', '2739']
+   nack(retry) on unflagged 2735 (200, {'ok': True}) retry_wait
+trial 5 queue e07plr1-5 purge (200, {'deleted': 111}) leased_total=89 leased_flagged=10 leased_unflagged=79 ids=['2935', '2936', '2937', '2938', '2939']
+   nack(retry) on unflagged 2935 (200, {'ok': True}) retry_wait
+trial 6 queue e07plr1-6 purge (200, {'deleted': 30}) leased_total=170 leased_flagged=30 leased_unflagged=140 ids=['3155', '3156', '3157', '3158', '3159']
+   nack(retry) on unflagged 3155 (200, {'ok': True}) retry_wait
+trial 7 queue e07plr1-7 purge (200, {'deleted': 0}) leased_total=200 leased_flagged=30 leased_unflagged=170 ids=['3345', '3346', '3347', '3348', '3349']
+   nack(retry) on unflagged 3345 (200, {'ok': True}) retry_wait
+trial 8 queue e07plr1-8 purge (200, {'deleted': 110}) leased_total=90 leased_flagged=10 leased_unflagged=80 ids=['3535', '3536', '3537', '3538', '3539']
+   nack(retry) on unflagged 3535 (200, {'ok': True}) retry_wait
+trial 9 queue e07plr1-9 purge (200, {'deleted': 0}) leased_total=200 leased_flagged=70 leased_unflagged=130 ids=['3795', '3796', '3797', '3798', '3799']
+   nack(retry) on unflagged 3795 (200, {'ok': True}) retry_wait
+2026-10-22T18:06:56Z hits 10 of 10

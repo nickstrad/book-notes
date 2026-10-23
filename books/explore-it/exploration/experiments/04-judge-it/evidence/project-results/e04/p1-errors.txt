@@ -1,0 +1,50 @@
+2026-10-22T12:45:13.273Z
+queuelet-e04-api-1 Up 8 seconds
+queuelet-e04-hooksink-1 Up 15 seconds
+queuelet-e04-postgres-1 Up 15 seconds (healthy)
+queuelet-e04-worker-a-1 Up 7 seconds
+queuelet-e04-worker-b-1 Up 7 seconds
+--- R36 unmatched method/path
+HTTP/1.1 405 Method Not Allowed
+Allow: GET, HEAD, POST
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+Method Not Allowed
+HTTP/1.1 404 Not Found
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+404 page not found
+HTTP/1.1 405 Method Not Allowed
+Allow: GET, HEAD, POST
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+Method Not Allowed
+HTTP/1.1 405 Method Not Allowed
+Allow: POST
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 19
+
+Method Not Allowed
+--- unauth unmatched
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Content-Length: 62
+
+{"error":{"code":"unauthorized","message":"invalid API key"}}
+--- setup q e04a
+{"backoff_base":2,"backoff_kind":"exponential","backoff_max":null,"id":1,"lease_seconds":30,"max_attempts":2,"name":"e04a","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+--- R43 verbs
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+{"error":{"code":"not_found","message":"unknown operation"}}
+ [404]

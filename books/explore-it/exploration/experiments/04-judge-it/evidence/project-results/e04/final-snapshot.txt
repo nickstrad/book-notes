@@ -1,0 +1,20 @@
+state | count
+dead | 1
+leased | 5
+queued | 62
+retry_wait | 2
+scheduled | 1
+(5 rows)
+id | name | max_attempts | lease_seconds | backoff_kind | backoff_base
+1 | e04a | 2 | 30 | exponential | 2
+2 | e04b | 10 | 30 | exponential | 2
+3 | e04c | 3 | 600 | exponential | 5
+4 | e04d | 3 | 30 | exponential | 5
+5 | e04e | 3 | 30 | exponential | 5
+6 | e04f | 3 | 30 | exponential | 5
+7 | e04g | 3 | 3600 | exponential | 5
+8 | e04h | 3 | 30 | exponential | 5
+9 | e04i | 3 | 30 | exponential | 5
+10 | e04j | 21 | 30 | exponential | 5
+11 | e04k | 3 | 30 | exponential | 5
+(11 rows)

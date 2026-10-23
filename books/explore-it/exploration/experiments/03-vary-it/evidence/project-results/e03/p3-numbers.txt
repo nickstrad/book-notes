@@ -1,0 +1,79 @@
+2026-10-22T04:17:32.730Z
+== H04/H05 delay_seconds
+delay=-60
+{"id":817,"state":"queued"}
+ [201]
+delay=0
+{"id":818,"state":"queued"}
+ [201]
+delay=1
+{"id":819,"state":"scheduled"}
+ [201]
+delay=9223372036
+{"id":820,"state":"scheduled"}
+ [201]
+delay=9223372037
+{"id":821,"state":"queued"}
+ [201]
+delay=100000000000
+{"id":822,"state":"scheduled"}
+ [201]
+delay=9223372036854775807
+{"id":823,"state":"queued"}
+ [201]
+delay 2^63 (int overflow at decode)
+{"error":{"code":"invalid_json","message":"json: cannot unmarshal number 9223372036854775808 into Go struct field JobInput.delay_seconds of type int"}}
+ [400]
+id | state | run_at | created_at | d
+817 | queued | 2026-10-22 04:16:32.760301+00 | 2026-10-22 04:17:32.760301+00 | -60
+818 | queued | 2026-10-22 04:17:32.798329+00 | 2026-10-22 04:17:32.798329+00 | 0
+819 | scheduled | 2026-10-22 04:17:33.829699+00 | 2026-10-22 04:17:32.829699+00 | 1
+820 | scheduled | 2319-02-01 04:04:49.07548+00 | 2026-10-22 04:17:33.07548+00 | 9223372036
+821 | queued | 1734-07-13 04:30:16.418908+00 | 2026-10-22 04:17:33.128459+00 | 9223372037
+822 | scheduled | 2272-11-28 16:11:24.655136+00 | 2026-10-22 04:17:33.202894+00 | 100000000000
+823 | queued | 2026-10-22 04:17:32.26392+00 | 2026-10-22 04:17:33.26392+00 | 9223372036854775807
+(7 rows)
+== run_at variants
+run_at="0001-01-01T00:00:00Z"
+{"id":824,"state":"queued"}
+ [201]
+run_at="9999-12-31T23:59:59Z"
+{"id":825,"state":"scheduled"}
+ [201]
+run_at="2030-01-01T00:00:00"
+{"error":{"code":"invalid_json","message":"parsing time \"2030-01-01T00:00:00\" as \"2006-01-02T15:04:05Z07:00\": cannot parse \"\" as \"Z07:00\""}}
+ [400]
+run_at="2030-01-01T00:00:00+14:00"
+{"id":826,"state":"scheduled"}
+ [201]
+run_at="2026-10-22T04:00:00.123456789Z"
+{"id":827,"state":"queued"}
+ [201]
+id | state | run_at
+824 | queued | 0001-01-01 00:00:00+00
+825 | scheduled | 9999-12-31 23:59:59+00
+826 | scheduled | 2029-12-31 10:00:00+00
+827 | queued | 2026-10-22 04:00:00.123457+00
+(4 rows)
+== H15 max_attempts per job
+max=1
+{"id":828,"state":"queued"}
+ [201]
+max=2147483647
+{"id":829,"state":"queued"}
+ [201]
+max=2147483648
+{"error":{"code":"invalid_job","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [400]
+== H16 kind strings
+{"id":830,"state":"queued"}
+ [201]
+{"id":831,"state":"queued"}
+ [201]
+{"error":{"code":"invalid_job","message":"pq: invalid byte sequence for encoding \"UTF8\": 0x00"}}
+ [400]
+id | kind | hex | ?column?
+830 |   | 20 | h16-space
+831 | ech�o | 656368efbfbd6f | h16-utf8
+(2 rows)
+2026-10-22T04:17:33.961Z

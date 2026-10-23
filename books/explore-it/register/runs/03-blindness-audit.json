@@ -1,0 +1,24 @@
+{
+  "experiment": 3,
+  "source_tag": "explore-it/lesson-02",
+  "source_commit": "939478243c633c116726e29c1e24240cf02c1887",
+  "created_before_run_utc": "2026-10-22T04:11:52.634644+00:00",
+  "tracked_source_files": 93,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "0c61cfe47e7efc757d48fe3b70a6863a6308fcdad656c140e749b3fd5289fdf5",
+  "brief_sha256": "1284b86b57375fda00ab1d1fde45bf3084f4c409aa20b46d050724868ab9b360",
+  "start": "2026-10-22T04:11:52Z",
+  "end": "2026-10-22T04:32:23Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 61,
+    "Grep": 4,
+    "Write": 11,
+    "Edit": 3
+  },
+  "flagged_inputs": [],
+  "inherited_source_and_raw_records": "unchanged; append-only defect index preserved",
+  "boundary": "Prompt boundary and exported file tree; no OS isolation"
+}

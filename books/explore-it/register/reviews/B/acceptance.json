@@ -1,0 +1,364 @@
+[
+  {
+    "label": "tag03-up",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:27:13.278221+00:00",
+    "elapsed_seconds": 7.369,
+    "exit": 0,
+    "log": "logs/tag03-up.log"
+  },
+  {
+    "label": "tag03-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=03"
+    ],
+    "started": "2026-10-22T17:27:20.647479+00:00",
+    "elapsed_seconds": 25.546,
+    "exit": 0,
+    "log": "logs/tag03-verify.log"
+  },
+  {
+    "label": "tag03-down",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:27:46.194557+00:00",
+    "elapsed_seconds": 2.889,
+    "exit": 0,
+    "log": "logs/tag03-down.log"
+  },
+  {
+    "label": "tag04-up",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:27:49.139333+00:00",
+    "elapsed_seconds": 41.251,
+    "exit": 0,
+    "log": "logs/tag04-up.log"
+  },
+  {
+    "label": "tag04-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=04"
+    ],
+    "started": "2026-10-22T17:28:30.390790+00:00",
+    "elapsed_seconds": 47.804,
+    "exit": 0,
+    "log": "logs/tag04-verify.log"
+  },
+  {
+    "label": "tag04-down",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:29:18.195930+00:00",
+    "elapsed_seconds": 4.122,
+    "exit": 0,
+    "log": "logs/tag04-down.log"
+  },
+  {
+    "label": "tag05-up",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:29:22.382352+00:00",
+    "elapsed_seconds": 49.333,
+    "exit": 0,
+    "log": "logs/tag05-up.log"
+  },
+  {
+    "label": "tag05-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=05"
+    ],
+    "started": "2026-10-22T17:30:11.716331+00:00",
+    "elapsed_seconds": 130.263,
+    "exit": 0,
+    "log": "logs/tag05-verify.log"
+  },
+  {
+    "label": "tag05-down",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:32:21.980349+00:00",
+    "elapsed_seconds": 2.757,
+    "exit": 0,
+    "log": "logs/tag05-down.log"
+  },
+  {
+    "label": "tag06-up",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:32:25.263784+00:00",
+    "elapsed_seconds": 42.173,
+    "exit": 0,
+    "log": "logs/tag06-up.log"
+  },
+  {
+    "label": "tag06-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=06"
+    ],
+    "started": "2026-10-22T17:33:07.437486+00:00",
+    "elapsed_seconds": 109.807,
+    "exit": 0,
+    "log": "logs/tag06-verify.log"
+  },
+  {
+    "label": "tag06-down",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:34:57.245020+00:00",
+    "elapsed_seconds": 2.626,
+    "exit": 0,
+    "log": "logs/tag06-down.log"
+  },
+  {
+    "label": "head-up",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:34:59.963336+00:00",
+    "elapsed_seconds": 9.927,
+    "exit": 0,
+    "log": "logs/head-up.log"
+  },
+  {
+    "label": "head02-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=02"
+    ],
+    "started": "2026-10-22T17:35:09.891506+00:00",
+    "elapsed_seconds": 45.715,
+    "exit": 2,
+    "log": "logs/head02-verify.log"
+  },
+  {
+    "label": "final-down",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:35:55.607004+00:00",
+    "elapsed_seconds": 2.331,
+    "exit": 0,
+    "log": "logs/final-down.log"
+  },
+  {
+    "label": "head-up-retry",
+    "command": [
+      "make",
+      "up"
+    ],
+    "started": "2026-10-22T17:36:37.012108+00:00",
+    "elapsed_seconds": 6.835,
+    "exit": 0,
+    "log": "logs/head-up-retry.log"
+  },
+  {
+    "label": "head02-verify-retry",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=02"
+    ],
+    "started": "2026-10-22T17:36:43.848051+00:00",
+    "elapsed_seconds": 45.205,
+    "exit": 0,
+    "log": "logs/head02-verify-retry.log"
+  },
+  {
+    "label": "head03-verify-retry",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=03"
+    ],
+    "started": "2026-10-22T17:37:29.054056+00:00",
+    "elapsed_seconds": 22.552,
+    "exit": 0,
+    "log": "logs/head03-verify-retry.log"
+  },
+  {
+    "label": "head04-verify-retry",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=04"
+    ],
+    "started": "2026-10-22T17:37:51.607142+00:00",
+    "elapsed_seconds": 38.121,
+    "exit": 0,
+    "log": "logs/head04-verify-retry.log"
+  },
+  {
+    "label": "head05-verify-retry",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=05"
+    ],
+    "started": "2026-10-22T17:38:29.729835+00:00",
+    "elapsed_seconds": 113.034,
+    "exit": 0,
+    "log": "logs/head05-verify-retry.log"
+  },
+  {
+    "label": "head06-verify-retry",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=06"
+    ],
+    "started": "2026-10-22T17:40:22.765311+00:00",
+    "elapsed_seconds": 118.499,
+    "exit": 0,
+    "log": "logs/head06-verify-retry.log"
+  },
+  {
+    "label": "ref02-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=02",
+      "REF=explore-it/lesson-01"
+    ],
+    "started": "2026-10-22T17:42:21.265305+00:00",
+    "elapsed_seconds": 84.152,
+    "exit": 0,
+    "log": "logs/ref02-verify.log"
+  },
+  {
+    "label": "ref03-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=03",
+      "REF=explore-it/lesson-02"
+    ],
+    "started": "2026-10-22T17:43:45.418234+00:00",
+    "elapsed_seconds": 66.777,
+    "exit": 0,
+    "log": "logs/ref03-verify.log"
+  },
+  {
+    "label": "ref04-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=04",
+      "REF=explore-it/lesson-03"
+    ],
+    "started": "2026-10-22T17:44:52.196354+00:00",
+    "elapsed_seconds": 65.188,
+    "exit": 0,
+    "log": "logs/ref04-verify.log"
+  },
+  {
+    "label": "ref05-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=05",
+      "REF=explore-it/lesson-04"
+    ],
+    "started": "2026-10-22T17:45:57.385825+00:00",
+    "elapsed_seconds": 67.2,
+    "exit": 0,
+    "log": "logs/ref05-verify.log"
+  },
+  {
+    "label": "ref06-verify",
+    "command": [
+      "make",
+      "verify",
+      "LESSON=06",
+      "REF=explore-it/lesson-05"
+    ],
+    "started": "2026-10-22T17:47:04.587095+00:00",
+    "elapsed_seconds": 96.603,
+    "exit": 0,
+    "log": "logs/ref06-verify.log"
+  },
+  {
+    "label": "head-checks",
+    "command": [
+      "make",
+      "checks"
+    ],
+    "started": "2026-10-22T17:48:41.191144+00:00",
+    "elapsed_seconds": 370.885,
+    "exit": 0,
+    "log": "logs/head-checks.log"
+  },
+  {
+    "label": "head-test",
+    "command": [
+      "make",
+      "test"
+    ],
+    "started": "2026-10-22T17:54:52.076955+00:00",
+    "elapsed_seconds": 3.413,
+    "exit": 0,
+    "log": "logs/head-test.log"
+  },
+  {
+    "label": "head-vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "started": "2026-10-22T17:54:55.491117+00:00",
+    "elapsed_seconds": 0.696,
+    "exit": 0,
+    "log": "logs/head-vet.log"
+  },
+  {
+    "label": "head-A3-open",
+    "command": [
+      "bash",
+      "../register/proof/A3.sh"
+    ],
+    "started": "2026-10-22T17:54:56.188041+00:00",
+    "elapsed_seconds": 0.308,
+    "exit": 0,
+    "log": "logs/head-A3-open.log"
+  },
+  {
+    "label": "final-down-retry",
+    "command": [
+      "make",
+      "down"
+    ],
+    "started": "2026-10-22T17:54:56.497495+00:00",
+    "elapsed_seconds": 2.921,
+    "exit": 0,
+    "log": "logs/final-down-retry.log"
+  }
+]

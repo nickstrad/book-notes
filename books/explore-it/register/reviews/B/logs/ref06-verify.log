@@ -1,0 +1,130 @@
+REF='explore-it/lesson-05' bash lab/verify.sh 06
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 198.24kB 0.0s done
+#6 DONE 0.1s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.1s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 38.0s
+
+#14 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#14 CACHED
+
+#15 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#15 CACHED
+
+#16 [stage-1 3/5] WORKDIR /app
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:2021509602d5c509532299ffb8f781769486e71a91a94558f021fca987e8a85a 0.0s done
+#18 exporting config sha256:4be82fd572f7961a270a7cf2c12dd70f33c0ce7507c6c911ec9ceea0f9dc5dd0 0.0s done
+#18 exporting attestation manifest sha256:492e0bde3c137721e61b34682d2f5e7a9dac06b1f8554ad1a6fc00b95161f026 0.0s done
+#18 exporting manifest list sha256:90b05a9deee716d86b84a355e76e7a1d82b9e5e2de48cf0c72e7130c04d54a9a
+#18 exporting manifest list sha256:90b05a9deee716d86b84a355e76e7a1d82b9e5e2de48cf0c72e7130c04d54a9a 0.0s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref 0.1s done
+#18 DONE 0.2s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+PRESENT: U27 — foreign/repeated/missing DELETE=204/204/204; owner delete=204, foreign untouched, deleted GET=404
+PRESENT: U28 — null/array/string/number/bool create=[201, 201, 201, 201, 201]; omitted payload=None, run=400; cron fired 7 templates; object run/cron and PATCH controls hold
+PRESENT: U29 — raw payload exact; worker echo big=9007199254740992, fraction=0.12345678901234568; stored result=valid signed webhook; sleep/fail numeric controls hold
+PRESENT: U30 — exact numeric value by path={'enqueue-input': False, 'job-get-payload': False, 'job-get-result': False, 'ack-result': False, 'batch-json': False, 'schedule-json': False}; direct API input/result controls exact
+PRESENT: U31 — ack string/nested/key and nack NUL statuses=[409, 409, 409, 409]; valid lease unchanged, clean retry stored exact value and one attempt each
+PRESENT: U32 — concurrent statuses={'enqueue': {201: 64, 404: 30, 400: 2}, 'schedule': {201: 32, 404: 19, 500: 13}, 'batch': {201: 96, 404: 31, 400: 1}}; FK errors={'enqueue': 2, 'schedule': 13, 'batch': 1}; accepted writes equal stored rows, no orphans; positive/missing-owner controls hold; historical examples={'enqueue': {'error': {'code': 'invalid_job', 'message': 'pq: insert or update on table "jobs" violates foreign key constraint "jobs_queue_owner"'}}, 'schedule': {'error': {'code': 'database_error', 'message': 'pq: insert or update on table "schedules" violates foreign key constraint "schedules_queue_owner"'}}, 'batch': {'error': {'code': 'invalid_job', 'message': 'pq: insert or update on table "jobs" violates foreign key constraint "jobs_queue_owner"'}}}
+PRESENT: U33 — attempt rows after purge/delete/retention={'purge': 1, 'delete': 1, 'retention': 1}; removed jobs absent in API+storage; live attempt retained; durable events and pending deliveries survive
+PRESENT: A4 — API clock ages 3599/3602/7202s: all remain below cutoff; succeeded/cancelled API=404 storage=0; dead API=404 storage=0; retained dead retry control holds when present
+DEFECTS REPRODUCED: 8 present

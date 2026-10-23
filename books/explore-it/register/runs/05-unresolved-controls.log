@@ -1,0 +1,8 @@
+ABSENT: A1 — attempt 20 schedules retry in 0.04 days with base 5 seconds
+exit=1
+ABSENT: A2 — lease → purge → nack leaves dead
+exit=1
+PRESENT: A3 — cancelled running work; completion ack=409, no cancellation signal in worker protocol
+exit=0
+PRESENT: A4 — dead job deleted by retention sweep at zero-hour retention
+exit=0

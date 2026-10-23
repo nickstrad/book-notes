@@ -1,0 +1,1006 @@
+api-1  | {"time":"2026-10-22T12:45:06.379945428Z","level":"INFO","msg":"queuelet listening on :8200"}
+worker-a-1  | {"time":"2026-10-22T12:45:06.591504476Z","level":"INFO","msg":"worker worker-a registered"}
+worker-a-1  | {"time":"2026-10-22T12:45:06.597274067Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:07.605430557Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:08.619424172Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:09.623547607Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:10.628672606Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:11.638197667Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:12.646220953Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:13.650011677Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:14.654392992Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:15.658917218Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:45:26.375930749Z","level":"INFO","msg":"job event","event_id":1,"job_id":1,"queue":"e04a","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:26.380905484Z","level":"INFO","msg":"job event","event_id":2,"job_id":1,"queue":"e04a","event":"leased","worker":1,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:26.58128953Z","level":"INFO","msg":"job event","event_id":3,"job_id":1,"queue":"e04a","event":"retry_wait","worker":1,"attempt":1,"outbox_id":null,"status":null,"error":"f1","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:27.41971756Z","level":"INFO","msg":"job event","event_id":4,"job_id":1,"queue":"e04a","event":"queued","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"f1","at":"2030-01-01T00:00:02Z"}
+api-1       | {"time":"2026-10-22T12:45:28.579510905Z","level":"INFO","msg":"job event","event_id":5,"job_id":1,"queue":"e04a","event":"leased","worker":1,"attempt":2,"outbox_id":null,"status":null,"error":"f1","at":"2030-01-01T00:00:02Z"}
+api-1       | {"time":"2026-10-22T12:45:28.589669982Z","level":"INFO","msg":"job event","event_id":6,"job_id":1,"queue":"e04a","event":"dead","worker":1,"attempt":2,"outbox_id":null,"status":null,"error":"f2","at":"2030-01-01T00:00:02Z"}
+api-1       | {"time":"2026-10-22T12:45:28.980118987Z","level":"INFO","msg":"job event","event_id":7,"job_id":1,"queue":"e04a","event":"queued","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"f2","at":"2030-01-01T00:00:02Z"}
+api-1       | {"time":"2026-10-22T12:45:28.995242414Z","level":"INFO","msg":"job event","event_id":8,"job_id":1,"queue":"e04a","event":"leased","worker":1,"attempt":1,"outbox_id":null,"status":null,"error":"f2","at":"2030-01-01T00:00:02Z"}
+api-1       | {"time":"2026-10-22T12:45:29.178085327Z","level":"INFO","msg":"job event","event_id":9,"job_id":1,"queue":"e04a","event":"succeeded","worker":1,"attempt":1,"outbox_id":null,"status":null,"error":"f2","at":"2030-01-01T00:00:07Z"}
+api-1       | {"time":"2026-10-22T12:45:57.777786081Z","level":"INFO","msg":"job event","event_id":10,"job_id":2,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:57.976893817Z","level":"INFO","msg":"job event","event_id":11,"job_id":2,"queue":"e04b","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:57.989177597Z","level":"INFO","msg":"job event","event_id":12,"job_id":2,"queue":"e04b","event":"retry_wait","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.180649322Z","level":"INFO","msg":"job event","event_id":13,"job_id":3,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.559015224Z","level":"INFO","msg":"job event","event_id":14,"job_id":3,"queue":"e04b","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.573896189Z","level":"INFO","msg":"job event","event_id":15,"job_id":2,"queue":"e04b","event":"queued","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.582798407Z","level":"INFO","msg":"job event","event_id":16,"job_id":3,"queue":"e04b","event":"retry_wait","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.778706678Z","level":"INFO","msg":"job event","event_id":17,"job_id":4,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:58.977380363Z","level":"INFO","msg":"job event","event_id":18,"job_id":2,"queue":"e04b","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.177503872Z","level":"INFO","msg":"job event","event_id":19,"job_id":2,"queue":"e04b","event":"retry_wait","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.468904237Z","level":"INFO","msg":"job event","event_id":20,"job_id":5,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.489844178Z","level":"INFO","msg":"job event","event_id":21,"job_id":3,"queue":"e04b","event":"queued","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.498754059Z","level":"INFO","msg":"job event","event_id":22,"job_id":3,"queue":"e04b","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.57754723Z","level":"INFO","msg":"job event","event_id":23,"job_id":3,"queue":"e04b","event":"retry_wait","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"neg","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:45:59.980380703Z","level":"INFO","msg":"job event","event_id":24,"job_id":6,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:00.027302823Z","level":"INFO","msg":"job event","event_id":25,"job_id":7,"queue":"e04b","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:17.982361113Z","level":"INFO","msg":"job event","event_id":26,"job_id":8,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.021875528Z","level":"INFO","msg":"job event","event_id":27,"job_id":9,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.031413104Z","level":"INFO","msg":"job event","event_id":28,"job_id":10,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.046318946Z","level":"INFO","msg":"job event","event_id":29,"job_id":11,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.062400856Z","level":"INFO","msg":"job event","event_id":30,"job_id":12,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.073822566Z","level":"INFO","msg":"job event","event_id":31,"job_id":13,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.086016616Z","level":"INFO","msg":"job event","event_id":32,"job_id":14,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.11170849Z","level":"INFO","msg":"job event","event_id":33,"job_id":15,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.147830835Z","level":"INFO","msg":"job event","event_id":34,"job_id":16,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.186121303Z","level":"INFO","msg":"job event","event_id":35,"job_id":17,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.205285676Z","level":"INFO","msg":"job event","event_id":36,"job_id":18,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.254491732Z","level":"INFO","msg":"job event","event_id":37,"job_id":19,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.283898843Z","level":"INFO","msg":"job event","event_id":38,"job_id":20,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.309812542Z","level":"INFO","msg":"job event","event_id":39,"job_id":21,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.355398806Z","level":"INFO","msg":"job event","event_id":40,"job_id":22,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.604509166Z","level":"INFO","msg":"job event","event_id":41,"job_id":23,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:18.788254443Z","level":"INFO","msg":"job event","event_id":42,"job_id":24,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:19.320789204Z","level":"INFO","msg":"job event","event_id":43,"job_id":25,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:19.506408395Z","level":"INFO","msg":"job event","event_id":44,"job_id":26,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.256747932Z","level":"INFO","msg":"job event","event_id":45,"job_id":27,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.39141395Z","level":"INFO","msg":"job event","event_id":46,"job_id":28,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+worker-a-1  | {"time":"2026-10-22T12:45:16.667973081Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:17.676975775Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:18.681533476Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:19.687212407Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:20.693891771Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:21.698139287Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:22.70473095Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:23.713219328Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:24.723698433Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:25.733003829Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:26.739469369Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:27.75416477Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:28.75933824Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:29.762706757Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:30.774483588Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:31.783185183Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:32.789322649Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:33.794744469Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:34.799330343Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:35.805368435Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:36.812014082Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:37.819358208Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:38.825295346Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:39.834310106Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:40.83830903Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:41.843984078Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:42.856238413Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:43.86743671Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:44.871999179Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:45.875980433Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:46.901467557Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:47.914185168Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:48.926265686Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:49.938114842Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:50.957588332Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:51.965669544Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:52.974826006Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:53.984242638Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:54.991352371Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:55.999177238Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:57.00504439Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:58.025553382Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:45:59.045462969Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:00.128068456Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:01.13786862Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:02.184263538Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:03.192326281Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:04.198846277Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:05.219799155Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:06.232227006Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:07.247351227Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:08.258291276Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:09.268163348Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:10.274437387Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:11.28304544Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:12.290488908Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:13.305492855Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:14.315015722Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:15.325294644Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:16.336910726Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:17.34279898Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:19.219278122Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:20.718861022Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:21.766465435Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:22.773291512Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:23.780860146Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:24.78391234Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:25.787372505Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:26.795637257Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:27.803789574Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:28.808040674Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:29.811122623Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:30.815744493Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:31.824078928Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:32.83373156Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:33.843671461Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:34.849151423Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:35.856664761Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:36.860634931Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:37.865838159Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:38.869817689Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:39.876248915Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:40.883320111Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:41.889937148Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:42.894839529Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:43.899977364Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:44.903099841Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:45.90726022Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:46.916064439Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:47.919043708Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:48.925985211Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:49.930591931Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:50.936347989Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:51.941168919Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:52.946311407Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:53.949789236Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:54.961422674Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:55.963817853Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:56.96839657Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:57.972996208Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:58.978446886Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:46:59.983087787Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:00.992032852Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:02.014226031Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:03.019766892Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:04.028118517Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:05.033593955Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:06.037129488Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:07.042283534Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:08.046554323Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:09.052887444Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:10.059194263Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:11.062511535Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:12.0697931Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:13.07828595Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:14.081924897Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:15.086515003Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:16.091926073Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:17.096993047Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:18.119572213Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:19.124612987Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:20.129214746Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:21.135294409Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:22.141265275Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:23.149046944Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:24.151395362Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:25.153880379Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:26.157323466Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:27.165482706Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:28.173050255Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:29.179310392Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:30.183219275Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:31.187492262Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:32.191770337Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:33.200731042Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:34.207811557Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:35.222774187Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:36.237589565Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:37.249512446Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:38.269520862Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:39.284532515Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:40.297512507Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:41.318991683Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:42.329513056Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:43.339328692Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:44.351421981Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:45.363643595Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:46.370692172Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:47.373396228Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:48.395299072Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:49.398997784Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:50.607669687Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:51.616345583Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:52.627415495Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:53.643384136Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:54.657729262Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:55.676045098Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:56.689764731Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:57.702605955Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:58.717497543Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:47:59.725421527Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:00.732431726Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:01.75901545Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:02.766886619Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:03.793755863Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:04.803803325Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:05.815954039Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:06.849822191Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:07.859936352Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:08.878158092Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:09.88616308Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:10.893083313Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:11.900825584Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:12.908740364Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:13.925144785Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:14.931393317Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:15.939850542Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:16.943369969Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:17.988408323Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:18.992052358Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:19.995184936Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:21.000718742Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:22.004817981Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:23.008788265Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:24.01169525Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:25.016224649Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:26.022798058Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:27.028224823Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:28.032749446Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:29.043661765Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:30.047499563Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:31.062178166Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:32.066345183Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:33.071776774Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:34.075951902Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:35.080829332Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:36.085964205Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:37.090497405Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:38.093080699Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:39.099295555Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:40.104277524Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:41.109335919Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:42.111920199Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:43.120096329Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:44.125209289Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:45.132425227Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:46.136789074Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:47.138730704Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:48.142514624Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:49.147222477Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:50.154314695Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:51.157292491Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:52.159802505Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:53.162930387Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:54.167144466Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:55.171339754Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:56.174506628Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:57.179428812Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:58.182340933Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:48:59.186992934Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:00.192206441Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:01.201670293Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:02.206056648Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:03.212791084Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:04.225933651Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:05.234964088Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:06.239951012Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:07.247286372Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:08.255156247Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:09.262425892Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:10.268043929Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:11.273111072Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:12.287184679Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:13.335201147Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:14.338271189Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:15.342246155Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:16.349774387Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:17.356710405Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:18.371335555Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:19.376052769Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:20.38118848Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:21.38513349Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:22.393586794Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:23.400236159Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:24.409744663Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:25.420762157Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:26.433920667Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:27.442044419Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:28.458382753Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:29.462602221Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:30.466172821Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:31.478306423Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:32.482048759Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:33.485503411Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:34.487572528Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:35.491870047Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:36.497727815Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:37.501186333Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:38.510221065Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:39.514908249Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:40.523984776Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:41.536604677Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:42.541526059Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:43.546826272Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:44.55040474Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:45.554520064Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:46.557435879Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:47.561229887Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:48.567031429Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:49.574374644Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:50.577728703Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:51.58239317Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:52.592116042Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:53.595997376Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:54.598775792Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:55.615688322Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:56.61916984Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:57.626563469Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:58.632047254Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:49:59.635553775Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:00.638326594Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:01.676405267Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:02.713433241Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:03.719309297Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:04.722267568Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:05.728377051Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:06.739484351Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:07.744109496Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:08.748037692Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:09.75437895Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:10.761754048Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:11.765491501Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:12.76941241Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:13.772588449Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:14.776346385Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:15.779120952Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:16.789319181Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:17.799926296Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:18.805891853Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+postgres-1  | The files belonging to this database system will be owned by user "postgres".
+postgres-1  | This user must also own the server process.
+postgres-1  | 
+postgres-1  | The database cluster will be initialized with locale "en_US.utf8".
+postgres-1  | The default database encoding has accordingly been set to "UTF8".
+postgres-1  | The default text search configuration will be set to "english".
+postgres-1  | 
+postgres-1  | Data page checksums are disabled.
+postgres-1  | 
+postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres-1  | creating subdirectories ... ok
+postgres-1  | selecting dynamic shared memory implementation ... posix
+postgres-1  | selecting default "max_connections" ... 100
+postgres-1  | selecting default "shared_buffers" ... 128MB
+postgres-1  | selecting default time zone ... UTC
+postgres-1  | creating configuration files ... ok
+postgres-1  | running bootstrap script ... ok
+postgres-1  | sh: locale: not found
+postgres-1  | 2026-10-22 12:45:00.637 UTC [35] WARNING:  no usable system locales were found
+postgres-1  | performing post-bootstrap initialization ... ok
+postgres-1  | syncing data to disk ... ok
+postgres-1  | 
+postgres-1  | 
+postgres-1  | Success. You can now start the database server using:
+postgres-1  | 
+postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres-1  | 
+postgres-1  | initdb: warning: enabling "trust" authentication for local connections
+postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1  | waiting for server to start....2026-10-22 12:45:03.700 UTC [57] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 12:45:03.733 UTC [57] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 12:45:03.819 UTC [60] LOG:  database system was shut down at 2026-10-22 12:45:02 UTC
+postgres-1  | 2026-10-22 12:45:03.878 UTC [57] LOG:  database system is ready to accept connections
+postgres-1  |  done
+postgres-1  | server started
+api-1       | {"time":"2026-10-22T12:46:20.692776466Z","level":"INFO","msg":"job event","event_id":47,"job_id":29,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.709931132Z","level":"INFO","msg":"job event","event_id":48,"job_id":30,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.81697597Z","level":"INFO","msg":"job event","event_id":49,"job_id":31,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.853877771Z","level":"INFO","msg":"job event","event_id":50,"job_id":32,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:20.921236281Z","level":"INFO","msg":"job event","event_id":51,"job_id":33,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.006090651Z","level":"INFO","msg":"job event","event_id":52,"job_id":34,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.064278703Z","level":"INFO","msg":"job event","event_id":53,"job_id":35,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.093524945Z","level":"INFO","msg":"job event","event_id":54,"job_id":36,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.106484197Z","level":"INFO","msg":"job event","event_id":55,"job_id":37,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.117737937Z","level":"INFO","msg":"job event","event_id":56,"job_id":38,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.171198446Z","level":"INFO","msg":"job event","event_id":57,"job_id":39,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.191888868Z","level":"INFO","msg":"job event","event_id":58,"job_id":40,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.21228022Z","level":"INFO","msg":"job event","event_id":59,"job_id":41,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.234644501Z","level":"INFO","msg":"job event","event_id":60,"job_id":42,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.276725044Z","level":"INFO","msg":"job event","event_id":61,"job_id":43,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.291667125Z","level":"INFO","msg":"job event","event_id":62,"job_id":44,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.330927523Z","level":"INFO","msg":"job event","event_id":63,"job_id":45,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.382661132Z","level":"INFO","msg":"job event","event_id":64,"job_id":46,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.428148328Z","level":"INFO","msg":"job event","event_id":65,"job_id":47,"queue":"e04c","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.495091639Z","level":"INFO","msg":"job event","event_id":66,"job_id":8,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.506095016Z","level":"INFO","msg":"job event","event_id":67,"job_id":9,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.511281075Z","level":"INFO","msg":"job event","event_id":68,"job_id":10,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.517431111Z","level":"INFO","msg":"job event","event_id":69,"job_id":11,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.530133622Z","level":"INFO","msg":"job event","event_id":70,"job_id":12,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.546530672Z","level":"INFO","msg":"job event","event_id":71,"job_id":17,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.561225149Z","level":"INFO","msg":"job event","event_id":72,"job_id":18,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.569218332Z","level":"INFO","msg":"job event","event_id":73,"job_id":19,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.585231446Z","level":"INFO","msg":"job event","event_id":74,"job_id":13,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.601307908Z","level":"INFO","msg":"job event","event_id":75,"job_id":20,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.609714294Z","level":"INFO","msg":"job event","event_id":76,"job_id":23,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.641608702Z","level":"INFO","msg":"job event","event_id":77,"job_id":14,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.66382207Z","level":"INFO","msg":"job event","event_id":78,"job_id":29,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.676813983Z","level":"INFO","msg":"job event","event_id":79,"job_id":24,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.68240952Z","level":"INFO","msg":"job event","event_id":80,"job_id":38,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.691131542Z","level":"INFO","msg":"job event","event_id":81,"job_id":30,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.70173414Z","level":"INFO","msg":"job event","event_id":82,"job_id":32,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.886028701Z","level":"INFO","msg":"job event","event_id":83,"job_id":21,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.90276179Z","level":"INFO","msg":"job event","event_id":84,"job_id":35,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.922125899Z","level":"INFO","msg":"job event","event_id":85,"job_id":15,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.937187564Z","level":"INFO","msg":"job event","event_id":86,"job_id":31,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.943895015Z","level":"INFO","msg":"job event","event_id":87,"job_id":33,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.948910248Z","level":"INFO","msg":"job event","event_id":88,"job_id":39,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.96125206Z","level":"INFO","msg":"job event","event_id":89,"job_id":36,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.972339544Z","level":"INFO","msg":"job event","event_id":90,"job_id":25,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.98172617Z","level":"INFO","msg":"job event","event_id":91,"job_id":34,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:21.986909339Z","level":"INFO","msg":"job event","event_id":92,"job_id":40,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.009138155Z","level":"INFO","msg":"job event","event_id":93,"job_id":37,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.028990251Z","level":"INFO","msg":"job event","event_id":94,"job_id":26,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.06122057Z","level":"INFO","msg":"job event","event_id":95,"job_id":22,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.069294852Z","level":"INFO","msg":"job event","event_id":96,"job_id":16,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.077036493Z","level":"INFO","msg":"job event","event_id":97,"job_id":41,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.084849444Z","level":"INFO","msg":"job event","event_id":98,"job_id":44,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.087899929Z","level":"INFO","msg":"job event","event_id":99,"job_id":47,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.091284035Z","level":"INFO","msg":"job event","event_id":100,"job_id":45,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.096088013Z","level":"INFO","msg":"job event","event_id":101,"job_id":27,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.102234948Z","level":"INFO","msg":"job event","event_id":102,"job_id":42,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.108182487Z","level":"INFO","msg":"job event","event_id":103,"job_id":28,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.114306237Z","level":"INFO","msg":"job event","event_id":104,"job_id":46,"queue":"e04c","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:22.11748725Z","level":"INFO","msg":"job event","event_id":105,"job_id":43,"queue":"e04c","event":"leased","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2030-01-01T00:00:00Z"}
+postgres-1  | 2026-10-22 12:45:04.045 UTC [73] FATAL:  database "queuelet" does not exist
+postgres-1  | CREATE DATABASE
+postgres-1  | 
+postgres-1  | 
+postgres-1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres-1  | 
+postgres-1  | waiting for server to shut down....2026-10-22 12:45:04.298 UTC [57] LOG:  received fast shutdown request
+postgres-1  | 2026-10-22 12:45:04.313 UTC [57] LOG:  aborting any active transactions
+postgres-1  | 2026-10-22 12:45:04.320 UTC [57] LOG:  background worker "logical replication launcher" (PID 63) exited with exit code 1
+postgres-1  | 2026-10-22 12:45:04.329 UTC [58] LOG:  shutting down
+api-1       | {"time":"2026-10-22T12:46:50.776602421Z","level":"INFO","msg":"job event","event_id":106,"job_id":48,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.783128422Z","level":"INFO","msg":"job event","event_id":107,"job_id":49,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.789740581Z","level":"INFO","msg":"job event","event_id":108,"job_id":50,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.793223557Z","level":"INFO","msg":"job event","event_id":109,"job_id":51,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.801801171Z","level":"INFO","msg":"job event","event_id":110,"job_id":52,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.808018038Z","level":"INFO","msg":"job event","event_id":111,"job_id":53,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.976281269Z","level":"INFO","msg":"job event","event_id":112,"job_id":54,"queue":"e04d","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.978923609Z","level":"INFO","msg":"job event","event_id":113,"job_id":48,"queue":"e04d","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.981610172Z","level":"INFO","msg":"job event","event_id":114,"job_id":48,"queue":"e04d","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:50.984165796Z","level":"INFO","msg":"job event","event_id":115,"job_id":49,"queue":"e04d","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.177342732Z","level":"INFO","msg":"job event","event_id":116,"job_id":49,"queue":"e04d","event":"retry_wait","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"x","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.183570893Z","level":"INFO","msg":"job event","event_id":117,"job_id":50,"queue":"e04d","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.376974015Z","level":"INFO","msg":"job event","event_id":118,"job_id":50,"queue":"e04d","event":"cancelled","worker":3,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.579321808Z","level":"INFO","msg":"job event","event_id":119,"job_id":3,"queue":"e04b","event":"queued","worker":null,"attempt":2,"outbox_id":null,"status":null,"error":"neg","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.601893518Z","level":"INFO","msg":"job event","event_id":137,"job_id":51,"queue":"e04d","event":"cancelled","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.610575891Z","level":"INFO","msg":"job event","event_id":150,"job_id":52,"queue":"e04d","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.777060472Z","level":"INFO","msg":"job event","event_id":120,"job_id":8,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.793739817Z","level":"INFO","msg":"job event","event_id":121,"job_id":9,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+worker-a-1  | {"time":"2026-10-22T12:50:19.81134614Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:20.818713824Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:21.824741656Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:22.865166133Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:23.870777394Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:24.879611864Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:25.884422068Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:26.887086282Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:27.890175474Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:28.897228464Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:29.905321225Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:30.908930612Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:31.913082956Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-a-1  | {"time":"2026-10-22T12:50:32.915489711Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:06.683419582Z","level":"INFO","msg":"worker worker-b registered"}
+worker-b-1  | {"time":"2026-10-22T12:45:06.687240938Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:07.694491466Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:08.69829004Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:09.702282717Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:10.71987336Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:11.728674809Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:12.735132467Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:13.747451762Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:14.750475466Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:46:51.804855318Z","level":"INFO","msg":"job event","event_id":122,"job_id":10,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.811117376Z","level":"INFO","msg":"job event","event_id":123,"job_id":14,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.819226994Z","level":"INFO","msg":"job event","event_id":124,"job_id":11,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.822728959Z","level":"INFO","msg":"job event","event_id":125,"job_id":12,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.826539299Z","level":"INFO","msg":"job event","event_id":126,"job_id":17,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.83158062Z","level":"INFO","msg":"job event","event_id":127,"job_id":18,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.836974715Z","level":"INFO","msg":"job event","event_id":128,"job_id":19,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.840293737Z","level":"INFO","msg":"job event","event_id":129,"job_id":13,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.846498129Z","level":"INFO","msg":"job event","event_id":130,"job_id":20,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.850034425Z","level":"INFO","msg":"job event","event_id":131,"job_id":23,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.876022457Z","level":"INFO","msg":"job event","event_id":132,"job_id":29,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.918878684Z","level":"INFO","msg":"job event","event_id":133,"job_id":27,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.927830025Z","level":"INFO","msg":"job event","event_id":134,"job_id":28,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.931924467Z","level":"INFO","msg":"job event","event_id":135,"job_id":38,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.937841865Z","level":"INFO","msg":"job event","event_id":136,"job_id":35,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.941483631Z","level":"INFO","msg":"job event","event_id":138,"job_id":32,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.946508394Z","level":"INFO","msg":"job event","event_id":139,"job_id":33,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.950889811Z","level":"INFO","msg":"job event","event_id":140,"job_id":39,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.954185219Z","level":"INFO","msg":"job event","event_id":141,"job_id":36,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.95876206Z","level":"INFO","msg":"job event","event_id":142,"job_id":34,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.962983487Z","level":"INFO","msg":"job event","event_id":143,"job_id":40,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.967144591Z","level":"INFO","msg":"job event","event_id":144,"job_id":37,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.970343228Z","level":"INFO","msg":"job event","event_id":145,"job_id":44,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.973968545Z","level":"INFO","msg":"job event","event_id":146,"job_id":41,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.977571563Z","level":"INFO","msg":"job event","event_id":147,"job_id":47,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.981294858Z","level":"INFO","msg":"job event","event_id":148,"job_id":45,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.984336388Z","level":"INFO","msg":"job event","event_id":149,"job_id":42,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.987887075Z","level":"INFO","msg":"job event","event_id":151,"job_id":46,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.992114704Z","level":"INFO","msg":"job event","event_id":152,"job_id":43,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:51.997025931Z","level":"INFO","msg":"job event","event_id":153,"job_id":24,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.008831146Z","level":"INFO","msg":"job event","event_id":154,"job_id":21,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.020755102Z","level":"INFO","msg":"job event","event_id":155,"job_id":26,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.024317389Z","level":"INFO","msg":"job event","event_id":156,"job_id":30,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.029218697Z","level":"INFO","msg":"job event","event_id":157,"job_id":15,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.032931497Z","level":"INFO","msg":"job event","event_id":158,"job_id":31,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.035167772Z","level":"INFO","msg":"job event","event_id":159,"job_id":25,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.042849815Z","level":"INFO","msg":"job event","event_id":160,"job_id":16,"queue":"e04c","event":"lease_expired","worker":4,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:46:52.0498441Z","level":"INFO","msg":"job event","event_id":161,"job_id":22,"queue":"e04c","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-01-01T00:00:00Z"}
+postgres-1  | 2026-10-22 12:45:04.359 UTC [58] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2026-10-22 12:45:04.896 UTC [58] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.312 s, sync=0.162 s, total=0.567 s; sync files=301, longest=0.026 s, average=0.001 s; distance=4266 kB, estimate=4266 kB; lsn=0/191E820, redo lsn=0/191E820
+postgres-1  | 2026-10-22 12:45:04.931 UTC [57] LOG:  database system is shut down
+postgres-1  |  done
+postgres-1  | server stopped
+postgres-1  | 
+postgres-1  | PostgreSQL init process complete; ready for start up.
+postgres-1  | 
+postgres-1  | 2026-10-22 12:45:05.221 UTC [1] LOG:  starting PostgreSQL 17.11 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1  | 2026-10-22 12:45:05.222 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2026-10-22 12:45:05.224 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2026-10-22 12:45:05.260 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2026-10-22 12:45:05.295 UTC [86] LOG:  database system was shut down at 2026-10-22 12:45:04 UTC
+postgres-1  | 2026-10-22 12:45:05.470 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2026-10-22 12:50:05.400 UTC [84] LOG:  checkpoint starting: time
+postgres-1  | 2026-10-22 12:50:26.633 UTC [84] LOG:  checkpoint complete: wrote 212 buffers (1.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=21.138 s, sync=0.039 s, total=21.234 s; sync files=130, longest=0.007 s, average=0.001 s; distance=1210 kB, estimate=1210 kB; lsn=0/1A57B48, redo lsn=0/1A4D208
+api-1       | {"time":"2026-10-22T12:46:52.052721197Z","level":"INFO","msg":"job event","event_id":162,"job_id":1,"queue":"e04a","event":"retained","worker":1,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-01-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:17.778155811Z","level":"INFO","msg":"job event","event_id":163,"job_id":55,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:17.782753149Z","level":"INFO","msg":"job event","event_id":164,"job_id":56,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:17.985774858Z","level":"INFO","msg":"job event","event_id":165,"job_id":55,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:18.021362376Z","level":"INFO","msg":"job event","event_id":166,"job_id":56,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:18.376280207Z","level":"INFO","msg":"job event","event_id":167,"job_id":55,"queue":"e04e","event":"heartbeat","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.385421597Z","level":"INFO","msg":"job event","event_id":168,"job_id":56,"queue":"e04e","event":"succeeded","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.584910771Z","level":"INFO","msg":"job event","event_id":169,"job_id":49,"queue":"e04d","event":"queued","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"x","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.594901542Z","level":"INFO","msg":"job event","event_id":170,"job_id":54,"queue":"e04d","event":"queued","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.602377735Z","level":"INFO","msg":"job event","event_id":171,"job_id":52,"queue":"e04d","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.605526404Z","level":"INFO","msg":"job event","event_id":172,"job_id":48,"queue":"e04d","event":"retained","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.608732142Z","level":"INFO","msg":"job event","event_id":173,"job_id":50,"queue":"e04d","event":"retained","worker":3,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:18.612286372Z","level":"INFO","msg":"job event","event_id":174,"job_id":51,"queue":"e04d","event":"retained","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-06-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:47:20.777631867Z","level":"INFO","msg":"job event","event_id":175,"job_id":57,"queue":"e04f","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:20.781218908Z","level":"INFO","msg":"job event","event_id":176,"job_id":57,"queue":"e04f","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:47:21.577401705Z","level":"INFO","msg":"job event","event_id":177,"job_id":57,"queue":"e04f","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:10:00Z"}
+api-1       | {"time":"2026-10-22T12:47:21.585389228Z","level":"INFO","msg":"job event","event_id":178,"job_id":55,"queue":"e04e","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:10:00Z"}
+api-1       | {"time":"2026-10-22T12:47:21.595319142Z","level":"INFO","msg":"job event","event_id":179,"job_id":56,"queue":"e04e","event":"retained","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:10:00Z"}
+api-1       | {"time":"2026-10-22T12:47:47.978804533Z","level":"INFO","msg":"job event","event_id":180,"job_id":58,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:10:00Z"}
+api-1       | {"time":"2026-10-22T12:47:48.177158162Z","level":"INFO","msg":"job event","event_id":181,"job_id":55,"queue":"e04e","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:10:00Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:15.758440671Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:47:48.579291568Z","level":"INFO","msg":"job event","event_id":182,"job_id":55,"queue":"e04e","event":"lease_expired","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:10:31Z"}
+api-1       | {"time":"2026-10-22T12:47:49.97944298Z","level":"INFO","msg":"job event","event_id":183,"job_id":59,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:10:31Z"}
+api-1       | {"time":"2026-10-22T12:47:50.002492449Z","level":"INFO","msg":"job event","event_id":184,"job_id":55,"queue":"e04e","event":"leased","worker":3,"attempt":3,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:10:31Z"}
+api-1       | {"time":"2026-10-22T12:47:50.176612753Z","level":"INFO","msg":"job event","event_id":185,"job_id":55,"queue":"e04e","event":"heartbeat","worker":3,"attempt":3,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:11:02Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:16.764605409Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:47:50.185056871Z","level":"INFO","msg":"job event","event_id":186,"job_id":60,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:11:02Z"}
+api-1       | {"time":"2026-10-22T12:47:50.191255115Z","level":"INFO","msg":"job event","event_id":187,"job_id":58,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:11:02Z"}
+api-1       | {"time":"2026-10-22T12:47:50.384891357Z","level":"INFO","msg":"job event","event_id":188,"job_id":58,"queue":"e04e","event":"heartbeat","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:11:33Z"}
+api-1       | {"time":"2026-10-22T12:47:50.390417919Z","level":"INFO","msg":"job event","event_id":189,"job_id":61,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:11:33Z"}
+api-1       | {"time":"2026-10-22T12:47:50.400970145Z","level":"INFO","msg":"job event","event_id":190,"job_id":59,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:11:33Z"}
+api-1       | {"time":"2026-10-22T12:47:50.583679157Z","level":"INFO","msg":"job event","event_id":191,"job_id":55,"queue":"e04e","event":"lease_expired","worker":3,"attempt":3,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:11:33Z"}
+api-1       | {"time":"2026-10-22T12:47:50.591462756Z","level":"INFO","msg":"job event","event_id":192,"job_id":59,"queue":"e04e","event":"heartbeat","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:04Z"}
+api-1       | {"time":"2026-10-22T12:47:50.778380789Z","level":"INFO","msg":"job event","event_id":193,"job_id":62,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:04Z"}
+api-1       | {"time":"2026-10-22T12:47:50.802322953Z","level":"INFO","msg":"job event","event_id":194,"job_id":60,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:04Z"}
+api-1       | {"time":"2026-10-22T12:47:50.99033453Z","level":"INFO","msg":"job event","event_id":195,"job_id":60,"queue":"e04e","event":"heartbeat","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:35Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:17.767975252Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:47:51.003978573Z","level":"INFO","msg":"job event","event_id":196,"job_id":63,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:35Z"}
+api-1       | {"time":"2026-10-22T12:47:51.176771905Z","level":"INFO","msg":"job event","event_id":197,"job_id":61,"queue":"e04e","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:12:35Z"}
+api-1       | {"time":"2026-10-22T12:47:51.180231105Z","level":"INFO","msg":"job event","event_id":198,"job_id":61,"queue":"e04e","event":"heartbeat","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-07-01T00:13:06Z"}
+api-1       | {"time":"2026-10-22T12:47:51.57748689Z","level":"INFO","msg":"job event","event_id":199,"job_id":58,"queue":"e04e","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:13:06Z"}
+api-1       | {"time":"2026-10-22T12:47:51.58366638Z","level":"INFO","msg":"job event","event_id":200,"job_id":60,"queue":"e04e","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:13:06Z"}
+api-1       | {"time":"2026-10-22T12:47:51.588366657Z","level":"INFO","msg":"job event","event_id":201,"job_id":59,"queue":"e04e","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-07-01T00:13:06Z"}
+api-1       | {"time":"2026-10-22T12:48:00.535798509Z","level":"INFO","msg":"job event","event_id":202,"job_id":64,"queue":"e04g","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-08-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:00.600744567Z","level":"INFO","msg":"job event","event_id":203,"job_id":61,"queue":"e04e","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-08-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:00.625719258Z","level":"INFO","msg":"job event","event_id":204,"job_id":55,"queue":"e04e","event":"retained","worker":null,"attempt":3,"outbox_id":null,"status":null,"error":"","at":"2031-08-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:00.646466896Z","level":"INFO","msg":"job event","event_id":205,"job_id":64,"queue":"e04g","event":"leased","worker":5,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-08-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:00.778769589Z","level":"INFO","msg":"job event","event_id":206,"job_id":64,"queue":"e04g","event":"queued","worker":5,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-08-01T00:01:40Z"}
+api-1       | {"time":"2026-10-22T12:48:01.177013315Z","level":"INFO","msg":"job event","event_id":207,"job_id":65,"queue":"e04h","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-08-01T00:01:40Z"}
+api-1       | {"time":"2026-10-22T12:48:31.579312049Z","level":"INFO","msg":"job event","event_id":208,"job_id":66,"queue":"e04i","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.585813338Z","level":"INFO","msg":"job event","event_id":209,"job_id":67,"queue":"e04i","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.598173307Z","level":"INFO","msg":"job event","event_id":210,"job_id":68,"queue":"e04i","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.609219336Z","level":"INFO","msg":"job event","event_id":211,"job_id":66,"queue":"e04i","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.776289882Z","level":"INFO","msg":"job event","event_id":212,"job_id":67,"queue":"e04i","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.781992939Z","level":"INFO","msg":"job event","event_id":213,"job_id":68,"queue":"e04i","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.789351041Z","level":"INFO","msg":"job event","event_id":214,"job_id":69,"queue":"e04i","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-09-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.977486813Z","level":"INFO","msg":"job event","event_id":215,"job_id":70,"queue":"e04i","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-08-31T23:59:00Z"}
+api-1       | {"time":"2026-10-22T12:48:31.979513134Z","level":"INFO","msg":"job event","event_id":216,"job_id":70,"queue":"e04i","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-08-31T23:59:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.577235941Z","level":"INFO","msg":"job event","event_id":217,"job_id":68,"queue":"e04i","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.580876895Z","level":"INFO","msg":"job event","event_id":218,"job_id":66,"queue":"e04i","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.583471913Z","level":"INFO","msg":"job event","event_id":219,"job_id":67,"queue":"e04i","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.589982015Z","level":"INFO","msg":"job event","event_id":220,"job_id":70,"queue":"e04i","event":"lease_expired","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.594401826Z","level":"INFO","msg":"job event","event_id":221,"job_id":71,"queue":"e04j","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.60193714Z","level":"INFO","msg":"job event","event_id":222,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:49.776182776Z","level":"INFO","msg":"job event","event_id":223,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"walk 1","at":"2031-10-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:48:50.576935754Z","level":"INFO","msg":"job event","event_id":224,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":1,"outbox_id":null,"status":null,"error":"walk 1","at":"2031-10-01T00:00:05Z"}
+api-1       | {"time":"2026-10-22T12:48:51.176812346Z","level":"INFO","msg":"job event","event_id":225,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"walk 1","at":"2031-10-01T00:00:05Z"}
+api-1       | {"time":"2026-10-22T12:48:51.181210163Z","level":"INFO","msg":"job event","event_id":226,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"walk 2","at":"2031-10-01T00:00:05Z"}
+api-1       | {"time":"2026-10-22T12:48:51.57704188Z","level":"INFO","msg":"job event","event_id":227,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":2,"outbox_id":null,"status":null,"error":"walk 2","at":"2031-10-01T00:00:15Z"}
+api-1       | {"time":"2026-10-22T12:48:52.776106553Z","level":"INFO","msg":"job event","event_id":228,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":3,"outbox_id":null,"status":null,"error":"walk 2","at":"2031-10-01T00:00:15Z"}
+api-1       | {"time":"2026-10-22T12:48:52.976647937Z","level":"INFO","msg":"job event","event_id":229,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":3,"outbox_id":null,"status":null,"error":"walk 3","at":"2031-10-01T00:00:15Z"}
+api-1       | {"time":"2026-10-22T12:48:53.57760554Z","level":"INFO","msg":"job event","event_id":230,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":3,"outbox_id":null,"status":null,"error":"walk 3","at":"2031-10-01T00:00:35Z"}
+api-1       | {"time":"2026-10-22T12:48:54.376258854Z","level":"INFO","msg":"job event","event_id":231,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":4,"outbox_id":null,"status":null,"error":"walk 3","at":"2031-10-01T00:00:35Z"}
+api-1       | {"time":"2026-10-22T12:48:54.381763003Z","level":"INFO","msg":"job event","event_id":232,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":4,"outbox_id":null,"status":null,"error":"walk 4","at":"2031-10-01T00:00:35Z"}
+api-1       | {"time":"2026-10-22T12:48:55.578442395Z","level":"INFO","msg":"job event","event_id":233,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":4,"outbox_id":null,"status":null,"error":"walk 4","at":"2031-10-01T00:01:15Z"}
+api-1       | {"time":"2026-10-22T12:48:55.977705592Z","level":"INFO","msg":"job event","event_id":234,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":5,"outbox_id":null,"status":null,"error":"walk 4","at":"2031-10-01T00:01:15Z"}
+api-1       | {"time":"2026-10-22T12:48:55.979858826Z","level":"INFO","msg":"job event","event_id":235,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":5,"outbox_id":null,"status":null,"error":"walk 5","at":"2031-10-01T00:01:15Z"}
+api-1       | {"time":"2026-10-22T12:48:56.390812839Z","level":"INFO","msg":"job event","event_id":236,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":5,"outbox_id":null,"status":null,"error":"walk 5","at":"2031-10-01T00:02:35Z"}
+api-1       | {"time":"2026-10-22T12:48:57.577513245Z","level":"INFO","msg":"job event","event_id":237,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":6,"outbox_id":null,"status":null,"error":"walk 5","at":"2031-10-01T00:02:35Z"}
+api-1       | {"time":"2026-10-22T12:48:57.580592832Z","level":"INFO","msg":"job event","event_id":238,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":6,"outbox_id":null,"status":null,"error":"walk 6","at":"2031-10-01T00:02:35Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:18.782135894Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:19.786122988Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:20.791548502Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:21.794691796Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:22.828855041Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:23.835372067Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:24.841503002Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:25.853443459Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:26.857820515Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:27.86228555Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:28.868178907Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:29.874716373Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:30.883000729Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:48:58.577123924Z","level":"INFO","msg":"job event","event_id":239,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":6,"outbox_id":null,"status":null,"error":"walk 6","at":"2031-10-01T00:05:15Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:31.893322696Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:32.899205613Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:48:59.177703783Z","level":"INFO","msg":"job event","event_id":240,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":7,"outbox_id":null,"status":null,"error":"walk 6","at":"2031-10-01T00:05:15Z"}
+api-1       | {"time":"2026-10-22T12:48:59.181004295Z","level":"INFO","msg":"job event","event_id":241,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":7,"outbox_id":null,"status":null,"error":"walk 7","at":"2031-10-01T00:05:15Z"}
+worker-b-1  | {"time":"2026-10-22T12:45:33.903800646Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:34.913031655Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:35.91924173Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:36.925834713Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:37.93355727Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:38.937221579Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:39.941988177Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:40.945718559Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:41.96091228Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:42.967972951Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:43.977700422Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:44.986967657Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:45.995769027Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:47.001490152Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:48.012510261Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:49.026163699Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:50.045480999Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:51.057558437Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:52.069773588Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:53.076604806Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:54.084832044Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:55.098643063Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:56.109738066Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:57.130870935Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:58.137069408Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:45:59.17289819Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:00.202368083Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:01.213586366Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:02.279727614Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:03.28805409Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:04.296013269Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:05.310132103Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:06.323242847Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:07.333486178Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:08.346820581Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:09.368042798Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:10.373111017Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:11.393278658Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:12.410104173Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:13.419201712Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:14.432343Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:15.454249616Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:16.469205008Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:17.47808938Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:19.895443583Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:21.331493343Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:22.338773986Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:23.350493556Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:24.361420044Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:25.37065933Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:26.377843226Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:27.384807333Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:28.394982321Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:29.40031837Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:30.407246699Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:31.413165753Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:32.438875533Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:33.454151711Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:34.459001092Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:35.462294284Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:36.465221828Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:48:59.395015595Z","level":"INFO","msg":"job event","event_id":242,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":7,"outbox_id":null,"status":null,"error":"walk 7","at":"2031-10-01T00:10:35Z"}
+api-1       | {"time":"2026-10-22T12:49:00.576438165Z","level":"INFO","msg":"job event","event_id":243,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":8,"outbox_id":null,"status":null,"error":"walk 7","at":"2031-10-01T00:10:35Z"}
+worker-b-1  | {"time":"2026-10-22T12:46:37.474440338Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:38.47897806Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:39.484887204Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:40.489144622Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:41.494201341Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:42.506065368Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:43.512037418Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:44.517437844Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:45.522777208Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:46.528825685Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:47.533055669Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:48.541828074Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:49.547116978Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:50.550865895Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:51.57059049Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:52.573691239Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:53.577296029Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:54.579889739Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:55.588290137Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:56.591458984Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:57.596958548Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:58.599577627Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:46:59.603023316Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:49:00.776453297Z","level":"INFO","msg":"job event","event_id":244,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":8,"outbox_id":null,"status":null,"error":"walk 8","at":"2031-10-01T00:10:35Z"}
+api-1       | {"time":"2026-10-22T12:49:01.577261323Z","level":"INFO","msg":"job event","event_id":245,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":8,"outbox_id":null,"status":null,"error":"walk 8","at":"2031-10-01T00:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:02.176972686Z","level":"INFO","msg":"job event","event_id":246,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":9,"outbox_id":null,"status":null,"error":"walk 8","at":"2031-10-01T00:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:02.378004845Z","level":"INFO","msg":"job event","event_id":247,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":9,"outbox_id":null,"status":null,"error":"walk 9","at":"2031-10-01T00:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:03.578562495Z","level":"INFO","msg":"job event","event_id":248,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":9,"outbox_id":null,"status":null,"error":"walk 9","at":"2031-10-01T00:42:35Z"}
+api-1       | {"time":"2026-10-22T12:49:03.981873454Z","level":"INFO","msg":"job event","event_id":249,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":10,"outbox_id":null,"status":null,"error":"walk 9","at":"2031-10-01T00:42:35Z"}
+api-1       | {"time":"2026-10-22T12:49:03.995584694Z","level":"INFO","msg":"job event","event_id":250,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":10,"outbox_id":null,"status":null,"error":"walk 10","at":"2031-10-01T00:42:35Z"}
+api-1       | {"time":"2026-10-22T12:49:04.576735567Z","level":"INFO","msg":"job event","event_id":251,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":10,"outbox_id":null,"status":null,"error":"walk 10","at":"2031-10-01T01:25:15Z"}
+worker-b-1  | {"time":"2026-10-22T12:47:00.608243347Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:01.662670029Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:02.667550037Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:03.674300006Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:04.685909266Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:05.697931707Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:06.70252928Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:07.705712946Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:08.708292594Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:09.714334365Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:10.719226332Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:11.723352803Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:12.7268412Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:13.730076347Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:49:05.579220048Z","level":"INFO","msg":"job event","event_id":252,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":11,"outbox_id":null,"status":null,"error":"walk 10","at":"2031-10-01T01:25:15Z"}
+api-1       | {"time":"2026-10-22T12:49:05.581917206Z","level":"INFO","msg":"job event","event_id":253,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":11,"outbox_id":null,"status":null,"error":"walk 11","at":"2031-10-01T01:25:15Z"}
+api-1       | {"time":"2026-10-22T12:49:06.42741849Z","level":"INFO","msg":"job event","event_id":254,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":11,"outbox_id":null,"status":null,"error":"walk 11","at":"2031-10-01T02:50:35Z"}
+api-1       | {"time":"2026-10-22T12:49:07.377462775Z","level":"INFO","msg":"job event","event_id":255,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":12,"outbox_id":null,"status":null,"error":"walk 11","at":"2031-10-01T02:50:35Z"}
+api-1       | {"time":"2026-10-22T12:49:07.39328972Z","level":"INFO","msg":"job event","event_id":256,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":12,"outbox_id":null,"status":null,"error":"walk 12","at":"2031-10-01T02:50:35Z"}
+api-1       | {"time":"2026-10-22T12:49:08.575937863Z","level":"INFO","msg":"job event","event_id":257,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":12,"outbox_id":null,"status":null,"error":"walk 12","at":"2031-10-01T05:41:15Z"}
+api-1       | {"time":"2026-10-22T12:49:08.977476725Z","level":"INFO","msg":"job event","event_id":258,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":13,"outbox_id":null,"status":null,"error":"walk 12","at":"2031-10-01T05:41:15Z"}
+api-1       | {"time":"2026-10-22T12:49:08.980816691Z","level":"INFO","msg":"job event","event_id":259,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":13,"outbox_id":null,"status":null,"error":"walk 13","at":"2031-10-01T05:41:15Z"}
+api-1       | {"time":"2026-10-22T12:49:09.580064308Z","level":"INFO","msg":"job event","event_id":260,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":13,"outbox_id":null,"status":null,"error":"walk 13","at":"2031-10-01T11:22:35Z"}
+api-1       | {"time":"2026-10-22T12:49:10.578512271Z","level":"INFO","msg":"job event","event_id":261,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":14,"outbox_id":null,"status":null,"error":"walk 13","at":"2031-10-01T11:22:35Z"}
+api-1       | {"time":"2026-10-22T12:49:10.583982266Z","level":"INFO","msg":"job event","event_id":262,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":14,"outbox_id":null,"status":null,"error":"walk 14","at":"2031-10-01T11:22:35Z"}
+api-1       | {"time":"2026-10-22T12:49:11.577000113Z","level":"INFO","msg":"job event","event_id":263,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":14,"outbox_id":null,"status":null,"error":"walk 14","at":"2031-10-01T22:45:15Z"}
+api-1       | {"time":"2026-10-22T12:49:12.484698709Z","level":"INFO","msg":"job event","event_id":264,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":15,"outbox_id":null,"status":null,"error":"walk 14","at":"2031-10-01T22:45:15Z"}
+worker-b-1  | {"time":"2026-10-22T12:47:14.737949514Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:15.74236186Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:16.747039928Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:17.752366578Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:18.759260925Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:19.765898935Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:20.77304723Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:21.780332463Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:22.819573963Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:23.823041718Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:24.826718726Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:25.830717422Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:26.8383141Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:27.848663793Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:28.851726377Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:29.857914122Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:30.862407755Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:31.865969837Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:32.87218532Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:33.883704876Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:34.897293228Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:35.902539384Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:36.908379381Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:37.916723245Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:38.927932238Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:39.937882268Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:40.953842126Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:41.971563223Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:42.994553407Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:44.008205426Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:45.013370678Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:46.027882525Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:47.034151592Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:48.045399973Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:49.060322275Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:50.067654405Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:51.08150402Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:52.114723084Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:53.14897862Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:54.163519473Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:55.170650491Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:56.200253712Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:57.21019444Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:58.228867661Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:47:59.26865591Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:49:12.623034278Z","level":"INFO","msg":"job event","event_id":265,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":15,"outbox_id":null,"status":null,"error":"walk 15","at":"2031-10-01T22:45:15Z"}
+api-1       | {"time":"2026-10-22T12:49:13.577015581Z","level":"INFO","msg":"job event","event_id":266,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":15,"outbox_id":null,"status":null,"error":"walk 15","at":"2031-10-02T21:30:35Z"}
+api-1       | {"time":"2026-10-22T12:49:14.442263651Z","level":"INFO","msg":"job event","event_id":267,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":16,"outbox_id":null,"status":null,"error":"walk 15","at":"2031-10-02T21:30:35Z"}
+api-1       | {"time":"2026-10-22T12:49:14.453242528Z","level":"INFO","msg":"job event","event_id":268,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":16,"outbox_id":null,"status":null,"error":"walk 16","at":"2031-10-02T21:30:35Z"}
+api-1       | {"time":"2026-10-22T12:49:15.577439107Z","level":"INFO","msg":"job event","event_id":269,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":16,"outbox_id":null,"status":null,"error":"walk 16","at":"2031-10-04T19:01:15Z"}
+api-1       | {"time":"2026-10-22T12:49:15.976197638Z","level":"INFO","msg":"job event","event_id":270,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":17,"outbox_id":null,"status":null,"error":"walk 16","at":"2031-10-04T19:01:15Z"}
+api-1       | {"time":"2026-10-22T12:49:15.980079279Z","level":"INFO","msg":"job event","event_id":271,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":17,"outbox_id":null,"status":null,"error":"walk 17","at":"2031-10-04T19:01:15Z"}
+api-1       | {"time":"2026-10-22T12:49:16.578139245Z","level":"INFO","msg":"job event","event_id":272,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":17,"outbox_id":null,"status":null,"error":"walk 17","at":"2031-10-08T14:02:35Z"}
+api-1       | {"time":"2026-10-22T12:49:17.578360028Z","level":"INFO","msg":"job event","event_id":273,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":18,"outbox_id":null,"status":null,"error":"walk 17","at":"2031-10-08T14:02:35Z"}
+api-1       | {"time":"2026-10-22T12:49:17.582018797Z","level":"INFO","msg":"job event","event_id":274,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":18,"outbox_id":null,"status":null,"error":"walk 18","at":"2031-10-08T14:02:35Z"}
+api-1       | {"time":"2026-10-22T12:49:18.576244787Z","level":"INFO","msg":"job event","event_id":275,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":18,"outbox_id":null,"status":null,"error":"walk 18","at":"2031-10-16T04:05:15Z"}
+api-1       | {"time":"2026-10-22T12:49:19.177549637Z","level":"INFO","msg":"job event","event_id":276,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":19,"outbox_id":null,"status":null,"error":"walk 18","at":"2031-10-16T04:05:15Z"}
+api-1       | {"time":"2026-10-22T12:49:19.182115633Z","level":"INFO","msg":"job event","event_id":277,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":19,"outbox_id":null,"status":null,"error":"walk 19","at":"2031-10-16T04:05:15Z"}
+api-1       | {"time":"2026-10-22T12:49:19.395454671Z","level":"INFO","msg":"job event","event_id":278,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":19,"outbox_id":null,"status":null,"error":"walk 19","at":"2031-10-31T08:10:35Z"}
+api-1       | {"time":"2026-10-22T12:49:20.776597616Z","level":"INFO","msg":"job event","event_id":279,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":20,"outbox_id":null,"status":null,"error":"walk 19","at":"2031-10-31T08:10:35Z"}
+api-1       | {"time":"2026-10-22T12:49:20.782780663Z","level":"INFO","msg":"job event","event_id":280,"job_id":71,"queue":"e04j","event":"retry_wait","worker":3,"attempt":20,"outbox_id":null,"status":null,"error":"walk 20","at":"2031-10-31T08:10:35Z"}
+worker-b-1  | {"time":"2026-10-22T12:48:00.296339149Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:01.309556414Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:02.315835703Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:03.326879266Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:04.336863496Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:05.347903631Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:06.362042095Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:07.375001831Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:08.491357596Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:09.511903256Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:10.526405499Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:11.551115393Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:12.5760513Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:13.606092244Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:14.618227827Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:15.642948624Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:16.647305577Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:17.660991289Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:18.678757929Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:19.687917925Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:20.691931721Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:21.696221057Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:22.699799035Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:23.706208439Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:24.711656266Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:25.71410487Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:26.716669928Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:27.719600396Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:28.728659381Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:29.734896714Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:30.744006732Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:31.747895708Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:32.752772377Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:33.757181299Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:34.760914007Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:35.765196886Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:36.769012065Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:37.772441191Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:38.78212779Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:39.785798239Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:40.792338059Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:41.802541343Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:42.807361075Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:43.812724369Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:44.818906567Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:45.824216556Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:46.829922484Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:47.835231691Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:48.838299122Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+api-1       | {"time":"2026-10-22T12:49:21.576353822Z","level":"INFO","msg":"job event","event_id":281,"job_id":71,"queue":"e04j","event":"queued","worker":null,"attempt":20,"outbox_id":null,"status":null,"error":"walk 20","at":"2031-11-30T16:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:22.378130733Z","level":"INFO","msg":"job event","event_id":282,"job_id":71,"queue":"e04j","event":"leased","worker":3,"attempt":21,"outbox_id":null,"status":null,"error":"walk 20","at":"2031-11-30T16:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:22.380696505Z","level":"INFO","msg":"job event","event_id":283,"job_id":71,"queue":"e04j","event":"dead","worker":3,"attempt":21,"outbox_id":null,"status":null,"error":"walk 21","at":"2031-11-30T16:21:15Z"}
+api-1       | {"time":"2026-10-22T12:49:59.978869745Z","level":"INFO","msg":"job event","event_id":284,"job_id":72,"queue":"e04e","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:49:59.987323105Z","level":"INFO","msg":"job event","event_id":285,"job_id":58,"queue":"e04e","event":"leased","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"lease expired","at":"2031-12-01T00:00:00Z"}
+api-1       | {"time":"2026-10-22T12:50:00.183083521Z","level":"INFO","msg":"job event","event_id":286,"job_id":58,"queue":"e04e","event":"retry_wait","worker":3,"attempt":2,"outbox_id":null,"status":null,"error":"late nack","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.178536273Z","level":"INFO","msg":"job event","event_id":287,"job_id":73,"queue":"e04k","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.182763382Z","level":"INFO","msg":"job event","event_id":288,"job_id":74,"queue":"e04k","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.186730435Z","level":"INFO","msg":"job event","event_id":289,"job_id":75,"queue":"e04k","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.192936656Z","level":"INFO","msg":"job event","event_id":290,"job_id":76,"queue":"e04k","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.199018931Z","level":"INFO","msg":"job event","event_id":291,"job_id":77,"queue":"e04k","event":"created","worker":null,"attempt":0,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.213563764Z","level":"INFO","msg":"job event","event_id":292,"job_id":75,"queue":"e04k","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.581824868Z","level":"INFO","msg":"job event","event_id":293,"job_id":77,"queue":"e04k","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.779259391Z","level":"INFO","msg":"job event","event_id":294,"job_id":73,"queue":"e04k","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:19.979808106Z","level":"INFO","msg":"job event","event_id":295,"job_id":76,"queue":"e04k","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+api-1       | {"time":"2026-10-22T12:50:20.384071793Z","level":"INFO","msg":"job event","event_id":296,"job_id":74,"queue":"e04k","event":"leased","worker":3,"attempt":1,"outbox_id":null,"status":null,"error":"","at":"2031-12-01T00:00:31Z"}
+worker-b-1  | {"time":"2026-10-22T12:48:49.843124076Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:50.84632507Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:51.849531118Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:52.853182973Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:53.857205058Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:54.860669749Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:55.862977255Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:56.867306503Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:57.871787336Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:58.874661708Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:48:59.877024985Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:00.884332384Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:01.89365062Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:02.898541521Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:03.906713422Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:04.910749011Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:05.921208401Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:06.924226007Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:07.927586631Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:08.931241429Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:09.942118197Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:10.945023359Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:11.949840657Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:12.956679562Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:13.961237683Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:14.966725599Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:15.972051662Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:16.981266597Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:17.983807262Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:18.986593922Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:19.996966372Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:21.00068671Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:22.006740265Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:23.010662694Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:24.013929793Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:25.02953475Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:26.033419537Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:27.043079202Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:28.048304816Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:29.052761821Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:30.063105717Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:31.066396696Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:32.078080669Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:33.084171998Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:34.088417559Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:35.090812649Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:36.096687077Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:37.105471817Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:38.11044645Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:39.119683815Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:40.133312185Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:41.138842287Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:42.147825461Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:43.157493379Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:44.160888836Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:45.164581536Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:46.167492157Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:47.179786441Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:48.186914753Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:49.199308157Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:50.217331583Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:51.224844353Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:52.232748825Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:53.236320925Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:54.246359314Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:55.260711212Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:56.26385865Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:57.270814184Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:58.274276451Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:49:59.277570181Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:00.290200789Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:01.298386353Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:02.31293759Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:03.316355475Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:04.338780822Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:05.34529196Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:06.350839846Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:07.361410736Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:08.369165226Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:09.375775017Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:10.384704908Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:11.390376169Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:12.396368298Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:13.401634459Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:14.406476138Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:15.410239019Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:16.428992646Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:17.443128625Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:18.447825733Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:19.451076307Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:20.487325658Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:21.494079604Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:22.498888057Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:23.507216506Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:24.514669915Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:25.520754152Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:26.524240404Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:27.528229739Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:28.539132997Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:29.541784575Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:30.548057024Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:31.551868388Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:32.554823389Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}
+worker-b-1  | {"time":"2026-10-22T12:50:33.558284252Z","level":"INFO","msg":"HTTP 404: {\"error\":{\"code\":\"queue_not_found\",\"message\":\"sql: no rows in result set\"}}"}

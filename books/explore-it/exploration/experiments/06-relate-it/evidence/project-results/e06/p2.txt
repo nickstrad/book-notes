@@ -1,0 +1,37 @@
+15:32:15
+# DELETE missing schedule id 99999
+ [204]
+# GET / PATCH / run missing id for comparison
+{"error":{"code":"schedule_not_found","message":"sql: no rows in result set"}}
+ [404]
+{"error":{"code":"schedule_not_found","message":"sql: no rows in result set"}}
+ [404]
+{"error":{"code":"schedule_not_found","message":"sql: no rows in result set"}}
+ [404]
+# globex DELETE acme schedule 1 (seeded daily-report)
+ [204]
+id | namespace_id | name
+1 | 1 | daily-report
+# repeated DELETE of an already-deleted id 3 (deleted in P1)
+ [204]
+# create schedule with omitted
+{"cron":"* * * * *","enabled":true,"id":4,"kind":"echo","last_run_at":null,"name":"p","namespace_id":1,"next_run_at":"2026-10-22T15:33:00Z","payload":null,"queue_id":9,"timezone":"UTC","zone_offset":0
+ [201]
+# create schedule with "payload":[1,2]
+{"cron":"* * * * *","enabled":true,"id":5,"kind":"echo","last_run_at":null,"name":"p","namespace_id":1,"next_run_at":"2026-10-22T15:33:00Z","payload":[1,2],"queue_id":9,"timezone":"UTC","zone_offset":
+ [201]
+# create schedule with "payload":"x"
+{"cron":"* * * * *","enabled":true,"id":6,"kind":"echo","last_run_at":null,"name":"p","namespace_id":1,"next_run_at":"2026-10-22T15:33:00Z","payload":"x","queue_id":9,"timezone":"UTC","zone_offset":0}
+ [201]
+# create schedule with "payload":null
+{"cron":"* * * * *","enabled":true,"id":7,"kind":"echo","last_run_at":null,"name":"p","namespace_id":1,"next_run_at":"2026-10-22T15:33:00Z","payload":null,"queue_id":9,"timezone":"UTC","zone_offset":0
+ [201]
+# create schedule with "payload":7
+{"cron":"* * * * *","enabled":true,"id":8,"kind":"echo","last_run_at":null,"name":"p","namespace_id":1,"next_run_at":"2026-10-22T15:33:00Z","payload":7,"queue_id":9,"timezone":"UTC","zone_offset":0}
+ [201]
+id | payload | enabled | next_run_at
+4 | null | t | 2026-10-22 15:33:00+00
+5 | [1, 2] | t | 2026-10-22 15:33:00+00
+6 | "x" | t | 2026-10-22 15:33:00+00
+7 | null | t | 2026-10-22 15:33:00+00
+8 | 7 | t | 2026-10-22 15:33:00+00

@@ -1,0 +1,1155 @@
+diff --git a/books/explore-it/lessons/06-relate-it.md b/books/explore-it/lessons/06-relate-it.md
+new file mode 100644
+index 0000000..ba299d1
+--- /dev/null
++++ b/books/explore-it/lessons/06-relate-it.md
+@@ -0,0 +1,222 @@
++# 06 — Relate it: owners, dependents and the data's journey
++
++An entity diagram suggests two useful questions: what happens when an owner disappears,
++and does a value survive every path that carries it? Here, queue deletion already refused
++while jobs or schedules existed. Following payloads beyond the API found different answers:
++the API preserved numbers, but queuelet's CLI and sample worker rounded them. Following a
++job through deletion found attempt rows that no API could reach afterwards.
++
++The sources are Hendrickson, *Explore It!* (2013), Chapter 7.1 “Recognizing Entities,
++Attributes, and Dependencies”, 7.2 “CRUD”, and 7.3 “Following the Data”. These are
++[approved-plan citations](../PLAN.md#22-chapter-map-kept-sections-only), checked against
++the chapter map, not a claim of full-text validation by this fixer.
++
++## What the blind experiment learned
++
++The [original record](../exploration/experiments/06-relate-it/revealed.md) belongs to
++exploration commit `b3b0559`. It is preserved byte-for-byte, including its reports, tools,
++models and score. The fresh Claude explorer used about 20 minutes of its 60-minute budget:
++roughly 3 reading, 10 probing and 7 writing. This fresh Codex Sol fix follows the coordinator's
++[assignment](../register/reconciliations/06.md); it is not another exploration run.
++
++| Original measure | Actual score |
++|---|---:|
++| Hypotheses stated | 20 |
++| Confirmed | 18 |
++| Refuted | 2 |
++| Code-reading predictions contradicted, as recorded | 2 |
++| Reports | 7 |
++| Observed model cells | 30 |
++
++The two contradictions need their original qualifications. H-E06-C predicted owner
++orphans from the original schema; reading migration 002 had already counter-predicted the
++queue guard before the probe confirmed it. H-E06-17 predicted a batch race error that did
++not occur in 320 tries. That sampling non-hit does not prove the window absent. The
++explorer explicitly reported no new contradiction of its own deterministic code predictions.
++
++| Classification | Actual outcome |
++|---|---|
++| Expected here, found early | D15 queue deletion orphans dependents, D16 schedule edits keep an old next fire, D17 webhook truncation: found and fixed in E01. D08 numeric loss at the API and D27 disabled firing were also repaired early. They are not rediscoveries here |
++| Found in E06 | Seven unplanned reports, reconciled to U27–U33 below; all fixed, none deferred |
++| Missed / disclosed planted defects | None remain to disclose |
++| Spec silence, resolved here | A4 dead-job retention, a coordinator policy decision. The explorer observed succeeded/cancelled retention, did not probe dead retention and filed no A4 report |
++
++The plan's teaching prediction changed. E06 did not newly expose D15–D17 or show different
++queue/schedule orphan behavior. The repaired queue guards and snapshot rules held. The
++useful distinction became **which dependencies should share a lifetime**, and **which
++client decoder lies between two otherwise exact storage boundaries**.
++
++## The seven faults, at `explore-it/lesson-05`
++
++Paths below are relative to `project/` in that tag, not line numbers in the repaired tree.
++
++| ID | Original report | Previous-tag source | Observable failure |
++|---|---|---|---|
++| U27 | [E06-F01](../exploration/defects/E06-F01-schedule-delete-missing-204.md) | `internal/api/schedules.go:136` | DELETE missing/repeated/foreign schedule says 204 even when no row changed |
++| U28 | [E06-F02](../exploration/defects/E06-F02-schedule-payload-not-validated.md) | `internal/api/schedules.go:55`, `internal/schedule/fire.go:76`; compare `internal/api/enqueue.go:64` | template accepts null/non-objects, cron copies them into jobs, manual run rejects them; omitted payload becomes null |
++| U29 | [E06-F03](../exploration/defects/E06-F03-sample-worker-echo-loses-precision.md) | `internal/client/client.go:57`, `internal/worker/worker.go:79` | worker decodes numbers as float64; echo result and webhook contain the rounded value |
++| U30 | [E06-F04](../exploration/defects/E06-F04-qctl-rounds-payload-numbers.md) | `cmd/qctl/main.go:52`, `cmd/qctl/main.go:277` | enqueue input is rounded before storage; job get rounds exact stored payload and result for display |
++| U31 | [E06-F05](../exploration/defects/E06-F05-nul-in-result-or-error-409-conflict.md) | `internal/api/jobs.go:65`, `internal/api/jobs.go:88` | NUL in result/error causes PostgreSQL rejection reported as 409 state_conflict with driver text, while lease remains valid |
++| U32 | [E06-F06](../exploration/defects/E06-F06-enqueue-racing-queue-delete-400-fk-text.md) | `internal/api/enqueue.go:88`, `internal/api/schedules.go:57` | owner disappears between lookup and insert: 400 invalid_job or 500 database_error with constraint text instead of 404 |
++| U33 | [E06-F07](../exploration/defects/E06-F07-attempts-outlive-their-job.md) | `migrations/001.sql:7`, `internal/api/jobs.go:32`, `internal/api/queues.go:170`, `internal/jobs/expire.go:91` | explicit DELETE, purge and retention remove jobs but leave attempts, including error text |
++
++A4 lived in `internal/jobs/expire.go:91`: the sweep included dead alongside succeeded and
++cancelled. That was consistent with the then-silent policy, not an eighth blind defect.
++
++## CRUD before and after
++
++“Before” is the explorer's observed lesson-05 grid in
++[entities.md](../exploration/models/entities.md#crud-grid-entity--operation-observed-in-e06-unless-marked).
++“After” describes this repair's direct checks and the unchanged observations explicitly
++labelled below. Worker read/update cells without an API remain unobserved. The pre-E06 model was
++also narrower: its original entity rows still said queue→job/schedule had no FK,
++and attempt deletion had no observed outcome. E06 adds the repaired FK/guard table,
++observes each job-removal path and separates the outbox/event lifetime. The model
++file retains those dated revisions rather than overwriting what was believed earlier.
++
++| Entity | Create before → after | Read before → after | Update before → after | Delete before → after |
++|---|---|---|---|---|
++| Queue | race loser leaks FK → 404 queue_not_found | namespace ownership holds → unchanged | max-attempt and notification snapshots hold → unchanged | dependent guard holds → race controls still refuse 409, empty delete 204 |
++| Job | qctl rounds → exact payload; race 400 → 404 | qctl rounds payload/result → exact display | NUL ack/nack 409 → service-owned 400, valid lease untouched and clean retry succeeds | terminal delete removes job only → job and attempts leave; events and pending notifications remain |
++| Schedule | non-object/null accepted, omission null → non-object/null rejected, omission {}; race 500 → 404 | missing GET 404 → still 404 | cron/zone/enabled rules already repaired → unchanged; PATCH still refuses payload | missing/foreign/repeated 204 → 404, real delete 204 |
++| Worker | registers → isolated worker still registers and processes | no new read observation | no new update observation | release counted; process may keep polling deleted id → unchanged, recovery question deferred |
++| Attempt | completion records it → one real row before each deletion test | orphan visible only in storage → live job's attempt remains reachable | no update API | never removed → removed on job DELETE, purge and retention |
++| Outbox | terminal snapshot → exact worker result snapshot | signed partner bytes preserve API values → worker values now exact too | delivery retries → pending snapshots still deliver after job deletion | independent lifetime → unchanged; delivered-row cleanup remains open |
++| Job event | transitions recorded → unchanged | survives job removal → checked through API and real storage | no mutation API | independent lifetime → unchanged |
++
++Automatic job deletion adds a policy distinction: dead persists; succeeded/cancelled age
++out. It is tested with a frozen API clock below cutoff and beyond two sweep opportunities,
++with API status and SELECT counts agreeing. Retained dead work can still be retried.
++
++## Follow payload, result and error
++
++| Datum / hop | Before | After / evidence |
++|---|---|---|
++| Payload: HTTP enqueue → jsonb → API/lease | exact values; jsonb normalizes form | exact API control still holds; normalization of key order, whitespace and `1e2` is not value loss |
++| Payload: qctl --payload → API → jsonb | float64 rounding | direct write/read check preserves `9007199254740993`, a long fractional decimal and a nested 64-bit integer |
++| Payload: schedule create → stored template → manual/cron job | incompatible validation; cron admitted poison payloads | same object/default contract; both paths produce equivalent valid values; PATCH gains no field |
++| Payload → worker decode → echo result | numbers rounded inside client | target container's worker produces exact result; sleep and fail numeric consumers still work |
++| Result: ack → jsonb → outbox → partner | API exact; worker already rounded it upstream | exact worker result reaches partner with valid signature; API and webhook values agree |
++| Result: qctl --result/--json and job get | shared float decoder | ack, batch and schedule JSON sibling paths checked directly; exact API-written payload/result displayed exactly |
++| Error/result: NUL → storage | PG rejects it; service calls it state_conflict | reject before mutation, including nested strings and object keys; literal backslash-u text stays valid |
++| Error: nack → attempt/history → job removal | attempt error text outlives inaccessible job | attempts share job lifetime; events and pending terminal snapshots keep independent lifetime |
++
++## The focused patch and decisions
++
++- `objectPayload` in `internal/api/enqueue.go` is the existing enqueue rule factored out for
++  schedule creation. Omission becomes `{}`; explicit null and other JSON types are rejected.
++  No payload PATCH field is added. Existing manual/cron execution consumes validated templates.
++- `deleteSchedule` checks RowsAffected and returns service-owned schedule_not_found for zero.
++- Client JSON decoding and qctl option/output decoding use `UseNumber`. The worker's existing
++  sleep/failure numeric consumers accept json.Number, retaining their omitted-value defaults.
++  The baseline lease check parses its returned ID as exact int64 and retains its priority and
++  concurrent-disjoint-lease assertions.
++- Ack recursively checks result strings and object keys for NUL; nack checks error text.
++  Both return 400 invalid_result/invalid_error before touching lease, attempts or result.
++- `missingQueue` recognizes only the assigned owner foreign-key violations, returning 404
++  queue_not_found without schema text. Enqueue, batch, manual schedule run and schedule create
++  use that mapping. No speculative lease-race repair is included.
++- `migrations/005.sql` adds `attempts_job_owner ON DELETE CASCADE` and a job-id index. It is
++  NOT VALID so existing legacy orphans remain inspectable; it enforces new writes and removes
++  attempts when their existing owner subsequently leaves. This fix does not bulk-delete old
++  orphan evidence or alter independent outbox/events lifetimes.
++- Retention selects succeeded/cancelled, exempting dead.
++
++The decided [SPEC lines](../project/SPEC.md) are: **dead jobs remain until an operator
++retries or explicitly deletes them; automatic retention applies only to succeeded/cancelled**
++(A4); **attempt records belong to their job and leave with it on deletion, purge and retention**
++(U33 / Q-E06-2 attempts half). Schedule payloads use the existing enqueue contract; NUL result/error
++is a 400 with a valid lease left usable. Delivered-outbox cleanup stays undecided.
++
++## Verify
++
++From `books/explore-it/project`, sequentially:
++
++```sh
++make up
++make verify LESSON=06
++make verify LESSON=06 REF=explore-it/lesson-05
++make checks
++make test
++```
++
++`lesson-06.ids` names U27–U33 and A4. Their wrappers use
++[`probe06.py`](../project/lab/repro/probe06.py); `TestL06U27` through `TestL06A4` execute
++these same public oracles. Historical qctl executes inside the historical API container;
++the sample-worker probe starts an isolated container from that target's image. Current
++client source is never used to decode historical input. Public repros perform no SQL writes.
++Unexpected setup, transport, parse, status, control or storage observations are PROBE ERROR.
++
++Measured 2026-10-22; exact commands, exits, elapsed times and output are in
++[`06-acceptance.json`](../register/runs/06-acceptance.json) and its linked logs.
++
++| Command | Exit | Elapsed | Exact result |
++|---|---:|---:|---|
++| `make up` (guarded migration) | 0 | 41.282 s | current stack ready |
++| `make verify LESSON=06` | 0 | 151.177 s | `FIXED AND CHECKED: 8 absent; regression checks pass` |
++| `make verify LESSON=06 REF=explore-it/lesson-05` | 0 | 57.671 s | `DEFECTS REPRODUCED: 8 present` |
++| `make checks` | 0 | 398.913 s | all 74 integration checks pass (66 earlier, 8 E06) |
++| `make test` | 0 | 1.239 s | unit suite passes |
++
++| Surface | lesson-05, measured | Repaired tree, measured |
++|---|---|---|
++| U27 schedule DELETE foreign/repeated/missing | 204/204/204 | 404/404/404; owner delete 204, foreign resource intact |
++| U28 template create | all five invalid shapes 201; omission null; manual run 400; cron fires 7 templates | invalid shapes 400; omission {}; manual run 201; cron fires 2 valid templates |
++| U29 worker echo + webhook | big integer …992, fraction 0.12345678901234568 | …993, fraction 0.12345678901234567890123456789; raw webhook equals stored result, valid signature |
++| U30 CLI input/display and ack/batch/schedule siblings | all six exact-value comparisons false | all six true; independent API controls exact |
++| U31 NUL string/nested/key result and error | all four 409 | all four 400; lease unchanged and clean retry succeeds |
++| U32 enqueue/schedule owner races | 2 actual 400 FK errors / 4 actual 500 FK errors; batch sibling also hit once | 800 enqueue + 800 schedule + 128 batch writes: only 201/404; accepted writes match stored rows, zero orphans |
++| U33 attempts after purge/delete/retention | 1/1/1 orphan rows | 0/0/0; live attempt, events and pending delivery controls hold |
++| A4 after cutoff | dead API 404, storage 0; succeeded/cancelled removed | dead API 200, storage 1; succeeded/cancelled API 404, storage 0; below-cutoff controls remain and retained dead retry works |
++
++**Dwell is paired only.** [`06-dwell.tsv`](../register/runs/06-dwell.tsv) derives from
++these two runs: all eight PRESENT at lesson-05, ABSENT at lesson-06. No full sweep
++or `make dwell` run was performed; this does not date their introduction. The
++batch race was observed in fixer regression evidence, not retroactively counted
++as an explorer finding or changed hypothesis score.
++
++**Instrument and record integrity.** The final pair uses the same frozen
++[`06-instruments.sha256`](../register/runs/06-instruments.sha256), rechecked after
++the pair. All 3,447 original explorer artifacts match their original manifest;
++only canonical U repair statuses and their index change in exploration/. The sink's
++parsed convenience field rounds numbers, so U29 decodes its preserved `raw_body`
++for wire evidence; hooksink itself is unchanged.
++
++**Retained failures and deviations.** The first rebuilt startup failed because the
++new constraint lacked a restart guard (`06-up-final.log`, diagnostics retained).
++The guard was added and reset/restarts now work. The first current verification
++stopped with PROBE ERROR on the sink's parsed convenience field (`06-current.log`,
++diagnostics retained), before any historical verdict. That measurement error was
++corrected to raw bytes; the failed instrument manifest is kept separately, and the
++complete final pair ran with the corrected immutable instrument. An initial successful
++build was repeated after fixing omitted-number defaults in worker consumers. No
++fault, control or verdict was weakened. The patch follows seven actual unplanned
++findings instead of the already-repaired D15–D17 sketch; A4 is policy disclosure.
++The first full suite then exposed a baseline check's float64 type assumption after the shared
++client change (`06-checks.log`, diagnostics retained). That test now parses an exact int64
++without changing the behavior asserted. The entire required sequence was rerun with a newly
++frozen manifest; public repro code did not change between the two successful pairs.
++Legacy preexisting attempt orphans remain inspectable, without bulk cleanup.
++
++
++## Try changing one variable
++
++- Replace the integer with `9007199254740992` and compare with `9007199254740993`: the
++  float64 boundary can hide the decoder defect for one value and expose it for its neighbor.
++- Put NUL in a nested result array or an object key; compare with literal `\\u0000` text.
++- Omit schedule payload, send `{}`, then send null. The first two mean an empty object;
++  the last is invalid. Compare manual run and cron firing.
++- Remove an attempted job by each of purge, explicit DELETE and retention. Check job,
++  attempt, event and pending notification independently rather than assuming all share a lifetime.
++- Change retention to two hours and advance the API clock to either side of that cutoff;
++  keep dead, succeeded and cancelled controls together.
++
++For further reading: Chapter 7.1–7.3, the
++[probe-entities-and-boundaries skill](../skills/probe-entities-and-boundaries/SKILL.md),
++the [original notes](../exploration/experiments/06-relate-it/notes.md) and
++[reconciliation](../register/reconciliations/06.md). Forward questions remain the sample
++worker's recovery after deregistration (Q-E06-1), missing job ids in decode logs (T-E06-1),
++delivered-outbox lifetime (Q-E06-2 remainder), deterministic race instrumentation (T-E06-2),
++the explorer's batch non-hit (H-E06-17; the fixer subsequently hit and repaired its shared
++error mapping), deleted-queue lease race (H-E06-20), worker NUL result and
++registration consequences (H-E06-21/22), and the previously handed-forward questions including A3.
+diff --git a/books/explore-it/project/SPEC.md b/books/explore-it/project/SPEC.md
+index a493369..aae5256 100644
+--- a/books/explore-it/project/SPEC.md
++++ b/books/explore-it/project/SPEC.md
+@@ -81,6 +81,8 @@ Valid state filters are `scheduled`, `queued`, `leased`, `retry_wait`,
+ Attempt `n` numbers every execution of the job and is never reused, across
+ operator retries too; the lease's `attempt` counts toward `max_attempts`.
+ `DELETE /v1/jobs/{id}` removes a terminal job.
++Attempt records belong to their job and are removed with it on deletion, purge and
++automatic retention; durable job events and pending webhook snapshots keep their independent lifetime.
+ Only a `leased` job has a lease token, holder and expiry; every exit from
+ `leased` clears all three; attempt rows keep the worker that ran them.
+ 
+@@ -106,6 +108,8 @@ Only the current lease holder may complete or extend a job. A lease ends at its
+ `lease_expires_at`: from that instant heartbeat, ack and nack are 409, whether or
+ not the background loop has released the job yet. There is no grace period.
+ Ack moves a leased job to `succeeded`.
++A result containing U+0000 (including object keys), or an error containing U+0000,
++is 400 `invalid_result` or `invalid_error`; the valid lease remains usable.
+ Nack with retry moves a job to `retry_wait`; when due it becomes `queued`.
+ A failed job reaches `dead` when its maximum attempts are exhausted, or when
+ nacked with retry false. No job may execute more than its maximum attempts.
+@@ -119,7 +123,8 @@ A cancelled job is never run.
+ `POST /v1/jobs/{id}/retry` permits an operator to retry a dead job, resets its
+ attempt count and makes it immediately available.
+ Succeeded and cancelled jobs cannot be retried.
+-Terminal jobs are deleted after `retention_hours`.
++Succeeded and cancelled jobs are deleted after `retention_hours`.
++Dead jobs remain until an operator retries or explicitly deletes them; automatic retention exempts them.
+ The API returns complete stored results and errors.
+ 
+ ## Schedules
+@@ -129,6 +134,8 @@ Cron uses five fields: minute, hour, day of month, month and day of week.
+ Time zones use IANA identifiers, defaulting to UTC.
+ Schedule times follow the named zone's local civil time, including offset changes.
+ The enabled flag defaults to true; disabled schedules do not enqueue jobs.
++Schedule creation follows enqueue's payload rule: omitted means `{}`, explicit null
++and non-object values are invalid. PATCH does not accept payload.
+ `GET /v1/schedules` lists schedules; `GET /v1/schedules/{id}` reads one.
+ `PATCH /v1/schedules/{id}` updates cron, timezone or enabled status; the next fire
+ must reflect the current configuration.
+diff --git a/books/explore-it/project/cmd/qctl/main.go b/books/explore-it/project/cmd/qctl/main.go
+index b6994dd..46730c5 100644
+--- a/books/explore-it/project/cmd/qctl/main.go
++++ b/books/explore-it/project/cmd/qctl/main.go
+@@ -1,6 +1,7 @@
+ package main
+ 
+ import (
++	"bytes"
+ 	"context"
+ 	"encoding/json"
+ 	"fmt"
+@@ -52,7 +53,9 @@ func run(args []string) error {
+ 	jsonOpt := func(key string) any {
+ 		var v any
+ 		if raw := opts[key]; raw != "" {
+-			json.Unmarshal([]byte(raw), &v)
++			decoder := json.NewDecoder(strings.NewReader(raw))
++			decoder.UseNumber()
++			decoder.Decode(&v)
+ 		}
+ 		return v
+ 	}
+@@ -275,7 +278,9 @@ func run(args []string) error {
+ 	}
+ 	if len(b) > 0 {
+ 		var v any
+-		if json.Unmarshal(b, &v) == nil {
++		decoder := json.NewDecoder(bytes.NewReader(b))
++		decoder.UseNumber()
++		if decoder.Decode(&v) == nil {
+ 			out, _ := json.MarshalIndent(v, "", "  ")
+ 			fmt.Println(string(out))
+ 		} else {
+diff --git a/books/explore-it/project/internal/api/enqueue.go b/books/explore-it/project/internal/api/enqueue.go
+index f9bdd29..51e9350 100644
+--- a/books/explore-it/project/internal/api/enqueue.go
++++ b/books/explore-it/project/internal/api/enqueue.go
+@@ -4,7 +4,9 @@ import (
+ 	"bytes"
+ 	"database/sql"
+ 	"encoding/json"
++	"errors"
+ 	"fmt"
++	"github.com/lib/pq"
+ 	"net/http"
+ 	"queuelet/internal/jobs"
+ 	"strconv"
+@@ -61,17 +63,13 @@ func insertJob(db jobWriter, q map[string]any, in JobInput, now time.Time) (map[
+ 	if at.After(now) {
+ 		state = "scheduled"
+ 	}
+-	if in.Payload == nil {
+-		in.Payload = json.RawMessage(`{}`)
+-	}
+-	in.Payload = bytes.TrimSpace(in.Payload)
+-	if len(in.Payload) == 0 || in.Payload[0] != '{' || !json.Valid(in.Payload) {
+-		return nil, fmt.Errorf("payload must be a JSON object")
++	b, e := objectPayload(in.Payload)
++	if e != nil {
++		return nil, e
+ 	}
+-	b := in.Payload
+ 	var id int64
+ 	var status string
+-	e := db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
++	e = db.QueryRow(`INSERT INTO jobs(queue_id,namespace_id,kind,payload,priority,state,run_at,max_attempts,idempotency_key,created_at,event_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) ON CONFLICT(queue_id,idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING RETURNING id,state`, q["id"], q["namespace_id"], in.Kind, string(b), priority, state, at, max, in.IdempotencyKey, now).Scan(&id, &status)
+ 	if e == sql.ErrNoRows && in.IdempotencyKey != nil {
+ 		e = db.QueryRow(`SELECT id,state FROM jobs WHERE queue_id=$1 AND idempotency_key=$2`, q["id"], *in.IdempotencyKey).Scan(&id, &status)
+ 	}
+@@ -84,7 +82,7 @@ func (s *Server) enqueue(w http.ResponseWriter, r *http.Request, q map[string]an
+ 	}
+ 	v, e := s.insertJob(q, in, s.Clock.Now())
+ 	if e != nil {
+-		fail(w, 400, "invalid_job", e)
++		jobInsertError(w, e)
+ 		return
+ 	}
+ 	write(w, 201, v)
+@@ -111,7 +109,7 @@ func (s *Server) batch(w http.ResponseWriter, r *http.Request, q map[string]any)
+ 	for _, j := range in.Jobs {
+ 		v, e := insertJob(tx, q, j, now)
+ 		if e != nil {
+-			fail(w, 400, "invalid_job", e)
++			jobInsertError(w, e)
+ 			return
+ 		}
+ 		ids = append(ids, v["id"])
+@@ -146,3 +144,30 @@ func (s *Server) listJobs(w http.ResponseWriter, r *http.Request) {
+ 	}
+ 	output(w, map[string]any{"jobs": v, "next_cursor": next}, e)
+ }
++
++// objectPayload is the shared enqueue/schedule-template contract.
++func objectPayload(raw json.RawMessage) (json.RawMessage, error) {
++	if raw == nil {
++		raw = json.RawMessage(`{}`)
++	}
++	raw = bytes.TrimSpace(raw)
++	if len(raw) == 0 || raw[0] != '{' || !json.Valid(raw) {
++		return nil, fmt.Errorf("payload must be a JSON object")
++	}
++	return raw, nil
++}
++
++// A queue can disappear after lookup but before the insert's owner check.
++func missingQueue(w http.ResponseWriter, e error) bool {
++	var pe *pq.Error
++	if errors.As(e, &pe) && pe.Code == "23503" && (pe.Constraint == "jobs_queue_owner" || pe.Constraint == "schedules_queue_owner") {
++		fail(w, 404, "queue_not_found", "queue not found")
++		return true
++	}
++	return false
++}
++func jobInsertError(w http.ResponseWriter, e error) {
++	if !missingQueue(w, e) {
++		fail(w, 400, "invalid_job", e)
++	}
++}
+diff --git a/books/explore-it/project/internal/api/jobs.go b/books/explore-it/project/internal/api/jobs.go
+index 0e80e37..08b4d33 100644
+--- a/books/explore-it/project/internal/api/jobs.go
++++ b/books/explore-it/project/internal/api/jobs.go
+@@ -5,6 +5,7 @@ import (
+ 	"github.com/lib/pq"
+ 	"net/http"
+ 	"queuelet/internal/jobs"
++	"strings"
+ )
+ 
+ func (s *Server) getJob(w http.ResponseWriter, r *http.Request) {
+@@ -62,8 +63,16 @@ func (s *Server) jobVerb(w http.ResponseWriter, r *http.Request) {
+ 		}
+ 		switch r.PathValue("verb") {
+ 		case "ack":
++			if containsNUL(in.Result) {
++				fail(w, 400, "invalid_result", "result cannot contain U+0000")
++				return
++			}
+ 			e = s.Jobs.Ack(id, in.LeaseToken, in.Result, now)
+ 		case "nack":
++			if strings.ContainsRune(in.Error, 0) {
++				fail(w, 400, "invalid_error", "error cannot contain U+0000")
++				return
++			}
+ 			if in.DelaySeconds != nil && (*in.DelaySeconds < 0 || *in.DelaySeconds > jobs.MaxSeconds) {
+ 				fail(w, 400, "invalid_delay", "delay_seconds must be 0–2147483647")
+ 				return
+@@ -171,3 +180,24 @@ func (s *Server) ownJob(w http.ResponseWriter, r *http.Request) bool {
+ 	}
+ 	return true
+ }
++
++// JSON strings and object keys can contain NUL; PostgreSQL jsonb cannot.
++func containsNUL(v any) bool {
++	switch x := v.(type) {
++	case string:
++		return strings.ContainsRune(x, 0)
++	case []any:
++		for _, value := range x {
++			if containsNUL(value) {
++				return true
++			}
++		}
++	case map[string]any:
++		for key, value := range x {
++			if strings.ContainsRune(key, 0) || containsNUL(value) {
++				return true
++			}
++		}
++	}
++	return false
++}
+diff --git a/books/explore-it/project/internal/api/schedules.go b/books/explore-it/project/internal/api/schedules.go
+index 4b37352..800406a 100644
+--- a/books/explore-it/project/internal/api/schedules.go
++++ b/books/explore-it/project/internal/api/schedules.go
+@@ -28,6 +28,12 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
+ 		fail(w, 400, "invalid_schedule", "name and kind required")
+ 		return
+ 	}
++	payload, e := objectPayload(in.Payload)
++	if e != nil {
++		fail(w, 400, "invalid_schedule", e)
++		return
++	}
++	in.Payload = payload
+ 	now := s.Clock.Now()
+ 	off, e := schedule.Offset(in.Timezone, now)
+ 	if e != nil {
+@@ -54,7 +60,9 @@ func (s *Server) createSchedule(w http.ResponseWriter, r *http.Request) {
+ 	}
+ 	v, e := s.S.One(`INSERT INTO schedules(namespace_id,queue_id,name,kind,payload,cron,timezone,zone_offset,enabled,next_run_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`, ident(r).Namespace, q["id"], in.Name, in.Kind, schedule.JSON(in.Payload), in.Cron, in.Timezone, off, enabled, nextValue)
+ 	if e != nil {
+-		fail(w, 500, "database_error", e)
++		if !missingQueue(w, e) {
++			fail(w, 500, "database_error", e)
++		}
+ 		return
+ 	}
+ 	write(w, 201, v)
+@@ -134,11 +142,20 @@ func (s *Server) patchSchedule(w http.ResponseWriter, r *http.Request) {
+ 	write(w, 200, v)
+ }
+ func (s *Server) deleteSchedule(w http.ResponseWriter, r *http.Request) {
+-	_, e := s.S.DB.Exec(`DELETE FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
++	res, e := s.S.DB.Exec(`DELETE FROM schedules WHERE id=$1 AND namespace_id=$2`, num(r, "id"), ident(r).Namespace)
++	if e != nil {
++		fail(w, 500, "database_error", e)
++		return
++	}
++	n, e := res.RowsAffected()
+ 	if e != nil {
+ 		fail(w, 500, "database_error", e)
+ 		return
+ 	}
++	if n == 0 {
++		fail(w, 404, "schedule_not_found", "schedule not found")
++		return
++	}
+ 	write(w, 204, nil)
+ }
+ func (s *Server) runSchedule(w http.ResponseWriter, r *http.Request) {
+@@ -158,7 +175,7 @@ func (s *Server) runSchedule(w http.ResponseWriter, r *http.Request) {
+ 	in.Kind = v["kind"].(string)
+ 	job, e := s.insertJob(q, in, s.Clock.Now())
+ 	if e != nil {
+-		fail(w, 400, "invalid_job", e)
++		jobInsertError(w, e)
+ 		return
+ 	}
+ 	write(w, 201, job)
+diff --git a/books/explore-it/project/internal/client/client.go b/books/explore-it/project/internal/client/client.go
+index 5331774..941d74d 100644
+--- a/books/explore-it/project/internal/client/client.go
++++ b/books/explore-it/project/internal/client/client.go
+@@ -54,5 +54,7 @@ func (c *Client) JSON(method, path string, data, out any) error {
+ 	if status >= 400 {
+ 		return fmt.Errorf("HTTP %d: %s", status, b)
+ 	}
+-	return json.Unmarshal(b, out)
++	decoder := json.NewDecoder(bytes.NewReader(b))
++	decoder.UseNumber()
++	return decoder.Decode(out)
+ }
+diff --git a/books/explore-it/project/internal/jobs/expire.go b/books/explore-it/project/internal/jobs/expire.go
+index dba93ec..3c66296 100644
+--- a/books/explore-it/project/internal/jobs/expire.go
++++ b/books/explore-it/project/internal/jobs/expire.go
+@@ -88,6 +88,6 @@ func (j *Service) Promote(now time.Time) error {
+ 	return e
+ }
+ func (j *Service) Retain(now time.Time) error {
+-	_, e := j.S.DB.Exec(`WITH removed AS (DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled','dead') AND extract(epoch FROM $1::timestamptz - j.finished_at) / 3600 > q.retention_hours RETURNING j.*) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$1,'retained',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, now)
++	_, e := j.S.DB.Exec(`WITH removed AS (DELETE FROM jobs j USING queues q WHERE j.queue_id=q.id AND j.state IN ('succeeded','cancelled') AND extract(epoch FROM $1::timestamptz - j.finished_at) / 3600 > q.retention_hours RETURNING j.*) INSERT INTO job_events(job_id,namespace_id,at,event,queue,worker,attempt) SELECT r.id,r.namespace_id,$1,'retained',q.name,r.leased_by,r.attempts FROM removed r JOIN queues q ON q.id=r.queue_id`, now)
+ 	return e
+ }
+diff --git a/books/explore-it/project/internal/worker/worker.go b/books/explore-it/project/internal/worker/worker.go
+index 65a5171..3e170ae 100644
+--- a/books/explore-it/project/internal/worker/worker.go
++++ b/books/explore-it/project/internal/worker/worker.go
+@@ -79,13 +79,15 @@ func perform(j Job) (any, error) {
+ 	case j.Kind == "echo":
+ 		return j.Payload, nil
+ 	case j.Kind == "sleep":
+-		seconds, _ := j.Payload["seconds"].(float64)
++		number, _ := j.Payload["seconds"].(json.Number)
++		seconds, _ := number.Float64()
+ 		time.Sleep(time.Duration(seconds * float64(time.Second)))
+ 		return j.Payload, nil
+ 	case j.Kind == "crash":
+ 		os.Exit(3)
+ 	case strings.HasPrefix(j.Kind, "fail"):
+-		n, _ := j.Payload["n"].(float64)
++		number, _ := j.Payload["n"].(json.Number)
++		n, _ := number.Float64()
+ 		if n == 0 {
+ 			v, _ := strconv.Atoi(strings.TrimPrefix(j.Kind, "fail"))
+ 			n = float64(v)
+diff --git a/books/explore-it/project/lab/repro/A4.sh b/books/explore-it/project/lab/repro/A4.sh
+new file mode 100644
+index 0000000..11c716d
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/A4.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py A4
+diff --git a/books/explore-it/project/lab/repro/README.md b/books/explore-it/project/lab/repro/README.md
+index 9a2bf4c..b9a9608 100644
+--- a/books/explore-it/project/lab/repro/README.md
++++ b/books/explore-it/project/lab/repro/README.md
+@@ -80,3 +80,20 @@ charter as a seeded random walk of 100 verbs (W1–W7, see its docstring) on a
+ frozen clock; `TestL05Walk` runs it. Holder verbs are favoured while a lease is
+ held, because a uniform walk rarely acks. It is a check, not a reproduction, so
+ it is not in `lesson-05.ids`.
++
++E06 adds `probe06.py`, U27–U33/A4 wrappers and `lesson-06.ids`; eight named
++`TestL06*` checks run these same oracles. U29 executes a separate worker from the
++target image on its unique queue and checks exact echo result and signed webhook,
++plus sleep/fail numeric consumers. U30 executes the target API container's qctl:
++input and display have independent API controls; ack/batch/schedule JSON siblings
++are also checked. Numbers are observed with Decimal, not float parsing. U28
++compares manual and cron jobs on an API clock and verifies PATCH rejects payload.
++U31 requires unchanged valid leases after NUL rejection and exact clean retries.
++U32 bounds public enqueue/schedule/batch races, checks accepted-row cardinality,
++known statuses/codes, controls and zero orphans; historical PRESENT needs actual
++errors on both reported paths, not merely a sampling inference. U33 creates real
++attempts then removes their jobs three ways; SELECT-only observations distinguish
++storage cleanup from API 404 and prove independent snapshots still deliver. A4
++uses a frozen API clock below/above retention, checking dead plus succeeded and
++cancelled controls in API and storage; it resets time in finally. Setup, tool,
++parse, unexpected outcome or missing control always produces PROBE ERROR.
+diff --git a/books/explore-it/project/lab/repro/U27.sh b/books/explore-it/project/lab/repro/U27.sh
+new file mode 100644
+index 0000000..50f3794
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U27.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U27
+diff --git a/books/explore-it/project/lab/repro/U28.sh b/books/explore-it/project/lab/repro/U28.sh
+new file mode 100644
+index 0000000..17e2287
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U28.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U28
+diff --git a/books/explore-it/project/lab/repro/U29.sh b/books/explore-it/project/lab/repro/U29.sh
+new file mode 100644
+index 0000000..9acaf25
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U29.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U29
+diff --git a/books/explore-it/project/lab/repro/U30.sh b/books/explore-it/project/lab/repro/U30.sh
+new file mode 100644
+index 0000000..ff5ac4c
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U30.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U30
+diff --git a/books/explore-it/project/lab/repro/U31.sh b/books/explore-it/project/lab/repro/U31.sh
+new file mode 100644
+index 0000000..77c7319
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U31.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U31
+diff --git a/books/explore-it/project/lab/repro/U32.sh b/books/explore-it/project/lab/repro/U32.sh
+new file mode 100644
+index 0000000..b1a083b
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U32.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U32
+diff --git a/books/explore-it/project/lab/repro/U33.sh b/books/explore-it/project/lab/repro/U33.sh
+new file mode 100644
+index 0000000..551ba72
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/U33.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")"
++exec python3 probe06.py U33
+diff --git a/books/explore-it/project/lab/repro/lesson-06.ids b/books/explore-it/project/lab/repro/lesson-06.ids
+new file mode 100644
+index 0000000..926cc1f
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/lesson-06.ids
+@@ -0,0 +1,8 @@
++U27
++U28
++U29
++U30
++U31
++U32
++U33
++A4
+diff --git a/books/explore-it/project/lab/repro/probe06.py b/books/explore-it/project/lab/repro/probe06.py
+new file mode 100644
+index 0000000..23939ad
+--- /dev/null
++++ b/books/explore-it/project/lab/repro/probe06.py
+@@ -0,0 +1,413 @@
++#!/usr/bin/env python3
++"""E06 assigned findings. Identical public instruments for current/REF binaries.
++Only API mutations, partner controls, the API clock, container lifecycle and
++read-only storage observations. All unexpected outcomes are PROBE ERROR.
++"""
++import collections
++import concurrent.futures as futures
++import decimal
++import json
++import pathlib
++import subprocess
++import sys
++import tempfile
++import threading
++import time
++import urllib.error
++import urllib.request
++import uuid
++
++import probe as p
++from probe04 import clock, lease_job
++
++ID = p.ID
++NUMBER_BYTES = '{"big":9007199254740993,"fraction":0.12345678901234567890123456789,"nested":[9223372036854775807],"small":42}'
++NUMBERS = json.loads(NUMBER_BYTES, parse_float=decimal.Decimal)
++
++
++def exact(method, path, raw=None, base=p.BASE):
++    req = urllib.request.Request(base + path, None if raw is None else raw.encode(),
++        {'Authorization': 'Bearer acme-key', 'Content-Type': 'application/json'}, method=method)
++    with urllib.request.urlopen(req, timeout=15) as response:
++        p.require(response.status in (200, 201), (path, response.status))
++        return json.loads(response.read(), parse_float=decimal.Decimal)
++
++
++def view(j):
++    return exact('GET', f'/v1/jobs/{j}')
++
++
++def exact_records(j):
++    return [r for r in exact('GET', '/admin/records', base=p.HOOK)['records']
++            if isinstance(r['body'], dict) and r['body'].get('job_id') == j]
++
++
++def qctl(*args):
++    # Exec the target container's built binary; never go run from current sources.
++    command = p.COMPOSE + ['exec', '-T', '-e', 'QUEUELET_URL=http://localhost:8200',
++        '-e', 'QUEUELET_KEY=acme-key', 'api', 'qctl'] + list(args)
++    result = subprocess.run(command, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=20)
++    p.require(result.returncode == 0, ('qctl', args, result.returncode, result.stdout, result.stderr))
++    return json.loads(result.stdout, parse_float=decimal.Decimal)
++
++
++def status(j):
++    code, value = p.checked('GET', f'/v1/jobs/{j}', statuses=(200, 404))
++    if code == 404:
++        p.require(value['error']['code'] == 'job_not_found', value)
++    return code
++
++
++def rows(j, table):
++    p.require(table in ('jobs', 'attempts', 'job_events', 'webhook_outbox'), table)
++    column = 'id' if table == 'jobs' else 'job_id'
++    return int(p.sql(f'SELECT count(*) FROM {table} WHERE {column}={int(j)}'))
++
++
++def delete_schedule():
++    p.queue()
++    s = p.schedule(enabled=False)
++    path = f'/v1/schedules/{s["id"]}'
++    foreign, fv = p.checked('DELETE', path, key='globex-key', statuses=(204, 404))
++    p.require(p.ok('GET', path)['id'] == s['id'], 'foreign delete changed schedule')
++    p.require(p.checked('DELETE', path)[0] == 204, 'own delete')
++    p.require(p.checked('GET', path, statuses=(404,))[1]['error']['code'] == 'schedule_not_found', 'deleted read')
++    repeated, rv = p.checked('DELETE', path, statuses=(204, 404))
++    missing, mv = p.checked('DELETE', '/v1/schedules/999999999', statuses=(204, 404))
++    for code, value in ((foreign, fv), (repeated, rv), (missing, mv)):
++        if code == 404:
++            p.require(value['error']['code'] == 'schedule_not_found', value)
++    p.require((foreign, repeated, missing) in ((204, 204, 204), (404, 404, 404)), 'mixed DELETE semantics')
++    return missing == 204, f'foreign/repeated/missing DELETE={foreign}/{repeated}/{missing}; owner delete=204, foreign untouched, deleted GET=404'
++
++
++def schedule_payload():
++    clock('set', at='2032-06-01T00:00:00Z')
++    schedules = []
++    try:
++        p.queue()
++        base = dict(name=p.NAME, queue=p.NAME, kind='manual', cron='* * * * *', timezone='UTC')
++        bad = []
++        for value in (None, [1, 2], 'x', 7, True):
++            code, v = p.checked('POST', '/v1/schedules', dict(base, payload=value), statuses=(201, 400))
++            bad.append(code)
++            if code == 201:
++                schedules.append(v['id'])
++                p.require(v['payload'] == value, ('invalid stored form', v))
++                p.require(p.checked('POST', f'/v1/schedules/{v["id"]}/run', {}, statuses=(400,))[1]['error']['code'] == 'invalid_job', 'invalid run')
++            else:
++                p.require(v['error']['code'] == 'invalid_schedule', v)
++        omitted = p.ok('POST', '/v1/schedules', dict(base, name=p.NAME + '-omitted'))
++        schedules.append(omitted['id'])
++        good = p.schedule(name=p.NAME + '-object', payload={'big': NUMBERS['big']})
++        schedules.append(good['id'])
++        manual = p.ok('POST', f'/v1/schedules/{good["id"]}/run', {})['id']
++        p.require(p.job(manual)['payload'] == {'big': NUMBERS['big']}, 'manual object mismatch')
++        oc, ov = p.checked('POST', f'/v1/schedules/{omitted["id"]}/run', {}, statuses=(201, 400))
++        if oc == 201:
++            p.require(p.job(ov['id'])['payload'] == {}, 'omitted manual payload')
++        else:
++            p.require(ov['error']['code'] == 'invalid_job', ov)
++        # PATCH retains its old field set and does not mutate payload.
++        p.checked('PATCH', f'/v1/schedules/{good["id"]}', {'payload': {}}, statuses=(400,))
++        p.require(p.ok('GET', f'/v1/schedules/{good["id"]}')['payload'] == {'big': NUMBERS['big']}, 'PATCH mutated payload')
++        before = {j['id'] for j in p.ok('GET', p.QPATH + '/jobs')['jobs']}
++        clock('advance', seconds=61)
++        expected = len(schedules)
++        def fired():
++            return [j for j in p.ok('GET', p.QPATH + '/jobs')['jobs'] if j['id'] not in before]
++        p.wait(lambda: len(fired()) == expected, 8)
++        payloads = [j['payload'] for j in fired()]
++        broken = all(c == 201 for c in bad)
++        if broken:
++            p.require(omitted['payload'] is None and oc == 400, ('historical omission', omitted, oc))
++            p.require(sum(not isinstance(v, dict) for v in payloads) == 6, payloads)
++        else:
++            p.require(all(c == 400 for c in bad) and omitted['payload'] == {} and oc == 201, (bad, omitted, oc))
++            p.require(len(payloads) == 2 and {} in payloads and {'big': NUMBERS['big']} in payloads, payloads)
++        stored = p.ok('GET', '/v1/schedules')['schedules']
++        p.require(sum(s['queue_id'] == good['queue_id'] for s in stored) == expected, 'rejected schedule persisted')
++        return broken, f'null/array/string/number/bool create={bad}; omitted payload={omitted["payload"]}, run={oc}; cron fired {expected} templates; object run/cron and PATCH controls hold'
++    finally:
++        for sid in schedules:
++            p.checked('DELETE', f'/v1/schedules/{sid}')
++        clock('reset')
++
++
++def worker_precision():
++    p.queue(lease_seconds=30, max_attempts=5, backoff={'kind': 'linear', 'base_seconds': 0},
++            webhook={'url': 'http://hooksink:8201/hook', 'secret': 'report-secret'})
++    j = exact('POST', p.QPATH + '/jobs', '{"kind":"echo","payload":' + NUMBER_BYTES + '}')['id']
++    p.require(view(j)['payload'] == NUMBERS, 'raw API write control failed')
++    name = 'queuelet-probe06-' + uuid.uuid4().hex[:10]
++    with tempfile.TemporaryFile(mode='w+') as log:
++        command = p.COMPOSE + ['run', '--rm', '-T', '--no-deps', '--name', name,
++            '-e', 'WORKER_QUEUE=' + p.NAME, '-e', 'WORKER_NAME=' + name, 'worker-a']
++        process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=log, stderr=log)
++        try:
++            p.wait(lambda: p.job(j)['state'] == 'succeeded', 12)
++            result = view(j)['result']
++            p.wait(lambda: exact_records(j), 8)
++            record = exact_records(j)[0]
++            # hooksink's convenience body uses float64; raw_body is the received wire evidence.
++            wire = json.loads(record['raw_body'], parse_float=decimal.Decimal)
++            p.require(wire['job_id'] == j, 'wrong raw webhook')
++            p.require(record['status'] == 200 and record['signature_valid'], record)
++            p.require(wire['result'] == result, 'raw webhook differs from stored result')
++            p.require(view(j)['payload'] == NUMBERS, 'worker changed payload')
++            # Decoder's numeric consumers must still work after UseNumber.
++            start = time.monotonic()
++            sleep = p.enqueue(kind='sleep', payload={'seconds': .3})
++            p.wait(lambda: p.job(sleep)['state'] == 'succeeded', 8)
++            p.require(time.monotonic() - start >= .29, 'sleep numeric consumer skipped delay')
++            fail = p.enqueue(kind='fail3', payload={'n': 1})
++            p.wait(lambda: p.job(fail)['state'] == 'succeeded', 10)
++            p.require(p.job(fail)['attempts'] == 2, 'fail numeric consumer ignored n=1')
++            p.require(result.get('small') == 42 and result.get('nested') is not None, result)
++            return result != NUMBERS, f'raw payload exact; worker echo big={result["big"]}, fraction={result["fraction"]}; stored result=valid signed webhook; sleep/fail numeric controls hold'
++        finally:
++            subprocess.run(['docker', 'stop', '-t', '2', name], capture_output=True, timeout=10)
++            try:
++                process.wait(timeout=10)
++            except subprocess.TimeoutExpired:
++                process.kill(); process.wait()
++            log.seek(0)
++            if sys.exc_info()[0]:
++                print('worker diagnostics:\n' + log.read(), file=sys.stderr)
++
++
++def cli_precision():
++    p.queue()
++    # Two reported surfaces, each directly checked; siblings exercise --result/--json.
++    j = qctl('enqueue', p.NAME, '--kind', 'manual', '--payload', NUMBER_BYTES)['id']
++    written = view(j)['payload']
++    direct = exact('POST', p.QPATH + '/jobs', '{"kind":"manual","payload":' + NUMBER_BYTES + '}')['id']
++    p.require(view(direct)['payload'] == NUMBERS, 'direct API precision control')
++    token = lease_job(j, p.worker())['lease_token']
++    qctl('job', 'ack', str(j), '--lease-token', token, '--result', NUMBER_BYTES)
++    result = view(j)['result']
++    # Give GET an exact payload AND result from the API, independent of CLI input.
++    token2 = lease_job(direct, p.worker())['lease_token']
++    p.require(p.ack(direct, token2, {'big': NUMBERS['big']})[0] == 200, 'direct ack control')
++    printed = qctl('job', 'get', str(direct))
++    batch = qctl('batch', p.NAME, '--json', '{"jobs":[{"kind":"manual","payload":' + NUMBER_BYTES + '}]}')['ids'][0]
++    sid = qctl('schedule', 'create', '--json', '{"name":"' + p.NAME + '","queue":"' + p.NAME + '","kind":"manual","payload":' + NUMBER_BYTES + ',"cron":"* * * * *","enabled":false}')['id']
++    scheduled = exact('GET', f'/v1/schedules/{sid}')['payload']
++    p.checked('DELETE', f'/v1/schedules/{sid}')
++    observations = {'enqueue-input': written == NUMBERS,
++        'job-get-payload': printed['payload'] == NUMBERS,
++        'job-get-result': printed['result'] == {'big': NUMBERS['big']},
++        'ack-result': result == NUMBERS, 'batch-json': view(batch)['payload'] == NUMBERS,
++        'schedule-json': scheduled == NUMBERS}
++    p.require(all(observations.values()) or not any(observations.values()), observations)
++    return not all(observations.values()), 'exact numeric value by path=' + str(observations) + '; direct API input/result controls exact'
++
++
++def invalid_values():
++    p.queue(lease_seconds=120)
++    outcomes = []
++    for verb, field, bad_values, clean in (
++        ('ack', 'result', ['a\0b', {'nested': ['a\0b']}, {'a\0b': 1}], {'literal': r'\u0000', 'text': 'clean'}),
++        ('nack', 'error', ['a\0b'], 'clean error')):
++        for bad in bad_values:
++            j = p.enqueue()
++            token = lease_job(j, p.worker())['lease_token']
++            before = p.job(j)
++            body = dict(lease_token=token, **{field: bad})
++            if verb == 'nack': body['retry'] = False
++            code, value = p.checked('POST', f'/v1/jobs/{j}/{verb}', body, statuses=(400, 409))
++            expected = 'invalid_result' if verb == 'ack' else 'invalid_error'
++            if code == 400:
++                p.require(value['error']['code'] == expected and 'U+0000' in value['error']['message'], value)
++                p.require('pq:' not in value['error']['message'], value)
++            else:
++                p.require(value['error']['code'] == 'state_conflict' and 'pq:' in value['error']['message'], value)
++            after = p.job(j)
++            for key in ('state', 'lease_token', 'leased_by', 'lease_expires_at', 'attempts'):
++                p.require(after[key] == before[key], ('invalid value mutated lease', key))
++            p.require(not p.ok('GET', f'/v1/jobs/{j}/attempts')['attempts'], 'invalid attempt inserted')
++            body[field] = clean
++            p.require(p.checked('POST', f'/v1/jobs/{j}/{verb}', body)[0] == 200, 'clean retry failed')
++            final = p.job(j)
++            p.require(final['state'] == ('succeeded' if verb == 'ack' else 'dead'), final)
++            p.require(final['result' if verb == 'ack' else 'last_error'] == clean, final)
++            p.require(len(p.ok('GET', f'/v1/jobs/{j}/attempts')['attempts']) == 1, 'clean attempt missing')
++            outcomes.append(code)
++    p.require(len(set(outcomes)) == 1, outcomes)
++    return outcomes[0] == 409, f'ack string/nested/key and nack NUL statuses={outcomes}; valid lease unchanged, clean retry stored exact value and one attempt each'
++
++
++def owner_races():
++    # Public concurrency only: no fixture SQL or synchronization hook.
++    counts = {kind: collections.Counter() for kind in ('enqueue', 'schedule', 'batch')}
++    bugs = {kind: 0 for kind in counts}
++    examples = {}
++    for kind in counts:
++        # Positive and missing-owner controls independent of race sampling.
++        qname = p.NAME + '-' + kind + '-control'
++        p.ok('POST', '/v1/queues', {'name': qname})
++        if kind == 'schedule':
++            path, body = '/v1/schedules', dict(name=qname, queue=qname, kind='manual', payload={}, cron='* * * * *', enabled=False)
++        else:
++            path = '/v1/queues/' + qname + ('/jobs' if kind == 'enqueue' else '/jobs:batch')
++            body = {'kind': 'manual', 'payload': {}} if kind == 'enqueue' else {'jobs': [{'kind': 'manual', 'payload': {}}]}
++        control = p.checked('POST', path, body, statuses=(201,))[1]
++        if kind == 'schedule':
++            p.require(p.ok('GET', f'/v1/schedules/{control["id"]}')['queue_id'] > 0, control)
++            p.checked('DELETE', f'/v1/schedules/{control["id"]}')
++        else:
++            jid = control['id'] if kind == 'enqueue' else control['ids'][0]
++            p.require(p.job(jid)['payload'] == {}, control)
++            p.ok('POST', f'/v1/jobs/{jid}/cancel', {}); p.checked('DELETE', f'/v1/jobs/{jid}')
++        p.checked('DELETE', '/v1/queues/' + qname)
++        code, value = p.checked('POST', path, body, statuses=(404,))
++        p.require(value['error']['code'] == 'queue_not_found', value)
++        rounds = 50 if kind != 'batch' else 8
++        with futures.ThreadPoolExecutor(max_workers=17) as pool:
++            for round_no in range(rounds):
++                name = p.NAME + '-' + kind + '-' + str(round_no)
++                p.ok('POST', '/v1/queues', {'name': name})
++                path = '/v1/schedules' if kind == 'schedule' else '/v1/queues/' + name + ('/jobs' if kind == 'enqueue' else '/jobs:batch')
++                body = dict(name=name, queue=name, kind='manual', payload={}, cron='* * * * *', enabled=False) if kind == 'schedule' else ({'kind': 'manual', 'payload': {}} if kind == 'enqueue' else {'jobs': [{'kind': 'manual', 'payload': {}}]})
++                gate = threading.Barrier(17)
++                def insert(i):
++                    gate.wait(timeout=10)
++                    time.sleep((i % 10) * .0007)
++                    return p.call('POST', path, body)
++                def remove():
++                    gate.wait(timeout=10)
++                    return p.checked('DELETE', '/v1/queues/' + name, statuses=(204, 409))
++                work = [pool.submit(insert, i) for i in range(16)]
++                deletion = pool.submit(remove)
++                results = [f.result(timeout=25) for f in work]
++                dc, dv = deletion.result(timeout=25)
++                if dc == 409: p.require(dv['error']['code'] == 'queue_not_empty', dv)
++                accepted = []
++                for code, value in results:
++                    counts[kind][code] += 1
++                    if code == 201:
++                        accepted.append(value)
++                    elif code == 404:
++                        p.require(value['error']['code'] == 'queue_not_found', value)
++                        p.require('constraint' not in value['error']['message'] and 'pq:' not in value['error']['message'], value)
++                    elif (kind in ('enqueue', 'batch') and code == 400 or kind == 'schedule' and code == 500):
++                        err = value['error']
++                        p.require(err['code'] == ('database_error' if kind == 'schedule' else 'invalid_job') and
++                            ('schedules_queue_owner' if kind == 'schedule' else 'jobs_queue_owner') in err['message'], value)
++                        bugs[kind] += 1; examples[kind] = value
++                    else:
++                        raise RuntimeError(('unexpected race outcome', kind, code, value))
++                p.require(not (dc == 204 and accepted), ('delete orphaned accepted write', dc, accepted))
++                if dc == 409:
++                    if kind == 'schedule':
++                        listing = [s for s in p.ok('GET', '/v1/schedules')['schedules'] if s['name'] == name]
++                        p.require({s['id'] for s in listing} == {s['id'] for s in accepted}, 'schedule race cardinality')
++                        for s in listing: p.checked('DELETE', f'/v1/schedules/{s["id"]}')
++                    else:
++                        listing = p.ok('GET', '/v1/queues/' + name + '/jobs')['jobs']
++                        expected = {v['id'] if kind == 'enqueue' else v['ids'][0] for v in accepted}
++                        p.require({j['id'] for j in listing} == expected, 'job race cardinality')
++                        for j in listing:
++                            p.ok('POST', f'/v1/jobs/{j["id"]}/cancel', {}); p.checked('DELETE', f'/v1/jobs/{j["id"]}')
++                    p.checked('DELETE', '/v1/queues/' + name)
++                # Historical evidence needs both actually reported races; current
++                # always exhausts the bounded sampling budget.
++                if kind != 'batch' and bugs[kind] >= 2:
++                    break
++        p.require(counts[kind][404] > 0, ('no concurrent missing-owner observations', counts))
++    orphaned = p.sql('SELECT (SELECT count(*) FROM jobs j WHERE NOT EXISTS(SELECT 1 FROM queues q WHERE q.id=j.queue_id)) + (SELECT count(*) FROM schedules s WHERE NOT EXISTS(SELECT 1 FROM queues q WHERE q.id=s.queue_id))')
++    p.require(orphaned == '0', ('owner orphans', orphaned))
++    p.require(bool(bugs['enqueue']) == bool(bugs['schedule']), ('only one reported race reproduced', counts, examples))
++    return bool(bugs['enqueue']), f'concurrent statuses={ {k:dict(v) for k,v in counts.items()} }; FK errors={bugs}; accepted writes equal stored rows, no orphans; positive/missing-owner controls hold; historical examples={examples}'
++
++
++def attempt_lifetime():
++    clock('set', at='2032-07-01T00:00:00Z')
++    try:
++        p.queue(retention_hours=1, lease_seconds=120,
++                webhook={'url': 'http://hooksink:8201/hook', 'secret': 'report-secret'})
++        p.ok('POST', '/admin/mode', {'mode': '500'}, base=p.HOOK)
++        left = {}
++        for mode in ('purge', 'delete', 'retention'):
++            j = p.enqueue()
++            token = lease_job(j, p.worker())['lease_token']
++            if mode == 'purge':
++                p.require(p.nack(j, token, delay_seconds=600)[0] == 200, 'retry fixture')
++            else:
++                p.require(p.ack(j, token, {'kept': mode})[0] == 200, 'ack fixture')
++            p.require(rows(j, 'attempts') == 1 and rows(j, 'jobs') == 1, 'real attempt fixture')
++            if mode == 'purge':
++                p.require(p.ok('POST', p.QPATH + '/purge', {})['deleted'] == 1, 'purge count')
++            elif mode == 'delete':
++                p.checked('DELETE', f'/v1/jobs/{j}')
++            else:
++                clock('advance', seconds=3601)
++                p.wait(lambda: status(j) == 404, 8)
++            p.require(status(j) == 404 and rows(j, 'jobs') == 0, ('job removal', mode))
++            p.require(rows(j, 'job_events') > 0 and p.ok('GET', f'/v1/jobs/{j}/events')['events'], 'durable events lost')
++            if mode != 'purge':
++                p.require(rows(j, 'webhook_outbox') == 1, 'pending snapshot deleted')
++                p.require(p.sql(f'SELECT delivered_at IS NULL FROM webhook_outbox WHERE job_id={j}') == 't', 'snapshot not pending')
++            left[mode] = rows(j, 'attempts')
++        p.require(set(left.values()) in ({0}, {1}), left)
++        # Unrelated live job retains its attempt until its own removal.
++        live = p.enqueue(); token = lease_job(live, p.worker())['lease_token']
++        p.require(p.nack(live, token, delay_seconds=600)[0] == 200, 'live control nack')
++        p.require(rows(live, 'attempts') == 1 and rows(live, 'jobs') == 1, 'live attempts removed')
++        p.ok('POST', '/admin/mode', {'mode': 'ok'}, base=p.HOOK)
++        # Prove independent snapshots actually deliver after their jobs disappear.
++        clock('advance', seconds=6)
++        p.wait(lambda: p.sql(f"SELECT count(*) FROM webhook_outbox WHERE body->>'result' LIKE '%kept%' AND delivered_at IS NULL") == '0', 10)
++        return bool(left['delete']), f'attempt rows after purge/delete/retention={left}; removed jobs absent in API+storage; live attempt retained; durable events and pending deliveries survive'
++    finally:
++        p.ok('POST', '/admin/mode', {'mode': 'ok'}, base=p.HOOK)
++        clock('reset')
++
++
++def retention_policy():
++    clock('set', at='2032-08-01T00:00:00Z')
++    try:
++        p.queue(retention_hours=1, lease_seconds=120)
++        w = p.worker()
++        ids = {}
++        for terminal in ('dead', 'succeeded', 'cancelled'):
++            j = p.enqueue(); ids[terminal] = j
++            if terminal == 'cancelled':
++                p.ok('POST', f'/v1/jobs/{j}/cancel', {})
++            else:
++                token = lease_job(j, w)['lease_token']
++                if terminal == 'dead': p.require(p.nack(j, token, retry=False)[0] == 200, 'dead fixture')
++                else: p.require(p.ack(j, token, {'ok': True})[0] == 200, 'success fixture')
++            p.require(p.job(j)['state'] == terminal and rows(j, 'jobs') == 1, ('terminal fixture', terminal))
++        # Below cutoff: all three remain, proving the policy/age fixture.
++        clock('advance', seconds=3599)
++        time.sleep(1.3)
++        p.require(all(status(j) == 200 and rows(j, 'jobs') == 1 for j in ids.values()), 'premature retention')
++        clock('advance', seconds=3)
++        p.wait(lambda: all(status(ids[t]) == 404 for t in ('succeeded', 'cancelled')), 8)
++        p.require(all(rows(ids[t], 'jobs') == 0 for t in ('succeeded', 'cancelled')), 'API/storage retention mismatch')
++        dead_status = status(ids['dead']); dead_rows = rows(ids['dead'], 'jobs')
++        p.require((dead_status, dead_rows) in ((200, 1), (404, 0)), 'dead API/storage mismatch')
++        if dead_status == 200:
++            p.require(p.job(ids['dead'])['state'] == 'dead', 'dead changed state')
++        # Another sweep/age boundary rules out a one-cycle observation.
++        clock('advance', seconds=3600); time.sleep(1.3)
++        p.require(status(ids['dead']) == dead_status and rows(ids['dead'], 'jobs') == dead_rows, 'dead retention unstable')
++        if dead_status == 200:
++            p.ok('POST', f'/v1/jobs/{ids["dead"]}/retry', {})
++            p.require(p.job(ids['dead'])['state'] == 'queued', 'retained dead not retryable')
++        return dead_status == 404, f'API clock ages 3599/3602/7202s: all remain below cutoff; succeeded/cancelled API=404 storage=0; dead API={dead_status} storage={dead_rows}; retained dead retry control holds when present'
++    finally:
++        clock('reset')
++
++
++RUN = {'U27': delete_schedule, 'U28': schedule_payload, 'U29': worker_precision,
++       'U30': cli_precision, 'U31': invalid_values, 'U32': owner_races,
++       'U33': attempt_lifetime, 'A4': retention_policy}
++if __name__ == '__main__':
++    try:
++        present, detail = RUN[ID]()
++        print(('PRESENT: ' if present else 'ABSENT: ') + ID + ' — ' + detail)
++    except Exception as error:
++        print('PROBE ERROR: ' + ID + ' — ' + repr(error), file=sys.stderr)
++        sys.exit(2)
+diff --git a/books/explore-it/project/migrations/005.sql b/books/explore-it/project/migrations/005.sql
+new file mode 100644
+index 0000000..46ade09
+--- /dev/null
++++ b/books/explore-it/project/migrations/005.sql
+@@ -0,0 +1,9 @@
++-- Attempts share the lifetime of their job. Legacy orphans remain inspectable;
++-- NOT VALID still enforces new writes and cascades all subsequent job deletions.
++DO $$ BEGIN
++ IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname='attempts_job_owner' AND conrelid='attempts'::regclass) THEN
++  ALTER TABLE attempts ADD CONSTRAINT attempts_job_owner
++   FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE NOT VALID;
++ END IF;
++END $$;
++CREATE INDEX IF NOT EXISTS attempts_job ON attempts(job_id);
+diff --git a/books/explore-it/project/test/checks/baseline_test.go b/books/explore-it/project/test/checks/baseline_test.go
+index 5df3c60..86ae420 100644
+--- a/books/explore-it/project/test/checks/baseline_test.go
++++ b/books/explore-it/project/test/checks/baseline_test.go
+@@ -98,13 +98,17 @@ func TestL00ConcurrentLeases(t *testing.T) {
+ 	if e := c.JSON("POST", "/v1/queues", map[string]any{"name": name}, &out); e != nil {
+ 		t.Fatal(e)
+ 	}
+-	var highID float64
++	var highID int64
+ 	for _, priority := range []int{1, 9, 3} {
+ 		if e := c.JSON("POST", "/v1/queues/"+name+"/jobs", map[string]any{"kind": "echo", "payload": map[string]any{}, "priority": priority}, &out); e != nil {
+ 			t.Fatal(e)
+ 		}
+ 		if priority == 9 {
+-			highID = out["id"].(float64)
++			var e error
++			highID, e = out["id"].(json.Number).Int64()
++			if e != nil {
++				t.Fatal(e)
++			}
+ 		}
+ 	}
+ 	workers := []any{}
+@@ -123,7 +127,7 @@ func TestL00ConcurrentLeases(t *testing.T) {
+ 	if e := c.JSON("POST", "/v1/queues/"+name+"/lease", map[string]any{"worker_id": workers[0], "max_jobs": 1}, &first); e != nil {
+ 		t.Fatal(e)
+ 	}
+-	if len(first.Jobs) != 1 || first.Jobs[0].ID != int64(highID) {
++	if len(first.Jobs) != 1 || first.Jobs[0].ID != highID {
+ 		t.Fatalf("highest priority was not leased first: %+v", first)
+ 	}
+ 	type answer struct {
+diff --git a/books/explore-it/project/test/checks/lesson06_test.go b/books/explore-it/project/test/checks/lesson06_test.go
+new file mode 100644
+index 0000000..b1d6608
+--- /dev/null
++++ b/books/explore-it/project/test/checks/lesson06_test.go
+@@ -0,0 +1,15 @@
++//go:build checks
++
++package checks
++
++// Shared public oracles also run unchanged against lesson-05 binaries.
++import "testing"
++
++func TestL06U27(t *testing.T) { l01Absent(t, "U27") }
++func TestL06U28(t *testing.T) { l01Absent(t, "U28") }
++func TestL06U29(t *testing.T) { l01Absent(t, "U29") }
++func TestL06U30(t *testing.T) { l01Absent(t, "U30") }
++func TestL06U31(t *testing.T) { l01Absent(t, "U31") }
++func TestL06U32(t *testing.T) { l01Absent(t, "U32") }
++func TestL06U33(t *testing.T) { l01Absent(t, "U33") }
++func TestL06A4(t *testing.T)  { l01Absent(t, "A4") }

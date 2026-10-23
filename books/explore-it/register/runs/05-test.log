@@ -1,0 +1,14 @@
+go test ./...
+?   	queuelet/cmd/api	[no test files]
+?   	queuelet/cmd/hooksink	[no test files]
+?   	queuelet/cmd/qctl	[no test files]
+?   	queuelet/cmd/worker	[no test files]
+?   	queuelet/internal/api	[no test files]
+?   	queuelet/internal/client	[no test files]
+ok  	queuelet/internal/clock	(cached)
+ok  	queuelet/internal/jobs	(cached)
+ok  	queuelet/internal/schedule	(cached)
+?   	queuelet/internal/stats	[no test files]
+?   	queuelet/internal/store	[no test files]
+?   	queuelet/internal/webhook	[no test files]
+?   	queuelet/internal/worker	[no test files]

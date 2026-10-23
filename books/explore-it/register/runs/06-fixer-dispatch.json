@@ -1,0 +1,17 @@
+{
+  "unit": "E06 fixer",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "source_record_commit": "b3b0559",
+  "brief": "register/reconciliations/06-fixer-brief.md",
+  "permission_profile": "danger-full-access, approval never; task scoped to authorized worktree/book",
+  "mode": "fresh headless subscription Codex exec; sequential authorized checkout per brief",
+  "start": "2026-10-22T15:50:33Z",
+  "end": "2026-10-22T16:22:44Z",
+  "exit_status": 0,
+  "fix_commit": "7a38788b362948d5c81fe1ee7dae14b59a010f48",
+  "tag": "explore-it/lesson-06",
+  "lifecycle": "complete",
+  "superseded_by": "755d21c",
+  "tag_at_completion": "explore-it/lesson-06 then pointed to 7a38788; final preacceptance amendment repointed it to 755d21c"
+}

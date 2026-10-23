@@ -1,0 +1,25 @@
+{
+  "experiment": 4,
+  "raw_reports": 5,
+  "new_catalogue_defects": 0,
+  "catalogue_expected": ["D09", "D10", "D11", "D25", "A1"],
+  "catalogue_expected_found_early_in": {"D09": 1, "D10": 1, "D11": 1, "D25": 1},
+  "silence_resolved_here": {"A1": "touched with prior knowledge from the exported lesson 03 note; resolved by decision"},
+  "new_unplanned_bugs": 5,
+  "raw_hypotheses": {
+    "stated": 16,
+    "confirmed": 15,
+    "refuted": 1,
+    "reading_contradictions": 1,
+    "model_cells": 18
+  },
+  "crosswalk": [
+    {"original": "E04-F01", "canonical": "U19", "classification": "bug"},
+    {"original": "E04-F02", "canonical": "U20", "classification": "bug plus spec line"},
+    {"original": "E04-F03", "canonical": "U21", "classification": "bug plus spec line"},
+    {"original": "E04-F04", "canonical": "U22", "classification": "bug plus spec line"},
+    {"original": "E04-F05", "canonical": "U23", "classification": "bug plus spec line"},
+    {"original": "Q-E04-1", "canonical": "A1", "classification": "spec silence, decided"}
+  ],
+  "silences_left_for_later": ["A2", "A3", "A4"]
+}

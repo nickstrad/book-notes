@@ -1,0 +1,8 @@
+=== RUN   TestL02ProductionClockDisabled
+--- PASS: TestL02ProductionClockDisabled (0.02s)
+=== RUN   TestL02LegacyMalformedOutboxIsolation
+    lesson02_direct_test.go:76: legacy failure attempts=1 error="parse \"http://bad host/x\": invalid character \" \" in host name" next=2026-10-22 03:56:42.525037 +0000 UTC
+--- FAIL: TestL02LegacyMalformedOutboxIsolation (0.22s)
+FAIL
+FAIL	queuelet/test/checks	0.252s
+FAIL

@@ -1,0 +1,17 @@
+{
+  "experiment": 5,
+  "builder": "claude-opus-5-5 (Opus seat per Nick 2026-10-22)",
+  "assigned": ["U24", "U25", "U26", "A2"],
+  "commands": [
+    {"cmd": "make up", "exit": 0, "elapsed_s": 40, "log": "05-up.log"},
+    {"cmd": "make verify LESSON=05 REF=explore-it/lesson-04", "exit": 0, "elapsed_s": 60, "result": "DEFECTS REPRODUCED: 4 present", "log": "05-historical.log"},
+    {"cmd": "make verify LESSON=05", "exit": 0, "elapsed_s": 115, "result": "FIXED AND CHECKED: 4 absent; regression checks pass", "log": "05-current.log"},
+    {"cmd": "go test -tags checks ./test/checks -count=1 -v", "exit": 0, "elapsed_s": 335, "result": "66 checks pass (61 earlier, 5 new incl. TestL05Walk)", "log": "05-checks.log"},
+    {"cmd": "make test", "exit": 0, "result": "unit suite passes", "log": "05-test.log"},
+    {"cmd": "python3 lab/repro/walk05.py W05 5..9 (current stack)", "result": "WALK HOLDS 100/100 for all five seeds", "log": "05-walk-current.log"},
+    {"cmd": "python3 lab/repro/walk05.py W05 5..9 (scratch stack built from explore-it/lesson-04)", "result": "all five seeds broken (W2 x4, W3 x1); masked variants show W3 and W4 reachable; W1 never fired", "log": "05-walk-lesson-04.log"},
+    {"cmd": "register/proof/A1.sh..A4.sh", "result": "A1, A2 ABSENT (resolved in lessons 04, 05); A3, A4 still PRESENT", "log": "05-unresolved-controls.log"}
+  ],
+  "instruments": "05-instruments.sha256 (frozen before the final current and REF runs; rechecked after)",
+  "dwell": "05-dwell.tsv (paired lesson-04 / lesson-05 only; no make dwell sweep)"
+}

@@ -1,0 +1,33 @@
+REF='' bash lab/verify.sh 00
+ Container queuelet-review-a-worker-a-1 Stopping 
+ Container queuelet-review-a-worker-b-1 Stopping 
+ Container queuelet-review-a-worker-a-1 Stopped 
+ Container queuelet-review-a-worker-b-1 Stopped 
+ Container queuelet-review-a-api-1 Stopping 
+ Container queuelet-review-a-api-1 Stopped 
+ Container queuelet-review-a-postgres-1 Waiting 
+ Container queuelet-review-a-postgres-1 Healthy 
+ Container queuelet-review-a-api-1 Starting 
+ Container queuelet-review-a-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-a-postgres-1 Waiting 
+ Container queuelet-review-a-postgres-1 Healthy 
+ Container queuelet-review-a-worker-a-1 Starting 
+ Container queuelet-review-a-worker-b-1 Starting 
+ Container queuelet-review-a-worker-a-1 Started 
+ Container queuelet-review-a-worker-b-1 Started 
+?   	queuelet/cmd/api	[no test files]
+?   	queuelet/cmd/hooksink	[no test files]
+?   	queuelet/cmd/qctl	[no test files]
+?   	queuelet/cmd/worker	[no test files]
+?   	queuelet/internal/api	[no test files]
+?   	queuelet/internal/client	[no test files]
+ok  	queuelet/internal/jobs	(cached)
+ok  	queuelet/internal/schedule	(cached)
+?   	queuelet/internal/stats	[no test files]
+?   	queuelet/internal/store	[no test files]
+?   	queuelet/internal/webhook	[no test files]
+?   	queuelet/internal/worker	[no test files]
+ok  	queuelet/test/checks	2.826s
+BASELINE HOLDS: enqueue→lease→ack→webhook; unit and happy-path checks pass

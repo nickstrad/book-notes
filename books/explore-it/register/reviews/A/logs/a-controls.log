@@ -1,0 +1,10 @@
+9:ROOT=pathlib.Path(__file__).resolve().parents[2]/'project'
+RESET=0
+PRESENT: A1 — attempt 20 schedules retry in 30.34 days with base 5 seconds
+EXIT A1=0
+PRESENT: A2 — lease → purge → nack leaves retry_wait
+EXIT A2=0
+PRESENT: A3 — cancelled running work; completion ack=409, no cancellation signal in worker protocol
+EXIT A3=0
+PRESENT: A4 — dead job deleted by retention sweep at zero-hour retention
+EXIT A4=0

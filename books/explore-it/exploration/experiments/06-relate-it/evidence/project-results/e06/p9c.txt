@@ -1,0 +1,16 @@
+15:40:33
+15:40:48
+# delete
+     39 204
+      1 409
+# schedule create
+      8 201
+    307 404
+      5 500
+# batch
+      8 201
+    312 404
+# unusual bodies
+      5 500 {"error":{"code":"database_error","message":"pq: insert or update on table \"schedules\" violates foreign key constraint \"schedules_queue_owner\""}}
+orphan_jobs | orphan_schedules
+0 | 0

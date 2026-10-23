@@ -1,0 +1,21 @@
+manifest entries: 3447
+missing: []
+mismatches: 0
+06-instruments.sha256 95 sha256 of file: 379fef80486e0a18aa9d466b0251e72405a46f68cc56a5986fdae721fb9f4873
+06-instruments-pair1.sha256 95 sha256 of file: 5cd0d91f66cd526c88a6b76ea5d30c8387459615d095dc9eb70fbeabb521a305
+06-instruments-attempt1.sha256 95 sha256 of file: 14733da1c5880c2b4f9ab41ca179872a3552260c0ac14ff6fc8a5eb128f738c8
+['603f7caf09b34789229eeb20e31a4e1a5d414dd924aa9889c56bb67fc042b74c  lab/dwell.sh\n', '6960ef74c157aaa0e5690e0a085dd8a5b11cd3522018eaf2852299b9dcfbe131  lab/observe02.py\n', '95536c9b878d93c4c3e24b7e62b75711be55126524f03e06343eb76e089340ca  lab/repro/A1.sh\n', '9586de0a6a5b0885ab8450a38ba93c97932dfebe419a15b08c601826d7f72771  lab/repro/A2.sh\n', '231af8d44872acfb7c47d641f9b2aa1b501fac1471bef1090044c628d7282479  lab/repro/A4.sh\n']
+exploration diff b3b0559..lesson06:
+ books/explore-it/exploration/defects/INDEX.md
+books/explore-it/exploration/defects/U27-schedule-delete-missing-204.md
+books/explore-it/exploration/defects/U28-schedule-payload-not-validated.md
+books/explore-it/exploration/defects/U29-sample-worker-echo-loses-precision.md
+books/explore-it/exploration/defects/U30-qctl-rounds-payload-numbers.md
+books/explore-it/exploration/defects/U31-nul-in-result-or-error-409-conflict.md
+books/explore-it/exploration/defects/U32-enqueue-racing-queue-delete-400-fk-text.md
+books/explore-it/exploration/defects/U33-attempts-outlive-their-job.md
+
+7a38788b362948d5c81fe1ee7dae14b59a010f48 b3b0559b0afe46e9552d9d4df4222508a03b822c
+
+b3b0559b0afe46e9552d9d4df4222508a03b822c 0099bcd0a91e86a25f39cfdf347fbbc3b8f5704e
+

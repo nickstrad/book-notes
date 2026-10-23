@@ -1,0 +1,184 @@
+api-1  | {"time":"2026-10-22T19:19:33.752784011Z","level":"INFO","msg":"queuelet listening on :8200"}
+api-1  | {"time":"2026-10-22T19:20:58.640485882Z","level":"INFO","msg":"queuelet listening on :8200"}
+api-1  | {"time":"2026-10-22T19:22:39.445594774Z","level":"ERROR","msg":"event console","error":"read tcp 172.28.0.4:33314->172.28.0.3:5432: read: connection reset by peer"}
+api-1  | {"time":"2026-10-22T19:22:39.645432543Z","level":"ERROR","msg":"event console","error":"dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.645487023Z","level":"INFO","msg":"webhook task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.645526687Z","level":"INFO","msg":"background task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.648126857Z","level":"INFO","msg":"background task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.64945411Z","level":"INFO","msg":"background task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.650907697Z","level":"INFO","msg":"background task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:22:39.849808492Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:22:40.059443921Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:22:40.242851582Z","level":"ERROR","msg":"event console","error":"dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:23:14.042783765Z","level":"ERROR","msg":"event console","error":"dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:23:14.246212119Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:23:14.445601875Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:23:15.208067652Z","level":"INFO","msg":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:04.603524802Z","level":"INFO","msg":"queuelet listening on :8200"}
+api-1  | {"time":"2026-10-22T19:24:06.532956754Z","level":"INFO","msg":"queuelet listening on :8200"}
+api-1  | {"time":"2026-10-22T19:24:24.264783973Z","level":"INFO","msg":"queuelet listening on :8200"}
+api-1  | {"time":"2026-10-22T19:24:25.301659242Z","level":"INFO","msg":"background task: dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:24:25.472467106Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:25.671007521Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:25.869689352Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.07025967Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.270232252Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.270383452Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.270755748Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.275606654Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.279964389Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.28404157Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.468891081Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.669065239Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:26.869862525Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.070413865Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.269868235Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.269895347Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.269813454Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.273391156Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.276685611Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.279792337Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.468504206Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.670417152Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:27.869478464Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.072606828Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.269266405Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.269276939Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.269304792Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.273323136Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.277484404Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.282744325Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.470261227Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.669770322Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:28.872045863Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.070176526Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.273284138Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.273305688Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.273419429Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.282448876Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.286758948Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.29170441Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.472028972Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.671895413Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:29.869633589Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.082843126Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.271054899Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.271507413Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.271384363Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.276896071Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.282232126Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.290022695Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.470727844Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.672604129Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:30.870553557Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.070541609Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.270602024Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.270652482Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.270774952Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.274879593Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.280042901Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.290066546Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.469468822Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.669820272Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:31.870215496Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.069755549Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.272227661Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.272690453Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.272753166Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.280365326Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.285159386Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.289926175Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.470310241Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.669596786Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:32.869509896Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.069507903Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.269693347Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.269742713Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.269947753Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.273295824Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.277484137Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.28081418Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.469074426Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.670296608Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:33.869906544Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.069964918Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.26972637Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.269737384Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.269773688Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.274018234Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.277897805Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.281918296Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.470373383Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.669912288Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:34.874860747Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.070227503Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.270042017Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.270075034Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.270064829Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.272690474Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.276086826Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.279362182Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.468846096Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.669310807Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:35.869336742Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.070443736Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.269163894Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.269195047Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.269165122Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.272645835Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.276018416Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.279325415Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.469212187Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.669831225Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:36.869222754Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.070949952Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.269605276Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.269679391Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.269701495Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.275853277Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.281102249Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.28584695Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.468875247Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.669941559Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:37.87024208Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.069221235Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.269730253Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.269788613Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.269800931Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.273493237Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.276902936Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.280364527Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.47034957Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.669873674Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:38.870451728Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.069841823Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.271750149Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.271793841Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.271791342Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.279328303Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.290237332Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.295362766Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.472492509Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.669348415Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:39.870185492Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.070197584Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.270269589Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.270229205Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.270433851Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.274659061Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.279564293Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.283398178Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.469132119Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.67485596Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:40.870024217Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.07067959Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.273605363Z","level":"INFO","msg":"webhook task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.27368098Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.273862824Z","level":"ERROR","msg":"event console","error":"dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.279075149Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.285813425Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.290039879Z","level":"INFO","msg":"background task: dial tcp: lookup postgres on 127.0.0.11:53: server misbehaving"}
+api-1  | {"time":"2026-10-22T19:24:41.467348379Z","level":"ERROR","msg":"event console","error":"dial tcp 172.28.0.3:5432: connect: connection refused"}
+api-1  | {"time":"2026-10-22T19:24:41.675032205Z","level":"ERROR","msg":"event console","error":"pq: the database system is starting up"}
+api-1  | {"time":"2026-10-22T19:24:41.884184291Z","level":"ERROR","msg":"event console","error":"pq: the database system is starting up"}
+api-1  | {"time":"2026-10-22T19:31:57.242051685Z","level":"INFO","msg":"queuelet listening on :8200"}

@@ -1,0 +1,28 @@
+2026-10-22T04:22:49.779Z
+== H12 payload representations (imports queue, read back via GET and lease)
+sent {"a":1E2} → {"id":850,"state":"queued"}
+ [201]
+   GET payload: {"a":100}
+sent {"a":-0} → {"id":851,"state":"queued"}
+ [201]
+   GET payload: {"a":0}
+sent {"a":1.50} → {"id":852,"state":"queued"}
+ [201]
+   GET payload: {"a":1.50}
+sent {"a":1e400} → {"id":853,"state":"queued"}
+ [201]
+   GET payload: {"a":1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+sent {"a":12345678901234567890.123456789} → {"id":854,"state":"queued"}
+ [201]
+   GET payload: {"a":12345678901234567890.123456789}
+sent {"a":1,"a":2} → {"id":855,"state":"queued"}
+ [201]
+   GET payload: {"a":2}
+sent {"b":1,"a":2} → {"id":856,"state":"queued"}
+ [201]
+   GET payload: {"a":2,"b":1}
+sent {"s":"😀"} → {"id":857,"state":"queued"}
+ [201]
+   GET payload: {"s":"😀"}
+(eval):5: character not in range
+sent {"s":"

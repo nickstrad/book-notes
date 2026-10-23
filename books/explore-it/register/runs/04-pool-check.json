@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-10-22T12:39:20.204929+00:00",
+  "claude_window_used_percent": 14,
+  "claude_weekly_used_percent": 22,
+  "claude_fable_weekly_used_percent": 27,
+  "codex_weekly_remaining_percent": 90,
+  "muse": "not measured: muse CLI not on PATH in this session",
+  "paid_api_fallback": false
+}

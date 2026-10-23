@@ -1,0 +1,132 @@
+REF='explore-it/lesson-01' bash lab/verify.sh 02
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.2s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.2s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 116.08kB 0.1s done
+#6 DONE 0.2s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 ...
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.5s done
+#8 DONE 0.5s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.5s done
+#7 DONE 0.5s
+
+#9 [stage-1 3/5] WORKDIR /app
+#9 CACHED
+
+#10 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#10 CACHED
+
+#11 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#11 CACHED
+
+#12 [build 3/6] COPY go.mod go.sum ./
+#12 CACHED
+
+#13 [build 4/6] RUN go mod download
+#13 CACHED
+
+#14 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#14 CACHED
+
+#15 [build 2/6] WORKDIR /src
+#15 CACHED
+
+#16 [build 5/6] COPY . .
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers 0.0s done
+#18 exporting manifest sha256:b1427aab317103b4110062c405bb5cfbd4e252cd5cd6156bcde2106f0fa16885 0.0s done
+#18 exporting config sha256:47655c03bd41c517c4d5a4a5818ede50f92ecb069e54b93720aecd63309d8fec done
+#18 exporting attestation manifest sha256:0db79cfca12f7b522e66e125919fd9ed6f806f52a72e10078fdbc9e7838ca8f2
+#18 exporting attestation manifest sha256:0db79cfca12f7b522e66e125919fd9ed6f806f52a72e10078fdbc9e7838ca8f2 0.1s done
+#18 exporting manifest list sha256:8d72975832d3f06e8e58fe27a7ccf16db9678d504ddbef1d4dd2927a61cd562c 0.1s done
+#18 naming to docker.io/library/queuelet:ref
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref 0.0s done
+#18 DONE 0.5s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Started 
+PRESENT: T01 — jobs 301/302 JSON lifecycle events=[]; correlated_fields=True; 500 and crash consoles compared
+PRESENT: T02 — job 303/304 GET events HTTP 405; crash state and partner failure have no history
+PRESENT: T03 — authenticated lab clock endpoint HTTP 404; semantic-time control unavailable
+PRESENT: U09 — Compose echo 305 succeeded; fail3 306 state=queued attempts=0; actual qctl default echo 307 succeeded, fail3 308 attempts=0; 8s bounds
+PRESENT: U10 — create/PATCH statuses=[201, 201, 201, 200, 200, 200]; independent job 310 partner_received=False; 8s bound
+DEFECTS REPRODUCED: 5 present

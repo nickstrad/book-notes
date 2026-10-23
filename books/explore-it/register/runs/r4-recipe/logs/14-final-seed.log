@@ -1,0 +1,22 @@
+{"command": ["make", "seed"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T00:51:14.213975+00:00"}
+bash lab/reset.sh
+ Container queuelet-r4-worker-b-1 Stopping 
+ Container queuelet-r4-worker-a-1 Stopping 
+ Container queuelet-r4-worker-a-1 Stopped 
+ Container queuelet-r4-worker-b-1 Stopped 
+ Container queuelet-r4-api-1 Stopping 
+ Container queuelet-r4-api-1 Stopped 
+ Container queuelet-r4-postgres-1 Waiting 
+ Container queuelet-r4-postgres-1 Healthy 
+ Container queuelet-r4-api-1 Starting 
+ Container queuelet-r4-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-r4-postgres-1 Waiting 
+ Container queuelet-r4-postgres-1 Healthy 
+ Container queuelet-r4-worker-b-1 Starting 
+ Container queuelet-r4-worker-a-1 Starting 
+ Container queuelet-r4-worker-a-1 Started 
+ Container queuelet-r4-worker-b-1 Started 
+
+EXIT 0; ELAPSED 10.147s

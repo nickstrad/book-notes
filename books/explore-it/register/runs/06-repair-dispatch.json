@@ -1,0 +1,14 @@
+{
+  "unit": "fresh E06 one-round review repair",
+  "model": "gpt-6.1-sol",
+  "mode": "headless, high effort; scoped authorized checkout",
+  "brief": "register/reconciliations/06-repair-brief.md",
+  "start": "2026-10-22T16:52:03Z",
+  "end": "2026-10-22T17:10:12Z",
+  "exit_status": 0,
+  "superseded_fix": "7a38788",
+  "final_fix": "755d21c",
+  "knowledge_commit": "7148dee",
+  "tag": "explore-it/lesson-06",
+  "lifecycle": "complete"
+}

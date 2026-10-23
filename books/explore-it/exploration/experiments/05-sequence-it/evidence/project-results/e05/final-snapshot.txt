@@ -1,0 +1,48 @@
+snapshot 2026-10-22T13:40:29.317Z
+name | state | count
+f2 | dead | 1
+f2 | succeeded | 1
+f3 | queued | 1
+f3s | cancelled | 1
+f3s | succeeded | 1
+i1 | queued | 1
+i2 | dead | 1
+p1 | queued | 1
+p2 | queued | 23
+p4 | cancelled | 1
+p4 | dead | 1
+p4 | succeeded | 1
+p5 | cancelled | 1
+p6 | queued | 1
+p7 | dead | 1
+p8 | cancelled | 2
+w1 | cancelled | 2
+w11 | cancelled | 3
+w11 | dead | 3
+w11 | queued | 1
+w11 | succeeded | 3
+w12 | cancelled | 1
+w12 | queued | 3
+w12 | succeeded | 1
+w13 | cancelled | 3
+w13 | queued | 8
+w21 | cancelled | 11
+w21 | dead | 1
+w21 | queued | 23
+w21 | succeeded | 2
+w22 | queued | 2
+w31 | cancelled | 2
+w31 | dead | 3
+w31 | queued | 10
+w31 | succeeded | 3
+w32 | cancelled | 1
+w32 | dead | 1
+w32 | leased | 2
+w32 | queued | 21
+w32 | succeeded | 6
+(40 rows)
+workers
+28
+(1 row)
+{"now":"2026-10-22T14:47:34.414039622Z"}
+ [200]

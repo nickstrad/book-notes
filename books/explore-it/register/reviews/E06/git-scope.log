@@ -1,0 +1,19 @@
+branch: plan/explore-it
+lesson-06: 7a38788b362948d5c81fe1ee7dae14b59a010f48
+lesson-05: 0099bcd0a91e86a25f39cfdf347fbbc3b8f5704e
+parent of lesson-06: b3b0559b0afe46e9552d9d4df4222508a03b822c
+outside books/explore-it in lesson-05..lesson-06:
+none
+merge commits lesson-05..lesson-06: 0
+SUT files changed b3b0559..lesson-06:
+books/explore-it/project/SPEC.md
+books/explore-it/project/cmd/qctl/main.go
+books/explore-it/project/internal/api/enqueue.go
+books/explore-it/project/internal/api/jobs.go
+books/explore-it/project/internal/api/schedules.go
+books/explore-it/project/internal/client/client.go
+books/explore-it/project/internal/jobs/expire.go
+books/explore-it/project/internal/worker/worker.go
+books/explore-it/project/migrations/005.sql
+git status:
+(clean if empty)

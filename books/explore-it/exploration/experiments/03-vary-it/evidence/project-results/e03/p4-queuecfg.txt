@@ -1,0 +1,59 @@
+2026-10-22T04:17:59.231Z
+== H06 int4 overflow on create
+lease_seconds=2147483647
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":7,"lease_seconds":2147483647,"max_attempts":3,"name":"e03-o-lease_seconds-2147483647","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+lease_seconds=2147483648
+{"error":{"code":"queue_conflict","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [409]
+max_attempts=2147483647
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":8,"lease_seconds":30,"max_attempts":2147483647,"name":"e03-o-max_attempts-2147483647","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+max_attempts=2147483648
+{"error":{"code":"queue_conflict","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [409]
+base_seconds=2147483648
+{"error":{"code":"queue_conflict","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [409]
+max_seconds=2147483648
+{"error":{"code":"queue_conflict","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [409]
+dup name control
+{"error":{"code":"queue_conflict","message":"pq: duplicate key value violates unique constraint \"queues_namespace_id_name_key\""}}
+ [409]
+== H06 patch overflow
+{"error":{"code":"database_error","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [500]
+{"error":{"code":"database_error","message":"pq: value \"2147483648\" is out of range for type integer"}}
+ [500]
+== H07 max_seconds
+{"backoff_base":4,"backoff_kind":"exponential","backoff_max":-7,"id":10,"lease_seconds":30,"max_attempts":3,"name":"e03-maxs","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+== retention variants
+retention=0
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":11,"lease_seconds":30,"max_attempts":3,"name":"e03-ret-0","namespace_id":1,"paused":false,"retention_hours":0,"webhook_secret":"","webhook_url":""}
+ [201]
+retention=0.0001
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":12,"lease_seconds":30,"max_attempts":3,"name":"e03-ret-0_0001","namespace_id":1,"paused":false,"retention_hours":0.0001,"webhook_secret":"","webhook_url":""}
+ [201]
+retention=1e8
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":13,"lease_seconds":30,"max_attempts":3,"name":"e03-ret-1e8","namespace_id":1,"paused":false,"retention_hours":100000000,"webhook_secret":"","webhook_url":""}
+ [201]
+retention=1e308
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":14,"lease_seconds":30,"max_attempts":3,"name":"e03-ret-1e308","namespace_id":1,"paused":false,"retention_hours":1e+308,"webhook_secret":"","webhook_url":""}
+ [201]
+== lease 1e3 / 30.0
+{"error":{"code":"invalid_json","message":"json: cannot unmarshal number 1e3 into Go struct field QueueInput.lease_seconds of type int"}}
+ [400]
+name | lease_seconds | max_attempts | backoff_base | backoff_max | retention_hours
+e03-trail | 30 | 3 | 5 |  | 24
+e03-case | 7 | 3 | 5 |  | 24
+e03-o-lease_seconds-2147483647 | 2147483647 | 3 | 5 |  | 24
+e03-o-max_attempts-2147483647 | 30 | 2147483647 | 5 |  | 24
+e03-maxs | 30 | 3 | 4 | -7 | 24
+e03-ret-0 | 30 | 3 | 5 |  | 0
+e03-ret-0_0001 | 30 | 3 | 5 |  | 0.0001
+e03-ret-1e8 | 30 | 3 | 5 |  | 100000000
+e03-ret-1e308 | 30 | 3 | 5 |  | 1e+308
+(9 rows)
+2026-10-22T04:17:59.856Z

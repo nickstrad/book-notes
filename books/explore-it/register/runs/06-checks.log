@@ -1,0 +1,26 @@
+cwd: /root/Software/booknotes-work/explore-it/books/explore-it/project
+command: make checks
+start: 2026-10-22T16:05:51.726596+00:00
+go test -tags checks ./test/checks -count=1
+--- FAIL: TestL00ConcurrentLeases (0.02s)
+panic: interface conversion: interface {} is json.Number, not float64 [recovered, repanicked]
+
+goroutine 73 [running]:
+testing.tRunner.func1.2({0x8142c0, 0x15779a826d20})
+	/usr/local/go/src/testing/testing.go:1974 +0x232
+testing.tRunner.func1()
+	/usr/local/go/src/testing/testing.go:1977 +0x349
+panic({0x8142c0?, 0x15779a826d20?})
+	/usr/local/go/src/runtime/panic.go:860 +0x13a
+queuelet/test/checks.TestL00ConcurrentLeases(0x15779a8e8008)
+	/root/Software/booknotes-work/explore-it/books/explore-it/project/test/checks/baseline_test.go:107 +0xdde
+testing.tRunner(0x15779a8e8008, 0x8b7740)
+	/usr/local/go/src/testing/testing.go:2036 +0xea
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go/src/testing/testing.go:2101 +0x4c5
+FAIL	queuelet/test/checks	0.702s
+FAIL
+make: *** [Makefile:17: checks] Error 1
+
+exit: 2
+elapsed_seconds: 1.799

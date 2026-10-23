@@ -1,0 +1,12 @@
+H12 trial 0 job 7585: immediate B lease 200 [] state then leased; B got [(7585, 2)] after 0.27 s; A ack 409
+H12 trial 1 job 7586: immediate B lease 200 [] state then leased; B got [(7586, 2)] after 1.03 s; A ack 409
+H12 trial 2 job 7587: immediate B lease 200 [] state then leased; B got [(7587, 2)] after 1.5 s; A ack 409
+H13 run_at 2026-10-22T18:12:46.411227Z retry_wait
+H13 trial 0 job 7588: immediate B lease [] state then retry_wait; B got [(7588, 2)] after 0.2 s
+H13 run_at 2026-10-22T18:13:47.411227Z retry_wait
+H13 trial 1 job 7589: immediate B lease [] state then retry_wait; B got [] after 3.04 s
+Traceback (most recent call last):
+  File "/tmp/explore-it-experiment-07/books/explore-it/exploration/experiments/07-state-it/tools/p6_pre_sweep.py", line 38, in <module>
+    ok(verb(j, "ack", lease_token=got[0]["lease_token"], result={}), 200)
+                                  ~~~^^^
+IndexError: list index out of range

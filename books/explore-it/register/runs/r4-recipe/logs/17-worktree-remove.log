@@ -1,0 +1,3 @@
+{"command": ["git", "worktree", "remove", "/tmp/ei-tag"], "cwd": "/tmp/ei-fixes/r4/repo/books/explore-it/project", "commit": "1d6a64b5637b620ee1b3abe22b8be0c1d6614f10", "start": "2026-10-23T01:03:25.041314+00:00"}
+
+EXIT 0; ELAPSED 0.324s

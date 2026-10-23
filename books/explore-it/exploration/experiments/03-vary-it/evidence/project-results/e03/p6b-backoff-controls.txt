@@ -1,0 +1,26 @@
+2026-10-22T04:20:12.761Z
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":18,"lease_seconds":30,"max_attempts":40,"name":"e03-bodef","namespace
+ [201]
+{"backoff_base":10,"backoff_kind":"exponential","backoff_max":1,"id":19,"lease_seconds":30,"max_attempts":3,"name":"e03-maxs2","namespace_id
+ [201]
+== control: e03-boexp attempt 1 default (no overflow)
+e03-boexp job=843
+2026-10-22T04:20:13.321Z attempt 1 nack {"error":{"code":"state_conflict","message":"sql: no rows in result set"}}
+[409]: queued | 0 | 2026-10-22 04:20:12.944248+00
+== H07 positive cap: base 10, max_seconds 1
+e03-maxs2 job=844
+2026-10-22T04:20:13.643Z attempt 1 nack {"ok":true}
+[200]: retry_wait | 1 | 2026-10-22 04:20:23.621391+00
+== default base 5, attempts 31 (no overflow expected) — separate job
+e03-bodef job=845
+2026-10-22T04:20:42.653Z attempt 30 nack {"ok":true}
+[200]: retry_wait | 30 | 2026-10-22 04:20:42.623913+00
+2026-10-22T04:20:43.434Z attempt 31 nack {"ok":true}
+[200]: retry_wait | 31 | 2196-12-07 00:26:03.420503+00
+== default base 5, attempt 32 (overflow expected) — separate job
+e03-bodef job=846
+2026-10-22T04:21:13.272Z attempt 31 nack {"ok":true}
+[200]: retry_wait | 31 | 2026-10-22 04:21:13.251403+00
+2026-10-22T04:21:14.447Z attempt 32 nack {"ok":true}
+[200]: retry_wait | 32 | 1782-07-04 20:57:20.723047+00
+2026-10-22T04:21:14.501Z

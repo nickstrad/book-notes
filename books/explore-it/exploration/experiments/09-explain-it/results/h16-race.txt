@@ -1,0 +1,21 @@
+{"jobs": [841, 1140], "summary": {"ack=409 delete=204": 68, "ack=200 delete=204": 232}}
+{"job": 841, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 842, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 843, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}"}
+{"job": 844, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 852, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 853, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 862, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 866, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 871, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 875, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 877, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}"}
+{"job": 882, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 883, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 885, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}"}
+{"job": 892, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}"}
+{"job": 899, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 905, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 908, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 909, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"pq: insert or update on table \\\"attempts\\\" violates foreign key constraint \\\"attempts_job_owner\\\"\"}}"}
+{"job": 910, "ack": 409, "body": "{\"error\":{\"code\":\"state_conflict\",\"message\":\"sql: no rows in result set\"}}"}

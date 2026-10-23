@@ -1,0 +1,29 @@
+{"command": ["make", "verify", "LESSON=02"], "tree": "repo", "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-review-c", "QUEUELET_IMAGE_TAG": "reviewc", "QUEUELET_API_PORT": "18270", "QUEUELET_HOOK_PORT": "18271", "QUEUELET_PG_PORT": "15503", "QUEUELET_URL": "http://localhost:18270", "QUEUELET_HOOK_URL": "http://localhost:18271", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15503/queuelet?sslmode=disable"}, "start": "2026-10-22T22:07:23.422109+00:00"}
+REF='' bash lab/verify.sh 02
+ Container queuelet-review-c-worker-a-1 Stopping 
+ Container queuelet-review-c-worker-b-1 Stopping 
+ Container queuelet-review-c-worker-b-1 Stopped 
+ Container queuelet-review-c-worker-a-1 Stopped 
+ Container queuelet-review-c-api-1 Stopping 
+ Container queuelet-review-c-api-1 Stopped 
+ Container queuelet-review-c-postgres-1 Waiting 
+ Container queuelet-review-c-postgres-1 Healthy 
+ Container queuelet-review-c-api-1 Starting 
+ Container queuelet-review-c-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-review-c-postgres-1 Waiting 
+ Container queuelet-review-c-postgres-1 Healthy 
+ Container queuelet-review-c-worker-a-1 Starting 
+ Container queuelet-review-c-worker-b-1 Starting 
+ Container queuelet-review-c-worker-a-1 Started 
+ Container queuelet-review-c-worker-b-1 Started 
+ABSENT: T01 — jobs 301/302 JSON lifecycle events=['created', 'lease_expired', 'leased', 'notification_failed', 'notification_queued', 'succeeded']; correlated_fields=True; 500 and crash consoles compared
+ABSENT: T02 — job 303: ['created', 'leased', 'succeeded', 'notification_queued', 'notification_failed']; abandoned 304: ['created', 'leased', 'lease_expired', 'notification_queued', 'notification_failed']; 500/outbox/error and true lease start retained; cross-tenant empty
+ABSENT: T03 — job 305 scheduled→queued→leased→dead; advanced 3662 semantic seconds in 1.85s real time; non-admin 403
+ABSENT: U09 — Compose echo 309 succeeded; fail3 310 state=dead attempts=1; actual qctl default echo 311 succeeded, fail3 312 attempts=1; 8s bounds
+ABSENT: U10 — create/PATCH statuses=[400, 400, 400, 400, 400, 400]; independent job 313 partner_received=True; 8s bound
+ok  	queuelet/test/checks	18.371s
+FIXED AND CHECKED: 5 absent; regression checks pass
+
+EXIT 0; ELAPSED 57.429s

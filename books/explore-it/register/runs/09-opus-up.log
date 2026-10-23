@@ -1,0 +1,107 @@
+{"command": ["make", "up"], "cwd": "/root/Software/booknotes-work/explore-it/books/explore-it/project", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-fix09", "QUEUELET_IMAGE_TAG": "fix09", "QUEUELET_API_PORT": "18400", "QUEUELET_HOOK_PORT": "18401", "QUEUELET_PG_PORT": "15633", "QUEUELET_URL": "http://localhost:18400", "QUEUELET_HOOK_URL": "http://localhost:18401", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15633/queuelet?sslmode=disable"}, "start": "2026-10-22T21:26:06.982710+00:00"}
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:fix09 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 587B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 7.62kB 0.0s done
+#6 DONE 0.1s
+
+#7 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#7 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#7 DONE 0.1s
+
+#8 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#8 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#8 DONE 0.1s
+
+#9 [build 4/6] RUN go mod download
+#9 CACHED
+
+#10 [build 2/6] WORKDIR /src
+#10 CACHED
+
+#11 [build 5/6] COPY . .
+#11 CACHED
+
+#12 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#12 CACHED
+
+#13 [build 3/6] COPY go.mod go.sum ./
+#13 CACHED
+
+#14 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#14 CACHED
+
+#15 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#15 CACHED
+
+#16 [stage-1 3/5] WORKDIR /app
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:d712cecfdf57098c9ceef80741742400e8839dc6f3170de151a5876dc98d31c3 done
+#18 exporting config sha256:efff434b92b36c9c97b9ac729fb7a9f10c303711a3bc15d9cf4bf37353c54271 done
+#18 exporting attestation manifest sha256:9575300518c067ebb1eb1e2ee1ac9db26ee93ab627228afa319aa4cafd4bcfc6 0.1s done
+#18 exporting manifest list sha256:b2c84896ab6466376ab4092e047e2f73696e7451b9a0b7008ecc96af71458b90
+#18 exporting manifest list sha256:b2c84896ab6466376ab4092e047e2f73696e7451b9a0b7008ecc96af71458b90 0.0s done
+#18 naming to docker.io/library/queuelet:fix09 0.0s done
+#18 unpacking to docker.io/library/queuelet:fix09 0.0s done
+#18 DONE 0.3s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:fix09 Built 
+ Network queuelet-fix09_default Creating 
+ Network queuelet-fix09_default Creating 
+ Volume queuelet-fix09_data Creating 
+ Volume queuelet-fix09_data Creating 
+ Volume queuelet-fix09_data Created 
+ Volume queuelet-fix09_data Created 
+ Network queuelet-fix09_default Created 
+ Network queuelet-fix09_default Created 
+ Container queuelet-fix09-hooksink-1 Creating 
+ Container queuelet-fix09-postgres-1 Creating 
+ Container queuelet-fix09-hooksink-1 Created 
+ Container queuelet-fix09-postgres-1 Created 
+ Container queuelet-fix09-api-1 Creating 
+ Container queuelet-fix09-api-1 Created 
+ Container queuelet-fix09-worker-b-1 Creating 
+ Container queuelet-fix09-worker-a-1 Creating 
+ Container queuelet-fix09-worker-b-1 Created 
+ Container queuelet-fix09-worker-a-1 Created 
+ Container queuelet-fix09-hooksink-1 Starting 
+ Container queuelet-fix09-postgres-1 Starting 
+ Container queuelet-fix09-postgres-1 Started 
+ Container queuelet-fix09-postgres-1 Waiting 
+ Container queuelet-fix09-hooksink-1 Started 
+ Container queuelet-fix09-postgres-1 Healthy 
+ Container queuelet-fix09-api-1 Starting 
+ Container queuelet-fix09-api-1 Started 
+ Container queuelet-fix09-worker-a-1 Starting 
+ Container queuelet-fix09-worker-b-1 Starting 
+ Container queuelet-fix09-worker-a-1 Started 
+ Container queuelet-fix09-worker-b-1 Started 
+
+EXIT 0; ELAPSED 7.737s

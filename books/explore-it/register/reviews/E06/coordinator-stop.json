@@ -1,0 +1,8 @@
+{
+  "at_utc": "2026-10-22T16:56:02.413965+00:00",
+  "action": "terminate completed reviewer runtime",
+  "reason": "Report and result finished and preserved. Runtime continued provider retries in closing/reminder activity after the review; lifecycle ends here, no reuse.",
+  "pid": 1819841,
+  "verdict": "NITS",
+  "report_sha256": "7dbd40f93f55c0b495dfecc94c0e59f06b86da8297d4ecb92d8ab7dd9ac55019"
+}

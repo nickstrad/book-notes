@@ -1,0 +1,35 @@
+{
+  "experiment": 9,
+  "source_tag": "explore-it/lesson-08",
+  "source_commit": "9b1b1a1e4b8c8d3dbb0506c472460158c96a05fc",
+  "created_before_run_utc": "2026-10-22T20:31:10.180951+00:00",
+  "tracked_source_files": 153,
+  "source_modified": [],
+  "forbidden_export_paths": [],
+  "charter_sha256": "eeda9dd8cecac9aac76f8e12ef54538b99a278b65c4e282fb4f4daec2ebc7c80",
+  "brief_sha256": "ed088e8b23e4cf85560b0f7bb338a9020a7261f352abf3069df4bea3b4c64502",
+  "start": "2026-10-22T20:31:13Z",
+  "end": "2026-10-22T20:49:57Z",
+  "exit_status": 0,
+  "model": "claude-opus-5-5",
+  "tool_calls": {
+    "Bash": 71,
+    "Read": 1
+  },
+  "flagged_inputs": [
+    {
+      "tool": "Read",
+      "input": "/root/.claude/projects/-tmp-explore-it-experiment-09/<session>/tool-results/bib7tjcq3.txt",
+      "judgement": "benign: the harness persisted one of this run's own oversized tool outputs and the explorer read it back; it is the explorer's own session output, not repository or answer-key content"
+    },
+    {
+      "tool": "Bash",
+      "input": "heredoc writing revealed.md",
+      "judgement": "false positive: the markdown link text '../../models/variables.md' matched the absolute-path pattern"
+    }
+  ],
+  "scan": "every tool_use input in 09-explorer-run.jsonl checked for absolute paths outside /tmp/explore-it-experiment-09 and for PLAN.md, register/, .git, git log/show/diff/archive, other checkouts or exports, the coordinator directory, agent spawning",
+  "inherited_source_and_raw_records": "collector integrity checks passed; no restorations needed",
+  "boundary": "plain export plus prompt, no OS isolation",
+  "interpretation": "two flagged inputs, both judged benign; no answer-key, history or other-checkout access identified"
+}

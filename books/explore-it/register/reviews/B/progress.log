@@ -1,0 +1,81 @@
+Cloning into '/tmp/explore-it-checkpoint-b/repo'...
+done.
+HEAD is now at 8ed9177 queuelet: fix experiment 03 findings; add checks (lesson 03)
+START tag03-up
+END tag03-up 0 7.369
+START tag03-verify
+END tag03-verify 0 25.546
+START tag03-down
+END tag03-down 0 2.889
+Previous HEAD position was 8ed9177 queuelet: fix experiment 03 findings; add checks (lesson 03)
+HEAD is now at 171974a queuelet: fix experiment 04 findings; resolve A1; add checks (lesson 04)
+START tag04-up
+END tag04-up 0 41.251
+START tag04-verify
+END tag04-verify 0 47.804
+START tag04-down
+END tag04-down 0 4.122
+Previous HEAD position was 171974a queuelet: fix experiment 04 findings; resolve A1; add checks (lesson 04)
+HEAD is now at 0099bcd queuelet: fix experiment 05 findings; resolve A2; add checks (lesson 05)
+START tag05-up
+END tag05-up 0 49.333
+START tag05-verify
+END tag05-verify 0 130.263
+START tag05-down
+END tag05-down 0 2.757
+Previous HEAD position was 0099bcd queuelet: fix experiment 05 findings; resolve A2; add checks (lesson 05)
+HEAD is now at 755d21c queuelet: fix experiment 06 findings; resolve A4; add checks (lesson 06)
+START tag06-up
+END tag06-up 0 42.173
+START tag06-verify
+END tag06-verify 0 109.807
+START tag06-down
+END tag06-down 0 2.626
+Previous HEAD position was 755d21c queuelet: fix experiment 06 findings; resolve A4; add checks (lesson 06)
+HEAD is now at 8aa2895 docs: record E06 independent reviews and final handoff
+START head-up
+END head-up 0 9.927
+START head02-verify
+END head02-verify 2 45.715
+START final-down
+END final-down 0 2.331
+Traceback (most recent call last):
+  File "/tmp/explore-it-checkpoint-b/run.py", line 25, in <module>
+    for n in ['02','03','04','05','06']: run('head'+n+'-verify',['make','verify','LESSON='+n])
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/explore-it-checkpoint-b/run.py", line 16, in run
+    if required and p.returncode: raise RuntimeError(label)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: head02-verify
+START head-up-retry
+END head-up-retry 0 6.835
+START head02-verify-retry
+END head02-verify-retry 0 45.205
+START head03-verify-retry
+END head03-verify-retry 0 22.552
+START head04-verify-retry
+END head04-verify-retry 0 38.121
+START head05-verify-retry
+END head05-verify-retry 0 113.034
+START head06-verify-retry
+END head06-verify-retry 0 118.499
+START ref02-verify
+END ref02-verify 0 84.152
+START ref03-verify
+END ref03-verify 0 66.777
+START ref04-verify
+END ref04-verify 0 65.188
+START ref05-verify
+END ref05-verify 0 67.2
+START ref06-verify
+END ref06-verify 0 96.603
+START head-checks
+END head-checks 0 370.885
+START head-test
+END head-test 0 3.413
+START head-vet
+END head-vet 0 0.696
+START head-A3-open
+END head-A3-open 0 0.308
+START final-down-retry
+END final-down-retry 0 2.921

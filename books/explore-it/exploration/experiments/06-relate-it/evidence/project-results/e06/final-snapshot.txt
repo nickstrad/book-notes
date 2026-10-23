@@ -1,0 +1,19 @@
+2026-10-22T15:46:48Z
+queues | jobs | schedules | workers | attempts | outbox | events
+8 | 319 | 10 | 4 | 174 | 79 | 2567
+orphan_jobs | orphan_schedules | orphan_attempts | outbox_missing_job
+0 | 0 | 4 | 3
+nonobject_payload_jobs
+7
+id | name | enabled
+1 | daily-report | t
+2 | import-pulse | t
+4 | p | f
+5 | p | f
+6 | p | f
+7 | p | f
+8 | p | f
+9 | arr | f
+10 | nul | f
+11 | r | t
+{"status":"ok"}

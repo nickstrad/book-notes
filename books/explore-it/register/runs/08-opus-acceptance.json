@@ -1,0 +1,180 @@
+{
+  "runs": [
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T19:47:08.389766+00:00",
+      "exit": 0,
+      "elapsed_seconds": 51.204,
+      "log": "08-opus-up.log"
+    },
+    {
+      "name": "up",
+      "command": [
+        "make",
+        "up"
+      ],
+      "start": "2026-10-22T19:51:35.237084+00:00",
+      "exit": 0,
+      "elapsed_seconds": 43.828,
+      "log": "08-opus-up.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-22T19:52:19.156142+00:00",
+      "exit": 0,
+      "elapsed_seconds": 133.471,
+      "log": "08-opus-current.log"
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08",
+        "REF=explore-it/lesson-07"
+      ],
+      "start": "2026-10-22T19:54:37.307021+00:00",
+      "exit": 0,
+      "elapsed_seconds": 173.335,
+      "log": "08-opus-ref.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-22T19:57:37.825479+00:00",
+      "exit": 0,
+      "elapsed_seconds": 129.108,
+      "log": "08-opus-current.log"
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08",
+        "REF=explore-it/lesson-07"
+      ],
+      "start": "2026-10-22T19:59:47.011019+00:00",
+      "exit": 0,
+      "elapsed_seconds": 142.265,
+      "log": "08-opus-ref.log"
+    },
+    {
+      "name": "checks",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T20:02:13.558744+00:00",
+      "exit": 2,
+      "elapsed_seconds": 601.078,
+      "log": "08-opus-checks.log"
+    },
+    {
+      "name": "test",
+      "command": [
+        "make",
+        "test"
+      ],
+      "start": "2026-10-22T20:12:14.722660+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.078,
+      "log": "08-opus-test.log"
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T20:12:16.886224+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.535,
+      "log": "08-opus-vet.log"
+    },
+    {
+      "name": "current",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08"
+      ],
+      "start": "2026-10-22T20:13:37.496117+00:00",
+      "exit": 0,
+      "elapsed_seconds": 141.227,
+      "log": "08-opus-current.log"
+    },
+    {
+      "name": "ref",
+      "command": [
+        "make",
+        "verify",
+        "LESSON=08",
+        "REF=explore-it/lesson-07"
+      ],
+      "start": "2026-10-22T20:15:58.813570+00:00",
+      "exit": 0,
+      "elapsed_seconds": 134.923,
+      "log": "08-opus-ref.log"
+    },
+    {
+      "name": "checks",
+      "command": [
+        "make",
+        "checks"
+      ],
+      "start": "2026-10-22T20:18:13.821571+00:00",
+      "exit": 0,
+      "elapsed_seconds": 573.911,
+      "log": "08-opus-checks.log"
+    },
+    {
+      "name": "test",
+      "command": [
+        "make",
+        "test"
+      ],
+      "start": "2026-10-22T20:27:47.813675+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.336,
+      "log": "08-opus-test.log"
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "start": "2026-10-22T20:27:48.258455+00:00",
+      "exit": 0,
+      "elapsed_seconds": 0.279,
+      "log": "08-opus-vet.log"
+    },
+    {
+      "name": "down",
+      "command": [
+        "make",
+        "down"
+      ],
+      "start": "2026-10-22T20:28:20.376032+00:00",
+      "exit": 0,
+      "elapsed_seconds": 2.689,
+      "log": "08-opus-down.log"
+    }
+  ]
+}

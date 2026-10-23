@@ -1,0 +1,1 @@
+{"cron":"0 0 1 1 *","enabled":true,"id":15,"kind":"x","last_run_at":null,"name":"x","namespace_id":1,"next_run_at":"2027-01-01T00:00:00Z","payload":{},"queue_id":91,"timezone":"UTC","zone_offset":0}

@@ -1,0 +1,153 @@
+REF='explore-it/v0-inherited' bash lab/verify.sh 01
+ Image queuelet:ref Pulling 
+ Image queuelet:ref Pulling 
+ Image queuelet:ref Pulling 
+ Image queuelet:ref Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:ref Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:ref Error pull access denied for queuelet, repository does not exist or may require 'docker login'
+ Image queuelet:ref Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 551B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 73.84kB 0.0s done
+#6 DONE 0.0s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#8 DONE 0.1s
+
+#9 [build 2/6] WORKDIR /src
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 DONE 0.1s
+
+#11 [build 4/6] RUN go mod download
+#11 DONE 0.7s
+
+#12 [build 5/6] COPY . .
+#12 DONE 0.2s
+
+#13 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#13 DONE 47.2s
+
+#14 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#14 CACHED
+
+#15 [stage-1 3/5] WORKDIR /app
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 DONE 0.2s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 0.3s done
+#18 exporting manifest sha256:0937f42692c9b1f41804e102b15901ade7cf7b01bdc7f3d30dc3989706f9f4a8 0.0s done
+#18 exporting config sha256:bc9a99ee6a5faae5d893ddf0ff80d7f1d9aa602240b86b6634549dac266e9a0a 0.0s done
+#18 exporting attestation manifest sha256:26714b64e7eba3f739f1cd0286eb72947a4f97c0886562c61f7b8ee7a814e93a
+#18 exporting attestation manifest sha256:26714b64e7eba3f739f1cd0286eb72947a4f97c0886562c61f7b8ee7a814e93a 0.1s done
+#18 exporting manifest list sha256:cc62a4e8bc3995fcb6fd5bb9de74f6e6c16fa0ddc06697311f08396ed843c8d9 0.0s done
+#18 naming to docker.io/library/queuelet:ref done
+#18 unpacking to docker.io/library/queuelet:ref
+#18 unpacking to docker.io/library/queuelet:ref 0.1s done
+#18 DONE 0.7s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.1s
+ Image queuelet:ref Built 
+ Network queuelet-ref_default Creating 
+ Network queuelet-ref_default Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Creating 
+ Volume queuelet-ref_data Created 
+ Volume queuelet-ref_data Created 
+ Network queuelet-ref_default Created 
+ Network queuelet-ref_default Created 
+ Container queuelet-ref-hooksink-1 Creating 
+ Container queuelet-ref-postgres-1 Creating 
+ Container queuelet-ref-hooksink-1 Created 
+ Container queuelet-ref-postgres-1 Created 
+ Container queuelet-ref-api-1 Creating 
+ Container queuelet-ref-api-1 Created 
+ Container queuelet-ref-worker-b-1 Creating 
+ Container queuelet-ref-worker-a-1 Creating 
+ Container queuelet-ref-worker-a-1 Created 
+ Container queuelet-ref-worker-b-1 Created 
+ Container queuelet-ref-postgres-1 Starting 
+ Container queuelet-ref-hooksink-1 Starting 
+ Container queuelet-ref-postgres-1 Started 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-hooksink-1 Started 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-a-1 Started 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-b-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopping 
+ Container queuelet-ref-worker-a-1 Stopped 
+ Container queuelet-ref-worker-b-1 Stopped 
+ Container queuelet-ref-api-1 Stopping 
+ Container queuelet-ref-api-1 Stopped 
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-api-1 Starting 
+ Container queuelet-ref-api-1 Started 
+curl: (56) Recv failure: Connection reset by peer
+Seeded 300 jobs, 4 queues, 2 schedules; results/manifest.json
+ Container queuelet-ref-postgres-1 Waiting 
+ Container queuelet-ref-postgres-1 Healthy 
+ Container queuelet-ref-worker-b-1 Starting 
+ Container queuelet-ref-worker-a-1 Starting 
+ Container queuelet-ref-worker-b-1 Started 
+ Container queuelet-ref-worker-a-1 Started 
+PRESENT: D01 — CLI missing-job exit=0; stderr=HTTP 404: {"error":{"code":"job_not_found","message":"sql: no rows in result set"}}
+PRESENT: D02 — delete absent queue HTTP 204
+PRESENT: D03 — expired lease counted=0; attempt rows=0
+PRESENT: D04 — partner HTTP 500; marked delivered=t
+PRESENT: D05 — priority -1/10 statuses=[201, 201]
+PRESENT: D06 — batch zero=201, 501=201, persisted=500
+PRESENT: D07 — slash/space queue create statuses=[201, 201]; contract requires rejection
+PRESENT: D08 — input=9007199254740993; stored=9007199254740992; leased=9007199254740992
+PRESENT: D09 — first nack max_attempts=1 leaves retry_wait
+PRESENT: D10 — stats queued=1; read-only SQL queued=0
+PRESENT: D11 — oldest=808, first=808, next after public nack/promote=809
+PRESENT: D12 — purged scheduled/retry_wait/queued GET statuses=[200, 200, 404]
+PRESENT: D13 — resume after two missed minute ticks produced=2; elapsed=115.4s; maximum allowed=1
+PRESENT: D14 — non-dead retry outcomes=[('cancelled', 200, 'queued'), ('succeeded', 200, 'queued')]
+PRESENT: D15 — nonempty owner DELETE=204; dependent job/schedule=200/200
+PRESENT: D16 — cron/zone recomputed=False; enabling sets next_run_at=None
+PRESENT: D17 — result complete=False; error chars=256/408
+PRESENT: D18 — expired A ack=200; current B ack=409; stored result={'owner': 'A'}
+PRESENT: D19 — nack incompatible outcomes=[('wrong-token', 200, 'retry_wait'), ('queued', 200, 'retry_wait')]
+PRESENT: D20 — first crash max_attempts=1 leaves queued; completed attempts=0
+PRESENT: D21 — foreign namespace get/attempts/cancel/retry/ack/nack/heartbeat/delete=[200, 200, 200, 200, 409, 200, 409, 204]
+PROBE ERROR: D22 — ConnectionResetError(104, 'Connection reset by peer')
+make: *** [Makefile:13: verify] Error 2

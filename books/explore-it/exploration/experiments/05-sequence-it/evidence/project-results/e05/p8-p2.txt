@@ -1,0 +1,69 @@
+== P8 cancel scheduled / cancel retry_wait, then time passes 2026-10-22T13:23:29.079Z
+$ mkq p8 "backoff":{"kind":"linear","base_seconds":30}
+{"backoff_base":30,"backoff_kind":"linear","backoff_max":null,"id":7,"lease_seconds":30,"max_attempts":3,"name":"p8","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+$ api POST /v1/jobs/11/nack -d {"lease_token":"bb50366b8215989d928598d26ea89840","error":"x"}
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/10/cancel
+{"ok":true}
+ [200]
+$ api POST /v1/jobs/11/cancel
+{"ok":true}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":120}
+{"now":"2026-10-22T13:25:29.414039622Z"}
+ [200]
+$ jget 10
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+10 | cancelled | 0 | 3 | 2026-10-22 13:23:59.172673+00 | 2026-10-22 13:23:29.172673+00 | 2026-10-22 13:23:29.336463+00 |  | f |  | 
+(1 row)
+$ jget 11
+id | state | attempts | max_attempts | run_at | created_at | finished_at | leased_by | tok | lease_expires_at | last_error
+11 | cancelled | 1 | 3 | 2026-10-22 13:23:59.297223+00 | 2026-10-22 13:23:29.208139+00 | 2026-10-22 13:23:29.373956+00 |  | f |  | x
+(1 row)
+$ lease1 p8 11
+{"jobs":[]}
+ [200]
+== P2 pause, advance clock 1h, resume 2026-10-22T13:23:32.701Z
+$ mkq p2
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":8,"lease_seconds":30,"max_attempts":3,"name":"p2","namespace_id":1,"paused":false,"retention_hours":24,"webhook_secret":"","webhook_url":""}
+ [201]
+worker 12
+$ api POST /v1/queues/p2/jobs -d {"kind":"k","delay_seconds":60}
+{"id":12,"state":"scheduled"}
+ [201]
+$ api POST /v1/schedules -d {"name":"p2s","queue":"p2","kind":"k","payload":{},"cron":"* * * * *"}
+{"cron":"* * * * *","enabled":true,"id":1,"kind":"k","last_run_at":null,"name":"p2s","namespace_id":1,"next_run_at":"2026-10-22T13:26:00Z","payload":{},"queue_id":8,"timezone":"UTC","zone_offset":0}
+ [201]
+$ api POST /v1/queues/p2/pause
+{"ok":true}
+ [200]
+$ adm POST /admin/clock -d {"action":"advance","seconds":3600}
+{"now":"2026-10-22T14:25:29.414039622Z"}
+ [200]
+$ sql select id,state,run_at,created_at from jobs where queue_id=(select id from queues where name='p2') order by id
+id | state | run_at | created_at
+12 | queued | 2026-10-22 13:26:29.41404+00 | 2026-10-22 13:25:29.41404+00
+(1 row)
+$ sql select id,next_run_at,last_run_at from schedules where name='p2s'
+id | next_run_at | last_run_at
+1 | 2026-10-22 14:26:00+00 | 
+(1 row)
+$ lease1 p2 12
+{"jobs":[]}
+ [200]
+$ api POST /v1/queues/p2/resume
+{"ok":true}
+ [200]
+$ sql select id,state,run_at,created_at from jobs where queue_id=(select id from queues where name='p2') order by id
+id | state | run_at | created_at
+12 | queued | 2026-10-22 13:26:29.41404+00 | 2026-10-22 13:25:29.41404+00
+(1 row)
+$ api POST /v1/queues/p2/lease -d {"worker_id":12,"max_jobs":10}
+{"jobs":[{"attempt":1,"id":12,"kind":"k","lease_expires_at":"2026-10-22T14:25:59.414039622Z","lease_token":"fcb354c778204185aab47f5ae837dfbb","payload":{}}]}
+ [200]
+$ sql select id,next_run_at,last_run_at from schedules where name='p2s'
+id | next_run_at | last_run_at
+1 | 2026-10-22 14:26:00+00 | 
+(1 row)

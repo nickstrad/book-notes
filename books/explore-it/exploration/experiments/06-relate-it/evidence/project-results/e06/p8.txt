@@ -1,0 +1,53 @@
+15:38:20
+## a) max_attempts
+{"backoff_base":5,"backoff_kind":"exponential","backoff_max":null,"id":10,"lease_seconds":30,"max_attempts":5,"name":"e6
+ [200]
+id | max_attempts
+317 | 3
+318 | 5
+319 | 5
+## b) webhook snapshot
+{"mode":"500"}
+id | job_id | url | secret | attempts | status | error
+77 | 320 | http://hooksink:8201/hook | report-secret | 1 | 500 | HTTP 500
+"webhook_secret":"changed","webhook_url":"http://hooksink:8201/other"
+## c) disable webhook
+"webhook_secret":"changed","webhook_url":""
+## e) H-E06-02 delete job and queue with pending row
+ [204]
+ [204]
+id | job_id | queue | url | secret | attempts | status | dlv
+77 | 320 | e6-hook | http://hooksink:8201/hook | report-secret | 1 | 500 | f
+78 | 321 | e6-hook | http://hooksink:8201/other | changed | 1 | 500 | f
+79 | 323 | e6-del | http://hooksink:8201/hook | report-secret | 0 |  | f
+C=320 D=321 E=322 F=323
+15:38:23
+{"mode":"ok"}
+
+15:38:31
+id | job_id | url | attempts | status | dlv
+77 | 320 | http://hooksink:8201/hook | 2 | 200 | t
+78 | 321 | http://hooksink:8201/other | 2 | 200 | t
+79 | 323 | http://hooksink:8201/hook | 1 | 200 | t
+true {"state":"cancelled","job_id":323,"result":null,"last_error":""}
+true {"state":"cancelled","job_id":320,"result":null,"last_error":""}
+false {"state":"cancelled","job_id":321,"result":null,"last_error":""}
+5
+## d) retention 0
+jobs
+3
+"retention_hours":0
+15:38:34
+jobs
+0
+job_id | event
+321 | retained
+320 | retained
+322 | retained
+outbox_rows
+2
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+{"error":{"code":"job_not_found","message":"job not found"}}
+ [404]
+ [204]

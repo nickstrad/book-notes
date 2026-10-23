@@ -1,0 +1,100 @@
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 581B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/alpine:3.22
+#4 DONE 0.1s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#5 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.1s done
+#5 DONE 0.1s
+
+#6 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#6 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.1s done
+#6 DONE 0.1s
+
+#7 [internal] load .dockerignore
+#7 transferring context: 52B done
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 175.07kB 0.0s done
+#8 DONE 0.1s
+
+#9 [build 4/6] RUN go mod download
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 4/6] RUN go mod download
+#11 CACHED
+
+#12 [build 2/6] WORKDIR /src
+#12 CACHED
+
+#13 [build 5/6] COPY . .
+#13 DONE 0.2s
+
+#14 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#14 ...
+
+#15 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#15 CACHED
+
+#16 [stage-1 3/5] WORKDIR /app
+#16 CACHED
+
+#14 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#14 DONE 65.7s
+
+#17 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#17 DONE 0.3s
+
+#18 [stage-1 5/5] COPY migrations/ migrations/
+#18 DONE 0.2s
+
+#19 exporting to image
+#19 exporting layers
+#19 exporting layers 5.7s done
+#19 exporting manifest sha256:8d2bc683fe403416e00481fd4b001204eb4caba235be3276c4f64b3ae63dc16e 0.0s done
+#19 exporting config sha256:26e5320e326e31f8de2b14daa7da63997954fdf473c2be7ab74c310620acf00e 0.1s done
+#19 exporting attestation manifest sha256:42d3fc4f10854e3c08847ba8324d7f36a5c22ba5d5f2e68befa86191c789a992 0.1s done
+#19 exporting manifest list sha256:4d808e475db7c72a7a3d57d78682a60a19f97021054207fca88867b58696bd4f
+#19 exporting manifest list sha256:4d808e475db7c72a7a3d57d78682a60a19f97021054207fca88867b58696bd4f 0.0s done
+#19 naming to docker.io/library/queuelet:local done
+#19 unpacking to docker.io/library/queuelet:local
+#19 unpacking to docker.io/library/queuelet:local 1.1s done
+#19 DONE 7.2s
+
+#20 resolving provenance for metadata file
+#20 DONE 0.0s
+ Image queuelet:local Built 
+ Container queuelet-postgres-1 Running 
+ Container queuelet-hooksink-1 Recreate 
+ Container queuelet-api-1 Recreate 
+ Container queuelet-hooksink-1 Recreated 
+ Container queuelet-api-1 Recreated 
+ Container queuelet-worker-a-1 Recreate 
+ Container queuelet-worker-b-1 Recreate 
+ Container queuelet-worker-b-1 Recreated 
+ Container queuelet-worker-a-1 Recreated 
+ Container queuelet-postgres-1 Waiting 
+ Container queuelet-hooksink-1 Starting 
+ Container queuelet-hooksink-1 Started 
+ Container queuelet-postgres-1 Healthy 
+ Container queuelet-api-1 Starting 
+ Container queuelet-api-1 Started 
+ Container queuelet-worker-b-1 Starting 
+ Container queuelet-worker-a-1 Starting 
+ Container queuelet-worker-b-1 Started 
+ Container queuelet-worker-a-1 Started 

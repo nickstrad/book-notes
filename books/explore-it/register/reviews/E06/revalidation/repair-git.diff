@@ -1,0 +1,331 @@
+diff --git a/books/explore-it/project/cmd/qctl/main.go b/books/explore-it/project/cmd/qctl/main.go
+index 46730c5..a2aa19f 100644
+--- a/books/explore-it/project/cmd/qctl/main.go
++++ b/books/explore-it/project/cmd/qctl/main.go
+@@ -1,7 +1,6 @@
+ package main
+ 
+ import (
+-	"bytes"
+ 	"context"
+ 	"encoding/json"
+ 	"fmt"
+@@ -50,14 +49,15 @@ func run(args []string) error {
+ 	}
+ 	method, path := "GET", ""
+ 	var data any
+-	jsonOpt := func(key string) any {
+-		var v any
+-		if raw := opts[key]; raw != "" {
+-			decoder := json.NewDecoder(strings.NewReader(raw))
+-			decoder.UseNumber()
+-			decoder.Decode(&v)
++	jsonOpts := map[string]any{}
++	for _, key := range []string{"json", "payload", "result"} {
++		if raw, ok := opts[key]; ok {
++			var v any
++			if e := client.DecodeJSON([]byte(raw), &v); e != nil {
++				return fmt.Errorf("--%s: %w", key, e)
++			}
++			jsonOpts[key] = v
+ 		}
+-		return v
+ 	}
+ 	integer := func(key string, fallback int) int {
+ 		n, e := strconv.Atoi(opts[key])
+@@ -67,7 +67,7 @@ func run(args []string) error {
+ 		return n
+ 	}
+ 	body := func() map[string]any {
+-		if v, ok := jsonOpt("json").(map[string]any); ok {
++		if v, ok := jsonOpts["json"].(map[string]any); ok {
+ 			return v
+ 		}
+ 		return map[string]any{}
+@@ -155,7 +155,7 @@ func run(args []string) error {
+ 			v["kind"] = "echo"
+ 		}
+ 		if opts["payload"] != "" {
+-			v["payload"] = jsonOpt("payload")
++			v["payload"] = jsonOpts["payload"]
+ 		}
+ 		v["priority"] = integer("priority", 5)
+ 		if opts["delay"] != "" {
+@@ -200,7 +200,7 @@ func run(args []string) error {
+ 				v["lease_token"] = opts["lease-token"]
+ 			}
+ 			if opts["result"] != "" {
+-				v["result"] = jsonOpt("result")
++				v["result"] = jsonOpts["result"]
+ 			}
+ 			if opts["error"] != "" {
+ 				v["error"] = opts["error"]
+@@ -278,9 +278,7 @@ func run(args []string) error {
+ 	}
+ 	if len(b) > 0 {
+ 		var v any
+-		decoder := json.NewDecoder(bytes.NewReader(b))
+-		decoder.UseNumber()
+-		if decoder.Decode(&v) == nil {
++		if client.DecodeJSON(b, &v) == nil {
+ 			out, _ := json.MarshalIndent(v, "", "  ")
+ 			fmt.Println(string(out))
+ 		} else {
+diff --git a/books/explore-it/project/cmd/qctl/main_test.go b/books/explore-it/project/cmd/qctl/main_test.go
+new file mode 100644
+index 0000000..eb790e5
+--- /dev/null
++++ b/books/explore-it/project/cmd/qctl/main_test.go
+@@ -0,0 +1,124 @@
++package main
++
++import (
++	"bytes"
++	"context"
++	"encoding/json"
++	"io"
++	"net/http"
++	"net/http/httptest"
++	"os/exec"
++	"path/filepath"
++	"strings"
++	"sync/atomic"
++	"testing"
++	"time"
++)
++
++func TestQctlJSON(t *testing.T) {
++	exe := filepath.Join(t.TempDir(), "qctl")
++	build := exec.Command("go", "build", "-o", exe, ".")
++	if out, err := build.CombinedOutput(); err != nil {
++		t.Fatalf("build qctl: %v\n%s", err, out)
++	}
++	run := func(t *testing.T, url string, args ...string) (string, string, error) {
++		t.Helper()
++		t.Setenv("QUEUELET_URL", url)
++		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
++		defer cancel()
++		cmd := exec.CommandContext(ctx, exe, args...)
++		var stdout, stderr bytes.Buffer
++		cmd.Stdout, cmd.Stderr = &stdout, &stderr
++		err := cmd.Run()
++		return stdout.String(), stderr.String(), err
++	}
++	const exact = `{"big":9007199254740993,"nested":[0.12345678901234567890123456789,{"id":9223372036854775807}]}`
++	var requests atomic.Int32
++	var lastBody atomic.Value
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		requests.Add(1)
++		b, _ := io.ReadAll(r.Body)
++		lastBody.Store(b)
++		io.WriteString(w, " \n"+exact+"\t\n")
++	}))
++	defer srv.Close()
++	for _, tc := range []struct {
++		option string
++		args   []string
++		field  string
++	}{
++		{"payload", []string{"enqueue", "emails"}, "payload"},
++		{"result", []string{"job", "ack", "1"}, "result"},
++		{"json", []string{"batch", "emails"}, ""},
++		{"json", []string{"schedule", "create"}, ""},
++	} {
++		t.Run(strings.Join(tc.args, " "), func(t *testing.T) {
++			args := append(append([]string{}, tc.args...), "--"+tc.option, " \n"+exact+" \t")
++			stdout, stderr, err := run(t, srv.URL, args...)
++			if err != nil {
++				t.Fatalf("valid options: %v: %s", err, stderr)
++			}
++			wire := lastBody.Load().([]byte)
++			if tc.field != "" {
++				var body map[string]json.RawMessage
++				if err := json.Unmarshal(wire, &body); err != nil {
++					t.Fatal(err)
++				}
++				wire = body[tc.field]
++			}
++			if string(wire) != exact {
++				t.Fatalf("wire numbers changed: %s", wire)
++			}
++			var compact bytes.Buffer
++			if err := json.Compact(&compact, []byte(stdout)); err != nil || compact.String() != exact {
++				t.Fatalf("display changed: %q (%v)", stdout, err)
++			}
++			for _, invalid := range []string{"", " \t", `{"big":}`, exact + "xyz", exact + `{}`, exact + "\ntrue"} {
++				before := requests.Load()
++				args[len(args)-1] = invalid
++				stdout, stderr, err := run(t, srv.URL, args...)
++				if exit, ok := err.(*exec.ExitError); !ok || exit.ExitCode() != 1 {
++					t.Fatalf("invalid %q: expected CLI exit 1, got %v", invalid, err)
++				}
++				if !strings.Contains(stderr, "--"+tc.option+": invalid JSON") || stdout != "" {
++					t.Fatalf("invalid %q: stdout=%q stderr=%q", invalid, stdout, stderr)
++				}
++				if requests.Load() != before {
++					t.Fatalf("invalid %q sent a request", invalid)
++				}
++			}
++		})
++	}
++	t.Run("omitted options", func(t *testing.T) {
++		_, stderr, err := run(t, srv.URL, "enqueue", "emails")
++		if err != nil {
++			t.Fatalf("defaults: %v: %s", err, stderr)
++		}
++		if body := string(lastBody.Load().([]byte)); body != `{"kind":"echo","priority":5}` {
++			t.Fatalf("changed defaults: %s", body)
++		}
++	})
++	for _, result := range []string{"null", "true", `"text"`, "9007199254740993", "0.12345678901234567890123456789", "[1,null]"} {
++		t.Run("result "+result, func(t *testing.T) {
++			_, stderr, err := run(t, srv.URL, "job", "ack", "1", "--result", result)
++			if err != nil {
++				t.Fatalf("valid result: %v: %s", err, stderr)
++			}
++			if body := string(lastBody.Load().([]byte)); body != `{"result":`+result+`}` {
++				t.Fatalf("result changed: %s", body)
++			}
++		})
++	}
++	for _, response := range []string{`{"id":1}xyz`, "{\"id\":1}\n{\"id\":2}", `{"id":}`} {
++		t.Run("raw response "+response, func(t *testing.T) {
++			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++				io.WriteString(w, response)
++			}))
++			defer server.Close()
++			stdout, stderr, err := run(t, server.URL, "job", "get", "1")
++			if err != nil || stdout != response {
++				t.Fatalf("must retain complete raw response: stdout=%q stderr=%q err=%v", stdout, stderr, err)
++			}
++		})
++	}
++}
+diff --git a/books/explore-it/project/internal/client/client.go b/books/explore-it/project/internal/client/client.go
+index 941d74d..9a75098 100644
+--- a/books/explore-it/project/internal/client/client.go
++++ b/books/explore-it/project/internal/client/client.go
+@@ -54,6 +54,14 @@ func (c *Client) JSON(method, path string, data, out any) error {
+ 	if status >= 400 {
+ 		return fmt.Errorf("HTTP %d: %s", status, b)
+ 	}
++	return DecodeJSON(b, out)
++}
++
++// DecodeJSON preserves numbers and requires one complete JSON document.
++func DecodeJSON(b []byte, out any) error {
++	if !json.Valid(b) {
++		return fmt.Errorf("invalid JSON: expected one complete value")
++	}
+ 	decoder := json.NewDecoder(bytes.NewReader(b))
+ 	decoder.UseNumber()
+ 	return decoder.Decode(out)
+diff --git a/books/explore-it/project/internal/client/client_test.go b/books/explore-it/project/internal/client/client_test.go
+new file mode 100644
+index 0000000..07ca639
+--- /dev/null
++++ b/books/explore-it/project/internal/client/client_test.go
+@@ -0,0 +1,46 @@
++package client
++
++import (
++	"encoding/json"
++	"net/http"
++	"net/http/httptest"
++	"testing"
++)
++
++func TestJSONResponseCompleteness(t *testing.T) {
++	for _, tc := range []struct {
++		name, response string
++		valid          bool
++	}{
++		{"exact with whitespace", " \n {\"big\":9007199254740993,\"nested\":[0.12345678901234567890123456789]} \t\n", true},
++		{"malformed", `{"big":}`, false},
++		{"garbage", `{"big":1}xyz`, false},
++		{"second object", `{"big":1}{"big":2}`, false},
++		{"second scalar", "{\"big\":1}\ntrue", false},
++		{"empty", "", false},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++				w.Write([]byte(tc.response))
++			}))
++			defer srv.Close()
++			var out map[string]any
++			err := (&Client{URL: srv.URL}).JSON("GET", "/response", nil, &out)
++			if !tc.valid {
++				if err == nil {
++					t.Fatal("accepted an incomplete JSON document")
++				}
++				if out != nil {
++					t.Fatalf("decoded a prefix on error: %#v", out)
++				}
++				return
++			}
++			if err != nil {
++				t.Fatal(err)
++			}
++			if out["big"] != json.Number("9007199254740993") || out["nested"].([]any)[0] != json.Number("0.12345678901234567890123456789") {
++				t.Fatalf("lost exact numbers: %#v", out)
++			}
++		})
++	}
++}
+diff --git a/books/explore-it/project/internal/worker/worker_test.go b/books/explore-it/project/internal/worker/worker_test.go
+new file mode 100644
+index 0000000..7cc515a
+--- /dev/null
++++ b/books/explore-it/project/internal/worker/worker_test.go
+@@ -0,0 +1,51 @@
++package worker
++
++import (
++	"encoding/json"
++	"net/http"
++	"net/http/httptest"
++	"queuelet/internal/client"
++	"testing"
++)
++
++func TestDecodedWorkerDefaults(t *testing.T) {
++	for _, tc := range []struct {
++		name, kind, payload string
++		attempt             int
++		wantFailure         bool
++	}{
++		{"sleep omitted", "sleep", `{}`, 1, false},
++		{"sleep wrong type", "sleep", `{"seconds":"not a number"}`, 1, false},
++		{"sleep numeric", "sleep", `{"seconds":0}`, 1, false},
++		{"fail3 omitted", "fail3", `{}`, 3, true},
++		{"fail3 exhausted", "fail3", `{}`, 4, false},
++		{"fail3 wrong type", "fail3", `{"n":true}`, 3, true},
++		{"fail3 zero default", "fail3", `{"n":0}`, 3, true},
++		{"fail omitted", "fail", `{}`, 1, false},
++		{"fail numeric", "fail", `{"n":1}`, 1, true},
++		{"fail numeric exhausted", "fail", `{"n":1}`, 2, false},
++		{"echo exact", "echo", `{"big":9007199254740993,"nested":[0.12345678901234567890123456789]}`, 1, false},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++				w.Write([]byte(`{"payload":` + tc.payload + `}`))
++			}))
++			defer srv.Close()
++			var job Job
++			if err := (&client.Client{URL: srv.URL}).JSON("GET", "/job", nil, &job); err != nil {
++				t.Fatal(err)
++			}
++			job.Kind, job.Attempt = tc.kind, tc.attempt
++			result, err := perform(job)
++			if (err != nil) != tc.wantFailure {
++				t.Fatalf("failure=%v, want %v", err, tc.wantFailure)
++			}
++			if !tc.wantFailure {
++				b, err := json.Marshal(result)
++				if err != nil || string(b) != tc.payload {
++					t.Fatalf("result=%s err=%v, want %s", b, err, tc.payload)
++				}
++			}
++		})
++	}
++}

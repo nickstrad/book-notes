@@ -1,0 +1,8 @@
+2026-10-22T19:22:38Z enqueued 305 scheduled run_at 2026-10-22T19:22:44.135098Z
+2026-10-22T19:22:39Z restart postgres
+2026-10-22T19:22:40Z restart returned 0
+19:22:38.1 200 (200, 'scheduled')
+19:22:39.7 503 (503, {'error': {'code': 'auth_unavailable', 'message': 'authentication store unavailable'}})
+19:22:40.7 200 (200, 'scheduled')
+19:22:44.8 200 (200, 'queued')
+final queued 2026-10-22T19:22:55Z

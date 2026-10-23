@@ -1,0 +1,107 @@
+{"command": ["make", "up"], "tree": "repo", "commit": "605c339cfb4978339cb203fd1d9895d0a14f460d", "environment": {"COMPOSE_PROJECT_NAME": "queuelet-review-c", "QUEUELET_IMAGE_TAG": "reviewc", "QUEUELET_API_PORT": "18270", "QUEUELET_HOOK_PORT": "18271", "QUEUELET_PG_PORT": "15503", "QUEUELET_URL": "http://localhost:18270", "QUEUELET_HOOK_URL": "http://localhost:18271", "QUEUELET_DATABASE_URL": "postgres://queuelet:queuelet@localhost:15503/queuelet?sslmode=disable"}, "start": "2026-10-22T22:00:42.394695+00:00"}
+docker compose -f deploy/compose.yml up -d --build
+ Image queuelet:reviewc Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 578B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 504B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.22
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/golang:1.26-alpine
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 52B 0.0s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 336.26kB 0.1s done
+#6 DONE 0.2s
+
+#7 [build 1/6] FROM docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca
+#7 resolve docker.io/library/golang:1.26-alpine@sha256:9ce231b28998b32e116927c61aa5c406183061d4f3f2d61b292c88e7f6bdf7ca 0.2s done
+#7 DONE 0.2s
+
+#8 [stage-1 1/5] FROM docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c
+#8 resolve docker.io/library/alpine:3.22@sha256:822614ea121e1d40a33655081af10ef85f0aa2ab9e61f649ceaf0c651822433c 0.2s done
+#8 DONE 0.3s
+
+#9 [stage-1 3/5] WORKDIR /app
+#9 CACHED
+
+#10 [build 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [build 2/6] WORKDIR /src
+#11 CACHED
+
+#12 [build 4/6] RUN go mod download
+#12 CACHED
+
+#13 [build 5/6] COPY . .
+#13 CACHED
+
+#14 [build 6/6] RUN CGO_ENABLED=0 go build -o /out/api ./cmd/api && CGO_ENABLED=0 go build -o /out/worker ./cmd/worker && CGO_ENABLED=0 go build -o /out/qctl ./cmd/qctl && CGO_ENABLED=0 go build -o /out/hooksink ./cmd/hooksink
+#14 CACHED
+
+#15 [stage-1 2/5] RUN apk add --no-cache ca-certificates tzdata
+#15 CACHED
+
+#16 [stage-1 4/5] COPY --from=build /out/ /usr/local/bin/
+#16 CACHED
+
+#17 [stage-1 5/5] COPY migrations/ migrations/
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers 0.0s done
+#18 exporting manifest sha256:b348c67d66673cc650ef1353624dcfe92a28239bba623df9ca5999c32151e6ef 0.0s done
+#18 exporting config sha256:d0c9c9d93f4571a995e489e6f281d08b8e0da6b584303934f385bfd2ab244cb3 done
+#18 exporting attestation manifest sha256:03f64a8f892816c0a30facc4ecc5cec600ee06c5edad67edcb0544b272e33f39
+#18 exporting attestation manifest sha256:03f64a8f892816c0a30facc4ecc5cec600ee06c5edad67edcb0544b272e33f39 0.1s done
+#18 exporting manifest list sha256:5a71c5d0b5f10399113049a1e62b277c205a5f291a9837a35b45621ad15d1ca8
+#18 exporting manifest list sha256:5a71c5d0b5f10399113049a1e62b277c205a5f291a9837a35b45621ad15d1ca8 0.1s done
+#18 naming to docker.io/library/queuelet:reviewc 0.0s done
+#18 unpacking to docker.io/library/queuelet:reviewc 0.1s done
+#18 DONE 0.5s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ Image queuelet:reviewc Built 
+ Network queuelet-review-c_default Creating 
+ Network queuelet-review-c_default Creating 
+ Volume queuelet-review-c_data Creating 
+ Volume queuelet-review-c_data Creating 
+ Volume queuelet-review-c_data Created 
+ Volume queuelet-review-c_data Created 
+ Network queuelet-review-c_default Created 
+ Network queuelet-review-c_default Created 
+ Container queuelet-review-c-postgres-1 Creating 
+ Container queuelet-review-c-hooksink-1 Creating 
+ Container queuelet-review-c-postgres-1 Created 
+ Container queuelet-review-c-api-1 Creating 
+ Container queuelet-review-c-hooksink-1 Created 
+ Container queuelet-review-c-api-1 Created 
+ Container queuelet-review-c-worker-a-1 Creating 
+ Container queuelet-review-c-worker-b-1 Creating 
+ Container queuelet-review-c-worker-b-1 Created 
+ Container queuelet-review-c-worker-a-1 Created 
+ Container queuelet-review-c-hooksink-1 Starting 
+ Container queuelet-review-c-postgres-1 Starting 
+ Container queuelet-review-c-postgres-1 Started 
+ Container queuelet-review-c-postgres-1 Waiting 
+ Container queuelet-review-c-hooksink-1 Started 
+ Container queuelet-review-c-postgres-1 Healthy 
+ Container queuelet-review-c-api-1 Starting 
+ Container queuelet-review-c-api-1 Started 
+ Container queuelet-review-c-worker-a-1 Starting 
+ Container queuelet-review-c-worker-b-1 Starting 
+ Container queuelet-review-c-worker-b-1 Started 
+ Container queuelet-review-c-worker-a-1 Started 
+
+EXIT 0; ELAPSED 12.187s
