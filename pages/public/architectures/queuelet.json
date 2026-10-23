@@ -1896,7 +1896,7 @@
     {
       "id": "doc-context",
       "title": "Queuelet: system context explained",
-      "plain": "Producers submit JSON jobs to named queues inside a namespace. Worker clients lease jobs, execute them outside Queuelet and report success or failure. Operators manage queues, jobs and schedules and inspect events and stats. Queuelet sends terminal-state notifications to a configured webhook receiver. In the lab that receiver is hooksink, a fault-controllable fake. Open Queuelet to see its containers. This is the explored and fixed b6df7db snapshot, still awaiting the book end review and merge; it is not a claim of complete exploration or exactly-once execution.",
+      "plain": "Producers submit JSON jobs to named queues inside a namespace. Worker clients lease jobs, execute them outside Queuelet and report success or failure. Operators manage queues, jobs and schedules and inspect events and stats. Queuelet sends terminal-state notifications to a configured webhook receiver. In the lab that receiver is hooksink, a fault-controllable fake. Open Queuelet to see its containers. This is the explored and fixed b6df7db snapshot; its project tree is identical to the merged end-review fix pass (7d26bb8). It is not a claim of complete exploration or exactly-once execution.",
       "ste": {
         "text": "The producer sends jobs to Queuelet. A worker leases and executes jobs. The operator manages queues and jobs. Queuelet sends terminal notifications to a receiver. Delivery can repeat. Open Queuelet to see the containers.",
         "issue": "ASD-STE100 Issue 9",

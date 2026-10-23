@@ -482,7 +482,7 @@ Terminal transition, attempt and notification insertion share the transaction wh
 
 ## Qualifications carried forward
 
-- The final book STATE at this snapshot awaits cross-family end review. Checkpoint C passed with a U32 sampling flake and nits; full book-text citations were not validated. Diagram browser success does not close book review.
+- The final book STATE at this snapshot awaited cross-family end review; that review's fix pass (record `1712ced`) merged at `7d26bb8` with an identical project tree (see reconciliation). Checkpoint C passed with a U32 sampling flake and nits; full book-text citations were not validated. Diagram browser success does not close book review.
 - Q-E09-1 (wildcard-hour spelling) and Q-E09-2 (last_error clearing) remain Nick decisions. Code treats `0 0-23 * * *` as fixed-hour; success and retry retain last_error. Legacy unadvanceable schedules leave health degraded until disabled/deleted; legacy invalid templates are not revalidated.
 - Backward lab-clock movement can invert FIFO and lease before run_at. Semantic time controls do not freeze real network/process timers. This is not a general real-clock correctness proof.
 - Worker identity within a tenant (Q-E08-1), redirect handling (H-E08-22), database pool exhaustion during freeze (H-E08-24), worker http-result float64 decoding, and unprobed cancel/retry/promote/retention interleavings remain open.
