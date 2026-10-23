@@ -16,8 +16,7 @@ verification/push. Items 3–8 remain separate runs; none was started here.
 - Item 2: `pages/public/architectures/litefleet.json`, seven views, plain explanations
   and STE drafts, [complete fidelity inventory](../../pages/content/litefleet/inventory.md),
   [machine inventory](../../pages/content/litefleet/inventory.json), L01–L12 mapping,
-  and `pages/tests/litefleet.{test,spec}.ts`. Dataset commit: this checkpoint
-  (`git log -1 -- pages/public/architectures/litefleet.json`).
+  and `pages/tests/litefleet.{test,spec}.ts`. Dataset commit: `2047046` on main.
 - Source snapshot rechecked: `release-it/v1-hardened` resolves to
   `936786399d7bab3ebbfa845b9a07df02b41ed363`. Working project code matches that tree.
 - No changes to book content, the Explore It! worktree, shared shell, catalog,
@@ -68,8 +67,10 @@ verification/push. Items 3–8 remain separate runs; none was started here.
   commits without push; this fresh run used the main checkout, not a worktree.
 - Independent fidelity review belongs to item 6 under the explicit brief. No book
   chaos suites were run for this static dataset.
-- Knowledge/script assessment follows in a separate indexed knowledge commit;
-  existing tests are the reusable verification tools, so no extra work script is needed.
+- Knowledge/script assessment complete: [diagram-dataset-fidelity.md](../knowledge/diagram-dataset-fidelity.md)
+  records pinned-object audits and SDK capture/navigation behavior, in a separate
+  indexed knowledge commit. Existing slice tests supply reusable checks; no extra
+  work script is needed.
 
 ## Next steps and owners
 

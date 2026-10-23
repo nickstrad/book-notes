@@ -15,3 +15,5 @@ Durable findings about building and verifying this repo's lab projects, cut from
   around a missing signal can hide the defect; log in a `defer`.
 - [diagram-site-shell.md](diagram-site-shell.md) — preserve SDK catalog bounds and identity,
   subscribe through the route port, and scope narrow-screen explanation checks.
+- [diagram-dataset-fidelity.md](diagram-dataset-fidelity.md) — pin and audit every C4 model ID,
+  distinguish behavior from plans, and capture dense/narrow SDK views accurately.
